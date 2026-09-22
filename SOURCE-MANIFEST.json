@@ -99,7 +99,7 @@
     {
       "Path": "artifacts/build-result.json",
       "Bytes": 342,
-      "Sha256": "936c51b80c36e66da5f2935e1d73947d941467e0f08a02112f3577611c9666b1"
+      "Sha256": "270f49cad10f2bb1f89647cbed8c5a38f1d1ef7d98e503e782b0807f08bdcbf4"
     },
     {
       "Path": "artifacts/build.log",
@@ -654,7 +654,7 @@
     {
       "Path": "artifacts/npm/manifest.json",
       "Bytes": 26008,
-      "Sha256": "086072e44a6e5438d6e24cbda1b8c0ecdf8c9e5494d5edd186aa9968d380f030"
+      "Sha256": "e45b4d33a5eb8c76b6a545793909631ebec1a12040ff8bb8f65cc9b6a4473431"
     },
     {
       "Path": "artifacts/npm/wieslawsoltes-avalonia-0.6.2-alpha.1.tgz",
@@ -673,8 +673,8 @@
     },
     {
       "Path": "artifacts/npm/wieslawsoltes-avalonia-browser-0.6.2-alpha.1.tgz",
-      "Bytes": 1414959,
-      "Sha256": "a4a8029c26dee3eb0fc9b05c69abf3bb7f8cfd7da74f33800a3acea14cd66931"
+      "Bytes": 1415343,
+      "Sha256": "87e9a6a8be5bb0c8816c18c66ae847e97e41ce7fbb3987d138f8c6db1bacb454"
     },
     {
       "Path": "artifacts/npm/wieslawsoltes-avalonia-composition-0.6.2-alpha.1.tgz",
@@ -754,7 +754,7 @@
     {
       "Path": "artifacts/package-consumer-result.json",
       "Bytes": 343,
-      "Sha256": "8481dfe985fd72858d179c908916f10f07698f155c5bdbffedd321e87893ed0d"
+      "Sha256": "97f77c6a954ae11ac46192110ad99523dd31b94fdcee150f897f8b621ca7568f"
     },
     {
       "Path": "artifacts/package-consumer.log",
@@ -778,8 +778,8 @@
     },
     {
       "Path": "artifacts/publication/pages-smoke.json",
-      "Bytes": 2365,
-      "Sha256": "edc5d7f3755c9168459d3db2846b84fa59c84688cdc583868410e4634b737178"
+      "Bytes": 2338,
+      "Sha256": "a4fa4369b8c6eec399262444888769e95c5f6765fad0ccee1a96c08c446a30d3"
     },
     {
       "Path": "artifacts/publication/render-worker.png",
@@ -903,13 +903,13 @@
     },
     {
       "Path": "artifacts/startup/http-comparison.json",
-      "Bytes": 87534,
-      "Sha256": "e3b5f3449ce583991139db71df6836702f6f4f7720456b5b53607c64c684f028"
+      "Bytes": 87455,
+      "Sha256": "1fd3f20dc4bd069a28a1aad04e2aa35c293f247d5971dbe4bcc13c3284dfc1d3"
     },
     {
       "Path": "artifacts/startup/node-console.log",
-      "Bytes": 99943,
-      "Sha256": "ba64c8bfb2099550663645f3d8d58fb65f30580317319255e2e5a6c2212ea6d7"
+      "Bytes": 102594,
+      "Sha256": "df63f27a6bd4b143626593855399e73880e8c8e14b42f9b4317fc59b1ba4230c"
     },
     {
       "Path": "artifacts/startup/text-ink-diagnostic.json",
@@ -1759,12 +1759,12 @@
     {
       "Path": "artifacts/validation-optimized/node-final.json",
       "Bytes": 439,
-      "Sha256": "d30e2203d116b4dcc1b0933bf50b9e5a32158835bceac502340f5cbd43c63100"
+      "Sha256": "540cf3712e709c2ac38d8fd9829885ce00d0d5bb92a223db8709a0666f6099fe"
     },
     {
       "Path": "artifacts/validation-optimized/node-final.log",
-      "Bytes": 99858,
-      "Sha256": "1acad139382a15ffabd2c38878c3d8997c2950e35e70a8ad71a2d2a994106973"
+      "Bytes": 102509,
+      "Sha256": "e5594b7aec9afbea3dfc67f37c0ec8ca96492547d55a1a9e23e232193332dab6"
     },
     {
       "Path": "artifacts/validation-optimized/node-record-final.log",
@@ -2907,6 +2907,11 @@
       "Sha256": "1f276359426859b55b0d6e2c32e9904fe03a0f2dfc5fe4f91ad5bdb68badac1f"
     },
     {
+      "Path": "dist/docs/SUBMISSION-FENCES.md",
+      "Bytes": 1989,
+      "Sha256": "0df7b0508cb00710688f07025bfe0406cc77cc92bf3765598cc6ed4071c732a1"
+    },
+    {
       "Path": "dist/docs/TESTING.md",
       "Bytes": 8184,
       "Sha256": "70483aa0dde36b0796dd75f83570a5ad5840c3e3dc641643f696070fd0c8726a"
@@ -3258,8 +3263,8 @@
     },
     {
       "Path": "dist/packages/browser/src/render-thread.js",
-      "Bytes": 20625,
-      "Sha256": "fe98d032c5f41d01fb1b49c8318f357c858ab4cb1f75ba0e8c5083f5d3bc3739"
+      "Bytes": 22645,
+      "Sha256": "c19c3e77999ae971996c7539dc328a48105dcd5dbc5b258fa9f914cdaeb4012e"
     },
     {
       "Path": "dist/packages/browser/src/render-worker.js",
@@ -3299,7 +3304,7 @@
     {
       "Path": "dist/packages/browser/worker-assets/manifest.json",
       "Bytes": 30114,
-      "Sha256": "bce05b1e57db4506174eee02c0f59bcc8d6eb903dd5853192aaeb793d33e3b8c"
+      "Sha256": "d28dd8504f31257ad23571c68c7d62c6da4aa0559fa926a932844d8fb35c543d"
     },
     {
       "Path": "dist/packages/browser/worker-assets/packages/animation/src/index.js",
@@ -3373,8 +3378,8 @@
     },
     {
       "Path": "dist/packages/browser/worker-assets/packages/browser/src/render-thread.js",
-      "Bytes": 20630,
-      "Sha256": "47c1b105e01cbe43a20a5e7aa1267c7bb27337336a1b9c3aeb90d53d0f772619"
+      "Bytes": 22650,
+      "Sha256": "f3ab9e1f20962c92b872d8db7ec8252f7064e055aa04fd990b932372d19bd653"
     },
     {
       "Path": "dist/packages/browser/worker-assets/packages/browser/src/render-worker.js",
@@ -5892,6 +5897,11 @@
       "Sha256": "1f276359426859b55b0d6e2c32e9904fe03a0f2dfc5fe4f91ad5bdb68badac1f"
     },
     {
+      "Path": "docs/SUBMISSION-FENCES.md",
+      "Bytes": 1989,
+      "Sha256": "0df7b0508cb00710688f07025bfe0406cc77cc92bf3765598cc6ed4071c732a1"
+    },
+    {
       "Path": "docs/TESTING.md",
       "Bytes": 8184,
       "Sha256": "70483aa0dde36b0796dd75f83570a5ad5840c3e3dc641643f696070fd0c8726a"
@@ -6228,8 +6238,8 @@
     },
     {
       "Path": "packages/browser/src/render-thread.js",
-      "Bytes": 20625,
-      "Sha256": "fe98d032c5f41d01fb1b49c8318f357c858ab4cb1f75ba0e8c5083f5d3bc3739"
+      "Bytes": 22645,
+      "Sha256": "c19c3e77999ae971996c7539dc328a48105dcd5dbc5b258fa9f914cdaeb4012e"
     },
     {
       "Path": "packages/browser/src/render-worker.js",
@@ -6269,7 +6279,7 @@
     {
       "Path": "packages/browser/worker-assets/manifest.json",
       "Bytes": 30108,
-      "Sha256": "d63f51a224496dd254a5f39cb40eac07880f75501f956b89835318c421de09d4"
+      "Sha256": "c16fe9aac6e413cc9c13950fdcd27f264d82efc9fe1d239bf7e9507044789dc6"
     },
     {
       "Path": "packages/browser/worker-assets/packages/animation/src/index.js",
@@ -6343,8 +6353,8 @@
     },
     {
       "Path": "packages/browser/worker-assets/packages/browser/src/render-thread.js",
-      "Bytes": 20630,
-      "Sha256": "47c1b105e01cbe43a20a5e7aa1267c7bb27337336a1b9c3aeb90d53d0f772619"
+      "Bytes": 22650,
+      "Sha256": "f3ab9e1f20962c92b872d8db7ec8252f7064e055aa04fd990b932372d19bd653"
     },
     {
       "Path": "packages/browser/worker-assets/packages/browser/src/render-worker.js",
@@ -9210,6 +9220,11 @@
       "Path": "tests/startup-initialization.test.mjs",
       "Bytes": 10207,
       "Sha256": "23b0a3014751d1b96209ed3a9963519b4a83944c9e707de01cc464f319334403"
+    },
+    {
+      "Path": "tests/submission-fences.test.mjs",
+      "Bytes": 6499,
+      "Sha256": "d49ae7c6426fb81ece61da2eb94b02b432a6a5e916cfa81b2606254a779a9b96"
     },
     {
       "Path": "tests/table-view.test.mjs",

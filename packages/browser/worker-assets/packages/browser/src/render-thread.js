@@ -18,7 +18,7 @@ export class WorkerSkiaRenderer extends Disposable {
         this.FrameRendered = new Event(); this.Errors = new Event(); this.Accumulator = new CompositionChangeAccumulator(); this.BufferPool = new CompositionBufferPool(options.BufferPool);
         this.Recorder = new CompositionSceneRecorder(root, platform); this.Port = null; this.Worker = null;
         this.Statistics = { EncodeMilliseconds: 0, LastEncodeMilliseconds: 0, EncodeCalls: 0, StringWrites: 0, Utf8Bytes: 0, StringDefinitions: 0, StringReferences: 0, PatchedVisuals: 0, ReplacedVisuals: 0, SentTransactions: 0, SentBytes: 0, PendingFramesCoalesced: 0, ProcessedSequence: 0, SubmittedSequence: 0, Restarts: 0, MaxInFlight: 0, LastWorkerFrame: 0 };
-        this._requests = new Map(); this._nextRequest = 1; this._waiters = []; this._processedWaiters = [];this._capturedProcessedWaiters=[]; this._ready = deferred(); this._latestRevision = 0;
+        this._requests = new Map(); this._nextRequest = 1; this._waiters = []; this._processedWaiters = [];this._capturedProcessedWaiters=[]; this._ready = deferred(); this._latestRevision = 0; this._preparedRevision = 0; this._preparedSequence = 0;
         this._fontSubscription = null;
         this.CompositionTransport = { RequestCommitAsync: () => { if(this.IsDisposed||this.LastError)return Promise.reject(this.LastError??new Error('Renderer disposed.'));if(this._processedWaiters.length)return this._processedWaiters[0].Promise;if(this._capturedProcessedWaiters.length>=(this.Options.MaxCommitWaiters??1024))return Promise.reject(new Error('Composition commit waiter budget exceeded.'));const d = deferred(); this._processedWaiters.push(d); this.Root._RequestRender(); return d.Promise; } };
     }
@@ -146,7 +146,7 @@ export class WorkerSkiaRenderer extends Disposable {
         for(const r of this.Accumulator.InFlight?.ProcessedWaiters??[])r.Reject(interrupted);
         for(const r of this._waiters.splice(0))r.Reject(interrupted);
         this.FastInputPort?.close();this.Port?.close();this.Worker?.terminate();this.Port=null;this.Worker=null;this.Backend=null;this.LastError=null;this._ready=deferred();
-        this.Accumulator.Reset();this.Recorder.ResetServerState();this.Accumulator.Update(this.Recorder.Capture());this.Statistics.ProcessedSequence=this.Statistics.SubmittedSequence=0;++this.Statistics.Restarts;
+        this.Accumulator.Reset();this._preparedRevision=0;this._preparedSequence=0;this._hiddenSubmission=false;this.Recorder.ResetServerState();this.Accumulator.Update(this.Recorder.Capture());this.Statistics.ProcessedSequence=this.Statistics.SubmittedSequence=0;++this.Statistics.Restarts;
         if(this.Options.RestartRenderer){const result=await this.Options.RestartRenderer();this.Connect(result.Port);await this._ready.Promise;}
         else {
             if(!this.Element?.ownerDocument)throw new Error('The host must provide a replacement canvas/channel for this renderer.');
@@ -161,7 +161,13 @@ export class WorkerSkiaRenderer extends Disposable {
         const batch = this.Accumulator.Prepare();
         if (!batch) {
             // A composition commit with no semantic changes is already processed.
-            if (!this.Accumulator.InFlight && this._capturedProcessedWaiters.length) for (const w of this._capturedProcessedWaiters.splice(0)) w.Resolve();
+            if (!this.Accumulator.InFlight) {
+                // A semantic no-op still maps this capture revision to the last
+                // accepted transaction, which may not have been submitted yet.
+                this._preparedRevision = this.Accumulator.Revision;
+                this._preparedSequence = this.Accumulator.Sequence;
+                for (const w of this._capturedProcessedWaiters.splice(0)) w.Resolve();
+            }
             return;
         }
         try {
@@ -173,6 +179,8 @@ export class WorkerSkiaRenderer extends Disposable {
             this.Statistics.StringDefinitions += encoded.Statistics.StringDefinitions; this.Statistics.StringReferences += encoded.Statistics.StringReferences;
             this.Statistics.PatchedVisuals += batch.Value.Nodes.Patch?.length ?? 0; this.Statistics.ReplacedVisuals += batch.Value.Nodes.Upsert.length;
             this.Accumulator.InFlight.ProcessedWaiters = this._capturedProcessedWaiters.splice(0);
+            this._preparedRevision = this.Accumulator.InFlight.Revision;
+            this._preparedSequence = batch.Sequence;
             clearTimeout(this._batchTimer);this._batchTimer=setTimeout(()=>this._Recover(new Error('Composition transaction timed out.')),this.Options.TransactionTimeout??30000);
             this.Port.postMessage({ Type: 'batch', Buffer: encoded.Buffer, ByteLength: encoded.ByteLength, Sequence: batch.Sequence, Generation: batch.Generation }, [encoded.Buffer]);
             ++this.Statistics.SentTransactions; this.Statistics.SentBytes += encoded.ByteLength; this.Statistics.MaxInFlight = Math.max(this.Statistics.MaxInFlight, 1);
@@ -191,20 +199,56 @@ export class WorkerSkiaRenderer extends Disposable {
         this.Accumulator.Update(snapshot); this._latestRevision = this.Accumulator.Revision; this._Pump(); return true;
     }
     _CheckWaiters() {
-        if (this.Accumulator.InFlight) return;
-        // Explicit flush/snapshot requests are allowed to render once while the
-        // automatic clock is paused for a hidden document. Never run a busy loop.
-        if(this._visible===false&&this._waiters.length&&this.Statistics.SubmittedSequence<this.Accumulator.Sequence&&!this._hiddenSubmission){
-            this._hiddenSubmission=true;this.RequestAsync('render').catch(error=>this._Fail(error)).finally(()=>{this._hiddenSubmission=false;this._CheckWaiters();});
+        const pending = [];
+        for (const waiter of this._waiters) {
+            if (waiter.Generation !== this.Accumulator.Generation) {
+                waiter.Reject(new Error('Renderer restarted before completion.'));
+                continue;
+            }
+            // Bind once, to the first prepared snapshot which includes or
+            // supersedes the requested revision. Never chase future animation.
+            if (waiter.Sequence == null && this._preparedRevision >= waiter.Revision)
+                waiter.Sequence = this._preparedSequence;
+            if (waiter.Sequence != null && this.Statistics.SubmittedSequence >= waiter.Sequence)
+                waiter.Resolve();
+            else pending.push(waiter);
         }
-        // Prepare() may find no delta although the desired snapshot instance is new.
-        if (this.Accumulator.Desired && this.Accumulator.Acknowledged && this.Statistics.SubmittedSequence >= this.Accumulator.Sequence)
-            for (const waiter of this._waiters.splice(0)) waiter.Resolve();
+        this._waiters = pending;
+        // Explicit requests can submit once while the automatic clock is hidden.
+        // Newer in-flight animation must not prevent an already processed fence
+        // from requesting its submission. One RPC at a time, not a busy loop.
+        if (this._visible === false && !this._hiddenSubmission && pending.some(w =>
+            w.Sequence != null && this.Statistics.ProcessedSequence >= w.Sequence)) {
+            this._hiddenSubmission = true;
+            const generation = this.Accumulator.Generation;
+            this.RequestAsync('render').catch(error => {
+                if (generation === this.Accumulator.Generation) this._Fail(error);
+            }).finally(() => {
+                if (generation === this.Accumulator.Generation) {
+                    this._hiddenSubmission = false; this._CheckWaiters();
+                }
+            });
+        }
     }
     async FlushAsync() {
-        if (this.LastError) throw this.LastError; await this._ready.Promise; this._Pump();
-        if (!this.Accumulator.InFlight && this.Statistics.SubmittedSequence >= this.Accumulator.Sequence) return;
-        if(this._waiters.length>=(this.Options.MaxRequests??128))throw new Error('Composition submission waiter queue is full.');const d = deferred(); this._waiters.push(d);this._CheckWaiters();const timer=setTimeout(()=>{const i=this._waiters.indexOf(d);if(i>=0)this._waiters.splice(i,1);d.Reject(new Error('Composition submission timed out.'));},this.Options.RequestTimeout??30000);return d.Promise.finally(()=>clearTimeout(timer));
+        if (this.IsDisposed) throw new Error('Renderer disposed.');
+        if (this.LastError) throw this.LastError;
+        const revision = this.Accumulator.Revision, generation = this.Accumulator.Generation;
+        await this._ready.Promise;
+        if (this.IsDisposed) throw new Error('Renderer disposed.');
+        if (this.LastError) throw this.LastError;
+        if (generation !== this.Accumulator.Generation) throw new Error('Renderer restarted before completion.');
+        this._Pump();
+        const sequence = this._preparedRevision >= revision ? this._preparedSequence : null;
+        if (sequence != null && this.Statistics.SubmittedSequence >= sequence) return;
+        if (this._waiters.length >= (this.Options.MaxRequests ?? 128)) throw new Error('Composition submission waiter queue is full.');
+        const d = Object.assign(deferred(), { Revision: revision, Generation: generation, Sequence: sequence });
+        this._waiters.push(d); this._CheckWaiters();
+        const timer = setTimeout(() => {
+            const i = this._waiters.indexOf(d); if (i >= 0) this._waiters.splice(i, 1);
+            d.Reject(new Error('Composition submission timed out.'));
+        }, this.Options.RequestTimeout ?? 30000);
+        return d.Promise.finally(() => clearTimeout(timer));
     }
     async RequestAsync(method, value = null) {
         if (this.LastError) throw this.LastError; if (this.IsDisposed && method !== 'dispose') throw new Error('Renderer is disposed.');
