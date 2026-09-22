@@ -1,0 +1,22 @@
+
+> avaloniaweb-workspace@0.5.1-alpha.1 pack:all
+> node scripts/pack.mjs
+
+@wieslawsoltes/avalonia-animation: wieslawsoltes-avalonia-animation-0.5.1-alpha.1.tgz (5861 bytes)
+@wieslawsoltes/avalonia: wieslawsoltes-avalonia-0.5.1-alpha.1.tgz (2562 bytes)
+@wieslawsoltes/avalonia-base: wieslawsoltes-avalonia-base-0.5.1-alpha.1.tgz (13456 bytes)
+@wieslawsoltes/avalonia-browser: wieslawsoltes-avalonia-browser-0.5.1-alpha.1.tgz (18464 bytes)
+@wieslawsoltes/avalonia-composition: wieslawsoltes-avalonia-composition-0.5.1-alpha.1.tgz (11001 bytes)
+@wieslawsoltes/avalonia-controls: wieslawsoltes-avalonia-controls-0.5.1-alpha.1.tgz (73311 bytes)
+@wieslawsoltes/avalonia-data: wieslawsoltes-avalonia-data-0.5.1-alpha.1.tgz (12902 bytes)
+@wieslawsoltes/avalonia-diagnostics: wieslawsoltes-avalonia-diagnostics-0.5.1-alpha.1.tgz (2980 bytes)
+@wieslawsoltes/avalonia-headless: wieslawsoltes-avalonia-headless-0.5.1-alpha.1.tgz (3107 bytes)
+@wieslawsoltes/avalonia-markup-xaml: wieslawsoltes-avalonia-markup-xaml-0.5.1-alpha.1.tgz (10968 bytes)
+@wieslawsoltes/avalonia-media: wieslawsoltes-avalonia-media-0.5.1-alpha.1.tgz (22300 bytes)
+@wieslawsoltes/avalonia-opengl: wieslawsoltes-avalonia-opengl-0.5.1-alpha.1.tgz (5532 bytes)
+@wieslawsoltes/avalonia-reactiveui: wieslawsoltes-avalonia-reactiveui-0.5.1-alpha.1.tgz (3646 bytes)
+@wieslawsoltes/avalonia-skia: wieslawsoltes-avalonia-skia-0.5.1-alpha.1.tgz (18132 bytes)
+@wieslawsoltes/avalonia-styling: wieslawsoltes-avalonia-styling-0.5.1-alpha.1.tgz (10364 bytes)
+@wieslawsoltes/avalonia-themes-fluent: wieslawsoltes-avalonia-themes-fluent-0.5.1-alpha.1.tgz (2911 bytes)
+@wieslawsoltes/xamlx: wieslawsoltes-xamlx-0.5.1-alpha.1.tgz (10250 bytes)
+Packed 17 packages; nothing published.

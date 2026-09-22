@@ -1,0 +1,86 @@
+
+> @wieslawsoltes/skiasharpweb@0.5.0 test:packaging
+> node --test --test-concurrency=1 tests/packaging/package.test.mjs tests/packaging/release.test.mjs
+
+TAP version 13
+# Subtest: package identity, exports and lifecycle have safe publication defaults
+ok 1 - package identity, exports and lifecycle have safe publication defaults
+  ---
+  duration_ms: 1.041526
+  type: 'test'
+  ...
+# Subtest: font-free defaults are explicit; invalid options and pre-aborted calls reject
+ok 2 - font-free defaults are explicit; invalid options and pre-aborted calls reject
+  ---
+  duration_ms: 0.839058
+  type: 'test'
+  ...
+# Subtest: asset URLs respect nested paths and reject executable URL schemes
+ok 3 - asset URLs respect nested paths and reject executable URL schemes
+  ---
+  duration_ms: 0.336437
+  type: 'test'
+  ...
+# Subtest: release tags match the package exactly and prereleases select next
+ok 4 - release tags match the package exactly and prereleases select next
+  ---
+  duration_ms: 0.420129
+  type: 'test'
+  ...
+# Subtest: native hashes and build inventory match files on disk
+ok 5 - native hashes and build inventory match files on disk
+  ---
+  duration_ms: 21.329904
+  type: 'test'
+  ...
+# Subtest: build is reproducible and does not mutate the qualified WASM
+ok 6 - build is reproducible and does not mutate the qualified WASM
+  ---
+  duration_ms: 316.502388
+  type: 'test'
+  ...
+# Subtest: copy CLI emits the exact native assets and refuses accidental overwrites
+ok 7 - copy CLI emits the exact native assets and refuses accidental overwrites
+  ---
+  duration_ms: 107.364487
+  type: 'test'
+  ...
+# Subtest: copy refuses symlink targets and validates all files before copying
+ok 8 - copy refuses symlink targets and validates all files before copying
+  ---
+  duration_ms: 14.516556
+  type: 'test'
+  ...
+# Subtest: npm tarball is reproducible, bounded and contains no demo, font or private files
+ok 9 - npm tarball is reproducible, bounded and contains no demo, font or private files
+  ---
+  duration_ms: 2263.255337
+  type: 'test'
+  ...
+# Subtest: packaged module and WOFF2 adapter initialize with JavaScript string compilation disabled
+ok 10 - packaged module and WOFF2 adapter initialize with JavaScript string compilation disabled
+  ---
+  duration_ms: 258.147606
+  type: 'test'
+  ...
+# Subtest: release validator rejects modified archives, metadata, commits and tags
+ok 11 - release validator rejects modified archives, metadata, commits and tags
+  ---
+  duration_ms: 1446.667866
+  type: 'test'
+  ...
+# Subtest: npm version synchronizes package, lockfile and runtime module without creating a tag
+ok 12 - npm version synchronizes package, lockfile and runtime module without creating a tag
+  ---
+  duration_ms: 164.031141
+  type: 'test'
+  ...
+1..12
+# tests 12
+# suites 0
+# pass 12
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 4706.999694

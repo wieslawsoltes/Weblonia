@@ -1,0 +1,21 @@
+PASS ScrollViewer thumb receives actual mouse drag without selecting or clicking content
+PASS ListBox thumb receives actual mouse drag without selecting or clicking content
+PASS TreeView thumb receives actual mouse drag without selecting or clicking content
+PASS TableView thumb receives actual mouse drag without selecting or clicking content
+PASS TextBox thumb receives actual mouse drag without selecting or clicking content
+PASS ScrollViewer horizontal thumb pans content and retains header/editor state
+PASS ListBox horizontal thumb pans content and retains header/editor state
+PASS TableView horizontal thumb pans content and retains header/editor state
+PASS TextBox horizontal thumb pans content and retains header/editor state
+PASS capture continues outside viewport and releases at the maximum
+PASS track click advances one viewport instead of teleporting the thumb
+PASS deferred drag previews only the thumb and commits on release
+PASS DOM wheel pixels and Shift-wheel horizontal scrolling retain exact deltas
+PASS wheel over either scrollbar uses the same pixel units as its content
+PASS mouse scrollbar focus and accessibility range keyboard commands scroll the host
+PASS Hidden still scrolls while Disabled rejects wheel input and clears offset
+PASS editor content shrink clamps offsets and removes obsolete tracks
+PASS disabling the scroll host during drag releases capture safely
+PASS compact overlay thumb stays interactive above a full-size Button
+PASS browser accessibility projection exposes a live scrollbar range
+{"passed": 20, "failed": 0, "pageErrors": [], "missingAssets": [], "completed": true}

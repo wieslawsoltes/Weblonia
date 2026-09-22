@@ -1,0 +1,20 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+  <Border Classes="card">
+    <StackPanel Spacing="14">
+      <TextBlock Text="Two-axis scrolling" FontSize="17" FontWeight="SemiBold"/>
+      <TextBlock Text="Drag either thumb, click a page track, or use the wheel. Shift+wheel moves horizontally. The content is intentionally wider than the viewport." TextWrapping="Wrap"/>
+      <WrapPanel>
+        <CheckBox x:Name="OverlayScrollBars" Content="Overlay tracks" IsChecked="False" Margin="0,0,20,4"/>
+        <CheckBox x:Name="DeferredScrollBars" Content="Deferred thumb scrolling" IsChecked="False" Margin="0,0,20,4"/>
+      </WrapPanel>
+      <ScrollViewer x:Name="DemoScrollViewer" IsCompositorScrollingEnabled="True" Height="300" AllowAutoHide="False" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <StackPanel x:Name="ScrollItems" Width="1200" Spacing="8"/>
+      </ScrollViewer>
+      <StackPanel Orientation="Horizontal" Spacing="10">
+        <Button x:Name="ScrollHome" Content="Home"/>
+        <Button x:Name="ScrollEnd" Content="End"/>
+        <TextBlock x:Name="ScrollPosition" VerticalAlignment="Center" FontSize="12"/>
+      </StackPanel>
+    </StackPanel>
+  </Border>
+</StackPanel>

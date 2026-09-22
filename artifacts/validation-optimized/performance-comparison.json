@@ -1,0 +1,180 @@
+{
+  "Version": "0.5.1-alpha.1",
+  "SourceFingerprint": "447569792cc677147d3b158d8d252a50a3eeff74d3b7b045cb6e009f448be57f",
+  "BaselineVersion": "0.5.0-alpha.1",
+  "BaselineSourceArchive": "AvaloniaWeb-0.5.0-alpha.1-source.zip",
+  "BenchmarkScriptSha256": "16eca3fcc0ad2f5cf79ebc7b29be9624fb1d51b085466f631e40f5b120cb8823",
+  "Completed": true,
+  "Backend": "canvas",
+  "Browser": "144.0.7559.96",
+  "DeviceScale": 2,
+  "FramesPerTrial": 20,
+  "TimingTrialsPerWorkload": 3,
+  "Timings": {
+    "repaint": {
+      "Baseline": {
+        "medianMs": 57.5,
+        "p95Ms": 87,
+        "maxMs": 277,
+        "meanMs": 63.505
+      },
+      "Optimized": {
+        "medianMs": 43.7,
+        "p95Ms": 53.6,
+        "maxMs": 60.7,
+        "meanMs": 43.145
+      }
+    },
+    "scroll": {
+      "Baseline": {
+        "medianMs": 74.3,
+        "p95Ms": 126.1,
+        "maxMs": 166.8,
+        "meanMs": 82.523
+      },
+      "Optimized": {
+        "medianMs": 42.7,
+        "p95Ms": 57.6,
+        "maxMs": 73.3,
+        "meanMs": 44.998
+      }
+    },
+    "horizontal": {
+      "Baseline": {
+        "medianMs": 59.8,
+        "p95Ms": 91.4,
+        "maxMs": 136.6,
+        "meanMs": 63.59
+      },
+      "Optimized": {
+        "medianMs": 38.1,
+        "p95Ms": 48.3,
+        "maxMs": 56.2,
+        "meanMs": 39.375
+      }
+    }
+  },
+  "Operations": {
+    "repaint": {
+      "Baseline": {
+        "hostBoundsReads": 20,
+        "renders": 20,
+        "propertyReads": 692760,
+        "metadataCalls": 692760,
+        "priorityLookups": 692760,
+        "accessibilityCalls": 20,
+        "accessibilityNames": 5120,
+        "ariaAttributeMutations": 17560
+      },
+      "Optimized": {
+        "hostBoundsReads": 20,
+        "renders": 20,
+        "propertyReads": 122200,
+        "metadataCalls": 18320,
+        "priorityLookups": 18320
+      }
+    },
+    "scroll": {
+      "Baseline": {
+        "propertyReads": 1003005,
+        "metadataCalls": 1538587,
+        "priorityLookups": 1010581,
+        "hostBoundsReads": 21,
+        "layoutExecutions": 21,
+        "visualDetachments": 621,
+        "inheritanceChanges": 1242,
+        "cellPrepares": 276,
+        "visualAttachments": 621,
+        "renders": 21,
+        "accessibilityCalls": 21,
+        "accessibilityNames": 5358,
+        "ariaAttributeMutations": 18368,
+        "ariaChildListMutations": 2158
+      },
+      "Optimized": {
+        "propertyReads": 308671,
+        "hostBoundsReads": 20,
+        "layoutExecutions": 20,
+        "metadataCalls": 32867,
+        "priorityLookups": 31143,
+        "cellPrepares": 276,
+        "visualDetachments": 18,
+        "inheritanceChanges": 36,
+        "renders": 20,
+        "accessibilityCalls": 20,
+        "accessibilityNames": 641,
+        "ariaAttributeMutations": 738,
+        "ariaChildListMutations": 548,
+        "visualAttachments": 18
+      }
+    },
+    "horizontal": {
+      "Baseline": {
+        "propertyReads": 752298,
+        "metadataCalls": 753178,
+        "priorityLookups": 753198,
+        "hostBoundsReads": 21,
+        "layoutExecutions": 20,
+        "renders": 21,
+        "accessibilityCalls": 21,
+        "accessibilityNames": 5376,
+        "ariaAttributeMutations": 18438
+      },
+      "Optimized": {
+        "propertyReads": 142240,
+        "priorityLookups": 21080,
+        "metadataCalls": 21060,
+        "hostBoundsReads": 20,
+        "layoutExecutions": 20,
+        "renders": 20,
+        "accessibilityCalls": 20,
+        "accessibilityNames": 20
+      }
+    },
+    "idle600ms": {
+      "Baseline": {},
+      "Optimized": {}
+    }
+  },
+  "CanvasPixelComparisons": [
+    {
+      "Baseline": "browser-baseline-scene-0.png",
+      "Optimized": "browser-performance-scene-0.png",
+      "Shape": [
+        1640,
+        1124,
+        4
+      ],
+      "Identical": true,
+      "DifferentPixels": 0,
+      "MaximumChannelError": 0
+    },
+    {
+      "Baseline": "browser-baseline-scene-1.png",
+      "Optimized": "browser-performance-scene-1.png",
+      "Shape": [
+        1640,
+        1124,
+        4
+      ],
+      "Identical": true,
+      "DifferentPixels": 0,
+      "MaximumChannelError": 0
+    },
+    {
+      "Baseline": "browser-baseline-scene-2.png",
+      "Optimized": "browser-performance-scene-2.png",
+      "Shape": [
+        1640,
+        1124,
+        4
+      ],
+      "Identical": true,
+      "DifferentPixels": 0,
+      "MaximumChannelError": 0
+    }
+  ],
+  "AllScenesPixelIdentical": true,
+  "HardwareGpuQualified": false,
+  "TimingScope": "Local native Skia raster/software Chromium CPU timings, not a hardware-GPU or cross-machine frame-rate claim. Timings and operation counts collected separately."
+}

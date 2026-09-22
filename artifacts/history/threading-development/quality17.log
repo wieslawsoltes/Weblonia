@@ -1,0 +1,39 @@
+/mnt/data/avalonia-threaded/AvaloniaWeb/tests/threading-quality.py:47: DeprecationWarning: Image.Image.getdata is deprecated and will be removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
+  diff=ImageChops.difference(reference,actual);maximum=max(v[1]for v in diff.getextrema());bad=sum(1 for px in diff.getdata()if max(px)>2)
+PASS render-worker browser-fonts 1.25x RGBA
+PASS full-isolation browser-fonts 1.25x RGBA
+Traceback (most recent call last):
+  File "/mnt/data/avalonia-threaded/AvaloniaWeb/tests/threading-quality.py", line 37, in <module>
+    if mode=='full-isolation':invoke(page,'Scroll',{'Name':'LongDocumentEditor','X':180.25,'Y':7200.5})
+                              ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/avalonia-threaded/AvaloniaWeb/tests/threading_support.py", line 29, in invoke
+    def invoke(page,command,value=None):return page.evaluate('async([c,v])=>await catalogHost.InvokeAsync(c,v)',[command,value])
+                                               ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/pyvenv/lib/python3.13/site-packages/playwright/sync_api/_generated.py", line 8562, in evaluate
+    self._sync(
+    ~~~~~~~~~~^
+        self._impl_obj.evaluate(expression=expression, arg=mapping.to_impl(arg))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/opt/pyvenv/lib/python3.13/site-packages/playwright/_impl/_sync_base.py", line 115, in _sync
+    return task.result()
+           ~~~~~~~~~~~^^
+  File "/opt/pyvenv/lib/python3.13/site-packages/playwright/_impl/_page.py", line 464, in evaluate
+    return await self._main_frame.evaluate(expression, arg)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/pyvenv/lib/python3.13/site-packages/playwright/_impl/_frame.py", line 320, in evaluate
+    await self._channel.send(
+    ...<6 lines>...
+    )
+  File "/opt/pyvenv/lib/python3.13/site-packages/playwright/_impl/_connection.py", line 69, in send
+    return await self._connection.wrap_api_call(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/opt/pyvenv/lib/python3.13/site-packages/playwright/_impl/_connection.py", line 559, in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+playwright._impl._errors.Error: Page.evaluate: TypeError: Cannot set property ScrollOffset of #<TextBox> which has only a getter
+    at ThreadChannel._Receive (http://localhost:4173/packages/browser/src/thread-channel.js:6:205)
+    at ThreadChannel.port.onmessage (http://localhost:4173/packages/browser/src/thread-channel.js:3:295)

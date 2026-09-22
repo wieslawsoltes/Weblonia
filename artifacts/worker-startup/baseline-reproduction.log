@@ -1,0 +1,9 @@
+WORKER data:text/javascript,import%20%22http%3A%2F%2Flocalhost%3A4173%2Fpackages%2Fbrowser%2Fworker-assets%2Frender.js%22%3B
+CONSOLE error Error: Render worker initialization timed out.
+    at http://localhost:4173/packages/browser/src/render-thread.js:45:51
+CONSOLE error Error: Render worker initialization timed out.
+    at http://localhost:4173/packages/browser/src/render-thread.js:45:51
+RESULT {'ready': None, 'error': 'Error: Render worker initialization timed out.\n    at http://localhost:4173/packages/browser/src/render-thread.js:45:51'}
+AFTER_TIMEOUT_HANDLER function
+RESEND_RESULT {'Type': 'ready', 'Backend': 'canvas', 'Diagnostics': {'Thread': 'composition-render-worker', 'InstanceId': '4a1d22fe-f5a2e7a5-20cf1dc4-4e1ac1ca', 'HasDocument': False, 'CrossOriginIsolated': False, 'WorkerFrames': 0, 'ReceivedBytes': 0, 'ReturnedBuffers': 0, 'Clock': 'worker-requestAnimationFrame', 'StartedAt': 1790011526776.7}, 'BackendFailures': []}
+MODULE_FETCH_COUNT 114

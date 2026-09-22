@@ -1,0 +1,31 @@
+{
+  "inspectedAt": "2026-09-21",
+  "Avalonia": {
+    "repository": "AvaloniaUI/Avalonia",
+    "commit": "334536066a6cf4df5dcfb1da22cb9ed80dd66e8e",
+    "catalog": "samples/ControlCatalog/ViewModels/MainWindowViewModel_PageList.cs"
+  },
+  "XamlX": {
+    "repository": "kekekeks/XamlX",
+    "ref": "master",
+    "pinStatus": "architecture reference; source tree not included",
+    "commit": "7ef6aef496ab6e8dcf3df04bef697be49db37c04"
+  },
+  "SkiaSharpWeb": {
+    "repository": "wieslawsoltes/SkiaSharpWeb",
+    "commit": "0a33427592e788d042ab69eedeb4bd7f29f35564",
+    "packageVersion": "0.5.0",
+    "browserTextExportPublishedToNpm": false,
+    "sourcePullRequest": 8,
+    "sourceDependency": "git+https://github.com/wieslawsoltes/SkiaSharpWeb.git#0a33427592e788d042ab69eedeb4bd7f29f35564"
+  },
+  "ReactiveWeb": {
+    "repository": "wieslawsoltes/ReactiveWeb",
+    "commit": "de265a21b4c25f151ba6927064b2071eaa1b10d2",
+    "packageVersion": "0.2.0"
+  },
+  "RxJS": {
+    "version": "7.8.2",
+    "distribution": "ReactiveWeb browser bundle namespace"
+  }
+}

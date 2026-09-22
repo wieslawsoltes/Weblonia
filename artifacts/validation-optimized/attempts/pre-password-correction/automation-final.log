@@ -1,0 +1,16 @@
+PASS warm paint does not rebuild or mutate accessibility DOM
+PASS detached LabeledBy updates its consumer and releases replaced dependencies
+PASS transitive and cyclic label relationships converge without stale names
+PASS Control-valued content label remains live without replacing the button node
+PASS visibility removes and restores complete automation subtrees
+PASS raw nodes flatten descendants and preserve reorder identity
+PASS command availability and parameter changes update aria-disabled
+PASS inherited disabling refreshes descendant semantics
+PASS focus projects editor semantics and transfers ownership between parents
+FAIL password conversion clears mirrored values and native plain-text buffers Page.evaluate: Error: Assertion failed
+    at window.assert (eval at evaluate (:290:30), <anonymous>:3:70)
+    at eval (eval at evaluate (:290:30), <anonymous>:3:42)
+    at async <anonymous>:316:30
+PASS recycled table rows retain accessibility nodes with updated content
+PASS explicit rendering consumes scheduled callbacks and settled UI stays idle
+{"Passed": 11, "Failed": 1, "Completed": true, "PageErrors": [], "MissingAssets": []}

@@ -1,0 +1,43 @@
+{
+  "name": "avaloniaweb-workspace",
+  "private": true,
+  "version": "0.6.2-alpha.1",
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "test": "node --import ./scripts/register-loader.mjs --test tests/*.test.mjs",
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/serve.mjs",
+    "start": "node scripts/serve.mjs",
+    "pack:all": "node scripts/pack.mjs",
+    "test:browser": "python tests/browser.py",
+    "check": "npm test && npm run build",
+    "test:packages": "node scripts/test-packages.mjs",
+    "inventory": "node scripts/inventory.mjs",
+    "sync:upstream": "node scripts/sync-upstream.mjs",
+    "test:text-quality": "python tests/text-quality.py",
+    "test:http": "python tests/http-smoke.py",
+    "benchmark": "node --import ./scripts/register-loader.mjs scripts/benchmark.mjs artifacts/benchmark-current.json",
+    "archive": "python scripts/archive.py",
+    "verify:vendor": "node scripts/verify-vendor.mjs",
+    "verify:release": "node scripts/verify-release.mjs",
+    "test:record": "node scripts/validate-node.mjs",
+    "test:scrollbars": "python tests/scrollbars.py",
+    "benchmark:scrolling": "node --import ./scripts/register-loader.mjs scripts/benchmark-scrolling.mjs artifacts/validation-optimized/benchmark-current.json",
+    "test:automation-incremental": "python tests/automation-incremental.py",
+    "benchmark:trace": "python tests/performance-trace.py --out artifacts/validation-optimized/browser-performance.json --frames 30",
+    "verify:workers": "node scripts/verify-workers.mjs",
+    "test:threading": "python tests/threading-browser.py && python tests/threading-integration.py && python tests/threading-quality.py && python tests/threading-catalog.py",
+    "benchmark:threading": "python tests/threading-performance.py",
+    "test:worker-startup": "python tests/worker-startup.py",
+    "test:http-workers": "python tests/worker-startup.py --http",
+    "test:invalidation": "node --import ./scripts/register-loader.mjs --test tests/invalidation.test.mjs tests/invalidation-native.test.mjs && python tests/invalidation-browser.py",
+    "test:worker-performance": "python tests/worker-performance-browser.py",
+    "test:pages": "python3 tests/pages-smoke.py"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

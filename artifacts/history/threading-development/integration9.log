@@ -1,0 +1,17 @@
+PASS isolated native text editing and grapheme-safe backward deletion
+PASS focused edit switches to password without plaintext semantic exposure
+PASS render clock and animation advance during a confirmed UI-worker stall
+PASS compositor wheel scrolling continues during UI stall and reconciles exactly once
+PASS virtual table fast scrolling respects realized-content coverage
+PASS three threads vertical scrollbar routes real mouse capture
+PASS three threads horizontal scrollbar routes real mouse capture
+PASS registered native DOM module binds to UI-worker model and cleans up
+PASS isolated renderer restart replaces canvas and rebuilds identical committed pixels
+PASS native editor still works after renderer restart
+FAIL worker-owned Window opens a real browser window with its own render worker {'Exists': True, 'Opened': False, 'Error': None, 'OwnerEnabled': True, 'Status': 'TextBox · JavaScript demonstration · AOT XAML construction', 'Renderer': True}
+{
+  "Passed": 10,
+  "Failed": 1,
+  "Errors": [],
+  "MissingAssets": []
+}

@@ -1,0 +1,17 @@
+FAIL isolated native text editing and grapheme-safe backward deletion {'Name': 'NameEditor', 'Type': 'TextBox', 'Id': 601, 'Bounds': {'X': 317, 'Y': 280, 'Width': 824, 'Height': 34}, 'Text': 'Threaded é👩🏽\u200d💻Ada Lovelace', 'Value': None, 'Offset': {'X': 0, 'Y': 0}, 'CaretIndex': 18, 'SelectionStart': 18, 'SelectionEnd': 18, 'SelectedIndex': None, 'IsChecked': None, 'IsEnabled': True}
+FAIL focused edit switches to password without plaintext semantic exposure debug descriptor leaks plaintext
+PASS render clock and animation advance during a confirmed UI-worker stall
+PASS compositor wheel scrolling continues during UI stall and reconciles exactly once
+PASS virtual table fast scrolling respects realized-content coverage
+PASS three threads vertical scrollbar routes real mouse capture
+PASS three threads horizontal scrollbar routes real mouse capture
+PASS registered native DOM module binds to UI-worker model and cleans up
+PASS isolated renderer restart replaces canvas and rebuilds identical committed pixels
+FAIL native editor still works after renderer restart {'Name': 'NameEditor', 'Type': 'TextBox', 'Id': 3207, 'Bounds': {'X': 317, 'Y': 280, 'Width': 824, 'Height': 34}, 'Text': 'Threaded é👩🏽\u200d💻Ada Lovelace', 'Value': None, 'Offset': {'X': 0, 'Y': 0}, 'CaretIndex': 18, 'SelectionStart': 18, 'SelectionEnd': 18, 'SelectedIndex': None, 'IsChecked': None, 'IsEnabled': True}
+FAIL worker-owned Window opens a real browser window with its own render worker {'Exists': True, 'Opened': False, 'Error': None, 'OwnerEnabled': True}
+{
+  "Passed": 7,
+  "Failed": 4,
+  "Errors": [],
+  "MissingAssets": []
+}

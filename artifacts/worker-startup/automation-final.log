@@ -1,0 +1,13 @@
+PASS warm paint does not rebuild or mutate accessibility DOM
+PASS detached LabeledBy updates its consumer and releases replaced dependencies
+PASS transitive and cyclic label relationships converge without stale names
+PASS Control-valued content label remains live without replacing the button node
+PASS visibility removes and restores complete automation subtrees
+PASS raw nodes flatten descendants and preserve reorder identity
+PASS command availability and parameter changes update aria-disabled
+PASS inherited disabling refreshes descendant semantics
+PASS focus projects editor semantics and transfers ownership between parents
+PASS password conversion clears mirrored values and native plain-text buffers
+PASS recycled table rows retain accessibility nodes with updated content
+PASS explicit rendering consumes scheduled callbacks and settled UI stays idle
+{"Passed": 12, "Failed": 0, "Completed": true, "PageErrors": [], "MissingAssets": []}

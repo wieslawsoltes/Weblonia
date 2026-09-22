@@ -1,0 +1,97 @@
+TAP version 13
+# Subtest: font metrics establish stable baselines; combining ink does not move line spacing
+not ok 1 - font metrics establish stable baselines; combining ink does not move line spacing
+  ---
+  duration_ms: 4.681955
+  type: 'test'
+  location: '/mnt/data/avalonia-next/AvaloniaWeb/tests/text-scroll-performance.test.mjs:10:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 13.799999999999999
+    - 13.8
+         ^
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 13.8
+  actual: 13.799999999999999
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///mnt/data/avalonia-next/AvaloniaWeb/tests/text-scroll-performance.test.mjs:14:16)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+# Subtest: viewport and caret line lookup are logarithmic for a 10000-line document
+ok 2 - viewport and caret line lookup are logarithmic for a 10000-line document
+  ---
+  duration_ms: 51.503869
+  type: 'test'
+  ...
+# Subtest: line aggregation handles documents beyond the JavaScript argument-count limit
+ok 3 - line aggregation handles documents beyond the JavaScript argument-count limit
+  ---
+  duration_ms: 219.791018
+  type: 'test'
+  ...
+# Subtest: MaxLines stops shaping invisible paragraphs after one overflow sentinel
+ok 4 - MaxLines stops shaping invisible paragraphs after one overflow sentinel
+  ---
+  duration_ms: 0.665038
+  type: 'test'
+  ...
+# Subtest: MaxLines with wrapped overflow still marks and fits the ellipsis
+ok 5 - MaxLines with wrapped overflow still marks and fits the ellipsis
+  ---
+  duration_ms: 11.666708
+  type: 'test'
+  ...
+# Subtest: FormattedText retains a borrowed layout and invalidates on brush/font/width changes
+ok 6 - FormattedText retains a borrowed layout and invalidates on brush/font/width changes
+  ---
+  duration_ms: 12.924967
+  type: 'test'
+  ...
+# Subtest: uncacheable rich/feature descriptors still have bounded layout ownership
+ok 7 - uncacheable rich/feature descriptors still have bounded layout ownership
+  ---
+  duration_ms: 4.170221
+  type: 'test'
+  ...
+# Subtest: z-order snapshots are reused and invalidate for values, add/remove and public reorder
+ok 8 - z-order snapshots are reused and invalidate for values, add/remove and public reorder
+  ---
+  duration_ms: 7.704752
+  type: 'test'
+  ...
+# Subtest: typeface descriptors are retained and external mutations do not alter control properties
+ok 9 - typeface descriptors are retained and external mutations do not alter control properties
+  ---
+  duration_ms: 1.821136
+  type: 'test'
+  ...
+# Subtest: scrollbars expose correct automation role/range and automation changes scroll the owner
+ok 10 - scrollbars expose correct automation role/range and automation changes scroll the owner
+  ---
+  duration_ms: 12.72464
+  type: 'test'
+  ...
+# Subtest: wheel mode is sampled before delta values
+ok 11 - wheel mode is sampled before delta values
+  ---
+  duration_ms: 2.467436
+  type: 'test'
+  ...
+1..11
+# tests 11
+# suites 0
+# pass 10
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1460.488075

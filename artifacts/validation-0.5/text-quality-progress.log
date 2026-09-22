@@ -1,0 +1,21 @@
+PASS fractional origin / italic overhang / 1x 
+PASS combining marks and browser shaping / 1x 
+PASS letter spacing / 1x 
+PASS fractional origin / italic overhang / 1.25x 
+PASS combining marks and browser shaping / 1.25x 
+PASS letter spacing / 1.25x 
+PASS fractional origin / italic overhang / 1.5x 
+PASS combining marks and browser shaping / 1.5x 
+PASS letter spacing / 1.5x 
+PASS fractional origin / italic overhang / 2x 
+PASS combining marks and browser shaping / 2x 
+PASS letter spacing / 2x 
+PASS fractional origin / italic overhang / 3x 
+PASS combining marks and browser shaping / 3x 
+PASS letter spacing / 3x 
+PASS nonuniform device scale preserves separate horizontal and vertical resolution 
+PASS long shaped line crosses many independently cached tile boundaries 
+PASS deep horizontal scrolling preserves phase and skips offscreen tile planning 
+PASS offscreen portions do not rasterize or upload 
+PASS 1000 warm TextBlock redraws do not build layouts, rasterize, upload or measure 
+{"Passed": 20, "Failed": 0, "PageErrors": [], "MissingAssets": []}

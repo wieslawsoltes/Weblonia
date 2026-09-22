@@ -1,0 +1,17 @@
+[
+  "tests/worker-performance-browser.py",
+  "tests/threading-protocol.test.mjs",
+  "tests/worker-native-performance.test.mjs",
+  "tests/worker-performance.test.mjs",
+  "packages/rendering/src/protocol.js",
+  "packages/rendering/src/resources.js",
+  "packages/rendering/src/server.js",
+  "packages/rendering/src/references.js",
+  "packages/rendering/src/recording.js",
+  "packages/skia/src/index.js",
+  "packages/skia/src/worker-runtime.js",
+  "packages/browser/src/render-worker.js",
+  "packages/browser/src/worker-top-level.js",
+  "packages/browser/src/isolated-host.js",
+  "packages/browser/src/render-thread.js"
+]

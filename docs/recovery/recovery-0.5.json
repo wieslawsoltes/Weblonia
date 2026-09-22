@@ -1,0 +1,12 @@
+{
+  "BaselineVersion": "0.4.0-alpha.1",
+  "Archive": "AvaloniaWeb-0.4.0-alpha.1-source.zip",
+  "ArchiveSha256": "e57f291c8d4f30918642e32e673c358f3a04619db0b43cb062a967e59baac63a",
+  "ManifestFilesChecked": 991,
+  "Mismatches": [],
+  "BaselineNodeLog": "artifacts/validation-0.5/baseline-node.log",
+  "HistoricalBaselineTests": 268,
+  "OriginalArchiveUnchanged": true,
+  "ContinuationSource": "All code in packages/scripts/tests/samples; not reconstructed from screenshots",
+  "UnavailableWorkClaimedRecovered": false
+}

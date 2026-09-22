@@ -1,0 +1,3 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Light and dark resources" FontSize="17" FontWeight="SemiBold"/><StackPanel Orientation="Horizontal" Spacing="12"><Button Content="Light theme" Click="LightTheme"/><Button Content="Dark theme" Click="DarkTheme"/></StackPanel><Border Background="{DynamicResource SystemSelectionBrush}" Padding="24" CornerRadius="8"><TextBlock Text="This brush is a DynamicResource." FontSize="21"/></Border></StackPanel></Border>
+</StackPanel>

@@ -1,0 +1,6 @@
+
+> avaloniaweb-workspace@0.6.2-alpha.1 build
+> node scripts/build.mjs
+
+Built race-free worker ESM entries and source application graph; native WASM is not duplicated.
+Compiled 75 XAML modules. Static distribution: dist/

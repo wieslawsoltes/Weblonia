@@ -1,0 +1,3 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Project explorer" FontSize="17" FontWeight="SemiBold"/><TreeView x:Name="Tree" Height="380"/></StackPanel></Border>
+</StackPanel>

@@ -1,0 +1,40 @@
+{
+  "name": "@wieslawsoltes/avalonia",
+  "version": "0.6.2-alpha.1",
+  "type": "module",
+  "description": "JavaScript avalonia runtime for AvaloniaWeb",
+  "license": "MIT",
+  "sideEffects": true,
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@wieslawsoltes/avalonia-animation": "0.6.2-alpha.1",
+    "@wieslawsoltes/avalonia-base": "0.6.2-alpha.1",
+    "@wieslawsoltes/avalonia-browser": "0.6.2-alpha.1",
+    "@wieslawsoltes/avalonia-controls": "0.6.2-alpha.1",
+    "@wieslawsoltes/avalonia-data": "0.6.2-alpha.1",
+    "@wieslawsoltes/avalonia-markup-xaml": "0.6.2-alpha.1",
+    "@wieslawsoltes/avalonia-media": "0.6.2-alpha.1",
+    "@wieslawsoltes/avalonia-reactiveui": "0.6.2-alpha.1",
+    "@wieslawsoltes/avalonia-skia": "0.6.2-alpha.1",
+    "@wieslawsoltes/avalonia-styling": "0.6.2-alpha.1",
+    "@wieslawsoltes/avalonia-themes-fluent": "0.6.2-alpha.1",
+    "@wieslawsoltes/avalonia-composition": "0.6.2-alpha.1",
+    "@wieslawsoltes/avalonia-opengl": "0.6.2-alpha.1",
+    "@wieslawsoltes/avalonia-rendering": "0.6.2-alpha.1"
+  }
+}

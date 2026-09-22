@@ -1,0 +1,3 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Pick a date" FontSize="17" FontWeight="SemiBold"/><StackPanel Orientation="Horizontal" Spacing="12"><Calendar x:Name="Calendar" Width="310" Height="310"/><StackPanel Spacing="10" Width="220"><TextBlock Text="Keyboard navigation" FontSize="17"/><TextBlock Text="Arrow keys change the selected day. Page Up and Page Down change the month." TextWrapping="Wrap" Classes="muted"/><TextBlock x:Name="DateText" Text="No date selected" TextWrapping="Wrap"/></StackPanel></StackPanel></StackPanel></Border>
+</StackPanel>

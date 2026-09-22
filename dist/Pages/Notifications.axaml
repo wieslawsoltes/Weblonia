@@ -1,0 +1,3 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Non-modal notifications" FontSize="17" FontWeight="SemiBold"/><Button Content="Show notification" Click="Notify" Classes="accent" HorizontalAlignment="Left"/></StackPanel></Border>
+</StackPanel>

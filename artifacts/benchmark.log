@@ -1,0 +1,4 @@
+
+> avaloniaweb-workspace@0.3.0-alpha.1 benchmark
+> node --import ./scripts/register-loader.mjs scripts/benchmark.mjs artifacts/benchmark-current.json
+

@@ -1,0 +1,79 @@
+{
+  "Version": "0.2.0-alpha.1",
+  "Date": "2026-09-20",
+  "FullAvaloniaParity": false,
+  "FullXamlXParity": false,
+  "FullUpstreamClonesIncluded": false,
+  "WorkspacePackages": 17,
+  "FacadeExports": 451,
+  "LibraryJavaScriptFiles": 52,
+  "LibraryJavaScriptLines": 14053,
+  "AotXamlModules": 75,
+  "CatalogRoutes": 74,
+  "BrowserDemonstrations": 74,
+  "ExplicitMissingFeaturePages": 0,
+  "OriginalCatalogSubexamplesFullyPorted": false,
+  "NodeTests": {
+    "Passed": 196,
+    "Failed": 0,
+    "Skipped": 0
+  },
+  "BrowserTests": {
+    "Passed": 105,
+    "Failed": 0,
+    "Skipped": 3,
+    "Mode": "local-asset-interception",
+    "Browser": "144.0.7559.96",
+    "Backend": "canvas",
+    "CatalogSweepSkipped": false,
+    "WebGL2Available": false,
+    "PageErrors": [],
+    "MissingAssets": [],
+    "PhysicalGpuQualified": false
+  },
+  "SoftwareWebGLFocusedTests": {
+    "Passed": 31,
+    "Failed": 0,
+    "Skipped": 3,
+    "CatalogSweepSkipped": true,
+    "WebGL2Available": false,
+    "Note": "Focused subset, not an additional full catalog sweep. Repeated tests are not added to the primary count."
+  },
+  "SoftwareWebGLFullSweepAttempt": {
+    "Completed": false,
+    "Reason": "External command timeout while processing the catalog; not counted as a passed test run."
+  },
+  "PackedPackageConsumer": {
+    "Passed": true,
+    "Packages": 17,
+    "FacadeExports": 451,
+    "PublicRegistryInstalled": false
+  },
+  "HttpHeaderChecks": {
+    "SourceHtml": 200,
+    "SourceRedirectTarget": "http://127.0.0.1:4219/samples/ControlCatalog/",
+    "DistributionHtml": {
+      "Status": 200,
+      "ContentType": "text/html; charset=utf-8"
+    },
+    "Wasm": {
+      "Status": 200,
+      "ContentType": "application/wasm"
+    },
+    "BrowserNavigatedHttp": false
+  },
+  "VendorIntegrityFilesVerified": 113,
+  "PublishedToNpm": false,
+  "CommittedToGitHub": false,
+  "PubliclyDeployed": false,
+  "FontFilesIncluded": 0,
+  "NotQualified": [
+    "Full upstream test/differential coverage",
+    "Full original Fluent templates and sample code-behind",
+    "Physical GPU devices",
+    "Real browser HTTP navigation",
+    "Firefox/Safari/mobile",
+    "Physical IMEs and screen readers",
+    "Public registry installation"
+  ]
+}

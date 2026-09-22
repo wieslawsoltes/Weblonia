@@ -1,0 +1,1 @@
+The interrupted log records a 120-second external command timeout, not a passing browser run. The current full result is ../browser-results.json with completed=true. Focused results are separate and not added to the primary test count.

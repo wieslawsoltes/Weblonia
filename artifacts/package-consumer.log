@@ -1,0 +1,10 @@
+
+> avaloniaweb-workspace@0.3.0-alpha.1 test:packages
+> node scripts/test-packages.mjs
+
+{
+  Passed: true,
+  Packages: 17,
+  FacadeExports: 464,
+  PublicRegistryInstalled: false
+}

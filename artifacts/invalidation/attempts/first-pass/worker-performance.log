@@ -1,0 +1,23 @@
+PASS vertical completes without render error
+PASS horizontal completes without render error
+PASS UTF8 references exceed fresh encodes
+PASS placement changes use sparse patches
+PASS identical text resources are interned
+PASS server validation reuses immutable reference summaries
+PASS exact identity transforms skip native canvas operations
+PASS transport retains one in-flight batch and a bounded transfer pool
+PASS 100 warm repaint requests create no new packets or string encodes
+PASS 0.6.1 versus optimized table-initial exact RGBA
+PASS 0.6.1 versus optimized table-vertical exact RGBA
+PASS 0.6.1 versus optimized table-both-axes exact RGBA
+PASS 0.6.1 versus optimized typography exact RGBA
+PASS 0.6.1 versus optimized scrollviewer exact RGBA
+PASS 0.6.1 versus optimized image exact RGBA
+PASS 0.6.1 versus optimized acrylic exact RGBA
+{
+  "Completed": true,
+  "Passed": 16,
+  "Failed": 0,
+  "Errors": [],
+  "MissingAssets": []
+}

@@ -1,0 +1,186 @@
+TAP version 13
+# Subtest: gesture collections enforce single ownership, duplicate rejection and immediate batched ownership
+ok 1 - gesture collections enforce single ownership, duplicate rejection and immediate batched ownership
+  ---
+  duration_ms: 2.354602
+  type: 'test'
+  ...
+# Subtest: gesture collection replacement and owner disposal detach contacts without sharing lifetimes
+ok 2 - gesture collection replacement and owner disposal detach contacts without sharing lifetimes
+  ---
+  duration_ms: 0.448952
+  type: 'test'
+  ...
+# Subtest: scroll threshold subtracts its dead zone and captures separately from element capture
+ok 3 - scroll threshold subtracts its dead zone and captures separately from element capture
+  ---
+  duration_ms: 1.891108
+  type: 'test'
+  ...
+# Subtest: Mouse contacts are never converted into touch scrolling
+ok 4 - Mouse contacts are never converted into touch scrolling
+  ---
+  duration_ms: 0.426379
+  type: 'test'
+  ...
+# Subtest: Pen contacts use the same threshold and release contracts as touch
+ok 5 - Pen contacts use the same threshold and release contracts as touch
+  ---
+  duration_ms: 0.456093
+  type: 'test'
+  ...
+# Subtest: unhandled scroll does not steal element capture
+ok 6 - unhandled scroll does not steal element capture
+  ---
+  duration_ms: 0.927157
+  type: 'test'
+  ...
+# Subtest: ScrollViewer cancels a pressed button before dragging can invoke Click
+ok 7 - ScrollViewer cancels a pressed button before dragging can invoke Click
+  ---
+  duration_ms: 6.698246
+  type: 'test'
+  ...
+# Subtest: a normal touch tap still invokes Button.Click once
+ok 8 - a normal touch tap still invokes Button.Click once
+  ---
+  duration_ms: 1.808036
+  type: 'test'
+  ...
+# Subtest: nested boundary-aware scroll recognizers yield to an ancestor that can consume movement
+ok 9 - nested boundary-aware scroll recognizers yield to an ancestor that can consume movement
+  ---
+  duration_ms: 1.195222
+  type: 'test'
+  ...
+# Subtest: pinch reports finite scale, midpoint, angle and exactly one end event
+ok 10 - pinch reports finite scale, midpoint, angle and exactly one end event
+  ---
+  duration_ms: 0.86773
+  type: 'test'
+  ...
+# Subtest: coincident pinch contacts and an extra third contact do not produce NaN or extra captures
+ok 11 - coincident pinch contacts and an extra third contact do not produce NaN or extra captures
+  ---
+  duration_ms: 0.361473
+  type: 'test'
+  ...
+# Subtest: cancel and collection removal release both pinch capture and pending contacts
+ok 12 - cancel and collection removal release both pinch capture and pending contacts
+  ---
+  duration_ms: 0.2307
+  type: 'test'
+  ...
+# Subtest: a second contact upgrades a running scroll to a pinch without leaving scroll state active
+ok 13 - a second contact upgrades a running scroll to a pinch without leaving scroll state active
+  ---
+  duration_ms: 0.363135
+  type: 'test'
+  ...
+# Subtest: PreventGestureRecognition in a tunnel handler suppresses recognizers without suppressing ordinary input
+ok 14 - PreventGestureRecognition in a tunnel handler suppresses recognizers without suppressing ordinary input
+  ---
+  duration_ms: 0.243189
+  type: 'test'
+  ...
+# Subtest: velocity estimator is bounded, rejects reversed time, tolerates duplicate timestamps and stale release
+ok 15 - velocity estimator is bounded, rejects reversed time, tolerates duplicate timestamps and stale release
+  ---
+  duration_ms: 3.046432
+  type: 'test'
+  ...
+# Subtest: inertial displacement is frame-rate independent using analytic integration
+ok 16 - inertial displacement is frame-rate independent using analytic integration
+  ---
+  duration_ms: 1.501404
+  type: 'test'
+  ...
+# Subtest: new press, disabled target, explicit cancellation and disposal stop inertia callbacks
+ok 17 - new press, disabled target, explicit cancellation and disposal stop inertia callbacks
+  ---
+  duration_ms: 0.71903
+  type: 'test'
+  ...
+# Subtest: capture-lost reentrancy preserves the latest capturer
+ok 18 - capture-lost reentrancy preserves the latest capturer
+  ---
+  duration_ms: 0.3119
+  type: 'test'
+  ...
+# Subtest: XAML builds recognizer collections and validates scalar options
+ok 19 - XAML builds recognizer collections and validates scalar options
+  ---
+  duration_ms: 4.035921
+  type: 'test'
+  ...
+# Subtest: cancellation cannot be defeated by a capture-lost handler recapturing
+ok 20 - cancellation cannot be defeated by a capture-lost handler recapturing
+  ---
+  duration_ms: 0.197532
+  type: 'test'
+  ...
+# Subtest: detaching a visual subtree cancels active scroll and releases every contact
+ok 21 - detaching a visual subtree cancels active scroll and releases every contact
+  ---
+  duration_ms: 0.95566
+  type: 'test'
+  ...
+# Subtest: a disposed recognizer stops scheduled inertia, unsubscribes and can never be re-added
+ok 22 - a disposed recognizer stops scheduled inertia, unsubscribes and can never be re-added
+  ---
+  duration_ms: 0.293693
+  type: 'test'
+  ...
+# Subtest: scroll gesture end requests cancel before a subsequent movement is emitted
+not ok 23 - scroll gesture end requests cancel before a subsequent movement is emitted
+  ---
+  duration_ms: 1.033914
+  type: 'test'
+  location: '/mnt/data/current-work/AvaloniaWeb/tests/gestures.test.mjs:210:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    2 !== 1
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 1
+  actual: 2
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///mnt/data/current-work/AvaloniaWeb/tests/gestures.test.mjs:213:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: Avalonia text raster compatibility exports are the actual upstream functions
+ok 24 - Avalonia text raster compatibility exports are the actual upstream functions
+  ---
+  duration_ms: 1.040084
+  type: 'test'
+  ...
+# Subtest: text module matches the merged upstream Git blob and consumer pins that exact revision
+ok 25 - text module matches the merged upstream Git blob and consumer pins that exact revision
+  ---
+  duration_ms: 5.762261
+  type: 'test'
+  ...
+# Subtest: shared clipped text planning is proportional to the viewport, not line length
+ok 26 - shared clipped text planning is proportional to the viewport, not line length
+  ---
+  duration_ms: 0.859477
+  type: 'test'
+  ...
+1..26
+# tests 26
+# suites 0
+# pass 25
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 348.507949

@@ -1,0 +1,10 @@
+{
+  "BaselineArchive": "AvaloniaWeb-0.3.0-alpha.1-source.zip",
+  "Sha256": "1066ee205ee0a731cc2248cecef827933604de2eb115bc2bcbbe0b695d2cbdcf",
+  "ManifestFiles": 928,
+  "Mismatches": [],
+  "RecoveredVersion": "0.3.0-alpha.1",
+  "BaselineNodeTests": 242,
+  "ContinuedVersion": "0.4.0-alpha.1",
+  "BaselineGitCommit": "c61bdd9a4b2a8aeec9c3c3acc29acae090df7c14"
+}

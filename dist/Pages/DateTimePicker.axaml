@@ -1,0 +1,3 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Date and time" FontSize="17" FontWeight="SemiBold"/><StackPanel Orientation="Horizontal" Spacing="12"><DatePicker Width="280"/><TimePicker SelectedTime="50400000" Width="180"/></StackPanel></StackPanel></Border>
+</StackPanel>

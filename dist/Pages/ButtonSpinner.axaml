@@ -1,0 +1,3 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Increment and decrement" FontSize="17" FontWeight="SemiBold"/><ButtonSpinner x:Name="Spinner" Width="300" HorizontalAlignment="Left" Content="{Binding Counter}"/><TextBlock Text="Use the arrow buttons to change the counter." Classes="muted"/></StackPanel></Border>
+</StackPanel>

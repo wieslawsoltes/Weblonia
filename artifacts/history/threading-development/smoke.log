@@ -1,0 +1,130 @@
+STATE {'ready': True, 'error': None}
+DIAG {
+  "Mode": "render-worker",
+  "UI": {
+    "SentTransactions": 2,
+    "SentBytes": 565812,
+    "PendingFramesCoalesced": 1,
+    "ProcessedSequence": 2,
+    "SubmittedSequence": 1,
+    "Restarts": 0,
+    "MaxInFlight": 1,
+    "LastWorkerFrame": 1,
+    "Recorder": {
+      "Captures": 3,
+      "VisualVisits": 445,
+      "CleanBranches": 9,
+      "ContentRecords": 430,
+      "Commands": 455,
+      "CaptureMilliseconds": 14.100000000093132
+    },
+    "Resources": {
+      "Created": 218,
+      "Reused": 0,
+      "TextDescriptors": 218,
+      "ImageBytes": 0
+    },
+    "BufferPool": {
+      "Bytes": 1044480,
+      "Hits": 7,
+      "Misses": 8
+    }
+  },
+  "Worker": {
+    "Thread": "composition-render-worker",
+    "InstanceId": "ce7b09e6-318dfcb-20621007-d40baacf",
+    "HasDocument": false,
+    "CrossOriginIsolated": false,
+    "WorkerFrames": 1,
+    "ReceivedBytes": 565812,
+    "ReturnedBuffers": 2,
+    "Clock": "worker-requestAnimationFrame",
+    "StartedAt": 1790003784620.5999,
+    "Target": {
+      "Frames": 1,
+      "RenderMilliseconds": 54.10000000009313,
+      "ResizeCount": 1,
+      "SelectedBackend": "canvas",
+      "BackendFailures": [],
+      "Width": 1200,
+      "Height": 900
+    },
+    "Scene": {
+      "Transactions": 2,
+      "ContentInstalls": 436,
+      "VisualsVisited": 199,
+      "ClippedBranches": 0,
+      "AnimationTicks": 0,
+      "ApplyMilliseconds": 12.899999999906868
+    },
+    "Resources": 129,
+    "Visuals": 268,
+    "CompositionObjects": 0,
+    "ActiveAnimations": 0,
+    "Skia": {
+      "Renderer": "SkiaSharpWeb",
+      "NativeRuntime": true,
+      "Frames": 1,
+      "PathCache": {
+        "Count": 0,
+        "Hits": 0,
+        "Misses": 0
+      },
+      "TextCache": {
+        "Count": 33,
+        "Bytes": 270476,
+        "Hits": 0,
+        "Misses": 33
+      },
+      "ParagraphCache": {
+        "Count": 0,
+        "EstimatedBytes": 0,
+        "KeySerializations": 0,
+        "Builds": 0
+      },
+      "TextMetricsCache": {
+        "Count": 33,
+        "Hits": 0,
+        "Misses": 33
+      },
+      "TextLinesVisited": 33,
+      "TextTilesVisited": 33,
+      "TextRasterizations": 33,
+      "TextUploads": 33,
+      "TextMeasurements": 33,
+      "SolidPaintCache": {
+        "Count": 9,
+        "Hits": 82,
+        "Misses": 9
+      },
+      "TextService": "Native SkParagraph for registered fonts; browser system-font fallback"
+    },
+    "Sequence": 2,
+    "Generation": 1
+  }
+}
+node:events:486
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: write EPIPE
+    at afterWriteDispatched (node:internal/stream_base_commons:159:15)
+    at writeGeneric (node:internal/stream_base_commons:150:3)
+    at Socket._writeGeneric (node:net:966:11)
+    at Socket._write (node:net:978:8)
+    at writeOrBuffer (node:internal/streams/writable:570:12)
+    at _write (node:internal/streams/writable:499:10)
+    at Writable.write (node:internal/streams/writable:508:10)
+    at PipeTransport.send (/opt/pyvenv/lib/python3.13/site-packages/playwright/driver/package/lib/server/utils/pipeTransport.js:52:21)
+    at dispatcherConnection.onmessage (/opt/pyvenv/lib/python3.13/site-packages/playwright/driver/package/lib/cli/driver.js:60:59)
+    at DispatcherConnection.sendDispose (/opt/pyvenv/lib/python3.13/site-packages/playwright/driver/package/lib/server/dispatchers/dispatcher.js:191:10)
+Emitted 'error' event on Socket instance at:
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at process.processTicksAndRejections (node:internal/process/task_queues:89:21) {
+  errno: -32,
+  code: 'EPIPE',
+  syscall: 'write'
+}
+
+Node.js v24.11.1

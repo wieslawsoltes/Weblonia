@@ -1,0 +1,556 @@
+TAP version 13
+# Subtest: value priorities expose lower priorities when disposed
+ok 1 - value priorities expose lower priorities when disposed
+  ---
+  duration_ms: 2.802451
+  type: 'test'
+  ...
+# Subtest: later same-priority value wins and removal reveals prior
+ok 2 - later same-priority value wins and removal reveals prior
+  ---
+  duration_ms: 0.228164
+  type: 'test'
+  ...
+# Subtest: inheritance notifications and local overrides
+ok 3 - inheritance notifications and local overrides
+  ---
+  duration_ms: 2.858153
+  type: 'test'
+  ...
+# Subtest: inheritance cycles are rejected
+ok 4 - inheritance cycles are rejected
+  ---
+  duration_ms: 1.437296
+  type: 'test'
+  ...
+# Subtest: RxJS observable binding lifecycle and SetCurrentValue
+ok 5 - RxJS observable binding lifecycle and SetCurrentValue
+  ---
+  duration_ms: 0.846898
+  type: 'test'
+  ...
+# Subtest: style observable does not replace local observable binding
+ok 6 - style observable does not replace local observable binding
+  ---
+  duration_ms: 0.434523
+  type: 'test'
+  ...
+# Subtest: direct properties call setter and publish once
+ok 7 - direct properties call setter and publish once
+  ---
+  duration_ms: 0.588404
+  type: 'test'
+  ...
+# Subtest: ReactiveWeb nested source replacement rebinds path
+ok 8 - ReactiveWeb nested source replacement rebinds path
+  ---
+  duration_ms: 6.518259
+  type: 'test'
+  ...
+# Subtest: ReactiveWeb two-way textbox binding
+ok 9 - ReactiveWeb two-way textbox binding
+  ---
+  duration_ms: 8.298643
+  type: 'test'
+  ...
+# Subtest: OneTime binding takes initial source only
+ok 10 - OneTime binding takes initial source only
+  ---
+  duration_ms: 1.161143
+  type: 'test'
+  ...
+# Subtest: binding fallback applies to missing source path
+ok 11 - binding fallback applies to missing source path
+  ---
+  duration_ms: 0.530343
+  type: 'test'
+  ...
+# Subtest: binding target-null replacement preserves null semantics
+ok 12 - binding target-null replacement preserves null semantics
+  ---
+  duration_ms: 0.350016
+  type: 'test'
+  ...
+# Subtest: unsafe binding path rejected: __proto__.polluted
+ok 13 - unsafe binding path rejected: __proto__.polluted
+  ---
+  duration_ms: 0.171497
+  type: 'test'
+  ...
+# Subtest: unsafe binding path rejected: constructor.name
+ok 14 - unsafe binding path rejected: constructor.name
+  ---
+  duration_ms: 0.08548
+  type: 'test'
+  ...
+# Subtest: unsafe binding path rejected: Value["__proto__"]
+ok 15 - unsafe binding path rejected: Value["__proto__"]
+  ---
+  duration_ms: 0.371285
+  type: 'test'
+  ...
+# Subtest: binding path parses array and dictionary indexers
+ok 16 - binding path parses array and dictionary indexers
+  ---
+  duration_ms: 0.236363
+  type: 'test'
+  ...
+# Subtest: dynamic resource updates existing target
+ok 17 - dynamic resource updates existing target
+  ---
+  duration_ms: 2.930768
+  type: 'test'
+  ...
+# Subtest: conditional styles activate and deactivate without defeating local values
+ok 18 - conditional styles activate and deactivate without defeating local values
+  ---
+  duration_ms: 5.995391
+  type: 'test'
+  ...
+# Subtest: attached properties are supported in style setters
+ok 19 - attached properties are supported in style setters
+  ---
+  duration_ms: 1.027594
+  type: 'test'
+  ...
+# Subtest: measure/arrange applies margin and alignment
+ok 20 - measure/arrange applies margin and alignment
+  ---
+  duration_ms: 1.235374
+  type: 'test'
+  ...
+# Subtest: Grid resolves pixel and weighted star columns
+ok 21 - Grid resolves pixel and weighted star columns
+  ---
+  duration_ms: 6.239391
+  type: 'test'
+  ...
+# Subtest: Grid star row behaves as auto under infinite measure
+ok 22 - Grid star row behaves as auto under infinite measure
+  ---
+  duration_ms: 1.452925
+  type: 'test'
+  ...
+# Subtest: Grid layout invalidates after definition changes
+ok 23 - Grid layout invalidates after definition changes
+  ---
+  duration_ms: 2.922263
+  type: 'test'
+  ...
+# Subtest: StackPanel sums children and spacing
+ok 24 - StackPanel sums children and spacing
+  ---
+  duration_ms: 2.813339
+  type: 'test'
+  ...
+# Subtest: WrapPanel starts a new line when width is exceeded
+ok 25 - WrapPanel starts a new line when width is exceeded
+  ---
+  duration_ms: 2.203566
+  type: 'test'
+  ...
+# Subtest: RelativePanel detects circular sibling references
+ok 26 - RelativePanel detects circular sibling references
+  ---
+  duration_ms: 3.138571
+  type: 'test'
+  ...
+# Subtest: visual ownership rejects duplicates and cycles
+ok 27 - visual ownership rejects duplicates and cycles
+  ---
+  duration_ms: 1.411234
+  type: 'test'
+  ...
+# Subtest: headless mouse click invokes a genuine ReactiveCommand
+ok 28 - headless mouse click invokes a genuine ReactiveCommand
+  ---
+  duration_ms: 12.650718
+  type: 'test'
+  ...
+# Subtest: button keyboard activation and disabled state
+ok 29 - button keyboard activation and disabled state
+  ---
+  duration_ms: 3.754013
+  type: 'test'
+  ...
+# Subtest: routed event tunnels before bubbling
+ok 30 - routed event tunnels before bubbling
+  ---
+  duration_ms: 1.254926
+  type: 'test'
+  ...
+# Subtest: virtual ListBox realizes a bounded viewport for 10,000 items
+ok 31 - virtual ListBox realizes a bounded viewport for 10,000 items
+  ---
+  duration_ms: 61.464786
+  type: 'test'
+  ...
+# Subtest: virtual ListBox nested in unconstrained Grid converges
+ok 32 - virtual ListBox nested in unconstrained Grid converges
+  ---
+  duration_ms: 34.424911
+  type: 'test'
+  ...
+# Subtest: Menu rebuild preserves caller-owned MenuItem instances
+ok 33 - Menu rebuild preserves caller-owned MenuItem instances
+  ---
+  duration_ms: 5.022031
+  type: 'test'
+  ...
+# Subtest: scalar XAML resources, attached properties and namescope
+ok 34 - scalar XAML resources, attached properties and namescope
+  ---
+  duration_ms: 11.692589
+  type: 'test'
+  ...
+# Subtest: XAML two-way bindings integrate ReactiveWeb
+ok 35 - XAML two-way bindings integrate ReactiveWeb
+  ---
+  duration_ms: 4.491123
+  type: 'test'
+  ...
+# Subtest: AOT emitter produces executable ESM without eval
+ok 36 - AOT emitter produces executable ESM without eval
+  ---
+  duration_ms: 46.604799
+  type: 'test'
+  ...
+# Subtest: ControlTemplate and TemplateBinding propagate content
+ok 37 - ControlTemplate and TemplateBinding propagate content
+  ---
+  duration_ms: 10.031647
+  type: 'test'
+  ...
+# Subtest: XML parser rejects DOCTYPE
+ok 38 - XML parser rejects DOCTYPE
+  ---
+  duration_ms: 0.274971
+  type: 'test'
+  ...
+# Subtest: XML parser rejects external entity
+ok 39 - XML parser rejects external entity
+  ---
+  duration_ms: 0.495188
+  type: 'test'
+  ...
+# Subtest: XML parser rejects bare ampersand
+ok 40 - XML parser rejects bare ampersand
+  ---
+  duration_ms: 0.263067
+  type: 'test'
+  ...
+# Subtest: XML parser rejects duplicate attribute
+ok 41 - XML parser rejects duplicate attribute
+  ---
+  duration_ms: 0.112358
+  type: 'test'
+  ...
+# Subtest: XML parser rejects mismatched close
+ok 42 - XML parser rejects mismatched close
+  ---
+  duration_ms: 0.084984
+  type: 'test'
+  ...
+# Subtest: XML parser rejects undeclared namespace
+ok 43 - XML parser rejects undeclared namespace
+  ---
+  duration_ms: 0.081807
+  type: 'test'
+  ...
+# Subtest: XML parser rejects multiple roots
+ok 44 - XML parser rejects multiple roots
+  ---
+  duration_ms: 0.087726
+  type: 'test'
+  ...
+# Subtest: XML parser rejects invalid codepoint
+ok 45 - XML parser rejects invalid codepoint
+  ---
+  duration_ms: 0.188918
+  type: 'test'
+  ...
+# Subtest: XML parser enforces nesting limit
+ok 46 - XML parser enforces nesting limit
+  ---
+  duration_ms: 0.195395
+  type: 'test'
+  ...
+# Subtest: XML parser handles namespaced attributes and escaped text
+ok 47 - XML parser handles namespaced attributes and escaped text
+  ---
+  duration_ms: 0.154623
+  type: 'test'
+  ...
+# Subtest: markup extension parser preserves nested expressions and quoted commas
+ok 48 - markup extension parser preserves nested expressions and quoted commas
+  ---
+  duration_ms: 0.160697
+  type: 'test'
+  ...
+# Subtest: unknown XAML types and properties fail rather than being ignored
+ok 49 - unknown XAML types and properties fail rather than being ignored
+  ---
+  duration_ms: 1.080752
+  type: 'test'
+  ...
+# Subtest: XAML property assignment cannot pollute prototypes
+ok 50 - XAML property assignment cannot pollute prototypes
+  ---
+  duration_ms: 0.466718
+  type: 'test'
+  ...
+# Subtest: animation samples keyframes and restores base value
+ok 51 - animation samples keyframes and restores base value
+  ---
+  duration_ms: 2.009168
+  type: 'test'
+  ...
+# Subtest: animation abort releases priority values and subscription
+ok 52 - animation abort releases priority values and subscription
+  ---
+  duration_ms: 0.486409
+  type: 'test'
+  ...
+# Subtest: LRU cache eviction disposes native resources
+ok 53 - LRU cache eviction disposes native resources
+  ---
+  duration_ms: 0.381658
+  type: 'test'
+  ...
+# Subtest: affine matrix inverse restores transformed coordinates
+ok 54 - affine matrix inverse restores transformed coordinates
+  ---
+  duration_ms: 0.244878
+  type: 'test'
+  ...
+# Subtest: Color uses Avalonia ARGB hexadecimal ordering
+ok 55 - Color uses Avalonia ARGB hexadecimal ordering
+  ---
+  duration_ms: 0.337186
+  type: 'test'
+  ...
+# Subtest: Calendar selected date updates the selected-date collection
+ok 56 - Calendar selected date updates the selected-date collection
+  ---
+  duration_ms: 1.492337
+  type: 'test'
+  ...
+# Subtest: ScrollBar derives from RangeBase rather than inheriting reversed Slider behavior
+ok 57 - ScrollBar derives from RangeBase rather than inheriting reversed Slider behavior
+  ---
+  duration_ms: 4.684523
+  type: 'test'
+  ...
+# Subtest: ScrollBar Vertical: proportional drag without jump and release event
+ok 58 - ScrollBar Vertical: proportional drag without jump and release event
+  ---
+  duration_ms: 12.802152
+  type: 'test'
+  ...
+# Subtest: ScrollBar Horizontal: proportional drag without jump and release event
+ok 59 - ScrollBar Horizontal: proportional drag without jump and release event
+  ---
+  duration_ms: 3.671662
+  type: 'test'
+  ...
+# Subtest: ScrollBar tiny viewport bounds never create oversized thumbs or divide by zero
+ok 60 - ScrollBar tiny viewport bounds never create oversized thumbs or divide by zero
+  ---
+  duration_ms: 2.674007
+  type: 'test'
+  ...
+# Subtest: ScrollBar reverse direction is geometry-consistent and keyboard increments follow its orientation
+ok 61 - ScrollBar reverse direction is geometry-consistent and keyboard increments follow its orientation
+  ---
+  duration_ms: 4.867565
+  type: 'test'
+  ...
+# Subtest: ScrollBar track press pages rather than jumps and releases repeat timers
+ok 62 - ScrollBar track press pages rather than jumps and releases repeat timers
+  ---
+  duration_ms: 2.204198
+  type: 'test'
+  ...
+# Subtest: ScrollBar page-repeat progresses while held and stops on capture loss
+ok 63 - ScrollBar page-repeat progresses while held and stops on capture loss
+  ---
+  duration_ms: 91.327971
+  type: 'test'
+  ...
+# Subtest: ScrollBar ignores right clicks and additional pointers during a drag
+ok 64 - ScrollBar ignores right clicks and additional pointers during a drag
+  ---
+  duration_ms: 1.848607
+  type: 'test'
+  ...
+# Subtest: ScrollBar visibility, zero range and explicit values remain coherent
+ok 65 - ScrollBar visibility, zero range and explicit values remain coherent
+  ---
+  duration_ms: 2.360915
+  type: 'test'
+  ...
+# Subtest: ScrollViewer scrollbar hits win over a child Button occupying the complete content
+ok 66 - ScrollViewer scrollbar hits win over a child Button occupying the complete content
+  ---
+  duration_ms: 18.743493
+  type: 'test'
+  ...
+# Subtest: ScrollViewer horizontal and vertical thumbs can independently reach both ends
+ok 67 - ScrollViewer horizontal and vertical thumbs can independently reach both ends
+  ---
+  duration_ms: 7.898428
+  type: 'test'
+  ...
+# Subtest: ScrollViewer deferred scrolling previews the thumb without moving content until release
+ok 68 - ScrollViewer deferred scrolling previews the thumb without moving content until release
+  ---
+  duration_ms: 4.492996
+  type: 'test'
+  ...
+# Subtest: ScrollViewer Hidden permits scrolling but Disabled does not
+ok 69 - ScrollViewer Hidden permits scrolling but Disabled does not
+  ---
+  duration_ms: 4.545084
+  type: 'test'
+  ...
+# Subtest: non-overlay ScrollViewer tracks reserve space and solve cross-axis overflow
+ok 70 - non-overlay ScrollViewer tracks reserve space and solve cross-axis overflow
+  ---
+  duration_ms: 5.762361
+  type: 'test'
+  ...
+# Subtest: ScrollViewer viewport clip prevents content hits and rendering in reserved chrome
+ok 71 - ScrollViewer viewport clip prevents content hits and rendering in reserved chrome
+  ---
+  duration_ms: 7.631799
+  type: 'test'
+  ...
+# Subtest: ScrollViewer resize and content replacement clamp stale offsets and notify extent deltas
+ok 72 - ScrollViewer resize and content replacement clamp stale offsets and notify extent deltas
+  ---
+  duration_ms: 11.049754
+  type: 'test'
+  ...
+# Subtest: ScrollViewer BringIntoView handles both axes, padding and partially visible large targets
+ok 73 - ScrollViewer BringIntoView handles both axes, padding and partially visible large targets
+  ---
+  duration_ms: 11.449512
+  type: 'test'
+  ...
+# Subtest: wheel deltaMode=0 respects CSS pixels, lines or viewport pages
+ok 74 - wheel deltaMode=0 respects CSS pixels, lines or viewport pages
+  ---
+  duration_ms: 9.185055
+  type: 'test'
+  ...
+# Subtest: wheel deltaMode=1 respects CSS pixels, lines or viewport pages
+ok 75 - wheel deltaMode=1 respects CSS pixels, lines or viewport pages
+  ---
+  duration_ms: 7.775345
+  type: 'test'
+  ...
+# Subtest: wheel deltaMode=2 respects CSS pixels, lines or viewport pages
+ok 76 - wheel deltaMode=2 respects CSS pixels, lines or viewport pages
+  ---
+  duration_ms: 6.028727
+  type: 'test'
+  ...
+# Subtest: Shift-wheel scrolls horizontally and disabled chaining consumes boundary input
+ok 77 - Shift-wheel scrolls horizontally and disabled chaining consumes boundary input
+  ---
+  duration_ms: 7.437822
+  type: 'test'
+  ...
+# Subtest: ListBox has an interactive scrollbar without changing selection
+ok 78 - ListBox has an interactive scrollbar without changing selection
+  ---
+  duration_ms: 45.862515
+  type: 'test'
+  ...
+# Subtest: TreeView has an interactive scrollbar without changing selection
+ok 79 - TreeView has an interactive scrollbar without changing selection
+  ---
+  duration_ms: 54.335767
+  type: 'test'
+  ...
+# Subtest: ListBox recycles row controls rather than allocating new containers on every scroll
+ok 80 - ListBox recycles row controls rather than allocating new containers on every scroll
+  ---
+  duration_ms: 588.85163
+  type: 'test'
+  ...
+# Subtest: ListBox horizontal chrome pans wide items without scrolling or selecting rows
+ok 81 - ListBox horizontal chrome pans wide items without scrolling or selecting rows
+  ---
+  duration_ms: 14.066038
+  type: 'test'
+  ...
+# Subtest: TableView both-axis scrollbars exclude headers and preserve header alignment
+ok 82 - TableView both-axis scrollbars exclude headers and preserve header alignment
+  ---
+  duration_ms: 70.734345
+  type: 'test'
+  ...
+# Subtest: multiline TextBox supports vertical drag, wheel, and horizontal pan without changing text or selection
+ok 83 - multiline TextBox supports vertical drag, wheel, and horizontal pan without changing text or selection
+  ---
+  duration_ms: 11.57757
+  type: 'test'
+  ...
+# Subtest: wrapped TextBox disables horizontal chrome and remaps viewport when resizing
+ok 84 - wrapped TextBox disables horizontal chrome and remaps viewport when resizing
+  ---
+  duration_ms: 22.842295
+  type: 'test'
+  ...
+# Subtest: TextBox measurement layouts are retained and disposed with their owner
+ok 85 - TextBox measurement layouts are retained and disposed with their owner
+  ---
+  duration_ms: 4.828395
+  type: 'test'
+  ...
+# Subtest: scroll chrome still works with runtime XAML attached scrollbar options
+ok 86 - scroll chrome still works with runtime XAML attached scrollbar options
+  ---
+  duration_ms: 11.839658
+  type: 'test'
+  ...
+# Subtest: reserved horizontal chrome does not oscillate realization at an item-height boundary
+ok 87 - reserved horizontal chrome does not oscillate realization at an item-height boundary
+  ---
+  duration_ms: 13.915197
+  type: 'test'
+  ...
+# Subtest: TableView header and reserved horizontal track share a stable realization viewport
+ok 88 - TableView header and reserved horizontal track share a stable realization viewport
+  ---
+  duration_ms: 82.422108
+  type: 'test'
+  ...
+# Subtest: ScrollBarMaximum and LargeChange notify bindings for extent-only and viewport-only changes
+ok 89 - ScrollBarMaximum and LargeChange notify bindings for extent-only and viewport-only changes
+  ---
+  duration_ms: 7.849067
+  type: 'test'
+  ...
+# Subtest: RangeBase matches the templated hierarchy and retains finite values on invalid assignments
+ok 90 - RangeBase matches the templated hierarchy and retains finite values on invalid assignments
+  ---
+  duration_ms: 1.01957
+  type: 'test'
+  ...
+# Subtest: RangeBase raises typed ValueChanged events and ScrollBar custom templates have layout and lifetime
+ok 91 - RangeBase raises typed ValueChanged events and ScrollBar custom templates have layout and lifetime
+  ---
+  duration_ms: 3.747517
+  type: 'test'
+  ...
+1..91
+# tests 91
+# suites 0
+# pass 91
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2510.627849

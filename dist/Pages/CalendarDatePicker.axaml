@@ -1,0 +1,3 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Popup calendar" FontSize="17" FontWeight="SemiBold"/><CalendarDatePicker x:Name="DatePicker" Width="320" HorizontalAlignment="Left"/><TextBlock x:Name="DateText" Text="Open the date selector."/></StackPanel></Border>
+</StackPanel>

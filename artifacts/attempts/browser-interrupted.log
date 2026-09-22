@@ -1,0 +1,227 @@
+RUN native Skia catalog startup
+PASS native Skia catalog startup
+RUN catalog route Buttons
+PASS catalog route Buttons
+RUN catalog route ButtonSpinner
+PASS catalog route ButtonSpinner
+RUN catalog route CheckBox
+PASS catalog route CheckBox
+RUN catalog route ColorPicker
+PASS catalog route ColorPicker
+RUN catalog route ComboBox
+PASS catalog route ComboBox
+RUN catalog route NumericUpDown
+PASS catalog route NumericUpDown
+RUN catalog route RadioButton
+PASS catalog route RadioButton
+RUN catalog route Slider
+PASS catalog route Slider
+RUN catalog route ToggleSwitch
+PASS catalog route ToggleSwitch
+RUN catalog route AutoCompleteBox
+PASS catalog route AutoCompleteBox
+RUN catalog route Label
+PASS catalog route Label
+RUN catalog route TextBox
+PASS catalog route TextBox
+RUN catalog route TextBlock
+PASS catalog route TextBlock
+RUN catalog route Carousel
+PASS catalog route Carousel
+RUN catalog route ListBox
+PASS catalog route ListBox
+RUN catalog route PipsPager
+PASS catalog route PipsPager
+RUN catalog route RefreshContainer
+PASS catalog route RefreshContainer
+RUN catalog route TableView
+PASS catalog route TableView
+RUN catalog route TreeView
+PASS catalog route TreeView
+RUN catalog route Calendar
+PASS catalog route Calendar
+RUN catalog route CalendarDatePicker
+PASS catalog route CalendarDatePicker
+RUN catalog route DateTimePicker
+PASS catalog route DateTimePicker
+RUN catalog route CommandBar
+PASS catalog route CommandBar
+RUN catalog route ContextFlyout
+PASS catalog route ContextFlyout
+RUN catalog route ContextMenu
+PASS catalog route ContextMenu
+RUN catalog route Flyouts
+PASS catalog route Flyouts
+RUN catalog route Menu
+PASS catalog route Menu
+RUN catalog route CarouselPage
+PASS catalog route CarouselPage
+RUN catalog route ContentPage
+PASS catalog route ContentPage
+RUN catalog route DrawerPage
+PASS catalog route DrawerPage
+RUN catalog route NavigationPage
+PASS catalog route NavigationPage
+RUN catalog route SplitView
+PASS catalog route SplitView
+RUN catalog route TabbedPage
+PASS catalog route TabbedPage
+RUN catalog route TabControl
+PASS catalog route TabControl
+RUN catalog route TabStrip
+PASS catalog route TabStrip
+RUN catalog route Border
+PASS catalog route Border
+RUN catalog route Canvas
+PASS catalog route Canvas
+RUN catalog route ContainerQueries
+PASS catalog route ContainerQueries
+RUN catalog route Expander
+PASS catalog route Expander
+RUN catalog route FlexPanel
+PASS catalog route FlexPanel
+RUN catalog route HeaderedContentControl
+PASS catalog route HeaderedContentControl
+RUN catalog route LayoutTransformControl
+PASS catalog route LayoutTransformControl
+RUN catalog route RelativePanel
+PASS catalog route RelativePanel
+RUN catalog route ScrollViewer
+PASS catalog route ScrollViewer
+RUN catalog route Viewbox
+PASS catalog route Viewbox
+RUN catalog route WrapPanel
+PASS catalog route WrapPanel
+RUN catalog route Acrylic
+PASS catalog route Acrylic
+RUN catalog route BitmapCache
+PASS catalog route BitmapCache
+RUN catalog route Composition
+PASS catalog route Composition
+RUN catalog route CustomDrawing
+PASS catalog route CustomDrawing
+RUN catalog route Image
+PASS catalog route Image
+RUN catalog route OpenGL
+PASS catalog route OpenGL
+RUN catalog route OpenGLLease
+PASS catalog route OpenGLLease
+RUN catalog route OpenGLInterop
+PASS catalog route OpenGLInterop
+RUN catalog route TransitioningContentControl
+PASS catalog route TransitioningContentControl
+RUN catalog route AdornerLayer
+PASS catalog route AdornerLayer
+RUN catalog route DataValidation
+PASS catalog route DataValidation
+RUN catalog route Dialogs
+PASS catalog route Dialogs
+RUN catalog route Notifications
+PASS catalog route Notifications
+RUN catalog route ProgressBar
+PASS catalog route ProgressBar
+RUN catalog route ToolTip
+PASS catalog route ToolTip
+RUN catalog route Accelerator
+PASS catalog route Accelerator
+RUN catalog route Clipboard
+PASS catalog route Clipboard
+RUN catalog route Cursor
+PASS catalog route Cursor
+RUN catalog route DragDrop
+PASS catalog route DragDrop
+RUN catalog route Focus
+PASS catalog route Focus
+RUN catalog route Gestures
+PASS catalog route Gestures
+RUN catalog route Pointers
+PASS catalog route Pointers
+RUN catalog route NativeEmbed
+PASS catalog route NativeEmbed
+RUN catalog route PlatformInformation
+PASS catalog route PlatformInformation
+RUN catalog route PlatformSettings
+PASS catalog route PlatformSettings
+RUN catalog route Screens
+PASS catalog route Screens
+RUN catalog route ThemeVariants
+PASS catalog route ThemeVariants
+RUN catalog route WindowCustomizations
+PASS catalog route WindowCustomizations
+RUN pointer clicks execute genuine ReactiveWeb commands and update binding
+PASS pointer clicks execute genuine ReactiveWeb commands and update binding
+RUN browser textarea input, selection and two-way ReactiveWeb binding
+PASS browser textarea input, selection and two-way ReactiveWeb binding
+RUN pointer slider updates progress and numeric binding
+PASS pointer slider updates progress and numeric binding
+RUN 10,000-item ListBox keyboard selection and bounded realization
+PASS 10,000-item ListBox keyboard selection and bounded realization
+RUN retained ComboBox popup selection and dismissal
+PASS retained ComboBox popup selection and dismissal
+RUN calendar native painting and keyboard date navigation
+PASS calendar native painting and keyboard date navigation
+RUN TableView header sorting and pointer row selection
+PASS TableView header sorting and pointer row selection
+RUN flyout light dismissal releases retained popup
+PASS flyout light dismissal releases retained popup
+RUN theme change propagates dynamic resources
+PASS theme change propagates dynamic resources
+RUN live XAML compiler produces and instantiates a changed view
+PASS live XAML compiler produces and instantiates a changed view
+RUN NavigationPage push and pop retain correct stack
+PASS NavigationPage push and pop retain correct stack
+RUN trusted click opens a real browser window with its own Skia surface
+PASS trusted click opens a real browser window with its own Skia surface
+RUN browser modal owner disabling and result delivery
+PASS browser modal owner disabling and result delivery
+RUN RxJS-debounced catalog navigation filter
+PASS RxJS-debounced catalog navigation filter
+RUN container query style activation and removal through real slider input
+PASS container query style activation and removal through real slider input
+RUN native visual bitmap cache reuse and geometry invalidation
+PASS native visual bitmap cache reuse and geometry invalidation
+RUN acrylic native rendering and live material property invalidation
+PASS acrylic native rendering and live material property invalidation
+RUN composition clocks, expression animation, cancellation and route disposal
+PASS composition clocks, expression animation, cancellation and route disposal
+RUN native HTML input binding, focus traversal, clipping and deterministic removal
+PASS native HTML input binding, focus traversal, clipping and deterministic removal
+RUN browser editing preserves emoji ZWJ and combining grapheme boundaries
+PASS browser editing preserves emoji ZWJ and combining grapheme boundaries
+RUN browser composition-event bridge groups preedit into one undo transaction (synthetic IME)
+PASS browser composition-event bridge groups preedit into one undo transaction (synthetic IME)
+RUN read-only TableView realizes bounded real row and cell controls
+PASS read-only TableView realizes bounded real row and cell controls
+SKIP real WebGL2 shader pixels transfer into native Skia No WebGL2 context available in this Chromium run.
+SKIP WebGL leases restore state and reject simultaneous ownership No WebGL2 context available in this Chromium run.
+SKIP WebGL context loss, restoration and disposal lifecycle No WebGL2 context available in this Chromium run.
+RUN Chromium accessibility tree exposes table hierarchy and actual grid cells
+PASS Chromium accessibility tree exposes table hierarchy and actual grid cells
+RUN accessibility activation respects enabled state and disposes old page nodes
+PASS accessibility activation respects enabled state and disposes old page nodes
+RUN automation password mirrors withhold values and preserve explicit accessible names
+node:events:486
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: write EPIPE
+    at afterWriteDispatched (node:internal/stream_base_commons:159:15)
+    at writeGeneric (node:internal/stream_base_commons:150:3)
+    at Socket._writeGeneric (node:net:966:11)
+    at Socket._write (node:net:978:8)
+    at writeOrBuffer (node:internal/streams/writable:570:12)
+    at _write (node:internal/streams/writable:499:10)
+    at Writable.write (node:internal/streams/writable:508:10)
+    at PipeTransport.send (/opt/pyvenv/lib/python3.13/site-packages/playwright/driver/package/lib/server/utils/pipeTransport.js:52:21)
+    at dispatcherConnection.onmessage (/opt/pyvenv/lib/python3.13/site-packages/playwright/driver/package/lib/cli/driver.js:60:59)
+    at DispatcherConnection.sendEvent (/opt/pyvenv/lib/python3.13/site-packages/playwright/driver/package/lib/server/dispatchers/dispatcher.js:180:10)
+Emitted 'error' event on Socket instance at:
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at process.processTicksAndRejections (node:internal/process/task_queues:89:21) {
+  errno: -32,
+  code: 'EPIPE',
+  syscall: 'write'
+}
+
+Node.js v24.11.1

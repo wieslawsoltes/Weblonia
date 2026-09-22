@@ -1,0 +1,3 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Borders and corners" FontSize="17" FontWeight="SemiBold"/><StackPanel Orientation="Horizontal" Spacing="12"><Border Background="#EEEAFB" BorderBrush="#6757D9" BorderThickness="2" CornerRadius="16" Padding="28"><TextBlock Text="Rounded" Foreground="#4C3BAF"/></Border><Border Background="#E6F4EE" BorderBrush="#29986B" BorderThickness="2,6,2,2" Padding="28"><TextBlock Text="Per-side border" Foreground="#176646"/></Border></StackPanel></StackPanel></Border>
+</StackPanel>

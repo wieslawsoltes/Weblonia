@@ -1,0 +1,31 @@
+{
+  "name": "@wieslawsoltes/avalonia-composition",
+  "version": "0.6.2-alpha.1",
+  "type": "module",
+  "description": "Transactional browser composition scene, keyframes, expressions and Skia drawing surfaces",
+  "license": "MIT",
+  "sideEffects": true,
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@wieslawsoltes/avalonia-base": "0.6.2-alpha.1",
+    "@wieslawsoltes/avalonia-controls": "0.6.2-alpha.1",
+    "@wieslawsoltes/avalonia-media": "0.6.2-alpha.1",
+    "@wieslawsoltes/avalonia-animation": "0.6.2-alpha.1",
+    "@wieslawsoltes/avalonia-skia": "0.6.2-alpha.1"
+  }
+}

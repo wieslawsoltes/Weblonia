@@ -1,0 +1,5 @@
+
+> avaloniaweb-workspace@0.6.1-alpha.1 verify:release
+> node scripts/verify-release.mjs
+
+{"Version":"0.6.1-alpha.1","SourceFingerprint":"20b1bbb184d2a12cb94127af77fe635118214218461df38c4078bdc8156c8979","Node":382,"Browser":109,"Scrollbars":[[1,20],[1.25,20]],"Text":27,"Packages":18,"Threading":{"Browser":39,"Integration":17,"Quality":12,"Catalog":148}}

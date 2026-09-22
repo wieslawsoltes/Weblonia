@@ -1,0 +1,6 @@
+
+> avaloniaweb-workspace@0.6.0-alpha.1 build
+> node scripts/build.mjs
+
+Built static worker ESM graphs; native WASM is shared by URL, not duplicated.
+Compiled 75 XAML modules. Static distribution: dist/

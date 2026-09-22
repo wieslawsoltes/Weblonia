@@ -1,0 +1,26 @@
+{
+  "name": "@wieslawsoltes/avalonia-rendering",
+  "version": "0.6.2-alpha.1",
+  "type": "module",
+  "description": "Retained cross-thread scene protocol, display lists and composition server for AvaloniaWeb",
+  "license": "MIT",
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "dependencies": {
+    "@wieslawsoltes/avalonia-base": "0.6.2-alpha.1",
+    "@wieslawsoltes/avalonia-media": "0.6.2-alpha.1",
+    "@wieslawsoltes/avalonia-composition": "0.6.2-alpha.1",
+    "@wieslawsoltes/avalonia-animation": "0.6.2-alpha.1"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

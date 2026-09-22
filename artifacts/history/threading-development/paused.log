@@ -1,0 +1,225 @@
+STATE {'ready': True, 'error': None}
+DIAG {
+  "Mode": "render-worker",
+  "UI": {
+    "SentTransactions": 2,
+    "SentBytes": 565812,
+    "PendingFramesCoalesced": 1,
+    "ProcessedSequence": 2,
+    "SubmittedSequence": 1,
+    "Restarts": 0,
+    "MaxInFlight": 1,
+    "LastWorkerFrame": 1,
+    "Recorder": {
+      "Captures": 3,
+      "VisualVisits": 445,
+      "CleanBranches": 9,
+      "ContentRecords": 430,
+      "Commands": 455,
+      "CaptureMilliseconds": 8.399999999906868
+    },
+    "Resources": {
+      "Created": 218,
+      "Reused": 0,
+      "TextDescriptors": 218,
+      "ImageBytes": 0
+    },
+    "BufferPool": {
+      "Bytes": 1044480,
+      "Hits": 7,
+      "Misses": 8
+    }
+  },
+  "Worker": {
+    "Thread": "composition-render-worker",
+    "InstanceId": "f2857cff-7c36aa54-e6466c90-96e6acdb",
+    "HasDocument": false,
+    "CrossOriginIsolated": false,
+    "WorkerFrames": 1,
+    "ReceivedBytes": 565812,
+    "ReturnedBuffers": 2,
+    "Clock": "worker-requestAnimationFrame",
+    "StartedAt": 1790004147993.9,
+    "Scheduler": {
+      "dirty": true,
+      "frameId": 2,
+      "running": false,
+      "suspended": false
+    },
+    "Target": {
+      "Frames": 1,
+      "RenderMilliseconds": 47.39999999990687,
+      "ResizeCount": 1,
+      "SelectedBackend": "canvas",
+      "BackendFailures": [],
+      "Width": 1200,
+      "Height": 900
+    },
+    "Scene": {
+      "Transactions": 2,
+      "ContentInstalls": 436,
+      "VisualsVisited": 199,
+      "ClippedBranches": 0,
+      "AnimationTicks": 0,
+      "ApplyMilliseconds": 16.600000000093132
+    },
+    "Resources": 129,
+    "Visuals": 268,
+    "CompositionObjects": 0,
+    "ActiveAnimations": 0,
+    "Skia": {
+      "Renderer": "SkiaSharpWeb",
+      "NativeRuntime": true,
+      "Frames": 1,
+      "PathCache": {
+        "Count": 0,
+        "Hits": 0,
+        "Misses": 0
+      },
+      "TextCache": {
+        "Count": 33,
+        "Bytes": 270476,
+        "Hits": 0,
+        "Misses": 33
+      },
+      "ParagraphCache": {
+        "Count": 0,
+        "EstimatedBytes": 0,
+        "KeySerializations": 0,
+        "Builds": 0
+      },
+      "TextMetricsCache": {
+        "Count": 33,
+        "Hits": 0,
+        "Misses": 33
+      },
+      "TextLinesVisited": 33,
+      "TextTilesVisited": 33,
+      "TextRasterizations": 33,
+      "TextUploads": 33,
+      "TextMeasurements": 33,
+      "SolidPaintCache": {
+        "Count": 9,
+        "Hits": 82,
+        "Misses": 9
+      },
+      "TextService": "Native SkParagraph for registered fonts; browser system-font fallback"
+    },
+    "Sequence": 2,
+    "Generation": 1
+  }
+}
+DIAG2 {
+  "Mode": "render-worker",
+  "UI": {
+    "SentTransactions": 2,
+    "SentBytes": 565812,
+    "PendingFramesCoalesced": 1,
+    "ProcessedSequence": 2,
+    "SubmittedSequence": 2,
+    "Restarts": 0,
+    "MaxInFlight": 1,
+    "LastWorkerFrame": 2,
+    "Recorder": {
+      "Captures": 3,
+      "VisualVisits": 445,
+      "CleanBranches": 9,
+      "ContentRecords": 430,
+      "Commands": 455,
+      "CaptureMilliseconds": 8.399999999906868
+    },
+    "Resources": {
+      "Created": 218,
+      "Reused": 0,
+      "TextDescriptors": 218,
+      "ImageBytes": 0
+    },
+    "BufferPool": {
+      "Bytes": 1044480,
+      "Hits": 7,
+      "Misses": 8
+    }
+  },
+  "Worker": {
+    "Thread": "composition-render-worker",
+    "InstanceId": "f2857cff-7c36aa54-e6466c90-96e6acdb",
+    "HasDocument": false,
+    "CrossOriginIsolated": false,
+    "WorkerFrames": 2,
+    "ReceivedBytes": 565812,
+    "ReturnedBuffers": 2,
+    "Clock": "worker-requestAnimationFrame",
+    "StartedAt": 1790004147993.9,
+    "Scheduler": {
+      "dirty": false,
+      "frameId": null,
+      "running": false,
+      "suspended": false
+    },
+    "Target": {
+      "Frames": 2,
+      "RenderMilliseconds": 48.60000000009313,
+      "ResizeCount": 1,
+      "SelectedBackend": "canvas",
+      "BackendFailures": [],
+      "Width": 1200,
+      "Height": 900
+    },
+    "Scene": {
+      "Transactions": 2,
+      "ContentInstalls": 436,
+      "VisualsVisited": 462,
+      "ClippedBranches": 0,
+      "AnimationTicks": 0,
+      "ApplyMilliseconds": 16.600000000093132
+    },
+    "Resources": 129,
+    "Visuals": 268,
+    "CompositionObjects": 0,
+    "ActiveAnimations": 0,
+    "Skia": {
+      "Renderer": "SkiaSharpWeb",
+      "NativeRuntime": true,
+      "Frames": 2,
+      "PathCache": {
+        "Count": 0,
+        "Hits": 0,
+        "Misses": 0
+      },
+      "TextCache": {
+        "Count": 58,
+        "Bytes": 614796,
+        "Hits": 31,
+        "Misses": 58
+      },
+      "ParagraphCache": {
+        "Count": 0,
+        "EstimatedBytes": 0,
+        "KeySerializations": 0,
+        "Builds": 0
+      },
+      "TextMetricsCache": {
+        "Count": 58,
+        "Hits": 31,
+        "Misses": 58
+      },
+      "TextLinesVisited": 89,
+      "TextTilesVisited": 89,
+      "TextRasterizations": 58,
+      "TextUploads": 58,
+      "TextMeasurements": 58,
+      "SolidPaintCache": {
+        "Count": 9,
+        "Hits": 191,
+        "Misses": 9
+      },
+      "TextService": "Native SkParagraph for registered fonts; browser system-font fallback"
+    },
+    "Sequence": 2,
+    "Generation": 1
+  }
+}
+MANUAL {'Sequence': 2, 'Frame': 3}
+warning navigated
+ERROR CDPSession.send: Protocol error (Debugger.resume): Can only perform operation while paused.
+MISSING []

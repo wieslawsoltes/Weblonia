@@ -1,0 +1,82 @@
+TAP version 13
+# Subtest: bootstrap installs message handler synchronously without importing the runtime
+ok 1 - bootstrap installs message handler synchronously without importing the runtime
+  ---
+  duration_ms: 0.878259
+  type: 'test'
+  ...
+# Subtest: bootstrap owns the original transferred objects before top-level await resolves
+ok 2 - bootstrap owns the original transferred objects before top-level await resolves
+  ---
+  duration_ms: 4.149942
+  type: 'test'
+  ...
+# Subtest: duplicate initialize is ignored while graph is suspended and after ready
+ok 3 - duplicate initialize is ignored while graph is suspended and after ready
+  ---
+  duration_ms: 0.739661
+  type: 'test'
+  ...
+# Subtest: non-initialization messages do not trigger graph import or allocate a queue
+ok 4 - non-initialization messages do not trigger graph import or allocate a queue
+  ---
+  duration_ms: 0.773221
+  type: 'test'
+  ...
+# Subtest: bootstrap reports sync-import and closes instead of timing out
+ok 5 - bootstrap reports sync-import and closes instead of timing out
+  ---
+  duration_ms: 1.315145
+  type: 'test'
+  ...
+# Subtest: bootstrap reports async-import and closes instead of timing out
+ok 6 - bootstrap reports async-import and closes instead of timing out
+  ---
+  duration_ms: 0.697638
+  type: 'test'
+  ...
+# Subtest: bootstrap reports missing-export and closes instead of timing out
+ok 7 - bootstrap reports missing-export and closes instead of timing out
+  ---
+  duration_ms: 0.721062
+  type: 'test'
+  ...
+# Subtest: bootstrap reports entry-rejection and closes instead of timing out
+ok 8 - bootstrap reports entry-rejection and closes instead of timing out
+  ---
+  duration_ms: 0.7124
+  type: 'test'
+  ...
+# Subtest: startup stage notifications remain ordered while the entry is awaiting work
+ok 9 - startup stage notifications remain ordered while the entry is awaiting work
+  ---
+  duration_ms: 1.631069
+  type: 'test'
+  ...
+# Subtest: production entry generation embeds bootstrap instead of statically importing asynchronous dependencies
+ok 10 - production entry generation embeds bootstrap instead of statically importing asynchronous dependencies
+  ---
+  duration_ms: 1.830288
+  type: 'test'
+  ...
+# Subtest: render-worker bootstrap failure does not attempt to reuse or retransfer its canvas
+ok 11 - render-worker bootstrap failure does not attempt to reuse or retransfer its canvas
+  ---
+  duration_ms: 2.008877
+  type: 'test'
+  ...
+# Subtest: disposing a not-yet-ready renderer settles initialization instead of leaving a pending promise
+ok 12 - disposing a not-yet-ready renderer settles initialization instead of leaving a pending promise
+  ---
+  duration_ms: 1.026591
+  type: 'test'
+  ...
+1..12
+# tests 12
+# suites 0
+# pass 12
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 338.212255

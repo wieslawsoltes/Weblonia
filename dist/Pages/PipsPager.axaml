@@ -1,0 +1,3 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Page indicators" FontSize="17" FontWeight="SemiBold"/><PipsPager x:Name="Pips" NumberOfPages="7" SelectedPageIndex="2"/><TextBlock x:Name="PipsText" Text="Click a dot or use the arrow keys."/></StackPanel></Border>
+</StackPanel>

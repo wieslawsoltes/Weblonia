@@ -1,0 +1,3 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Browser-owned windows" FontSize="17" FontWeight="SemiBold"/><TextBlock Text="Window.Show opens a real browser window. Desktop minimize, taskbar identity and arbitrary native decorations are not available through standard browser APIs." TextWrapping="Wrap" Classes="muted"/><StackPanel Orientation="Horizontal" Spacing="12"><Button Content="Open browser window" Click="NewWindow"/><Button Content="Fullscreen" Click="Fullscreen"/></StackPanel></StackPanel></Border>
+</StackPanel>

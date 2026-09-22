@@ -1,0 +1,8 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Live model binding" FontSize="17" FontWeight="SemiBold"/><TextBox x:Name="NameEditor" Text="{Binding Name,Mode=TwoWay}" PlaceholderText="Your name"/><TextBlock x:Name="NamePreview" Text="{Binding Name,StringFormat='Hello, {0}'}" FontSize="22"/></StackPanel></Border><Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Editing surfaces" FontSize="17" FontWeight="SemiBold"/><TextBox Text="Multiple lines.&#10;Selection, clipboard, undo and IME are handled by the browser." AcceptsReturn="True" TextWrapping="Wrap" Height="110"/><StackPanel Orientation="Horizontal" Spacing="12"><TextBox Text="secret-password" PasswordChar="●" Width="250"/><TextBox Text="Read-only content" IsReadOnly="True" Width="250"/></StackPanel></StackPanel></Border>
+  <Border Classes="card"><StackPanel Spacing="12">
+    <TextBlock Text="Document editor · viewport-driven text" FontSize="17" FontWeight="SemiBold"/>
+    <TextBlock Text="1,000 lines with both scrollbar axes. Caret movement reveals only the nearest clipped edge; unchanged redraws reuse layouts and text images." TextWrapping="Wrap"/>
+    <TextBox x:Name="LongDocumentEditor" AcceptsReturn="True" TextWrapping="NoWrap" FontFamily="monospace" FontSize="13" Height="250" AllowAutoHide="False"/>
+  </StackPanel></Border>
+</StackPanel>

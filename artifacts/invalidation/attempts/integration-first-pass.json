@@ -1,0 +1,490 @@
+{
+  "Version": "0.6.2-alpha.1",
+  "SourceFingerprint": "0f5dffa6e336a753ffa94915daddda89c931a3df55e4025d90009e10846deaf4",
+  "Completed": true,
+  "Tests": [
+    {
+      "Name": "isolated native text editing and grapheme-safe backward deletion",
+      "Passed": true,
+      "Evidence": {
+        "Name": "NameEditor",
+        "Type": "TextBox",
+        "Id": 601,
+        "Bounds": {
+          "X": 317,
+          "Y": 280,
+          "Width": 824,
+          "Height": 34
+        },
+        "Text": "Threaded ",
+        "Value": null,
+        "Offset": {
+          "X": 0,
+          "Y": 0
+        },
+        "CaretIndex": 9,
+        "SelectionStart": 9,
+        "SelectionEnd": 9,
+        "SelectedIndex": null,
+        "IsChecked": null,
+        "IsEnabled": true
+      },
+      "Milliseconds": 625.83
+    },
+    {
+      "Name": "focused edit switches to password without plaintext semantic exposure",
+      "Passed": true,
+      "Evidence": {
+        "NativePassword": true,
+        "PlaintextExcludedFromControlDescriptor": true
+      },
+      "Milliseconds": 170.61
+    },
+    {
+      "Name": "render clock and animation advance during a confirmed UI-worker stall",
+      "Passed": true,
+      "Evidence": {
+        "FramesWhileUIBlocked": 12,
+        "TicksWhileUIBlocked": 12,
+        "HostToRenderRoundtripMilliseconds": [
+          3.44,
+          2.76
+        ],
+        "UIStillBlockedAtSecondRead": true,
+        "UIStallMilliseconds": 1200,
+        "Before": 26,
+        "LastReadDuringStall": 45
+      },
+      "Milliseconds": 1457.33
+    },
+    {
+      "Name": "compositor wheel scrolling continues during UI stall and reconciles exactly once",
+      "Passed": true,
+      "Evidence": {
+        "Speculative": {
+          "Id": 966,
+          "Offset": [
+            0,
+            120
+          ],
+          "Base": [
+            0,
+            0
+          ],
+          "CoverageY": [
+            0,
+            4308
+          ]
+        },
+        "ReconciledOffset": {
+          "X": 0,
+          "Y": 120
+        },
+        "PendingAfterAck": 0,
+        "Inputs": 1
+      },
+      "Milliseconds": 1612.76
+    },
+    {
+      "Name": "virtual table fast scrolling respects realized-content coverage",
+      "Passed": true,
+      "Evidence": {
+        "WhileStalled": {
+          "Id": 1340,
+          "Offset": [
+            0,
+            76
+          ],
+          "Base": [
+            0,
+            0
+          ],
+          "CoverageY": [
+            0,
+            76
+          ]
+        },
+        "AfterRealization": {
+          "X": 0,
+          "Y": 1800
+        }
+      },
+      "Milliseconds": 1264.32
+    },
+    {
+      "Name": "three threads vertical scrollbar routes real mouse capture",
+      "Passed": true,
+      "Evidence": {
+        "Value": 2369.4,
+        "Maximum": 4308
+      },
+      "Milliseconds": 470.52
+    },
+    {
+      "Name": "three threads horizontal scrollbar routes real mouse capture",
+      "Passed": true,
+      "Evidence": {
+        "Value": 215.59998162902224,
+        "Maximum": 392
+      },
+      "Milliseconds": 379.26
+    },
+    {
+      "Name": "registered native DOM module binds to UI-worker model and cleans up",
+      "Passed": true,
+      "Evidence": {
+        "Bidirectional": true,
+        "DisposedAfterNavigation": true
+      },
+      "Milliseconds": 693.68
+    },
+    {
+      "Name": "isolated renderer restart replaces canvas and rebuilds identical committed pixels",
+      "Passed": true,
+      "Evidence": {
+        "MaximumChannelError": 0,
+        "Restarts": 1,
+        "Generation": 2
+      },
+      "Milliseconds": 1631.81
+    },
+    {
+      "Name": "native editor still works after renderer restart",
+      "Passed": true,
+      "Evidence": {
+        "Name": "NameEditor",
+        "Type": "TextBox",
+        "Id": 3207,
+        "Bounds": {
+          "X": 317,
+          "Y": 280,
+          "Width": 824,
+          "Height": 34
+        },
+        "Text": "Threaded ",
+        "Value": null,
+        "Offset": {
+          "X": 0,
+          "Y": 0
+        },
+        "CaretIndex": 9,
+        "SelectionStart": 9,
+        "SelectionEnd": 9,
+        "SelectedIndex": null,
+        "IsChecked": null,
+        "IsEnabled": true
+      },
+      "Milliseconds": 520.63
+    },
+    {
+      "Name": "registered custom visual executes, acknowledges bounded messages and restores durable state",
+      "Passed": true,
+      "Evidence": {
+        "MessagesConsumed": 101,
+        "TransientPending": 0,
+        "Recovered": {
+          "Messages": 0,
+          "AnimationTicks": 0,
+          "HasDocument": false,
+          "Color": "#d1495b"
+        },
+        "IdenticalPixels": true
+      },
+      "Milliseconds": 1798.11
+    },
+    {
+      "Name": "200 immediate state changes coalesce without losing final values or queuing scene deltas",
+      "Passed": true,
+      "Evidence": {
+        "Text": "Burst 199",
+        "EncodeMilliseconds": 70.50000000325963,
+        "LastEncodeMilliseconds": 0.19999999995343387,
+        "EncodeCalls": 94,
+        "StringWrites": 264555,
+        "Utf8Bytes": 1173515,
+        "StringDefinitions": 9645,
+        "StringReferences": 254910,
+        "PatchedVisuals": 2903,
+        "ReplacedVisuals": 4390,
+        "SentTransactions": 94,
+        "SentBytes": 4451629,
+        "PendingFramesCoalesced": 232,
+        "ProcessedSequence": 9,
+        "SubmittedSequence": 9,
+        "Restarts": 2,
+        "MaxInFlight": 1,
+        "LastWorkerFrame": 9
+      },
+      "Milliseconds": 287.25
+    },
+    {
+      "Name": "hidden target explicit flush completes without an idle render loop",
+      "Passed": true,
+      "Evidence": {
+        "ExplicitFlushCompleted": true,
+        "IdleExtraFrames": 0
+      },
+      "Milliseconds": 342.14
+    },
+    {
+      "Name": "host resize reaches UI layout and the worker-owned backing canvas",
+      "Passed": true,
+      "Evidence": {
+        "UIViewport": {
+          "ReducedMotion": false,
+          "Theme": "Light",
+          "Width": 1050,
+          "Height": 760,
+          "Scale": 1
+        },
+        "Pixels": [
+          1050,
+          760
+        ]
+      },
+      "Milliseconds": 601.96
+    },
+    {
+      "Name": "live browser platform preferences are forwarded into the UI worker",
+      "Passed": true,
+      "Evidence": {
+        "ReducedMotion": true,
+        "Theme": "Dark",
+        "Width": 1200,
+        "Height": 900,
+        "Scale": 1
+      },
+      "Milliseconds": 192.12
+    },
+    {
+      "Name": "worker-owned Window opens a real browser window with its own render worker",
+      "Passed": false,
+      "Error": "{'Exists': True, 'Opened': False, 'Error': None, 'OwnerEnabled': True, 'Status': 'TableView \u00b7 JavaScript demonstration \u00b7 AOT XAML construction', 'Renderer': True}"
+    },
+    {
+      "Name": "real isolated modal window blocks owner and returns its exact result",
+      "Passed": true,
+      "Evidence": {
+        "Completed": true,
+        "Result": {
+          "Accepted": true,
+          "Value": 42
+        },
+        "OwnerEnabled": true
+      },
+      "Milliseconds": 1309.59
+    }
+  ],
+  "Errors": [],
+  "MissingAssets": [],
+  "Qualification": "Chromium raster, real dedicated workers, emulated browser input; no physical GPU/touch/IME or screen reader qualification.",
+  "FinalDiagnostics": {
+    "Mode": "full-isolation",
+    "Host": {
+      "EventsSent": 137,
+      "EventBatches": 85,
+      "CoalescedMoves": 0,
+      "MaxQueuedEvents": 8,
+      "AutomationWrites": 21036,
+      "MainHasSkiaRuntime": false,
+      "QueuedEvents": 0,
+      "HasDocument": true
+    },
+    "UI": {
+      "Thread": "avalonia-ui-worker",
+      "HasDocument": false,
+      "StartedAt": 1790020007245.6,
+      "Inputs": 137,
+      "LastUiFrame": {
+        "Milliseconds": 39.5999999998603,
+        "LayoutMilliseconds": 19.0999999998603,
+        "RenderOrRecordMilliseconds": 17.100000000093132,
+        "AutomationMilliseconds": 3.3999999999068677
+      },
+      "WasmHeapBytes": 134217728,
+      "ClientSize": {
+        "Width": 1200,
+        "Height": 900
+      },
+      "PendingFrames": 0,
+      "LastError": null,
+      "Automation": {
+        "StructurePasses": 21,
+        "IncrementalPasses": 55,
+        "PeerVisits": 3987,
+        "Projections": 3299,
+        "AttributeWrites": 8751,
+        "NodesCreated": 2496,
+        "NodesRemoved": 2258
+      }
+    },
+    "Renderer": {
+      "Mode": "full-isolation",
+      "UI": {
+        "EncodeMilliseconds": 77.90000000339933,
+        "LastEncodeMilliseconds": 2.0999999998603016,
+        "EncodeCalls": 103,
+        "StringWrites": 285304,
+        "Utf8Bytes": 1177928,
+        "StringDefinitions": 10173,
+        "StringReferences": 275131,
+        "PatchedVisuals": 3736,
+        "ReplacedVisuals": 4686,
+        "SentTransactions": 103,
+        "SentBytes": 4724599,
+        "PendingFramesCoalesced": 232,
+        "ProcessedSequence": 18,
+        "SubmittedSequence": 18,
+        "Restarts": 2,
+        "MaxInFlight": 1,
+        "LastWorkerFrame": 21,
+        "Recorder": {
+          "Captures": 323,
+          "VisualVisits": 9910,
+          "CleanBranches": 5227,
+          "ContentRecords": 7230,
+          "Commands": 7596,
+          "CaptureMilliseconds": 13.300000000046566,
+          "ReferenceObjectsWalked": 133368,
+          "ReferenceCacheHits": 127023
+        },
+        "Resources": {
+          "Created": 852,
+          "Reused": 2763,
+          "TextDescriptors": 3590,
+          "ImageBytes": 0,
+          "InternHits": 2738,
+          "InternCandidates": 2770
+        },
+        "BufferPool": {
+          "Bytes": 1568768,
+          "Hits": 241,
+          "Misses": 8
+        }
+      },
+      "Worker": {
+        "DecodeMilliseconds": 22.299999999813735,
+        "LastDecodeMilliseconds": 1.1999999999534339,
+        "DecodedStringDefinitions": 2311,
+        "DecodedStringReferences": 64860,
+        "Thread": "composition-render-worker",
+        "InstanceId": "8d699dfd-66708c19-1010c7ba-f7c8a27c",
+        "HasDocument": false,
+        "CrossOriginIsolated": false,
+        "WorkerFrames": 21,
+        "ReceivedBytes": 1211752,
+        "ReturnedBuffers": 18,
+        "Clock": "worker-requestAnimationFrame",
+        "StartedAt": 1790020018670.2,
+        "Scheduler": {
+          "dirty": false,
+          "frameId": null,
+          "running": false,
+          "suspended": false
+        },
+        "Target": {
+          "Frames": 21,
+          "RenderMilliseconds": 16.899999999906868,
+          "ResizeCount": 3,
+          "SelectedBackend": "canvas",
+          "BackendFailures": [],
+          "Width": 1200,
+          "Height": 900
+        },
+        "Scroll": {
+          "Inputs": 0,
+          "SpeculativeFrames": 0,
+          "CoverageClamps": 0,
+          "MaxPending": 0,
+          "Reconciliations": 0,
+          "ProcessedInput": 137,
+          "Pending": 0,
+          "Offsets": [
+            {
+              "Id": 3884,
+              "Offset": [
+                0,
+                0
+              ],
+              "Base": [
+                0,
+                0
+              ],
+              "CoverageY": [
+                0,
+                76
+              ]
+            }
+          ]
+        },
+        "Scene": {
+          "ValidatedDescriptors": 2091,
+          "ReferenceChecks": 1798,
+          "GraphChecks": 17,
+          "ValidationMilliseconds": 4.300000000046566,
+          "TotalValidationMilliseconds": 68.8000000002794,
+          "TotalApplyMilliseconds": 120.89999999967404,
+          "IdentityTransformsSkipped": 521,
+          "Transactions": 18,
+          "ContentInstalls": 1790,
+          "VisualsVisited": 5918,
+          "ClippedBranches": 28,
+          "AnimationTicks": 0,
+          "ApplyMilliseconds": 6.400000000139698,
+          "ReferenceObjectsWalked": 19811,
+          "ReferenceCacheHits": 5020
+        },
+        "Resources": 129,
+        "Visuals": 342,
+        "CompositionObjects": 0,
+        "ActiveAnimations": 0,
+        "Skia": {
+          "Renderer": "SkiaSharpWeb",
+          "NativeRuntime": true,
+          "DeviceClipQueries": 1013,
+          "Frames": 21,
+          "PathCache": {
+            "Count": 0,
+            "Hits": 0,
+            "Misses": 0
+          },
+          "TextCache": {
+            "Count": 81,
+            "Bytes": 852108,
+            "Hits": 1278,
+            "Misses": 81
+          },
+          "ParagraphCache": {
+            "Count": 0,
+            "EstimatedBytes": 0,
+            "KeySerializations": 0,
+            "Builds": 0
+          },
+          "TextMetricsCache": {
+            "Count": 81,
+            "Hits": 1282,
+            "Misses": 81
+          },
+          "TextLinesVisited": 1363,
+          "TextTilesVisited": 1359,
+          "TextRasterizations": 81,
+          "TextUploads": 81,
+          "TextMeasurements": 81,
+          "SolidPaintCache": {
+            "Count": 10,
+            "Hits": 2088,
+            "Misses": 10
+          },
+          "TextService": "Native SkParagraph for registered fonts; browser system-font fallback"
+        },
+        "WasmHeapBytes": 134217728,
+        "CustomHandlers": [],
+        "Sequence": 18,
+        "Generation": 3
+      }
+    }
+  },
+  "Passed": 16,
+  "Failed": 1,
+  "FinalSourceFingerprint": "0f5dffa6e336a753ffa94915daddda89c931a3df55e4025d90009e10846deaf4"
+}

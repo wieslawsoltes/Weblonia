@@ -1,0 +1,5 @@
+
+> avaloniaweb-workspace@0.6.0-alpha.1 verify:workers
+> node scripts/verify-workers.mjs
+
+{"Passed":true,"Files":257,"SourceFingerprint":"93bd3c924ade6b353c6ca18432cbb8104ae0f51262c7c30a7dc9c7493495894c","NativeWasm":"not duplicated","WorkerImportMaps":false}

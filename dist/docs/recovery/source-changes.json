@@ -1,0 +1,241 @@
+{
+  "BaselineVersion": "0.2.0-alpha.1",
+  "CurrentVersion": "0.3.0-alpha.1",
+  "Scope": [
+    "packages",
+    "samples",
+    "scripts",
+    "tests",
+    ".github",
+    "README.md",
+    "CHANGELOG.md",
+    "package.json",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "Added": [
+    {
+      "Path": "packages/media/src/text-cache.js",
+      "Sha256": "b011dff7c052955bc1473e67562348d7f5a66fb96cadd84f5d3d42f2d1ea6afa",
+      "Bytes": 2544
+    },
+    {
+      "Path": "packages/skia/src/text-raster.js",
+      "Sha256": "324e0af6ebc89476a400523526b6bb467ddf92f881ef50dd4b92477b46231fb2",
+      "Bytes": 4455
+    },
+    {
+      "Path": "scripts/archive.py",
+      "Sha256": "2685055632340c8ca86e55020df408dc64e8f97d54fd38b91356fc1136ceeaaa",
+      "Bytes": 3569
+    },
+    {
+      "Path": "scripts/benchmark.mjs",
+      "Sha256": "06d830eda8dff9efe9f3b40ca21c7f08b1228623669d00cbf13ab913f05899ff",
+      "Bytes": 4760
+    },
+    {
+      "Path": "tests/compiled-binding.test.mjs",
+      "Sha256": "d2a9b7ee8b6646ae32e2caa57ca0186a89b49c09363975e5999ecf485bb83ae6",
+      "Bytes": 14275
+    },
+    {
+      "Path": "tests/http-smoke.py",
+      "Sha256": "695b1cab1b570024797840d60822bdebc5f0adcf0cec1ef6604d5d8a917d37f1",
+      "Bytes": 2756
+    },
+    {
+      "Path": "tests/native-text-performance.test.mjs",
+      "Sha256": "66e209b3d6e2ca8206d986dde2f30049590c5d1da07bc7cb24aef3b3f0fb909e",
+      "Bytes": 3709
+    },
+    {
+      "Path": "tests/text-performance.test.mjs",
+      "Sha256": "faf0d3e0b098215bb85921a49d9e29b8a8ea2be005d36452923ef017708e5fdf",
+      "Bytes": 10023
+    },
+    {
+      "Path": "tests/text-quality.js",
+      "Sha256": "0ba58297807c5c1f8a1686947b423716ce32580953a27f2e38af7b2968f495be",
+      "Bytes": 7754
+    },
+    {
+      "Path": "tests/text-quality.py",
+      "Sha256": "0099b0575d101ddd4d8f2725bb515223d4e2ce62e1d013afc7b14691bc469f5e",
+      "Bytes": 3370
+    }
+  ],
+  "Modified": [
+    {
+      "Path": ".github/workflows/ci.yml",
+      "Before": "cff11fde8e56e3e61614f42973ee37e803c2d2f14c3180dc0e4a513a006a0229",
+      "After": "4d6299a689a494ae379334d7a3c08fa7f7137d6de653623d1c137d9c9998ea0b"
+    },
+    {
+      "Path": "CHANGELOG.md",
+      "Before": "3c00f3d6049499dd3e4fe60daa3f3e584ac9b1bf7921d0f9121fa2f32ca77567",
+      "After": "4c3044a57bd0e0f2f7da889cd68fe231db7f304eb6c7527c9787596d5c8ece49"
+    },
+    {
+      "Path": "README.md",
+      "Before": "38668c1427fe7050ac6d96143ebb9ee569d358b6e0186197b1c56692adb06e78",
+      "After": "19b866dab527141d317b767abfb3cdfdab3473adf050953fc5a9605fc2d6719e"
+    },
+    {
+      "Path": "package.json",
+      "Before": "39d772abda98e69bce82f7dd6774b2cf52913960c5157166e5a6fac6676e8bd2",
+      "After": "5106d289da687b76e63ce0c2cad3ba3ccd4904e5ebb6838959216359c180ca07"
+    },
+    {
+      "Path": "packages/animation/package.json",
+      "Before": "aa81343bd63a7c68fdf2b05afe64d0ca1c24f07eebed3c68dcd1c74a4014f05b",
+      "After": "d563f7b38c89d3bad4abb032c1b83bed770940a5845522a9bdd3cb1d77254178"
+    },
+    {
+      "Path": "packages/avalonia/package.json",
+      "Before": "41db9f94d7c94e305b70b461b910c9047a75c80288d1b9e5dda6f5e13182bd0c",
+      "After": "c82a1249980e295ce945c101e5043ecc0ead892dc2090a716648f0e2ad8d78d1"
+    },
+    {
+      "Path": "packages/base/package.json",
+      "Before": "08098e73221bbaf599bfbc5c7be22de6499e172b802539cf14ff4a5c3b6143d3",
+      "After": "baac6aba4ae8c50d153ba196508567c1043345f072f693bb9ed00b5012843de6"
+    },
+    {
+      "Path": "packages/browser/package.json",
+      "Before": "e77261a1adec0de4586c0cfb6ce96bb2b4950f9651e213ff8861db5c43196e17",
+      "After": "48b6deaee5ba59fff5ac7a8f84f1cd12ca0389c52c52557a3a2a426fcb4137fe"
+    },
+    {
+      "Path": "packages/browser/src/index.js",
+      "Before": "5c46a1e0a6501c59c4fad1cb33fab3ac7152a0d469d7dcd04505a11c6d501b0d",
+      "After": "03df262884121d1631dbf903dfdb74c70054788e836c32da89fe14b887cc3122"
+    },
+    {
+      "Path": "packages/composition/package.json",
+      "Before": "edcc183de26a11d9dcdb8e87708c3a2e3742f75f0aec8751d9521ca96d696f53",
+      "After": "c7a9752b53e9135775a8cc137b53ca9eed5ee6c054603a111641adeadc01ff82"
+    },
+    {
+      "Path": "packages/controls/package.json",
+      "Before": "34e0e5721704f058f5e21097613c9219c9c199e61d4c2b2bee2c92d7362dfcfb",
+      "After": "d3ceded225a376cd3cde96d8a303acc113648fb5e9f2d6d6a6606177428dc3c7"
+    },
+    {
+      "Path": "packages/controls/src/content.js",
+      "Before": "61fb542db61fd409478460d6e449c9b4e6aaf72f4b5b5f5fdd3bde2560e5d3f6",
+      "After": "428d18f0d24fc2e7e3e5700393a28b2bfa77f11f62730ea5343b9f4419cff758"
+    },
+    {
+      "Path": "packages/controls/src/core.js",
+      "Before": "e08d3bc65ad709cd9e3acf56e9a7d34736d65df506fd20e06fc2c1d4f400fd9d",
+      "After": "448ca49376e14c04a5dbd2919f69bec98fb73d6cdd090116aa4a7207707cd5c5"
+    },
+    {
+      "Path": "packages/controls/src/input-controls.js",
+      "Before": "99021be438daeec7a997d3b1a9c7910f958a68b1fdbba641a10a1fee61a3b95b",
+      "After": "07c25a957425a8cde05ce211a03b40cb70359cc94384747f6b7954ac666418ee"
+    },
+    {
+      "Path": "packages/data/package.json",
+      "Before": "4bbe70560ddfb28d27e5f937ad09e9bc3b65068537be78ef7876dc52e01a27fc",
+      "After": "296ccdb05ed1e162afa2fe54ba80bc4e875401433b528591d042f8ece4fe7e67"
+    },
+    {
+      "Path": "packages/data/src/binding.js",
+      "Before": "b2cb9b0ab1283989d27407a1970df857aa0eb3a2d1b66046c85e102a77234b96",
+      "After": "28af248516a0f3326a510af7cd0c2aa760b298fe48b4022137712c777893ddab"
+    },
+    {
+      "Path": "packages/diagnostics/package.json",
+      "Before": "132d82a17f1deec40ff88f5033b7f6d1bff0b254f19da5ac8fdc794168d6e0db",
+      "After": "9a532aa48413016590a6d51e6b747878b1171b15704dc5ee9470904080c3512e"
+    },
+    {
+      "Path": "packages/headless/package.json",
+      "Before": "aeccd075b75a8cd3db60bd7decb9c1496c36970e7284e654fc833b45001061ce",
+      "After": "9bc72ac534110b227109d18ce85df3b8bb5c9b4079020a19f3605d04b7dd5c2d"
+    },
+    {
+      "Path": "packages/markup-xaml/package.json",
+      "Before": "c32be316c543750efe175061afdb15cd72b1072d7422c8b03be14c9a3e22409d",
+      "After": "ffb5424d39c2f64c5d03449097e279cc31b38c20422a1a89204896099ef69c53"
+    },
+    {
+      "Path": "packages/markup-xaml/src/index.js",
+      "Before": "38481ccee6672113a2ed3aa4539df37f85a5709747c8d48912df4b18e0ddbc91",
+      "After": "07c80c3efd508475d4d4fbcf557a8b337b4f41cda0dfa5af75b462c00fd3a569"
+    },
+    {
+      "Path": "packages/media/package.json",
+      "Before": "9eb748100c5a0c4f92ce39052b7afcfc99a45a80a779a15e13b4bbee1697c69b",
+      "After": "7b4c2fffc5a794f33a12907e406ab3dc3f5aabbf2bd4998731043d5e6ebf690a"
+    },
+    {
+      "Path": "packages/media/src/index.js",
+      "Before": "eae4e5529d8dcaf112b5fabeb1b68e0535c4be6a6b3bb707bfbfd0ac0d931060",
+      "After": "15838d8bfa2ac935545327ca85a8e6868f5d2397eedff28ff102decbccefe9cf"
+    },
+    {
+      "Path": "packages/media/src/text.js",
+      "Before": "876b2ffa28676cbf25b08bcd16fed7cbf4a3ee4ea1779b603514b769465b007e",
+      "After": "ef87a2061374fbd909ea6633917a58cd022762722e542885e18dcb2aec38d841"
+    },
+    {
+      "Path": "packages/media/src/unicode.js",
+      "Before": "6d4332bf70d57928b480fe0dbe7aebcecb2f3ef7f90108026215e291fcb4b779",
+      "After": "7107e8add3266acd2398919dbf25cb3063a1838d7bbacb3ed903a93b10e36ae5"
+    },
+    {
+      "Path": "packages/opengl/package.json",
+      "Before": "1bcdf37983582ca380e7fa378f0c4b23b7bb96f4417d776a0f9a6b4d90c6539e",
+      "After": "213d77f60f54cea5dde38bc8a3b6a0acccaf33eb71c8a84661d624d2e814defc"
+    },
+    {
+      "Path": "packages/reactiveui/package.json",
+      "Before": "20240de053e0957ec9ea7f3390f37a624bb86251c94948b5b82868baf8f933ff",
+      "After": "b75c9407d9c414fff4bdb3bee6394ce6d99ea624f61dfd2b4de14fc110b1da8b"
+    },
+    {
+      "Path": "packages/skia/package.json",
+      "Before": "4b64246710657986c0513cce70b27e1caa62c1805c03d4c74065cbeea7b482e5",
+      "After": "6a4b2b7d2cfa92db214f2952eb3a3324b6b7a6f00e05cd74b90c397d5e1f9930"
+    },
+    {
+      "Path": "packages/skia/src/index.js",
+      "Before": "6662ca3c3432f7ec6487e845f4d6637f48e6395a1db760901953b35932968fa2",
+      "After": "b7ccb70b48cea3c10e98c7f2a2e9501b727758b72162b72cb716bdb5cc188a9e"
+    },
+    {
+      "Path": "packages/skia/src/text-service.js",
+      "Before": "0046cfb7a541a707908f985a4d9c3f193f01ae5a21c7c04e01dcb4c20c705246",
+      "After": "8a9e682ae1d4def23a8c971df0d4ab9b5a0bd8fe35e3611a292ddd2bd4dd88e5"
+    },
+    {
+      "Path": "packages/styling/package.json",
+      "Before": "40ad29eac32d2d8b6549c648b48f506d5db56d89aef2ee918a6d91487c94e520",
+      "After": "ace60424a91fa99ae8a0099ec3fd25fa55fcdc077c41340a62bded0ad44c9f73"
+    },
+    {
+      "Path": "packages/themes-fluent/package.json",
+      "Before": "3d5a6ad74dc33cd9b6095a7665f11090bd8803f8fb5ee9abd0e0099e98661d54",
+      "After": "57edc326193fd3bc6c92bee8d648f2fdeadffe92ac562f50560a1851c5ab5f36"
+    },
+    {
+      "Path": "packages/xamlx/package.json",
+      "Before": "3c091c720379f1517f670b45a8a333af221e5fc179ea22246a46222d216e65b3",
+      "After": "b23118ada4b21694c33b749c25fc1244c53cc6231ce532bec31b05557ea7c943"
+    },
+    {
+      "Path": "scripts/build.mjs",
+      "Before": "471d6aa45e356424a2e96858c585bb0e5ea6e8d320cb91e1b6b89dcf53e5869b",
+      "After": "24b193ca5f3c3bfda45bac68c8bcbd9f70ce14bcc751db4cfef6600500c785d7"
+    },
+    {
+      "Path": "tests/browser.py",
+      "Before": "f5a0f7cbe8c300dbdec3bb1a1a2682e933def7960899d3d85ab9691b9b43afa0",
+      "After": "aab9c0739c483450b435b3fdb2d861ad6ca4d30939fee722393542350ad106f6"
+    }
+  ],
+  "Removed": []
+}

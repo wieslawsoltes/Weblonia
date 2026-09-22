@@ -1,0 +1,15 @@
+<!doctype html><html><head><meta charset="utf-8"><title>AvaloniaWeb native Skia smoke</title><style>html,body,#app{height:100%;margin:0}</style><script type="importmap">{"imports": {"@wieslawsoltes/avalonia-controls": "/packages/controls/src/index.js", "@wieslawsoltes/avalonia-diagnostics": "/packages/diagnostics/src/index.js", "@wieslawsoltes/avalonia-base": "/packages/base/src/index.js", "@wieslawsoltes/avalonia-media": "/packages/media/src/index.js", "@wieslawsoltes/avalonia-browser": "/packages/browser/src/index.js", "@wieslawsoltes/avalonia-markup-xaml": "/packages/markup-xaml/src/index.js", "@wieslawsoltes/avalonia-skia": "/packages/skia/src/index.js", "@wieslawsoltes/avalonia-themes-fluent": "/packages/themes-fluent/src/index.js", "@wieslawsoltes/avalonia-data": "/packages/data/src/index.js", "@wieslawsoltes/avalonia": "/packages/avalonia/src/index.js", "@wieslawsoltes/avalonia-reactiveui": "/packages/reactiveui/src/index.js", "@wieslawsoltes/avalonia-animation": "/packages/animation/src/index.js", "@wieslawsoltes/xamlx": "/packages/xamlx/src/index.js", "@wieslawsoltes/avalonia-headless": "/packages/headless/src/index.js", "@wieslawsoltes/avalonia-styling": "/packages/styling/src/index.js", "rxjs": "/vendor/rxjs.js", "rxjs/operators": "/vendor/rxjs.js", "@wieslawsoltes/reactiveweb": "/vendor/reactiveweb.browser.js", "@wieslawsoltes/skiasharpweb/browser-text": "/vendor/skiasharpweb/dist/lib/browser-text.js", "@wieslawsoltes/skiasharpweb/browser": "/vendor/skiasharpweb/dist/package/browser.js"}}</script></head><body><div id="app"></div><script type="module">
+import {Window} from '@wieslawsoltes/avalonia-browser';
+import {StackPanel,TextBlock,Button,CheckBox,TextBox,Slider,ProgressBar} from '@wieslawsoltes/avalonia-controls';
+const w=new Window();w.RequestedThemeVariant='Light';
+const p=new StackPanel();p.Margin=32;p.Spacing=16;
+const t=new TextBlock('Avalonia, rendered by native Skia');t.FontSize=28;t.FontWeight=600;p.Children.Add(t);
+const button=new Button('Increment');button.HorizontalAlignment='Left';p.Children.Add(button);
+const checkbox=new CheckBox('Retained visual tree');checkbox.IsChecked=true;p.Children.Add(checkbox);
+const input=new TextBox('Hello from JavaScript');input.Name='Input';input.Width=360;input.HorizontalAlignment='Left';p.Children.Add(input);
+const slider=new Slider();slider.Width=360;slider.HorizontalAlignment='Left';slider.Value=35;p.Children.Add(slider);
+const progress=new ProgressBar();progress.Width=360;progress.HorizontalAlignment='Left';progress.ShowProgressText=true;progress.Value=35;p.Children.Add(progress);
+slider.ValueChanged.Add((_,e)=>progress.Value=e.NewValue);
+button.Click.Add(()=>{button.Content='Clicked '+(++window.count);});window.count=0;
+w.Content=p;window.app=w;await w.Attach(document.getElementById('app'),{Backend:'canvas'});window.ready=true;
+</script></body></html>

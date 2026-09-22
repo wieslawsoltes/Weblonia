@@ -1,0 +1,47 @@
+PASS render-worker actual worker ownership
+PASS full-isolation actual worker ownership
+PASS single navigate TableView
+PASS render-worker navigate TableView
+PASS full-isolation navigate TableView
+/mnt/data/avalonia-threaded/AvaloniaWeb/tests/threading-browser.py:60: DeprecationWarning: Image.Image.getdata is deprecated and will be removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
+  actual=pixels(pages[mode],mode).crop((0,0,1200,865));diff=ImageChops.difference(reference,actual);maximum=max(v[1]for v in diff.getextrema());changed=sum(1 for px in diff.getdata()if max(px)>2)
+PASS render-worker RGBA TableView
+PASS full-isolation RGBA TableView
+PASS single navigate TextBlock
+PASS render-worker navigate TextBlock
+PASS full-isolation navigate TextBlock
+PASS render-worker RGBA TextBlock
+PASS full-isolation RGBA TextBlock
+PASS single navigate ScrollViewer
+PASS render-worker navigate ScrollViewer
+PASS full-isolation navigate ScrollViewer
+PASS render-worker RGBA ScrollViewer
+PASS full-isolation RGBA ScrollViewer
+PASS single navigate Image
+PASS render-worker navigate Image
+PASS full-isolation navigate Image
+PASS render-worker RGBA Image
+PASS full-isolation RGBA Image
+PASS single navigate Acrylic
+PASS render-worker navigate Acrylic
+PASS full-isolation navigate Acrylic
+PASS render-worker RGBA Acrylic
+PASS full-isolation RGBA Acrylic
+PASS single navigate Composition
+PASS render-worker navigate Composition
+PASS full-isolation navigate Composition
+PASS render-worker RGBA Composition
+PASS full-isolation RGBA Composition
+PASS single navigate BitmapCache
+PASS render-worker navigate BitmapCache
+PASS full-isolation navigate BitmapCache
+PASS render-worker RGBA BitmapCache
+PASS full-isolation RGBA BitmapCache
+PASS three threads: animation continues through UI stall
+PASS three threads: control query
+{
+  "Passed": 39,
+  "Failed": 0,
+  "Errors": [],
+  "Missing": []
+}

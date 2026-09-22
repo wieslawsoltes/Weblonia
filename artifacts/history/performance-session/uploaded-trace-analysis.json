@@ -1,0 +1,821 @@
+{
+  "inputFile": "Trace-20260921T141220.json.gz",
+  "eventCount": 94466,
+  "profileCount": 1,
+  "sampleCount": 58491,
+  "sampledTotalMs": 7243.981,
+  "activeSampledMs": 3798.187,
+  "self": [
+    {
+      "function": "(idle)",
+      "url": "",
+      "line": 0,
+      "sampledMs": 2883.56,
+      "shareOfProfilePercent": 39.81,
+      "shareOfActiveSamplesPercent": 75.92,
+      "selfSampleCount": 22264
+    },
+    {
+      "function": "SetInheritanceParent",
+      "url": "http://127.0.0.1:4173/packages/base/src/properties.js",
+      "line": 133,
+      "sampledMs": 1006.0,
+      "shareOfProfilePercent": 13.89,
+      "shareOfActiveSamplesPercent": 26.49,
+      "selfSampleCount": 7829
+    },
+    {
+      "function": "GetValue",
+      "url": "http://127.0.0.1:4173/packages/base/src/properties.js",
+      "line": 151,
+      "sampledMs": 688.127,
+      "shareOfProfilePercent": 9.5,
+      "shareOfActiveSamplesPercent": 18.12,
+      "selfSampleCount": 5369
+    },
+    {
+      "function": "(program)",
+      "url": "",
+      "line": 0,
+      "sampledMs": 562.234,
+      "shareOfProfilePercent": 7.76,
+      "shareOfActiveSamplesPercent": 14.8,
+      "selfSampleCount": 5333
+    },
+    {
+      "function": "get",
+      "url": "http://127.0.0.1:4173/packages/base/src/properties.js",
+      "line": 391,
+      "sampledMs": 359.891,
+      "shareOfProfilePercent": 4.97,
+      "shareOfActiveSamplesPercent": 9.48,
+      "selfSampleCount": 2810
+    },
+    {
+      "function": "visit",
+      "url": "http://127.0.0.1:4173/packages/browser/src/index.js",
+      "line": 634,
+      "sampledMs": 111.037,
+      "shareOfProfilePercent": 1.53,
+      "shareOfActiveSamplesPercent": 2.92,
+      "selfSampleCount": 871
+    },
+    {
+      "function": "(garbage collector)",
+      "url": "",
+      "line": 0,
+      "sampledMs": 89.764,
+      "shareOfProfilePercent": 1.24,
+      "shareOfActiveSamplesPercent": 2.36,
+      "selfSampleCount": 613
+    },
+    {
+      "function": "RenderTree",
+      "url": "http://127.0.0.1:4173/packages/controls/src/core.js",
+      "line": 346,
+      "sampledMs": 63.849,
+      "shareOfProfilePercent": 0.88,
+      "shareOfActiveSamplesPercent": 1.68,
+      "selfSampleCount": 499
+    },
+    {
+      "function": "RemoveVisualChild",
+      "url": "http://127.0.0.1:4173/packages/controls/src/core.js",
+      "line": 249,
+      "sampledMs": 57.425,
+      "shareOfProfilePercent": 0.79,
+      "shareOfActiveSamplesPercent": 1.51,
+      "selfSampleCount": 447
+    },
+    {
+      "function": "AddVisualChild",
+      "url": "http://127.0.0.1:4173/packages/controls/src/core.js",
+      "line": 218,
+      "sampledMs": 53.252,
+      "shareOfProfilePercent": 0.74,
+      "shareOfActiveSamplesPercent": 1.4,
+      "selfSampleCount": 415
+    },
+    {
+      "function": "ApplyStyles",
+      "url": "http://127.0.0.1:4173/packages/styling/src/styles.js",
+      "line": 140,
+      "sampledMs": 50.696,
+      "shareOfProfilePercent": 0.7,
+      "shareOfActiveSamplesPercent": 1.33,
+      "selfSampleCount": 396
+    },
+    {
+      "function": "get IsEffectivelyVisible",
+      "url": "http://127.0.0.1:4173/packages/controls/src/core.js",
+      "line": 203,
+      "sampledMs": 50.171,
+      "shareOfProfilePercent": 0.69,
+      "shareOfActiveSamplesPercent": 1.32,
+      "selfSampleCount": 392
+    },
+    {
+      "function": "simpleMatches",
+      "url": "http://127.0.0.1:4173/packages/styling/src/selectors.js",
+      "line": 102,
+      "sampledMs": 42.552,
+      "shareOfProfilePercent": 0.59,
+      "shareOfActiveSamplesPercent": 1.12,
+      "selfSampleCount": 332
+    },
+    {
+      "function": "invokerFn",
+      "url": "http://127.0.0.1:4173/vendor/skiasharpweb/dist/vendor/canvaskit.js",
+      "line": 7,
+      "sampledMs": 32.524,
+      "shareOfProfilePercent": 0.45,
+      "shareOfActiveSamplesPercent": 0.86,
+      "selfSampleCount": 253
+    },
+    {
+      "function": "append",
+      "url": "",
+      "line": 0,
+      "sampledMs": 30.368,
+      "shareOfProfilePercent": 0.42,
+      "shareOfActiveSamplesPercent": 0.8,
+      "selfSampleCount": 325
+    },
+    {
+      "function": "get IsEffectivelyEnabled",
+      "url": "http://127.0.0.1:4173/packages/controls/src/core.js",
+      "line": 795,
+      "sampledMs": 30.011,
+      "shareOfProfilePercent": 0.41,
+      "shareOfActiveSamplesPercent": 0.79,
+      "selfSampleCount": 237
+    },
+    {
+      "function": "AutomationProperties.<computed>",
+      "url": "http://127.0.0.1:4173/packages/controls/src/automation.js",
+      "line": 27,
+      "sampledMs": 29.63,
+      "shareOfProfilePercent": 0.41,
+      "shareOfActiveSamplesPercent": 0.78,
+      "selfSampleCount": 229
+    },
+    {
+      "function": "insertBefore",
+      "url": "",
+      "line": 0,
+      "sampledMs": 28.969,
+      "shareOfProfilePercent": 0.4,
+      "shareOfActiveSamplesPercent": 0.76,
+      "selfSampleCount": 238
+    },
+    {
+      "function": "Get",
+      "url": "http://127.0.0.1:4173/packages/skia/src/index.js",
+      "line": 17,
+      "sampledMs": 27.216,
+      "shareOfProfilePercent": 0.38,
+      "shareOfActiveSamplesPercent": 0.72,
+      "selfSampleCount": 212
+    },
+    {
+      "function": "requestAnimationFrame",
+      "url": "",
+      "line": 0,
+      "sampledMs": 26.959,
+      "shareOfProfilePercent": 0.37,
+      "shareOfActiveSamplesPercent": 0.71,
+      "selfSampleCount": 410
+    },
+    {
+      "function": "_RaiseChange",
+      "url": "http://127.0.0.1:4173/packages/base/src/properties.js",
+      "line": 337,
+      "sampledMs": 26.334,
+      "shareOfProfilePercent": 0.36,
+      "shareOfActiveSamplesPercent": 0.69,
+      "selfSampleCount": 205
+    },
+    {
+      "function": "processRecords",
+      "url": "chrome-extension://aeblfdkhhhdcdjpifhhbdiojplfjncoa/inline/injected.js",
+      "line": 37,
+      "sampledMs": 25.207,
+      "shareOfProfilePercent": 0.35,
+      "shareOfActiveSamplesPercent": 0.66,
+      "selfSampleCount": 195
+    },
+    {
+      "function": "setAttribute",
+      "url": "",
+      "line": 0,
+      "sampledMs": 23.451,
+      "shareOfProfilePercent": 0.32,
+      "shareOfActiveSamplesPercent": 0.62,
+      "selfSampleCount": 182
+    },
+    {
+      "function": "GetLocalTransform",
+      "url": "http://127.0.0.1:4173/packages/controls/src/core.js",
+      "line": 286,
+      "sampledMs": 22.701,
+      "shareOfProfilePercent": 0.31,
+      "shareOfActiveSamplesPercent": 0.6,
+      "selfSampleCount": 178
+    },
+    {
+      "function": "Arrange",
+      "url": "http://127.0.0.1:4173/packages/controls/src/core.js",
+      "line": 506,
+      "sampledMs": 20.34,
+      "shareOfProfilePercent": 0.28,
+      "shareOfActiveSamplesPercent": 0.54,
+      "selfSampleCount": 159
+    },
+    {
+      "function": "_SetPriorityValue",
+      "url": "http://127.0.0.1:4173/packages/base/src/properties.js",
+      "line": 202,
+      "sampledMs": 19.032,
+      "shareOfProfilePercent": 0.26,
+      "shareOfActiveSamplesPercent": 0.5,
+      "selfSampleCount": 149
+    },
+    {
+      "function": "InvalidateMeasure",
+      "url": "http://127.0.0.1:4173/packages/controls/src/core.js",
+      "line": 460,
+      "sampledMs": 18.016,
+      "shareOfProfilePercent": 0.25,
+      "shareOfActiveSamplesPercent": 0.47,
+      "selfSampleCount": 142
+    },
+    {
+      "function": "GetAutomationAriaProperties",
+      "url": "http://127.0.0.1:4173/packages/controls/src/automation.js",
+      "line": 304,
+      "sampledMs": 17.523,
+      "shareOfProfilePercent": 0.24,
+      "shareOfActiveSamplesPercent": 0.46,
+      "selfSampleCount": 136
+    },
+    {
+      "function": "_Paint",
+      "url": "http://127.0.0.1:4173/packages/skia/src/index.js",
+      "line": 401,
+      "sampledMs": 15.488,
+      "shareOfProfilePercent": 0.21,
+      "shareOfActiveSamplesPercent": 0.41,
+      "selfSampleCount": 120
+    },
+    {
+      "function": "OnPropertyChanged",
+      "url": "http://127.0.0.1:4173/packages/controls/src/core.js",
+      "line": 821,
+      "sampledMs": 15.463,
+      "shareOfProfilePercent": 0.21,
+      "shareOfActiveSamplesPercent": 0.41,
+      "selfSampleCount": 120
+    },
+    {
+      "function": "Measure",
+      "url": "http://127.0.0.1:4173/packages/controls/src/core.js",
+      "line": 475,
+      "sampledMs": 15.135,
+      "shareOfProfilePercent": 0.21,
+      "shareOfActiveSamplesPercent": 0.4,
+      "selfSampleCount": 124
+    },
+    {
+      "function": "InvalidateStyles",
+      "url": "http://127.0.0.1:4173/packages/controls/src/core.js",
+      "line": 132,
+      "sampledMs": 15.055,
+      "shareOfProfilePercent": 0.21,
+      "shareOfActiveSamplesPercent": 0.4,
+      "selfSampleCount": 118
+    },
+    {
+      "function": "nr",
+      "url": "chrome-extension://aeblfdkhhhdcdjpifhhbdiojplfjncoa/inline/injected.js",
+      "line": 37,
+      "sampledMs": 14.832,
+      "shareOfProfilePercent": 0.2,
+      "shareOfActiveSamplesPercent": 0.39,
+      "selfSampleCount": 115
+    },
+    {
+      "function": "_GetTextTiles",
+      "url": "http://127.0.0.1:4173/packages/skia/src/index.js",
+      "line": 322,
+      "sampledMs": 14.741,
+      "shareOfProfilePercent": 0.2,
+      "shareOfActiveSamplesPercent": 0.39,
+      "selfSampleCount": 115
+    },
+    {
+      "function": "createBindGroup",
+      "url": "",
+      "line": 0,
+      "sampledMs": 14.43,
+      "shareOfProfilePercent": 0.2,
+      "shareOfActiveSamplesPercent": 0.38,
+      "selfSampleCount": 113
+    }
+  ],
+  "inclusive": [
+    {
+      "function": "(root)",
+      "url": "",
+      "line": 0,
+      "sampledMs": 7243.981,
+      "shareOfProfilePercent": 100.0,
+      "shareOfActiveSamplesPercent": 190.72,
+      "selfSampleCount": 0
+    },
+    {
+      "function": "(anonymous)",
+      "url": "http://127.0.0.1:4173/packages/browser/src/index.js",
+      "line": 588,
+      "sampledMs": 3546.596,
+      "shareOfProfilePercent": 48.96,
+      "shareOfActiveSamplesPercent": 93.38,
+      "selfSampleCount": 5
+    },
+    {
+      "function": "RenderNow",
+      "url": "http://127.0.0.1:4173/packages/browser/src/index.js",
+      "line": 593,
+      "sampledMs": 3546.172,
+      "shareOfProfilePercent": 48.95,
+      "shareOfActiveSamplesPercent": 93.36,
+      "selfSampleCount": 3
+    },
+    {
+      "function": "(idle)",
+      "url": "",
+      "line": 0,
+      "sampledMs": 2883.56,
+      "shareOfProfilePercent": 39.81,
+      "shareOfActiveSamplesPercent": 75.92,
+      "selfSampleCount": 22264
+    },
+    {
+      "function": "ExecuteLayoutPass",
+      "url": "http://127.0.0.1:4173/packages/controls/src/core.js",
+      "line": 935,
+      "sampledMs": 2102.497,
+      "shareOfProfilePercent": 29.02,
+      "shareOfActiveSamplesPercent": 55.36,
+      "selfSampleCount": 4
+    },
+    {
+      "function": "_Realize",
+      "url": "http://127.0.0.1:4173/packages/controls/src/table-view.js",
+      "line": 240,
+      "sampledMs": 1566.019,
+      "shareOfProfilePercent": 21.62,
+      "shareOfActiveSamplesPercent": 41.23,
+      "selfSampleCount": 7
+    },
+    {
+      "function": "SetInheritanceParent",
+      "url": "http://127.0.0.1:4173/packages/base/src/properties.js",
+      "line": 133,
+      "sampledMs": 1276.246,
+      "shareOfProfilePercent": 17.62,
+      "shareOfActiveSamplesPercent": 33.6,
+      "selfSampleCount": 7829
+    },
+    {
+      "function": "Measure",
+      "url": "http://127.0.0.1:4173/packages/controls/src/core.js",
+      "line": 475,
+      "sampledMs": 1236.936,
+      "shareOfProfilePercent": 17.08,
+      "shareOfActiveSamplesPercent": 32.57,
+      "selfSampleCount": 124
+    },
+    {
+      "function": "MeasureOverride",
+      "url": "http://127.0.0.1:4173/packages/controls/src/content.js",
+      "line": 331,
+      "sampledMs": 1226.56,
+      "shareOfProfilePercent": 16.93,
+      "shareOfActiveSamplesPercent": 32.29,
+      "selfSampleCount": 27
+    },
+    {
+      "function": "Measure",
+      "url": "http://127.0.0.1:4173/packages/browser/src/index.js",
+      "line": 202,
+      "sampledMs": 1147.34,
+      "shareOfProfilePercent": 15.84,
+      "shareOfActiveSamplesPercent": 30.21,
+      "selfSampleCount": 2
+    },
+    {
+      "function": "MeasureOverride",
+      "url": "http://127.0.0.1:4173/packages/controls/src/layout.js",
+      "line": 330,
+      "sampledMs": 1146.492,
+      "shareOfProfilePercent": 15.83,
+      "shareOfActiveSamplesPercent": 30.19,
+      "selfSampleCount": 28
+    },
+    {
+      "function": "MeasureOverride",
+      "url": "http://127.0.0.1:4173/packages/controls/src/layout.js",
+      "line": 43,
+      "sampledMs": 1125.637,
+      "shareOfProfilePercent": 15.54,
+      "shareOfActiveSamplesPercent": 29.64,
+      "selfSampleCount": 10
+    },
+    {
+      "function": "_MeasureViewport",
+      "url": "http://127.0.0.1:4173/packages/controls/src/content.js",
+      "line": 500,
+      "sampledMs": 1125.541,
+      "shareOfProfilePercent": 15.54,
+      "shareOfActiveSamplesPercent": 29.63,
+      "selfSampleCount": 2
+    },
+    {
+      "function": "MeasureOverride",
+      "url": "http://127.0.0.1:4173/packages/controls/src/content.js",
+      "line": 517,
+      "sampledMs": 1125.329,
+      "shareOfProfilePercent": 15.53,
+      "shareOfActiveSamplesPercent": 29.63,
+      "selfSampleCount": 1
+    },
+    {
+      "function": "MeasureOverride",
+      "url": "http://127.0.0.1:4173/packages/controls/src/content.js",
+      "line": 176,
+      "sampledMs": 1123.201,
+      "shareOfProfilePercent": 15.51,
+      "shareOfActiveSamplesPercent": 29.57,
+      "selfSampleCount": 0
+    },
+    {
+      "function": "MeasureOverride",
+      "url": "http://127.0.0.1:4173/packages/controls/src/table-view.js",
+      "line": 267,
+      "sampledMs": 1112.892,
+      "shareOfProfilePercent": 15.36,
+      "shareOfActiveSamplesPercent": 29.3,
+      "selfSampleCount": 6
+    },
+    {
+      "function": "Arrange",
+      "url": "http://127.0.0.1:4173/packages/browser/src/index.js",
+      "line": 209,
+      "sampledMs": 954.873,
+      "shareOfProfilePercent": 13.18,
+      "shareOfActiveSamplesPercent": 25.14,
+      "selfSampleCount": 1
+    },
+    {
+      "function": "ArrangeOverride",
+      "url": "http://127.0.0.1:4173/packages/browser/src/index.js",
+      "line": 217,
+      "sampledMs": 954.744,
+      "shareOfProfilePercent": 13.18,
+      "shareOfActiveSamplesPercent": 25.14,
+      "selfSampleCount": 2
+    },
+    {
+      "function": "ArrangeOverride",
+      "url": "http://127.0.0.1:4173/packages/controls/src/content.js",
+      "line": 337,
+      "sampledMs": 954.487,
+      "shareOfProfilePercent": 13.18,
+      "shareOfActiveSamplesPercent": 25.13,
+      "selfSampleCount": 33
+    },
+    {
+      "function": "Arrange",
+      "url": "http://127.0.0.1:4173/packages/controls/src/core.js",
+      "line": 506,
+      "sampledMs": 954.109,
+      "shareOfProfilePercent": 13.17,
+      "shareOfActiveSamplesPercent": 25.12,
+      "selfSampleCount": 159
+    },
+    {
+      "function": "ArrangeOverride",
+      "url": "http://127.0.0.1:4173/packages/controls/src/layout.js",
+      "line": 347,
+      "sampledMs": 952.82,
+      "shareOfProfilePercent": 13.15,
+      "shareOfActiveSamplesPercent": 25.09,
+      "selfSampleCount": 15
+    },
+    {
+      "function": "Prepare",
+      "url": "http://127.0.0.1:4173/packages/controls/src/table-view.js",
+      "line": 105,
+      "sampledMs": 951.09,
+      "shareOfProfilePercent": 13.13,
+      "shareOfActiveSamplesPercent": 25.04,
+      "selfSampleCount": 5
+    },
+    {
+      "function": "ArrangeOverride",
+      "url": "http://127.0.0.1:4173/packages/controls/src/content.js",
+      "line": 522,
+      "sampledMs": 943.081,
+      "shareOfProfilePercent": 13.02,
+      "shareOfActiveSamplesPercent": 24.83,
+      "selfSampleCount": 10
+    },
+    {
+      "function": "Prepare",
+      "url": "http://127.0.0.1:4173/packages/controls/src/table-view.js",
+      "line": 80,
+      "sampledMs": 940.89,
+      "shareOfProfilePercent": 12.99,
+      "shareOfActiveSamplesPercent": 24.77,
+      "selfSampleCount": 11
+    },
+    {
+      "function": "ArrangeOverride",
+      "url": "http://127.0.0.1:4173/packages/controls/src/layout.js",
+      "line": 57,
+      "sampledMs": 935.471,
+      "shareOfProfilePercent": 12.91,
+      "shareOfActiveSamplesPercent": 24.63,
+      "selfSampleCount": 5
+    },
+    {
+      "function": "ArrangeOverride",
+      "url": "http://127.0.0.1:4173/packages/controls/src/content.js",
+      "line": 181,
+      "sampledMs": 934.439,
+      "shareOfProfilePercent": 12.9,
+      "shareOfActiveSamplesPercent": 24.6,
+      "selfSampleCount": 2
+    },
+    {
+      "function": "ArrangeOverride",
+      "url": "http://127.0.0.1:4173/packages/controls/src/table-view.js",
+      "line": 280,
+      "sampledMs": 929.429,
+      "shareOfProfilePercent": 12.83,
+      "shareOfActiveSamplesPercent": 24.47,
+      "selfSampleCount": 11
+    },
+    {
+      "function": "get",
+      "url": "http://127.0.0.1:4173/packages/base/src/properties.js",
+      "line": 391,
+      "sampledMs": 793.797,
+      "shareOfProfilePercent": 10.96,
+      "shareOfActiveSamplesPercent": 20.9,
+      "selfSampleCount": 2810
+    },
+    {
+      "function": "_UpdateAccessibility",
+      "url": "http://127.0.0.1:4173/packages/browser/src/index.js",
+      "line": 629,
+      "sampledMs": 746.599,
+      "shareOfProfilePercent": 10.31,
+      "shareOfActiveSamplesPercent": 19.66,
+      "selfSampleCount": 35
+    },
+    {
+      "function": "visit",
+      "url": "http://127.0.0.1:4173/packages/browser/src/index.js",
+      "line": 634,
+      "sampledMs": 734.62,
+      "shareOfProfilePercent": 10.14,
+      "shareOfActiveSamplesPercent": 19.34,
+      "selfSampleCount": 871
+    },
+    {
+      "function": "RemoveVisualChild",
+      "url": "http://127.0.0.1:4173/packages/controls/src/core.js",
+      "line": 249,
+      "sampledMs": 712.905,
+      "shareOfProfilePercent": 9.84,
+      "shareOfActiveSamplesPercent": 18.77,
+      "selfSampleCount": 447
+    },
+    {
+      "function": "AddVisualChild",
+      "url": "http://127.0.0.1:4173/packages/controls/src/core.js",
+      "line": 218,
+      "sampledMs": 701.835,
+      "shareOfProfilePercent": 9.69,
+      "shareOfActiveSamplesPercent": 18.48,
+      "selfSampleCount": 415
+    },
+    {
+      "function": "GetValue",
+      "url": "http://127.0.0.1:4173/packages/base/src/properties.js",
+      "line": 151,
+      "sampledMs": 700.437,
+      "shareOfProfilePercent": 9.67,
+      "shareOfActiveSamplesPercent": 18.44,
+      "selfSampleCount": 5369
+    },
+    {
+      "function": "Render",
+      "url": "http://127.0.0.1:4173/packages/skia/src/index.js",
+      "line": 766,
+      "sampledMs": 680.496,
+      "shareOfProfilePercent": 9.39,
+      "shareOfActiveSamplesPercent": 17.92,
+      "selfSampleCount": 4
+    },
+    {
+      "function": "_RaiseChange",
+      "url": "http://127.0.0.1:4173/packages/base/src/properties.js",
+      "line": 337,
+      "sampledMs": 639.112,
+      "shareOfProfilePercent": 8.82,
+      "shareOfActiveSamplesPercent": 16.83,
+      "selfSampleCount": 205
+    }
+  ],
+  "events": {
+    "FireAnimationFrame": {
+      "count": 194,
+      "totalMs": 3859.853,
+      "medianMs": 20.701,
+      "p95Ms": 31.747,
+      "maxMs": 33.044,
+      "over8_33Ms": 161,
+      "over16_67Ms": 104,
+      "over50Ms": 0
+    },
+    "FunctionCall": {
+      "count": 663,
+      "totalMs": 4010.299,
+      "medianMs": 0.218,
+      "p95Ms": 30.441,
+      "maxMs": 32.866,
+      "over8_33Ms": 160,
+      "over16_67Ms": 103,
+      "over50Ms": 0
+    },
+    "RunTask": {
+      "count": 3607,
+      "totalMs": 4273.75,
+      "medianMs": 0.002,
+      "p95Ms": 7.687,
+      "maxMs": 110.56,
+      "over8_33Ms": 169,
+      "over16_67Ms": 107,
+      "over50Ms": 1
+    },
+    "EventDispatch": {
+      "count": 396,
+      "totalMs": 71.895,
+      "medianMs": 0.143,
+      "p95Ms": 0.532,
+      "maxMs": 1.254,
+      "over8_33Ms": 0,
+      "over16_67Ms": 0,
+      "over50Ms": 0
+    },
+    "UpdateLayoutTree": {
+      "count": 130,
+      "totalMs": 11.464,
+      "medianMs": 0.093,
+      "p95Ms": 0.108,
+      "maxMs": 0.217,
+      "over8_33Ms": 0,
+      "over16_67Ms": 0,
+      "over50Ms": 0
+    },
+    "Layout": {
+      "count": 126,
+      "totalMs": 8.333,
+      "medianMs": 0.068,
+      "p95Ms": 0.077,
+      "maxMs": 0.083,
+      "over8_33Ms": 0,
+      "over16_67Ms": 0,
+      "over50Ms": 0
+    },
+    "Paint": {
+      "count": 126,
+      "totalMs": 1.728,
+      "medianMs": 0.014,
+      "p95Ms": 0.017,
+      "maxMs": 0.02,
+      "over8_33Ms": 0,
+      "over16_67Ms": 0,
+      "over50Ms": 0
+    },
+    "MinorGC": {
+      "count": 56,
+      "totalMs": 75.753,
+      "medianMs": 1.366,
+      "p95Ms": 1.837,
+      "maxMs": 2.087,
+      "over8_33Ms": 0,
+      "over16_67Ms": 0,
+      "over50Ms": 0
+    },
+    "MajorGC": {
+      "count": 1,
+      "totalMs": 6.653,
+      "medianMs": 6.653,
+      "p95Ms": 6.653,
+      "maxMs": 6.653,
+      "over8_33Ms": 0,
+      "over16_67Ms": 0,
+      "over50Ms": 0
+    }
+  },
+  "functionCalls": [
+    {
+      "url": "http://127.0.0.1:4173/packages/browser/src/index.js",
+      "line": 588,
+      "count": 194,
+      "totalMs": 3843.422,
+      "medianMs": 20.634,
+      "p95Ms": 31.557
+    },
+    {
+      "url": "chrome-extension://aeblfdkhhhdcdjpifhhbdiojplfjncoa/inline/injected.js",
+      "line": 37,
+      "count": 151,
+      "totalMs": 100.324,
+      "medianMs": 0.007,
+      "p95Ms": 4.921
+    },
+    {
+      "url": "http://127.0.0.1:4173/packages/browser/src/index.js",
+      "line": 388,
+      "count": 311,
+      "totalMs": 66.36,
+      "medianMs": 0.153,
+      "p95Ms": 0.536
+    },
+    {
+      "url": "chrome-extension://aeblfdkhhhdcdjpifhhbdiojplfjncoa/inline/injected.js",
+      "line": 3,
+      "count": 2,
+      "totalMs": 0.083,
+      "medianMs": 0.042,
+      "p95Ms": 0.07
+    },
+    {
+      "url": "chrome-extension://aeblfdkhhhdcdjpifhhbdiojplfjncoa/inline/injected.js",
+      "line": 40,
+      "count": 1,
+      "totalMs": 0.036,
+      "medianMs": 0.036,
+      "p95Ms": 0.036
+    },
+    {
+      "url": "http://127.0.0.1:4173/packages/controls/src/scroll-bar.js",
+      "line": 44,
+      "count": 2,
+      "totalMs": 0.034,
+      "medianMs": 0.017,
+      "p95Ms": 0.018
+    },
+    {
+      "url": "chrome-extension://aeblfdkhhhdcdjpifhhbdiojplfjncoa/inline/injected.js",
+      "line": 85,
+      "count": 1,
+      "totalMs": 0.02,
+      "medianMs": 0.02,
+      "p95Ms": 0.02
+    },
+    {
+      "url": "http://127.0.0.1:4173/packages/browser/src/index.js",
+      "line": 353,
+      "count": 1,
+      "totalMs": 0.02,
+      "medianMs": 0.02,
+      "p95Ms": 0.02
+    }
+  ],
+  "counters": {
+    "jsHeapSizeUsed": {
+      "first": 39296292,
+      "last": 132014916,
+      "min": 30373872,
+      "max": 150734072
+    },
+    "nodes": {
+      "first": 1554,
+      "last": 26584,
+      "min": 1546,
+      "max": 26584
+    },
+    "jsEventListeners": {
+      "first": 770,
+      "last": 20922,
+      "min": 759,
+      "max": 20922
+    }
+  },
+  "interpretation": "CPU profile is sampled and inclusive rows overlap; do not add inclusive percentages. RAF callback time is main-thread work, not GPU duration or presented-frame latency."
+}

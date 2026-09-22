@@ -1,0 +1,146 @@
+{
+  "Version": "0.4.0-alpha.1",
+  "Scope": "Fixed-width counting text provider; deterministic JavaScript allocation/work counts, NOT end-to-end UI/GPU frame rates",
+  "Node": "v22.16.0",
+  "Architecture": "x64",
+  "Cpu": "Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz",
+  "SamplesPerCase": 3,
+  "Results": [
+    {
+      "Name": "5000 unchanged TextBox measure invalidations",
+      "MedianMilliseconds": 77.83214100000009,
+      "Samples": [
+        {
+          "Iterations": 5000,
+          "Milliseconds": 60.291251999999986,
+          "NewLayouts": 5000,
+          "Measurements": 5000
+        },
+        {
+          "Iterations": 5000,
+          "Milliseconds": 107.64235499999995,
+          "NewLayouts": 5000,
+          "Measurements": 5000
+        },
+        {
+          "Iterations": 5000,
+          "Milliseconds": 77.83214100000009,
+          "NewLayouts": 5000,
+          "Measurements": 5000
+        }
+      ]
+    },
+    {
+      "Name": "5000 paired FormattedText width/height reads",
+      "MedianMilliseconds": 18.143432000000075,
+      "Samples": [
+        {
+          "Iterations": 5000,
+          "Milliseconds": 26.201594000000114,
+          "NewLayouts": 10000,
+          "Measurements": 10000
+        },
+        {
+          "Iterations": 5000,
+          "Milliseconds": 18.143432000000075,
+          "NewLayouts": 10000,
+          "Measurements": 10000
+        },
+        {
+          "Iterations": 5000,
+          "Milliseconds": 18.085436000000072,
+          "NewLayouts": 10000,
+          "Measurements": 10000
+        }
+      ]
+    },
+    {
+      "Name": "20 caret placements in a 10000-line document",
+      "MedianMilliseconds": 4511.276918000001,
+      "Samples": [
+        {
+          "Iterations": 20,
+          "Milliseconds": 4818.086860999999,
+          "BoundaryCache": {
+            "Count": 0,
+            "EstimatedBytes": 0,
+            "Hits": 0,
+            "Misses": 20,
+            "MaxEntries": 128,
+            "MaxBytes": 2097152
+          }
+        },
+        {
+          "Iterations": 20,
+          "Milliseconds": 4112.032929999999,
+          "BoundaryCache": {
+            "Count": 0,
+            "EstimatedBytes": 0,
+            "Hits": 0,
+            "Misses": 20,
+            "MaxEntries": 128,
+            "MaxBytes": 2097152
+          }
+        },
+        {
+          "Iterations": 20,
+          "Milliseconds": 4511.276918000001,
+          "BoundaryCache": {
+            "Count": 0,
+            "EstimatedBytes": 0,
+            "Hits": 0,
+            "Misses": 20,
+            "MaxEntries": 128,
+            "MaxBytes": 2097152
+          }
+        }
+      ]
+    },
+    {
+      "Name": "150 disjoint ListBox viewport jumps across 10000 items",
+      "MedianMilliseconds": 1515.1613529999995,
+      "Samples": [
+        {
+          "Iterations": 150,
+          "Milliseconds": 1740.4614880000008,
+          "NewContainers": 1800,
+          "MaximumRealized": 12
+        },
+        {
+          "Iterations": 150,
+          "Milliseconds": 1283.5066430000006,
+          "NewContainers": 1800,
+          "MaximumRealized": 12
+        },
+        {
+          "Iterations": 150,
+          "Milliseconds": 1515.1613529999995,
+          "NewContainers": 1800,
+          "MaximumRealized": 12
+        }
+      ]
+    },
+    {
+      "Name": "5000 unchanged visual ordering queries on 100 children",
+      "MedianMilliseconds": 1463.5021629999974,
+      "Samples": [
+        {
+          "Iterations": 5000,
+          "Milliseconds": 1829.789958999998,
+          "DistinctReturnedArrays": 5000
+        },
+        {
+          "Iterations": 5000,
+          "Milliseconds": 1463.5021629999974,
+          "DistinctReturnedArrays": 5000
+        },
+        {
+          "Iterations": 5000,
+          "Milliseconds": 1347.157478000001,
+          "DistinctReturnedArrays": 5000
+        }
+      ]
+    }
+  ],
+  "Consumed": 11036479.99999255
+}

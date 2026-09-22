@@ -1,0 +1,22 @@
+[
+  {
+    "Name": "catalog",
+    "Pid": 3121,
+    "Log": "/mnt/data/avalonia-final/AvaloniaWeb/artifacts/validation-optimized/catalog-final.log"
+  },
+  {
+    "Name": "text",
+    "Pid": 3122,
+    "Log": "/mnt/data/avalonia-final/AvaloniaWeb/artifacts/validation-optimized/text-final.log"
+  },
+  {
+    "Name": "automation",
+    "Pid": 3123,
+    "Log": "/mnt/data/avalonia-final/AvaloniaWeb/artifacts/validation-optimized/automation-final.log"
+  },
+  {
+    "Name": "scrollbars",
+    "Pid": 3124,
+    "Log": "/mnt/data/avalonia-final/AvaloniaWeb/artifacts/validation-optimized/scrollbars-final.log"
+  }
+]

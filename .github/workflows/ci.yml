@@ -1,0 +1,58 @@
+name: Validate JavaScript port
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          package-manager-cache: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+      - run: npm run verify:vendor
+      - run: npm run test:record
+      - run: npm run build
+      - run: npm run verify:workers
+      - run: npm run pack:all
+      - run: node scripts/test-packages.mjs
+      - run: python -m pip install -r tests/requirements.txt
+      - run: python -m playwright install --with-deps chromium
+      - name: Browser test against an HTTP deployment
+        shell: bash
+        run: |
+          node scripts/serve.mjs --dist > artifacts/http-server.log 2>&1 &
+          server=$!
+          trap 'kill "$server" || true' EXIT
+          for attempt in {1..30}; do
+            curl --fail --silent http://127.0.0.1:4173/ > /dev/null && break
+            sleep 1
+          done
+          python tests/browser.py --dist --url http://127.0.0.1:4173/
+      - run: python tests/text-quality.py
+      - run: python tests/scrollbars.py
+      - run: python tests/scrollbars.py --scale 1.25
+      - run: python tests/automation-incremental.py
+      - run: python tests/worker-startup.py
+      - run: python tests/worker-startup.py --http
+      - run: python tests/threading-browser.py
+      - run: python tests/threading-integration.py
+      - run: python tests/threading-quality.py
+      - run: python tests/threading-catalog.py
+      - run: python tests/threading-performance.py
+      - run: python tests/invalidation-browser.py
+      - run: python tests/worker-performance-browser.py
+      - run: npm run verify:release
+      - run: npm run benchmark
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: verification
+          path: artifacts/

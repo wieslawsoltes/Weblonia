@@ -1,0 +1,5 @@
+
+> avaloniaweb-workspace@0.3.0-alpha.1 build
+> node scripts/build.mjs
+
+Compiled 75 XAML modules. Static distribution: dist/

@@ -1,0 +1,22 @@
+{
+  "Version": "0.6.0-alpha.1",
+  "BaselineVersion": "0.5.1-alpha.1",
+  "BaselineArchive": "AvaloniaWeb-0.5.1-alpha.1-source.zip",
+  "BaselineArchiveSha256": "8d40fa661635c6e9db4c80c37375f2f197aae25dc7909e9c191574ca03a5a997",
+  "BaselineManifestFiles": 1137,
+  "BaselineManifestMismatches": [],
+  "BaselineTests": {
+    "Passed": 345,
+    "Failed": 0,
+    "Log": "artifacts/history/threading-development/baseline-tests.log"
+  },
+  "BaselineLocalCommit": "4976f347e64d5b487973ed8d9282f323c366fe6a",
+  "RecoveredWithoutLoss": true,
+  "OriginalArchiveUnmodified": true,
+  "MissingSourceInvented": false,
+  "SourceChanges": "Implemented against the intact 0.5.1 archive; retained protocol and actual dedicated workers, explicit DOM/browser services, rebuilt static worker graphs, tests and packages.",
+  "SkiaVendorChanged": false,
+  "SkiaSourceRevision": "0a33427592e788d042ab69eedeb4bd7f29f35564",
+  "UpstreamRemoteWrites": false,
+  "FontBinariesRedistributed": false
+}

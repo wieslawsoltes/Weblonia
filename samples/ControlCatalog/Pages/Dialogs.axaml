@@ -1,0 +1,3 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Browser services" FontSize="17" FontWeight="SemiBold"/><StackPanel Orientation="Horizontal" Spacing="12"><Button x:Name="DialogButton" Content="Open modal window" Click="OpenDialog" Classes="accent"/><Button Content="Open a file" Click="OpenFile"/></StackPanel><TextBlock x:Name="DialogResult" Text="No dialog result yet." TextWrapping="Wrap"/></StackPanel></Border>
+</StackPanel>

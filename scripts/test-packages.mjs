@@ -1,0 +1,81 @@
+import { SourceFingerprint } from './source-fingerprint.mjs';
+import { readFile, mkdir, rm, writeFile } from 'node:fs/promises';
+import { gunzipSync } from 'node:zlib';
+import { spawnSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
+
+const root = fileURLToPath(new URL('../', import.meta.url));
+const fingerprint = SourceFingerprint(root);
+const input = path.join(root, 'artifacts/npm'), fixture = path.join(root, 'artifacts/package-consumer');
+const { Packages } = JSON.parse(await readFile(path.join(input, 'manifest.json'), 'utf8'));
+await rm(fixture, { recursive: true, force: true });
+await mkdir(fixture, { recursive: true });
+// Minimal safe tar reader for npm's regular-file package archives. No external tar dependency.
+for (const item of Packages) {
+    const tar = gunzipSync(await readFile(path.join(input, item.File)));
+    for (let offset = 0; offset + 512 <= tar.length;) {
+        const header = tar.subarray(offset, offset + 512);
+        if (header.every(x => x === 0)) break;
+        const text = (a, n) => header.subarray(a, a + n).toString('utf8').replace(/\0.*$/s, '');
+        const name = text(0, 100), prefix = text(345, 155), type = text(156, 1);
+        const size = parseInt(text(124, 12).trim() || '0', 8);
+        if (!Number.isSafeInteger(size) || size < 0 || offset + 512 + size > tar.length) throw new Error('Invalid tar size');
+        const relative = (prefix ? prefix + '/' : '') + name;
+        if (type === '0' || type === '') {
+            if (!relative.startsWith('package/') || relative.split('/').includes('..') || relative.includes('\\')) throw new Error('Unsafe archive path');
+            const file = path.join(fixture, 'node_modules', item.Name, relative.slice(8));
+            await mkdir(path.dirname(file), { recursive: true });
+            await writeFile(file, tar.subarray(offset + 512, offset + 512 + size));
+        } else if (!['5', 'x', 'g'].includes(type)) throw new Error(`Unsupported tar entry type: ${type}`);
+        offset += 512 + Math.ceil(size / 512) * 512;
+    }
+}
+await writeFile(path.join(fixture, 'package.json'), '{"private":true,"type":"module"}\n');
+const vendor = new URL('../vendor/', import.meta.url);
+const mappings = {
+    rxjs: new URL('rxjs.js', vendor).href,
+    'rxjs/operators': new URL('rxjs.js', vendor).href,
+    '@wieslawsoltes/reactiveweb': new URL('reactiveweb.browser.js', vendor).href,
+    '@wieslawsoltes/skiasharpweb/browser-text': new URL('skiasharpweb/dist/lib/browser-text.js', vendor).href,
+    '@wieslawsoltes/skiasharpweb/browser': new URL('skiasharpweb/dist/package/browser.js', vendor).href,
+    '@wieslawsoltes/skiasharpweb': new URL('skiasharpweb/dist/package/node.js', vendor).href
+};
+await writeFile(path.join(fixture, 'vendor-loader.mjs'), `const map=${JSON.stringify(mappings)}; export async function resolve(s,c,n){return map[s]?{url:map[s],shortCircuit:true}:n(s,c);}`);
+await writeFile(path.join(fixture, 'register.mjs'), `import{register}from'node:module';register('./vendor-loader.mjs',import.meta.url);`);
+await writeFile(path.join(fixture, 'consumer.mjs'), `
+import assert from 'node:assert/strict';
+import * as A from '@wieslawsoltes/avalonia';
+import { ReactiveObject } from '@wieslawsoltes/reactiveweb';
+import { AvaloniaXamlCompiler } from '@wieslawsoltes/avalonia-markup-xaml';
+const names=${JSON.stringify(Packages.map(p=>p.Name))};
+for (const name of names) assert.ok(Object.keys(await import(name)).length > 0, name);
+const model=new ReactiveObject({Text:'Packed modules'});
+const view=new A.StackPanel(); view.DataContext=model;
+const label=new A.TextBlock(); view.Children.Add(label);
+label.Bind(A.TextBlock.TextProperty,new A.Binding('Text'));
+assert.equal(label.Text,'Packed modules'); model.Text='Changed'; assert.equal(label.Text,'Changed');
+const compiled=new AvaloniaXamlCompiler().Compile('<TextBlock xmlns="https://github.com/avaloniaui" Text="Packed XAML"/>');
+const xaml=compiled.Build(); assert.equal(xaml.Text,'Packed XAML');
+view.Dispose(); xaml.Dispose();
+const {HeadlessTopLevel}=await import('@wieslawsoltes/avalonia-headless');
+const scroller=new A.ScrollViewer();scroller.Content=Object.assign(new A.Border(),{Width:1200,Height:2400});scroller.HorizontalScrollBarVisibility='Auto';
+const host=new HeadlessTopLevel(new A.Size(400,240));host.Content=scroller;host.Layout();assert(scroller.VerticalScrollBar instanceof A.TemplatedControl);
+scroller.VerticalScrollBar.Value=500;host.Layout();assert.equal(scroller.Offset.Y,500);host.Dispose();
+
+const packet=A.EncodeCompositionBatch({Message:'Packed transport',Bytes:new Uint8Array([1,2,3])});
+assert.equal(A.DecodeCompositionBatch(packet.Buffer,packet.ByteLength).Value.Message,'Packed transport');
+assert.equal(A.BrowserThreadingMode.FullIsolation,'full-isolation');
+const {readFile}=await import('node:fs/promises');
+const worker=new URL('../worker-assets/render.js',import.meta.resolve('@wieslawsoltes/avalonia-browser'));
+assert.match(await readFile(worker,'utf8'),/render-worker/);
+console.log(JSON.stringify({Passed:true,Packages:names.length,FacadeExports:Object.keys(A).length,PublicRegistryInstalled:false}));
+`);
+const run = spawnSync(process.execPath, ['--import', './register.mjs', 'consumer.mjs'], { cwd: fixture, encoding: 'utf8' });
+if (run.status !== 0) throw new Error(`${run.stdout}\n${run.stderr}`);
+const report = JSON.parse(run.stdout.trim());
+Object.assign(report,{Version:Packages[0].Version,SourceFingerprint:fingerprint,FinalSourceFingerprint:SourceFingerprint(root)});
+if(report.SourceFingerprint!==report.FinalSourceFingerprint)throw new Error('Source changed during package qualification');
+await writeFile(path.join(root, 'artifacts/package-consumer-result.json'), JSON.stringify(report, null, 2) + '\n');
+console.log(report);
+await rm(fixture, { recursive: true, force: true });

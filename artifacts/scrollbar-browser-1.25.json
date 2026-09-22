@@ -1,0 +1,175 @@
+{
+  "version": "0.6.2-alpha.1",
+  "deviceScale": 1.25,
+  "mode": "local-asset-interception",
+  "hardwareQualified": false,
+  "completed": true,
+  "startedAt": "2026-09-21T19:52:12.592348+00:00",
+  "tests": [
+    {
+      "name": "ScrollViewer thumb receives actual mouse drag without selecting or clicking content",
+      "passed": true,
+      "milliseconds": 386.9
+    },
+    {
+      "name": "ListBox thumb receives actual mouse drag without selecting or clicking content",
+      "passed": true,
+      "milliseconds": 458.9
+    },
+    {
+      "name": "TreeView thumb receives actual mouse drag without selecting or clicking content",
+      "passed": true,
+      "milliseconds": 359.9
+    },
+    {
+      "name": "TableView thumb receives actual mouse drag without selecting or clicking content",
+      "passed": true,
+      "milliseconds": 472.4
+    },
+    {
+      "name": "TextBox thumb receives actual mouse drag without selecting or clicking content",
+      "passed": true,
+      "milliseconds": 660.5
+    },
+    {
+      "name": "ScrollViewer horizontal thumb pans content and retains header/editor state",
+      "passed": true,
+      "milliseconds": 343.4
+    },
+    {
+      "name": "ListBox horizontal thumb pans content and retains header/editor state",
+      "passed": true,
+      "milliseconds": 370.2
+    },
+    {
+      "name": "TableView horizontal thumb pans content and retains header/editor state",
+      "passed": true,
+      "milliseconds": 362.2
+    },
+    {
+      "name": "TextBox horizontal thumb pans content and retains header/editor state",
+      "passed": true,
+      "milliseconds": 613.2
+    },
+    {
+      "name": "capture continues outside viewport and releases at the maximum",
+      "passed": true,
+      "milliseconds": 355.1
+    },
+    {
+      "name": "track click advances one viewport instead of teleporting the thumb",
+      "passed": true,
+      "milliseconds": 180.9
+    },
+    {
+      "name": "deferred drag previews only the thumb and commits on release",
+      "passed": true,
+      "milliseconds": 431.5
+    },
+    {
+      "name": "DOM wheel pixels and Shift-wheel horizontal scrolling retain exact deltas",
+      "passed": true,
+      "milliseconds": 342.6
+    },
+    {
+      "name": "wheel over either scrollbar uses the same pixel units as its content",
+      "passed": true,
+      "milliseconds": 363.7
+    },
+    {
+      "name": "mouse scrollbar focus and accessibility range keyboard commands scroll the host",
+      "passed": true,
+      "milliseconds": 392.1
+    },
+    {
+      "name": "Hidden still scrolls while Disabled rejects wheel input and clears offset",
+      "passed": true,
+      "milliseconds": 439.7
+    },
+    {
+      "name": "editor content shrink clamps offsets and removes obsolete tracks",
+      "passed": true,
+      "milliseconds": 736.9
+    },
+    {
+      "name": "disabling the scroll host during drag releases capture safely",
+      "passed": true,
+      "milliseconds": 481.1
+    },
+    {
+      "name": "compact overlay thumb stays interactive above a full-size Button",
+      "passed": true,
+      "milliseconds": 408.0
+    },
+    {
+      "name": "browser accessibility projection exposes a live scrollbar range",
+      "passed": true,
+      "milliseconds": 202.3
+    }
+  ],
+  "pageErrors": [],
+  "missingAssets": [],
+  "sourceFingerprint": "93c095505d6ae58d74e38e68e6296edf5f0ee81ed427f9d3042d26314d241cab",
+  "browser": "144.0.7559.96",
+  "backend": "canvas",
+  "passed": 20,
+  "failed": 0,
+  "wheelEvidence": [
+    {
+      "requested": [
+        0,
+        83
+      ],
+      "deliveredCss": {
+        "mode": 0,
+        "x": 0,
+        "y": 66.4
+      }
+    },
+    {
+      "requested": [
+        0,
+        61
+      ],
+      "deliveredCss": {
+        "mode": 0,
+        "x": 0,
+        "y": 48.8
+      }
+    },
+    {
+      "requested": [
+        0,
+        71
+      ],
+      "deliveredCss": {
+        "mode": 0,
+        "x": 0,
+        "y": 56.8
+      }
+    },
+    {
+      "requested": [
+        0,
+        51
+      ],
+      "deliveredCss": {
+        "mode": 0,
+        "x": 0,
+        "y": 40.8
+      }
+    },
+    {
+      "requested": [
+        0,
+        80
+      ],
+      "deliveredCss": {
+        "mode": 0,
+        "x": 0,
+        "y": 64
+      }
+    }
+  ],
+  "finalSourceFingerprint": "93c095505d6ae58d74e38e68e6296edf5f0ee81ed427f9d3042d26314d241cab"
+}

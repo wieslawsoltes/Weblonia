@@ -1,0 +1,9 @@
+PASS automatic backend selection render-worker
+PASS automatic backend selection full-isolation
+{
+  "Passed": 2,
+  "Failed": 0,
+  "Errors": [],
+  "MissingAssets": [],
+  "BlockedByBrowserPolicy": false
+}

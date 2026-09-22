@@ -1,0 +1,13 @@
+
+> avaloniaweb-workspace@0.6.1-alpha.1 verify:release
+> node scripts/verify-release.mjs
+
+file:///mnt/data/worker-fix/AvaloniaWeb/scripts/verify-release.mjs:13
+const require = (condition, message) => { if (!condition) throw new Error(message); };
+                                                                ^
+
+Error: CI must qualify ordinary HTTP worker startup without interception
+    at require (file:///mnt/data/worker-fix/AvaloniaWeb/scripts/verify-release.mjs:13:65)
+    at file:///mnt/data/worker-fix/AvaloniaWeb/scripts/verify-release.mjs:65:28
+
+Node.js v22.16.0

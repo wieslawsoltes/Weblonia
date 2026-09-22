@@ -1,0 +1,8 @@
+
+> @wieslawsoltes/skiasharpweb@0.5.0 test:package
+> node scripts/verify-package.mjs
+
+Built @wieslawsoltes/skiasharpweb@0.5.0: 106 runtime/type/notice files, native hashes verified, no fonts.
+{"package":"wieslawsoltes-skiasharpweb-0.5.0.tgz","files":120,"bytes":5202817,"sha256":"aba26cede486bd8f1f925f41b7880dbcabe2bd530b95a1ec8630c10af98d0886"}
+Clean installed ESM/CJS consumers: native drawing, PNG, PDF, exports, initialization and cancellation passed.
+Copied native assets to /tmp/skia consumer ZKKUTZ/public/skia

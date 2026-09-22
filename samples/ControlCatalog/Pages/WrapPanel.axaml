@@ -1,0 +1,3 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Flow layout" FontSize="17" FontWeight="SemiBold"/><WrapPanel x:Name="Wrap" ItemWidth="155" ItemHeight="54"/></StackPanel></Border>
+</StackPanel>

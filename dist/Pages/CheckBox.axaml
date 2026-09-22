@@ -1,0 +1,3 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Check states" FontSize="17" FontWeight="SemiBold"/><CheckBox x:Name="Check" Content="Two-way checked state" IsChecked="{Binding Checked,Mode=TwoWay}"/><CheckBox Content="Three-state option" IsThreeState="True"/><CheckBox Content="Disabled option" IsEnabled="False" IsChecked="True"/><TextBlock Text="{Binding Checked,StringFormat='Model: {0}'}"/></StackPanel></Border>
+</StackPanel>

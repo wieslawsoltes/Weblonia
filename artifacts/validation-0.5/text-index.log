@@ -1,0 +1,310 @@
+TAP version 13
+# Subtest: ScrollBar derives from RangeBase rather than inheriting reversed Slider behavior
+ok 1 - ScrollBar derives from RangeBase rather than inheriting reversed Slider behavior
+  ---
+  duration_ms: 3.932348
+  type: 'test'
+  ...
+# Subtest: ScrollBar Vertical: proportional drag without jump and release event
+ok 2 - ScrollBar Vertical: proportional drag without jump and release event
+  ---
+  duration_ms: 13.150832
+  type: 'test'
+  ...
+# Subtest: ScrollBar Horizontal: proportional drag without jump and release event
+ok 3 - ScrollBar Horizontal: proportional drag without jump and release event
+  ---
+  duration_ms: 2.69895
+  type: 'test'
+  ...
+# Subtest: ScrollBar tiny viewport bounds never create oversized thumbs or divide by zero
+ok 4 - ScrollBar tiny viewport bounds never create oversized thumbs or divide by zero
+  ---
+  duration_ms: 2.242923
+  type: 'test'
+  ...
+# Subtest: ScrollBar reverse direction is geometry-consistent and keyboard increments follow its orientation
+ok 5 - ScrollBar reverse direction is geometry-consistent and keyboard increments follow its orientation
+  ---
+  duration_ms: 4.52889
+  type: 'test'
+  ...
+# Subtest: ScrollBar track press pages rather than jumps and releases repeat timers
+ok 6 - ScrollBar track press pages rather than jumps and releases repeat timers
+  ---
+  duration_ms: 2.746364
+  type: 'test'
+  ...
+# Subtest: ScrollBar page-repeat progresses while held and stops on capture loss
+ok 7 - ScrollBar page-repeat progresses while held and stops on capture loss
+  ---
+  duration_ms: 86.326914
+  type: 'test'
+  ...
+# Subtest: ScrollBar ignores right clicks and additional pointers during a drag
+ok 8 - ScrollBar ignores right clicks and additional pointers during a drag
+  ---
+  duration_ms: 1.774583
+  type: 'test'
+  ...
+# Subtest: ScrollBar visibility, zero range and explicit values remain coherent
+ok 9 - ScrollBar visibility, zero range and explicit values remain coherent
+  ---
+  duration_ms: 3.578504
+  type: 'test'
+  ...
+# Subtest: ScrollViewer scrollbar hits win over a child Button occupying the complete content
+ok 10 - ScrollViewer scrollbar hits win over a child Button occupying the complete content
+  ---
+  duration_ms: 16.662266
+  type: 'test'
+  ...
+# Subtest: ScrollViewer horizontal and vertical thumbs can independently reach both ends
+ok 11 - ScrollViewer horizontal and vertical thumbs can independently reach both ends
+  ---
+  duration_ms: 9.653117
+  type: 'test'
+  ...
+# Subtest: ScrollViewer deferred scrolling previews the thumb without moving content until release
+ok 12 - ScrollViewer deferred scrolling previews the thumb without moving content until release
+  ---
+  duration_ms: 8.877948
+  type: 'test'
+  ...
+# Subtest: ScrollViewer Hidden permits scrolling but Disabled does not
+ok 13 - ScrollViewer Hidden permits scrolling but Disabled does not
+  ---
+  duration_ms: 23.689262
+  type: 'test'
+  ...
+# Subtest: non-overlay ScrollViewer tracks reserve space and solve cross-axis overflow
+ok 14 - non-overlay ScrollViewer tracks reserve space and solve cross-axis overflow
+  ---
+  duration_ms: 8.142008
+  type: 'test'
+  ...
+# Subtest: ScrollViewer viewport clip prevents content hits and rendering in reserved chrome
+ok 15 - ScrollViewer viewport clip prevents content hits and rendering in reserved chrome
+  ---
+  duration_ms: 11.625533
+  type: 'test'
+  ...
+# Subtest: ScrollViewer resize and content replacement clamp stale offsets and notify extent deltas
+ok 16 - ScrollViewer resize and content replacement clamp stale offsets and notify extent deltas
+  ---
+  duration_ms: 8.671755
+  type: 'test'
+  ...
+# Subtest: ScrollViewer BringIntoView handles both axes, padding and partially visible large targets
+ok 17 - ScrollViewer BringIntoView handles both axes, padding and partially visible large targets
+  ---
+  duration_ms: 10.261957
+  type: 'test'
+  ...
+# Subtest: wheel deltaMode=0 respects CSS pixels, lines or viewport pages
+ok 18 - wheel deltaMode=0 respects CSS pixels, lines or viewport pages
+  ---
+  duration_ms: 9.468304
+  type: 'test'
+  ...
+# Subtest: wheel deltaMode=1 respects CSS pixels, lines or viewport pages
+ok 19 - wheel deltaMode=1 respects CSS pixels, lines or viewport pages
+  ---
+  duration_ms: 6.466484
+  type: 'test'
+  ...
+# Subtest: wheel deltaMode=2 respects CSS pixels, lines or viewport pages
+ok 20 - wheel deltaMode=2 respects CSS pixels, lines or viewport pages
+  ---
+  duration_ms: 6.842454
+  type: 'test'
+  ...
+# Subtest: Shift-wheel scrolls horizontally and disabled chaining consumes boundary input
+ok 21 - Shift-wheel scrolls horizontally and disabled chaining consumes boundary input
+  ---
+  duration_ms: 6.966109
+  type: 'test'
+  ...
+# Subtest: ListBox has an interactive scrollbar without changing selection
+ok 22 - ListBox has an interactive scrollbar without changing selection
+  ---
+  duration_ms: 55.700435
+  type: 'test'
+  ...
+# Subtest: TreeView has an interactive scrollbar without changing selection
+ok 23 - TreeView has an interactive scrollbar without changing selection
+  ---
+  duration_ms: 66.054571
+  type: 'test'
+  ...
+# Subtest: ListBox recycles row controls rather than allocating new containers on every scroll
+ok 24 - ListBox recycles row controls rather than allocating new containers on every scroll
+  ---
+  duration_ms: 628.929794
+  type: 'test'
+  ...
+# Subtest: ListBox horizontal chrome pans wide items without scrolling or selecting rows
+ok 25 - ListBox horizontal chrome pans wide items without scrolling or selecting rows
+  ---
+  duration_ms: 12.182151
+  type: 'test'
+  ...
+# Subtest: TableView both-axis scrollbars exclude headers and preserve header alignment
+ok 26 - TableView both-axis scrollbars exclude headers and preserve header alignment
+  ---
+  duration_ms: 74.034953
+  type: 'test'
+  ...
+# Subtest: multiline TextBox supports vertical drag, wheel, and horizontal pan without changing text or selection
+ok 27 - multiline TextBox supports vertical drag, wheel, and horizontal pan without changing text or selection
+  ---
+  duration_ms: 10.280157
+  type: 'test'
+  ...
+# Subtest: wrapped TextBox disables horizontal chrome and remaps viewport when resizing
+ok 28 - wrapped TextBox disables horizontal chrome and remaps viewport when resizing
+  ---
+  duration_ms: 23.429822
+  type: 'test'
+  ...
+# Subtest: TextBox measurement layouts are retained and disposed with their owner
+ok 29 - TextBox measurement layouts are retained and disposed with their owner
+  ---
+  duration_ms: 14.160335
+  type: 'test'
+  ...
+# Subtest: scroll chrome still works with runtime XAML attached scrollbar options
+ok 30 - scroll chrome still works with runtime XAML attached scrollbar options
+  ---
+  duration_ms: 12.948193
+  type: 'test'
+  ...
+# Subtest: repeated TextBlock rendering retains the same layout without measuring
+ok 31 - repeated TextBlock rendering retains the same layout without measuring
+  ---
+  duration_ms: 13.510813
+  type: 'test'
+  ...
+# Subtest: TextBlock invalidates retained layout for shaping properties, width and inline changes
+ok 32 - TextBlock invalidates retained layout for shaping properties, width and inline changes
+  ---
+  duration_ms: 6.427575
+  type: 'test'
+  ...
+# Subtest: in-place foreground brush changes invalidate native descriptor snapshots
+ok 33 - in-place foreground brush changes invalidate native descriptor snapshots
+  ---
+  duration_ms: 1.136853
+  type: 'test'
+  ...
+# Subtest: text service generations invalidate retained layouts after font changes
+ok 34 - text service generations invalidate retained layouts after font changes
+  ---
+  duration_ms: 0.573162
+  type: 'test'
+  ...
+# Subtest: Control.DrawText retains bounded label layouts and respects mutable brush colors
+ok 35 - Control.DrawText retains bounded label layouts and respects mutable brush colors
+  ---
+  duration_ms: 2.180172
+  type: 'test'
+  ...
+# Subtest: text editor does not rebuild layout on caret or selection changes
+ok 36 - text editor does not rebuild layout on caret or selection changes
+  ---
+  duration_ms: 9.92506
+  type: 'test'
+  ...
+# Subtest: password layout reuse refreshes the logical mapping when equal-length masks hide different clusters
+ok 37 - password layout reuse refreshes the logical mapping when equal-length masks hide different clusters
+  ---
+  duration_ms: 4.677565
+  type: 'test'
+  ...
+# Subtest: grapheme cache is immutable, bounded, and does not expose text in diagnostics
+ok 38 - grapheme cache is immutable, bounded, and does not expose text in diagnostics
+  ---
+  duration_ms: 6.849321
+  type: 'test'
+  ...
+# Subtest: fallback caret hit testing uses logarithmic prefix measurements and reuses them
+ok 39 - fallback caret hit testing uses logarithmic prefix measurements and reuses them
+  ---
+  duration_ms: 96.91032
+  type: 'test'
+  ...
+# Subtest: negative letter spacing retains a non-monotonic fallback hit-test path
+ok 40 - negative letter spacing retains a non-monotonic fallback hit-test path
+  ---
+  duration_ms: 0.986295
+  type: 'test'
+  ...
+# Subtest: provider registrations restore the previous provider after out-of-order disposal
+ok 41 - provider registrations restore the previous provider after out-of-order disposal
+  ---
+  duration_ms: 0.298576
+  type: 'test'
+  ...
+# Subtest: font stretch and letter spacing survive XAML property conversion
+ok 42 - font stretch and letter spacing survive XAML property conversion
+  ---
+  duration_ms: 7.215861
+  type: 'test'
+  ...
+# Subtest: text raster plan includes italic overhang and unusually tall combining-mark ink
+ok 43 - text raster plan includes italic overhang and unusually tall combining-mark ink
+  ---
+  duration_ms: 0.581979
+  type: 'test'
+  ...
+# Subtest: text tiles cover large lines exactly without requiring an oversized canvas
+ok 44 - text tiles cover large lines exactly without requiring an oversized canvas
+  ---
+  duration_ms: 0.744138
+  type: 'test'
+  ...
+# Subtest: device-phase raster destinations land on the original physical pixel grid
+ok 45 - device-phase raster destinations land on the original physical pixel grid
+  ---
+  duration_ms: 0.474599
+  type: 'test'
+  ...
+# Subtest: rotated or sheared text uses the largest affine stretch rather than device DPR alone
+ok 46 - rotated or sheared text uses the largest affine stretch rather than device DPR alone
+  ---
+  duration_ms: 0.194971
+  type: 'test'
+  ...
+# Subtest: invalid raster sizes fail explicitly before allocation
+ok 47 - invalid raster sizes fail explicitly before allocation
+  ---
+  duration_ms: 0.204766
+  type: 'test'
+  ...
+# Subtest: wide fallback paragraph wrapping searches break candidates instead of every prefix
+ok 48 - wide fallback paragraph wrapping searches break candidates instead of every prefix
+  ---
+  duration_ms: 127.763376
+  type: 'test'
+  ...
+# Subtest: fallback ellipsis binary search never splits a grapheme and avoids a quadratic scan
+ok 49 - fallback ellipsis binary search never splits a grapheme and avoids a quadratic scan
+  ---
+  duration_ms: 20.272332
+  type: 'test'
+  ...
+# Subtest: WrapWithOverflow preserves an unbreakable word while Wrap can split it
+ok 50 - WrapWithOverflow preserves an unbreakable word while Wrap can split it
+  ---
+  duration_ms: 0.753181
+  type: 'test'
+  ...
+1..50
+# tests 50
+# suites 0
+# pass 50
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2349.179009

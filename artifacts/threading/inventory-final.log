@@ -1,0 +1,5 @@
+
+> avaloniaweb-workspace@0.6.0-alpha.1 inventory
+> node scripts/inventory.mjs
+
+Inventoried 18 packages.

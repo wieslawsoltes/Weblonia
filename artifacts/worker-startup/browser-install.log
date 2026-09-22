@@ -1,0 +1,56 @@
+Downloading Chromium 143.0.7499.4 (playwright build v1200) from https://cdn.playwright.dev/dbazure/download/playwright/builds/chromium/1200/chromium-linux.zip
+(node:1627) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Error: getaddrinfo EAI_AGAIN cdn.playwright.dev
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:internal/dns/promises:101:17) {
+  errno: -3001,
+  code: 'EAI_AGAIN',
+  syscall: 'getaddrinfo',
+  hostname: 'cdn.playwright.dev'
+}
+Downloading Chromium 143.0.7499.4 (playwright build v1200) from https://playwright.download.prss.microsoft.com/dbazure/download/playwright/builds/chromium/1200/chromium-linux.zip
+(node:1638) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Error: getaddrinfo EAI_AGAIN playwright.download.prss.microsoft.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:internal/dns/promises:101:17) {
+  errno: -3001,
+  code: 'EAI_AGAIN',
+  syscall: 'getaddrinfo',
+  hostname: 'playwright.download.prss.microsoft.com'
+}
+Downloading Chromium 143.0.7499.4 (playwright build v1200) from https://cdn.playwright.dev/builds/chromium/1200/chromium-linux.zip
+(node:1649) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Error: getaddrinfo EAI_AGAIN cdn.playwright.dev
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:internal/dns/promises:101:17) {
+  errno: -3001,
+  code: 'EAI_AGAIN',
+  syscall: 'getaddrinfo',
+  hostname: 'cdn.playwright.dev'
+}
+Downloading Chromium 143.0.7499.4 (playwright build v1200) from https://cdn.playwright.dev/dbazure/download/playwright/builds/chromium/1200/chromium-linux.zip
+(node:1660) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Error: getaddrinfo EAI_AGAIN cdn.playwright.dev
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:internal/dns/promises:101:17) {
+  errno: -3001,
+  code: 'EAI_AGAIN',
+  syscall: 'getaddrinfo',
+  hostname: 'cdn.playwright.dev'
+}
+Downloading Chromium 143.0.7499.4 (playwright build v1200) from https://playwright.download.prss.microsoft.com/dbazure/download/playwright/builds/chromium/1200/chromium-linux.zip
+(node:1671) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Error: getaddrinfo EAI_AGAIN playwright.download.prss.microsoft.com
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:internal/dns/promises:101:17) {
+  errno: -3001,
+  code: 'EAI_AGAIN',
+  syscall: 'getaddrinfo',
+  hostname: 'playwright.download.prss.microsoft.com'
+}
+Failed to install browsers
+Error: Failed to download Chromium 143.0.7499.4 (playwright build v1200), caused by
+Error: Download failure, code=1
+    at ChildProcess.<anonymous> (/opt/pyvenv/lib/python3.13/site-packages/playwright/driver/package/lib/server/registry/browserFetcher.js:94:32)
+    at ChildProcess.emit (node:events:508:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:294:12)

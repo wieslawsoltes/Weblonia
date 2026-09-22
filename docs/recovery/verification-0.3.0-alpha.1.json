@@ -1,0 +1,180 @@
+{
+  "Version": "0.3.0-alpha.1",
+  "GeneratedAt": "2026-09-20T23:01:07.661647+00:00",
+  "FullAvaloniaParity": false,
+  "FullXamlXParity": false,
+  "FullUpstreamClonesIncluded": false,
+  "OriginalCatalogSubexamplesFullyPorted": false,
+  "Recovery": {
+    "RecoveredArchive": "AvaloniaWeb-0.2.0-alpha.1-source.zip",
+    "ArchiveSha256": "b00330e60a45fd229a90cee7d437ae6e5af643646bfadd13c6c92c08dbb6e7ca",
+    "ManifestEntries": 882,
+    "Mismatches": [],
+    "FontFiles": [],
+    "LaterSourceAvailable": false,
+    "LaterFilesAvailable": [
+      "overview-light.png",
+      "typography-light.png"
+    ],
+    "RecoveryMethod": "Verified mounted 0.2.0-alpha.1 source; kept original archive and extracted baseline unchanged. Later text-performance source archive was not mounted."
+  },
+  "WorkspacePackages": 17,
+  "FacadeExports": 464,
+  "LibraryJavaScriptFiles": 54,
+  "LibraryJavaScriptLines": 14569,
+  "AotXamlModules": 75,
+  "CatalogRoutes": 74,
+  "NodeTests": {
+    "Passed": 242,
+    "Failed": 0,
+    "Skipped": 0
+  },
+  "BrowserTests": {
+    "passed": 105,
+    "failed": 0,
+    "skipped": 3,
+    "completed": true,
+    "mode": "local-asset-interception",
+    "browser": "144.0.7559.96",
+    "backend": "canvas",
+    "catalogSweepSkipped": false,
+    "webGL2Available": false,
+    "pageErrors": [],
+    "missingAssets": [],
+    "elapsedSeconds": 31.56
+  },
+  "TextQualityTests": {
+    "Passed": 19,
+    "Failed": 0,
+    "PixelComparisons": 17,
+    "MaximumChannelError": 1,
+    "Tolerance": 2,
+    "PageErrors": [],
+    "MissingAssets": [],
+    "WarmRedraw": {
+      "Name": "1000 warm TextBlock redraws do not build layouts, rasterize, upload or measure",
+      "Passed": true,
+      "Redraws": 1000,
+      "Milliseconds": 709.9000000001397,
+      "WorkDelta": {
+        "TextRasterizations": 0,
+        "TextUploads": 0,
+        "TextMeasurements": 0,
+        "TextLayouts": 0
+      }
+    }
+  },
+  "SoftwareWebGLFocusedTests": {
+    "Passed": 31,
+    "Failed": 0,
+    "Skipped": 3,
+    "Completed": true,
+    "WebGL2Available": false,
+    "Note": "Focused repeated checks are not added to the primary count."
+  },
+  "PackedPackageConsumer": {
+    "Passed": true,
+    "Packages": 17,
+    "FacadeExports": 464,
+    "PublicRegistryInstalled": false
+  },
+  "HttpSmoke": {
+    "Url": "http://127.0.0.1:54979/",
+    "Mode": "ordinary-http-navigation",
+    "Passed": false,
+    "PolicyChanged": false,
+    "PageErrors": [],
+    "HttpStatus": 200,
+    "ContentType": "text/html; charset=utf-8",
+    "Error": "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:54979/\nCall log:\n  - navigating to \"http://127.0.0.1:54979/\", waiting until \"load\"\n",
+    "BlockedByBrowserPolicy": true
+  },
+  "PerformanceComparison": {
+    "BaselineVersion": "0.2.0-alpha.1",
+    "CurrentVersion": "0.3.0-alpha.1",
+    "Scope": "Single-process JavaScript microbenchmarks with a counting fixed-width metrics provider; not end-to-end UI/GPU frame rate",
+    "Environment": {
+      "Node": "v22.16.0",
+      "Architecture": "x64",
+      "Platform": "linux",
+      "Cpu": "INTEL(R) XEON(R) PLATINUM 8573C"
+    },
+    "Results": [
+      {
+        "Name": "5000 unchanged TextBlock renders",
+        "BaselineMedianMilliseconds": 14.411960000000022,
+        "CurrentMedianMilliseconds": 2.508666000000005,
+        "BaselineOperations": {
+          "Iterations": 5000,
+          "Measurements": 5000,
+          "Layouts": 5000
+        },
+        "CurrentOperations": {
+          "Iterations": 5000,
+          "Measurements": 0,
+          "Layouts": 0
+        }
+      },
+      {
+        "Name": "100 repeated caret hit tests on a 5000-character line",
+        "BaselineMedianMilliseconds": 200.96801000000005,
+        "CurrentMedianMilliseconds": 0.198237000000006,
+        "BaselineOperations": {
+          "Iterations": 100,
+          "Measurements": 500100,
+          "FirstHitMeasurements": 5001
+        },
+        "CurrentOperations": {
+          "Iterations": 100,
+          "Measurements": 0,
+          "FirstHitMeasurements": 12
+        }
+      },
+      {
+        "Name": "20 wrapped layouts of a 10000-character line",
+        "BaselineMedianMilliseconds": 82.05703300000027,
+        "CurrentMedianMilliseconds": 5.195186999999976,
+        "BaselineOperations": {
+          "Iterations": 20,
+          "Measurements": 200020
+        },
+        "CurrentOperations": {
+          "Iterations": 20,
+          "Measurements": 800
+        }
+      },
+      {
+        "Name": "5000 nested compiled-binding leaf updates",
+        "BaselineMedianMilliseconds": 15.114774000000125,
+        "CurrentMedianMilliseconds": 8.564282999999989,
+        "BaselineOperations": {
+          "Iterations": 5000,
+          "AncestorReads": 5000,
+          "NewSubscriptions": 10000
+        },
+        "CurrentOperations": {
+          "Iterations": 5000,
+          "AncestorReads": 0,
+          "NewSubscriptions": 0
+        }
+      }
+    ]
+  },
+  "FontFilesDistributed": 0,
+  "PhysicalGpuQualified": false,
+  "RemoteGitHubChanges": false,
+  "NpmPublished": false,
+  "PublicDeployment": false,
+  "Warnings": [
+    "All upstream API/template/compiler, original catalog, text/IME/accessibility and compositor parity remains incomplete.",
+    "The initial final browser attempt exceeded the command timeout. Its log is preserved, is not counted as passing, and the fresh full rerun completed successfully.",
+    "Ordinary HTTP top-level browser navigation was blocked by administrator policy; local-asset test success is not deployment qualification."
+  ],
+  "Reports": {
+    "Node": "artifacts/unit-tests.tap",
+    "Browser": "artifacts/browser-results.json",
+    "TextQuality": "artifacts/text-quality-results.json",
+    "Packages": "artifacts/package-consumer-result.json",
+    "Performance": "artifacts/performance-comparison.json"
+  }
+}

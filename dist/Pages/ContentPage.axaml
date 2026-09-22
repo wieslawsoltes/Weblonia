@@ -1,0 +1,3 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Content page" FontSize="17" FontWeight="SemiBold"/><ContentPage><Border Background="{DynamicResource SystemSelectionBrush}" Padding="40" CornerRadius="8"><StackPanel Spacing="12"><TextBlock Text="A page is a content host." FontSize="24"/><TextBlock Text="Page content participates in the same visual and logical trees." TextWrapping="Wrap"/></StackPanel></Border></ContentPage></StackPanel></Border>
+</StackPanel>

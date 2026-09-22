@@ -1,0 +1,3 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Commands" FontSize="17" FontWeight="SemiBold"/><CommandBar x:Name="MenuHost" Height="42"/><TextBlock x:Name="MenuStatus" Text="Open File or Edit." Classes="muted"/></StackPanel></Border>
+</StackPanel>

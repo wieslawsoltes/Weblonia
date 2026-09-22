@@ -1,0 +1,53 @@
+{
+  "Version": "0.5.0-alpha.1",
+  "BaselineArchive": "AvaloniaWeb-0.4.0-alpha.1-source.zip",
+  "BaselineArchiveSha256": "e57f291c8d4f30918642e32e673c358f3a04619db0b43cb062a967e59baac63a",
+  "PatchSha256": "35183c2d6f908ea1916054f03553b2c09b1058c2ab0b1816ad8d3a867c24c56a",
+  "AppliedCleanly": true,
+  "SourceFingerprint": "a62e548d681fbe72ee2193c615fb49b1521604691614f62acb3b797e2233d70c",
+  "MatchesQualifiedSource": true,
+  "Commands": [
+    {
+      "Command": [
+        "git",
+        "apply",
+        "--check",
+        "/mnt/data/AvaloniaWeb-0.5.0-alpha.1-continuation.patch"
+      ],
+      "ExitCode": 0,
+      "Stdout": "",
+      "Stderr": ""
+    },
+    {
+      "Command": [
+        "git",
+        "apply",
+        "/mnt/data/AvaloniaWeb-0.5.0-alpha.1-continuation.patch"
+      ],
+      "ExitCode": 0,
+      "Stdout": "",
+      "Stderr": ""
+    },
+    {
+      "Command": [
+        "npm",
+        "run",
+        "verify:vendor"
+      ],
+      "ExitCode": 0,
+      "Stdout": "\n> avaloniaweb-workspace@0.5.0-alpha.1 verify:vendor\n> node scripts/verify-vendor.mjs\n\n{\"Passed\":true,\"Files\":121,\"SkiaSharpWebCommit\":\"0a33427592e788d042ab69eedeb4bd7f29f35564\"}\n",
+      "Stderr": ""
+    },
+    {
+      "Command": [
+        "node",
+        "--input-type=module",
+        "-e",
+        "import{SourceFingerprint}from\"./scripts/source-fingerprint.mjs\"; console.log(SourceFingerprint());"
+      ],
+      "ExitCode": 0,
+      "Stdout": "a62e548d681fbe72ee2193c615fb49b1521604691614f62acb3b797e2233d70c\n",
+      "Stderr": ""
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "Version": "0.5.1-alpha.1",
+  "BaselineVersion": "0.5.0-alpha.1",
+  "BaselineArchive": "AvaloniaWeb-0.5.0-alpha.1-source.zip",
+  "BaselineSha256": "d69b3d5a8a7dc23c2aea051020b87685de19e614e341e65522d5f084f6d7991a",
+  "BaselineFilesVerified": 1073,
+  "RestoredOptimizationFiles": [
+    {
+      "Path": "tests/trace-performance.test.mjs",
+      "Bytes": 13378,
+      "Sha256": "ac09fe76c59abe5015d692511a658d4f492dc1e78bc2aba847a1aef4640ca646"
+    },
+    {
+      "Path": "tests/performance-trace.py",
+      "Bytes": 7911,
+      "Sha256": "16eca3fcc0ad2f5cf79ebc7b29be9624fb1d51b085466f631e40f5b120cb8823"
+    },
+    {
+      "Path": "packages/base/src/properties.js",
+      "Bytes": 21526,
+      "Sha256": "bb623848ba6ec7f9c21f28327292a4fe487284c26a515e834553d688104dbad1"
+    },
+    {
+      "Path": "packages/controls/src/table-view.js",
+      "Bytes": 25340,
+      "Sha256": "3057c06f4e18c9acb7abf11c17ce54ee4497791539591dc3823a42ef262dfa79"
+    },
+    {
+      "Path": "packages/controls/src/core.js",
+      "Bytes": 46424,
+      "Sha256": "d5a30c37ba61f0aabff4dbc435f7c46c3f5b328299777bc18b64fb5ea85b2ab9"
+    },
+    {
+      "Path": "packages/controls/src/input-controls.js",
+      "Bytes": 38804,
+      "Sha256": "bcf233d9644caf4b0b83eeed242dd414f22facb07f2a8bdf206fba92d379c61d"
+    },
+    {
+      "Path": "packages/controls/src/layout.js",
+      "Bytes": 27496,
+      "Sha256": "7b8e469b8fb1e024affa6873a677213279844596cc1d1f6ac1a1885fb4278cfb"
+    },
+    {
+      "Path": "packages/controls/src/items.js",
+      "Bytes": 37611,
+      "Sha256": "3b71c0be272254f021099a4fa43426677826126df3e90291aa505556cc61724a"
+    },
+    {
+      "Path": "packages/controls/src/automation.js",
+      "Bytes": 29755,
+      "Sha256": "bc1da9ac16b07c94c674002b06fc50ab2d2013206ecc1c49e0a4de87895baa38"
+    },
+    {
+      "Path": "packages/browser/src/automation-bridge.js",
+      "Bytes": 12101,
+      "Sha256": "f4de695a21efe71d09c60c948a0ec8b79b9a85169257f9973946ab185e5b97cb"
+    },
+    {
+      "Path": "packages/browser/src/index.js",
+      "Bytes": 44861,
+      "Sha256": "cedab60c6989b21d037c3cb502389da1a3982f94a15fbde4dbfd5dc6407c9a67"
+    }
+  ],
+  "FullAvaloniaParity": false,
+  "NativeVendorBytesChanged": false
+}

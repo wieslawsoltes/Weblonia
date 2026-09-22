@@ -1,0 +1,13 @@
+
+> avaloniaweb-workspace@0.6.2-alpha.1 verify:release
+> node scripts/verify-release.mjs
+
+file:///mnt/data/invalidation-fix/AvaloniaWeb/scripts/verify-release.mjs:13
+const require = (condition, message) => { if (!condition) throw new Error(message); };
+                                                                ^
+
+Error: Threaded integration did not complete cleanly
+    at require (file:///mnt/data/invalidation-fix/AvaloniaWeb/scripts/verify-release.mjs:13:65)
+    at file:///mnt/data/invalidation-fix/AvaloniaWeb/scripts/verify-release.mjs:58:2
+
+Node.js v22.16.0

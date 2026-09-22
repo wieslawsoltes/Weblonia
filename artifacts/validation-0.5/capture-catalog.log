@@ -1,0 +1,29 @@
+{
+  "Version": "0.5.0-alpha.1",
+  "Mode": "local-asset-interception",
+  "DeviceScale": 1.25,
+  "PageErrors": [],
+  "MissingAssets": [],
+  "Pages": [
+    {
+      "Page": "ScrollViewer",
+      "Offset": {
+        "X": 52.919994502645935,
+        "Y": 1938.6000000000001
+      },
+      "Vertical": true,
+      "Horizontal": true,
+      "RenderError": ""
+    },
+    {
+      "Page": "TextBox",
+      "Offset": {
+        "X": 133.43710694491025,
+        "Y": 8090.819776953873
+      },
+      "Vertical": true,
+      "Horizontal": true,
+      "RenderError": ""
+    }
+  ]
+}

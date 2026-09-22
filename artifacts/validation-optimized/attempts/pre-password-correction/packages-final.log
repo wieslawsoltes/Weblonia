@@ -1,0 +1,13 @@
+
+> avaloniaweb-workspace@0.5.1-alpha.1 test:packages
+> node scripts/test-packages.mjs
+
+{
+  Passed: true,
+  Packages: 17,
+  FacadeExports: 481,
+  PublicRegistryInstalled: false,
+  Version: '0.5.1-alpha.1',
+  SourceFingerprint: '519cca656f2ce49e61a2e0d95b796b37fd7aaded82b7444e10771b073dc2f33e',
+  FinalSourceFingerprint: '519cca656f2ce49e61a2e0d95b796b37fd7aaded82b7444e10771b073dc2f33e'
+}

@@ -1,0 +1,3 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Determinate progress" FontSize="17" FontWeight="SemiBold"/><Slider Value="{Binding Value,Mode=TwoWay}"/><ProgressBar Value="{Binding Value}" Height="10"/></StackPanel></Border><Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Indeterminate progress" FontSize="17" FontWeight="SemiBold"/><ProgressBar IsIndeterminate="True" Height="6"/></StackPanel></Border>
+</StackPanel>

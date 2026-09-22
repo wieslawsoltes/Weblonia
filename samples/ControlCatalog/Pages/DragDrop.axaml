@@ -1,0 +1,3 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Drop text or a file" FontSize="17" FontWeight="SemiBold"/><Border x:Name="DropZone" Background="{DynamicResource SystemSelectionBrush}" Padding="40" CornerRadius="8"><TextBlock x:Name="DropText" Text="Drop a file or text onto the application." TextWrapping="Wrap" FontSize="20"/></Border></StackPanel></Border>
+</StackPanel>

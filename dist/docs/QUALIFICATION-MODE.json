@@ -1,0 +1,11 @@
+{
+  "Version": "0.6.2-alpha.1",
+  "LocalEvidenceProfile": true,
+  "StrictCiGatePassed": false,
+  "OrdinaryHttpWorkersQualified": false,
+  "BrowserPoliciesChanged": false,
+  "GateInvocation": "CI=false npm run verify:release",
+  "Reason": "The environment injects CI=true, but Chromium blocks localhost navigation. Run the existing local profile without changing the strict CI requirement or browser policy. HTTP failures remain in the report.",
+  "StrictGateLog": "artifacts/invalidation/final-logs/release-gate.log",
+  "FirstAttempt": "A secondary-window startup check timed out in the initial attempt; the complete final integration rerun passed all 17 checks. Both logs are retained."
+}

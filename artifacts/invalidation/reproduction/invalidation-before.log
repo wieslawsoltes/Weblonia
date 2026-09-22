@@ -1,0 +1,280 @@
+TAP version 13
+# Subtest: invalidation: all realized cells and headers follow pixel column resize without hover
+not ok 1 - invalidation: all realized cells and headers follow pixel column resize without hover
+  ---
+  duration_ms: 64.609811
+  type: 'test'
+  location: '/mnt/data/invalidation-fix/AvaloniaWeb/tests/invalidation.test.mjs:26:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    150 !== 240
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 240
+  actual: 150
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///mnt/data/invalidation-fix/AvaloniaWeb/tests/invalidation.test.mjs:32:39)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: invalidation: one control invalidating itself during recording is redrawn on the next capture
+not ok 2 - invalidation: one control invalidating itself during recording is redrawn on the next capture
+  ---
+  duration_ms: 3.54475
+  type: 'test'
+  location: '/mnt/data/invalidation-fix/AvaloniaWeb/tests/invalidation.test.mjs:39:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    1 !== 2
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 2
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///mnt/data/invalidation-fix/AvaloniaWeb/tests/invalidation.test.mjs:41:87)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: invalidation: later sibling invalidating an already recorded sibling survives clean-parent reuse
+not ok 3 - invalidation: later sibling invalidating an already recorded sibling survives clean-parent reuse
+  ---
+  duration_ms: 1.849509
+  type: 'test'
+  location: '/mnt/data/invalidation-fix/AvaloniaWeb/tests/invalidation.test.mjs:43:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    1 !== 2
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 2
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///mnt/data/invalidation-fix/AvaloniaWeb/tests/invalidation.test.mjs:47:40)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: invalidation: RenderAfter requests do not mark newer content revisions as already recorded
+not ok 4 - invalidation: RenderAfter requests do not mark newer content revisions as already recorded
+  ---
+  duration_ms: 1.018272
+  type: 'test'
+  location: '/mnt/data/invalidation-fix/AvaloniaWeb/tests/invalidation.test.mjs:49:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    1 !== 2
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 2
+  actual: 1
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///mnt/data/invalidation-fix/AvaloniaWeb/tests/invalidation.test.mjs:51:75)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: invalidation: indeterminate progress records changing content without input and stops when disabled
+not ok 5 - invalidation: indeterminate progress records changing content without input and stops when disabled
+  ---
+  duration_ms: 32.504481
+  type: 'test'
+  location: '/mnt/data/invalidation-fix/AvaloniaWeb/tests/invalidation.test.mjs:53:1'
+  failureType: 'testCodeFailure'
+  error: 'animation must not replay a frozen progress display list'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0:
+      0: 3
+      1:
+        $: 'Brush'
+        Type: 'SolidColorBrush'
+        Opacity: 1
+        Transform: ~
+        TransformOrigin:
+          $: 'RelativePoint'
+          V:
+            0: 0
+            1: 0
+            2: 'Relative'
+        Color:
+          $: 'Color'
+          V:
+            0: 255
+            1: 197
+            2: 198
+            3: 206
+      2: ~
+      3:
+        $: 'Rect'
+        V:
+          0: 0
+          1: 137.5
+          2: 520
+          3: 5
+      4: 2.5
+    1:
+      0: 1
+      1: 'Clip'
+      2:
+        $: 'Rect'
+        V:
+          0: 0
+          1: 137.5
+          2: 520
+          3: 5
+    2:
+      0: 3
+      1:
+        $: 'Brush'
+        Type: 'SolidColorBrush'
+        Opacity: 1
+        Transform: ~
+        TransformOrigin:
+          $: 'RelativePoint'
+          V:
+            0: 0
+            1: 0
+            2: 'Relative'
+        Color:
+          $: 'Color'
+          V:
+            0: 255
+            1: 66
+            2: 97
+            3: 219
+      2: ~
+      3:
+        $: 'Rect'
+        V:
+          0: -155.7974873
+          1: 137.5
+          2: 156
+          3: 5
+      4: 2.5
+    3:
+      0: 2
+  actual:
+    0:
+      0: 3
+      1:
+        $: 'Brush'
+        Type: 'SolidColorBrush'
+        Opacity: 1
+        Transform: ~
+        TransformOrigin:
+          $: 'RelativePoint'
+          V:
+            0: 0
+            1: 0
+            2: 'Relative'
+        Color:
+          $: 'Color'
+          V:
+            0: 255
+            1: 197
+            2: 198
+            3: 206
+      2: ~
+      3:
+        $: 'Rect'
+        V:
+          0: 0
+          1: 137.5
+          2: 520
+          3: 5
+      4: 2.5
+    1:
+      0: 1
+      1: 'Clip'
+      2:
+        $: 'Rect'
+        V:
+          0: 0
+          1: 137.5
+          2: 520
+          3: 5
+    2:
+      0: 3
+      1:
+        $: 'Brush'
+        Type: 'SolidColorBrush'
+        Opacity: 1
+        Transform: ~
+        TransformOrigin:
+          $: 'RelativePoint'
+          V:
+            0: 0
+            1: 0
+            2: 'Relative'
+        Color:
+          $: 'Color'
+          V:
+            0: 255
+            1: 66
+            2: 97
+            3: 219
+      2: ~
+      3:
+        $: 'Rect'
+        V:
+          0: -155.7974873
+          1: 137.5
+          2: 156
+          3: 5
+      4: 2.5
+    3:
+      0: 2
+  operator: 'notDeepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///mnt/data/invalidation-fix/AvaloniaWeb/tests/invalidation.test.mjs:56:16)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: invalidation: transition from transparent content reaches the worker scene without mouse input
+ok 6 - invalidation: transition from transparent content reaches the worker scene without mouse input
+  ---
+  duration_ms: 5.487086
+  type: 'test'
+  ...
+# Subtest: invalidation: property keyframes generate worker deltas through their final frame
+ok 7 - invalidation: property keyframes generate worker deltas through their final frame
+  ---
+  duration_ms: 2.205464
+  type: 'test'
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 2
+# fail 5
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 479.40903

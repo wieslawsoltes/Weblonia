@@ -1,0 +1,3 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Language suggestions" FontSize="17" FontWeight="SemiBold"/><AutoCompleteBox x:Name="AutoComplete" ItemsSource="{Binding Languages}" PlaceholderText="Start typing a language…" Width="380" HorizontalAlignment="Left"/><TextBlock Text="Suggestions are retained ListBox containers in a popup." Classes="muted"/></StackPanel></Border>
+</StackPanel>

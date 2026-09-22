@@ -1,0 +1,8 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Composition visual graph" FontSize="19" FontWeight="SemiBold"/>
+<TextBlock Text="A keyframe animation and a parsed expression run over committed scene properties. This browser compositor executes on the UI thread." TextWrapping="Wrap"/>
+<Border Background="#15182B" CornerRadius="14" Padding="18"><Control Name="CompositionHost" Height="240" ClipToBounds="True"/></Border>
+<StackPanel Orientation="Horizontal" Spacing="12"><Button Name="AnimateComposition" Content="Start animation"/><Button Name="StopComposition" Content="Stop animation"/></StackPanel>
+<TextBlock Name="CompositionStatus"/>
+</StackPanel></Border>
+</StackPanel>

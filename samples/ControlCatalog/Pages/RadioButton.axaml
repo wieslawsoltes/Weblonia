@@ -1,0 +1,3 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="One choice per group" FontSize="17" FontWeight="SemiBold"/><RadioButton Content="JavaScript" GroupName="Language" IsChecked="True"/><RadioButton Content="TypeScript" GroupName="Language"/><RadioButton Content="C# interoperability" GroupName="Language"/></StackPanel></Border>
+</StackPanel>

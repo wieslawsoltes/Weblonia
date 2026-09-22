@@ -1,0 +1,8 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Visual snapshots and invalidation" FontSize="19" FontWeight="SemiBold"/>
+<TextBlock Text="Both panels draw the same geometry. Redrawing the host reuses the cached panel. Mutating its content invalidates the snapshot." TextWrapping="Wrap"/>
+<Grid Name="CacheSlot" ColumnDefinitions="*,*" ColumnSpacing="18" Height="250"/>
+<StackPanel Orientation="Horizontal" Spacing="12"><Button Name="RedrawCache" Content="Redraw host"/><Button Name="InvalidateCache" Content="Change geometry"/></StackPanel>
+<TextBlock Name="CacheStatus"/>
+</StackPanel></Border>
+</StackPanel>

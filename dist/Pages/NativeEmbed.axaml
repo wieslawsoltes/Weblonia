@@ -1,0 +1,9 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Native HTML control hosting" FontSize="19" FontWeight="SemiBold"/>
+<TextBlock Text="A real browser input is hosted inside the retained layout. Its handle is an HTMLElement; no desktop child-window handle is fabricated." TextWrapping="Wrap"/>
+<Border Name="NativeSlot" Height="130" ClipToBounds="True" CornerRadius="12"/>
+<TextBlock Name="NativePreview" Text="{Binding Name, StringFormat='Reactive model: {0}'}" FontSize="18"/>
+<TextBox Name="NativeModelEditor" Text="{Binding Name, Mode=TwoWay}"/>
+<TextBlock Text="Both editors share the same ReactiveWeb property. The native layer is clipped to its retained ancestors, and is disposed when navigating away." TextWrapping="Wrap"/>
+</StackPanel></Border>
+</StackPanel>

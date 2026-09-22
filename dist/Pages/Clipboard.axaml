@@ -1,0 +1,3 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="System clipboard" FontSize="17" FontWeight="SemiBold"/><TextBox x:Name="ClipboardText" Text="AvaloniaWeb uses the browser clipboard API."/><StackPanel Orientation="Horizontal" Spacing="12"><Button Content="Copy" Click="Copy"/><Button Content="Paste" Click="Paste"/></StackPanel><TextBlock x:Name="ClipboardStatus" Text="Clipboard access depends on browser permissions and a secure origin." TextWrapping="Wrap" Classes="muted"/></StackPanel></Border>
+</StackPanel>

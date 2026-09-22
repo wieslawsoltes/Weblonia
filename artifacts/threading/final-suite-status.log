@@ -1,0 +1,19 @@
+START artifacts/validation-optimized/catalog-final.log python tests/browser.py --dist
+PASS python tests/browser.py --dist
+START artifacts/validation-optimized/scrollbars-1-final.log python tests/scrollbars.py
+PASS python tests/scrollbars.py
+START artifacts/validation-optimized/scrollbars-1.25-final.log python tests/scrollbars.py --scale 1.25
+PASS python tests/scrollbars.py --scale 1.25
+START artifacts/validation-optimized/text-final.log python tests/text-quality.py
+PASS python tests/text-quality.py
+START artifacts/validation-optimized/automation-final.log python tests/automation-incremental.py
+PASS python tests/automation-incremental.py
+START artifacts/threading/browser-final.log python tests/threading-browser.py
+PASS python tests/threading-browser.py
+START artifacts/threading/integration-final.log python tests/threading-integration.py
+PASS python tests/threading-integration.py
+START artifacts/threading/quality-final.log python tests/threading-quality.py
+PASS python tests/threading-quality.py
+START artifacts/threading/catalog-final.log python tests/threading-catalog.py
+PASS python tests/threading-catalog.py
+ALL BROWSER REGRESSIONS FINISHED

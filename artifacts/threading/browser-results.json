@@ -1,0 +1,630 @@
+{
+  "Version": "0.6.2-alpha.1",
+  "SourceFingerprint": "93c095505d6ae58d74e38e68e6296edf5f0ee81ed427f9d3042d26314d241cab",
+  "Completed": true,
+  "Tests": [
+    {
+      "Name": "render-worker actual worker ownership",
+      "Passed": true,
+      "Evidence": {
+        "Mode": "render-worker",
+        "UI": {
+          "EncodeMilliseconds": 9.400000000139698,
+          "LastEncodeMilliseconds": 3,
+          "EncodeCalls": 2,
+          "StringWrites": 23886,
+          "Utf8Bytes": 4509,
+          "StringDefinitions": 327,
+          "StringReferences": 23559,
+          "PatchedVisuals": 18,
+          "ReplacedVisuals": 427,
+          "SentTransactions": 2,
+          "SentBytes": 290793,
+          "PendingFramesCoalesced": 1,
+          "ProcessedSequence": 2,
+          "SubmittedSequence": 2,
+          "Restarts": 0,
+          "MaxInFlight": 1,
+          "LastWorkerFrame": 2,
+          "Recorder": {
+            "Captures": 3,
+            "VisualVisits": 445,
+            "CleanBranches": 9,
+            "ContentRecords": 430,
+            "Commands": 455,
+            "CaptureMilliseconds": 14.300000000046566,
+            "ReferenceObjectsWalked": 7109,
+            "ReferenceCacheHits": 892
+          },
+          "Resources": {
+            "Created": 128,
+            "Reused": 90,
+            "TextDescriptors": 218,
+            "ImageBytes": 0,
+            "InternHits": 90,
+            "InternCandidates": 91
+          },
+          "BufferPool": {
+            "Bytes": 520192,
+            "Hits": 7,
+            "Misses": 7
+          }
+        },
+        "Worker": {
+          "DecodeMilliseconds": 7.099999999860302,
+          "LastDecodeMilliseconds": 3.2999999998137355,
+          "DecodedStringDefinitions": 327,
+          "DecodedStringReferences": 23559,
+          "Thread": "composition-render-worker",
+          "InstanceId": "1e0319a9-8eeb14c0-c9060c67-9ff4d27f",
+          "HasDocument": false,
+          "CrossOriginIsolated": false,
+          "WorkerFrames": 2,
+          "ReceivedBytes": 290793,
+          "ReturnedBuffers": 2,
+          "Clock": "worker-requestAnimationFrame",
+          "StartedAt": 1790020355416.8,
+          "Scheduler": {
+            "dirty": false,
+            "frameId": null,
+            "running": false,
+            "suspended": false
+          },
+          "Target": {
+            "Frames": 2,
+            "RenderMilliseconds": 80.89999999990687,
+            "ResizeCount": 1,
+            "SelectedBackend": "canvas",
+            "BackendFailures": [],
+            "Width": 1200,
+            "Height": 900
+          },
+          "Scroll": {
+            "Inputs": 0,
+            "SpeculativeFrames": 0,
+            "CoverageClamps": 0,
+            "MaxPending": 0,
+            "Reconciliations": 0,
+            "ProcessedInput": 0,
+            "Pending": 0,
+            "Offsets": []
+          },
+          "Scene": {
+            "ValidatedDescriptors": 573,
+            "ReferenceChecks": 229,
+            "GraphChecks": 5,
+            "ValidationMilliseconds": 12,
+            "TotalValidationMilliseconds": 18,
+            "TotalApplyMilliseconds": 44.89999999990687,
+            "IdentityTransformsSkipped": 46,
+            "Transactions": 2,
+            "ContentInstalls": 436,
+            "VisualsVisited": 462,
+            "ClippedBranches": 0,
+            "AnimationTicks": 0,
+            "ApplyMilliseconds": 30.300000000046566,
+            "ReferenceObjectsWalked": 7701,
+            "ReferenceCacheHits": 92
+          },
+          "Resources": 124,
+          "Visuals": 268,
+          "CompositionObjects": 0,
+          "ActiveAnimations": 0,
+          "Skia": {
+            "Renderer": "SkiaSharpWeb",
+            "NativeRuntime": true,
+            "DeviceClipQueries": 14,
+            "Frames": 2,
+            "PathCache": {
+              "Count": 0,
+              "Hits": 0,
+              "Misses": 0
+            },
+            "TextCache": {
+              "Count": 58,
+              "Bytes": 614796,
+              "Hits": 31,
+              "Misses": 58
+            },
+            "ParagraphCache": {
+              "Count": 0,
+              "EstimatedBytes": 0,
+              "KeySerializations": 0,
+              "Builds": 0
+            },
+            "TextMetricsCache": {
+              "Count": 58,
+              "Hits": 31,
+              "Misses": 58
+            },
+            "TextLinesVisited": 89,
+            "TextTilesVisited": 89,
+            "TextRasterizations": 58,
+            "TextUploads": 58,
+            "TextMeasurements": 58,
+            "SolidPaintCache": {
+              "Count": 9,
+              "Hits": 191,
+              "Misses": 9
+            },
+            "TextService": "Native SkParagraph for registered fonts; browser system-font fallback"
+          },
+          "WasmHeapBytes": 134217728,
+          "CustomHandlers": [],
+          "Sequence": 2,
+          "Generation": 1
+        }
+      }
+    },
+    {
+      "Name": "full-isolation actual worker ownership",
+      "Passed": true,
+      "Evidence": {
+        "Mode": "full-isolation",
+        "Host": {
+          "EventsSent": 1,
+          "EventBatches": 1,
+          "CoalescedMoves": 0,
+          "MaxQueuedEvents": 1,
+          "AutomationWrites": 2576,
+          "MainHasSkiaRuntime": false,
+          "QueuedEvents": 0,
+          "HasDocument": true
+        },
+        "UI": {
+          "Thread": "avalonia-ui-worker",
+          "HasDocument": false,
+          "StartedAt": 1790020357444.0999,
+          "Inputs": 1,
+          "LastUiFrame": {
+            "Milliseconds": 1.3000000000465661,
+            "LayoutMilliseconds": 0.30000000004656613,
+            "RenderOrRecordMilliseconds": 0.9000000001396984,
+            "AutomationMilliseconds": 0
+          },
+          "WasmHeapBytes": 134217728,
+          "ClientSize": {
+            "Width": 1200,
+            "Height": 900
+          },
+          "PendingFrames": 0,
+          "LastError": null,
+          "Automation": {
+            "StructurePasses": 3,
+            "IncrementalPasses": 0,
+            "PeerVisits": 418,
+            "Projections": 358,
+            "AttributeWrites": 1014,
+            "NodesCreated": 348,
+            "NodesRemoved": 170
+          }
+        },
+        "Renderer": {
+          "Mode": "full-isolation",
+          "UI": {
+            "EncodeMilliseconds": 10.199999999953434,
+            "LastEncodeMilliseconds": 0.10000000009313226,
+            "EncodeCalls": 4,
+            "StringWrites": 29429,
+            "Utf8Bytes": 4940,
+            "StringDefinitions": 384,
+            "StringReferences": 29045,
+            "PatchedVisuals": 25,
+            "ReplacedVisuals": 586,
+            "SentTransactions": 4,
+            "SentBytes": 366863,
+            "PendingFramesCoalesced": 0,
+            "ProcessedSequence": 4,
+            "SubmittedSequence": 4,
+            "Restarts": 0,
+            "MaxInFlight": 1,
+            "LastWorkerFrame": 4,
+            "Recorder": {
+              "Captures": 4,
+              "VisualVisits": 611,
+              "CleanBranches": 16,
+              "ContentRecords": 590,
+              "Commands": 614,
+              "CaptureMilliseconds": 0.6999999999534339,
+              "ReferenceObjectsWalked": 9198,
+              "ReferenceCacheHits": 1296
+            },
+            "Resources": {
+              "Created": 128,
+              "Reused": 175,
+              "TextDescriptors": 303,
+              "ImageBytes": 0,
+              "InternHits": 175,
+              "InternCandidates": 176
+            },
+            "BufferPool": {
+              "Bytes": 520192,
+              "Hits": 14,
+              "Misses": 7
+            }
+          },
+          "Worker": {
+            "DecodeMilliseconds": 9.400000000139698,
+            "LastDecodeMilliseconds": 0.10000000009313226,
+            "DecodedStringDefinitions": 384,
+            "DecodedStringReferences": 29045,
+            "Thread": "composition-render-worker",
+            "InstanceId": "57c21e3a-546be92e-1847c42f-cb0490e3",
+            "HasDocument": false,
+            "CrossOriginIsolated": false,
+            "WorkerFrames": 4,
+            "ReceivedBytes": 366863,
+            "ReturnedBuffers": 4,
+            "Clock": "worker-requestAnimationFrame",
+            "StartedAt": 1790020357442.2,
+            "Scheduler": {
+              "dirty": false,
+              "frameId": null,
+              "running": false,
+              "suspended": false
+            },
+            "Target": {
+              "Frames": 4,
+              "RenderMilliseconds": 33.699999999953434,
+              "ResizeCount": 1,
+              "SelectedBackend": "canvas",
+              "BackendFailures": [],
+              "Width": 1200,
+              "Height": 900
+            },
+            "Scroll": {
+              "Inputs": 0,
+              "SpeculativeFrames": 0,
+              "CoverageClamps": 0,
+              "MaxPending": 0,
+              "Reconciliations": 0,
+              "ProcessedInput": 1,
+              "Pending": 0,
+              "Offsets": []
+            },
+            "Scene": {
+              "ValidatedDescriptors": 739,
+              "ReferenceChecks": 314,
+              "GraphChecks": 6,
+              "ValidationMilliseconds": 0.19999999995343387,
+              "TotalValidationMilliseconds": 24.5,
+              "TotalApplyMilliseconds": 43.300000000046566,
+              "IdentityTransformsSkipped": 92,
+              "Transactions": 4,
+              "ContentInstalls": 596,
+              "VisualsVisited": 924,
+              "ClippedBranches": 0,
+              "AnimationTicks": 0,
+              "ApplyMilliseconds": 0.8000000000465661,
+              "ReferenceObjectsWalked": 9913,
+              "ReferenceCacheHits": 133
+            },
+            "Resources": 124,
+            "Visuals": 268,
+            "CompositionObjects": 0,
+            "ActiveAnimations": 0,
+            "Skia": {
+              "Renderer": "SkiaSharpWeb",
+              "NativeRuntime": true,
+              "DeviceClipQueries": 28,
+              "Frames": 4,
+              "PathCache": {
+                "Count": 0,
+                "Hits": 0,
+                "Misses": 0
+              },
+              "TextCache": {
+                "Count": 58,
+                "Bytes": 614796,
+                "Hits": 120,
+                "Misses": 58
+              },
+              "ParagraphCache": {
+                "Count": 0,
+                "EstimatedBytes": 0,
+                "KeySerializations": 0,
+                "Builds": 0
+              },
+              "TextMetricsCache": {
+                "Count": 58,
+                "Hits": 120,
+                "Misses": 58
+              },
+              "TextLinesVisited": 178,
+              "TextTilesVisited": 178,
+              "TextRasterizations": 58,
+              "TextUploads": 58,
+              "TextMeasurements": 58,
+              "SolidPaintCache": {
+                "Count": 9,
+                "Hits": 391,
+                "Misses": 9
+              },
+              "TextService": "Native SkParagraph for registered fonts; browser system-font fallback"
+            },
+            "WasmHeapBytes": 134217728,
+            "CustomHandlers": [],
+            "Sequence": 4,
+            "Generation": 1
+          }
+        }
+      }
+    },
+    {
+      "Name": "single navigate TableView",
+      "Passed": true,
+      "Evidence": null
+    },
+    {
+      "Name": "render-worker navigate TableView",
+      "Passed": true,
+      "Evidence": null
+    },
+    {
+      "Name": "full-isolation navigate TableView",
+      "Passed": true,
+      "Evidence": null
+    },
+    {
+      "Name": "render-worker RGBA TableView",
+      "Passed": true,
+      "Evidence": {
+        "MaximumChannelError": 0,
+        "PixelsAboveTolerance": 0,
+        "Channels": 4
+      }
+    },
+    {
+      "Name": "full-isolation RGBA TableView",
+      "Passed": true,
+      "Evidence": {
+        "MaximumChannelError": 0,
+        "PixelsAboveTolerance": 0,
+        "Channels": 4
+      }
+    },
+    {
+      "Name": "single navigate TextBlock",
+      "Passed": true,
+      "Evidence": null
+    },
+    {
+      "Name": "render-worker navigate TextBlock",
+      "Passed": true,
+      "Evidence": null
+    },
+    {
+      "Name": "full-isolation navigate TextBlock",
+      "Passed": true,
+      "Evidence": null
+    },
+    {
+      "Name": "render-worker RGBA TextBlock",
+      "Passed": true,
+      "Evidence": {
+        "MaximumChannelError": 0,
+        "PixelsAboveTolerance": 0,
+        "Channels": 4
+      }
+    },
+    {
+      "Name": "full-isolation RGBA TextBlock",
+      "Passed": true,
+      "Evidence": {
+        "MaximumChannelError": 0,
+        "PixelsAboveTolerance": 0,
+        "Channels": 4
+      }
+    },
+    {
+      "Name": "single navigate ScrollViewer",
+      "Passed": true,
+      "Evidence": null
+    },
+    {
+      "Name": "render-worker navigate ScrollViewer",
+      "Passed": true,
+      "Evidence": null
+    },
+    {
+      "Name": "full-isolation navigate ScrollViewer",
+      "Passed": true,
+      "Evidence": null
+    },
+    {
+      "Name": "render-worker RGBA ScrollViewer",
+      "Passed": true,
+      "Evidence": {
+        "MaximumChannelError": 0,
+        "PixelsAboveTolerance": 0,
+        "Channels": 4
+      }
+    },
+    {
+      "Name": "full-isolation RGBA ScrollViewer",
+      "Passed": true,
+      "Evidence": {
+        "MaximumChannelError": 0,
+        "PixelsAboveTolerance": 0,
+        "Channels": 4
+      }
+    },
+    {
+      "Name": "single navigate Image",
+      "Passed": true,
+      "Evidence": null
+    },
+    {
+      "Name": "render-worker navigate Image",
+      "Passed": true,
+      "Evidence": null
+    },
+    {
+      "Name": "full-isolation navigate Image",
+      "Passed": true,
+      "Evidence": null
+    },
+    {
+      "Name": "render-worker RGBA Image",
+      "Passed": true,
+      "Evidence": {
+        "MaximumChannelError": 0,
+        "PixelsAboveTolerance": 0,
+        "Channels": 4
+      }
+    },
+    {
+      "Name": "full-isolation RGBA Image",
+      "Passed": true,
+      "Evidence": {
+        "MaximumChannelError": 0,
+        "PixelsAboveTolerance": 0,
+        "Channels": 4
+      }
+    },
+    {
+      "Name": "single navigate Acrylic",
+      "Passed": true,
+      "Evidence": null
+    },
+    {
+      "Name": "render-worker navigate Acrylic",
+      "Passed": true,
+      "Evidence": null
+    },
+    {
+      "Name": "full-isolation navigate Acrylic",
+      "Passed": true,
+      "Evidence": null
+    },
+    {
+      "Name": "render-worker RGBA Acrylic",
+      "Passed": true,
+      "Evidence": {
+        "MaximumChannelError": 0,
+        "PixelsAboveTolerance": 0,
+        "Channels": 4
+      }
+    },
+    {
+      "Name": "full-isolation RGBA Acrylic",
+      "Passed": true,
+      "Evidence": {
+        "MaximumChannelError": 0,
+        "PixelsAboveTolerance": 0,
+        "Channels": 4
+      }
+    },
+    {
+      "Name": "single navigate Composition",
+      "Passed": true,
+      "Evidence": null
+    },
+    {
+      "Name": "render-worker navigate Composition",
+      "Passed": true,
+      "Evidence": null
+    },
+    {
+      "Name": "full-isolation navigate Composition",
+      "Passed": true,
+      "Evidence": null
+    },
+    {
+      "Name": "render-worker RGBA Composition",
+      "Passed": true,
+      "Evidence": {
+        "MaximumChannelError": 0,
+        "PixelsAboveTolerance": 0,
+        "Channels": 4
+      }
+    },
+    {
+      "Name": "full-isolation RGBA Composition",
+      "Passed": true,
+      "Evidence": {
+        "MaximumChannelError": 0,
+        "PixelsAboveTolerance": 0,
+        "Channels": 4
+      }
+    },
+    {
+      "Name": "single navigate BitmapCache",
+      "Passed": true,
+      "Evidence": null
+    },
+    {
+      "Name": "render-worker navigate BitmapCache",
+      "Passed": true,
+      "Evidence": null
+    },
+    {
+      "Name": "full-isolation navigate BitmapCache",
+      "Passed": true,
+      "Evidence": null
+    },
+    {
+      "Name": "render-worker RGBA BitmapCache",
+      "Passed": true,
+      "Evidence": {
+        "MaximumChannelError": 0,
+        "PixelsAboveTolerance": 0,
+        "Channels": 4
+      }
+    },
+    {
+      "Name": "full-isolation RGBA BitmapCache",
+      "Passed": true,
+      "Evidence": {
+        "MaximumChannelError": 0,
+        "PixelsAboveTolerance": 0,
+        "Channels": 4
+      }
+    },
+    {
+      "Name": "three threads: animation continues through UI stall",
+      "Passed": true,
+      "Evidence": {
+        "FramesDuringAndAroundStall": 48,
+        "AnimationTicks": 48,
+        "HostRoundtripMilliseconds": 1.4951159998872754,
+        "UIStallMilliseconds": 650,
+        "TransactionsBefore": 24,
+        "TransactionsAfter": 24
+      }
+    },
+    {
+      "Name": "three threads: control query",
+      "Passed": true,
+      "Evidence": {
+        "Name": "NameEditor",
+        "Type": "TextBox",
+        "Id": 2308,
+        "Bounds": {
+          "X": 317,
+          "Y": 280,
+          "Width": 824,
+          "Height": 34
+        },
+        "Text": "Ada Lovelace",
+        "Value": null,
+        "Offset": {
+          "X": 0,
+          "Y": 0
+        },
+        "CaretIndex": 0,
+        "SelectionStart": 0,
+        "SelectionEnd": 0,
+        "SelectedIndex": null,
+        "IsChecked": null,
+        "IsEnabled": true
+      }
+    }
+  ],
+  "Errors": [],
+  "MissingAssets": [],
+  "Qualification": "Chromium native raster; real dedicated workers; real module workers importing unchanged production entries through intercepted local assets; ordinary HTTP navigation is separately tested.",
+  "Passed": 39,
+  "Failed": 0,
+  "FinalSourceFingerprint": "93c095505d6ae58d74e38e68e6296edf5f0ee81ed427f9d3042d26314d241cab"
+}

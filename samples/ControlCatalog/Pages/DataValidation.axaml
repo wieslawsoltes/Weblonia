@@ -1,0 +1,3 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Binding validation" FontSize="17" FontWeight="SemiBold"/><TextBox x:Name="Validated" Text="{Binding Name,Mode=TwoWay}"/><TextBlock x:Name="ValidationText" Foreground="#C24858"/><TextBlock Text="The binding keeps the model unchanged when validation rejects an edit." Classes="muted" TextWrapping="Wrap"/></StackPanel></Border>
+</StackPanel>

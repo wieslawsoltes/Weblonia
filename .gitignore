@@ -1,0 +1,11 @@
+node_modules/
+upstream/
+artifacts/npm/
+artifacts/package-consumer/
+*.log
+__pycache__/
+.DS_Store
+
+# Private publication scratch files are never source.
+.venv/
+.import/

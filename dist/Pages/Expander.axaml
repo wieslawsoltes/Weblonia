@@ -1,0 +1,3 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Expandable sections" FontSize="17" FontWeight="SemiBold"/><Expander Header="Account details" IsExpanded="True"><TextBox Text="Bound content lives inside the expander."/></Expander><Expander Header="Advanced settings"><CheckBox Content="Enable advanced mode"/></Expander></StackPanel></Border>
+</StackPanel>

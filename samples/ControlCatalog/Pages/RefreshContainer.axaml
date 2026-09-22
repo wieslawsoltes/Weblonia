@@ -1,0 +1,3 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Refresh with a deferral" FontSize="17" FontWeight="SemiBold"/><RefreshContainer x:Name="Refresh"><TextBlock x:Name="RefreshText" Text="Request a refresh to update this content." Height="70"/></RefreshContainer><Button Content="Refresh now" Click="Refresh" HorizontalAlignment="Left"/></StackPanel></Border>
+</StackPanel>

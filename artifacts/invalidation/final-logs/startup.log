@@ -1,0 +1,24 @@
+PASS source module startup, nonblank TableView and restart render-worker
+PASS source module startup, nonblank TableView and restart full-isolation
+PASS dist module startup, nonblank TableView and restart render-worker
+PASS dist module startup, nonblank TableView and restart full-isolation
+PASS nested module startup, nonblank TableView and restart render-worker
+PASS nested module startup, nonblank TableView and restart full-isolation
+PASS delayed top-level-await dependency render-worker
+PASS automatic backend selection render-worker
+PASS fail fast and release workers: render-worker/loader
+PASS fail fast and release workers: render-worker/graph
+PASS fail fast and release workers: render-worker/pending
+PASS delayed top-level-await dependency full-isolation
+PASS automatic backend selection full-isolation
+PASS fail fast and release workers: full-isolation/loader
+PASS fail fast and release workers: full-isolation/graph
+PASS fail fast and release workers: full-isolation/pending
+PASS invalid isolated application import releases both workers
+{
+  "Passed": 17,
+  "Failed": 0,
+  "Errors": [],
+  "MissingAssets": [],
+  "BlockedByBrowserPolicy": false
+}

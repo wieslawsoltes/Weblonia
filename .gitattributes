@@ -1,0 +1,18 @@
+* text=auto
+*.js text eol=lf
+*.mjs text eol=lf
+*.axaml text eol=lf
+*.wasm binary
+*.png binary
+*.tgz binary
+
+# Preserve byte-verified upstream payloads (including generated notices).
+vendor/** -text
+
+*.sh text eol=lf
+artifacts/** -text
+docs/recovery/** -text
+dist/docs/recovery/** -text
+dist/vendor/** -text
+packages/browser/worker-assets/vendor/** -text
+dist/packages/browser/worker-assets/vendor/** -text

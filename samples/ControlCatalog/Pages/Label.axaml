@@ -1,0 +1,3 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Captions and targets" FontSize="17" FontWeight="SemiBold"/><Label Content="_Display name" Target="{x:Reference NameInput}"/><TextBox x:Name="NameInput" Text="{Binding Name,Mode=TwoWay}" Width="360" HorizontalAlignment="Left"/></StackPanel></Border>
+</StackPanel>

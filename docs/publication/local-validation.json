@@ -1,0 +1,20 @@
+{
+  "ArchiveSha256": "c73e921588ede76fedc79a9bdce1d03116d07eea0f2dbbcb484b137731f52303",
+  "SourceFingerprint": "07b18ad615434fd2a6bcd52c49e64e8eaa4f9259f6c01f5f6377637786f3875e",
+  "Node": {
+    "tests": 446,
+    "pass": 446,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "BuildPassed": true,
+  "VendorVerificationPassed": true,
+  "WorkerVerificationPassed": true,
+  "PackagedConsumers": 18,
+  "LocalHttpBrowserTestsRun": false,
+  "CompleteBrowserReleaseGateRunLocally": false,
+  "RemotePushVerified": false,
+  "Note": "This report is created before pushing. Remote completion is recorded outside the source tree."
+}

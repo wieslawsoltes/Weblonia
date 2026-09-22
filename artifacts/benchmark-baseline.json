@@ -1,0 +1,159 @@
+{
+  "Version": "0.2.0-alpha.1",
+  "Node": "v22.16.0",
+  "Architecture": "x64",
+  "Platform": "linux",
+  "Cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+  "Scope": "Single-process JavaScript microbenchmarks with a counting fixed-width metrics provider; not end-to-end UI/GPU frame rate",
+  "SamplesPerCase": 5,
+  "Results": [
+    {
+      "Name": "5000 unchanged TextBlock renders",
+      "MedianMilliseconds": 14.411960000000022,
+      "MinMilliseconds": 13.826668999999981,
+      "MaxMilliseconds": 23.12122899999997,
+      "Samples": [
+        {
+          "Iterations": 5000,
+          "Milliseconds": 23.12122899999997,
+          "Measurements": 5000,
+          "Layouts": 5000
+        },
+        {
+          "Iterations": 5000,
+          "Milliseconds": 16.460635000000025,
+          "Measurements": 5000,
+          "Layouts": 5000
+        },
+        {
+          "Iterations": 5000,
+          "Milliseconds": 14.411960000000022,
+          "Measurements": 5000,
+          "Layouts": 5000
+        },
+        {
+          "Iterations": 5000,
+          "Milliseconds": 14.154663000000028,
+          "Measurements": 5000,
+          "Layouts": 5000
+        },
+        {
+          "Iterations": 5000,
+          "Milliseconds": 13.826668999999981,
+          "Measurements": 5000,
+          "Layouts": 5000
+        }
+      ]
+    },
+    {
+      "Name": "100 repeated caret hit tests on a 5000-character line",
+      "MedianMilliseconds": 200.96801000000005,
+      "MinMilliseconds": 191.33974899999998,
+      "MaxMilliseconds": 215.90189599999997,
+      "Samples": [
+        {
+          "Iterations": 100,
+          "Milliseconds": 215.90189599999997,
+          "Measurements": 500100,
+          "FirstHitMeasurements": 5001
+        },
+        {
+          "Iterations": 100,
+          "Milliseconds": 200.96801000000005,
+          "Measurements": 500100,
+          "FirstHitMeasurements": 5001
+        },
+        {
+          "Iterations": 100,
+          "Milliseconds": 191.33974899999998,
+          "Measurements": 500100,
+          "FirstHitMeasurements": 5001
+        },
+        {
+          "Iterations": 100,
+          "Milliseconds": 201.50345500000003,
+          "Measurements": 500100,
+          "FirstHitMeasurements": 5001
+        },
+        {
+          "Iterations": 100,
+          "Milliseconds": 192.20497400000022,
+          "Measurements": 500100,
+          "FirstHitMeasurements": 5001
+        }
+      ]
+    },
+    {
+      "Name": "20 wrapped layouts of a 10000-character line",
+      "MedianMilliseconds": 82.05703300000027,
+      "MinMilliseconds": 81.5209870000001,
+      "MaxMilliseconds": 83.12385800000015,
+      "Samples": [
+        {
+          "Iterations": 20,
+          "Milliseconds": 82.79926,
+          "Measurements": 200020
+        },
+        {
+          "Iterations": 20,
+          "Milliseconds": 83.12385800000015,
+          "Measurements": 200020
+        },
+        {
+          "Iterations": 20,
+          "Milliseconds": 81.5209870000001,
+          "Measurements": 200020
+        },
+        {
+          "Iterations": 20,
+          "Milliseconds": 82.05703300000027,
+          "Measurements": 200020
+        },
+        {
+          "Iterations": 20,
+          "Milliseconds": 81.70683599999984,
+          "Measurements": 200020
+        }
+      ]
+    },
+    {
+      "Name": "5000 nested compiled-binding leaf updates",
+      "MedianMilliseconds": 15.114774000000125,
+      "MinMilliseconds": 14.306625999999596,
+      "MaxMilliseconds": 32.88435000000027,
+      "Samples": [
+        {
+          "Iterations": 5000,
+          "Milliseconds": 32.88435000000027,
+          "AncestorReads": 5000,
+          "NewSubscriptions": 10000
+        },
+        {
+          "Iterations": 5000,
+          "Milliseconds": 18.714284000000134,
+          "AncestorReads": 5000,
+          "NewSubscriptions": 10000
+        },
+        {
+          "Iterations": 5000,
+          "Milliseconds": 15.114774000000125,
+          "AncestorReads": 5000,
+          "NewSubscriptions": 10000
+        },
+        {
+          "Iterations": 5000,
+          "Milliseconds": 14.378131999999823,
+          "AncestorReads": 5000,
+          "NewSubscriptions": 10000
+        },
+        {
+          "Iterations": 5000,
+          "Milliseconds": 14.306625999999596,
+          "AncestorReads": 5000,
+          "NewSubscriptions": 10000
+        }
+      ]
+    }
+  ],
+  "Consumed": 13757183.99999991
+}

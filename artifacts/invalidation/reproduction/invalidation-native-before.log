@@ -1,0 +1,87 @@
+TAP version 13
+# Subtest: native invalidation: a visual cache never consumes invalidation raised while rendering its snapshot
+not ok 1 - native invalidation: a visual cache never consumes invalidation raised while rendering its snapshot
+  ---
+  duration_ms: 10.412207
+  type: 'test'
+  location: '/mnt/data/invalidation-fix/AvaloniaWeb/tests/invalidation-native.test.mjs:13:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+      [
+    +   255,
+        0,
+        0,
+        255,
+    -   255
+      ]
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 0
+    1: 0
+    2: 255
+    3: 255
+  actual:
+    0: 255
+    1: 0
+    2: 0
+    3: 255
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///mnt/data/invalidation-fix/AvaloniaWeb/tests/invalidation-native.test.mjs:17:165)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+# Subtest: native invalidation: cached worker visual retains the final composition animation frame
+not ok 2 - native invalidation: cached worker visual retains the final composition animation frame
+  ---
+  duration_ms: 13.174404
+  type: 'test'
+  location: '/mnt/data/invalidation-fix/AvaloniaWeb/tests/invalidation-native.test.mjs:19:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+      [
+        255,
+    -   0,
+    -   0,
+        255,
+    +   255,
+    +   255
+      ]
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 255
+    1: 0
+    2: 0
+    3: 255
+  actual:
+    0: 255
+    1: 255
+    2: 255
+    3: 255
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///mnt/data/invalidation-fix/AvaloniaWeb/tests/invalidation-native.test.mjs:31:72)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+1..2
+# tests 2
+# suites 0
+# pass 0
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 446.417438

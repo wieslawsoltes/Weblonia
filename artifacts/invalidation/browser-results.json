@@ -1,0 +1,253 @@
+{
+  "Version": "0.6.2-alpha.1",
+  "SourceFingerprint": "93c095505d6ae58d74e38e68e6296edf5f0ee81ed427f9d3042d26314d241cab",
+  "Completed": true,
+  "Tests": [
+    {
+      "Name": "single timer-driven column width without input",
+      "Passed": true,
+      "Evidence": {
+        "MaximumChannelError": 0,
+        "Channels": 4,
+        "Pixels": 256000,
+        "Width": 236
+      }
+    },
+    {
+      "Name": "single header-only mouse drag updates all rows",
+      "Passed": true,
+      "Evidence": {
+        "MaximumChannelError": 0,
+        "Channels": 4,
+        "Pixels": 256000,
+        "Width": 278,
+        "PointerStayedInHeader": true
+      }
+    },
+    {
+      "Name": "single progress advances naturally and stops without global rerecording",
+      "Passed": true,
+      "Evidence": {
+        "MovingPixels": true,
+        "RetainedSiblingUnchanged": null,
+        "StoppedContentRecords": null
+      }
+    },
+    {
+      "Name": "single hidden progress resumes without input",
+      "Passed": true,
+      "Evidence": {
+        "Resumed": true
+      }
+    },
+    {
+      "Name": "single transition intermediate and final frames without hover",
+      "Passed": true,
+      "Evidence": {
+        "MaximumChannelError": 0,
+        "Channels": 4,
+        "Pixels": 256000
+      }
+    },
+    {
+      "Name": "single overlapping transition replacement completes latest content",
+      "Passed": true,
+      "Evidence": {
+        "MaximumChannelError": 0,
+        "Channels": 4,
+        "Pixels": 256000
+      }
+    },
+    {
+      "Name": "single reentrant invalidation survives capture",
+      "Passed": true,
+      "Evidence": {
+        "RenderCalls": 2,
+        "MaximumChannelError": 0,
+        "Channels": 4,
+        "Pixels": 256000
+      }
+    },
+    {
+      "Name": "single cached-reentrant invalidation survives capture",
+      "Passed": true,
+      "Evidence": {
+        "RenderCalls": 2,
+        "MaximumChannelError": 0,
+        "Channels": 4,
+        "Pixels": 256000
+      }
+    },
+    {
+      "Name": "render-worker timer-driven column width without input",
+      "Passed": true,
+      "Evidence": {
+        "MaximumChannelError": 0,
+        "Channels": 4,
+        "Pixels": 256000,
+        "Width": 236
+      }
+    },
+    {
+      "Name": "render-worker header-only mouse drag updates all rows",
+      "Passed": true,
+      "Evidence": {
+        "MaximumChannelError": 0,
+        "Channels": 4,
+        "Pixels": 256000,
+        "Width": 278,
+        "PointerStayedInHeader": true
+      }
+    },
+    {
+      "Name": "render-worker progress advances naturally and stops without global rerecording",
+      "Passed": true,
+      "Evidence": {
+        "MovingPixels": true,
+        "RetainedSiblingUnchanged": true,
+        "StoppedContentRecords": 281
+      }
+    },
+    {
+      "Name": "render-worker hidden progress resumes without input",
+      "Passed": true,
+      "Evidence": {
+        "Resumed": true
+      }
+    },
+    {
+      "Name": "render-worker transition intermediate and final frames without hover",
+      "Passed": true,
+      "Evidence": {
+        "MaximumChannelError": 0,
+        "Channels": 4,
+        "Pixels": 256000
+      }
+    },
+    {
+      "Name": "render-worker overlapping transition replacement completes latest content",
+      "Passed": true,
+      "Evidence": {
+        "MaximumChannelError": 0,
+        "Channels": 4,
+        "Pixels": 256000
+      }
+    },
+    {
+      "Name": "render-worker reentrant invalidation survives capture",
+      "Passed": true,
+      "Evidence": {
+        "RenderCalls": 2,
+        "MaximumChannelError": 0,
+        "Channels": 4,
+        "Pixels": 256000
+      }
+    },
+    {
+      "Name": "render-worker cached-reentrant invalidation survives capture",
+      "Passed": true,
+      "Evidence": {
+        "RenderCalls": 2,
+        "MaximumChannelError": 0,
+        "Channels": 4,
+        "Pixels": 256000
+      }
+    },
+    {
+      "Name": "render-worker render-side custom invalidation survives render completion",
+      "Passed": true,
+      "Evidence": {
+        "HandlerRenderCalls": 3
+      }
+    },
+    {
+      "Name": "full-isolation timer-driven column width without input",
+      "Passed": true,
+      "Evidence": {
+        "MaximumChannelError": 0,
+        "Channels": 4,
+        "Pixels": 256000,
+        "Width": 236
+      }
+    },
+    {
+      "Name": "full-isolation header-only mouse drag updates all rows",
+      "Passed": true,
+      "Evidence": {
+        "MaximumChannelError": 0,
+        "Channels": 4,
+        "Pixels": 256000,
+        "Width": 278,
+        "PointerStayedInHeader": true
+      }
+    },
+    {
+      "Name": "full-isolation progress advances naturally and stops without global rerecording",
+      "Passed": true,
+      "Evidence": {
+        "MovingPixels": true,
+        "RetainedSiblingUnchanged": true,
+        "StoppedContentRecords": 293
+      }
+    },
+    {
+      "Name": "full-isolation hidden progress resumes without input",
+      "Passed": true,
+      "Evidence": {
+        "Resumed": true
+      }
+    },
+    {
+      "Name": "full-isolation transition intermediate and final frames without hover",
+      "Passed": true,
+      "Evidence": {
+        "MaximumChannelError": 0,
+        "Channels": 4,
+        "Pixels": 256000
+      }
+    },
+    {
+      "Name": "full-isolation overlapping transition replacement completes latest content",
+      "Passed": true,
+      "Evidence": {
+        "MaximumChannelError": 0,
+        "Channels": 4,
+        "Pixels": 256000
+      }
+    },
+    {
+      "Name": "full-isolation reentrant invalidation survives capture",
+      "Passed": true,
+      "Evidence": {
+        "RenderCalls": 2,
+        "MaximumChannelError": 0,
+        "Channels": 4,
+        "Pixels": 256000
+      }
+    },
+    {
+      "Name": "full-isolation cached-reentrant invalidation survives capture",
+      "Passed": true,
+      "Evidence": {
+        "RenderCalls": 2,
+        "MaximumChannelError": 0,
+        "Channels": 4,
+        "Pixels": 256000
+      }
+    },
+    {
+      "Name": "full-isolation render-side custom invalidation survives render completion",
+      "Passed": true,
+      "Evidence": {
+        "HandlerRenderCalls": 3
+      }
+    }
+  ],
+  "Errors": [],
+  "MissingAssets": [],
+  "Qualification": "Chromium native Skia raster; real module workers importing production startup; asset interception only. No pointer nudge or forced render before autonomous-state/pixel assertions.",
+  "Browser": "144.0.7559.96",
+  "Passed": 26,
+  "Failed": 0,
+  "FinalSourceFingerprint": "93c095505d6ae58d74e38e68e6296edf5f0ee81ed427f9d3042d26314d241cab"
+}

@@ -1,0 +1,3 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Slide through content" FontSize="17" FontWeight="SemiBold"/><Carousel x:Name="Carousel" Height="220"/><StackPanel Orientation="Horizontal" Spacing="12"><Button Content="← Previous" Click="Previous"/><Button Content="Next →" Click="Next"/></StackPanel></StackPanel></Border>
+</StackPanel>

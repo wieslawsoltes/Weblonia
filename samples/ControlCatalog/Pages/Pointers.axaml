@@ -1,0 +1,3 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Pointer input" FontSize="17" FontWeight="SemiBold"/><Border x:Name="PointerArea" Background="{DynamicResource SystemSelectionBrush}" Height="280" CornerRadius="8"><TextBlock x:Name="PointerText" Text="Move, press or touch this surface." TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border></StackPanel></Border>
+</StackPanel>

@@ -1,0 +1,3 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Navigation stack" FontSize="17" FontWeight="SemiBold"/><StackPanel Orientation="Horizontal" Spacing="12"><Button Content="Push page" Click="PushPage"/><Button Content="← Back" Click="PopPage"/></StackPanel><NavigationPage x:Name="Navigator" Height="230"/></StackPanel></Border>
+</StackPanel>

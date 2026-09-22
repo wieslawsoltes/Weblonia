@@ -1,0 +1,3 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Numeric values" FontSize="17" FontWeight="SemiBold"/><StackPanel Orientation="Horizontal" Spacing="12"><NumericUpDown x:Name="Numeric" Minimum="0" Maximum="100" Increment="1" Value="{Binding Value,Mode=TwoWay}" Width="220"/><NumericUpDown Minimum="-50" Maximum="50" Increment="0.25" Value="3.5" Width="220"/></StackPanel><ProgressBar Value="{Binding Value}" Height="8"/></StackPanel></Border>
+</StackPanel>

@@ -1,0 +1,66 @@
+RUN native Skia catalog startup
+PASS native Skia catalog startup
+RUN pointer clicks execute genuine ReactiveWeb commands and update binding
+PASS pointer clicks execute genuine ReactiveWeb commands and update binding
+RUN browser textarea input, selection and two-way ReactiveWeb binding
+PASS browser textarea input, selection and two-way ReactiveWeb binding
+RUN pointer slider updates progress and numeric binding
+PASS pointer slider updates progress and numeric binding
+RUN 10,000-item ListBox keyboard selection and bounded realization
+PASS 10,000-item ListBox keyboard selection and bounded realization
+RUN retained ComboBox popup selection and dismissal
+PASS retained ComboBox popup selection and dismissal
+RUN calendar native painting and keyboard date navigation
+PASS calendar native painting and keyboard date navigation
+RUN TableView header sorting and pointer row selection
+PASS TableView header sorting and pointer row selection
+RUN flyout light dismissal releases retained popup
+PASS flyout light dismissal releases retained popup
+RUN theme change propagates dynamic resources
+PASS theme change propagates dynamic resources
+RUN live XAML compiler produces and instantiates a changed view
+PASS live XAML compiler produces and instantiates a changed view
+RUN NavigationPage push and pop retain correct stack
+PASS NavigationPage push and pop retain correct stack
+RUN trusted click opens a real browser window with its own Skia surface
+PASS trusted click opens a real browser window with its own Skia surface
+RUN browser modal owner disabling and result delivery
+PASS browser modal owner disabling and result delivery
+RUN RxJS-debounced catalog navigation filter
+PASS RxJS-debounced catalog navigation filter
+RUN container query style activation and removal through real slider input
+PASS container query style activation and removal through real slider input
+RUN native visual bitmap cache reuse and geometry invalidation
+PASS native visual bitmap cache reuse and geometry invalidation
+RUN acrylic native rendering and live material property invalidation
+PASS acrylic native rendering and live material property invalidation
+RUN composition clocks, expression animation, cancellation and route disposal
+PASS composition clocks, expression animation, cancellation and route disposal
+RUN native HTML input binding, focus traversal, clipping and deterministic removal
+PASS native HTML input binding, focus traversal, clipping and deterministic removal
+RUN browser editing preserves emoji ZWJ and combining grapheme boundaries
+PASS browser editing preserves emoji ZWJ and combining grapheme boundaries
+RUN browser composition-event bridge groups preedit into one undo transaction (synthetic IME)
+PASS browser composition-event bridge groups preedit into one undo transaction (synthetic IME)
+RUN read-only TableView realizes bounded real row and cell controls
+PASS read-only TableView realizes bounded real row and cell controls
+SKIP real WebGL2 shader pixels transfer into native Skia No WebGL2 context available in this Chromium run.
+SKIP WebGL leases restore state and reject simultaneous ownership No WebGL2 context available in this Chromium run.
+SKIP WebGL context loss, restoration and disposal lifecycle No WebGL2 context available in this Chromium run.
+RUN Chromium accessibility tree exposes table hierarchy and actual grid cells
+PASS Chromium accessibility tree exposes table hierarchy and actual grid cells
+RUN accessibility activation respects enabled state and disposes old page nodes
+PASS accessibility activation respects enabled state and disposes old page nodes
+RUN automation password mirrors withhold values and preserve explicit accessible names
+PASS automation password mirrors withhold values and preserve explicit accessible names
+RUN focused password editing uses a protected native input and clears inactive buffers
+PASS focused password editing uses a protected native input and clears inactive buffers
+RUN navigation disposes prior page tree and leaves no popups
+PASS navigation disposes prior page tree and leaves no popups
+RUN no JavaScript page errors
+PASS no JavaScript page errors
+RUN no missing local assets
+PASS no missing local assets
+RUN no rendering errors during catalog sweep
+PASS no rendering errors during catalog sweep
+{"passed": 31, "failed": 0, "skipped": 3, "elapsedSeconds": 16.32}

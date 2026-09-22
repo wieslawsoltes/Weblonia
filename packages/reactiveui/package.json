@@ -1,0 +1,31 @@
+{
+  "name": "@wieslawsoltes/avalonia-reactiveui",
+  "version": "0.6.2-alpha.1",
+  "type": "module",
+  "description": "JavaScript avalonia-reactiveui runtime for AvaloniaWeb",
+  "license": "MIT",
+  "sideEffects": true,
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@wieslawsoltes/avalonia-base": "0.6.2-alpha.1",
+    "@wieslawsoltes/avalonia-browser": "0.6.2-alpha.1",
+    "@wieslawsoltes/avalonia-controls": "0.6.2-alpha.1",
+    "@wieslawsoltes/reactiveweb": "0.2.0",
+    "rxjs": "7.8.2"
+  }
+}

@@ -1,0 +1,23 @@
+PASS isolated native text editing and grapheme-safe backward deletion
+PASS focused edit switches to password without plaintext semantic exposure
+PASS render clock and animation advance during a confirmed UI-worker stall
+PASS compositor wheel scrolling continues during UI stall and reconciles exactly once
+PASS virtual table fast scrolling respects realized-content coverage
+PASS three threads vertical scrollbar routes real mouse capture
+PASS three threads horizontal scrollbar routes real mouse capture
+FAIL registered native DOM module binds to UI-worker model and cleans up {'Name': 'NativeModelEditor', 'Type': 'TextBox', 'Id': 2435, 'Bounds': {'X': 317, 'Y': 525, 'Width': 824, 'Height': 34}, 'Text': 'Nativto rker', 'Value': None, 'Offset': {'X': 0, 'Y': 0}, 'CaretIndex': 0, 'SelectionStart': 0, 'SelectionEnd': 0, 'SelectedIndex': None, 'IsChecked': None, 'IsEnabled': True}
+PASS isolated renderer restart replaces canvas and rebuilds identical committed pixels
+PASS native editor still works after renderer restart
+PASS registered custom visual executes, acknowledges bounded messages and restores durable state
+PASS 200 immediate state changes coalesce without losing final values or queuing scene deltas
+PASS hidden target explicit flush completes without an idle render loop
+PASS host resize reaches UI layout and the worker-owned backing canvas
+PASS live browser platform preferences are forwarded into the UI worker
+PASS worker-owned Window opens a real browser window with its own render worker
+PASS real isolated modal window blocks owner and returns its exact result
+{
+  "Passed": 16,
+  "Failed": 1,
+  "Errors": [],
+  "MissingAssets": []
+}

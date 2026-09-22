@@ -1,0 +1,184 @@
+[
+  {
+    "Name": "vendor",
+    "Args": [
+      "npm",
+      "run",
+      "verify:vendor"
+    ],
+    "ExitCode": 0,
+    "Seconds": 0.33
+  },
+  {
+    "Name": "workers",
+    "Args": [
+      "npm",
+      "run",
+      "verify:workers"
+    ],
+    "ExitCode": 0,
+    "Seconds": 0.58
+  },
+  {
+    "Name": "pack",
+    "Args": [
+      "npm",
+      "run",
+      "pack:all"
+    ],
+    "ExitCode": 0,
+    "Seconds": 6.55
+  },
+  {
+    "Name": "consumers",
+    "Args": [
+      "npm",
+      "run",
+      "test:packages"
+    ],
+    "ExitCode": 0,
+    "Seconds": 0.62
+  },
+  {
+    "Name": "catalog",
+    "Args": [
+      "python",
+      "tests/browser.py",
+      "--dist"
+    ],
+    "ExitCode": 0,
+    "Seconds": 34.17
+  },
+  {
+    "Name": "scrollbars-1",
+    "Args": [
+      "python",
+      "tests/scrollbars.py"
+    ],
+    "ExitCode": 0,
+    "Seconds": 10.91
+  },
+  {
+    "Name": "scrollbars-1.25",
+    "Args": [
+      "python",
+      "tests/scrollbars.py",
+      "--scale",
+      "1.25"
+    ],
+    "ExitCode": 0,
+    "Seconds": 11.46
+  },
+  {
+    "Name": "text",
+    "Args": [
+      "python",
+      "tests/text-quality.py"
+    ],
+    "ExitCode": 0,
+    "Seconds": 3.89
+  },
+  {
+    "Name": "automation",
+    "Args": [
+      "python",
+      "tests/automation-incremental.py"
+    ],
+    "ExitCode": 0,
+    "Seconds": 3.53
+  },
+  {
+    "Name": "threaded-browser",
+    "Args": [
+      "python",
+      "tests/threading-browser.py"
+    ],
+    "ExitCode": 0,
+    "Seconds": 17.81
+  },
+  {
+    "Name": "threaded-integration",
+    "Args": [
+      "python",
+      "tests/threading-integration.py"
+    ],
+    "ExitCode": 0,
+    "Seconds": 18.7
+  },
+  {
+    "Name": "threaded-quality",
+    "Args": [
+      "python",
+      "tests/threading-quality.py"
+    ],
+    "ExitCode": 0,
+    "Seconds": 27.26
+  },
+  {
+    "Name": "threaded-catalog",
+    "Args": [
+      "python",
+      "tests/threading-catalog.py"
+    ],
+    "ExitCode": 0,
+    "Seconds": 36.98
+  },
+  {
+    "Name": "startup",
+    "Args": [
+      "python",
+      "tests/worker-startup.py"
+    ],
+    "ExitCode": 0,
+    "Seconds": 55.74
+  },
+  {
+    "Name": "startup-http",
+    "Args": [
+      "python",
+      "tests/worker-startup.py",
+      "--http"
+    ],
+    "ExitCode": 2,
+    "Seconds": 2.09
+  },
+  {
+    "Name": "invalidation",
+    "Args": [
+      "python",
+      "tests/invalidation-browser.py"
+    ],
+    "ExitCode": 0,
+    "Seconds": 20.19
+  },
+  {
+    "Name": "worker-performance",
+    "Args": [
+      "python",
+      "tests/worker-performance-browser.py",
+      "--baseline",
+      "/mnt/data/invalidation-baseline/AvaloniaWeb"
+    ],
+    "ExitCode": 0,
+    "Seconds": 23.59
+  },
+  {
+    "Name": "threaded-performance",
+    "Args": [
+      "python",
+      "tests/threading-performance.py"
+    ],
+    "ExitCode": 0,
+    "Seconds": 22.69
+  },
+  {
+    "Name": "release-gate",
+    "Args": [
+      "npm",
+      "run",
+      "verify:release"
+    ],
+    "ExitCode": 1,
+    "Seconds": 0.32
+  }
+]

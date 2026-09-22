@@ -1,0 +1,1518 @@
+{
+  "Version": "0.6.2-alpha.1",
+  "SourceFingerprint": "93c095505d6ae58d74e38e68e6296edf5f0ee81ed427f9d3042d26314d241cab",
+  "Completed": true,
+  "Tests": [
+    {
+      "Name": "vertical completes without render error",
+      "Passed": true,
+      "Evidence": null
+    },
+    {
+      "Name": "horizontal completes without render error",
+      "Passed": true,
+      "Evidence": null
+    },
+    {
+      "Name": "UTF8 references exceed fresh encodes",
+      "Passed": true,
+      "Evidence": {
+        "StringWrites": 196517,
+        "StringDefinitions": 14420,
+        "StringReferences": 182097,
+        "Utf8Bytes": 123577
+      }
+    },
+    {
+      "Name": "placement changes use sparse patches",
+      "Passed": true,
+      "Evidence": {
+        "PatchedVisuals": 7518,
+        "ReplacedVisuals": 2737,
+        "SentBytes": 3186892,
+        "SentTransactions": 188
+      }
+    },
+    {
+      "Name": "identical text resources are interned",
+      "Passed": true,
+      "Evidence": {
+        "Created": 743,
+        "Reused": 1741,
+        "TextDescriptors": 2483,
+        "ImageBytes": 314216,
+        "InternHits": 1741,
+        "InternCandidates": 1793
+      }
+    },
+    {
+      "Name": "server validation reuses immutable reference summaries",
+      "Passed": true,
+      "Evidence": {
+        "ValidatedDescriptors": 10998,
+        "ReferenceChecks": 20114,
+        "GraphChecks": 144,
+        "ValidationMilliseconds": 0.39999999990686774,
+        "TotalValidationMilliseconds": 184.6999999997206,
+        "TotalApplyMilliseconds": 323.8999999992084,
+        "IdentityTransformsSkipped": 5419,
+        "Transactions": 188,
+        "ContentInstalls": 5771,
+        "VisualsVisited": 57656,
+        "ClippedBranches": 4260,
+        "AnimationTicks": 0,
+        "ApplyMilliseconds": 0.6999999999534339,
+        "ReferenceObjectsWalked": 71533,
+        "ReferenceCacheHits": 36549
+      }
+    },
+    {
+      "Name": "exact identity transforms skip native canvas operations",
+      "Passed": true,
+      "Evidence": null
+    },
+    {
+      "Name": "transport retains one in-flight batch and a bounded transfer pool",
+      "Passed": true,
+      "Evidence": {
+        "Bytes": 1044480,
+        "Hits": 531,
+        "Misses": 8
+      }
+    },
+    {
+      "Name": "100 warm repaint requests create no new packets or string encodes",
+      "Passed": true,
+      "Evidence": {
+        "SentBytes": 0,
+        "SentTransactions": 0,
+        "StringWrites": 0,
+        "StringDefinitions": 0
+      }
+    },
+    {
+      "Name": "0.6.1 versus optimized table-initial exact RGBA",
+      "Passed": true,
+      "Evidence": {
+        "Channels": 4,
+        "ComparedPixels": 1775920,
+        "MaximumChannelError": 0,
+        "ChangedPixels": 0,
+        "BaselineRGBA256": "c4f34c3d9eb4cf981e763f5a27838ba72aa2a20b793a14a76c23ecaa896709ab",
+        "OptimizedRGBA256": "c4f34c3d9eb4cf981e763f5a27838ba72aa2a20b793a14a76c23ecaa896709ab"
+      }
+    },
+    {
+      "Name": "0.6.1 versus optimized table-vertical exact RGBA",
+      "Passed": true,
+      "Evidence": {
+        "Channels": 4,
+        "ComparedPixels": 1775920,
+        "MaximumChannelError": 0,
+        "ChangedPixels": 0,
+        "BaselineRGBA256": "6cbb4a217647b6a84af1471569ad695d8162cf0e325eab7fdb33ec4309cd9002",
+        "OptimizedRGBA256": "6cbb4a217647b6a84af1471569ad695d8162cf0e325eab7fdb33ec4309cd9002"
+      }
+    },
+    {
+      "Name": "0.6.1 versus optimized table-both-axes exact RGBA",
+      "Passed": true,
+      "Evidence": {
+        "Channels": 4,
+        "ComparedPixels": 1775920,
+        "MaximumChannelError": 0,
+        "ChangedPixels": 0,
+        "BaselineRGBA256": "94323a43ee4a445067f42538d79bca97dea6b337dd194bff0feab3880b88419f",
+        "OptimizedRGBA256": "94323a43ee4a445067f42538d79bca97dea6b337dd194bff0feab3880b88419f"
+      }
+    },
+    {
+      "Name": "0.6.1 versus optimized typography exact RGBA",
+      "Passed": true,
+      "Evidence": {
+        "Channels": 4,
+        "ComparedPixels": 1775920,
+        "MaximumChannelError": 0,
+        "ChangedPixels": 0,
+        "BaselineRGBA256": "551aa3e79cc655cf051433c5d8ad8bd291672bf17718d65f7a186be92ae5f79d",
+        "OptimizedRGBA256": "551aa3e79cc655cf051433c5d8ad8bd291672bf17718d65f7a186be92ae5f79d"
+      }
+    },
+    {
+      "Name": "0.6.1 versus optimized scrollviewer exact RGBA",
+      "Passed": true,
+      "Evidence": {
+        "Channels": 4,
+        "ComparedPixels": 1775920,
+        "MaximumChannelError": 0,
+        "ChangedPixels": 0,
+        "BaselineRGBA256": "e88a522bb7b36f2404c33ddd22e41653167c33e483951a012caf95bdb97fd50c",
+        "OptimizedRGBA256": "e88a522bb7b36f2404c33ddd22e41653167c33e483951a012caf95bdb97fd50c"
+      }
+    },
+    {
+      "Name": "0.6.1 versus optimized image exact RGBA",
+      "Passed": true,
+      "Evidence": {
+        "Channels": 4,
+        "ComparedPixels": 1775920,
+        "MaximumChannelError": 0,
+        "ChangedPixels": 0,
+        "BaselineRGBA256": "0ba62c2fc1071786fd0b136b9fea69d38ebe061eb281c1b9b99f4e23f9002e0e",
+        "OptimizedRGBA256": "0ba62c2fc1071786fd0b136b9fea69d38ebe061eb281c1b9b99f4e23f9002e0e"
+      }
+    },
+    {
+      "Name": "0.6.1 versus optimized acrylic exact RGBA",
+      "Passed": true,
+      "Evidence": {
+        "Channels": 4,
+        "ComparedPixels": 1775920,
+        "MaximumChannelError": 0,
+        "ChangedPixels": 0,
+        "BaselineRGBA256": "211fa00691eb167238376799043c088826048897e97d23bc282dafdcb9184ffd",
+        "OptimizedRGBA256": "211fa00691eb167238376799043c088826048897e97d23bc282dafdcb9184ffd"
+      }
+    }
+  ],
+  "Errors": [],
+  "MissingAssets": [],
+  "Scale": 2,
+  "Viewport": [
+    562,
+    820
+  ],
+  "Qualification": "Full-isolation, real module workers, native Skia raster, locally intercepted source assets. Same Chromium, viewport and device scale for both revisions; not physical GPU FPS.",
+  "Browser": "144.0.7559.96",
+  "Baseline": {
+    "Version": "0.6.1-alpha.1",
+    "SourceFingerprint": "20b1bbb184d2a12cb94127af77fe635118214218461df38c4078bdc8156c8979"
+  },
+  "DiagnosticsBefore": {
+    "Mode": "full-isolation",
+    "Host": {
+      "EventsSent": 1,
+      "EventBatches": 1,
+      "CoalescedMoves": 0,
+      "MaxQueuedEvents": 1,
+      "AutomationWrites": 16044,
+      "MainHasSkiaRuntime": false,
+      "QueuedEvents": 0,
+      "HasDocument": true
+    },
+    "UI": {
+      "Thread": "avalonia-ui-worker",
+      "HasDocument": false,
+      "StartedAt": 1790020539859.2,
+      "Inputs": 1,
+      "LastUiFrame": {
+        "Milliseconds": 4.900000000139698,
+        "LayoutMilliseconds": 1.6000000000931323,
+        "RenderOrRecordMilliseconds": 1.7999999998137355,
+        "AutomationMilliseconds": 1.3000000000465661
+      },
+      "WasmHeapBytes": 134217728,
+      "ClientSize": {
+        "Width": 562,
+        "Height": 820
+      },
+      "PendingFrames": 0,
+      "LastError": null,
+      "Automation": {
+        "StructurePasses": 61,
+        "IncrementalPasses": 8,
+        "PeerVisits": 14669,
+        "Projections": 3098,
+        "AttributeWrites": 7154,
+        "NodesCreated": 1703,
+        "NodesRemoved": 1447
+      }
+    },
+    "Renderer": {
+      "Mode": "full-isolation",
+      "UI": {
+        "EncodeMilliseconds": 37.799999999580905,
+        "LastEncodeMilliseconds": 0.10000000009313226,
+        "EncodeCalls": 69,
+        "StringWrites": 152145,
+        "Utf8Bytes": 64950,
+        "StringDefinitions": 6567,
+        "StringReferences": 145578,
+        "PatchedVisuals": 2697,
+        "ReplacedVisuals": 2717,
+        "SentTransactions": 69,
+        "SentBytes": 2376892,
+        "PendingFramesCoalesced": 1,
+        "ProcessedSequence": 69,
+        "SubmittedSequence": 69,
+        "Restarts": 0,
+        "MaxInFlight": 1,
+        "LastWorkerFrame": 76,
+        "Recorder": {
+          "Captures": 82,
+          "VisualVisits": 5414,
+          "CleanBranches": 1376,
+          "ContentRecords": 4066,
+          "Commands": 3433,
+          "CaptureMilliseconds": 1.3000000000465661,
+          "ReferenceObjectsWalked": 64037,
+          "ReferenceCacheHits": 40380
+        },
+        "Resources": {
+          "Created": 543,
+          "Reused": 1314,
+          "TextDescriptors": 1856,
+          "ImageBytes": 314216,
+          "InternHits": 1314,
+          "InternCandidates": 1366
+        },
+        "BufferPool": {
+          "Bytes": 1044480,
+          "Hits": 231,
+          "Misses": 8
+        }
+      },
+      "Worker": {
+        "DecodeMilliseconds": 40.00000000023283,
+        "LastDecodeMilliseconds": 0.09999999986030161,
+        "DecodedStringDefinitions": 6567,
+        "DecodedStringReferences": 145578,
+        "Thread": "composition-render-worker",
+        "InstanceId": "bc1bcfe5-935a3c82-ea7b7b41-de74771f",
+        "HasDocument": false,
+        "CrossOriginIsolated": false,
+        "WorkerFrames": 76,
+        "ReceivedBytes": 2376892,
+        "ReturnedBuffers": 69,
+        "Clock": "worker-requestAnimationFrame",
+        "StartedAt": 1790020539898.5,
+        "Scheduler": {
+          "dirty": false,
+          "frameId": null,
+          "running": false,
+          "suspended": false
+        },
+        "Target": {
+          "Frames": 76,
+          "RenderMilliseconds": 25.399999999906868,
+          "ResizeCount": 1,
+          "SelectedBackend": "canvas",
+          "BackendFailures": [],
+          "Width": 1124,
+          "Height": 1640
+        },
+        "Scroll": {
+          "Inputs": 0,
+          "SpeculativeFrames": 0,
+          "CoverageClamps": 0,
+          "MaxPending": 0,
+          "Reconciliations": 0,
+          "ProcessedInput": 1,
+          "Pending": 0,
+          "Offsets": [
+            {
+              "Id": 2435,
+              "Offset": [
+                0,
+                1122
+              ],
+              "Base": [
+                0,
+                1122
+              ],
+              "CoverageY": [
+                1054,
+                1198
+              ]
+            }
+          ]
+        },
+        "Scene": {
+          "ValidatedDescriptors": 5957,
+          "ReferenceChecks": 10446,
+          "GraphChecks": 82,
+          "ValidationMilliseconds": 0.8000000000465661,
+          "TotalValidationMilliseconds": 118.00000000093132,
+          "TotalApplyMilliseconds": 205.29999999981374,
+          "IdentityTransformsSkipped": 2028,
+          "Transactions": 69,
+          "ContentInstalls": 4075,
+          "VisualsVisited": 21866,
+          "ClippedBranches": 1498,
+          "AnimationTicks": 0,
+          "ApplyMilliseconds": 1.3000000000465661,
+          "ReferenceObjectsWalked": 53979,
+          "ReferenceCacheHits": 13098
+        },
+        "Resources": 131,
+        "Visuals": 362,
+        "CompositionObjects": 0,
+        "ActiveAnimations": 0,
+        "Skia": {
+          "Renderer": "SkiaSharpWeb",
+          "NativeRuntime": true,
+          "DeviceClipQueries": 4126,
+          "Frames": 76,
+          "PathCache": {
+            "Count": 0,
+            "Hits": 0,
+            "Misses": 0
+          },
+          "TextCache": {
+            "Count": 158,
+            "Bytes": 5660452,
+            "Hits": 3780,
+            "Misses": 158
+          },
+          "ParagraphCache": {
+            "Count": 0,
+            "EstimatedBytes": 0,
+            "KeySerializations": 0,
+            "Builds": 0
+          },
+          "TextMetricsCache": {
+            "Count": 167,
+            "Hits": 3817,
+            "Misses": 167
+          },
+          "TextLinesVisited": 3984,
+          "TextTilesVisited": 3938,
+          "TextRasterizations": 158,
+          "TextUploads": 158,
+          "TextMeasurements": 167,
+          "SolidPaintCache": {
+            "Count": 13,
+            "Hits": 7880,
+            "Misses": 13
+          },
+          "TextService": "Native SkParagraph for registered fonts; browser system-font fallback"
+        },
+        "WasmHeapBytes": 134217728,
+        "CustomHandlers": [],
+        "Sequence": 69,
+        "Generation": 1
+      }
+    }
+  },
+  "DiagnosticsAfter": {
+    "Mode": "full-isolation",
+    "Host": {
+      "EventsSent": 1,
+      "EventBatches": 1,
+      "CoalescedMoves": 0,
+      "MaxQueuedEvents": 1,
+      "AutomationWrites": 19173,
+      "MainHasSkiaRuntime": false,
+      "QueuedEvents": 0,
+      "HasDocument": true
+    },
+    "UI": {
+      "Thread": "avalonia-ui-worker",
+      "HasDocument": false,
+      "StartedAt": 1790020539859.2,
+      "Inputs": 1,
+      "LastUiFrame": {
+        "Milliseconds": 2,
+        "LayoutMilliseconds": 0.6000000000931323,
+        "RenderOrRecordMilliseconds": 1.3999999999068677,
+        "AutomationMilliseconds": 0
+      },
+      "WasmHeapBytes": 134217728,
+      "ClientSize": {
+        "Width": 562,
+        "Height": 820
+      },
+      "PendingFrames": 0,
+      "LastError": null,
+      "Automation": {
+        "StructurePasses": 121,
+        "IncrementalPasses": 67,
+        "PeerVisits": 30011,
+        "Projections": 5017,
+        "AttributeWrites": 9417,
+        "NodesCreated": 1721,
+        "NodesRemoved": 1465
+      }
+    },
+    "Renderer": {
+      "Mode": "full-isolation",
+      "UI": {
+        "EncodeMilliseconds": 58.799999999348074,
+        "LastEncodeMilliseconds": 0.19999999995343387,
+        "EncodeCalls": 188,
+        "StringWrites": 196517,
+        "Utf8Bytes": 123577,
+        "StringDefinitions": 14420,
+        "StringReferences": 182097,
+        "PatchedVisuals": 7518,
+        "ReplacedVisuals": 2737,
+        "SentTransactions": 188,
+        "SentBytes": 3186892,
+        "PendingFramesCoalesced": 1,
+        "ProcessedSequence": 188,
+        "SubmittedSequence": 188,
+        "Restarts": 0,
+        "MaxInFlight": 1,
+        "LastWorkerFrame": 195,
+        "Recorder": {
+          "Captures": 202,
+          "VisualVisits": 10255,
+          "CleanBranches": 4381,
+          "ContentRecords": 5762,
+          "Commands": 4498,
+          "CaptureMilliseconds": 1,
+          "ReferenceObjectsWalked": 104640,
+          "ReferenceCacheHits": 105608
+        },
+        "Resources": {
+          "Created": 743,
+          "Reused": 1741,
+          "TextDescriptors": 2483,
+          "ImageBytes": 314216,
+          "InternHits": 1741,
+          "InternCandidates": 1793
+        },
+        "BufferPool": {
+          "Bytes": 1044480,
+          "Hits": 531,
+          "Misses": 8
+        }
+      },
+      "Worker": {
+        "DecodeMilliseconds": 55.00000000023283,
+        "LastDecodeMilliseconds": 0.10000000009313226,
+        "DecodedStringDefinitions": 14420,
+        "DecodedStringReferences": 182097,
+        "Thread": "composition-render-worker",
+        "InstanceId": "bc1bcfe5-935a3c82-ea7b7b41-de74771f",
+        "HasDocument": false,
+        "CrossOriginIsolated": false,
+        "WorkerFrames": 195,
+        "ReceivedBytes": 3186892,
+        "ReturnedBuffers": 188,
+        "Clock": "worker-requestAnimationFrame",
+        "StartedAt": 1790020539898.5,
+        "Scheduler": {
+          "dirty": false,
+          "frameId": null,
+          "running": false,
+          "suspended": false
+        },
+        "Target": {
+          "Frames": 195,
+          "RenderMilliseconds": 23.199999999953434,
+          "ResizeCount": 1,
+          "SelectedBackend": "canvas",
+          "BackendFailures": [],
+          "Width": 1124,
+          "Height": 1640
+        },
+        "Scroll": {
+          "Inputs": 0,
+          "SpeculativeFrames": 0,
+          "CoverageClamps": 0,
+          "MaxPending": 0,
+          "Reconciliations": 0,
+          "ProcessedInput": 1,
+          "Pending": 0,
+          "Offsets": [
+            {
+              "Id": 2435,
+              "Offset": [
+                120,
+                578
+              ],
+              "Base": [
+                120,
+                578
+              ],
+              "CoverageY": [
+                510,
+                654
+              ]
+            }
+          ]
+        },
+        "Scene": {
+          "ValidatedDescriptors": 10998,
+          "ReferenceChecks": 20114,
+          "GraphChecks": 144,
+          "ValidationMilliseconds": 0.39999999990686774,
+          "TotalValidationMilliseconds": 184.6999999997206,
+          "TotalApplyMilliseconds": 323.8999999992084,
+          "IdentityTransformsSkipped": 5419,
+          "Transactions": 188,
+          "ContentInstalls": 5771,
+          "VisualsVisited": 57656,
+          "ClippedBranches": 4260,
+          "AnimationTicks": 0,
+          "ApplyMilliseconds": 0.6999999999534339,
+          "ReferenceObjectsWalked": 71533,
+          "ReferenceCacheHits": 36549
+        },
+        "Resources": 131,
+        "Visuals": 362,
+        "CompositionObjects": 0,
+        "ActiveAnimations": 0,
+        "Skia": {
+          "Renderer": "SkiaSharpWeb",
+          "NativeRuntime": true,
+          "DeviceClipQueries": 12216,
+          "Frames": 195,
+          "PathCache": {
+            "Count": 0,
+            "Hits": 0,
+            "Misses": 0
+          },
+          "TextCache": {
+            "Count": 168,
+            "Bytes": 5702676,
+            "Hits": 10375,
+            "Misses": 168
+          },
+          "ParagraphCache": {
+            "Count": 0,
+            "EstimatedBytes": 0,
+            "KeySerializations": 0,
+            "Builds": 0
+          },
+          "TextMetricsCache": {
+            "Count": 177,
+            "Hits": 10682,
+            "Misses": 177
+          },
+          "TextLinesVisited": 10859,
+          "TextTilesVisited": 10543,
+          "TextRasterizations": 168,
+          "TextUploads": 168,
+          "TextMeasurements": 177,
+          "SolidPaintCache": {
+            "Count": 13,
+            "Hits": 19572,
+            "Misses": 13
+          },
+          "TextService": "Native SkParagraph for registered fonts; browser system-font fallback"
+        },
+        "WasmHeapBytes": 134217728,
+        "CustomHandlers": [],
+        "Sequence": 188,
+        "Generation": 1
+      }
+    }
+  },
+  "Workloads": {
+    "vertical": {
+      "Samples": [
+        {
+          "Milliseconds": 7.699999999953434,
+          "LayoutMilliseconds": 3.5,
+          "RenderOrRecordMilliseconds": 3,
+          "AutomationMilliseconds": 1.1999999999534339,
+          "SubmittedLatencyMilliseconds": 36.4000000001397
+        },
+        {
+          "Milliseconds": 7.599999999860302,
+          "LayoutMilliseconds": 4,
+          "RenderOrRecordMilliseconds": 2.2999999998137355,
+          "AutomationMilliseconds": 1.3000000000465661,
+          "SubmittedLatencyMilliseconds": 36.5
+        },
+        {
+          "Milliseconds": 4.699999999953434,
+          "LayoutMilliseconds": 1.8000000000465661,
+          "RenderOrRecordMilliseconds": 1.8999999999068677,
+          "AutomationMilliseconds": 1,
+          "SubmittedLatencyMilliseconds": 36.299999999813735
+        },
+        {
+          "Milliseconds": 6.100000000093132,
+          "LayoutMilliseconds": 2.199999999953434,
+          "RenderOrRecordMilliseconds": 2.4000000001396984,
+          "AutomationMilliseconds": 1.5,
+          "SubmittedLatencyMilliseconds": 36.300000000046566
+        },
+        {
+          "Milliseconds": 9.199999999953434,
+          "LayoutMilliseconds": 2.5,
+          "RenderOrRecordMilliseconds": 5.199999999953434,
+          "AutomationMilliseconds": 1.5,
+          "SubmittedLatencyMilliseconds": 1044.6000000000931
+        },
+        {
+          "Milliseconds": 4.100000000093132,
+          "LayoutMilliseconds": 1.6000000000931323,
+          "RenderOrRecordMilliseconds": 1.6000000000931323,
+          "AutomationMilliseconds": 0.8000000000465661,
+          "SubmittedLatencyMilliseconds": 34.5999999998603
+        },
+        {
+          "Milliseconds": 4.5,
+          "LayoutMilliseconds": 1.7999999998137355,
+          "RenderOrRecordMilliseconds": 1.7000000001862645,
+          "AutomationMilliseconds": 1,
+          "SubmittedLatencyMilliseconds": 34.60000000009313
+        },
+        {
+          "Milliseconds": 4.5,
+          "LayoutMilliseconds": 1.5999999998603016,
+          "RenderOrRecordMilliseconds": 2,
+          "AutomationMilliseconds": 0.9000000001396984,
+          "SubmittedLatencyMilliseconds": 30
+        },
+        {
+          "Milliseconds": 4.7999999998137355,
+          "LayoutMilliseconds": 1.8999999999068677,
+          "RenderOrRecordMilliseconds": 1.8999999999068677,
+          "AutomationMilliseconds": 1,
+          "SubmittedLatencyMilliseconds": 34.300000000046566
+        },
+        {
+          "Milliseconds": 5,
+          "LayoutMilliseconds": 1.6999999999534339,
+          "RenderOrRecordMilliseconds": 1.9000000001396984,
+          "AutomationMilliseconds": 1.3000000000465661,
+          "SubmittedLatencyMilliseconds": 33.0999999998603
+        },
+        {
+          "Milliseconds": 4.7999999998137355,
+          "LayoutMilliseconds": 1.6000000000931323,
+          "RenderOrRecordMilliseconds": 1.8000000000465661,
+          "AutomationMilliseconds": 1.2999999998137355,
+          "SubmittedLatencyMilliseconds": 33.200000000186265
+        },
+        {
+          "Milliseconds": 4.800000000046566,
+          "LayoutMilliseconds": 1.5999999998603016,
+          "RenderOrRecordMilliseconds": 1.8000000000465661,
+          "AutomationMilliseconds": 1.4000000001396984,
+          "SubmittedLatencyMilliseconds": 33.699999999953434
+        },
+        {
+          "Milliseconds": 4.2000000001862645,
+          "LayoutMilliseconds": 1.5,
+          "RenderOrRecordMilliseconds": 1.8000000000465661,
+          "AutomationMilliseconds": 0.9000000001396984,
+          "SubmittedLatencyMilliseconds": 36
+        },
+        {
+          "Milliseconds": 4.600000000093132,
+          "LayoutMilliseconds": 1.6000000000931323,
+          "RenderOrRecordMilliseconds": 1.8999999999068677,
+          "AutomationMilliseconds": 1.1000000000931323,
+          "SubmittedLatencyMilliseconds": 30.899999999906868
+        },
+        {
+          "Milliseconds": 5.199999999953434,
+          "LayoutMilliseconds": 2.300000000046566,
+          "RenderOrRecordMilliseconds": 1.8999999999068677,
+          "AutomationMilliseconds": 0.8999999999068677,
+          "SubmittedLatencyMilliseconds": 32.800000000046566
+        },
+        {
+          "Milliseconds": 5.5,
+          "LayoutMilliseconds": 2.2999999998137355,
+          "RenderOrRecordMilliseconds": 1.9000000001396984,
+          "AutomationMilliseconds": 1.3000000000465661,
+          "SubmittedLatencyMilliseconds": 36.800000000046566
+        },
+        {
+          "Milliseconds": 5.600000000093132,
+          "LayoutMilliseconds": 2.300000000046566,
+          "RenderOrRecordMilliseconds": 2.1000000000931323,
+          "AutomationMilliseconds": 1.1999999999534339,
+          "SubmittedLatencyMilliseconds": 35.5999999998603
+        },
+        {
+          "Milliseconds": 5.199999999953434,
+          "LayoutMilliseconds": 2.3999999999068677,
+          "RenderOrRecordMilliseconds": 1.8999999999068677,
+          "AutomationMilliseconds": 0.9000000001396984,
+          "SubmittedLatencyMilliseconds": 36.700000000186265
+        },
+        {
+          "Milliseconds": 5.900000000139698,
+          "LayoutMilliseconds": 2.300000000046566,
+          "RenderOrRecordMilliseconds": 2.6000000000931323,
+          "AutomationMilliseconds": 1,
+          "SubmittedLatencyMilliseconds": 40.5999999998603
+        },
+        {
+          "Milliseconds": 5,
+          "LayoutMilliseconds": 1.6999999999534339,
+          "RenderOrRecordMilliseconds": 2.3999999999068677,
+          "AutomationMilliseconds": 0.9000000001396984,
+          "SubmittedLatencyMilliseconds": 33.199999999953434
+        },
+        {
+          "Milliseconds": 5.2000000001862645,
+          "LayoutMilliseconds": 2.2000000001862645,
+          "RenderOrRecordMilliseconds": 2,
+          "AutomationMilliseconds": 1,
+          "SubmittedLatencyMilliseconds": 34.4000000001397
+        },
+        {
+          "Milliseconds": 5.199999999953434,
+          "LayoutMilliseconds": 2.199999999953434,
+          "RenderOrRecordMilliseconds": 2.1000000000931323,
+          "AutomationMilliseconds": 0.8999999999068677,
+          "SubmittedLatencyMilliseconds": 34.300000000046566
+        },
+        {
+          "Milliseconds": 5.5,
+          "LayoutMilliseconds": 2.300000000046566,
+          "RenderOrRecordMilliseconds": 2.199999999953434,
+          "AutomationMilliseconds": 1,
+          "SubmittedLatencyMilliseconds": 32.299999999813735
+        },
+        {
+          "Milliseconds": 5.199999999953434,
+          "LayoutMilliseconds": 1.8000000000465661,
+          "RenderOrRecordMilliseconds": 2,
+          "AutomationMilliseconds": 1.3999999999068677,
+          "SubmittedLatencyMilliseconds": 34.199999999953434
+        },
+        {
+          "Milliseconds": 5,
+          "LayoutMilliseconds": 1.9000000001396984,
+          "RenderOrRecordMilliseconds": 1.8999999999068677,
+          "AutomationMilliseconds": 1.1000000000931323,
+          "SubmittedLatencyMilliseconds": 31.0999999998603
+        },
+        {
+          "Milliseconds": 4.5,
+          "LayoutMilliseconds": 1.9000000001396984,
+          "RenderOrRecordMilliseconds": 1.8000000000465661,
+          "AutomationMilliseconds": 0.7999999998137355,
+          "SubmittedLatencyMilliseconds": 32.9000000001397
+        },
+        {
+          "Milliseconds": 5.400000000139698,
+          "LayoutMilliseconds": 2.1000000000931323,
+          "RenderOrRecordMilliseconds": 2.300000000046566,
+          "AutomationMilliseconds": 1,
+          "SubmittedLatencyMilliseconds": 34.199999999953434
+        },
+        {
+          "Milliseconds": 5.300000000046566,
+          "LayoutMilliseconds": 1.8000000000465661,
+          "RenderOrRecordMilliseconds": 2.3999999999068677,
+          "AutomationMilliseconds": 1.1000000000931323,
+          "SubmittedLatencyMilliseconds": 33.699999999953434
+        },
+        {
+          "Milliseconds": 5.800000000046566,
+          "LayoutMilliseconds": 2,
+          "RenderOrRecordMilliseconds": 2.3999999999068677,
+          "AutomationMilliseconds": 1.4000000001396984,
+          "SubmittedLatencyMilliseconds": 32.199999999953434
+        },
+        {
+          "Milliseconds": 5.899999999906868,
+          "LayoutMilliseconds": 2.300000000046566,
+          "RenderOrRecordMilliseconds": 2.699999999953434,
+          "AutomationMilliseconds": 0.8999999999068677,
+          "SubmittedLatencyMilliseconds": 33.4000000001397
+        },
+        {
+          "Milliseconds": 6.2000000001862645,
+          "LayoutMilliseconds": 1.9000000001396984,
+          "RenderOrRecordMilliseconds": 2,
+          "AutomationMilliseconds": 2.300000000046566,
+          "SubmittedLatencyMilliseconds": 33.89999999990687
+        },
+        {
+          "Milliseconds": 4.800000000046566,
+          "LayoutMilliseconds": 1.8999999999068677,
+          "RenderOrRecordMilliseconds": 1.8000000000465661,
+          "AutomationMilliseconds": 1.1000000000931323,
+          "SubmittedLatencyMilliseconds": 32
+        },
+        {
+          "Milliseconds": 5.800000000046566,
+          "LayoutMilliseconds": 2.6000000000931323,
+          "RenderOrRecordMilliseconds": 2.0999999998603016,
+          "AutomationMilliseconds": 1.1000000000931323,
+          "SubmittedLatencyMilliseconds": 36.699999999953434
+        },
+        {
+          "Milliseconds": 4.899999999906868,
+          "LayoutMilliseconds": 1.7999999998137355,
+          "RenderOrRecordMilliseconds": 1.9000000001396984,
+          "AutomationMilliseconds": 1.1999999999534339,
+          "SubmittedLatencyMilliseconds": 32
+        },
+        {
+          "Milliseconds": 4.899999999906868,
+          "LayoutMilliseconds": 1.8999999999068677,
+          "RenderOrRecordMilliseconds": 1.8000000000465661,
+          "AutomationMilliseconds": 1.1999999999534339,
+          "SubmittedLatencyMilliseconds": 31.9000000001397
+        },
+        {
+          "Milliseconds": 4.800000000046566,
+          "LayoutMilliseconds": 1.8000000000465661,
+          "RenderOrRecordMilliseconds": 1.8000000000465661,
+          "AutomationMilliseconds": 1.1999999999534339,
+          "SubmittedLatencyMilliseconds": 33.5999999998603
+        },
+        {
+          "Milliseconds": 4.800000000046566,
+          "LayoutMilliseconds": 1.6999999999534339,
+          "RenderOrRecordMilliseconds": 1.9000000001396984,
+          "AutomationMilliseconds": 1.1999999999534339,
+          "SubmittedLatencyMilliseconds": 33.4000000001397
+        },
+        {
+          "Milliseconds": 4.800000000046566,
+          "LayoutMilliseconds": 1.9000000001396984,
+          "RenderOrRecordMilliseconds": 1.6999999999534339,
+          "AutomationMilliseconds": 1.1999999999534339,
+          "SubmittedLatencyMilliseconds": 32.699999999953434
+        },
+        {
+          "Milliseconds": 5.699999999953434,
+          "LayoutMilliseconds": 2.199999999953434,
+          "RenderOrRecordMilliseconds": 2.1000000000931323,
+          "AutomationMilliseconds": 1.3999999999068677,
+          "SubmittedLatencyMilliseconds": 34.699999999953434
+        },
+        {
+          "Milliseconds": 4.899999999906868,
+          "LayoutMilliseconds": 2.0999999998603016,
+          "RenderOrRecordMilliseconds": 2,
+          "AutomationMilliseconds": 0.8000000000465661,
+          "SubmittedLatencyMilliseconds": 32.4000000001397
+        },
+        {
+          "Milliseconds": 4.900000000139698,
+          "LayoutMilliseconds": 2.199999999953434,
+          "RenderOrRecordMilliseconds": 1.9000000001396984,
+          "AutomationMilliseconds": 0.8000000000465661,
+          "SubmittedLatencyMilliseconds": 33.39999999990687
+        },
+        {
+          "Milliseconds": 4.5,
+          "LayoutMilliseconds": 1.6999999999534339,
+          "RenderOrRecordMilliseconds": 2,
+          "AutomationMilliseconds": 0.8000000000465661,
+          "SubmittedLatencyMilliseconds": 34
+        },
+        {
+          "Milliseconds": 4.400000000139698,
+          "LayoutMilliseconds": 1.6000000000931323,
+          "RenderOrRecordMilliseconds": 1.8000000000465661,
+          "AutomationMilliseconds": 1,
+          "SubmittedLatencyMilliseconds": 35.199999999953434
+        },
+        {
+          "Milliseconds": 4.300000000046566,
+          "LayoutMilliseconds": 1.5999999998603016,
+          "RenderOrRecordMilliseconds": 1.8000000000465661,
+          "AutomationMilliseconds": 0.9000000001396984,
+          "SubmittedLatencyMilliseconds": 31.9000000001397
+        },
+        {
+          "Milliseconds": 5.400000000139698,
+          "LayoutMilliseconds": 2.4000000001396984,
+          "RenderOrRecordMilliseconds": 2,
+          "AutomationMilliseconds": 1,
+          "SubmittedLatencyMilliseconds": 32.199999999953434
+        },
+        {
+          "Milliseconds": 4.600000000093132,
+          "LayoutMilliseconds": 1.6000000000931323,
+          "RenderOrRecordMilliseconds": 1.6999999999534339,
+          "AutomationMilliseconds": 1.3000000000465661,
+          "SubmittedLatencyMilliseconds": 35
+        },
+        {
+          "Milliseconds": 5.300000000046566,
+          "LayoutMilliseconds": 2.0999999998603016,
+          "RenderOrRecordMilliseconds": 2.2000000001862645,
+          "AutomationMilliseconds": 1,
+          "SubmittedLatencyMilliseconds": 31.5
+        },
+        {
+          "Milliseconds": 5.099999999860302,
+          "LayoutMilliseconds": 2.0999999998603016,
+          "RenderOrRecordMilliseconds": 2.1000000000931323,
+          "AutomationMilliseconds": 0.8999999999068677,
+          "SubmittedLatencyMilliseconds": 33.39999999990687
+        },
+        {
+          "Milliseconds": 4.400000000139698,
+          "LayoutMilliseconds": 1.8000000000465661,
+          "RenderOrRecordMilliseconds": 1.9000000001396984,
+          "AutomationMilliseconds": 0.6999999999534339,
+          "SubmittedLatencyMilliseconds": 37.5
+        },
+        {
+          "Milliseconds": 4.5,
+          "LayoutMilliseconds": 1.5,
+          "RenderOrRecordMilliseconds": 2.1000000000931323,
+          "AutomationMilliseconds": 0.8999999999068677,
+          "SubmittedLatencyMilliseconds": 31.800000000046566
+        },
+        {
+          "Milliseconds": 7.599999999860302,
+          "LayoutMilliseconds": 2.5999999998603016,
+          "RenderOrRecordMilliseconds": 3.199999999953434,
+          "AutomationMilliseconds": 1.8000000000465661,
+          "SubmittedLatencyMilliseconds": 32.89999999990687
+        },
+        {
+          "Milliseconds": 4.399999999906868,
+          "LayoutMilliseconds": 1.6999999999534339,
+          "RenderOrRecordMilliseconds": 1.8000000000465661,
+          "AutomationMilliseconds": 0.8999999999068677,
+          "SubmittedLatencyMilliseconds": 31.600000000093132
+        },
+        {
+          "Milliseconds": 4.5,
+          "LayoutMilliseconds": 1.6999999999534339,
+          "RenderOrRecordMilliseconds": 1.8000000000465661,
+          "AutomationMilliseconds": 0.9000000001396984,
+          "SubmittedLatencyMilliseconds": 36.39999999990687
+        },
+        {
+          "Milliseconds": 5.300000000046566,
+          "LayoutMilliseconds": 1.8999999999068677,
+          "RenderOrRecordMilliseconds": 1.7000000001862645,
+          "AutomationMilliseconds": 1.6000000000931323,
+          "SubmittedLatencyMilliseconds": 36.4000000001397
+        },
+        {
+          "Milliseconds": 9.300000000046566,
+          "LayoutMilliseconds": 3.7000000001862645,
+          "RenderOrRecordMilliseconds": 3.5,
+          "AutomationMilliseconds": 2.0999999998603016,
+          "SubmittedLatencyMilliseconds": 66
+        },
+        {
+          "Milliseconds": 5.400000000139698,
+          "LayoutMilliseconds": 1.6000000000931323,
+          "RenderOrRecordMilliseconds": 2.300000000046566,
+          "AutomationMilliseconds": 1.5,
+          "SubmittedLatencyMilliseconds": 49.199999999953434
+        },
+        {
+          "Milliseconds": 5.100000000093132,
+          "LayoutMilliseconds": 2.300000000046566,
+          "RenderOrRecordMilliseconds": 2,
+          "AutomationMilliseconds": 0.8000000000465661,
+          "SubmittedLatencyMilliseconds": 32.800000000046566
+        },
+        {
+          "Milliseconds": 4.699999999953434,
+          "LayoutMilliseconds": 1.8000000000465661,
+          "RenderOrRecordMilliseconds": 1.6999999999534339,
+          "AutomationMilliseconds": 1.1999999999534339,
+          "SubmittedLatencyMilliseconds": 32.800000000046566
+        },
+        {
+          "Milliseconds": 4.800000000046566,
+          "LayoutMilliseconds": 1.6999999999534339,
+          "RenderOrRecordMilliseconds": 1.6999999999534339,
+          "AutomationMilliseconds": 1.4000000001396984,
+          "SubmittedLatencyMilliseconds": 31.5
+        },
+        {
+          "Milliseconds": 5,
+          "LayoutMilliseconds": 2,
+          "RenderOrRecordMilliseconds": 1.5999999998603016,
+          "AutomationMilliseconds": 1.1999999999534339,
+          "SubmittedLatencyMilliseconds": 32.299999999813735
+        }
+      ],
+      "Rows": 14,
+      "Recorder": {
+        "Captures": 142,
+        "VisualVisits": 8426,
+        "CleanBranches": 2787,
+        "ContentRecords": 5644,
+        "Commands": 4380,
+        "CaptureMilliseconds": 1.1999999999534339,
+        "ReferenceObjectsWalked": 92132,
+        "ReferenceCacheHits": 72606
+      },
+      "Transport": {
+        "EncodeMilliseconds": 50.299999999813735,
+        "LastEncodeMilliseconds": 0.2999999998137355,
+        "EncodeCalls": 129,
+        "StringWrites": 185897,
+        "Utf8Bytes": 105582,
+        "StringDefinitions": 11883,
+        "StringReferences": 174014,
+        "PatchedVisuals": 5689,
+        "ReplacedVisuals": 2737,
+        "SentTransactions": 129,
+        "SentBytes": 2925640,
+        "PendingFramesCoalesced": 1,
+        "ProcessedSequence": 129,
+        "SubmittedSequence": 129,
+        "Restarts": 0,
+        "MaxInFlight": 1,
+        "LastWorkerFrame": 136
+      },
+      "Error": null
+    },
+    "horizontal": {
+      "Samples": [
+        {
+          "Milliseconds": 0.39999999990686774,
+          "LayoutMilliseconds": 0,
+          "RenderOrRecordMilliseconds": 0.39999999990686774,
+          "AutomationMilliseconds": 0,
+          "SubmittedLatencyMilliseconds": 0.5
+        },
+        {
+          "Milliseconds": 1.5,
+          "LayoutMilliseconds": 0.4000000001396984,
+          "RenderOrRecordMilliseconds": 1,
+          "AutomationMilliseconds": 0.09999999986030161,
+          "SubmittedLatencyMilliseconds": 31
+        },
+        {
+          "Milliseconds": 1.8999999999068677,
+          "LayoutMilliseconds": 0.5999999998603016,
+          "RenderOrRecordMilliseconds": 1.3000000000465661,
+          "AutomationMilliseconds": 0,
+          "SubmittedLatencyMilliseconds": 48.60000000009313
+        },
+        {
+          "Milliseconds": 6.100000000093132,
+          "LayoutMilliseconds": 0.5,
+          "RenderOrRecordMilliseconds": 5.5,
+          "AutomationMilliseconds": 0,
+          "SubmittedLatencyMilliseconds": 40.299999999813735
+        },
+        {
+          "Milliseconds": 2.300000000046566,
+          "LayoutMilliseconds": 0.6000000000931323,
+          "RenderOrRecordMilliseconds": 1.6999999999534339,
+          "AutomationMilliseconds": 0,
+          "SubmittedLatencyMilliseconds": 40.4000000001397
+        },
+        {
+          "Milliseconds": 1.7000000001862645,
+          "LayoutMilliseconds": 0.5,
+          "RenderOrRecordMilliseconds": 1.1000000000931323,
+          "AutomationMilliseconds": 0.10000000009313226,
+          "SubmittedLatencyMilliseconds": 29.300000000046566
+        },
+        {
+          "Milliseconds": 3.4000000001396984,
+          "LayoutMilliseconds": 1.9000000001396984,
+          "RenderOrRecordMilliseconds": 1.5,
+          "AutomationMilliseconds": 0,
+          "SubmittedLatencyMilliseconds": 36.39999999990687
+        },
+        {
+          "Milliseconds": 1.6999999999534339,
+          "LayoutMilliseconds": 0.4000000001396984,
+          "RenderOrRecordMilliseconds": 1.2999999998137355,
+          "AutomationMilliseconds": 0,
+          "SubmittedLatencyMilliseconds": 28.600000000093132
+        },
+        {
+          "Milliseconds": 1.8000000000465661,
+          "LayoutMilliseconds": 0.6000000000931323,
+          "RenderOrRecordMilliseconds": 1.0999999998603016,
+          "AutomationMilliseconds": 0.10000000009313226,
+          "SubmittedLatencyMilliseconds": 35
+        },
+        {
+          "Milliseconds": 2.800000000046566,
+          "LayoutMilliseconds": 1.5,
+          "RenderOrRecordMilliseconds": 1.1999999999534339,
+          "AutomationMilliseconds": 0.10000000009313226,
+          "SubmittedLatencyMilliseconds": 33.199999999953434
+        },
+        {
+          "Milliseconds": 3.1000000000931323,
+          "LayoutMilliseconds": 0.5,
+          "RenderOrRecordMilliseconds": 2.6000000000931323,
+          "AutomationMilliseconds": 0,
+          "SubmittedLatencyMilliseconds": 34.39999999990687
+        },
+        {
+          "Milliseconds": 3.5,
+          "LayoutMilliseconds": 2,
+          "RenderOrRecordMilliseconds": 1.5,
+          "AutomationMilliseconds": 0,
+          "SubmittedLatencyMilliseconds": 34.199999999953434
+        },
+        {
+          "Milliseconds": 1.8999999999068677,
+          "LayoutMilliseconds": 0.39999999990686774,
+          "RenderOrRecordMilliseconds": 1.3999999999068677,
+          "AutomationMilliseconds": 0.10000000009313226,
+          "SubmittedLatencyMilliseconds": 32.60000000009313
+        },
+        {
+          "Milliseconds": 2.0999999998603016,
+          "LayoutMilliseconds": 0.5999999998603016,
+          "RenderOrRecordMilliseconds": 1.5,
+          "AutomationMilliseconds": 0,
+          "SubmittedLatencyMilliseconds": 31.199999999953434
+        },
+        {
+          "Milliseconds": 1.8000000000465661,
+          "LayoutMilliseconds": 0.5,
+          "RenderOrRecordMilliseconds": 1.2000000001862645,
+          "AutomationMilliseconds": 0.09999999986030161,
+          "SubmittedLatencyMilliseconds": 36
+        },
+        {
+          "Milliseconds": 1.7000000001862645,
+          "LayoutMilliseconds": 0.5,
+          "RenderOrRecordMilliseconds": 1.2000000001862645,
+          "AutomationMilliseconds": 0,
+          "SubmittedLatencyMilliseconds": 31.199999999953434
+        },
+        {
+          "Milliseconds": 2.1000000000931323,
+          "LayoutMilliseconds": 0.6000000000931323,
+          "RenderOrRecordMilliseconds": 1.3999999999068677,
+          "AutomationMilliseconds": 0.10000000009313226,
+          "SubmittedLatencyMilliseconds": 35.10000000009313
+        },
+        {
+          "Milliseconds": 1.7999999998137355,
+          "LayoutMilliseconds": 0.5,
+          "RenderOrRecordMilliseconds": 1.2999999998137355,
+          "AutomationMilliseconds": 0,
+          "SubmittedLatencyMilliseconds": 31.5
+        },
+        {
+          "Milliseconds": 2.5999999998603016,
+          "LayoutMilliseconds": 1.1999999999534339,
+          "RenderOrRecordMilliseconds": 1.3000000000465661,
+          "AutomationMilliseconds": 0.09999999986030161,
+          "SubmittedLatencyMilliseconds": 34.300000000046566
+        },
+        {
+          "Milliseconds": 1.8000000000465661,
+          "LayoutMilliseconds": 0.7000000001862645,
+          "RenderOrRecordMilliseconds": 1.0999999998603016,
+          "AutomationMilliseconds": 0,
+          "SubmittedLatencyMilliseconds": 35.5999999998603
+        },
+        {
+          "Milliseconds": 2.1000000000931323,
+          "LayoutMilliseconds": 0.8000000000465661,
+          "RenderOrRecordMilliseconds": 1.1999999999534339,
+          "AutomationMilliseconds": 0.10000000009313226,
+          "SubmittedLatencyMilliseconds": 31.9000000001397
+        },
+        {
+          "Milliseconds": 2.699999999953434,
+          "LayoutMilliseconds": 1.1999999999534339,
+          "RenderOrRecordMilliseconds": 1.4000000001396984,
+          "AutomationMilliseconds": 0.09999999986030161,
+          "SubmittedLatencyMilliseconds": 32.39999999990687
+        },
+        {
+          "Milliseconds": 2.5999999998603016,
+          "LayoutMilliseconds": 0.5999999998603016,
+          "RenderOrRecordMilliseconds": 1.9000000001396984,
+          "AutomationMilliseconds": 0,
+          "SubmittedLatencyMilliseconds": 36.10000000009313
+        },
+        {
+          "Milliseconds": 1.8999999999068677,
+          "LayoutMilliseconds": 0.5,
+          "RenderOrRecordMilliseconds": 1.3000000000465661,
+          "AutomationMilliseconds": 0.09999999986030161,
+          "SubmittedLatencyMilliseconds": 29.199999999953434
+        },
+        {
+          "Milliseconds": 2.2999999998137355,
+          "LayoutMilliseconds": 0.5999999998603016,
+          "RenderOrRecordMilliseconds": 1.5,
+          "AutomationMilliseconds": 0.09999999986030161,
+          "SubmittedLatencyMilliseconds": 36.10000000009313
+        },
+        {
+          "Milliseconds": 2.6000000000931323,
+          "LayoutMilliseconds": 0.6999999999534339,
+          "RenderOrRecordMilliseconds": 1.8000000000465661,
+          "AutomationMilliseconds": 0.10000000009313226,
+          "SubmittedLatencyMilliseconds": 30
+        },
+        {
+          "Milliseconds": 2.199999999953434,
+          "LayoutMilliseconds": 0.5999999998603016,
+          "RenderOrRecordMilliseconds": 1.6000000000931323,
+          "AutomationMilliseconds": 0,
+          "SubmittedLatencyMilliseconds": 36
+        },
+        {
+          "Milliseconds": 2.3999999999068677,
+          "LayoutMilliseconds": 0.6999999999534339,
+          "RenderOrRecordMilliseconds": 1.6999999999534339,
+          "AutomationMilliseconds": 0,
+          "SubmittedLatencyMilliseconds": 30.899999999906868
+        },
+        {
+          "Milliseconds": 2.699999999953434,
+          "LayoutMilliseconds": 0.6999999999534339,
+          "RenderOrRecordMilliseconds": 1.8000000000465661,
+          "AutomationMilliseconds": 0.10000000009313226,
+          "SubmittedLatencyMilliseconds": 34.300000000046566
+        },
+        {
+          "Milliseconds": 1.8000000000465661,
+          "LayoutMilliseconds": 0.5,
+          "RenderOrRecordMilliseconds": 1.2000000001862645,
+          "AutomationMilliseconds": 0.09999999986030161,
+          "SubmittedLatencyMilliseconds": 34.199999999953434
+        },
+        {
+          "Milliseconds": 2,
+          "LayoutMilliseconds": 0.5999999998603016,
+          "RenderOrRecordMilliseconds": 1.3000000000465661,
+          "AutomationMilliseconds": 0.10000000009313226,
+          "SubmittedLatencyMilliseconds": 34.39999999990687
+        },
+        {
+          "Milliseconds": 2.0999999998603016,
+          "LayoutMilliseconds": 0.5,
+          "RenderOrRecordMilliseconds": 1.5,
+          "AutomationMilliseconds": 0.09999999986030161,
+          "SubmittedLatencyMilliseconds": 33.5
+        },
+        {
+          "Milliseconds": 3,
+          "LayoutMilliseconds": 0.5,
+          "RenderOrRecordMilliseconds": 2.3999999999068677,
+          "AutomationMilliseconds": 0.10000000009313226,
+          "SubmittedLatencyMilliseconds": 33.5
+        },
+        {
+          "Milliseconds": 2.1000000000931323,
+          "LayoutMilliseconds": 0.6000000000931323,
+          "RenderOrRecordMilliseconds": 1.5,
+          "AutomationMilliseconds": 0,
+          "SubmittedLatencyMilliseconds": 29.9000000001397
+        },
+        {
+          "Milliseconds": 2,
+          "LayoutMilliseconds": 0.6999999999534339,
+          "RenderOrRecordMilliseconds": 1.1999999999534339,
+          "AutomationMilliseconds": 0.10000000009313226,
+          "SubmittedLatencyMilliseconds": 36.0999999998603
+        },
+        {
+          "Milliseconds": 1.8999999999068677,
+          "LayoutMilliseconds": 0.5999999998603016,
+          "RenderOrRecordMilliseconds": 1.3000000000465661,
+          "AutomationMilliseconds": 0,
+          "SubmittedLatencyMilliseconds": 31
+        },
+        {
+          "Milliseconds": 1.8999999999068677,
+          "LayoutMilliseconds": 0.5999999998603016,
+          "RenderOrRecordMilliseconds": 1.3000000000465661,
+          "AutomationMilliseconds": 0,
+          "SubmittedLatencyMilliseconds": 34.9000000001397
+        },
+        {
+          "Milliseconds": 1.8999999999068677,
+          "LayoutMilliseconds": 0.6000000000931323,
+          "RenderOrRecordMilliseconds": 1.1999999999534339,
+          "AutomationMilliseconds": 0.09999999986030161,
+          "SubmittedLatencyMilliseconds": 30.5999999998603
+        },
+        {
+          "Milliseconds": 2,
+          "LayoutMilliseconds": 0.6000000000931323,
+          "RenderOrRecordMilliseconds": 1.2999999998137355,
+          "AutomationMilliseconds": 0.10000000009313226,
+          "SubmittedLatencyMilliseconds": 36.60000000009313
+        },
+        {
+          "Milliseconds": 2.1000000000931323,
+          "LayoutMilliseconds": 0.6999999999534339,
+          "RenderOrRecordMilliseconds": 1.4000000001396984,
+          "AutomationMilliseconds": 0,
+          "SubmittedLatencyMilliseconds": 32.10000000009313
+        },
+        {
+          "Milliseconds": 2,
+          "LayoutMilliseconds": 0.5,
+          "RenderOrRecordMilliseconds": 1.5,
+          "AutomationMilliseconds": 0,
+          "SubmittedLatencyMilliseconds": 34.299999999813735
+        },
+        {
+          "Milliseconds": 1.6999999999534339,
+          "LayoutMilliseconds": 0.5,
+          "RenderOrRecordMilliseconds": 1.1000000000931323,
+          "AutomationMilliseconds": 0.09999999986030161,
+          "SubmittedLatencyMilliseconds": 32.89999999990687
+        },
+        {
+          "Milliseconds": 1.8999999999068677,
+          "LayoutMilliseconds": 0.6000000000931323,
+          "RenderOrRecordMilliseconds": 1.2999999998137355,
+          "AutomationMilliseconds": 0,
+          "SubmittedLatencyMilliseconds": 34.4000000001397
+        },
+        {
+          "Milliseconds": 1.8999999999068677,
+          "LayoutMilliseconds": 0.5999999998603016,
+          "RenderOrRecordMilliseconds": 1.3000000000465661,
+          "AutomationMilliseconds": 0,
+          "SubmittedLatencyMilliseconds": 30
+        },
+        {
+          "Milliseconds": 2.1000000000931323,
+          "LayoutMilliseconds": 0.6999999999534339,
+          "RenderOrRecordMilliseconds": 1.3000000000465661,
+          "AutomationMilliseconds": 0.10000000009313226,
+          "SubmittedLatencyMilliseconds": 40
+        },
+        {
+          "Milliseconds": 2,
+          "LayoutMilliseconds": 0.6000000000931323,
+          "RenderOrRecordMilliseconds": 1.3000000000465661,
+          "AutomationMilliseconds": 0.09999999986030161,
+          "SubmittedLatencyMilliseconds": 27.300000000046566
+        },
+        {
+          "Milliseconds": 2,
+          "LayoutMilliseconds": 0.6000000000931323,
+          "RenderOrRecordMilliseconds": 1.1999999999534339,
+          "AutomationMilliseconds": 0.19999999995343387,
+          "SubmittedLatencyMilliseconds": 35.10000000009313
+        },
+        {
+          "Milliseconds": 1.8000000000465661,
+          "LayoutMilliseconds": 0.6000000000931323,
+          "RenderOrRecordMilliseconds": 1.1999999999534339,
+          "AutomationMilliseconds": 0,
+          "SubmittedLatencyMilliseconds": 30.899999999906868
+        },
+        {
+          "Milliseconds": 1.9000000001396984,
+          "LayoutMilliseconds": 0.6000000000931323,
+          "RenderOrRecordMilliseconds": 1.1999999999534339,
+          "AutomationMilliseconds": 0.10000000009313226,
+          "SubmittedLatencyMilliseconds": 35.800000000046566
+        },
+        {
+          "Milliseconds": 1.9000000001396984,
+          "LayoutMilliseconds": 0.5,
+          "RenderOrRecordMilliseconds": 1.3000000000465661,
+          "AutomationMilliseconds": 0.10000000009313226,
+          "SubmittedLatencyMilliseconds": 31.699999999953434
+        },
+        {
+          "Milliseconds": 1.9000000001396984,
+          "LayoutMilliseconds": 0.6000000000931323,
+          "RenderOrRecordMilliseconds": 1.1999999999534339,
+          "AutomationMilliseconds": 0.10000000009313226,
+          "SubmittedLatencyMilliseconds": 35.300000000046566
+        },
+        {
+          "Milliseconds": 1.8999999999068677,
+          "LayoutMilliseconds": 0.5999999998603016,
+          "RenderOrRecordMilliseconds": 1.2000000001862645,
+          "AutomationMilliseconds": 0.09999999986030161,
+          "SubmittedLatencyMilliseconds": 30.600000000093132
+        },
+        {
+          "Milliseconds": 2.0999999998603016,
+          "LayoutMilliseconds": 0.5999999998603016,
+          "RenderOrRecordMilliseconds": 1.4000000001396984,
+          "AutomationMilliseconds": 0.09999999986030161,
+          "SubmittedLatencyMilliseconds": 35.299999999813735
+        },
+        {
+          "Milliseconds": 1.7999999998137355,
+          "LayoutMilliseconds": 0.5999999998603016,
+          "RenderOrRecordMilliseconds": 1.1000000000931323,
+          "AutomationMilliseconds": 0.09999999986030161,
+          "SubmittedLatencyMilliseconds": 35
+        },
+        {
+          "Milliseconds": 1.7999999998137355,
+          "LayoutMilliseconds": 0.5999999998603016,
+          "RenderOrRecordMilliseconds": 1.1999999999534339,
+          "AutomationMilliseconds": 0,
+          "SubmittedLatencyMilliseconds": 33.5
+        },
+        {
+          "Milliseconds": 2,
+          "LayoutMilliseconds": 0.6999999999534339,
+          "RenderOrRecordMilliseconds": 1.1999999999534339,
+          "AutomationMilliseconds": 0.10000000009313226,
+          "SubmittedLatencyMilliseconds": 29
+        },
+        {
+          "Milliseconds": 1.8999999999068677,
+          "LayoutMilliseconds": 0.5999999998603016,
+          "RenderOrRecordMilliseconds": 1.3000000000465661,
+          "AutomationMilliseconds": 0,
+          "SubmittedLatencyMilliseconds": 35.9000000001397
+        },
+        {
+          "Milliseconds": 1.8999999999068677,
+          "LayoutMilliseconds": 0.5999999998603016,
+          "RenderOrRecordMilliseconds": 1.1999999999534339,
+          "AutomationMilliseconds": 0.10000000009313226,
+          "SubmittedLatencyMilliseconds": 30.5
+        },
+        {
+          "Milliseconds": 1.9000000001396984,
+          "LayoutMilliseconds": 0.6000000000931323,
+          "RenderOrRecordMilliseconds": 1.1999999999534339,
+          "AutomationMilliseconds": 0.10000000009313226,
+          "SubmittedLatencyMilliseconds": 35.89999999990687
+        },
+        {
+          "Milliseconds": 2,
+          "LayoutMilliseconds": 0.6000000000931323,
+          "RenderOrRecordMilliseconds": 1.3999999999068677,
+          "AutomationMilliseconds": 0,
+          "SubmittedLatencyMilliseconds": 31.9000000001397
+        }
+      ],
+      "Rows": 14,
+      "Recorder": {
+        "Captures": 202,
+        "VisualVisits": 10255,
+        "CleanBranches": 4381,
+        "ContentRecords": 5762,
+        "Commands": 4498,
+        "CaptureMilliseconds": 1,
+        "ReferenceObjectsWalked": 104640,
+        "ReferenceCacheHits": 105608
+      },
+      "Transport": {
+        "EncodeMilliseconds": 58.799999999348074,
+        "LastEncodeMilliseconds": 0.19999999995343387,
+        "EncodeCalls": 188,
+        "StringWrites": 196517,
+        "Utf8Bytes": 123577,
+        "StringDefinitions": 14420,
+        "StringReferences": 182097,
+        "PatchedVisuals": 7518,
+        "ReplacedVisuals": 2737,
+        "SentTransactions": 188,
+        "SentBytes": 3186892,
+        "PendingFramesCoalesced": 1,
+        "ProcessedSequence": 188,
+        "SubmittedSequence": 188,
+        "Restarts": 0,
+        "MaxInFlight": 1,
+        "LastWorkerFrame": 195
+      },
+      "Error": null
+    }
+  },
+  "Passed": 16,
+  "Failed": 0,
+  "FinalSourceFingerprint": "93c095505d6ae58d74e38e68e6296edf5f0ee81ed427f9d3042d26314d241cab"
+}

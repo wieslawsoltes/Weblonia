@@ -1,0 +1,3 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Header and content" FontSize="17" FontWeight="SemiBold"/><HeaderedContentControl Header="Connection settings"><TextBox Text="https://localhost:4173"/></HeaderedContentControl></StackPanel></Border>
+</StackPanel>

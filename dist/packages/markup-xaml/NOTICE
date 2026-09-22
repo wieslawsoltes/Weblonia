@@ -1,0 +1,29 @@
+AvaloniaWeb 0.2.0-alpha.1
+
+An independent, partial JavaScript reimplementation of Avalonia APIs and a
+XamlX-style compiler architecture. This is not an official AvaloniaUI,
+XamlX, Skia, or ReactiveUI release. Product names identify compatibility
+references; no affiliation or endorsement is claimed.
+
+Reference: AvaloniaUI/Avalonia, copyright AvaloniaUI OÜ (MIT).
+Reference: kekekeks/XamlX, copyright 2019 Nikita Tsukanov (MIT).
+Reference license texts are retained in licenses/.
+Full upstream Git repositories are not bundled. docs/upstream-lock.json
+records the inspected source revisions. scripts/sync-upstream.mjs obtains
+full source clones on a networked development machine; this download step
+was not executed in the delivery environment.
+
+The native renderer is the actual SkiaSharpWeb distribution from
+wieslawsoltes/SkiaSharpWeb. Its third-party notices and native build metadata
+remain under vendor/skiasharpweb/dist/. Skia, CanvasKit, font engines and
+other embedded dependencies retain their upstream licenses.
+
+ReactiveWeb and its RxJS implementation are actual upstream browser
+bundles, not replacements. Retain vendor/licenses/ and the browser chunks.
+RxJS is Apache-2.0 licensed; additional included components have their own
+license/notice files. The root MIT license does not relicense these files.
+
+No font files are included. Browser system-font rasterization supplies the
+default text path. Native fonts must be explicitly supplied by the host.
+
+See docs/COMPATIBILITY.md before relying on behavioral compatibility.

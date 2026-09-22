@@ -1,0 +1,13 @@
+{
+  "RecoveredArchive": "AvaloniaWeb-0.2.0-alpha.1-source.zip",
+  "ArchiveSha256": "b00330e60a45fd229a90cee7d437ae6e5af643646bfadd13c6c92c08dbb6e7ca",
+  "ManifestEntries": 882,
+  "Mismatches": [],
+  "FontFiles": [],
+  "LaterSourceAvailable": false,
+  "LaterFilesAvailable": [
+    "overview-light.png",
+    "typography-light.png"
+  ],
+  "RecoveryMethod": "Verified mounted 0.2.0-alpha.1 source; kept original archive and extracted baseline unchanged. Later text-performance source archive was not mounted."
+}

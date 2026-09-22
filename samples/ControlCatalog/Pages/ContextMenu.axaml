@@ -1,0 +1,3 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Retained popup surface" FontSize="17" FontWeight="SemiBold"/><Button x:Name="FlyoutTarget" Content="Open context menu" Click="OpenFlyout" HorizontalAlignment="Left"/><TextBlock Text="The popup is rendered into the same native Skia surface." Classes="muted"/></StackPanel></Border>
+</StackPanel>

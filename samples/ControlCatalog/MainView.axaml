@@ -1,0 +1,43 @@
+<Grid xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      x:Name="Shell" RowDefinitions="72,*,32" Background="{DynamicResource SystemBackgroundBrush}">
+  <Grid.Styles>
+    <Style Selector="Button.nav"><Setter Property="HorizontalContentAlignment" Value="Left"/><Setter Property="BorderThickness" Value="0"/><Setter Property="Background" Value="Transparent"/><Setter Property="CornerRadius" Value="6"/></Style>
+    <Style Selector="Button.nav.selected"><Setter Property="Background" Value="{DynamicResource SystemSelectionBrush}"/><Setter Property="Foreground" Value="{DynamicResource SystemAccentBrush}"/></Style>
+  </Grid.Styles>
+  <Border Background="{DynamicResource SystemSurfaceBrush}" BorderBrush="{DynamicResource SystemBorderBrush}" BorderThickness="0,0,0,1" Padding="26,16">
+    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="18">
+      <Border Width="36" Height="36" Background="#6757D9" CornerRadius="10"><TextBlock Text="A" Foreground="White" FontSize="25" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+      <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="14" VerticalAlignment="Center"><TextBlock Text="Avalonia" FontSize="22" FontWeight="SemiBold"/><TextBlock Text="/" Foreground="{DynamicResource SystemMutedBrush}" FontSize="22"/><TextBlock Text="Control Catalog" FontSize="16" VerticalAlignment="Center"/></StackPanel>
+      <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="10"><Button x:Name="ThemeButton" Content="◐  Theme" Click="ToggleTheme"/><Button x:Name="WindowButton" Content="↗  New window" Click="NewWindow"/><Border Background="{DynamicResource SystemSelectionBrush}" CornerRadius="4" Padding="9,5" VerticalAlignment="Center"><TextBlock Text="WEB · ALPHA" FontSize="10" FontWeight="Bold" Foreground="{DynamicResource SystemAccentBrush}"/></Border></StackPanel>
+    </Grid>
+  </Border>
+  <Grid Grid.Row="1" x:Name="Workspace" ColumnDefinitions="258,*">
+    <Border Background="{DynamicResource SystemSurfaceAltBrush}" BorderBrush="{DynamicResource SystemBorderBrush}" BorderThickness="0,0,1,0" Padding="16,20,12,12">
+      <Grid RowDefinitions="Auto,Auto,*" RowSpacing="14">
+        <TextBox x:Name="SearchBox" Text="{Binding Query,Mode=TwoWay}" PlaceholderText="Search controls…" Height="38"/>
+        <Button x:Name="HomeButton" Grid.Row="1" Content="⌂   Overview" Classes="nav" Click="Home"/>
+        <ScrollViewer x:Name="NavigationScroll" Grid.Row="2" HorizontalScrollBarVisibility="Disabled"><StackPanel x:Name="NavigationItems" Spacing="3"/></ScrollViewer>
+      </Grid>
+    </Border>
+    <Grid Grid.Column="1" RowDefinitions="Auto,*,Auto" Margin="34,26,34,20" RowSpacing="20">
+      <StackPanel Spacing="8">
+        <TextBlock Text="{Binding Breadcrumb}" Classes="muted" FontSize="12"/>
+        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="20">
+          <TextBlock x:Name="PageTitle" Text="{Binding CurrentTitle}" FontSize="32" FontWeight="SemiBold"/>
+          <Button Grid.Column="1" x:Name="SourceButton" Content="&lt;/&gt;  XAML source" Click="ToggleSource" VerticalAlignment="Center"/>
+        </Grid>
+        <TextBlock Text="{Binding Description}" Classes="muted" TextWrapping="Wrap" FontSize="14"/>
+      </StackPanel>
+      <ScrollViewer x:Name="PageScroll" Grid.Row="1" HorizontalScrollBarVisibility="Disabled"><ContentControl x:Name="PageHost" HorizontalContentAlignment="Stretch"/></ScrollViewer>
+      <Border x:Name="SourcePane" Grid.Row="2" IsVisible="False" Classes="card" Padding="12">
+        <Grid RowDefinitions="Auto,*" Height="250" RowSpacing="10">
+          <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10"><TextBlock Text="XAML → AST → JavaScript emitter" FontWeight="SemiBold" VerticalAlignment="Center"/><Button Grid.Column="1" x:Name="ApplyXamlButton" Content="Compile &amp; apply" Classes="accent" Click="ApplyXaml"/></Grid>
+          <TextBox x:Name="SourceEditor" Grid.Row="1" AcceptsReturn="True" AcceptsTab="True" TextWrapping="NoWrap" FontFamily="monospace" FontSize="12"/>
+        </Grid>
+      </Border>
+    </Grid>
+  </Grid>
+  <Border Grid.Row="2" BorderBrush="{DynamicResource SystemBorderBrush}" BorderThickness="0,1,0,0" Background="{DynamicResource SystemSurfaceBrush}" Padding="22,6">
+    <Grid ColumnDefinitions="*,Auto"><TextBlock x:Name="StatusText" Text="{Binding Status}" FontSize="11" Classes="muted"/><TextBlock Grid.Column="1" Text="{Binding RendererStatus}" FontSize="11" Foreground="{DynamicResource SystemAccentBrush}"/></Grid>
+  </Border>
+</Grid>

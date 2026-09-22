@@ -1,0 +1,98 @@
+{
+  "Version": "0.5.1-alpha.1",
+  "SourceFingerprint": "519cca656f2ce49e61a2e0d95b796b37fd7aaded82b7444e10771b073dc2f33e",
+  "Completed": true,
+  "Tests": [
+    {
+      "Name": "warm paint does not rebuild or mutate accessibility DOM",
+      "Passed": true,
+      "Details": {
+        "Frames": 25,
+        "StructurePasses": 0,
+        "Projections": 0,
+        "DomMutations": 0
+      },
+      "Milliseconds": 126.73
+    },
+    {
+      "Name": "detached LabeledBy updates its consumer and releases replaced dependencies",
+      "Passed": true,
+      "Details": null,
+      "Milliseconds": 48.11
+    },
+    {
+      "Name": "transitive and cyclic label relationships converge without stale names",
+      "Passed": true,
+      "Details": null,
+      "Milliseconds": 19.81
+    },
+    {
+      "Name": "Control-valued content label remains live without replacing the button node",
+      "Passed": true,
+      "Details": null,
+      "Milliseconds": 29.62
+    },
+    {
+      "Name": "visibility removes and restores complete automation subtrees",
+      "Passed": true,
+      "Details": null,
+      "Milliseconds": 18.37
+    },
+    {
+      "Name": "raw nodes flatten descendants and preserve reorder identity",
+      "Passed": true,
+      "Details": null,
+      "Milliseconds": 16.02
+    },
+    {
+      "Name": "command availability and parameter changes update aria-disabled",
+      "Passed": true,
+      "Details": null,
+      "Milliseconds": 17.05
+    },
+    {
+      "Name": "inherited disabling refreshes descendant semantics",
+      "Passed": true,
+      "Details": null,
+      "Milliseconds": 25.27
+    },
+    {
+      "Name": "focus projects editor semantics and transfers ownership between parents",
+      "Passed": true,
+      "Details": null,
+      "Milliseconds": 53.92
+    },
+    {
+      "Name": "password conversion clears mirrored values and native plain-text buffers",
+      "Passed": false,
+      "Error": "Page.evaluate: Error: Assertion failed\n    at window.assert (eval at evaluate (:290:30), <anonymous>:3:70)\n    at eval (eval at evaluate (:290:30), <anonymous>:3:42)\n    at async <anonymous>:316:30",
+      "Milliseconds": 46.92
+    },
+    {
+      "Name": "recycled table rows retain accessibility nodes with updated content",
+      "Passed": true,
+      "Details": {
+        "Before": 10,
+        "After": 12,
+        "RetainedNodes": 10
+      },
+      "Milliseconds": 56.63
+    },
+    {
+      "Name": "explicit rendering consumes scheduled callbacks and settled UI stays idle",
+      "Passed": true,
+      "Details": null,
+      "Milliseconds": 319.35
+    }
+  ],
+  "PageErrors": [],
+  "MissingAssets": [],
+  "Mode": "local-asset-interception",
+  "ScreenReaderQualified": false,
+  "StartedAt": "2026-09-21T13:22:25.352626+00:00",
+  "Passed": 11,
+  "Failed": 1,
+  "Browser": "144.0.7559.96",
+  "Backend": "canvas",
+  "FinalSourceFingerprint": "519cca656f2ce49e61a2e0d95b796b37fd7aaded82b7444e10771b073dc2f33e"
+}

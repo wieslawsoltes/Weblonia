@@ -1,0 +1,124 @@
+TAP version 13
+# Subtest: gesture collections enforce single ownership, duplicate rejection and immediate batched ownership
+ok 1 - gesture collections enforce single ownership, duplicate rejection and immediate batched ownership
+  ---
+  duration_ms: 2.597399
+  type: 'test'
+  ...
+# Subtest: gesture collection replacement and owner disposal detach contacts without sharing lifetimes
+ok 2 - gesture collection replacement and owner disposal detach contacts without sharing lifetimes
+  ---
+  duration_ms: 0.552394
+  type: 'test'
+  ...
+# Subtest: scroll threshold subtracts its dead zone and captures separately from element capture
+ok 3 - scroll threshold subtracts its dead zone and captures separately from element capture
+  ---
+  duration_ms: 1.64176
+  type: 'test'
+  ...
+# Subtest: Mouse contacts are never converted into touch scrolling
+ok 4 - Mouse contacts are never converted into touch scrolling
+  ---
+  duration_ms: 0.424576
+  type: 'test'
+  ...
+# Subtest: Pen contacts use the same threshold and release contracts as touch
+ok 5 - Pen contacts use the same threshold and release contracts as touch
+  ---
+  duration_ms: 0.464615
+  type: 'test'
+  ...
+# Subtest: unhandled scroll does not steal element capture
+ok 6 - unhandled scroll does not steal element capture
+  ---
+  duration_ms: 0.933515
+  type: 'test'
+  ...
+# Subtest: ScrollViewer cancels a pressed button before dragging can invoke Click
+ok 7 - ScrollViewer cancels a pressed button before dragging can invoke Click
+  ---
+  duration_ms: 6.107152
+  type: 'test'
+  ...
+# Subtest: a normal touch tap still invokes Button.Click once
+ok 8 - a normal touch tap still invokes Button.Click once
+  ---
+  duration_ms: 1.715138
+  type: 'test'
+  ...
+# Subtest: nested boundary-aware scroll recognizers yield to an ancestor that can consume movement
+ok 9 - nested boundary-aware scroll recognizers yield to an ancestor that can consume movement
+  ---
+  duration_ms: 1.122875
+  type: 'test'
+  ...
+# Subtest: pinch reports finite scale, midpoint, angle and exactly one end event
+ok 10 - pinch reports finite scale, midpoint, angle and exactly one end event
+  ---
+  duration_ms: 0.899286
+  type: 'test'
+  ...
+# Subtest: coincident pinch contacts and an extra third contact do not produce NaN or extra captures
+ok 11 - coincident pinch contacts and an extra third contact do not produce NaN or extra captures
+  ---
+  duration_ms: 0.343547
+  type: 'test'
+  ...
+# Subtest: cancel and collection removal release both pinch capture and pending contacts
+ok 12 - cancel and collection removal release both pinch capture and pending contacts
+  ---
+  duration_ms: 0.229839
+  type: 'test'
+  ...
+# Subtest: a second contact upgrades a running scroll to a pinch without leaving scroll state active
+ok 13 - a second contact upgrades a running scroll to a pinch without leaving scroll state active
+  ---
+  duration_ms: 0.392538
+  type: 'test'
+  ...
+# Subtest: PreventGestureRecognition in a tunnel handler suppresses recognizers without suppressing ordinary input
+ok 14 - PreventGestureRecognition in a tunnel handler suppresses recognizers without suppressing ordinary input
+  ---
+  duration_ms: 0.240144
+  type: 'test'
+  ...
+# Subtest: velocity estimator is bounded, rejects reversed time, tolerates duplicate timestamps and stale release
+ok 15 - velocity estimator is bounded, rejects reversed time, tolerates duplicate timestamps and stale release
+  ---
+  duration_ms: 2.958792
+  type: 'test'
+  ...
+# Subtest: inertial displacement is frame-rate independent using analytic integration
+ok 16 - inertial displacement is frame-rate independent using analytic integration
+  ---
+  duration_ms: 1.617804
+  type: 'test'
+  ...
+# Subtest: new press, disabled target, explicit cancellation and disposal stop inertia callbacks
+ok 17 - new press, disabled target, explicit cancellation and disposal stop inertia callbacks
+  ---
+  duration_ms: 0.666132
+  type: 'test'
+  ...
+# Subtest: capture-lost reentrancy preserves the latest capturer
+ok 18 - capture-lost reentrancy preserves the latest capturer
+  ---
+  duration_ms: 0.293353
+  type: 'test'
+  ...
+# Subtest: XAML builds recognizer collections and validates scalar options
+ok 19 - XAML builds recognizer collections and validates scalar options
+  ---
+  duration_ms: 5.939955
+  type: 'test'
+  ...
+1..19
+# tests 19
+# suites 0
+# pass 19
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 331.96252

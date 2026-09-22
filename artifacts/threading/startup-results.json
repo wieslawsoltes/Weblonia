@@ -1,0 +1,455 @@
+{
+  "Version": "0.6.2-alpha.1",
+  "SourceFingerprint": "93c095505d6ae58d74e38e68e6296edf5f0ee81ed427f9d3042d26314d241cab",
+  "Completed": true,
+  "Tests": [
+    {
+      "Name": "source module startup, nonblank TableView and restart render-worker",
+      "Passed": true,
+      "Milliseconds": 3976.3,
+      "Evidence": {
+        "StartupMilliseconds": 2662.16,
+        "WorkerCount": 1,
+        "RequestedBackend": "canvas",
+        "SelectedBackend": "canvas",
+        "Width": 1500,
+        "Height": 1125,
+        "PngSha256": "eb4a7df27ed142edaf2ffaf9460751a697d03303faf6cf1455d19e80e6c6f1e6",
+        "RestartPassed": true,
+        "Startup": {
+          "Type": "startup-progress",
+          "Role": "render",
+          "Stage": "ready",
+          "ElapsedMilliseconds": 948.9000000001397
+        },
+        "EntryRequests": [
+          "packages/browser/worker-assets/render.js",
+          "packages/browser/worker-assets/render.js"
+        ],
+        "DelayedDependencyMilliseconds": 0
+      }
+    },
+    {
+      "Name": "source module startup, nonblank TableView and restart full-isolation",
+      "Passed": true,
+      "Milliseconds": 4028.88,
+      "Evidence": {
+        "StartupMilliseconds": 2543.94,
+        "WorkerCount": 2,
+        "RequestedBackend": "canvas",
+        "SelectedBackend": "canvas",
+        "Width": 1500,
+        "Height": 1125,
+        "PngSha256": "eb4a7df27ed142edaf2ffaf9460751a697d03303faf6cf1455d19e80e6c6f1e6",
+        "RestartPassed": true,
+        "Startup": {
+          "ui": {
+            "Type": "startup-progress",
+            "Role": "ui",
+            "Stage": "ready",
+            "ElapsedMilliseconds": 1952.6999999999534
+          },
+          "render": {
+            "Type": "startup-progress",
+            "Role": "render",
+            "Stage": "ready",
+            "ElapsedMilliseconds": 1351.3000000000466
+          }
+        },
+        "EntryRequests": [
+          "packages/browser/worker-assets/ui.js",
+          "packages/browser/worker-assets/render.js",
+          "packages/browser/worker-assets/render.js"
+        ],
+        "DelayedDependencyMilliseconds": 0
+      }
+    },
+    {
+      "Name": "dist module startup, nonblank TableView and restart render-worker",
+      "Passed": true,
+      "Milliseconds": 3621.98,
+      "Evidence": {
+        "StartupMilliseconds": 2177.63,
+        "WorkerCount": 1,
+        "RequestedBackend": "canvas",
+        "SelectedBackend": "canvas",
+        "Width": 1500,
+        "Height": 1125,
+        "PngSha256": "eb4a7df27ed142edaf2ffaf9460751a697d03303faf6cf1455d19e80e6c6f1e6",
+        "RestartPassed": true,
+        "Startup": {
+          "Type": "startup-progress",
+          "Role": "render",
+          "Stage": "ready",
+          "ElapsedMilliseconds": 802.6999999999534
+        },
+        "EntryRequests": [
+          "packages/browser/worker-assets/render.js",
+          "packages/browser/worker-assets/render.js"
+        ],
+        "DelayedDependencyMilliseconds": 0
+      }
+    },
+    {
+      "Name": "dist module startup, nonblank TableView and restart full-isolation",
+      "Passed": true,
+      "Milliseconds": 4308.57,
+      "Evidence": {
+        "StartupMilliseconds": 2856.59,
+        "WorkerCount": 2,
+        "RequestedBackend": "canvas",
+        "SelectedBackend": "canvas",
+        "Width": 1500,
+        "Height": 1125,
+        "PngSha256": "eb4a7df27ed142edaf2ffaf9460751a697d03303faf6cf1455d19e80e6c6f1e6",
+        "RestartPassed": true,
+        "Startup": {
+          "ui": {
+            "Type": "startup-progress",
+            "Role": "ui",
+            "Stage": "ready",
+            "ElapsedMilliseconds": 2024.5
+          },
+          "render": {
+            "Type": "startup-progress",
+            "Role": "render",
+            "Stage": "ready",
+            "ElapsedMilliseconds": 1540.8999999999069
+          }
+        },
+        "EntryRequests": [
+          "packages/browser/worker-assets/ui.js",
+          "packages/browser/worker-assets/render.js",
+          "packages/browser/worker-assets/render.js"
+        ],
+        "DelayedDependencyMilliseconds": 0
+      }
+    },
+    {
+      "Name": "nested module startup, nonblank TableView and restart render-worker",
+      "Passed": true,
+      "Milliseconds": 3674.15,
+      "Evidence": {
+        "StartupMilliseconds": 2287.93,
+        "WorkerCount": 1,
+        "RequestedBackend": "canvas",
+        "SelectedBackend": "canvas",
+        "Width": 1500,
+        "Height": 1125,
+        "PngSha256": "eb4a7df27ed142edaf2ffaf9460751a697d03303faf6cf1455d19e80e6c6f1e6",
+        "RestartPassed": true,
+        "Startup": {
+          "Type": "startup-progress",
+          "Role": "render",
+          "Stage": "ready",
+          "ElapsedMilliseconds": 912
+        },
+        "EntryRequests": [
+          "packages/browser/worker-assets/render.js",
+          "packages/browser/worker-assets/render.js"
+        ],
+        "DelayedDependencyMilliseconds": 0
+      }
+    },
+    {
+      "Name": "nested module startup, nonblank TableView and restart full-isolation",
+      "Passed": true,
+      "Milliseconds": 3838.99,
+      "Evidence": {
+        "StartupMilliseconds": 2537.9,
+        "WorkerCount": 2,
+        "RequestedBackend": "canvas",
+        "SelectedBackend": "canvas",
+        "Width": 1500,
+        "Height": 1125,
+        "PngSha256": "eb4a7df27ed142edaf2ffaf9460751a697d03303faf6cf1455d19e80e6c6f1e6",
+        "RestartPassed": true,
+        "Startup": {
+          "ui": {
+            "Type": "startup-progress",
+            "Role": "ui",
+            "Stage": "ready",
+            "ElapsedMilliseconds": 1976.5999999998603
+          },
+          "render": {
+            "Type": "startup-progress",
+            "Role": "render",
+            "Stage": "ready",
+            "ElapsedMilliseconds": 1492.4000000001397
+          }
+        },
+        "EntryRequests": [
+          "packages/browser/worker-assets/ui.js",
+          "packages/browser/worker-assets/render.js",
+          "packages/browser/worker-assets/render.js"
+        ],
+        "DelayedDependencyMilliseconds": 0
+      }
+    },
+    {
+      "Name": "delayed top-level-await dependency render-worker",
+      "Passed": true,
+      "Milliseconds": 4140.26,
+      "Evidence": {
+        "StartupMilliseconds": 2643.7,
+        "WorkerCount": 1,
+        "RequestedBackend": "canvas",
+        "SelectedBackend": "canvas",
+        "Width": 1500,
+        "Height": 1125,
+        "PngSha256": "eb4a7df27ed142edaf2ffaf9460751a697d03303faf6cf1455d19e80e6c6f1e6",
+        "RestartPassed": true,
+        "Startup": {
+          "Type": "startup-progress",
+          "Role": "render",
+          "Stage": "ready",
+          "ElapsedMilliseconds": 1107.6999999999534
+        },
+        "EntryRequests": [
+          "packages/browser/worker-assets/render.js",
+          "packages/browser/worker-assets/render.js"
+        ],
+        "DelayedDependencyMilliseconds": 250
+      }
+    },
+    {
+      "Name": "automatic backend selection render-worker",
+      "Passed": true,
+      "Milliseconds": 3540.36,
+      "Evidence": {
+        "StartupMilliseconds": 2203.54,
+        "WorkerCount": 1,
+        "RequestedBackend": "auto",
+        "SelectedBackend": "canvas",
+        "Width": 1500,
+        "Height": 1125,
+        "PngSha256": "eb4a7df27ed142edaf2ffaf9460751a697d03303faf6cf1455d19e80e6c6f1e6",
+        "RestartPassed": true,
+        "Startup": {
+          "Type": "startup-progress",
+          "Role": "render",
+          "Stage": "ready",
+          "ElapsedMilliseconds": 860.6999999999534
+        },
+        "EntryRequests": [
+          "packages/browser/worker-assets/render.js",
+          "packages/browser/worker-assets/render.js"
+        ],
+        "DelayedDependencyMilliseconds": 0
+      }
+    },
+    {
+      "Name": "fail fast and release workers: render-worker/loader",
+      "Passed": true,
+      "Milliseconds": 1715.87,
+      "Evidence": {
+        "ReportedImmediately": true,
+        "DetailedTimeoutStage": false,
+        "LiveWorkersAfterFailure": 0,
+        "Error": "Error: render worker startup failed: Failed to fetch dynamically imported module: http://localhost:4173/__missing_loader__.mjs\n    at Initialize.worker.onmessage (http://localhost:4173/packages/browser/src/render-thread.js:35:70)"
+      }
+    },
+    {
+      "Name": "fail fast and release workers: render-worker/graph",
+      "Passed": true,
+      "Milliseconds": 1492.87,
+      "Evidence": {
+        "ReportedImmediately": true,
+        "DetailedTimeoutStage": false,
+        "LiveWorkersAfterFailure": 0,
+        "Error": "Error: render worker startup failed: Failed to fetch dynamically imported module: http://localhost:4173/packages/browser/worker-assets/packages/browser/src/render-worker.js\n    at Initialize.worker.onmessage (http://localhost:4173/packages/browser/src/render-thread.js:35:70)"
+      }
+    },
+    {
+      "Name": "fail fast and release workers: render-worker/pending",
+      "Passed": true,
+      "Milliseconds": 3449.54,
+      "Evidence": {
+        "ReportedImmediately": false,
+        "DetailedTimeoutStage": true,
+        "LiveWorkersAfterFailure": 0,
+        "Error": "Error: Render worker initialization timed out during wasm-initialization (http://localhost:4173/vendor/skiasharpweb/dist/vendor/canvaskit.wasm).\n    at http://localhost:4173/packages/browser/src/render-thread.js:51:79"
+      }
+    },
+    {
+      "Name": "delayed top-level-await dependency full-isolation",
+      "Passed": true,
+      "Milliseconds": 4795.52,
+      "Evidence": {
+        "StartupMilliseconds": 2942.41,
+        "WorkerCount": 2,
+        "RequestedBackend": "canvas",
+        "SelectedBackend": "canvas",
+        "Width": 1500,
+        "Height": 1125,
+        "PngSha256": "eb4a7df27ed142edaf2ffaf9460751a697d03303faf6cf1455d19e80e6c6f1e6",
+        "RestartPassed": true,
+        "Startup": {
+          "render": {
+            "Type": "startup-progress",
+            "Role": "render",
+            "Stage": "ready",
+            "ElapsedMilliseconds": 1276.5
+          },
+          "ui": {
+            "Type": "startup-progress",
+            "Role": "ui",
+            "Stage": "ready",
+            "ElapsedMilliseconds": 2317
+          }
+        },
+        "EntryRequests": [
+          "packages/browser/worker-assets/render.js",
+          "packages/browser/worker-assets/ui.js",
+          "packages/browser/worker-assets/render.js"
+        ],
+        "DelayedDependencyMilliseconds": 250
+      }
+    },
+    {
+      "Name": "automatic backend selection full-isolation",
+      "Passed": true,
+      "Milliseconds": 4155.21,
+      "Evidence": {
+        "StartupMilliseconds": 2733.32,
+        "WorkerCount": 2,
+        "RequestedBackend": "auto",
+        "SelectedBackend": "canvas",
+        "Width": 1500,
+        "Height": 1125,
+        "PngSha256": "eb4a7df27ed142edaf2ffaf9460751a697d03303faf6cf1455d19e80e6c6f1e6",
+        "RestartPassed": true,
+        "Startup": {
+          "ui": {
+            "Type": "startup-progress",
+            "Role": "ui",
+            "Stage": "ready",
+            "ElapsedMilliseconds": 2131
+          },
+          "render": {
+            "Type": "startup-progress",
+            "Role": "render",
+            "Stage": "ready",
+            "ElapsedMilliseconds": 1634.9000000001397
+          }
+        },
+        "EntryRequests": [
+          "packages/browser/worker-assets/ui.js",
+          "packages/browser/worker-assets/render.js",
+          "packages/browser/worker-assets/render.js"
+        ],
+        "DelayedDependencyMilliseconds": 0
+      }
+    },
+    {
+      "Name": "fail fast and release workers: full-isolation/loader",
+      "Passed": true,
+      "Milliseconds": 1526.88,
+      "Evidence": {
+        "ReportedImmediately": true,
+        "DetailedTimeoutStage": false,
+        "LiveWorkersAfterFailure": 0,
+        "Error": "Error: render worker startup failed: Failed to fetch dynamically imported module: http://localhost:4173/__missing_loader__.mjs\n    at BrowserWorkerApplication._WorkerMessage (http://localhost:4173/packages/browser/src/isolated-host.js:29:62)\n    at StartAsync.worker.onmessage (http://localhost:4173/packages/browser/src/isolated-host.js:18:38)"
+      }
+    },
+    {
+      "Name": "fail fast and release workers: full-isolation/graph",
+      "Passed": true,
+      "Milliseconds": 867.09,
+      "Evidence": {
+        "ReportedImmediately": true,
+        "DetailedTimeoutStage": false,
+        "LiveWorkersAfterFailure": 0,
+        "Error": "Error: render worker startup failed: Failed to fetch dynamically imported module: http://localhost:4173/packages/browser/worker-assets/packages/browser/src/render-worker.js\n    at BrowserWorkerApplication._WorkerMessage (http://localhost:4173/packages/browser/src/isolated-host.js:29:62)\n    at StartAsync.worker.onmessage (http://localhost:4173/packages/browser/src/isolated-host.js:18:38)"
+      }
+    },
+    {
+      "Name": "fail fast and release workers: full-isolation/pending",
+      "Passed": true,
+      "Milliseconds": 2823.72,
+      "Evidence": {
+        "ReportedImmediately": false,
+        "DetailedTimeoutStage": true,
+        "LiveWorkersAfterFailure": 0,
+        "Error": "Error: Isolated application initialization timed out. Last stages: render: wasm-initialization (http://localhost:4173/vendor/skiasharpweb/dist/vendor/canvaskit.wasm); ui: wasm-initialization (http://localhost:4173/vendor/skiasharpweb/dist/vendor/canvaskit.wasm)\n    at http://localhost:4173/packages/browser/src/isolated-host.js:24:73"
+      }
+    },
+    {
+      "Name": "invalid isolated application import releases both workers",
+      "Passed": true,
+      "Milliseconds": 2375.2,
+      "Evidence": {
+        "ReportedImmediately": true,
+        "DetailedTimeoutStage": false,
+        "LiveWorkersAfterFailure": 0,
+        "Error": "Error: ui worker startup failed: Failed to fetch dynamically imported module: http://localhost:4173/__missing_application__.js\n    at BrowserWorkerApplication._WorkerMessage (http://localhost:4173/packages/browser/src/isolated-host.js:29:62)\n    at StartAsync.worker.onmessage (http://localhost:4173/packages/browser/src/isolated-host.js:18:38)"
+      }
+    }
+  ],
+  "Errors": [],
+  "MissingAssets": [],
+  "ExpectedFailureCases": [
+    {
+      "Mode": "render-worker",
+      "Failure": "loader",
+      "Error": "Error: render worker startup failed: Failed to fetch dynamically imported module: http://localhost:4173/__missing_loader__.mjs\n    at Initialize.worker.onmessage (http://localhost:4173/packages/browser/src/render-thread.js:35:70)",
+      "Expected404": [
+        "__missing_loader__.mjs"
+      ]
+    },
+    {
+      "Mode": "render-worker",
+      "Failure": "graph",
+      "Error": "Error: render worker startup failed: Failed to fetch dynamically imported module: http://localhost:4173/packages/browser/worker-assets/packages/browser/src/render-worker.js\n    at Initialize.worker.onmessage (http://localhost:4173/packages/browser/src/render-thread.js:35:70)",
+      "Expected404": [
+        "packages/browser/worker-assets/packages/browser/src/render-worker.js"
+      ]
+    },
+    {
+      "Mode": "render-worker",
+      "Failure": "pending",
+      "Error": "Error: Render worker initialization timed out during wasm-initialization (http://localhost:4173/vendor/skiasharpweb/dist/vendor/canvaskit.wasm).\n    at http://localhost:4173/packages/browser/src/render-thread.js:51:79",
+      "Expected404": []
+    },
+    {
+      "Mode": "full-isolation",
+      "Failure": "loader",
+      "Error": "Error: render worker startup failed: Failed to fetch dynamically imported module: http://localhost:4173/__missing_loader__.mjs\n    at BrowserWorkerApplication._WorkerMessage (http://localhost:4173/packages/browser/src/isolated-host.js:29:62)\n    at StartAsync.worker.onmessage (http://localhost:4173/packages/browser/src/isolated-host.js:18:38)",
+      "Expected404": [
+        "__missing_loader__.mjs"
+      ]
+    },
+    {
+      "Mode": "full-isolation",
+      "Failure": "graph",
+      "Error": "Error: render worker startup failed: Failed to fetch dynamically imported module: http://localhost:4173/packages/browser/worker-assets/packages/browser/src/render-worker.js\n    at BrowserWorkerApplication._WorkerMessage (http://localhost:4173/packages/browser/src/isolated-host.js:29:62)\n    at StartAsync.worker.onmessage (http://localhost:4173/packages/browser/src/isolated-host.js:18:38)",
+      "Expected404": [
+        "packages/browser/worker-assets/packages/browser/src/render-worker.js"
+      ]
+    },
+    {
+      "Mode": "full-isolation",
+      "Failure": "pending",
+      "Error": "Error: Isolated application initialization timed out. Last stages: render: wasm-initialization (http://localhost:4173/vendor/skiasharpweb/dist/vendor/canvaskit.wasm); ui: wasm-initialization (http://localhost:4173/vendor/skiasharpweb/dist/vendor/canvaskit.wasm)\n    at http://localhost:4173/packages/browser/src/isolated-host.js:24:73",
+      "Expected404": []
+    },
+    {
+      "Mode": "full-isolation",
+      "Failure": "application",
+      "Error": "Error: ui worker startup failed: Failed to fetch dynamically imported module: http://localhost:4173/__missing_application__.js\n    at BrowserWorkerApplication._WorkerMessage (http://localhost:4173/packages/browser/src/isolated-host.js:29:62)\n    at StartAsync.worker.onmessage (http://localhost:4173/packages/browser/src/isolated-host.js:18:38)",
+      "Expected404": [
+        "__missing_application__.js"
+      ]
+    }
+  ],
+  "WorkerType": "module",
+  "TestMessageQueue": false,
+  "InitializationReplay": false,
+  "PoliciesChanged": false,
+  "Transport": "intercepted-local-assets; data module imports unchanged production entry",
+  "Browser": "144.0.7559.96",
+  "Passed": 17,
+  "Failed": 0,
+  "FinalSourceFingerprint": "93c095505d6ae58d74e38e68e6296edf5f0ee81ed427f9d3042d26314d241cab",
+  "BlockedByBrowserPolicy": false
+}

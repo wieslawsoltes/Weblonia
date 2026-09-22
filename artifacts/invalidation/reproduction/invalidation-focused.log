@@ -1,0 +1,112 @@
+TAP version 13
+# Subtest: invalidation: all realized cells and headers follow pixel column resize without hover
+ok 1 - invalidation: all realized cells and headers follow pixel column resize without hover
+  ---
+  duration_ms: 59.419628
+  type: 'test'
+  ...
+# Subtest: invalidation: one control invalidating itself during recording is redrawn on the next capture
+ok 2 - invalidation: one control invalidating itself during recording is redrawn on the next capture
+  ---
+  duration_ms: 2.225534
+  type: 'test'
+  ...
+# Subtest: invalidation: later sibling invalidating an already recorded sibling survives clean-parent reuse
+ok 3 - invalidation: later sibling invalidating an already recorded sibling survives clean-parent reuse
+  ---
+  duration_ms: 1.68772
+  type: 'test'
+  ...
+# Subtest: invalidation: RenderAfter requests do not mark newer content revisions as already recorded
+ok 4 - invalidation: RenderAfter requests do not mark newer content revisions as already recorded
+  ---
+  duration_ms: 0.936842
+  type: 'test'
+  ...
+# Subtest: invalidation: indeterminate progress records changing content without input and stops when disabled
+ok 5 - invalidation: indeterminate progress records changing content without input and stops when disabled
+  ---
+  duration_ms: 33.910849
+  type: 'test'
+  ...
+# Subtest: invalidation: transition from transparent content reaches the worker scene without mouse input
+ok 6 - invalidation: transition from transparent content reaches the worker scene without mouse input
+  ---
+  duration_ms: 4.988202
+  type: 'test'
+  ...
+# Subtest: invalidation: property keyframes generate worker deltas through their final frame
+ok 7 - invalidation: property keyframes generate worker deltas through their final frame
+  ---
+  duration_ms: 2.301026
+  type: 'test'
+  ...
+# Subtest: invalidation: progress resumes after a hidden ancestor is shown without hover
+ok 8 - invalidation: progress resumes after a hidden ancestor is shown without hover
+  ---
+  duration_ms: 2.807022
+  type: 'test'
+  ...
+# Subtest: invalidation: transparent ancestor stops frame requests and showing it resumes progress
+ok 9 - invalidation: transparent ancestor stops frame requests and showing it resumes progress
+  ---
+  duration_ms: 1.917601
+  type: 'test'
+  ...
+# Subtest: invalidation: detached/disposed animation requests do not keep the old root active
+ok 10 - invalidation: detached/disposed animation requests do not keep the old root active
+  ---
+  duration_ms: 1.401679
+  type: 'test'
+  ...
+# Subtest: invalidation: next-frame requests coalesce by owner and preserve unrelated retained drawing
+ok 11 - invalidation: next-frame requests coalesce by owner and preserve unrelated retained drawing
+  ---
+  duration_ms: 1.811114
+  type: 'test'
+  ...
+# Subtest: invalidation: column resize preserves existing binding subscriptions and recycled content presenters
+ok 12 - invalidation: column resize preserves existing binding subscriptions and recycled content presenters
+  ---
+  duration_ms: 23.573592
+  type: 'test'
+  ...
+# Subtest: invalidation: column constraints and star redistribution update cell arrangement in the same pass
+ok 13 - invalidation: column constraints and star redistribution update cell arrangement in the same pass
+  ---
+  duration_ms: 17.265482
+  type: 'test'
+  ...
+# Subtest: invalidation: column hiding and showing update both control layout and retained scene membership
+ok 14 - invalidation: column hiding and showing update both control layout and retained scene membership
+  ---
+  duration_ms: 30.576799
+  type: 'test'
+  ...
+# Subtest: invalidation: backpressure does not consume a render-time invalidation before the next transaction
+ok 15 - invalidation: backpressure does not consume a render-time invalidation before the next transaction
+  ---
+  duration_ms: 1.485252
+  type: 'test'
+  ...
+# Subtest: invalidation: replacing content during an active transition reaches the latest content and final opacity
+ok 16 - invalidation: replacing content during an active transition reaches the latest content and final opacity
+  ---
+  duration_ms: 3.042751
+  type: 'test'
+  ...
+# Subtest: invalidation: animation clock falls back when a worker RAF exists but has no owner window
+ok 17 - invalidation: animation clock falls back when a worker RAF exists but has no owner window
+  ---
+  duration_ms: 46.606068
+  type: 'test'
+  ...
+1..17
+# tests 17
+# suites 0
+# pass 17
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 543.244923

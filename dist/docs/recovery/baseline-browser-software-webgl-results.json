@@ -1,0 +1,193 @@
+{
+  "mode": "local-asset-interception",
+  "distribution": true,
+  "tests": [
+    {
+      "name": "native Skia catalog startup",
+      "passed": true,
+      "milliseconds": 181.77
+    },
+    {
+      "name": "pointer clicks execute genuine ReactiveWeb commands and update binding",
+      "passed": true,
+      "milliseconds": 469.07
+    },
+    {
+      "name": "browser textarea input, selection and two-way ReactiveWeb binding",
+      "passed": true,
+      "milliseconds": 642.71
+    },
+    {
+      "name": "pointer slider updates progress and numeric binding",
+      "passed": true,
+      "milliseconds": 290.33
+    },
+    {
+      "name": "10,000-item ListBox keyboard selection and bounded realization",
+      "passed": true,
+      "milliseconds": 489.1
+    },
+    {
+      "name": "retained ComboBox popup selection and dismissal",
+      "passed": true,
+      "milliseconds": 388.25
+    },
+    {
+      "name": "calendar native painting and keyboard date navigation",
+      "passed": true,
+      "milliseconds": 343.2
+    },
+    {
+      "name": "TableView header sorting and pointer row selection",
+      "passed": true,
+      "milliseconds": 499.59
+    },
+    {
+      "name": "flyout light dismissal releases retained popup",
+      "passed": true,
+      "milliseconds": 440.99
+    },
+    {
+      "name": "theme change propagates dynamic resources",
+      "passed": true,
+      "milliseconds": 416.44
+    },
+    {
+      "name": "live XAML compiler produces and instantiates a changed view",
+      "passed": true,
+      "milliseconds": 518.51
+    },
+    {
+      "name": "NavigationPage push and pop retain correct stack",
+      "passed": true,
+      "milliseconds": 382.91
+    },
+    {
+      "name": "trusted click opens a real browser window with its own Skia surface",
+      "passed": true,
+      "milliseconds": 161.55
+    },
+    {
+      "name": "browser modal owner disabling and result delivery",
+      "passed": true,
+      "milliseconds": 423.37
+    },
+    {
+      "name": "RxJS-debounced catalog navigation filter",
+      "passed": true,
+      "milliseconds": 729.84
+    },
+    {
+      "name": "container query style activation and removal through real slider input",
+      "passed": true,
+      "milliseconds": 659.29
+    },
+    {
+      "name": "native visual bitmap cache reuse and geometry invalidation",
+      "passed": true,
+      "milliseconds": 751.25
+    },
+    {
+      "name": "acrylic native rendering and live material property invalidation",
+      "passed": true,
+      "milliseconds": 541.1
+    },
+    {
+      "name": "composition clocks, expression animation, cancellation and route disposal",
+      "passed": true,
+      "milliseconds": 1171.64
+    },
+    {
+      "name": "native HTML input binding, focus traversal, clipping and deterministic removal",
+      "passed": true,
+      "milliseconds": 650.31
+    },
+    {
+      "name": "browser editing preserves emoji ZWJ and combining grapheme boundaries",
+      "passed": true,
+      "milliseconds": 576.51
+    },
+    {
+      "name": "browser composition-event bridge groups preedit into one undo transaction (synthetic IME)",
+      "passed": true,
+      "milliseconds": 320.37
+    },
+    {
+      "name": "read-only TableView realizes bounded real row and cell controls",
+      "passed": true,
+      "milliseconds": 320.96
+    },
+    {
+      "name": "real WebGL2 shader pixels transfer into native Skia",
+      "passed": false,
+      "skipped": true,
+      "reason": "No WebGL2 context available in this Chromium run."
+    },
+    {
+      "name": "WebGL leases restore state and reject simultaneous ownership",
+      "passed": false,
+      "skipped": true,
+      "reason": "No WebGL2 context available in this Chromium run."
+    },
+    {
+      "name": "WebGL context loss, restoration and disposal lifecycle",
+      "passed": false,
+      "skipped": true,
+      "reason": "No WebGL2 context available in this Chromium run."
+    },
+    {
+      "name": "Chromium accessibility tree exposes table hierarchy and actual grid cells",
+      "passed": true,
+      "milliseconds": 212.87
+    },
+    {
+      "name": "accessibility activation respects enabled state and disposes old page nodes",
+      "passed": true,
+      "milliseconds": 448.49
+    },
+    {
+      "name": "automation password mirrors withhold values and preserve explicit accessible names",
+      "passed": true,
+      "milliseconds": 269.59
+    },
+    {
+      "name": "focused password editing uses a protected native input and clears inactive buffers",
+      "passed": true,
+      "milliseconds": 762.75
+    },
+    {
+      "name": "navigation disposes prior page tree and leaves no popups",
+      "passed": true,
+      "milliseconds": 341.6
+    },
+    {
+      "name": "no JavaScript page errors",
+      "passed": true,
+      "milliseconds": 0.0
+    },
+    {
+      "name": "no missing local assets",
+      "passed": true,
+      "milliseconds": 0.0
+    },
+    {
+      "name": "no rendering errors during catalog sweep",
+      "passed": true,
+      "milliseconds": 2.38
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [],
+  "missingAssets": [],
+  "hardwareGPUQualified": false,
+  "softwareWebGLRequested": true,
+  "catalogSweepSkipped": true,
+  "browser": "144.0.7559.96",
+  "backend": "canvas",
+  "facadeExports": 451,
+  "webGL2Available": false,
+  "elapsedSeconds": 16.32,
+  "passed": 31,
+  "skipped": 3,
+  "failed": 0
+}

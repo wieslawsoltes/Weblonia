@@ -1,0 +1,11 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16">
+<TextBlock Text="Ancestor-size queries" FontSize="19" FontWeight="SemiBold"/>
+<TextBlock Text="Resize the container. Its descendant styles activate above 380 device-independent pixels, then withdraw below the threshold." TextWrapping="Wrap"/>
+<Slider Name="ContainerWidth" Minimum="220" Maximum="680" Value="460"/>
+<Border Name="QueryHost" Width="460" HorizontalAlignment="Left" Padding="22" CornerRadius="12" Background="#EEEAFB" Container.Name="DemoHost" Container.Sizing="Width">
+<Border.Styles><Style Selector="TextBlock.responsive"><Setter Property="FontSize" Value="18"/><Setter Property="Foreground" Value="#5A526F"/></Style><ContainerQuery Name="DemoHost" Query="min-width: 380"><Style Selector="TextBlock.responsive"><Setter Property="FontSize" Value="34"/><Setter Property="Foreground" Value="#5B43BB"/></Style></ContainerQuery></Border.Styles>
+<TextBlock Name="ResponsiveText" Classes="responsive" Text="One control. Responsive styles." TextWrapping="Wrap"/>
+</Border><TextBlock Name="QueryStatus"/>
+</StackPanel></Border>
+</StackPanel>

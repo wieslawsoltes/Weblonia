@@ -1,0 +1,32 @@
+PASS single timer-driven column width without input
+PASS single header-only mouse drag updates all rows
+PASS single progress advances naturally and stops without global rerecording
+PASS single hidden progress resumes without input
+PASS single transition intermediate and final frames without hover
+PASS single overlapping transition replacement completes latest content
+PASS single reentrant invalidation survives capture
+PASS single cached-reentrant invalidation survives capture
+PASS render-worker timer-driven column width without input
+PASS render-worker header-only mouse drag updates all rows
+PASS render-worker progress advances naturally and stops without global rerecording
+PASS render-worker hidden progress resumes without input
+PASS render-worker transition intermediate and final frames without hover
+PASS render-worker overlapping transition replacement completes latest content
+PASS render-worker reentrant invalidation survives capture
+PASS render-worker cached-reentrant invalidation survives capture
+PASS render-worker render-side custom invalidation survives render completion
+PASS full-isolation timer-driven column width without input
+PASS full-isolation header-only mouse drag updates all rows
+PASS full-isolation progress advances naturally and stops without global rerecording
+PASS full-isolation hidden progress resumes without input
+PASS full-isolation transition intermediate and final frames without hover
+PASS full-isolation overlapping transition replacement completes latest content
+PASS full-isolation reentrant invalidation survives capture
+PASS full-isolation cached-reentrant invalidation survives capture
+PASS full-isolation render-side custom invalidation survives render completion
+{
+  "Passed": 26,
+  "Failed": 0,
+  "Errors": [],
+  "MissingAssets": []
+}

@@ -1,0 +1,23 @@
+PASS isolated native text editing and grapheme-safe backward deletion
+PASS focused edit switches to password without plaintext semantic exposure
+PASS render clock and animation advance during a confirmed UI-worker stall
+PASS compositor wheel scrolling continues during UI stall and reconciles exactly once
+PASS virtual table fast scrolling respects realized-content coverage
+PASS three threads vertical scrollbar routes real mouse capture
+PASS three threads horizontal scrollbar routes real mouse capture
+PASS registered native DOM module binds to UI-worker model and cleans up
+PASS isolated renderer restart replaces canvas and rebuilds identical committed pixels
+PASS native editor still works after renderer restart
+PASS registered custom visual executes, acknowledges bounded messages and restores durable state
+PASS 200 immediate state changes coalesce without losing final values or queuing scene deltas
+PASS hidden target explicit flush completes without an idle render loop
+PASS host resize reaches UI layout and the worker-owned backing canvas
+PASS live browser platform preferences are forwarded into the UI worker
+PASS worker-owned Window opens a real browser window with its own render worker
+PASS real isolated modal window blocks owner and returns its exact result
+{
+  "Passed": 17,
+  "Failed": 0,
+  "Errors": [],
+  "MissingAssets": []
+}

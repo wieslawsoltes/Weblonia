@@ -1,0 +1,12 @@
+WORKER data:text/javascript,import%20%22http%3A%2F%2Flocalhost%3A4173%2Fpackages%2Fbrowser%2Fworker-assets%2Frender.js%22%3B
+CONSOLE log RAW_WORKER_MESSAGE {"Type":"startup-progress","Role":"render","Stage":"waiting-for-initialize","ElapsedMilliseconds":0}
+CONSOLE log RAW_WORKER_MESSAGE {"Type":"startup-progress","Role":"render","Stage":"module-import","ElapsedMilliseconds":0.5999999999767169}
+CONSOLE log RAW_WORKER_MESSAGE {"Type":"startup-progress","Role":"render","Stage":"runtime-loader","ElapsedMilliseconds":307.9000000000233,"Url":"http://localhost:4173/packages/browser/worker-assets/canvaskit-loader.mjs"}
+CONSOLE log RAW_WORKER_MESSAGE {"Type":"startup-progress","Role":"render","Stage":"wasm-initialization","ElapsedMilliseconds":327.70000000001164,"Url":"http://localhost:4173/vendor/skiasharpweb/dist/vendor/canvaskit.wasm"}
+CONSOLE log RAW_WORKER_MESSAGE {"Type":"startup-progress","Role":"render","Stage":"skia-platform","ElapsedMilliseconds":1446.7000000000116}
+CONSOLE log RAW_WORKER_MESSAGE {"Type":"startup-progress","Role":"render","Stage":"backend-probe","ElapsedMilliseconds":1459.4000000000233}
+CONSOLE log RAW_WORKER_MESSAGE {"Type":"startup-progress","Role":"render","Stage":"ready","ElapsedMilliseconds":1463.4000000000233}
+RESULT {'ready': True, 'error': None}
+AFTER_TIMEOUT_HANDLER function
+RESEND_RESULT {'Type': 'probe-timeout'}
+MODULE_FETCH_COUNT 114

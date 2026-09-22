@@ -1,0 +1,3 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Settings" FontSize="17" FontWeight="SemiBold"/><ToggleSwitch Content="Enable notifications" IsChecked="{Binding Checked,Mode=TwoWay}"/><ToggleSwitch Content="Sync across windows" IsChecked="True"/><ToggleSwitch Content="Unavailable setting" IsEnabled="False"/></StackPanel></Border>
+</StackPanel>

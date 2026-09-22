@@ -1,0 +1,5 @@
+
+> avaloniaweb-workspace@0.5.1-alpha.1 verify:vendor
+> node scripts/verify-vendor.mjs
+
+{"Passed":true,"Files":121,"SkiaSharpWebCommit":"0a33427592e788d042ab69eedeb4bd7f29f35564"}

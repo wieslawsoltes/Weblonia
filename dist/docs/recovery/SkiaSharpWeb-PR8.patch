@@ -1,0 +1,298 @@
+--- /dev/null
++++ b/dist/lib/browser-text.js
+@@ -0,0 +1,96 @@
++/**
++ * Browser-system-font helpers. No DOM, Skia runtime, font download or UI framework
++ * is required at module evaluation. This is a web extension, not a SkiaSharp API.
++ * Matrices use Skia row-major 3x3 storage. Raster bounds are device pixels.
++ */
++const stretches = ['ultra-condensed', 'extra-condensed', 'condensed', 'semi-condensed', 'normal', 'semi-expanded', 'expanded', 'extra-expanded', 'ultra-expanded'];
++const finiteOr = (value, fallback) => Number.isFinite(value) ? value : fallback;
++function positive(value, name) {
++    if (!Number.isFinite(value) || value <= 0) throw new RangeError(`${name} must be positive and finite.`);
++    return value;
++}
++function finite(value, name) {
++    if (!Number.isFinite(value)) throw new RangeError(`${name} must be finite.`);
++    return value;
++}
++export function CanvasFont(typeface, size) {
++    positive(size, 'Font size');
++    return `${String(typeface.Style ?? 'Normal').toLowerCase()} ${typeface.Weight ?? 400} ${size}px ${typeface.FontFamily}`;
++}
++export function ConfigureCanvasText(context, typeface, size, options = {}) {
++    context.font = CanvasFont(typeface, size);
++    context.textAlign = 'left'; context.textBaseline = 'alphabetic';
++    context.direction = options.FlowDirection === 'RightToLeft' ? 'rtl' : 'ltr';
++    if ('fontStretch' in context) context.fontStretch = stretches[(typeface.Stretch ?? 5) - 1] ?? 'normal';
++    if ('fontKerning' in context) context.fontKerning = options.FontKerning ?? 'auto';
++    if ('textRendering' in context) context.textRendering = options.TextRendering ?? 'auto';
++    for (const [option, key] of [['LetterSpacing', 'letterSpacing'], ['WordSpacing', 'wordSpacing']]) {
++        const value = finite(options[option] ?? 0, option);
++        if (key in context) context[key] = `${value}px`;
++        else if (value) throw new Error(`Canvas2D ${key} is unavailable in this browser.`);
++    }
++}
++/** All Canvas2D typography fields set by ConfigureCanvasText, for caller-owned caches. */
++export function TextRasterSignature(typeface, size, options = {}) {
++    return [CanvasFont(typeface, size), typeface.Stretch ?? 5, options.FlowDirection ?? 'LeftToRight', options.LetterSpacing ?? 0,
++        options.WordSpacing ?? 0, options.FontKerning ?? 'auto', options.TextRendering ?? 'auto'];
++}
++function phase(value) {
++    finite(value, 'Device origin');
++    // Remove floating-point noise only; preserve the actual fractional origin.
++    return Math.round((value - Math.floor(value)) * 1e6) / 1e6;
++}
++export function GetDeviceTextGeometry(matrix, x, y, fallbackScale = 1) {
++    positive(fallbackScale, 'Fallback scale'); finite(x, 'Text x'); finite(y, 'Text y');
++    const m = matrix?.Values ?? matrix ?? [fallbackScale, 0, 0, 0, fallbackScale, 0, 0, 0, 1];
++    if (m.length !== 9 || !Array.from(m).every(Number.isFinite)) throw new TypeError('Text matrix must have nine finite components.');
++    if (m[6] !== 0 || m[7] !== 0 || m[8] !== 1) throw new RangeError('Perspective text matrices are not supported by this affine raster planner.');
++    const axisAligned = Math.abs(m[1]) < 1e-10 && Math.abs(m[3]) < 1e-10 && m[0] > 0 && m[4] > 0;
++    if (axisAligned) return { ScaleX: m[0], ScaleY: m[4], PhaseX: phase(m[0] * x + m[2]), PhaseY: phase(m[4] * y + m[5]), AxisAligned: true };
++    // Normalize before squaring to keep the largest singular value stable.
++    const norm = Math.max(Math.abs(m[0]), Math.abs(m[1]), Math.abs(m[3]), Math.abs(m[4]));
++    if (!norm) return { ScaleX: fallbackScale, ScaleY: fallbackScale, PhaseX: 0, PhaseY: 0, AxisAligned: false };
++    const a = (m[0] / norm) ** 2 + (m[3] / norm) ** 2, b = (m[1] / norm) ** 2 + (m[4] / norm) ** 2;
++    const c = (m[0] / norm) * (m[1] / norm) + (m[3] / norm) * (m[4] / norm);
++    const scale = positive(norm * Math.sqrt((a + b + Math.hypot(a - b, 2 * c)) / 2), 'Affine raster scale');
++    return { ScaleX: scale, ScaleY: scale, PhaseX: 0, PhaseY: 0, AxisAligned: false };
++}
++/**
++ * Accepts either native Canvas2D TextMetrics or PascalCase ink metrics.
++ * Tiles(clip) visits only intersecting tiles; clip uses the plan's device-pixel
++ * coordinates, not logical coordinates. It does not crop the returned tiles.
++ */
++export function CreateTextRasterPlan(metrics, size, geometry, tileSize = 2048) {
++    positive(size, 'Font size');
++    const sx = positive(geometry.ScaleX, 'Text raster scales'), sy = positive(geometry.ScaleY, 'Text raster scales');
++    const px = finite(geometry.PhaseX ?? 0, 'PhaseX'), py = finite(geometry.PhaseY ?? 0, 'PhaseY');
++    if (!Number.isInteger(tileSize) || tileSize < 16 || tileSize > 8192) throw new RangeError('Text tile size must be an integer from 16 to 8192.');
++    const advance = finite(metrics.Width ?? metrics.width, 'Text advance');
++    const inkLeft = finiteOr(metrics.Left ?? metrics.actualBoundingBoxLeft, 0);
++    const inkRight = finiteOr(metrics.Right ?? metrics.actualBoundingBoxRight, advance);
++    const ascent = finiteOr(metrics.Ascent ?? metrics.actualBoundingBoxAscent, size * .8);
++    const descent = finiteOr(metrics.Descent ?? metrics.actualBoundingBoxDescent, size * .2);
++    const left = Math.floor(-inkLeft * sx + px) - 2, right = Math.ceil(inkRight * sx + px) + 2;
++    const top = Math.floor(-ascent * sy + py) - 2, bottom = Math.ceil(descent * sy + py) + 2;
++    const width = Math.max(1, right - left), height = Math.max(1, bottom - top);
++    if (![left, right, top, bottom, width, height, left + width, top + height].every(Number.isSafeInteger))
++        throw new RangeError('Text raster bounds exceed safe integer precision.');
++    return Object.freeze({ Left: left, Top: top, Width: width, Height: height, TileSize: tileSize,
++        ScaleX: sx, ScaleY: sy, PhaseX: px, PhaseY: py, AxisAligned: geometry.AxisAligned ?? false,
++        *Tiles(clip = null) {
++            let startX = 0, startY = 0, endX = width, endY = height;
++            if (clip) {
++                for (const k of ['Left', 'Top', 'Right', 'Bottom']) finite(clip[k], `Clip.${k}`);
++                if (clip.Right <= clip.Left || clip.Bottom <= clip.Top || clip.Right <= left || clip.Bottom <= top || clip.Left >= left + width || clip.Top >= top + height) return;
++                startX = Math.max(0, Math.floor((clip.Left - left) / tileSize) * tileSize);
++                startY = Math.max(0, Math.floor((clip.Top - top) / tileSize) * tileSize);
++                endX = Math.min(width, clip.Right - left); endY = Math.min(height, clip.Bottom - top);
++            }
++            for (let y = startY; y < endY; y += tileSize) for (let x = startX; x < endX; x += tileSize) {
++                const w = Math.min(tileSize, width - x), h = Math.min(tileSize, height - y);
++                yield { Left: left + x, Top: top + y, PixelWidth: w, PixelHeight: h, Width: w / sx, Height: h / sy,
++                    OffsetX: (px - left - x) / sx, Baseline: (py - top - y) / sy };
++            }
++        }
++    });
++}
+--- /dev/null
++++ b/dist/lib/browser-text.d.ts
+@@ -0,0 +1,25 @@
++/** Framework-independent browser-system-font raster planning; does not initialize Skia. */
++export interface CanvasTypeface { FontFamily: string | { toString(): string }; Style?: string; Weight?: number | string; Stretch?: number }
++export interface CanvasTextOptions {
++    FlowDirection?: 'LeftToRight' | 'RightToLeft'; LetterSpacing?: number; WordSpacing?: number;
++    FontKerning?: 'auto' | 'normal' | 'none'; TextRendering?: 'auto' | 'optimizeSpeed' | 'optimizeLegibility' | 'geometricPrecision';
++}
++export interface CanvasTextContext {
++    font: string; textAlign: string; textBaseline: string; direction: string;
++    fontStretch?: string; fontKerning?: string; textRendering?: string; letterSpacing?: string; wordSpacing?: string;
++}
++export interface DeviceTextGeometry { ScaleX: number; ScaleY: number; PhaseX?: number; PhaseY?: number; AxisAligned?: boolean }
++export interface TextInkMetrics { Width: number; Left?: number; Right?: number; Ascent?: number; Descent?: number }
++export interface BrowserTextMetrics { width: number; actualBoundingBoxLeft?: number; actualBoundingBoxRight?: number; actualBoundingBoxAscent?: number; actualBoundingBoxDescent?: number }
++export interface TextRasterClip { Left: number; Top: number; Right: number; Bottom: number }
++export interface TextRasterTile { Left: number; Top: number; PixelWidth: number; PixelHeight: number; Width: number; Height: number; OffsetX: number; Baseline: number }
++export interface TextRasterPlan extends Required<DeviceTextGeometry> {
++    readonly Left: number; readonly Top: number; readonly Width: number; readonly Height: number; readonly TileSize: number;
++    /** Clip is in plan device pixels. Returns complete, intersecting tiles, never cropped tiles. */
++    Tiles(clip?: TextRasterClip | null): IterableIterator<TextRasterTile>;
++}
++export function CanvasFont(typeface: CanvasTypeface, size: number): string;
++export function ConfigureCanvasText(context: CanvasTextContext, typeface: CanvasTypeface, size: number, options?: CanvasTextOptions): void;
++export function TextRasterSignature(typeface: CanvasTypeface, size: number, options?: CanvasTextOptions): (string | number)[];
++export function GetDeviceTextGeometry(matrix: ArrayLike<number> | { Values: ArrayLike<number> } | null | undefined, x: number, y: number, fallbackScale?: number): Required<DeviceTextGeometry>;
++export function CreateTextRasterPlan(metrics: TextInkMetrics | BrowserTextMetrics, size: number, geometry: DeviceTextGeometry, tileSize?: number): TextRasterPlan;
+--- /dev/null
++++ b/tests/browser-text.test.mjs
+@@ -0,0 +1,68 @@
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import { CanvasFont, ConfigureCanvasText, TextRasterSignature, GetDeviceTextGeometry, CreateTextRasterPlan } from '@wieslawsoltes/skiasharpweb/browser-text';
++const metrics = { Width: 40, Left: 5, Right: 42, Ascent: 15, Descent: 4 };
++const geometry = { ScaleX: 1.25, ScaleY: 1.75, PhaseX: .2, PhaseY: .7, AxisAligned: true };
++test('browser text: import works without DOM or native runtime', () => {
++    assert.equal(typeof globalThis.document, 'undefined');
++    assert.equal(CanvasFont({FontFamily:'serif',Style:'Italic',Weight:600},14), 'italic 600 14px serif');
++});
++test('browser text: canvas typography is completely reset between callers', () => {
++    const context = { fontStretch:'',fontKerning:'',textRendering:'',letterSpacing:'',wordSpacing:'' };
++    ConfigureCanvasText(context,{FontFamily:'sans-serif',Stretch:3},16,{FlowDirection:'RightToLeft',LetterSpacing:1,WordSpacing:2,FontKerning:'none'});
++    assert.equal(context.direction,'rtl'); assert.equal(context.fontStretch,'condensed'); assert.equal(context.letterSpacing,'1px');
++    ConfigureCanvasText(context,{FontFamily:'serif'},14);
++    assert.equal(context.direction,'ltr'); assert.equal(context.letterSpacing,'0px'); assert.equal(context.wordSpacing,'0px'); assert.equal(context.fontStretch,'normal'); assert.equal(context.fontKerning,'auto');
++    assert.throws(()=>ConfigureCanvasText({}, {FontFamily:'serif'},14,{LetterSpacing:1}), /unavailable/);
++});
++test('browser text: signature distinguishes every supported shaping option', () => {
++    const tf={FontFamily:'serif'}, initial=TextRasterSignature(tf,14);
++    for(const [key,value] of [['FlowDirection','RightToLeft'],['LetterSpacing',1],['WordSpacing',2],['FontKerning','none'],['TextRendering','optimizeLegibility']]) assert.notDeepEqual(TextRasterSignature(tf,14,{[key]:value}),initial);
++    assert.notDeepEqual(TextRasterSignature({...tf,Stretch:3},14),initial);
++});
++test('browser text: browser TextMetrics and PascalCase ink bounds agree', () => {
++    const a=CreateTextRasterPlan(metrics,14,geometry), b=CreateTextRasterPlan({width:40,actualBoundingBoxLeft:5,actualBoundingBoxRight:42,actualBoundingBoxAscent:15,actualBoundingBoxDescent:4},14,geometry);
++    assert.deepEqual([...a.Tiles()],[...b.Tiles()]); assert(a.Left < -5); assert(a.Top < -25);
++});
++test('browser text: fractional-origin tiles land on the destination device grid', () => {
++    const m=[1.25,0,.7,0,1.75,.4,0,0,1],x=10.3,y=26.2,g=GetDeviceTextGeometry(m,x,y);
++    for(const t of CreateTextRasterPlan(metrics,14,g,16).Tiles()) {
++        const dx=m[0]*(x-t.OffsetX)+m[2],dy=m[4]*(y-t.Baseline)+m[5];
++        assert(Math.abs(dx-Math.round(dx))<1e-5); assert(Math.abs(dy-Math.round(dy))<1e-5);
++    }
++});
++test('browser text: tiles cover full ink exactly without oversized allocations', () => {
++    const p=CreateTextRasterPlan({...metrics,Right:20000},14,geometry,256); let area=0;
++    for(const t of p.Tiles()) { assert(t.PixelWidth<=256 && t.PixelHeight<=256); area+=t.PixelWidth*t.PixelHeight; }
++    assert.equal(area,p.Width*p.Height); assert(Object.isFrozen(p));
++});
++test('browser text: clipped enumeration jumps directly into a billion-pixel line', () => {
++    const p=CreateTextRasterPlan({...metrics,Right:1e9},14,{ScaleX:1,ScaleY:1},256);
++    const clip={Left:900000000,Top:-20,Right:900000100,Bottom:10},tiles=[...p.Tiles(clip)];
++    assert(tiles.length>0 && tiles.length<=2); for(const t of tiles) assert(t.Left+t.PixelWidth>clip.Left && t.Left<clip.Right);
++    assert.deepEqual([...p.Tiles({Left:-50,Top:500,Right:50,Bottom:501})],[]);
++    assert.deepEqual([...p.Tiles({Left:0,Top:0,Right:0,Bottom:0})],[]);
++});
++test('browser text: clipped enumeration equals exhaustive intersection for fractional clips', () => {
++    const p=CreateTextRasterPlan({...metrics,Right:1000,Ascent:900},14,geometry,32),all=[...p.Tiles()];
++    for(let i=0;i<100;i++) {
++        const c={Left:i*11.3-60,Right:i*11.3+36.4,Top:i*9.7-1100,Bottom:i*9.7-1013};
++        const expected=all.filter(t=>t.Left<c.Right && t.Left+t.PixelWidth>c.Left && t.Top<c.Bottom && t.Top+t.PixelHeight>c.Top);
++        assert.deepEqual([...p.Tiles(c)],expected);
++    }
++});
++test('browser text: matrix validation, degenerate transforms and singular-value scale', () => {
++    const g=GetDeviceTextGeometry([1,4,0,0,1,0,0,0,1],0,0); assert(!g.AxisAligned); assert(g.ScaleX>4); assert.equal(g.ScaleX,g.ScaleY);
++    const large=GetDeviceTextGeometry([1e200,1e200,0,0,1e200,0,0,0,1],0,0); assert(Number.isFinite(large.ScaleX));
++    assert.equal(GetDeviceTextGeometry([0,0,0,0,0,0,0,0,1],0,0,2).ScaleX,2);
++    assert.throws(()=>GetDeviceTextGeometry([1,0,0,0,1,0,.1,0,1],0,0),/Perspective/);
++    assert.throws(()=>GetDeviceTextGeometry([1],0,0),/nine/);
++});
++test('browser text: invalid dimensions, phases and precision fail before iteration', () => {
++    assert.throws(()=>CreateTextRasterPlan(metrics,14,{ScaleX:0,ScaleY:1}),/positive/);
++    assert.throws(()=>CreateTextRasterPlan(metrics,14,geometry,2),/tile size/);
++    assert.throws(()=>CreateTextRasterPlan(metrics,14,{...geometry,PhaseX:NaN}),/finite/);
++    assert.throws(()=>CreateTextRasterPlan({...metrics,Right:1e20},14,geometry),/safe integer/);
++    assert.throws(()=>[...CreateTextRasterPlan(metrics,14,geometry).Tiles({Left:NaN,Top:0,Right:1,Bottom:2})],/finite/);
++    assert.throws(()=>CanvasFont({FontFamily:'serif'},Infinity),/finite/);
++});
+--- /dev/null
++++ b/docs/BROWSER_TEXT.md
+@@ -0,0 +1,56 @@
++# Browser-system-font raster planning
++
++`@wieslawsoltes/skiasharpweb/browser-text` exports five framework-independent,
++PascalCase helpers extracted from the AvaloniaWeb Skia adapter. They neither load
++Skia nor download fonts. This is an explicit web extension, not a claim of new
++.NET SkiaSharp methods or a replacement for native SKParagraph shaping.
++
++```js
++import { ConfigureCanvasText, GetDeviceTextGeometry, CreateTextRasterPlan }
++  from '@wieslawsoltes/skiasharpweb/browser-text';
++
++const face = { FontFamily: 'system-ui', Style: 'Normal', Weight: 400, Stretch: 5 };
++ConfigureCanvasText(measureContext, face, 14, { LetterSpacing: 0 });
++const geometry = GetDeviceTextGeometry(canvas.TotalMatrix, x, baseline, deviceScale);
++const plan = CreateTextRasterPlan(measureContext.measureText(text), 14, geometry);
++for (const tile of plan.Tiles()) {
++  // Allocate tile.PixelWidth x tile.PixelHeight pixels, not the full text width.
++  const element = new OffscreenCanvas(tile.PixelWidth, tile.PixelHeight);
++  const ctx = element.getContext('2d');
++  ConfigureCanvasText(ctx, face, 14);
++  ctx.setTransform(plan.ScaleX, 0, 0, plan.ScaleY,
++    plan.PhaseX - tile.Left, plan.PhaseY - tile.Top);
++  ctx.fillStyle = '#202020';
++  ctx.fillText(text, 0, 0);
++  // Upload getImageData(...).data as RGBA8888 / Unpremul using SKImage.FromPixels.
++  // Draw into the original Skia logical coordinate system at:
++  // (x - tile.OffsetX, baseline - tile.Baseline, tile.Width, tile.Height).
++  // Dispose the image, or retain it in a caller-owned, byte-bounded cache.
++}
++```
++
++The plan retains glyph ink overhangs and tall combining marks. A two-device-pixel
++margin protects antialiasing. Positive axis-aligned transforms preserve fractional
++origin phase so tiles map back to the original physical pixel grid. Rotation,
++shear and reflections use the largest singular value to avoid undersampling;
++they are not guaranteed pixel-equivalent. Perspective is rejected explicitly.
++
++`Tiles({Left, Top, Right, Bottom})` skips directly to intersecting tiles in the
++plan's device-pixel coordinate system. It returns **whole tiles**, not cropped
++images. For a logical clip, transform its bounds with:
++`(clip.Left - x) * ScaleX + PhaseX` and
++`(clip.Top - baseline) * ScaleY + PhaseY` (likewise Right and Bottom).
++Apply the actual clip in Skia when drawing. Complexity is proportional to visited
++tiles, not to every tile in a long offscreen line. The immutable plan has no image
++allocations and callers retain explicit control of cache memory and ownership.
++
++`TextRasterSignature` returns an array of all configured typography fields. Include
++text, color, device scale, phase and a font-registration generation in your full
++cache key. `CanvasFont` formats the CSS font shorthand. Spacing that the browser
++cannot represent fails explicitly; no guessed glyph spacing is substituted.
++
++Tests cover module import without DOM/WASM, typography reset, native TextMetrics,
++ink bounds, fractional phase, exact coverage, numerical validation, affine scale,
++and clipped enumeration on a billion-pixel line. They do not certify screen font
++availability, every browser's shaping, native paragraph equivalence, or GPU output.
++The consuming AvaloniaWeb pixel suite remains the browser-to-Skia transport test.
+--- a/package.json
++++ b/package.json
+@@ -1 +1 @@
+-{"name":"@wieslawsoltes/skiasharpweb","version":"0.5.0","type":"module","description":"SkiaSharp-style JavaScript graphics API with native Skia Graphite/WebGPU, Ganesh/WebGL and raster Canvas backends","main":"./dist/package/node.cjs","module":"./dist/package/browser.js","types":"./dist/package/index.d.ts","exports":{".":{"browser":{"types":"./dist/package/index.d.ts","default":"./dist/package/browser.js"},"node":{"import":{"types":"./dist/package/index.d.ts","default":"./dist/package/node.js"},"require":{"types":"./dist/package/node.d.cts","default":"./dist/package/node.cjs"}},"types":"./dist/package/index.d.ts","default":"./dist/package/browser.js"},"./browser":{"types":"./dist/package/index.d.ts","default":"./dist/package/browser.js"},"./node":{"import":{"types":"./dist/package/index.d.ts","default":"./dist/package/node.js"},"require":{"types":"./dist/package/node.d.cts","default":"./dist/package/node.cjs"}},"./core":{"types":"./dist/package/core.d.ts","default":"./dist/lib/index.js"},"./canvaskit":"./dist/vendor/canvaskit.cjs","./canvaskit.js":"./dist/vendor/canvaskit.js","./canvaskit.wasm":"./dist/vendor/canvaskit.wasm","./package.json":"./package.json"},"files":["dist/lib/","dist/vendor/","dist/package/","dist/licenses/","LICENSE","README.md","CHANGELOG.md","COMPATIBILITY.md","docs/PACKAGING.md","docs/RELEASING.md","README.web.md","blazor/README.md","blazor/INTEGRATION.md"],"scripts":{"test":"node --test tests/*.test.mjs","check":"node scripts/check.mjs","serve":"python3 -m http.server 8080 -d dist","coverage":"node scripts/coverage.mjs && node scripts/audit-v05.mjs","benchmark":"node scripts/benchmark.mjs","benchmark:bitmaps":"node scripts/benchmark-bitmaps.mjs","verify:graphite":"node scripts/verify-graphite.mjs","verify:webgpu":"node scripts/verify-webgpu.mjs","verify:browser":"python3 scripts/verify-browser.py","docs":"node scripts/sync-docs.mjs","verify:geometry":"python3 scripts/verify-geometry.py","verify:qualification":"python3 scripts/verify-qualification.py","benchmark:alpha":"node scripts/benchmark-alpha.mjs","soak":"node --expose-gc scripts/soak-runtime.mjs","test:optimization":"node --test tests/optimization-round.test.mjs tests/resource-concurrency.test.mjs tests/optimization-lab.test.mjs","benchmark:optimization":"node scripts/benchmark-optimization.mjs","verify:optimization":"python3 scripts/verify-optimization.py","build":"node scripts/build-package.mjs","prepack":"npm run build","prepublishOnly":"npm run release:check","version":"node scripts/sync-version.mjs && git add dist/package/version.js","test:packaging":"node --test --test-concurrency=1 tests/packaging/package.test.mjs tests/packaging/release.test.mjs","test:types":"node scripts/verify-package-types.mjs","pack:release":"node scripts/pack-release.mjs","test:package":"node scripts/verify-package.mjs","release:check":"npm run build && npm run test:packaging && npm run test:package && npm run test:types"},"license":"MIT","repository":{"type":"git","url":"https://github.com/wieslawsoltes/SkiaSharpWeb.git"},"homepage":"https://wieslawsoltes.github.io/SkiaSharpWeb/","bugs":{"url":"https://github.com/wieslawsoltes/SkiaSharpWeb/issues"},"engines":{"node":">=22"},"keywords":["skia","skiasharp","webgpu","webgl","canvas","wasm","graphics"],"sideEffects":["./dist/vendor/**"],"publishConfig":{"access":"public","registry":"https://registry.npmjs.org/"},"bin":{"skiasharp-web-assets":"./dist/package/copy-assets.mjs"},"devDependencies":{"typescript":"5.8.3"}}
++{"name":"@wieslawsoltes/skiasharpweb","version":"0.5.0","type":"module","description":"SkiaSharp-style JavaScript graphics API with native Skia Graphite/WebGPU, Ganesh/WebGL and raster Canvas backends","main":"./dist/package/node.cjs","module":"./dist/package/browser.js","types":"./dist/package/index.d.ts","exports":{".":{"browser":{"types":"./dist/package/index.d.ts","default":"./dist/package/browser.js"},"node":{"import":{"types":"./dist/package/index.d.ts","default":"./dist/package/node.js"},"require":{"types":"./dist/package/node.d.cts","default":"./dist/package/node.cjs"}},"types":"./dist/package/index.d.ts","default":"./dist/package/browser.js"},"./browser":{"types":"./dist/package/index.d.ts","default":"./dist/package/browser.js"},"./node":{"import":{"types":"./dist/package/index.d.ts","default":"./dist/package/node.js"},"require":{"types":"./dist/package/node.d.cts","default":"./dist/package/node.cjs"}},"./core":{"types":"./dist/package/core.d.ts","default":"./dist/lib/index.js"},"./canvaskit":"./dist/vendor/canvaskit.cjs","./canvaskit.js":"./dist/vendor/canvaskit.js","./canvaskit.wasm":"./dist/vendor/canvaskit.wasm","./package.json":"./package.json","./browser-text":{"types":"./dist/lib/browser-text.d.ts","default":"./dist/lib/browser-text.js"}},"files":["dist/lib/","dist/vendor/","dist/package/","dist/licenses/","LICENSE","README.md","CHANGELOG.md","COMPATIBILITY.md","docs/PACKAGING.md","docs/RELEASING.md","README.web.md","blazor/README.md","blazor/INTEGRATION.md","docs/BROWSER_TEXT.md"],"scripts":{"test":"node --test tests/*.test.mjs","check":"node scripts/check.mjs","serve":"python3 -m http.server 8080 -d dist","coverage":"node scripts/coverage.mjs && node scripts/audit-v05.mjs","benchmark":"node scripts/benchmark.mjs","benchmark:bitmaps":"node scripts/benchmark-bitmaps.mjs","verify:graphite":"node scripts/verify-graphite.mjs","verify:webgpu":"node scripts/verify-webgpu.mjs","verify:browser":"python3 scripts/verify-browser.py","docs":"node scripts/sync-docs.mjs","verify:geometry":"python3 scripts/verify-geometry.py","verify:qualification":"python3 scripts/verify-qualification.py","benchmark:alpha":"node scripts/benchmark-alpha.mjs","soak":"node --expose-gc scripts/soak-runtime.mjs","test:optimization":"node --test tests/optimization-round.test.mjs tests/resource-concurrency.test.mjs tests/optimization-lab.test.mjs","benchmark:optimization":"node scripts/benchmark-optimization.mjs","verify:optimization":"python3 scripts/verify-optimization.py","build":"node scripts/build-package.mjs","prepack":"npm run build","prepublishOnly":"npm run release:check","version":"node scripts/sync-version.mjs && git add dist/package/version.js","test:packaging":"node --test --test-concurrency=1 tests/packaging/package.test.mjs tests/packaging/release.test.mjs","test:types":"node scripts/verify-package-types.mjs","pack:release":"node scripts/pack-release.mjs","test:package":"node scripts/verify-package.mjs","release:check":"npm run build && npm run test:packaging && npm run test:package && npm run test:types"},"license":"MIT","repository":{"type":"git","url":"https://github.com/wieslawsoltes/SkiaSharpWeb.git"},"homepage":"https://wieslawsoltes.github.io/SkiaSharpWeb/","bugs":{"url":"https://github.com/wieslawsoltes/SkiaSharpWeb/issues"},"engines":{"node":">=22"},"keywords":["skia","skiasharp","webgpu","webgl","canvas","wasm","graphics"],"sideEffects":["./dist/vendor/**"],"publishConfig":{"access":"public","registry":"https://registry.npmjs.org/"},"bin":{"skiasharp-web-assets":"./dist/package/copy-assets.mjs"},"devDependencies":{"typescript":"5.8.3"}}
+--- a/scripts/pack-release.mjs
++++ b/scripts/pack-release.mjs
+@@ -14,7 +14,7 @@
+ for(const path of entries.keys()) {
+   // Only the reviewed Markdown integration guides are added; source trees,
+   // build tools, samples, keys and font binaries remain excluded.
+-  if(!/^(?:dist\/(?:lib|vendor|package|licenses)\/|dist\/(?:README|COMPATIBILITY)\.md$|docs\/(?:PACKAGING|RELEASING)\.md$|blazor\/(?:README|INTEGRATION)\.md$|(?:package\.json|README(?:\.web)?\.md|CHANGELOG\.md|COMPATIBILITY\.md|LICENSE)$)/.test(path))throw new Error(`Unapproved package entry: ${path}`);
++  if(!/^(?:dist\/(?:lib|vendor|package|licenses)\/|dist\/(?:README|COMPATIBILITY)\.md$|docs\/(?:PACKAGING|RELEASING|BROWSER_TEXT)\.md$|blazor\/(?:README|INTEGRATION)\.md$|(?:package\.json|README(?:\.web)?\.md|CHANGELOG\.md|COMPATIBILITY\.md|LICENSE)$)/.test(path))throw new Error(`Unapproved package entry: ${path}`);
+   if(/\.(?:ttf|otf|woff2?|ttc|otc|eot|pfa|pfb|pem|key)$/i.test(path)||/(^|\/)(?:\.env|\.git|node_modules|test-output)(\/|$)/.test(path))throw new Error(`Disallowed package entry: ${path}`);
+ }
+ if(result.size>12*1024*1024||result.unpackedSize>24*1024*1024)throw new Error('Package exceeds its release size budget.');
+--- a/tests/packaging/consumer.mts
++++ b/tests/packaging/consumer.mts
+@@ -18,3 +18,12 @@
+ await S.SKSurface.Create(document.createElement('canvas'),{backend:'metal'});
+ // @ts-expect-error misspelled initialization option
+ await initialize({assetBaseURL:'/skia/'});
++
++import { ConfigureCanvasText, GetDeviceTextGeometry, CreateTextRasterPlan } from '@wieslawsoltes/skiasharpweb/browser-text';
++const context = document.createElement('canvas').getContext('2d')!;
++ConfigureCanvasText(context, { FontFamily: 'system-ui' }, 14, { LetterSpacing: .25 });
++const geometry = GetDeviceTextGeometry(new Float32Array([1,0,0,0,1,0,0,0,1]), 10, 20);
++const plan = CreateTextRasterPlan(context.measureText('Hello'), 14, geometry);
++for (const tile of plan.Tiles({Left:0,Top:-20,Right:200,Bottom:20})) console.log(tile.PixelWidth);
++// @ts-expect-error missing vertical scale must be diagnosed
++CreateTextRasterPlan({Width:20},14,{ScaleX:1});
+--- a/tests/packaging/consumer.mjs
++++ b/tests/packaging/consumer.mjs
+@@ -27,3 +27,7 @@
+ await assert.rejects(Initialize({fonts:true}),TypeError);
+ await assert.rejects(cjs.RegisterWebComponent(),/browser/);
+ console.log('Clean installed ESM/CJS consumers: native drawing, PNG, PDF, exports, initialization and cancellation passed.');
++
++const browserText = await import('@wieslawsoltes/skiasharpweb/browser-text');
++const textPlan = browserText.CreateTextRasterPlan({Width:1000000},14,{ScaleX:1,ScaleY:1},64);
++assert.ok([...textPlan.Tiles({Left:900000,Top:-20,Right:900060,Bottom:20})].length <= 2);

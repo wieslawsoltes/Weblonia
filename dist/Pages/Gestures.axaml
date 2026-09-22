@@ -1,0 +1,22 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+  <Border Classes="card">
+    <StackPanel Spacing="12">
+      <TextBlock Text="Pinch and rotate" FontSize="17" FontWeight="SemiBold"/>
+      <TextBlock Text="Use two touch contacts to scale and rotate. One contact scrolls the list below; dragging does not activate its buttons." TextWrapping="Wrap"/>
+      <Border x:Name="PointerArea" ClipToBounds="True" Background="{DynamicResource SystemSelectionBrush}" Height="210" CornerRadius="8">
+        <Border.GestureRecognizers><PinchGestureRecognizer/></Border.GestureRecognizers>
+        <Border x:Name="GestureVisual" Width="190" Height="90" Background="#6757d9" CornerRadius="10" HorizontalAlignment="Center" VerticalAlignment="Center">
+          <TextBlock Text="Pinch · Rotate" Foreground="White" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
+      </Border>
+      <TextBlock x:Name="PointerText" Text="Two-contact input: ready" TextWrapping="Wrap"/>
+    </StackPanel>
+  </Border>
+  <Border Classes="card">
+    <StackPanel Spacing="12">
+      <TextBlock Text="Touch scrolling with inertia" FontSize="17" FontWeight="SemiBold"/>
+      <ScrollViewer x:Name="GestureScroll" Height="210"><StackPanel x:Name="GestureItems" Spacing="8"/></ScrollViewer>
+      <TextBlock x:Name="GestureStatus" Text="Taps: 0 · scroll offset: 0"/>
+    </StackPanel>
+  </Border>
+</StackPanel>

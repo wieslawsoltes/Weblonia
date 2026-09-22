@@ -1,0 +1,23 @@
+FAIL source HTTP render-worker Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:54683/?threading=render-worker&backend=canvas
+Call log:
+  - navigating to "http://127.0.0.1:54683/?threading=render-worker&backend=canvas", waiting until "load"
+
+FAIL source HTTP full-isolation Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:55903/?threading=full-isolation&backend=canvas
+Call log:
+  - navigating to "http://127.0.0.1:55903/?threading=full-isolation&backend=canvas", waiting until "load"
+
+FAIL dist HTTP render-worker Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:44357/?threading=render-worker&backend=canvas
+Call log:
+  - navigating to "http://127.0.0.1:44357/?threading=render-worker&backend=canvas", waiting until "load"
+
+FAIL dist HTTP full-isolation Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:51013/?threading=full-isolation&backend=canvas
+Call log:
+  - navigating to "http://127.0.0.1:51013/?threading=full-isolation&backend=canvas", waiting until "load"
+
+{
+  "Passed": 0,
+  "Failed": 4,
+  "Errors": [],
+  "MissingAssets": [],
+  "BlockedByBrowserPolicy": true
+}

@@ -1,0 +1,196 @@
+TAP version 13
+# Subtest: ScrollBar derives from RangeBase rather than inheriting reversed Slider behavior
+ok 1 - ScrollBar derives from RangeBase rather than inheriting reversed Slider behavior
+  ---
+  duration_ms: 4.384446
+  type: 'test'
+  ...
+# Subtest: ScrollBar Vertical: proportional drag without jump and release event
+ok 2 - ScrollBar Vertical: proportional drag without jump and release event
+  ---
+  duration_ms: 10.804856
+  type: 'test'
+  ...
+# Subtest: ScrollBar Horizontal: proportional drag without jump and release event
+ok 3 - ScrollBar Horizontal: proportional drag without jump and release event
+  ---
+  duration_ms: 3.511082
+  type: 'test'
+  ...
+# Subtest: ScrollBar tiny viewport bounds never create oversized thumbs or divide by zero
+ok 4 - ScrollBar tiny viewport bounds never create oversized thumbs or divide by zero
+  ---
+  duration_ms: 2.641366
+  type: 'test'
+  ...
+# Subtest: ScrollBar reverse direction is geometry-consistent and keyboard increments follow its orientation
+ok 5 - ScrollBar reverse direction is geometry-consistent and keyboard increments follow its orientation
+  ---
+  duration_ms: 4.351165
+  type: 'test'
+  ...
+# Subtest: ScrollBar track press pages rather than jumps and releases repeat timers
+ok 6 - ScrollBar track press pages rather than jumps and releases repeat timers
+  ---
+  duration_ms: 2.195907
+  type: 'test'
+  ...
+# Subtest: ScrollBar page-repeat progresses while held and stops on capture loss
+ok 7 - ScrollBar page-repeat progresses while held and stops on capture loss
+  ---
+  duration_ms: 88.394783
+  type: 'test'
+  ...
+# Subtest: ScrollBar ignores right clicks and additional pointers during a drag
+ok 8 - ScrollBar ignores right clicks and additional pointers during a drag
+  ---
+  duration_ms: 2.702888
+  type: 'test'
+  ...
+# Subtest: ScrollBar visibility, zero range and explicit values remain coherent
+ok 9 - ScrollBar visibility, zero range and explicit values remain coherent
+  ---
+  duration_ms: 1.475143
+  type: 'test'
+  ...
+# Subtest: ScrollViewer scrollbar hits win over a child Button occupying the complete content
+ok 10 - ScrollViewer scrollbar hits win over a child Button occupying the complete content
+  ---
+  duration_ms: 15.026083
+  type: 'test'
+  ...
+# Subtest: ScrollViewer horizontal and vertical thumbs can independently reach both ends
+ok 11 - ScrollViewer horizontal and vertical thumbs can independently reach both ends
+  ---
+  duration_ms: 7.151629
+  type: 'test'
+  ...
+# Subtest: ScrollViewer deferred scrolling previews the thumb without moving content until release
+ok 12 - ScrollViewer deferred scrolling previews the thumb without moving content until release
+  ---
+  duration_ms: 3.988588
+  type: 'test'
+  ...
+# Subtest: ScrollViewer Hidden permits scrolling but Disabled does not
+ok 13 - ScrollViewer Hidden permits scrolling but Disabled does not
+  ---
+  duration_ms: 4.704839
+  type: 'test'
+  ...
+# Subtest: non-overlay ScrollViewer tracks reserve space and solve cross-axis overflow
+ok 14 - non-overlay ScrollViewer tracks reserve space and solve cross-axis overflow
+  ---
+  duration_ms: 5.407102
+  type: 'test'
+  ...
+# Subtest: ScrollViewer viewport clip prevents content hits and rendering in reserved chrome
+ok 15 - ScrollViewer viewport clip prevents content hits and rendering in reserved chrome
+  ---
+  duration_ms: 7.541985
+  type: 'test'
+  ...
+# Subtest: ScrollViewer resize and content replacement clamp stale offsets and notify extent deltas
+ok 16 - ScrollViewer resize and content replacement clamp stale offsets and notify extent deltas
+  ---
+  duration_ms: 8.748338
+  type: 'test'
+  ...
+# Subtest: ScrollViewer BringIntoView handles both axes, padding and partially visible large targets
+ok 17 - ScrollViewer BringIntoView handles both axes, padding and partially visible large targets
+  ---
+  duration_ms: 9.012587
+  type: 'test'
+  ...
+# Subtest: wheel deltaMode=0 respects CSS pixels, lines or viewport pages
+ok 18 - wheel deltaMode=0 respects CSS pixels, lines or viewport pages
+  ---
+  duration_ms: 6.941313
+  type: 'test'
+  ...
+# Subtest: wheel deltaMode=1 respects CSS pixels, lines or viewport pages
+ok 19 - wheel deltaMode=1 respects CSS pixels, lines or viewport pages
+  ---
+  duration_ms: 6.209907
+  type: 'test'
+  ...
+# Subtest: wheel deltaMode=2 respects CSS pixels, lines or viewport pages
+ok 20 - wheel deltaMode=2 respects CSS pixels, lines or viewport pages
+  ---
+  duration_ms: 6.952667
+  type: 'test'
+  ...
+# Subtest: Shift-wheel scrolls horizontally and disabled chaining consumes boundary input
+ok 21 - Shift-wheel scrolls horizontally and disabled chaining consumes boundary input
+  ---
+  duration_ms: 6.819532
+  type: 'test'
+  ...
+# Subtest: ListBox has an interactive scrollbar without changing selection
+ok 22 - ListBox has an interactive scrollbar without changing selection
+  ---
+  duration_ms: 40.514016
+  type: 'test'
+  ...
+# Subtest: TreeView has an interactive scrollbar without changing selection
+ok 23 - TreeView has an interactive scrollbar without changing selection
+  ---
+  duration_ms: 55.172148
+  type: 'test'
+  ...
+# Subtest: ListBox recycles row controls rather than allocating new containers on every scroll
+ok 24 - ListBox recycles row controls rather than allocating new containers on every scroll
+  ---
+  duration_ms: 513.807043
+  type: 'test'
+  ...
+# Subtest: ListBox horizontal chrome pans wide items without scrolling or selecting rows
+ok 25 - ListBox horizontal chrome pans wide items without scrolling or selecting rows
+  ---
+  duration_ms: 11.825865
+  type: 'test'
+  ...
+# Subtest: TableView both-axis scrollbars exclude headers and preserve header alignment
+ok 26 - TableView both-axis scrollbars exclude headers and preserve header alignment
+  ---
+  duration_ms: 61.193894
+  type: 'test'
+  ...
+# Subtest: multiline TextBox supports vertical drag, wheel, and horizontal pan without changing text or selection
+ok 27 - multiline TextBox supports vertical drag, wheel, and horizontal pan without changing text or selection
+  ---
+  duration_ms: 9.641888
+  type: 'test'
+  ...
+# Subtest: wrapped TextBox disables horizontal chrome and remaps viewport when resizing
+ok 28 - wrapped TextBox disables horizontal chrome and remaps viewport when resizing
+  ---
+  duration_ms: 21.361436
+  type: 'test'
+  ...
+# Subtest: TextBox measurement layouts are retained and disposed with their owner
+ok 29 - TextBox measurement layouts are retained and disposed with their owner
+  ---
+  duration_ms: 4.405752
+  type: 'test'
+  ...
+# Subtest: scroll chrome still works with runtime XAML attached scrollbar options
+ok 30 - scroll chrome still works with runtime XAML attached scrollbar options
+  ---
+  duration_ms: 11.534772
+  type: 'test'
+  ...
+# Subtest: reserved horizontal chrome does not oscillate realization at an item-height boundary
+ok 31 - reserved horizontal chrome does not oscillate realization at an item-height boundary
+  ---
+  duration_ms: 14.366641
+  type: 'test'
+  ...
+1..31
+# tests 31
+# suites 0
+# pass 31
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2087.136225

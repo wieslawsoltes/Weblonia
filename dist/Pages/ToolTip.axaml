@@ -1,0 +1,3 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Hover hints" FontSize="17" FontWeight="SemiBold"/><StackPanel Orientation="Horizontal" Spacing="12"><Button Content="Hover for a hint" ToolTip.Tip="This hint is drawn with native Skia."/><Button Content="A second hint" ToolTip.Tip="Try keyboard focus and the source editor too."/></StackPanel></StackPanel></Border>
+</StackPanel>

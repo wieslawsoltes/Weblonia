@@ -1,0 +1,280 @@
+TAP version 13
+# Subtest: ScrollBar derives from RangeBase rather than inheriting reversed Slider behavior
+ok 1 - ScrollBar derives from RangeBase rather than inheriting reversed Slider behavior
+  ---
+  duration_ms: 4.275789
+  type: 'test'
+  ...
+# Subtest: ScrollBar Vertical: proportional drag without jump and release event
+ok 2 - ScrollBar Vertical: proportional drag without jump and release event
+  ---
+  duration_ms: 11.015358
+  type: 'test'
+  ...
+# Subtest: ScrollBar Horizontal: proportional drag without jump and release event
+ok 3 - ScrollBar Horizontal: proportional drag without jump and release event
+  ---
+  duration_ms: 2.718813
+  type: 'test'
+  ...
+# Subtest: ScrollBar tiny viewport bounds never create oversized thumbs or divide by zero
+ok 4 - ScrollBar tiny viewport bounds never create oversized thumbs or divide by zero
+  ---
+  duration_ms: 2.291084
+  type: 'test'
+  ...
+# Subtest: ScrollBar reverse direction is geometry-consistent and keyboard increments follow its orientation
+ok 5 - ScrollBar reverse direction is geometry-consistent and keyboard increments follow its orientation
+  ---
+  duration_ms: 4.191213
+  type: 'test'
+  ...
+# Subtest: ScrollBar track press pages rather than jumps and releases repeat timers
+ok 6 - ScrollBar track press pages rather than jumps and releases repeat timers
+  ---
+  duration_ms: 2.062555
+  type: 'test'
+  ...
+# Subtest: ScrollBar page-repeat progresses while held and stops on capture loss
+ok 7 - ScrollBar page-repeat progresses while held and stops on capture loss
+  ---
+  duration_ms: 88.437024
+  type: 'test'
+  ...
+# Subtest: ScrollBar ignores right clicks and additional pointers during a drag
+ok 8 - ScrollBar ignores right clicks and additional pointers during a drag
+  ---
+  duration_ms: 1.685137
+  type: 'test'
+  ...
+# Subtest: ScrollBar visibility, zero range and explicit values remain coherent
+ok 9 - ScrollBar visibility, zero range and explicit values remain coherent
+  ---
+  duration_ms: 2.065013
+  type: 'test'
+  ...
+# Subtest: ScrollViewer scrollbar hits win over a child Button occupying the complete content
+ok 10 - ScrollViewer scrollbar hits win over a child Button occupying the complete content
+  ---
+  duration_ms: 19.934415
+  type: 'test'
+  ...
+# Subtest: ScrollViewer horizontal and vertical thumbs can independently reach both ends
+ok 11 - ScrollViewer horizontal and vertical thumbs can independently reach both ends
+  ---
+  duration_ms: 9.273478
+  type: 'test'
+  ...
+# Subtest: ScrollViewer deferred scrolling previews the thumb without moving content until release
+ok 12 - ScrollViewer deferred scrolling previews the thumb without moving content until release
+  ---
+  duration_ms: 5.485243
+  type: 'test'
+  ...
+# Subtest: ScrollViewer Hidden permits scrolling but Disabled does not
+ok 13 - ScrollViewer Hidden permits scrolling but Disabled does not
+  ---
+  duration_ms: 4.621672
+  type: 'test'
+  ...
+# Subtest: non-overlay ScrollViewer tracks reserve space and solve cross-axis overflow
+ok 14 - non-overlay ScrollViewer tracks reserve space and solve cross-axis overflow
+  ---
+  duration_ms: 12.218388
+  type: 'test'
+  ...
+# Subtest: ScrollViewer viewport clip prevents content hits and rendering in reserved chrome
+ok 15 - ScrollViewer viewport clip prevents content hits and rendering in reserved chrome
+  ---
+  duration_ms: 12.977022
+  type: 'test'
+  ...
+# Subtest: ScrollViewer resize and content replacement clamp stale offsets and notify extent deltas
+ok 16 - ScrollViewer resize and content replacement clamp stale offsets and notify extent deltas
+  ---
+  duration_ms: 13.144399
+  type: 'test'
+  ...
+# Subtest: ScrollViewer BringIntoView handles both axes, padding and partially visible large targets
+ok 17 - ScrollViewer BringIntoView handles both axes, padding and partially visible large targets
+  ---
+  duration_ms: 11.441798
+  type: 'test'
+  ...
+# Subtest: wheel deltaMode=0 respects CSS pixels, lines or viewport pages
+ok 18 - wheel deltaMode=0 respects CSS pixels, lines or viewport pages
+  ---
+  duration_ms: 9.487525
+  type: 'test'
+  ...
+# Subtest: wheel deltaMode=1 respects CSS pixels, lines or viewport pages
+ok 19 - wheel deltaMode=1 respects CSS pixels, lines or viewport pages
+  ---
+  duration_ms: 7.745402
+  type: 'test'
+  ...
+# Subtest: wheel deltaMode=2 respects CSS pixels, lines or viewport pages
+ok 20 - wheel deltaMode=2 respects CSS pixels, lines or viewport pages
+  ---
+  duration_ms: 7.522098
+  type: 'test'
+  ...
+# Subtest: Shift-wheel scrolls horizontally and disabled chaining consumes boundary input
+ok 21 - Shift-wheel scrolls horizontally and disabled chaining consumes boundary input
+  ---
+  duration_ms: 8.672993
+  type: 'test'
+  ...
+# Subtest: ListBox has an interactive scrollbar without changing selection
+ok 22 - ListBox has an interactive scrollbar without changing selection
+  ---
+  duration_ms: 52.817584
+  type: 'test'
+  ...
+# Subtest: TreeView has an interactive scrollbar without changing selection
+ok 23 - TreeView has an interactive scrollbar without changing selection
+  ---
+  duration_ms: 73.861252
+  type: 'test'
+  ...
+# Subtest: ListBox recycles row controls rather than allocating new containers on every scroll
+ok 24 - ListBox recycles row controls rather than allocating new containers on every scroll
+  ---
+  duration_ms: 575.341137
+  type: 'test'
+  ...
+# Subtest: ListBox horizontal chrome pans wide items without scrolling or selecting rows
+ok 25 - ListBox horizontal chrome pans wide items without scrolling or selecting rows
+  ---
+  duration_ms: 24.159648
+  type: 'test'
+  ...
+# Subtest: TableView both-axis scrollbars exclude headers and preserve header alignment
+ok 26 - TableView both-axis scrollbars exclude headers and preserve header alignment
+  ---
+  duration_ms: 69.336546
+  type: 'test'
+  ...
+# Subtest: multiline TextBox supports vertical drag, wheel, and horizontal pan without changing text or selection
+ok 27 - multiline TextBox supports vertical drag, wheel, and horizontal pan without changing text or selection
+  ---
+  duration_ms: 10.917331
+  type: 'test'
+  ...
+# Subtest: wrapped TextBox disables horizontal chrome and remaps viewport when resizing
+ok 28 - wrapped TextBox disables horizontal chrome and remaps viewport when resizing
+  ---
+  duration_ms: 21.210608
+  type: 'test'
+  ...
+# Subtest: TextBox measurement layouts are retained and disposed with their owner
+ok 29 - TextBox measurement layouts are retained and disposed with their owner
+  ---
+  duration_ms: 3.812315
+  type: 'test'
+  ...
+# Subtest: scroll chrome still works with runtime XAML attached scrollbar options
+ok 30 - scroll chrome still works with runtime XAML attached scrollbar options
+  ---
+  duration_ms: 12.136212
+  type: 'test'
+  ...
+# Subtest: reserved horizontal chrome does not oscillate realization at an item-height boundary
+ok 31 - reserved horizontal chrome does not oscillate realization at an item-height boundary
+  ---
+  duration_ms: 14.38541
+  type: 'test'
+  ...
+# Subtest: TableView header and reserved horizontal track share a stable realization viewport
+ok 32 - TableView header and reserved horizontal track share a stable realization viewport
+  ---
+  duration_ms: 65.942329
+  type: 'test'
+  ...
+# Subtest: font metrics establish stable baselines; combining ink does not move line spacing
+ok 33 - font metrics establish stable baselines; combining ink does not move line spacing
+  ---
+  duration_ms: 3.292327
+  type: 'test'
+  ...
+# Subtest: viewport and caret line lookup are logarithmic for a 10000-line document
+ok 34 - viewport and caret line lookup are logarithmic for a 10000-line document
+  ---
+  duration_ms: 50.171745
+  type: 'test'
+  ...
+# Subtest: line aggregation handles documents beyond the JavaScript argument-count limit
+ok 35 - line aggregation handles documents beyond the JavaScript argument-count limit
+  ---
+  duration_ms: 254.931519
+  type: 'test'
+  ...
+# Subtest: MaxLines stops shaping invisible paragraphs after one overflow sentinel
+ok 36 - MaxLines stops shaping invisible paragraphs after one overflow sentinel
+  ---
+  duration_ms: 0.816735
+  type: 'test'
+  ...
+# Subtest: MaxLines with wrapped overflow still marks and fits the ellipsis
+ok 37 - MaxLines with wrapped overflow still marks and fits the ellipsis
+  ---
+  duration_ms: 29.121257
+  type: 'test'
+  ...
+# Subtest: FormattedText retains a borrowed layout and invalidates on brush/font/width changes
+ok 38 - FormattedText retains a borrowed layout and invalidates on brush/font/width changes
+  ---
+  duration_ms: 6.883759
+  type: 'test'
+  ...
+# Subtest: uncacheable rich/feature descriptors still have bounded layout ownership
+ok 39 - uncacheable rich/feature descriptors still have bounded layout ownership
+  ---
+  duration_ms: 1.949149
+  type: 'test'
+  ...
+# Subtest: z-order snapshots are reused and invalidate for values, add/remove and public reorder
+ok 40 - z-order snapshots are reused and invalidate for values, add/remove and public reorder
+  ---
+  duration_ms: 7.914318
+  type: 'test'
+  ...
+# Subtest: typeface descriptors are retained and external mutations do not alter control properties
+ok 41 - typeface descriptors are retained and external mutations do not alter control properties
+  ---
+  duration_ms: 1.534944
+  type: 'test'
+  ...
+# Subtest: scrollbars expose correct automation role/range and automation changes scroll the owner
+ok 42 - scrollbars expose correct automation role/range and automation changes scroll the owner
+  ---
+  duration_ms: 11.855363
+  type: 'test'
+  ...
+# Subtest: wheel mode is sampled before delta values
+ok 43 - wheel mode is sampled before delta values
+  ---
+  duration_ms: 2.501269
+  type: 'test'
+  ...
+# Subtest: deep document caret positions segment only the touched line and preserve CRLF ties
+ok 44 - deep document caret positions segment only the touched line and preserve CRLF ties
+  ---
+  duration_ms: 87.003648
+  type: 'test'
+  ...
+# Subtest: FormattedText culture and disposed borrowed layouts invalidate safely
+ok 45 - FormattedText culture and disposed borrowed layouts invalidate safely
+  ---
+  duration_ms: 0.508939
+  type: 'test'
+  ...
+1..45
+# tests 45
+# suites 0
+# pass 45
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2360.200708

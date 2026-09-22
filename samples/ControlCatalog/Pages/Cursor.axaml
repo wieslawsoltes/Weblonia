@@ -1,0 +1,3 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Pointer cursors" FontSize="17" FontWeight="SemiBold"/><StackPanel Orientation="Horizontal" Spacing="12"><Button Content="Crosshair" Cursor="crosshair"/><Button Content="Move" Cursor="move"/><Button Content="Text" Cursor="text"/><Button Content="Help" Cursor="help"/></StackPanel></StackPanel></Border>
+</StackPanel>

@@ -1,0 +1,70 @@
+{
+  "BaseArchive": "AvaloniaWeb-0.6.1-alpha.1-source.zip",
+  "BaseArchiveSha256": "2cea849adbb46e791d1e795b41be2443d8e8728cb9447a8304d67c51888c8684",
+  "ManifestFiles": 1839,
+  "Mismatches": [],
+  "RecoveredPerformanceFiles": [
+    {
+      "Path": "tests/worker-performance-browser.py",
+      "Sha256": "69b465acbb71b83132c38c9021e8490fa83a1d2de3276cf8112c22b3e904aff9"
+    },
+    {
+      "Path": "tests/threading-protocol.test.mjs",
+      "Sha256": "f0a0f9a30bba0e2f6671b2677dfbf3bae231552b30b4d3d5b5f2f8ceecef9ab8"
+    },
+    {
+      "Path": "tests/worker-native-performance.test.mjs",
+      "Sha256": "4669ac1f51ae0a0f5ea372dde775cddc1062dbb76824a5425fcd1c6a4ef52d3b"
+    },
+    {
+      "Path": "tests/worker-performance.test.mjs",
+      "Sha256": "5c837c3c6c079bd7fc68ee791df472436c692ebe2fb1461867f7771c459afbd1"
+    },
+    {
+      "Path": "packages/rendering/src/protocol.js",
+      "Sha256": "ef78832dc35edcb479931ffc98dc18deefbddf9bfc74364f5d70093727731d5e"
+    },
+    {
+      "Path": "packages/rendering/src/resources.js",
+      "Sha256": "b5916266e580f3ff983be8b76491aa2394a48049688d2b4c9b62ca9925dbdb7d"
+    },
+    {
+      "Path": "packages/rendering/src/server.js",
+      "Sha256": "fa98e060985f67e019f4f1cd082cd4d0001f36f14f54624b9fb74f2fca1a9038"
+    },
+    {
+      "Path": "packages/rendering/src/references.js",
+      "Sha256": "b325e74c0a5821b3b5a984542612a271617c10a1fcc44db97ec93070dc4bb8bc"
+    },
+    {
+      "Path": "packages/rendering/src/recording.js",
+      "Sha256": "851abd763c4f32718477cf79f361bb57e877820d22fec8de7d9c2ce1fb9aef7f"
+    },
+    {
+      "Path": "packages/skia/src/index.js",
+      "Sha256": "7537cf9b9e3b2475c97d8bd41f439d09cadca219dcab9dc62bfa54e4e708fae2"
+    },
+    {
+      "Path": "packages/skia/src/worker-runtime.js",
+      "Sha256": "8bd02a4f6d34e47552a16e7be560bfe53a6ed74ee8247a752d9d680204ae5bd7"
+    },
+    {
+      "Path": "packages/browser/src/render-worker.js",
+      "Sha256": "9ecc214877e848cf3af70d0e649798edff871cb568d91370cb672eb9251fa95b"
+    },
+    {
+      "Path": "packages/browser/src/worker-top-level.js",
+      "Sha256": "3ca358cbffc2c74f356f6379adee8cfc4969f79f13f6a718d9ba61a4bd84941b"
+    },
+    {
+      "Path": "packages/browser/src/isolated-host.js",
+      "Sha256": "d75737843770ee9cc78550de1e3e9e0a99105c9d76477783afad3d150aa3fdde"
+    },
+    {
+      "Path": "packages/browser/src/render-thread.js",
+      "Sha256": "c7f49a59fb8701ce0eb68db49d42df822d741700955872c29cbdc9e4dca4f96b"
+    }
+  ],
+  "RecoveredPerformanceBaselineNodeTests": 421,
+  "FullParityClaimed": false
+}

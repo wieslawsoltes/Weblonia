@@ -1,0 +1,20 @@
+/mnt/data/worker-fix/AvaloniaWeb/tests/threading-quality.py:47: DeprecationWarning: Image.Image.getdata is deprecated and will be removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
+  diff=ImageChops.difference(reference,actual);maximum=max(v[1]for v in diff.getextrema());bad=sum(1 for px in diff.getdata()if max(px)>2)
+PASS render-worker browser-fonts 1.25x RGBA
+PASS full-isolation browser-fonts 1.25x RGBA
+PASS render-worker scrolled-editor 1.25x RGBA
+PASS full-isolation scrolled-editor 1.25x RGBA
+PASS render-worker native-fonts 1.25x RGBA
+PASS full-isolation native-fonts 1.25x RGBA
+PASS render-worker browser-fonts 2x RGBA
+PASS full-isolation browser-fonts 2x RGBA
+PASS render-worker scrolled-editor 2x RGBA
+PASS full-isolation scrolled-editor 2x RGBA
+PASS render-worker native-fonts 2x RGBA
+PASS full-isolation native-fonts 2x RGBA
+{
+  "Passed": 12,
+  "Failed": 0,
+  "Errors": [],
+  "MissingAssets": []
+}

@@ -1,0 +1,98 @@
+{
+  "Version": "0.6.2-alpha.1",
+  "SourceFingerprint": "93c095505d6ae58d74e38e68e6296edf5f0ee81ed427f9d3042d26314d241cab",
+  "Completed": true,
+  "Tests": [
+    {
+      "Name": "warm paint does not rebuild or mutate accessibility DOM",
+      "Passed": true,
+      "Details": {
+        "Frames": 25,
+        "StructurePasses": 0,
+        "Projections": 0,
+        "DomMutations": 0
+      },
+      "Milliseconds": 54.35
+    },
+    {
+      "Name": "detached LabeledBy updates its consumer and releases replaced dependencies",
+      "Passed": true,
+      "Details": null,
+      "Milliseconds": 10.2
+    },
+    {
+      "Name": "transitive and cyclic label relationships converge without stale names",
+      "Passed": true,
+      "Details": null,
+      "Milliseconds": 9.95
+    },
+    {
+      "Name": "Control-valued content label remains live without replacing the button node",
+      "Passed": true,
+      "Details": null,
+      "Milliseconds": 7.15
+    },
+    {
+      "Name": "visibility removes and restores complete automation subtrees",
+      "Passed": true,
+      "Details": null,
+      "Milliseconds": 7.92
+    },
+    {
+      "Name": "raw nodes flatten descendants and preserve reorder identity",
+      "Passed": true,
+      "Details": null,
+      "Milliseconds": 8.75
+    },
+    {
+      "Name": "command availability and parameter changes update aria-disabled",
+      "Passed": true,
+      "Details": null,
+      "Milliseconds": 7.94
+    },
+    {
+      "Name": "inherited disabling refreshes descendant semantics",
+      "Passed": true,
+      "Details": null,
+      "Milliseconds": 7.09
+    },
+    {
+      "Name": "focus projects editor semantics and transfers ownership between parents",
+      "Passed": true,
+      "Details": null,
+      "Milliseconds": 19.15
+    },
+    {
+      "Name": "password conversion clears mirrored values and native plain-text buffers",
+      "Passed": true,
+      "Details": null,
+      "Milliseconds": 18.16
+    },
+    {
+      "Name": "recycled table rows retain accessibility nodes with updated content",
+      "Passed": true,
+      "Details": {
+        "Before": 10,
+        "After": 12,
+        "RetainedNodes": 10
+      },
+      "Milliseconds": 34.35
+    },
+    {
+      "Name": "explicit rendering consumes scheduled callbacks and settled UI stays idle",
+      "Passed": true,
+      "Details": null,
+      "Milliseconds": 294.29
+    }
+  ],
+  "PageErrors": [],
+  "MissingAssets": [],
+  "Mode": "local-asset-interception",
+  "ScreenReaderQualified": false,
+  "StartedAt": "2026-09-21T19:52:28.006661+00:00",
+  "Passed": 12,
+  "Failed": 0,
+  "Browser": "144.0.7559.96",
+  "Backend": "canvas",
+  "FinalSourceFingerprint": "93c095505d6ae58d74e38e68e6296edf5f0ee81ed427f9d3042d26314d241cab"
+}

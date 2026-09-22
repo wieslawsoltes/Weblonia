@@ -1,0 +1,3 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Component inventory" FontSize="17" FontWeight="SemiBold"/><TableView IsCompositorScrollingEnabled="True" x:Name="Table" ItemsSource="{Binding Rows}" Height="370"/></StackPanel></Border>
+</StackPanel>

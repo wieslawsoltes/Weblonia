@@ -1,0 +1,23 @@
+WORKER data:text/javascript,import%20%22http%3A%2F%2Flocalhost%3A4173%2Fpackages%2Fbrowser%2Fworker-assets%2Fui.js%22%3B
+WORKER data:text/javascript,import%20%22http%3A%2F%2Flocalhost%3A4173%2Fpackages%2Fbrowser%2Fworker-assets%2Frender.js%22%3B
+CONSOLE log RAW_WORKER_MESSAGE {"Type":"startup-progress","Role":"ui","Stage":"waiting-for-initialize","ElapsedMilliseconds":0.09999999997671694}
+CONSOLE log RAW_WORKER_MESSAGE {"Type":"startup-progress","Role":"ui","Stage":"module-import","ElapsedMilliseconds":1.2000000000116415}
+CONSOLE log RAW_WORKER_MESSAGE {"Type":"startup-progress","Role":"render","Stage":"waiting-for-initialize","ElapsedMilliseconds":0.1000000000349246}
+CONSOLE log RAW_WORKER_MESSAGE {"Type":"startup-progress","Role":"render","Stage":"module-import","ElapsedMilliseconds":0.9000000000232831}
+CONSOLE log RAW_WORKER_MESSAGE {"Type":"startup-progress","Role":"ui","Stage":"runtime-loader","ElapsedMilliseconds":632.7000000000116,"Url":"http://localhost:4173/packages/browser/worker-assets/canvaskit-loader.mjs"}
+CONSOLE log RAW_WORKER_MESSAGE {"Type":"startup-progress","Role":"render","Stage":"runtime-loader","ElapsedMilliseconds":651,"Url":"http://localhost:4173/packages/browser/worker-assets/canvaskit-loader.mjs"}
+CONSOLE log RAW_WORKER_MESSAGE {"Type":"startup-progress","Role":"ui","Stage":"wasm-initialization","ElapsedMilliseconds":687.5999999999767,"Url":"http://localhost:4173/vendor/skiasharpweb/dist/vendor/canvaskit.wasm"}
+CONSOLE log RAW_WORKER_MESSAGE {"Type":"startup-progress","Role":"render","Stage":"wasm-initialization","ElapsedMilliseconds":693.1000000000349,"Url":"http://localhost:4173/vendor/skiasharpweb/dist/vendor/canvaskit.wasm"}
+CONSOLE log RAW_WORKER_MESSAGE {"Type":"startup-progress","Role":"ui","Stage":"skia-platform","ElapsedMilliseconds":3273.2999999999884}
+CONSOLE log RAW_WORKER_MESSAGE {"Type":"startup-progress","Role":"ui","Stage":"application-module","ElapsedMilliseconds":3286.899999999965,"Url":"http://localhost:4173/samples/ControlCatalog/worker/catalog.js"}
+CONSOLE log RAW_WORKER_MESSAGE {"Type":"startup-progress","Role":"render","Stage":"skia-platform","ElapsedMilliseconds":3352.600000000035}
+CONSOLE log RAW_WORKER_MESSAGE {"Type":"startup-progress","Role":"render","Stage":"backend-probe","ElapsedMilliseconds":3368}
+CONSOLE log RAW_WORKER_MESSAGE {"Type":"startup-progress","Role":"render","Stage":"ready","ElapsedMilliseconds":3373.5}
+CONSOLE log RAW_WORKER_MESSAGE {"Type":"startup-progress","Role":"ui","Stage":"renderer-channel","ElapsedMilliseconds":3564.0999999999767}
+CONSOLE log RAW_WORKER_MESSAGE {"Type":"startup-progress","Role":"ui","Stage":"ready","ElapsedMilliseconds":4088}
+RESULT {'ready': True, 'error': None}
+AFTER_TIMEOUT_HANDLER function
+RESEND_RESULT {'Type': 'probe-timeout'}
+AFTER_TIMEOUT_HANDLER function
+RESEND_RESULT {'Type': 'probe-timeout'}
+MODULE_FETCH_COUNT 246

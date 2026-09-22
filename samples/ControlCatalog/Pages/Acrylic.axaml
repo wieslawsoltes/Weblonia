@@ -1,0 +1,8 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Native Skia backdrop sampling" FontSize="19" FontWeight="SemiBold"/>
+<TextBlock Text="Acrylic blurs the pixels already drawn in this canvas. It does not sample the desktop outside the browser." TextWrapping="Wrap"/>
+<Border Name="AcrylicSlot" Height="300" ClipToBounds="True" CornerRadius="14"/>
+<TextBlock Text="Tint opacity"/><Slider Name="AcrylicTint" Minimum="0" Maximum="1" Value="0.35"/>
+<TextBlock Text="Blur radius"/><Slider Name="AcrylicBlur" Minimum="0" Maximum="35" Value="18"/>
+</StackPanel></Border>
+</StackPanel>

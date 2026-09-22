@@ -1,0 +1,2540 @@
+
+> avaloniaweb-workspace@0.6.1-alpha.1 test
+> node --import ./scripts/register-loader.mjs --test tests/*.test.mjs
+
+TAP version 13
+# Subtest: Automation peers are cached, dispatch notifications, and release owner subscriptions
+ok 1 - Automation peers are cached, dispatch notifications, and release owner subscriptions
+  ---
+  duration_ms: 8.019888
+  type: 'test'
+  ...
+# Subtest: Automation XAML metadata, labeled-by cycles and custom peer overrides
+ok 2 - Automation XAML metadata, labeled-by cycles and custom peer overrides
+  ---
+  duration_ms: 11.350603
+  type: 'test'
+  ...
+# Subtest: Invoke/toggle/radio providers enforce disabled and mutually exclusive behavior
+ok 3 - Invoke/toggle/radio providers enforce disabled and mutually exclusive behavior
+  ---
+  duration_ms: 5.034101
+  type: 'test'
+  ...
+# Subtest: Value and range providers preserve password privacy and read-only/range contracts
+ok 4 - Value and range providers preserve password privacy and read-only/range contracts
+  ---
+  duration_ms: 5.910825
+  type: 'test'
+  ...
+# Subtest: Selection peers represent offscreen items without allocating the whole list
+ok 5 - Selection peers represent offscreen items without allocating the whole list
+  ---
+  duration_ms: 14.570401
+  type: 'test'
+  ...
+# Subtest: Table automation exposes actual headers, rows, grid cell identity and current row indices
+ok 6 - Table automation exposes actual headers, rows, grid cell identity and current row indices
+  ---
+  duration_ms: 42.630544
+  type: 'test'
+  ...
+# Subtest: Tree expansion peers update underlying hierarchy and report sibling positions
+ok 7 - Tree expansion peers update underlying hierarchy and report sibling positions
+  ---
+  duration_ms: 8.602548
+  type: 'test'
+  ...
+# Subtest: Scroll and clipping automation use measured viewport and enforce unsupported axes
+ok 8 - Scroll and clipping automation use measured viewport and enforce unsupported axes
+  ---
+  duration_ms: 6.121215
+  type: 'test'
+  ...
+# Subtest: Visual adoption rejects a conflicting logical parent without a partial mutation
+ok 9 - Visual adoption rejects a conflicting logical parent without a partial mutation
+  ---
+  duration_ms: 0.666874
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: MainView
+ok 10 - AOT catalog construction, layout and disposal: MainView
+  ---
+  duration_ms: 64.819474
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: Accelerator
+ok 11 - AOT catalog construction, layout and disposal: Accelerator
+  ---
+  duration_ms: 4.272566
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: Acrylic
+ok 12 - AOT catalog construction, layout and disposal: Acrylic
+  ---
+  duration_ms: 6.337704
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: AdornerLayer
+ok 13 - AOT catalog construction, layout and disposal: AdornerLayer
+  ---
+  duration_ms: 8.292681
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: AutoCompleteBox
+ok 14 - AOT catalog construction, layout and disposal: AutoCompleteBox
+  ---
+  duration_ms: 6.181133
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: BitmapCache
+ok 15 - AOT catalog construction, layout and disposal: BitmapCache
+  ---
+  duration_ms: 5.884766
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: Border
+ok 16 - AOT catalog construction, layout and disposal: Border
+  ---
+  duration_ms: 5.018808
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: ButtonSpinner
+ok 17 - AOT catalog construction, layout and disposal: ButtonSpinner
+  ---
+  duration_ms: 4.193219
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: Buttons
+ok 18 - AOT catalog construction, layout and disposal: Buttons
+  ---
+  duration_ms: 9.588643
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: Calendar
+ok 19 - AOT catalog construction, layout and disposal: Calendar
+  ---
+  duration_ms: 6.900956
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: CalendarDatePicker
+ok 20 - AOT catalog construction, layout and disposal: CalendarDatePicker
+  ---
+  duration_ms: 3.664339
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: Canvas
+ok 21 - AOT catalog construction, layout and disposal: Canvas
+  ---
+  duration_ms: 5.665993
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: Carousel
+ok 22 - AOT catalog construction, layout and disposal: Carousel
+  ---
+  duration_ms: 3.494629
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: CarouselPage
+ok 23 - AOT catalog construction, layout and disposal: CarouselPage
+  ---
+  duration_ms: 2.483866
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: CheckBox
+ok 24 - AOT catalog construction, layout and disposal: CheckBox
+  ---
+  duration_ms: 3.593614
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: Clipboard
+ok 25 - AOT catalog construction, layout and disposal: Clipboard
+  ---
+  duration_ms: 3.483882
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: ColorPicker
+ok 26 - AOT catalog construction, layout and disposal: ColorPicker
+  ---
+  duration_ms: 5.319562
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: ComboBox
+ok 27 - AOT catalog construction, layout and disposal: ComboBox
+  ---
+  duration_ms: 3.396543
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: CommandBar
+ok 28 - AOT catalog construction, layout and disposal: CommandBar
+  ---
+  duration_ms: 3.043843
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: Composition
+ok 29 - AOT catalog construction, layout and disposal: Composition
+  ---
+  duration_ms: 3.843693
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: ContainerQueries
+ok 30 - AOT catalog construction, layout and disposal: ContainerQueries
+  ---
+  duration_ms: 5.732601
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: ContentPage
+ok 31 - AOT catalog construction, layout and disposal: ContentPage
+  ---
+  duration_ms: 3.816273
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: ContextFlyout
+ok 32 - AOT catalog construction, layout and disposal: ContextFlyout
+  ---
+  duration_ms: 2.243382
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: ContextMenu
+ok 33 - AOT catalog construction, layout and disposal: ContextMenu
+  ---
+  duration_ms: 1.859835
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: Cursor
+ok 34 - AOT catalog construction, layout and disposal: Cursor
+  ---
+  duration_ms: 2.917777
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: CustomDrawing
+ok 35 - AOT catalog construction, layout and disposal: CustomDrawing
+  ---
+  duration_ms: 1.247402
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: DataValidation
+ok 36 - AOT catalog construction, layout and disposal: DataValidation
+  ---
+  duration_ms: 2.979588
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: DateTimePicker
+ok 37 - AOT catalog construction, layout and disposal: DateTimePicker
+  ---
+  duration_ms: 3.275404
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: Dialogs
+ok 38 - AOT catalog construction, layout and disposal: Dialogs
+  ---
+  duration_ms: 2.522914
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: DragDrop
+ok 39 - AOT catalog construction, layout and disposal: DragDrop
+  ---
+  duration_ms: 2.056685
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: DrawerPage
+ok 40 - AOT catalog construction, layout and disposal: DrawerPage
+  ---
+  duration_ms: 2.3783
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: Expander
+ok 41 - AOT catalog construction, layout and disposal: Expander
+  ---
+  duration_ms: 4.318694
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: FlexPanel
+ok 42 - AOT catalog construction, layout and disposal: FlexPanel
+  ---
+  duration_ms: 2.041934
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: Flyouts
+ok 43 - AOT catalog construction, layout and disposal: Flyouts
+  ---
+  duration_ms: 3.750857
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: Focus
+ok 44 - AOT catalog construction, layout and disposal: Focus
+  ---
+  duration_ms: 4.049818
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: Gestures
+ok 45 - AOT catalog construction, layout and disposal: Gestures
+  ---
+  duration_ms: 6.184918
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: HeaderedContentControl
+ok 46 - AOT catalog construction, layout and disposal: HeaderedContentControl
+  ---
+  duration_ms: 2.746494
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: Image
+ok 47 - AOT catalog construction, layout and disposal: Image
+  ---
+  duration_ms: 2.098567
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: Label
+ok 48 - AOT catalog construction, layout and disposal: Label
+  ---
+  duration_ms: 2.990494
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: LayoutTransformControl
+ok 49 - AOT catalog construction, layout and disposal: LayoutTransformControl
+  ---
+  duration_ms: 3.486436
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: ListBox
+ok 50 - AOT catalog construction, layout and disposal: ListBox
+  ---
+  duration_ms: 8.110021
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: Menu
+ok 51 - AOT catalog construction, layout and disposal: Menu
+  ---
+  duration_ms: 2.362707
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: NativeEmbed
+ok 52 - AOT catalog construction, layout and disposal: NativeEmbed
+  ---
+  duration_ms: 3.682545
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: NavigationPage
+ok 53 - AOT catalog construction, layout and disposal: NavigationPage
+  ---
+  duration_ms: 3.88479
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: Notifications
+ok 54 - AOT catalog construction, layout and disposal: Notifications
+  ---
+  duration_ms: 1.601273
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: NumericUpDown
+ok 55 - AOT catalog construction, layout and disposal: NumericUpDown
+  ---
+  duration_ms: 7.798761
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: OpenGL
+ok 56 - AOT catalog construction, layout and disposal: OpenGL
+  ---
+  duration_ms: 4.786725
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: OpenGLInterop
+ok 57 - AOT catalog construction, layout and disposal: OpenGLInterop
+  ---
+  duration_ms: 3.437274
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: OpenGLLease
+ok 58 - AOT catalog construction, layout and disposal: OpenGLLease
+  ---
+  duration_ms: 3.304457
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: PipsPager
+ok 59 - AOT catalog construction, layout and disposal: PipsPager
+  ---
+  duration_ms: 3.088869
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: PlatformInformation
+ok 60 - AOT catalog construction, layout and disposal: PlatformInformation
+  ---
+  duration_ms: 2.962883
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: PlatformSettings
+ok 61 - AOT catalog construction, layout and disposal: PlatformSettings
+  ---
+  duration_ms: 2.27578
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: Pointers
+ok 62 - AOT catalog construction, layout and disposal: Pointers
+  ---
+  duration_ms: 6.539933
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: ProgressBar
+ok 63 - AOT catalog construction, layout and disposal: ProgressBar
+  ---
+  duration_ms: 4.27152
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: RadioButton
+ok 64 - AOT catalog construction, layout and disposal: RadioButton
+  ---
+  duration_ms: 4.618146
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: RefreshContainer
+ok 65 - AOT catalog construction, layout and disposal: RefreshContainer
+  ---
+  duration_ms: 4.228521
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: RelativePanel
+ok 66 - AOT catalog construction, layout and disposal: RelativePanel
+  ---
+  duration_ms: 7.280807
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: Screens
+ok 67 - AOT catalog construction, layout and disposal: Screens
+  ---
+  duration_ms: 3.295194
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: ScrollViewer
+ok 68 - AOT catalog construction, layout and disposal: ScrollViewer
+  ---
+  duration_ms: 11.067515
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: Slider
+ok 69 - AOT catalog construction, layout and disposal: Slider
+  ---
+  duration_ms: 19.763411
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: SplitView
+ok 70 - AOT catalog construction, layout and disposal: SplitView
+  ---
+  duration_ms: 3.766308
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: TabControl
+ok 71 - AOT catalog construction, layout and disposal: TabControl
+  ---
+  duration_ms: 2.942944
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: TabStrip
+ok 72 - AOT catalog construction, layout and disposal: TabStrip
+  ---
+  duration_ms: 1.627502
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: TabbedPage
+ok 73 - AOT catalog construction, layout and disposal: TabbedPage
+  ---
+  duration_ms: 1.611548
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: TableView
+ok 74 - AOT catalog construction, layout and disposal: TableView
+  ---
+  duration_ms: 4.737713
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: TextBlock
+ok 75 - AOT catalog construction, layout and disposal: TextBlock
+  ---
+  duration_ms: 3.554637
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: TextBox
+ok 76 - AOT catalog construction, layout and disposal: TextBox
+  ---
+  duration_ms: 9.731799
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: ThemeVariants
+ok 77 - AOT catalog construction, layout and disposal: ThemeVariants
+  ---
+  duration_ms: 3.497092
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: ToggleSwitch
+ok 78 - AOT catalog construction, layout and disposal: ToggleSwitch
+  ---
+  duration_ms: 3.127667
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: ToolTip
+ok 79 - AOT catalog construction, layout and disposal: ToolTip
+  ---
+  duration_ms: 2.940169
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: TransitioningContentControl
+ok 80 - AOT catalog construction, layout and disposal: TransitioningContentControl
+  ---
+  duration_ms: 2.374454
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: TreeView
+ok 81 - AOT catalog construction, layout and disposal: TreeView
+  ---
+  duration_ms: 2.793513
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: Viewbox
+ok 82 - AOT catalog construction, layout and disposal: Viewbox
+  ---
+  duration_ms: 3.424985
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: WindowCustomizations
+ok 83 - AOT catalog construction, layout and disposal: WindowCustomizations
+  ---
+  duration_ms: 6.75505
+  type: 'test'
+  ...
+# Subtest: AOT catalog construction, layout and disposal: WrapPanel
+ok 84 - AOT catalog construction, layout and disposal: WrapPanel
+  ---
+  duration_ms: 2.142702
+  type: 'test'
+  ...
+# Subtest: catalog coverage manifest does not claim all upstream subexamples
+ok 85 - catalog coverage manifest does not claim all upstream subexamples
+  ---
+  duration_ms: 0.209839
+  type: 'test'
+  ...
+# Subtest: CompiledBindingExtension creates an executable incremental expression, not the reflection expression
+ok 86 - CompiledBindingExtension creates an executable incremental expression, not the reflection expression
+  ---
+  duration_ms: 9.134642
+  type: 'test'
+  ...
+# Subtest: compiled nested leaf updates do not reread ancestors or recreate subscriptions
+ok 87 - compiled nested leaf updates do not reread ancestors or recreate subscriptions
+  ---
+  duration_ms: 2.574399
+  type: 'test'
+  ...
+# Subtest: compiled branch replacement detaches only the obsolete suffix
+ok 88 - compiled branch replacement detaches only the obsolete suffix
+  ---
+  duration_ms: 1.000426
+  type: 'test'
+  ...
+# Subtest: compiled paths preserve terminal null and TargetNullValue without treating it as missing
+ok 89 - compiled paths preserve terminal null and TargetNullValue without treating it as missing
+  ---
+  duration_ms: 0.698992
+  type: 'test'
+  ...
+# Subtest: null intermediate compiled paths recover when the branch appears
+ok 90 - null intermediate compiled paths recover when the branch appears
+  ---
+  duration_ms: 0.925216
+  type: 'test'
+  ...
+# Subtest: compiled TwoWay setters reread normalized source values after assignment
+ok 91 - compiled TwoWay setters reread normalized source values after assignment
+  ---
+  duration_ms: 1.452884
+  type: 'test'
+  ...
+# Subtest: compiled delegates and declared read-only accessors are enforced
+ok 92 - compiled delegates and declared read-only accessors are enforced
+  ---
+  duration_ms: 0.964244
+  type: 'test'
+  ...
+# Subtest: compiled observable streams switch subscriptions and continue through emitted objects
+ok 93 - compiled observable streams switch subscriptions and continue through emitted objects
+  ---
+  duration_ms: 0.801663
+  type: 'test'
+  ...
+# Subtest: compiled Promise streams ignore stale completions after replacement
+ok 94 - compiled Promise streams ignore stale completions after replacement
+  ---
+  duration_ms: 1.435398
+  type: 'test'
+  ...
+# Subtest: compiled Promise rejection publishes fallback and exposes the binding error
+ok 95 - compiled Promise rejection publishes fallback and exposes the binding error
+  ---
+  duration_ms: 1.172391
+  type: 'test'
+  ...
+# Subtest: compiled stream disposal rejects late results and releases child observers
+ok 96 - compiled stream disposal rejects late results and releases child observers
+  ---
+  duration_ms: 0.691852
+  type: 'test'
+  ...
+# Subtest: compiled OneTime bindings release stream subscriptions after the first real value
+ok 97 - compiled OneTime bindings release stream subscriptions after the first real value
+  ---
+  duration_ms: 0.520328
+  type: 'test'
+  ...
+# Subtest: builder ArrayElement, TypeCast and Not compose executable operations
+ok 98 - builder ArrayElement, TypeCast and Not compose executable operations
+  ---
+  duration_ms: 0.910333
+  type: 'test'
+  ...
+# Subtest: compiled self, templated parent and namescope roots resolve without DataContext
+ok 99 - compiled self, templated parent and namescope roots resolve without DataContext
+  ---
+  duration_ms: 1.410873
+  type: 'test'
+  ...
+# Subtest: compiled command dependencies notify CanExecuteChanged and dispose observers
+ok 100 - compiled command dependencies notify CanExecuteChanged and dispose observers
+  ---
+  duration_ms: 0.783927
+  type: 'test'
+  ...
+# Subtest: compiled paths reject unsafe names and preserve carets inside quoted map keys
+ok 101 - compiled paths reject unsafe names and preserve carets inside quoted map keys
+  ---
+  duration_ms: 0.890284
+  type: 'test'
+  ...
+# Subtest: runtime XAML and emitted AOT modules both execute compiled stream bindings
+ok 102 - runtime XAML and emitted AOT modules both execute compiled stream bindings
+  ---
+  duration_ms: 15.620205
+  type: 'test'
+  ...
+# Subtest: compiled accessor factories observe, set and dispose without retaining obsolete branches
+ok 103 - compiled accessor factories observe, set and dispose without retaining obsolete branches
+  ---
+  duration_ms: 0.966998
+  type: 'test'
+  ...
+# Subtest: compiled accessor errors are cleared by the next successful value
+ok 104 - compiled accessor errors are cleared by the next successful value
+  ---
+  duration_ms: 0.619304
+  type: 'test'
+  ...
+# Subtest: OneWayToSource preserves the initial target and keeps an active source-only priority entry
+ok 105 - OneWayToSource preserves the initial target and keeps an active source-only priority entry
+  ---
+  duration_ms: 1.336763
+  type: 'test'
+  ...
+# Subtest: compiled explicit source updates do not write before UpdateSource is requested
+ok 106 - compiled explicit source updates do not write before UpdateSource is requested
+  ---
+  duration_ms: 0.505897
+  type: 'test'
+  ...
+# Subtest: compiled builder validates casts and can evaluate nullable getter delegates
+ok 107 - compiled builder validates casts and can evaluate nullable getter delegates
+  ---
+  duration_ms: 0.899067
+  type: 'test'
+  ...
+# Subtest: composition snapshots publish atomically at commit, not at property assignment
+ok 108 - composition snapshots publish atomically at commit, not at property assignment
+  ---
+  duration_ms: 3.928148
+  type: 'test'
+  ...
+# Subtest: visual collections reject duplicate parents, cycles, and cross-compositor resources
+ok 109 - visual collections reject duplicate parents, cycles, and cross-compositor resources
+  ---
+  duration_ms: 1.108937
+  type: 'test'
+  ...
+# Subtest: scalar keyframes are deterministic and cancellation restores the base property
+ok 110 - scalar keyframes are deterministic and cancellation restores the base property
+  ---
+  duration_ms: 1.313189
+  type: 'test'
+  ...
+# Subtest: keyframe clocks stop after completion and retain final presentation state
+ok 111 - keyframe clocks stop after completion and retain final presentation state
+  ---
+  duration_ms: 0.455442
+  type: 'test'
+  ...
+# Subtest: alternating keyframes and delay use the injected clock
+ok 112 - alternating keyframes and delay use the injected clock
+  ---
+  duration_ms: 0.504725
+  type: 'test'
+  ...
+# Subtest: expression parser supports vectors, arithmetic, functions and lazy conditionals
+ok 113 - expression parser supports vectors, arithmetic, functions and lazy conditionals
+  ---
+  duration_ms: 2.1138
+  type: 'test'
+  ...
+# Subtest: expression references observe committed property-set values
+ok 114 - expression references observe committed property-set values
+  ---
+  duration_ms: 0.846609
+  type: 'test'
+  ...
+# Subtest: custom visuals receive queued messages before rendering
+ok 115 - custom visuals receive queued messages before rendering
+  ---
+  duration_ms: 0.524173
+  type: 'test'
+  ...
+# Subtest: commit failures reject the batch and do not strand subsequent commits
+ok 116 - commit failures reject the batch and do not strand subsequent commits
+  ---
+  duration_ms: 0.469363
+  type: 'test'
+  ...
+# Subtest: disposing a compositor rejects pending batches and disposes its object graph
+ok 117 - disposing a compositor rejects pending batches and disposes its object graph
+  ---
+  duration_ms: 0.401212
+  type: 'test'
+  ...
+# Subtest: compositor disposal clears events and invokes custom handler disposal only once
+ok 118 - compositor disposal clears events and invokes custom handler disposal only once
+  ---
+  duration_ms: 0.190992
+  type: 'test'
+  ...
+# Subtest: container query grammar validates full input, axes, and Boolean precedence
+ok 119 - container query grammar validates full input, axes, and Boolean precedence
+  ---
+  duration_ms: 2.265765
+  type: 'test'
+  ...
+# Subtest: ancestor resize applies and removes query setters without replacing local values
+ok 120 - ancestor resize applies and removes query setters without replacing local values
+  ---
+  duration_ms: 9.653859
+  type: 'test'
+  ...
+# Subtest: XAML Container attached properties and conditional children instantiate
+ok 121 - XAML Container attached properties and conditional children instantiate
+  ---
+  duration_ms: 8.627234
+  type: 'test'
+  ...
+# Subtest: gesture collections enforce single ownership, duplicate rejection and immediate batched ownership
+ok 122 - gesture collections enforce single ownership, duplicate rejection and immediate batched ownership
+  ---
+  duration_ms: 2.614369
+  type: 'test'
+  ...
+# Subtest: gesture collection replacement and owner disposal detach contacts without sharing lifetimes
+ok 123 - gesture collection replacement and owner disposal detach contacts without sharing lifetimes
+  ---
+  duration_ms: 0.464316
+  type: 'test'
+  ...
+# Subtest: scroll threshold subtracts its dead zone and captures separately from element capture
+ok 124 - scroll threshold subtracts its dead zone and captures separately from element capture
+  ---
+  duration_ms: 1.839986
+  type: 'test'
+  ...
+# Subtest: Mouse contacts are never converted into touch scrolling
+ok 125 - Mouse contacts are never converted into touch scrolling
+  ---
+  duration_ms: 0.547488
+  type: 'test'
+  ...
+# Subtest: Pen contacts use the same threshold and release contracts as touch
+ok 126 - Pen contacts use the same threshold and release contracts as touch
+  ---
+  duration_ms: 0.56933
+  type: 'test'
+  ...
+# Subtest: unhandled scroll does not steal element capture
+ok 127 - unhandled scroll does not steal element capture
+  ---
+  duration_ms: 1.492984
+  type: 'test'
+  ...
+# Subtest: ScrollViewer cancels a pressed button before dragging can invoke Click
+ok 128 - ScrollViewer cancels a pressed button before dragging can invoke Click
+  ---
+  duration_ms: 10.905202
+  type: 'test'
+  ...
+# Subtest: a normal touch tap still invokes Button.Click once
+ok 129 - a normal touch tap still invokes Button.Click once
+  ---
+  duration_ms: 4.783484
+  type: 'test'
+  ...
+# Subtest: nested boundary-aware scroll recognizers yield to an ancestor that can consume movement
+ok 130 - nested boundary-aware scroll recognizers yield to an ancestor that can consume movement
+  ---
+  duration_ms: 1.044322
+  type: 'test'
+  ...
+# Subtest: pinch reports finite scale, midpoint, angle and exactly one end event
+ok 131 - pinch reports finite scale, midpoint, angle and exactly one end event
+  ---
+  duration_ms: 0.924484
+  type: 'test'
+  ...
+# Subtest: coincident pinch contacts and an extra third contact do not produce NaN or extra captures
+ok 132 - coincident pinch contacts and an extra third contact do not produce NaN or extra captures
+  ---
+  duration_ms: 0.35245
+  type: 'test'
+  ...
+# Subtest: cancel and collection removal release both pinch capture and pending contacts
+ok 133 - cancel and collection removal release both pinch capture and pending contacts
+  ---
+  duration_ms: 0.237641
+  type: 'test'
+  ...
+# Subtest: a second contact upgrades a running scroll to a pinch without leaving scroll state active
+ok 134 - a second contact upgrades a running scroll to a pinch without leaving scroll state active
+  ---
+  duration_ms: 0.429104
+  type: 'test'
+  ...
+# Subtest: PreventGestureRecognition in a tunnel handler suppresses recognizers without suppressing ordinary input
+ok 135 - PreventGestureRecognition in a tunnel handler suppresses recognizers without suppressing ordinary input
+  ---
+  duration_ms: 0.269137
+  type: 'test'
+  ...
+# Subtest: velocity estimator is bounded, rejects reversed time, tolerates duplicate timestamps and stale release
+ok 136 - velocity estimator is bounded, rejects reversed time, tolerates duplicate timestamps and stale release
+  ---
+  duration_ms: 3.389864
+  type: 'test'
+  ...
+# Subtest: inertial displacement is frame-rate independent using analytic integration
+ok 137 - inertial displacement is frame-rate independent using analytic integration
+  ---
+  duration_ms: 2.017749
+  type: 'test'
+  ...
+# Subtest: new press, disabled target, explicit cancellation and disposal stop inertia callbacks
+ok 138 - new press, disabled target, explicit cancellation and disposal stop inertia callbacks
+  ---
+  duration_ms: 0.746422
+  type: 'test'
+  ...
+# Subtest: capture-lost reentrancy preserves the latest capturer
+ok 139 - capture-lost reentrancy preserves the latest capturer
+  ---
+  duration_ms: 0.424346
+  type: 'test'
+  ...
+# Subtest: XAML builds recognizer collections and validates scalar options
+ok 140 - XAML builds recognizer collections and validates scalar options
+  ---
+  duration_ms: 5.290869
+  type: 'test'
+  ...
+# Subtest: cancellation cannot be defeated by a capture-lost handler recapturing
+ok 141 - cancellation cannot be defeated by a capture-lost handler recapturing
+  ---
+  duration_ms: 0.326362
+  type: 'test'
+  ...
+# Subtest: detaching a visual subtree cancels active scroll and releases every contact
+ok 142 - detaching a visual subtree cancels active scroll and releases every contact
+  ---
+  duration_ms: 1.119142
+  type: 'test'
+  ...
+# Subtest: a disposed recognizer stops scheduled inertia, unsubscribes and can never be re-added
+ok 143 - a disposed recognizer stops scheduled inertia, unsubscribes and can never be re-added
+  ---
+  duration_ms: 0.475542
+  type: 'test'
+  ...
+# Subtest: scroll gesture end requests cancel before a subsequent movement is emitted
+ok 144 - scroll gesture end requests cancel before a subsequent movement is emitted
+  ---
+  duration_ms: 0.38614
+  type: 'test'
+  ...
+# Subtest: actual native Skia surface draws pixels and encodes PNG
+ok 145 - actual native Skia surface draws pixels and encodes PNG
+  ---
+  duration_ms: 19.097562
+  type: 'test'
+  ...
+# Subtest: native SVG path geometry has accurate bounds and fill hit testing
+ok 146 - native SVG path geometry has accurate bounds and fill hit testing
+  ---
+  duration_ms: 1.95142
+  type: 'test'
+  ...
+# Subtest: native path boolean intersection produces actual geometry
+ok 147 - native path boolean intersection produces actual geometry
+  ---
+  duration_ms: 1.663005
+  type: 'test'
+  ...
+# Subtest: multiple registered faces in one family retain independent native ownership
+ok 148 - multiple registered faces in one family retain independent native ownership
+  ---
+  duration_ms: 92.374551
+  type: 'test'
+  ...
+# Subtest: retained native paragraph keys are serialized once across repeated shaping queries
+ok 149 - retained native paragraph keys are serialized once across repeated shaping queries
+  ---
+  duration_ms: 42.256176
+  type: 'test'
+  ...
+# Subtest: font handles remain safe when disposed after their owning platform
+ok 150 - font handles remain safe when disposed after their owning platform
+  ---
+  duration_ms: 16.653551
+  type: 'test'
+  ...
+# Subtest: solid native paints are reused without changing the rendered color after eviction
+ok 151 - solid native paints are reused without changing the rendered color after eviction
+  ---
+  duration_ms: 6.688593
+  type: 'test'
+  ...
+# Subtest: ImageBrush uses native image shader with transparent uniform letterboxing
+ok 152 - ImageBrush uses native image shader with transparent uniform letterboxing
+  ---
+  duration_ms: 14.182995
+  type: 'test'
+  ...
+# Subtest: VisualBrush snapshots actual retained content and refreshes mutable brushes
+ok 153 - VisualBrush snapshots actual retained content and refreshes mutable brushes
+  ---
+  duration_ms: 10.705591
+  type: 'test'
+  ...
+# Subtest: BitmapCache reuses unchanged content, refreshes descendants, and releases on dispose
+ok 154 - BitmapCache reuses unchanged content, refreshes descendants, and releases on dispose
+  ---
+  duration_ms: 7.739283
+  type: 'test'
+  ...
+# Subtest: native blur and drop shadow affect pixels outside original geometry
+ok 155 - native blur and drop shadow affect pixels outside original geometry
+  ---
+  duration_ms: 12.230883
+  type: 'test'
+  ...
+# Subtest: inset shadows are clipped to the border and darken interior edge
+ok 156 - inset shadows are clipped to the border and darken interior edge
+  ---
+  duration_ms: 6.756282
+  type: 'test'
+  ...
+# Subtest: acrylic filters the existing native surface before applying material tint
+ok 157 - acrylic filters the existing native surface before applying material tint
+  ---
+  duration_ms: 2.679706
+  type: 'test'
+  ...
+# Subtest: value priorities expose lower priorities when disposed
+ok 158 - value priorities expose lower priorities when disposed
+  ---
+  duration_ms: 1.807959
+  type: 'test'
+  ...
+# Subtest: later same-priority value wins and removal reveals prior
+ok 159 - later same-priority value wins and removal reveals prior
+  ---
+  duration_ms: 0.198684
+  type: 'test'
+  ...
+# Subtest: inheritance notifications and local overrides
+ok 160 - inheritance notifications and local overrides
+  ---
+  duration_ms: 2.149663
+  type: 'test'
+  ...
+# Subtest: inheritance cycles are rejected
+ok 161 - inheritance cycles are rejected
+  ---
+  duration_ms: 0.604492
+  type: 'test'
+  ...
+# Subtest: RxJS observable binding lifecycle and SetCurrentValue
+ok 162 - RxJS observable binding lifecycle and SetCurrentValue
+  ---
+  duration_ms: 0.601378
+  type: 'test'
+  ...
+# Subtest: style observable does not replace local observable binding
+ok 163 - style observable does not replace local observable binding
+  ---
+  duration_ms: 0.401122
+  type: 'test'
+  ...
+# Subtest: direct properties call setter and publish once
+ok 164 - direct properties call setter and publish once
+  ---
+  duration_ms: 0.423385
+  type: 'test'
+  ...
+# Subtest: ReactiveWeb nested source replacement rebinds path
+ok 165 - ReactiveWeb nested source replacement rebinds path
+  ---
+  duration_ms: 4.962054
+  type: 'test'
+  ...
+# Subtest: ReactiveWeb two-way textbox binding
+ok 166 - ReactiveWeb two-way textbox binding
+  ---
+  duration_ms: 4.522755
+  type: 'test'
+  ...
+# Subtest: OneTime binding takes initial source only
+ok 167 - OneTime binding takes initial source only
+  ---
+  duration_ms: 0.929092
+  type: 'test'
+  ...
+# Subtest: binding fallback applies to missing source path
+ok 168 - binding fallback applies to missing source path
+  ---
+  duration_ms: 0.461021
+  type: 'test'
+  ...
+# Subtest: binding target-null replacement preserves null semantics
+ok 169 - binding target-null replacement preserves null semantics
+  ---
+  duration_ms: 0.353883
+  type: 'test'
+  ...
+# Subtest: unsafe binding path rejected: __proto__.polluted
+ok 170 - unsafe binding path rejected: __proto__.polluted
+  ---
+  duration_ms: 0.157212
+  type: 'test'
+  ...
+# Subtest: unsafe binding path rejected: constructor.name
+ok 171 - unsafe binding path rejected: constructor.name
+  ---
+  duration_ms: 0.07451
+  type: 'test'
+  ...
+# Subtest: unsafe binding path rejected: Value["__proto__"]
+ok 172 - unsafe binding path rejected: Value["__proto__"]
+  ---
+  duration_ms: 0.188558
+  type: 'test'
+  ...
+# Subtest: binding path parses array and dictionary indexers
+ok 173 - binding path parses array and dictionary indexers
+  ---
+  duration_ms: 0.180527
+  type: 'test'
+  ...
+# Subtest: dynamic resource updates existing target
+ok 174 - dynamic resource updates existing target
+  ---
+  duration_ms: 2.327846
+  type: 'test'
+  ...
+# Subtest: conditional styles activate and deactivate without defeating local values
+ok 175 - conditional styles activate and deactivate without defeating local values
+  ---
+  duration_ms: 5.155239
+  type: 'test'
+  ...
+# Subtest: attached properties are supported in style setters
+ok 176 - attached properties are supported in style setters
+  ---
+  duration_ms: 0.588879
+  type: 'test'
+  ...
+# Subtest: measure/arrange applies margin and alignment
+ok 177 - measure/arrange applies margin and alignment
+  ---
+  duration_ms: 0.899908
+  type: 'test'
+  ...
+# Subtest: Grid resolves pixel and weighted star columns
+ok 178 - Grid resolves pixel and weighted star columns
+  ---
+  duration_ms: 3.729064
+  type: 'test'
+  ...
+# Subtest: Grid star row behaves as auto under infinite measure
+ok 179 - Grid star row behaves as auto under infinite measure
+  ---
+  duration_ms: 0.836515
+  type: 'test'
+  ...
+# Subtest: Grid layout invalidates after definition changes
+ok 180 - Grid layout invalidates after definition changes
+  ---
+  duration_ms: 2.401895
+  type: 'test'
+  ...
+# Subtest: StackPanel sums children and spacing
+ok 181 - StackPanel sums children and spacing
+  ---
+  duration_ms: 1.052704
+  type: 'test'
+  ...
+# Subtest: WrapPanel starts a new line when width is exceeded
+ok 182 - WrapPanel starts a new line when width is exceeded
+  ---
+  duration_ms: 0.902001
+  type: 'test'
+  ...
+# Subtest: RelativePanel detects circular sibling references
+ok 183 - RelativePanel detects circular sibling references
+  ---
+  duration_ms: 0.955299
+  type: 'test'
+  ...
+# Subtest: visual ownership rejects duplicates and cycles
+ok 184 - visual ownership rejects duplicates and cycles
+  ---
+  duration_ms: 0.926397
+  type: 'test'
+  ...
+# Subtest: headless mouse click invokes a genuine ReactiveCommand
+ok 185 - headless mouse click invokes a genuine ReactiveCommand
+  ---
+  duration_ms: 5.248998
+  type: 'test'
+  ...
+# Subtest: button keyboard activation and disabled state
+ok 186 - button keyboard activation and disabled state
+  ---
+  duration_ms: 1.517881
+  type: 'test'
+  ...
+# Subtest: routed event tunnels before bubbling
+ok 187 - routed event tunnels before bubbling
+  ---
+  duration_ms: 0.375975
+  type: 'test'
+  ...
+# Subtest: virtual ListBox realizes a bounded viewport for 10,000 items
+ok 188 - virtual ListBox realizes a bounded viewport for 10,000 items
+  ---
+  duration_ms: 10.442844
+  type: 'test'
+  ...
+# Subtest: virtual ListBox nested in unconstrained Grid converges
+ok 189 - virtual ListBox nested in unconstrained Grid converges
+  ---
+  duration_ms: 7.261878
+  type: 'test'
+  ...
+# Subtest: Menu rebuild preserves caller-owned MenuItem instances
+ok 190 - Menu rebuild preserves caller-owned MenuItem instances
+  ---
+  duration_ms: 2.109003
+  type: 'test'
+  ...
+# Subtest: scalar XAML resources, attached properties and namescope
+ok 191 - scalar XAML resources, attached properties and namescope
+  ---
+  duration_ms: 5.856775
+  type: 'test'
+  ...
+# Subtest: XAML two-way bindings integrate ReactiveWeb
+ok 192 - XAML two-way bindings integrate ReactiveWeb
+  ---
+  duration_ms: 2.988701
+  type: 'test'
+  ...
+# Subtest: AOT emitter produces executable ESM without eval
+ok 193 - AOT emitter produces executable ESM without eval
+  ---
+  duration_ms: 29.910599
+  type: 'test'
+  ...
+# Subtest: ControlTemplate and TemplateBinding propagate content
+ok 194 - ControlTemplate and TemplateBinding propagate content
+  ---
+  duration_ms: 4.707518
+  type: 'test'
+  ...
+# Subtest: XML parser rejects DOCTYPE
+ok 195 - XML parser rejects DOCTYPE
+  ---
+  duration_ms: 0.213315
+  type: 'test'
+  ...
+# Subtest: XML parser rejects external entity
+ok 196 - XML parser rejects external entity
+  ---
+  duration_ms: 0.201788
+  type: 'test'
+  ...
+# Subtest: XML parser rejects bare ampersand
+ok 197 - XML parser rejects bare ampersand
+  ---
+  duration_ms: 0.119016
+  type: 'test'
+  ...
+# Subtest: XML parser rejects duplicate attribute
+ok 198 - XML parser rejects duplicate attribute
+  ---
+  duration_ms: 0.065887
+  type: 'test'
+  ...
+# Subtest: XML parser rejects mismatched close
+ok 199 - XML parser rejects mismatched close
+  ---
+  duration_ms: 0.083873
+  type: 'test'
+  ...
+# Subtest: XML parser rejects undeclared namespace
+ok 200 - XML parser rejects undeclared namespace
+  ---
+  duration_ms: 0.053839
+  type: 'test'
+  ...
+# Subtest: XML parser rejects multiple roots
+ok 201 - XML parser rejects multiple roots
+  ---
+  duration_ms: 0.116982
+  type: 'test'
+  ...
+# Subtest: XML parser rejects invalid codepoint
+ok 202 - XML parser rejects invalid codepoint
+  ---
+  duration_ms: 0.106577
+  type: 'test'
+  ...
+# Subtest: XML parser enforces nesting limit
+ok 203 - XML parser enforces nesting limit
+  ---
+  duration_ms: 0.116172
+  type: 'test'
+  ...
+# Subtest: XML parser handles namespaced attributes and escaped text
+ok 204 - XML parser handles namespaced attributes and escaped text
+  ---
+  duration_ms: 0.097845
+  type: 'test'
+  ...
+# Subtest: markup extension parser preserves nested expressions and quoted commas
+ok 205 - markup extension parser preserves nested expressions and quoted commas
+  ---
+  duration_ms: 0.198393
+  type: 'test'
+  ...
+# Subtest: unknown XAML types and properties fail rather than being ignored
+ok 206 - unknown XAML types and properties fail rather than being ignored
+  ---
+  duration_ms: 0.641987
+  type: 'test'
+  ...
+# Subtest: XAML property assignment cannot pollute prototypes
+ok 207 - XAML property assignment cannot pollute prototypes
+  ---
+  duration_ms: 0.259914
+  type: 'test'
+  ...
+# Subtest: animation samples keyframes and restores base value
+ok 208 - animation samples keyframes and restores base value
+  ---
+  duration_ms: 0.968409
+  type: 'test'
+  ...
+# Subtest: animation abort releases priority values and subscription
+ok 209 - animation abort releases priority values and subscription
+  ---
+  duration_ms: 0.303849
+  type: 'test'
+  ...
+# Subtest: LRU cache eviction disposes native resources
+ok 210 - LRU cache eviction disposes native resources
+  ---
+  duration_ms: 0.207035
+  type: 'test'
+  ...
+# Subtest: affine matrix inverse restores transformed coordinates
+ok 211 - affine matrix inverse restores transformed coordinates
+  ---
+  duration_ms: 0.116833
+  type: 'test'
+  ...
+# Subtest: Color uses Avalonia ARGB hexadecimal ordering
+ok 212 - Color uses Avalonia ARGB hexadecimal ordering
+  ---
+  duration_ms: 0.156361
+  type: 'test'
+  ...
+# Subtest: Calendar selected date updates the selected-date collection
+ok 213 - Calendar selected date updates the selected-date collection
+  ---
+  duration_ms: 0.669668
+  type: 'test'
+  ...
+# Subtest: ScrollBar derives from RangeBase rather than inheriting reversed Slider behavior
+ok 214 - ScrollBar derives from RangeBase rather than inheriting reversed Slider behavior
+  ---
+  duration_ms: 6.563007
+  type: 'test'
+  ...
+# Subtest: ScrollBar Vertical: proportional drag without jump and release event
+ok 215 - ScrollBar Vertical: proportional drag without jump and release event
+  ---
+  duration_ms: 8.725249
+  type: 'test'
+  ...
+# Subtest: ScrollBar Horizontal: proportional drag without jump and release event
+ok 216 - ScrollBar Horizontal: proportional drag without jump and release event
+  ---
+  duration_ms: 2.034333
+  type: 'test'
+  ...
+# Subtest: ScrollBar tiny viewport bounds never create oversized thumbs or divide by zero
+ok 217 - ScrollBar tiny viewport bounds never create oversized thumbs or divide by zero
+  ---
+  duration_ms: 1.553153
+  type: 'test'
+  ...
+# Subtest: ScrollBar reverse direction is geometry-consistent and keyboard increments follow its orientation
+ok 218 - ScrollBar reverse direction is geometry-consistent and keyboard increments follow its orientation
+  ---
+  duration_ms: 3.000969
+  type: 'test'
+  ...
+# Subtest: ScrollBar track press pages rather than jumps and releases repeat timers
+ok 219 - ScrollBar track press pages rather than jumps and releases repeat timers
+  ---
+  duration_ms: 1.607233
+  type: 'test'
+  ...
+# Subtest: ScrollBar page-repeat progresses while held and stops on capture loss
+ok 220 - ScrollBar page-repeat progresses while held and stops on capture loss
+  ---
+  duration_ms: 87.419432
+  type: 'test'
+  ...
+# Subtest: ScrollBar ignores right clicks and additional pointers during a drag
+ok 221 - ScrollBar ignores right clicks and additional pointers during a drag
+  ---
+  duration_ms: 3.809173
+  type: 'test'
+  ...
+# Subtest: ScrollBar visibility, zero range and explicit values remain coherent
+ok 222 - ScrollBar visibility, zero range and explicit values remain coherent
+  ---
+  duration_ms: 1.122046
+  type: 'test'
+  ...
+# Subtest: ScrollViewer scrollbar hits win over a child Button occupying the complete content
+ok 223 - ScrollViewer scrollbar hits win over a child Button occupying the complete content
+  ---
+  duration_ms: 12.465258
+  type: 'test'
+  ...
+# Subtest: ScrollViewer horizontal and vertical thumbs can independently reach both ends
+ok 224 - ScrollViewer horizontal and vertical thumbs can independently reach both ends
+  ---
+  duration_ms: 7.232175
+  type: 'test'
+  ...
+# Subtest: ScrollViewer deferred scrolling previews the thumb without moving content until release
+ok 225 - ScrollViewer deferred scrolling previews the thumb without moving content until release
+  ---
+  duration_ms: 2.169662
+  type: 'test'
+  ...
+# Subtest: ScrollViewer Hidden permits scrolling but Disabled does not
+ok 226 - ScrollViewer Hidden permits scrolling but Disabled does not
+  ---
+  duration_ms: 3.174135
+  type: 'test'
+  ...
+# Subtest: non-overlay ScrollViewer tracks reserve space and solve cross-axis overflow
+ok 227 - non-overlay ScrollViewer tracks reserve space and solve cross-axis overflow
+  ---
+  duration_ms: 1.517881
+  type: 'test'
+  ...
+# Subtest: ScrollViewer viewport clip prevents content hits and rendering in reserved chrome
+ok 228 - ScrollViewer viewport clip prevents content hits and rendering in reserved chrome
+  ---
+  duration_ms: 2.217873
+  type: 'test'
+  ...
+# Subtest: ScrollViewer resize and content replacement clamp stale offsets and notify extent deltas
+ok 229 - ScrollViewer resize and content replacement clamp stale offsets and notify extent deltas
+  ---
+  duration_ms: 2.037627
+  type: 'test'
+  ...
+# Subtest: ScrollViewer BringIntoView handles both axes, padding and partially visible large targets
+ok 230 - ScrollViewer BringIntoView handles both axes, padding and partially visible large targets
+  ---
+  duration_ms: 3.862411
+  type: 'test'
+  ...
+# Subtest: wheel deltaMode=0 respects CSS pixels, lines or viewport pages
+ok 231 - wheel deltaMode=0 respects CSS pixels, lines or viewport pages
+  ---
+  duration_ms: 2.035474
+  type: 'test'
+  ...
+# Subtest: wheel deltaMode=1 respects CSS pixels, lines or viewport pages
+ok 232 - wheel deltaMode=1 respects CSS pixels, lines or viewport pages
+  ---
+  duration_ms: 6.932562
+  type: 'test'
+  ...
+# Subtest: wheel deltaMode=2 respects CSS pixels, lines or viewport pages
+ok 233 - wheel deltaMode=2 respects CSS pixels, lines or viewport pages
+  ---
+  duration_ms: 1.66674
+  type: 'test'
+  ...
+# Subtest: Shift-wheel scrolls horizontally and disabled chaining consumes boundary input
+ok 234 - Shift-wheel scrolls horizontally and disabled chaining consumes boundary input
+  ---
+  duration_ms: 1.743173
+  type: 'test'
+  ...
+# Subtest: ListBox has an interactive scrollbar without changing selection
+ok 235 - ListBox has an interactive scrollbar without changing selection
+  ---
+  duration_ms: 22.200118
+  type: 'test'
+  ...
+# Subtest: TreeView has an interactive scrollbar without changing selection
+ok 236 - TreeView has an interactive scrollbar without changing selection
+  ---
+  duration_ms: 23.928549
+  type: 'test'
+  ...
+# Subtest: ListBox recycles row controls rather than allocating new containers on every scroll
+ok 237 - ListBox recycles row controls rather than allocating new containers on every scroll
+  ---
+  duration_ms: 66.204919
+  type: 'test'
+  ...
+# Subtest: ListBox horizontal chrome pans wide items without scrolling or selecting rows
+ok 238 - ListBox horizontal chrome pans wide items without scrolling or selecting rows
+  ---
+  duration_ms: 8.569969
+  type: 'test'
+  ...
+# Subtest: TableView both-axis scrollbars exclude headers and preserve header alignment
+ok 239 - TableView both-axis scrollbars exclude headers and preserve header alignment
+  ---
+  duration_ms: 23.119945
+  type: 'test'
+  ...
+# Subtest: multiline TextBox supports vertical drag, wheel, and horizontal pan without changing text or selection
+ok 240 - multiline TextBox supports vertical drag, wheel, and horizontal pan without changing text or selection
+  ---
+  duration_ms: 6.258998
+  type: 'test'
+  ...
+# Subtest: wrapped TextBox disables horizontal chrome and remaps viewport when resizing
+ok 241 - wrapped TextBox disables horizontal chrome and remaps viewport when resizing
+  ---
+  duration_ms: 8.760471
+  type: 'test'
+  ...
+# Subtest: TextBox measurement layouts are retained and disposed with their owner
+ok 242 - TextBox measurement layouts are retained and disposed with their owner
+  ---
+  duration_ms: 2.810559
+  type: 'test'
+  ...
+# Subtest: scroll chrome still works with runtime XAML attached scrollbar options
+ok 243 - scroll chrome still works with runtime XAML attached scrollbar options
+  ---
+  duration_ms: 8.698709
+  type: 'test'
+  ...
+# Subtest: reserved horizontal chrome does not oscillate realization at an item-height boundary
+ok 244 - reserved horizontal chrome does not oscillate realization at an item-height boundary
+  ---
+  duration_ms: 7.313415
+  type: 'test'
+  ...
+# Subtest: TableView header and reserved horizontal track share a stable realization viewport
+ok 245 - TableView header and reserved horizontal track share a stable realization viewport
+  ---
+  duration_ms: 36.696004
+  type: 'test'
+  ...
+# Subtest: ScrollBarMaximum and LargeChange notify bindings for extent-only and viewport-only changes
+ok 246 - ScrollBarMaximum and LargeChange notify bindings for extent-only and viewport-only changes
+  ---
+  duration_ms: 3.160504
+  type: 'test'
+  ...
+# Subtest: RangeBase matches the templated hierarchy and retains finite values on invalid assignments
+ok 247 - RangeBase matches the templated hierarchy and retains finite values on invalid assignments
+  ---
+  duration_ms: 0.50176
+  type: 'test'
+  ...
+# Subtest: RangeBase raises typed ValueChanged events and ScrollBar custom templates have layout and lifetime
+ok 248 - RangeBase raises typed ValueChanged events and ScrollBar custom templates have layout and lifetime
+  ---
+  duration_ms: 2.533699
+  type: 'test'
+  ...
+# Subtest: disjoint virtual scrolling retargets attached scalar presenters without tree churn
+ok 249 - disjoint virtual scrolling retargets attached scalar presenters without tree churn
+  ---
+  duration_ms: 17.383184
+  type: 'test'
+  ...
+# Subtest: surplus recycled scalar rows release prior item data and their empty presenter is owned
+ok 250 - surplus recycled scalar rows release prior item data and their empty presenter is owned
+  ---
+  duration_ms: 6.993302
+  type: 'test'
+  ...
+# Subtest: TableView is a ListBox with live read-only Binding definitions and actual cell controls
+ok 251 - TableView is a ListBox with live read-only Binding definitions and actual cell controls
+  ---
+  duration_ms: 39.249393
+  type: 'test'
+  ...
+# Subtest: TableView XAML assigns Binding rather than evaluating on the column DataContext
+ok 252 - TableView XAML assigns Binding rather than evaluating on the column DataContext
+  ---
+  duration_ms: 15.049624
+  type: 'test'
+  ...
+# Subtest: TableView CellTemplate receives row data and takes precedence over Binding
+ok 253 - TableView CellTemplate receives row data and takes precedence over Binding
+  ---
+  duration_ms: 6.143868
+  type: 'test'
+  ...
+# Subtest: TableView rejects duplicate or cross-owned columns before mutating collections
+ok 254 - TableView rejects duplicate or cross-owned columns before mutating collections
+  ---
+  duration_ms: 5.151984
+  type: 'test'
+  ...
+# Subtest: TableView star, auto, pixel and constrained column widths share one row/header layout
+ok 255 - TableView star, auto, pixel and constrained column widths share one row/header layout
+  ---
+  duration_ms: 7.782998
+  type: 'test'
+  ...
+# Subtest: TableView 10,000 rows recycle real cell containers and release stale bindings
+ok 256 - TableView 10,000 rows recycle real cell containers and release stale bindings
+  ---
+  duration_ms: 101.216582
+  type: 'test'
+  ...
+# Subtest: TableView checkbox cell subscriptions and controls are disposed when recycled
+ok 257 - TableView checkbox cell subscriptions and controls are disposed when recycled
+  ---
+  duration_ms: 2.165817
+  type: 'test'
+  ...
+# Subtest: TableView header click sorting preserves selection identity and can be cancelled
+ok 258 - TableView header click sorting preserves selection identity and can be cancelled
+  ---
+  duration_ms: 14.136625
+  type: 'test'
+  ...
+# Subtest: TableView nullable resize override respects owning table changes
+ok 259 - TableView nullable resize override respects owning table changes
+  ---
+  duration_ms: 2.325532
+  type: 'test'
+  ...
+# Subtest: grapheme boundaries preserve emoji ZWJ, combining marks, flags and CRLF
+ok 260 - grapheme boundaries preserve emoji ZWJ, combining marks, flags and CRLF
+  ---
+  duration_ms: 1.478382
+  type: 'test'
+  ...
+# Subtest: TextBox deletes complete graphemes and enforces MaxLength without lone surrogates
+ok 261 - TextBox deletes complete graphemes and enforces MaxLength without lone surrogates
+  ---
+  duration_ms: 5.00628
+  type: 'test'
+  ...
+# Subtest: a native IME composition is a single undo/redo transaction
+ok 262 - a native IME composition is a single undo/redo transaction
+  ---
+  duration_ms: 1.123648
+  type: 'test'
+  ...
+# Subtest: password masking maps visual caret positions to original UTF-16 boundaries and supports reveal
+ok 263 - password masking maps visual caret positions to original UTF-16 boundaries and supports reveal
+  ---
+  duration_ms: 2.493631
+  type: 'test'
+  ...
+# Subtest: fallback line breaking retains source indices across CRLF and never truncates a grapheme
+ok 264 - fallback line breaking retains source indices across CRLF and never truncates a grapheme
+  ---
+  duration_ms: 0.451005
+  type: 'test'
+  ...
+# Subtest: rich inline ownership, inheritance, dynamic invalidation and XAML loading are functional
+ok 265 - rich inline ownership, inheritance, dynamic invalidation and XAML loading are functional
+  ---
+  duration_ms: 9.713978
+  type: 'test'
+  ...
+# Subtest: native SkParagraph shapes ligatures, Arabic and mixed-direction text with cluster hit testing
+ok 266 - native SkParagraph shapes ligatures, Arabic and mixed-direction text with cluster hit testing
+  ---
+  duration_ms: 68.301364
+  type: 'test'
+  ...
+# Subtest: native rich paragraph rendering uses per-run sizes, colors, wrapping and source indices
+ok 267 - native rich paragraph rendering uses per-run sizes, colors, wrapping and source indices
+  ---
+  duration_ms: 28.403344
+  type: 'test'
+  ...
+# Subtest: native paragraph cache eviction cannot invalidate a retained TextLayout
+ok 268 - native paragraph cache eviction cannot invalidate a retained TextLayout
+  ---
+  duration_ms: 15.947098
+  type: 'test'
+  ...
+# Subtest: inline UI containers participate in native text layout, visual arrangement and hit testing
+ok 269 - inline UI containers participate in native text layout, visual arrangement and hit testing
+  ---
+  duration_ms: 8.230779
+  type: 'test'
+  ...
+# Subtest: TextFormatter consumes source runs, preserves CRLF indices, and returns line-break continuations
+ok 270 - TextFormatter consumes source runs, preserves CRLF indices, and returns line-break continuations
+  ---
+  duration_ms: 5.111896
+  type: 'test'
+  ...
+# Subtest: wrapped formatter lines reuse a paragraph rather than rereading and reshaping the source
+ok 271 - wrapped formatter lines reuse a paragraph rather than rereading and reshaping the source
+  ---
+  duration_ms: 1.708402
+  type: 'test'
+  ...
+# Subtest: source run styles survive formatting and drawing records
+ok 272 - source run styles survive formatting and drawing records
+  ---
+  duration_ms: 0.763207
+  type: 'test'
+  ...
+# Subtest: TextLine caret navigation is UTF-16-indexed and grapheme safe
+ok 273 - TextLine caret navigation is UTF-16-indexed and grapheme safe
+  ---
+  duration_ms: 1.371754
+  type: 'test'
+  ...
+# Subtest: formatter rejects non-advancing runs and oversized paragraphs
+ok 274 - formatter rejects non-advancing runs and oversized paragraphs
+  ---
+  duration_ms: 0.286884
+  type: 'test'
+  ...
+# Subtest: TextLine collapse and interword justification are executable layout operations
+ok 275 - TextLine collapse and interword justification are executable layout operations
+  ---
+  duration_ms: 1.185099
+  type: 'test'
+  ...
+# Subtest: repeated TextBlock rendering retains the same layout without measuring
+ok 276 - repeated TextBlock rendering retains the same layout without measuring
+  ---
+  duration_ms: 7.461187
+  type: 'test'
+  ...
+# Subtest: TextBlock invalidates retained layout for shaping properties, width and inline changes
+ok 277 - TextBlock invalidates retained layout for shaping properties, width and inline changes
+  ---
+  duration_ms: 3.950942
+  type: 'test'
+  ...
+# Subtest: in-place foreground brush changes invalidate native descriptor snapshots
+ok 278 - in-place foreground brush changes invalidate native descriptor snapshots
+  ---
+  duration_ms: 0.915622
+  type: 'test'
+  ...
+# Subtest: text service generations invalidate retained layouts after font changes
+ok 279 - text service generations invalidate retained layouts after font changes
+  ---
+  duration_ms: 0.506728
+  type: 'test'
+  ...
+# Subtest: Control.DrawText retains bounded label layouts and respects mutable brush colors
+ok 280 - Control.DrawText retains bounded label layouts and respects mutable brush colors
+  ---
+  duration_ms: 1.758766
+  type: 'test'
+  ...
+# Subtest: text editor does not rebuild layout on caret or selection changes
+ok 281 - text editor does not rebuild layout on caret or selection changes
+  ---
+  duration_ms: 6.327289
+  type: 'test'
+  ...
+# Subtest: password layout reuse refreshes the logical mapping when equal-length masks hide different clusters
+ok 282 - password layout reuse refreshes the logical mapping when equal-length masks hide different clusters
+  ---
+  duration_ms: 2.821835
+  type: 'test'
+  ...
+# Subtest: grapheme cache is immutable, bounded, and does not expose text in diagnostics
+ok 283 - grapheme cache is immutable, bounded, and does not expose text in diagnostics
+  ---
+  duration_ms: 5.233785
+  type: 'test'
+  ...
+# Subtest: fallback caret hit testing uses logarithmic prefix measurements and reuses them
+ok 284 - fallback caret hit testing uses logarithmic prefix measurements and reuses them
+  ---
+  duration_ms: 56.332688
+  type: 'test'
+  ...
+# Subtest: negative letter spacing retains a non-monotonic fallback hit-test path
+ok 285 - negative letter spacing retains a non-monotonic fallback hit-test path
+  ---
+  duration_ms: 0.685873
+  type: 'test'
+  ...
+# Subtest: provider registrations restore the previous provider after out-of-order disposal
+ok 286 - provider registrations restore the previous provider after out-of-order disposal
+  ---
+  duration_ms: 0.210841
+  type: 'test'
+  ...
+# Subtest: font stretch and letter spacing survive XAML property conversion
+ok 287 - font stretch and letter spacing survive XAML property conversion
+  ---
+  duration_ms: 5.12825
+  type: 'test'
+  ...
+# Subtest: text raster plan includes italic overhang and unusually tall combining-mark ink
+ok 288 - text raster plan includes italic overhang and unusually tall combining-mark ink
+  ---
+  duration_ms: 0.336917
+  type: 'test'
+  ...
+# Subtest: text tiles cover large lines exactly without requiring an oversized canvas
+ok 289 - text tiles cover large lines exactly without requiring an oversized canvas
+  ---
+  duration_ms: 0.581518
+  type: 'test'
+  ...
+# Subtest: device-phase raster destinations land on the original physical pixel grid
+ok 290 - device-phase raster destinations land on the original physical pixel grid
+  ---
+  duration_ms: 0.331559
+  type: 'test'
+  ...
+# Subtest: rotated or sheared text uses the largest affine stretch rather than device DPR alone
+ok 291 - rotated or sheared text uses the largest affine stretch rather than device DPR alone
+  ---
+  duration_ms: 0.131004
+  type: 'test'
+  ...
+# Subtest: invalid raster sizes fail explicitly before allocation
+ok 292 - invalid raster sizes fail explicitly before allocation
+  ---
+  duration_ms: 0.220445
+  type: 'test'
+  ...
+# Subtest: wide fallback paragraph wrapping searches break candidates instead of every prefix
+ok 293 - wide fallback paragraph wrapping searches break candidates instead of every prefix
+  ---
+  duration_ms: 60.135681
+  type: 'test'
+  ...
+# Subtest: fallback ellipsis binary search never splits a grapheme and avoids a quadratic scan
+ok 294 - fallback ellipsis binary search never splits a grapheme and avoids a quadratic scan
+  ---
+  duration_ms: 8.991242
+  type: 'test'
+  ...
+# Subtest: WrapWithOverflow preserves an unbreakable word while Wrap can split it
+ok 295 - WrapWithOverflow preserves an unbreakable word while Wrap can split it
+  ---
+  duration_ms: 0.381683
+  type: 'test'
+  ...
+# Subtest: font metrics establish stable baselines; combining ink does not move line spacing
+ok 296 - font metrics establish stable baselines; combining ink does not move line spacing
+  ---
+  duration_ms: 2.472589
+  type: 'test'
+  ...
+# Subtest: viewport and caret line lookup are logarithmic for a 10000-line document
+ok 297 - viewport and caret line lookup are logarithmic for a 10000-line document
+  ---
+  duration_ms: 26.904121
+  type: 'test'
+  ...
+# Subtest: line aggregation handles documents beyond the JavaScript argument-count limit
+ok 298 - line aggregation handles documents beyond the JavaScript argument-count limit
+  ---
+  duration_ms: 119.14882
+  type: 'test'
+  ...
+# Subtest: MaxLines stops shaping invisible paragraphs after one overflow sentinel
+ok 299 - MaxLines stops shaping invisible paragraphs after one overflow sentinel
+  ---
+  duration_ms: 0.580176
+  type: 'test'
+  ...
+# Subtest: MaxLines with wrapped overflow still marks and fits the ellipsis
+ok 300 - MaxLines with wrapped overflow still marks and fits the ellipsis
+  ---
+  duration_ms: 17.962222
+  type: 'test'
+  ...
+# Subtest: FormattedText retains a borrowed layout and invalidates on brush/font/width changes
+ok 301 - FormattedText retains a borrowed layout and invalidates on brush/font/width changes
+  ---
+  duration_ms: 3.962669
+  type: 'test'
+  ...
+# Subtest: uncacheable rich/feature descriptors still have bounded layout ownership
+ok 302 - uncacheable rich/feature descriptors still have bounded layout ownership
+  ---
+  duration_ms: 0.933087
+  type: 'test'
+  ...
+# Subtest: z-order snapshots are reused and invalidate for values, add/remove and public reorder
+ok 303 - z-order snapshots are reused and invalidate for values, add/remove and public reorder
+  ---
+  duration_ms: 5.918256
+  type: 'test'
+  ...
+# Subtest: typeface descriptors are retained and external mutations do not alter control properties
+ok 304 - typeface descriptors are retained and external mutations do not alter control properties
+  ---
+  duration_ms: 0.777498
+  type: 'test'
+  ...
+# Subtest: scrollbars expose correct automation role/range and automation changes scroll the owner
+ok 305 - scrollbars expose correct automation role/range and automation changes scroll the owner
+  ---
+  duration_ms: 9.398792
+  type: 'test'
+  ...
+# Subtest: wheel mode is sampled before delta values
+ok 306 - wheel mode is sampled before delta values
+  ---
+  duration_ms: 1.432474
+  type: 'test'
+  ...
+# Subtest: deep document caret positions segment only the touched line and preserve CRLF ties
+ok 307 - deep document caret positions segment only the touched line and preserve CRLF ties
+  ---
+  duration_ms: 61.325647
+  type: 'test'
+  ...
+# Subtest: FormattedText culture and disposed borrowed layouts invalidate safely
+ok 308 - FormattedText culture and disposed borrowed layouts invalidate safely
+  ---
+  duration_ms: 0.439188
+  type: 'test'
+  ...
+# Subtest: default scalar content updates retain the owned TextBlock presenter
+ok 309 - default scalar content updates retain the owned TextBlock presenter
+  ---
+  duration_ms: 2.050667
+  type: 'test'
+  ...
+# Subtest: implicit and explicit templates never inherit the default scalar presenter fast path
+ok 310 - implicit and explicit templates never inherit the default scalar presenter fast path
+  ---
+  duration_ms: 5.274886
+  type: 'test'
+  ...
+# Subtest: threading: binary round-trip retains UTF8, floating values, typed buffers and isolated ownership
+ok 311 - threading: binary round-trip retains UTF8, floating values, typed buffers and isolated ownership
+  ---
+  duration_ms: 3.227032
+  type: 'test'
+  ...
+# Subtest: threading: malformed protocol, cycles, dangerous keys and unsupported functions fail closed
+ok 312 - threading: malformed protocol, cycles, dangerous keys and unsupported functions fail closed
+  ---
+  duration_ms: 0.98881
+  type: 'test'
+  ...
+# Subtest: threading: buffer pool is byte bounded and never reuses transferred detached memory
+ok 313 - threading: buffer pool is byte bounded and never reuses transferred detached memory
+  ---
+  duration_ms: 0.308916
+  type: 'test'
+  ...
+# Subtest: threading: backpressure computes the next delta from acknowledged state, preserving prerequisite objects
+ok 314 - threading: backpressure computes the next delta from acknowledged state, preserving prerequisite objects
+  ---
+  duration_ms: 0.563281
+  type: 'test'
+  ...
+# Subtest: threading: clean scene capture does not call Control.Render and placement changes do not rerecord content
+ok 315 - threading: clean scene capture does not call Control.Render and placement changes do not rerecord content
+  ---
+  duration_ms: 8.606934
+  type: 'test'
+  ...
+# Subtest: threading: server applies a portable gradient/text scene without accessing UI controls
+ok 316 - threading: server applies a portable gradient/text scene without accessing UI controls
+  ---
+  duration_ms: 11.981405
+  type: 'test'
+  ...
+# Subtest: threading: invalid graph and sequence are rejected without changing the committed scene
+ok 317 - threading: invalid graph and sequence are rejected without changing the committed scene
+  ---
+  duration_ms: 1.407417
+  type: 'test'
+  ...
+# Subtest: threading: server materializes primitive visual defaults and ticks keyframes without UI access
+ok 318 - threading: server materializes primitive visual defaults and ticks keyframes without UI access
+  ---
+  duration_ms: 7.261217
+  type: 'test'
+  ...
+# Subtest: threading: all node arguments are prepared before scene mutation
+ok 319 - threading: all node arguments are prepared before scene mutation
+  ---
+  duration_ms: 2.170264
+  type: 'test'
+  ...
+# Subtest: threading: delta references cannot delete a still-live resource
+ok 320 - threading: delta references cannot delete a still-live resource
+  ---
+  duration_ms: 1.638779
+  type: 'test'
+  ...
+# Subtest: threading: an unrecorded composition mutation cannot receive an early processed acknowledgement
+ok 321 - threading: an unrecorded composition mutation cannot receive an early processed acknowledgement
+  ---
+  duration_ms: 0.554459
+  type: 'test'
+  ...
+# Subtest: threading: semantic projection emits incremental mutations and preserves node identity
+ok 322 - threading: semantic projection emits incremental mutations and preserves node identity
+  ---
+  duration_ms: 0.472798
+  type: 'test'
+  ...
+# Subtest: threading: control RPC transfers buffers and rejects unknown operations
+ok 323 - threading: control RPC transfers buffers and rejects unknown operations
+  ---
+  duration_ms: 35.475226
+  type: 'test'
+  ...
+# Subtest: threading: control RPC is bounded and rejects pending work on disposal
+ok 324 - threading: control RPC is bounded and rejects pending work on disposal
+  ---
+  duration_ms: 0.492076
+  type: 'test'
+  ...
+# Subtest: threading: ellipse replay preserves center and both radii without per-frame argument arrays
+ok 325 - threading: ellipse replay preserves center and both radii without per-frame argument arrays
+  ---
+  duration_ms: 0.300273
+  type: 'test'
+  ...
+# Subtest: threading: compositor scroll acknowledgement reconciles sequenced deltas once
+ok 326 - threading: compositor scroll acknowledgement reconciles sequenced deltas once
+  ---
+  duration_ms: 0.800111
+  type: 'test'
+  ...
+# Subtest: threading: virtual scroll coverage prevents speculative blank rows and rejects duplicate events
+ok 327 - threading: virtual scroll coverage prevents speculative blank rows and rejects duplicate events
+  ---
+  duration_ms: 0.265121
+  type: 'test'
+  ...
+# Subtest: threading: scroll fast path maps CSS delta modes and updates header and thumb transforms
+ok 328 - threading: scroll fast path maps CSS delta modes and updates header and thumb transforms
+  ---
+  duration_ms: 0.2575
+  type: 'test'
+  ...
+# Subtest: threading: scroll queues are bounded and removed policies cannot retain input
+ok 329 - threading: scroll queues are bounded and removed policies cannot retain input
+  ---
+  duration_ms: 19.338875
+  type: 'test'
+  ...
+# Subtest: threading: fast-scroll policy is explicit and excludes editor, rotated or animated content
+ok 330 - threading: fast-scroll policy is explicit and excludes editor, rotated or animated content
+  ---
+  duration_ms: 8.013457
+  type: 'test'
+  ...
+# Subtest: threading: custom worker messages are queued before connection and acknowledgement trims only consumed messages
+ok 331 - threading: custom worker messages are queued before connection and acknowledgement trims only consumed messages
+  ---
+  duration_ms: 2.054328
+  type: 'test'
+  ...
+# Subtest: threading: registered worker custom handler receives durable state and messages only on server
+ok 332 - threading: registered worker custom handler receives durable state and messages only on server
+  ---
+  duration_ms: 13.40038
+  type: 'test'
+  ...
+# Subtest: threading: a burst of pre-capture composition waits shares one bounded promise
+ok 333 - threading: a burst of pre-capture composition waits shares one bounded promise
+  ---
+  duration_ms: 0.794222
+  type: 'test'
+  ...
+# Subtest: threading: concurrent render RPCs are bounded after initialization and reject on failure
+ok 334 - threading: concurrent render RPCs are bounded after initialization and reject on failure
+  ---
+  duration_ms: 0.428372
+  type: 'test'
+  ...
+# Subtest: threading: clean off-tree VisualBrush retains every nested descendant and tracks changed ink
+ok 335 - threading: clean off-tree VisualBrush retains every nested descendant and tracks changed ink
+  ---
+  duration_ms: 11.225139
+  type: 'test'
+  ...
+# Subtest: property cache: repeated inherited reads do not resolve metadata or priorities again
+ok 336 - property cache: repeated inherited reads do not resolve metadata or priorities again
+  ---
+  duration_ms: 5.617982
+  type: 'test'
+  ...
+# Subtest: property cache: parent handlers immediately observe fresh descendant values
+ok 337 - property cache: parent handlers immediately observe fresh descendant values
+  ---
+  duration_ms: 0.90141
+  type: 'test'
+  ...
+# Subtest: property cache: reparent notifications see all newly inherited descendant properties
+ok 338 - property cache: reparent notifications see all newly inherited descendant properties
+  ---
+  duration_ms: 1.564439
+  type: 'test'
+  ...
+# Subtest: property cache: local shadows isolate their descendants and ClearValue reconnects inheritance
+ok 339 - property cache: local shadows isolate their descendants and ClearValue reconnects inheritance
+  ---
+  duration_ms: 1.512042
+  type: 'test'
+  ...
+# Subtest: property cache: priority removal, animation base values and same-priority order remain correct
+ok 340 - property cache: priority removal, animation base values and same-priority order remain correct
+  ---
+  duration_ms: 0.69048
+  type: 'test'
+  ...
+# Subtest: property cache: changing the order on an existing slot invalidates its winning entry
+ok 341 - property cache: changing the order on an existing slot invalidates its winning entry
+  ---
+  duration_ms: 0.665623
+  type: 'test'
+  ...
+# Subtest: property cache: observable bindings replace cached values and dispose without stale roots
+ok 342 - property cache: observable bindings replace cached values and dispose without stale roots
+  ---
+  duration_ms: 5.391888
+  type: 'test'
+  ...
+# Subtest: property cache: coerced values are never frozen, including through inherited nodes
+ok 343 - property cache: coerced values are never frozen, including through inherited nodes
+  ---
+  duration_ms: 0.554218
+  type: 'test'
+  ...
+# Subtest: property cache: direct getters continue to execute on every read
+ok 344 - property cache: direct getters continue to execute on every read
+  ---
+  duration_ms: 0.345129
+  type: 'test'
+  ...
+# Subtest: property cache: null, undefined, NaN and per-instance factories preserve value semantics
+ok 345 - property cache: null, undefined, NaN and per-instance factories preserve value semantics
+  ---
+  duration_ms: 0.656779
+  type: 'test'
+  ...
+# Subtest: property cache: metadata override invalidates already cached derived defaults
+ok 346 - property cache: metadata override invalidates already cached derived defaults
+  ---
+  duration_ms: 0.375804
+  type: 'test'
+  ...
+# Subtest: property cache: AddOwner and newly registered inherited properties invalidate lookup inventories
+ok 347 - property cache: AddOwner and newly registered inherited properties invalidate lookup inventories
+  ---
+  duration_ms: 1.018163
+  type: 'test'
+  ...
+# Subtest: property cache: metadata can disable inheritance for a derived node and its descendants
+ok 348 - property cache: metadata can disable inheritance for a derived node and its descendants
+  ---
+  duration_ms: 1.082197
+  type: 'test'
+  ...
+# Subtest: property cache: disposed objects release retained resolved entries and factories
+ok 349 - property cache: disposed objects release retained resolved entries and factories
+  ---
+  duration_ms: 0.61011
+  type: 'test'
+  ...
+# Subtest: layout: a batch of leaf arrange invalidations reaches the root only once
+ok 350 - layout: a batch of leaf arrange invalidations reaches the root only once
+  ---
+  duration_ms: 6.942758
+  type: 'test'
+  ...
+# Subtest: layout: a batch of leaf measure invalidations reaches the root only once
+ok 351 - layout: a batch of leaf measure invalidations reaches the root only once
+  ---
+  duration_ms: 1.645258
+  type: 'test'
+  ...
+# Subtest: layout: invalidation raised inside ArrangeOverride is not overwritten
+ok 352 - layout: invalidation raised inside ArrangeOverride is not overwritten
+  ---
+  duration_ms: 1.129827
+  type: 'test'
+  ...
+# Subtest: layout: identity-transform translations are cached but track bounds and nonidentity transforms
+ok 353 - layout: identity-transform translations are cached but track bounds and nonidentity transforms
+  ---
+  duration_ms: 0.458166
+  type: 'test'
+  ...
+# Subtest: table: steady-state disjoint viewport jumps keep row/cell/text visual identities attached
+ok 354 - table: steady-state disjoint viewport jumps keep row/cell/text visual identities attached
+  ---
+  duration_ms: 80.369607
+  type: 'test'
+  ...
+# Subtest: table: recycled scalar bindings unsubscribe old rows and observe their new row
+ok 355 - table: recycled scalar bindings unsubscribe old rows and observe their new row
+  ---
+  duration_ms: 44.871031
+  type: 'test'
+  ...
+# Subtest: table: visible-column cache updates for visibility, replacement and order changes
+ok 356 - table: visible-column cache updates for visibility, replacement and order changes
+  ---
+  duration_ms: 35.597753
+  type: 'test'
+  ...
+# Subtest: table: custom data templates still rebuild and dispose obsolete instances
+ok 357 - table: custom data templates still rebuild and dispose obsolete instances
+  ---
+  duration_ms: 1.015409
+  type: 'test'
+  ...
+# Subtest: render transform: caller mutation cannot poison a cached translation
+ok 358 - render transform: caller mutation cannot poison a cached translation
+  ---
+  duration_ms: 0.330388
+  type: 'test'
+  ...
+# Subtest: button command: parameter and CanExecute notifications invalidate automation state
+ok 359 - button command: parameter and CanExecute notifications invalidate automation state
+  ---
+  duration_ms: 2.109363
+  type: 'test'
+  ...
+# Subtest: editor: masking and read-only changes synchronize the existing native input without a text edit
+ok 360 - editor: masking and read-only changes synchronize the existing native input without a text edit
+  ---
+  duration_ms: 4.045041
+  type: 'test'
+  ...
+# Subtest: Avalonia text raster compatibility exports are the actual upstream functions
+ok 361 - Avalonia text raster compatibility exports are the actual upstream functions
+  ---
+  duration_ms: 1.129998
+  type: 'test'
+  ...
+# Subtest: text module matches the merged upstream Git blob and consumer pins that exact revision
+ok 362 - text module matches the merged upstream Git blob and consumer pins that exact revision
+  ---
+  duration_ms: 10.262552
+  type: 'test'
+  ...
+# Subtest: shared clipped text planning is proportional to the viewport, not line length
+ok 363 - shared clipped text planning is proportional to the viewport, not line length
+  ---
+  duration_ms: 0.599415
+  type: 'test'
+  ...
+# Subtest: worker native perf: device clips are reused through transform-only state changes
+ok 364 - worker native perf: device clips are reused through transform-only state changes
+  ---
+  duration_ms: 17.915443
+  type: 'test'
+  ...
+# Subtest: worker native perf: nested clip and layer changes refresh only at the relevant scope
+ok 365 - worker native perf: nested clip and layer changes refresh only at the relevant scope
+  ---
+  duration_ms: 6.695363
+  type: 'test'
+  ...
+# Subtest: worker native perf: direct native mutation is uncached by default and explicit invalidation is honored
+ok 366 - worker native perf: direct native mutation is uncached by default and explicit invalidation is honored
+  ---
+  duration_ms: 0.507819
+  type: 'test'
+  ...
+# Subtest: worker native perf: cached clip state preserves RGBA through transforms clips opacity geometry and effects
+ok 367 - worker native perf: cached clip state preserves RGBA through transforms clips opacity geometry and effects
+  ---
+  duration_ms: 12.229611
+  type: 'test'
+  ...
+# Subtest: worker perf: packet-local UTF8 dictionary eliminates repeated field and value encoding
+ok 368 - worker perf: packet-local UTF8 dictionary eliminates repeated field and value encoding
+  ---
+  duration_ms: 20.888832
+  type: 'test'
+  ...
+# Subtest: worker perf: string definitions encode into destination storage without temporary encode arrays
+ok 369 - worker perf: string definitions encode into destination storage without temporary encode arrays
+  ---
+  duration_ms: 0.410676
+  type: 'test'
+  ...
+# Subtest: worker perf: dictionary scope is one transaction including transfer-buffer reuse
+ok 370 - worker perf: dictionary scope is one transaction including transfer-buffer reuse
+  ---
+  duration_ms: 0.390296
+  type: 'test'
+  ...
+# Subtest: worker perf: strings preserve Unicode and standard lone-surrogate replacement
+ok 371 - worker perf: strings preserve Unicode and standard lone-surrogate replacement
+  ---
+  duration_ms: 0.606976
+  type: 'test'
+  ...
+# Subtest: worker perf: inline string encoding respects an exact small byte budget
+ok 372 - worker perf: inline string encoding respects an exact small byte budget
+  ---
+  duration_ms: 0.571574
+  type: 'test'
+  ...
+# Subtest: worker perf: invalid and forward dictionary references fail closed
+ok 373 - worker perf: invalid and forward dictionary references fail closed
+  ---
+  duration_ms: 0.182069
+  type: 'test'
+  ...
+# Subtest: worker perf: malformed UTF8 and truncated dictionary payloads fail closed
+ok 374 - worker perf: malformed UTF8 and truncated dictionary payloads fail closed
+  ---
+  duration_ms: 0.269157
+  type: 'test'
+  ...
+# Subtest: worker perf: v1 transaction reading remains available for recorded diagnostics
+ok 375 - worker perf: v1 transaction reading remains available for recorded diagnostics
+  ---
+  duration_ms: 0.120939
+  type: 'test'
+  ...
+# Subtest: worker perf: non-string reference identity is never shared by the dictionary
+ok 376 - worker perf: non-string reference identity is never shared by the dictionary
+  ---
+  duration_ms: 0.412098
+  type: 'test'
+  ...
+# Subtest: worker perf: deterministic nested Unicode/typed-array corpus roundtrips
+ok 377 - worker perf: deterministic nested Unicode/typed-array corpus roundtrips
+  ---
+  duration_ms: 2.633187
+  type: 'test'
+  ...
+# Subtest: worker perf: deeply repeated objects still respect nesting and key safety
+ok 378 - worker perf: deeply repeated objects still respect nesting and key safety
+  ---
+  duration_ms: 0.688025
+  type: 'test'
+  ...
+# Subtest: worker perf: placement-only patches omit retained drawing instructions and resource metadata
+ok 379 - worker perf: placement-only patches omit retained drawing instructions and resource metadata
+  ---
+  duration_ms: 11.397923
+  type: 'test'
+  ...
+# Subtest: worker perf: pending patches are rebased against ACK, not an intermediate desired state
+ok 380 - worker perf: pending patches are rebased against ACK, not an intermediate desired state
+  ---
+  duration_ms: 0.30469
+  type: 'test'
+  ...
+# Subtest: worker perf: patch rejects missing target without mutating scene
+ok 381 - worker perf: patch rejects missing target without mutating scene
+  ---
+  duration_ms: 3.365478
+  type: 'test'
+  ...
+# Subtest: worker perf: patch rejects Id replacement without mutating scene
+ok 382 - worker perf: patch rejects Id replacement without mutating scene
+  ---
+  duration_ms: 2.494812
+  type: 'test'
+  ...
+# Subtest: worker perf: patch rejects unknown field without mutating scene
+ok 383 - worker perf: patch rejects unknown field without mutating scene
+  ---
+  duration_ms: 2.198706
+  type: 'test'
+  ...
+# Subtest: worker perf: patch rejects prototype member without mutating scene
+ok 384 - worker perf: patch rejects prototype member without mutating scene
+  ---
+  duration_ms: 1.761229
+  type: 'test'
+  ...
+# Subtest: worker perf: conflicting patch/remove operations and patches in full snapshots are rejected
+ok 385 - worker perf: conflicting patch/remove operations and patches in full snapshots are rejected
+  ---
+  duration_ms: 1.614763
+  type: 'test'
+  ...
+# Subtest: worker perf: patched commands are checked even when content revision is unchanged
+ok 386 - worker perf: patched commands are checked even when content revision is unchanged
+  ---
+  duration_ms: 1.150168
+  type: 'test'
+  ...
+# Subtest: worker perf: changed native descriptors fail before committed state is replaced
+ok 387 - worker perf: changed native descriptors fail before committed state is replaced
+  ---
+  duration_ms: 1.548305
+  type: 'test'
+  ...
+# Subtest: worker perf: removal revalidates cached references of untouched display lists
+ok 388 - worker perf: removal revalidates cached references of untouched display lists
+  ---
+  duration_ms: 1.730264
+  type: 'test'
+  ...
+# Subtest: worker perf: placement-only transaction does not repeat graph validation
+ok 389 - worker perf: placement-only transaction does not repeat graph validation
+  ---
+  duration_ms: 2.133138
+  type: 'test'
+  ...
+# Subtest: worker perf: cached descriptors are immutable, including nested clip arrays
+ok 390 - worker perf: cached descriptors are immutable, including nested clip arrays
+  ---
+  duration_ms: 1.545882
+  type: 'test'
+  ...
+# Subtest: worker perf: cycle inserted by a patch is rejected after prior topology was cached
+ok 391 - worker perf: cycle inserted by a patch is rejected after prior topology was cached
+  ---
+  duration_ms: 1.486003
+  type: 'test'
+  ...
+# Subtest: worker perf: actual resource references participate in cycle checks even without declared Depends
+ok 392 - worker perf: actual resource references participate in cycle checks even without declared Depends
+  ---
+  duration_ms: 2.486099
+  type: 'test'
+  ...
+# Subtest: worker perf: retained reference summaries handle deep shared descriptors without rescanning
+ok 393 - worker perf: retained reference summaries handle deep shared descriptors without rescanning
+  ---
+  duration_ms: 3.050763
+  type: 'test'
+  ...
+# Subtest: worker perf: off-tree VisualBrush in a TEXT RESOURCE stays live and invalidates independently
+ok 394 - worker perf: off-tree VisualBrush in a TEXT RESOURCE stays live and invalidates independently
+  ---
+  duration_ms: 3.415732
+  type: 'test'
+  ...
+# Subtest: worker perf: equal independent text layouts share one immutable resource
+ok 395 - worker perf: equal independent text layouts share one immutable resource
+  ---
+  duration_ms: 0.425218
+  type: 'test'
+  ...
+# Subtest: worker perf: text resource interning preserves width, color, typeface and spacing differences
+ok 396 - worker perf: text resource interning preserves width, color, typeface and spacing differences
+  ---
+  duration_ms: 1.470511
+  type: 'test'
+  ...
+# Subtest: worker perf: one shared-resource owner changing revision cannot overwrite another owner
+ok 397 - worker perf: one shared-resource owner changing revision cannot overwrite another owner
+  ---
+  duration_ms: 0.279613
+  type: 'test'
+  ...
+# Subtest: worker perf: shared text is retained until its last visible consumer is gone
+ok 398 - worker perf: shared text is retained until its last visible consumer is gone
+  ---
+  duration_ms: 7.97423
+  type: 'test'
+  ...
+# Subtest: worker perf: no-editor acknowledgement traffic is suppressed but focus/editor updates are not
+ok 399 - worker perf: no-editor acknowledgement traffic is suppressed but focus/editor updates are not
+  ---
+  duration_ms: 0.467841
+  type: 'test'
+  ...
+# Subtest: worker perf: key/focus event forwarding does not force a canvas layout read
+ok 400 - worker perf: key/focus event forwarding does not force a canvas layout read
+  ---
+  duration_ms: 0.393952
+  type: 'test'
+  ...
+# Subtest: worker perf: submitted/frame duplicate notification projects state once but acknowledges credit
+ok 401 - worker perf: submitted/frame duplicate notification projects state once but acknowledges credit
+  ---
+  duration_ms: 0.652483
+  type: 'test'
+  ...
+# Subtest: worker perf: exact identity transforms skip native state operations without losing ink
+ok 402 - worker perf: exact identity transforms skip native state operations without losing ink
+  ---
+  duration_ms: 1.440026
+  type: 'test'
+  ...
+# Subtest: bootstrap installs message handler synchronously without importing the runtime
+ok 403 - bootstrap installs message handler synchronously without importing the runtime
+  ---
+  duration_ms: 1.399356
+  type: 'test'
+  ...
+# Subtest: bootstrap owns the original transferred objects before top-level await resolves
+ok 404 - bootstrap owns the original transferred objects before top-level await resolves
+  ---
+  duration_ms: 7.897397
+  type: 'test'
+  ...
+# Subtest: duplicate initialize is ignored while graph is suspended and after ready
+ok 405 - duplicate initialize is ignored while graph is suspended and after ready
+  ---
+  duration_ms: 0.869343
+  type: 'test'
+  ...
+# Subtest: non-initialization messages do not trigger graph import or allocate a queue
+ok 406 - non-initialization messages do not trigger graph import or allocate a queue
+  ---
+  duration_ms: 0.81994
+  type: 'test'
+  ...
+# Subtest: bootstrap reports sync-import and closes instead of timing out
+ok 407 - bootstrap reports sync-import and closes instead of timing out
+  ---
+  duration_ms: 1.290415
+  type: 'test'
+  ...
+# Subtest: bootstrap reports async-import and closes instead of timing out
+ok 408 - bootstrap reports async-import and closes instead of timing out
+  ---
+  duration_ms: 0.590922
+  type: 'test'
+  ...
+# Subtest: bootstrap reports missing-export and closes instead of timing out
+ok 409 - bootstrap reports missing-export and closes instead of timing out
+  ---
+  duration_ms: 0.692802
+  type: 'test'
+  ...
+# Subtest: bootstrap reports entry-rejection and closes instead of timing out
+ok 410 - bootstrap reports entry-rejection and closes instead of timing out
+  ---
+  duration_ms: 0.824397
+  type: 'test'
+  ...
+# Subtest: startup stage notifications remain ordered while the entry is awaiting work
+ok 411 - startup stage notifications remain ordered while the entry is awaiting work
+  ---
+  duration_ms: 1.903669
+  type: 'test'
+  ...
+# Subtest: production entry generation embeds bootstrap instead of statically importing asynchronous dependencies
+ok 412 - production entry generation embeds bootstrap instead of statically importing asynchronous dependencies
+  ---
+  duration_ms: 2.159988
+  type: 'test'
+  ...
+# Subtest: render-worker bootstrap failure does not attempt to reuse or retransfer its canvas
+ok 413 - render-worker bootstrap failure does not attempt to reuse or retransfer its canvas
+  ---
+  duration_ms: 3.649436
+  type: 'test'
+  ...
+# Subtest: disposing a not-yet-ready renderer settles initialization instead of leaving a pending promise
+ok 414 - disposing a not-yet-ready renderer settles initialization instead of leaving a pending promise
+  ---
+  duration_ms: 1.309783
+  type: 'test'
+  ...
+# Subtest: XAML explicit constructor overloads preserve argument types in runtime and direct AOT
+ok 415 - XAML explicit constructor overloads preserve argument types in runtime and direct AOT
+  ---
+  duration_ms: 10.183226
+  type: 'test'
+  ...
+# Subtest: XAML registered factories receive optional and variadic arguments without eval
+ok 416 - XAML registered factories receive optional and variadic arguments without eval
+  ---
+  duration_ms: 4.056628
+  type: 'test'
+  ...
+# Subtest: XAML generic factories cache closed types and typed arrays reject incompatible elements
+ok 417 - XAML generic factories cache closed types and typed arrays reject incompatible elements
+  ---
+  duration_ms: 8.350822
+  type: 'test'
+  ...
+# Subtest: XAML array resources remain keyed and nested object arguments do not become RootObject
+ok 418 - XAML array resources remain keyed and nested object arguments do not become RootObject
+  ---
+  duration_ms: 6.187633
+  type: 'test'
+  ...
+# Subtest: XAML failure disposes constructed objects once in both execution paths
+ok 419 - XAML failure disposes constructed objects once in both execution paths
+  ---
+  duration_ms: 2.569633
+  type: 'test'
+  ...
+# Subtest: overload ambiguity, nullability and numeric validation are explicit
+ok 420 - overload ambiguity, nullability and numeric validation are explicit
+  ---
+  duration_ms: 1.271477
+  type: 'test'
+  ...
+# Subtest: XAML duplicate constructor directives and missing generic arity fail before silent defaults
+ok 421 - XAML duplicate constructor directives and missing generic arity fail before silent defaults
+  ---
+  duration_ms: 1.073575
+  type: 'test'
+  ...
+1..421
+# tests 421
+# suites 0
+# pass 421
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 4812.625777

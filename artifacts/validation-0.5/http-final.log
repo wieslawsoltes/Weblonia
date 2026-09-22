@@ -1,0 +1,11 @@
+{
+  "Url": "http://127.0.0.1:46365/",
+  "Mode": "ordinary-http-navigation",
+  "Passed": false,
+  "PolicyChanged": false,
+  "PageErrors": [],
+  "HttpStatus": 200,
+  "ContentType": "text/html; charset=utf-8",
+  "Error": "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:46365/\nCall log:\n  - navigating to \"http://127.0.0.1:46365/\", waiting until \"load\"\n",
+  "BlockedByBrowserPolicy": true
+}

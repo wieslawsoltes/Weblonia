@@ -1,0 +1,6 @@
+Existing local evidence profile (CI=false). The strict CI HTTP gate is not qualified by this execution.
+
+> avaloniaweb-workspace@0.6.2-alpha.1 verify:release
+> node scripts/verify-release.mjs
+
+{"Version":"0.6.2-alpha.1","SourceFingerprint":"93c095505d6ae58d74e38e68e6296edf5f0ee81ed427f9d3042d26314d241cab","Node":440,"Browser":109,"Scrollbars":[[1,20],[1.25,20]],"Text":27,"Packages":18,"Threading":{"Browser":39,"Integration":17,"Quality":12,"Catalog":148}}

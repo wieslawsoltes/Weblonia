@@ -1,0 +1,3 @@
+<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Selection" FontSize="17" FontWeight="SemiBold"/><ComboBox x:Name="Combo" ItemsSource="{Binding Languages}" SelectedIndex="1" Width="320" HorizontalAlignment="Left"/><TextBlock x:Name="ChoiceText" Text="Select a language, or use the arrow keys." Classes="muted"/></StackPanel></Border>
+</StackPanel>
