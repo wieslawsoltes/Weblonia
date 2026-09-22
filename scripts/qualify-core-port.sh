@@ -29,7 +29,7 @@ python tests/worker-startup.py --http
 python tests/pages-smoke.py
 python tests/startup-http.py
 python tests/threading-browser.py
-python tests/threading-integration.py
+python tests/threading-integration.py --http
 python tests/threading-quality.py
 python tests/threading-catalog.py
 python tests/threading-performance.py
