@@ -99,7 +99,7 @@
     {
       "Path": "artifacts/build-result.json",
       "Bytes": 342,
-      "Sha256": "cf9f9d6d8ff41727734eb59a842e7f559d4f158217256a0f76b82474364c0687"
+      "Sha256": "e609b68873f58a1c33664da1ee59911ebcd19d2b77ac91c0b3851c624b3ae8bd"
     },
     {
       "Path": "artifacts/build.log",
@@ -654,7 +654,7 @@
     {
       "Path": "artifacts/npm/manifest.json",
       "Bytes": 26008,
-      "Sha256": "a57a874d9850f6cc4ead0b0e150f8ba84177b1c110c6abb12ece01b4e443e0b1"
+      "Sha256": "b0512047abf91efca3af5537437b08a30f6a15d2829354c7425d5aa9dc5f6dfd"
     },
     {
       "Path": "artifacts/npm/wieslawsoltes-avalonia-0.6.2-alpha.1.tgz",
@@ -673,8 +673,8 @@
     },
     {
       "Path": "artifacts/npm/wieslawsoltes-avalonia-browser-0.6.2-alpha.1.tgz",
-      "Bytes": 1414958,
-      "Sha256": "86a9cb5ddc871316065206d81e7b78f4110cc889172600c9f85c45709ea36d65"
+      "Bytes": 1414959,
+      "Sha256": "85e2bc1557daa7387408813edc15579e8cae1996ae5e1f39433c694d3bb08530"
     },
     {
       "Path": "artifacts/npm/wieslawsoltes-avalonia-composition-0.6.2-alpha.1.tgz",
@@ -754,7 +754,7 @@
     {
       "Path": "artifacts/package-consumer-result.json",
       "Bytes": 343,
-      "Sha256": "a1f4b8c82d8c1e59227d819b64a383fbf54a8ff4fc1af8080d413fdd436aa82b"
+      "Sha256": "e71df115889b5cab7d8e5f18aa5c9830f05f577303d7f6cfec78b85de69d7b52"
     },
     {
       "Path": "artifacts/package-consumer.log",
@@ -778,8 +778,8 @@
     },
     {
       "Path": "artifacts/publication/pages-smoke.json",
-      "Bytes": 2366,
-      "Sha256": "54e91e555fb15efe6647eaf5228230eea8198f1026e41a179036aab5b036d374"
+      "Bytes": 2362,
+      "Sha256": "5c176186b797cde422b47698c63c5fdd47a85289b5d99c66cc57fd79edaf6fcc"
     },
     {
       "Path": "artifacts/publication/render-worker.png",
@@ -903,13 +903,13 @@
     },
     {
       "Path": "artifacts/startup/http-comparison.json",
-      "Bytes": 87395,
-      "Sha256": "232b7d35bfdf251f6524e625c69452ec08caf9cb6e0979c9a71ff4e7e2d4e9a3"
+      "Bytes": 87400,
+      "Sha256": "a7b9bb10a6f7fa020d0601a489d666e28b5b231738ad071e3a04684da48bcba9"
     },
     {
       "Path": "artifacts/startup/node-console.log",
-      "Bytes": 99943,
-      "Sha256": "4f2221f097461641ee3581b559f572e2c21332feb3e7bc5c01bf695a9b524963"
+      "Bytes": 99888,
+      "Sha256": "8feeaa127ffd63a8bca323b5d8ed6b9795fb8f7c59d0eaa3a91790ef2c986bd1"
     },
     {
       "Path": "artifacts/startup/text-ink-diagnostic.json",
@@ -1759,12 +1759,12 @@
     {
       "Path": "artifacts/validation-optimized/node-final.json",
       "Bytes": 439,
-      "Sha256": "29db0af687118c3565f401c3a7a12efa2977cd4b2620b002bfa8d7a3af93b745"
+      "Sha256": "84b91cd47c4e8bb51ae3dc55a92e53c2cbac6c19d84a038a0c11ac61555ed9de"
     },
     {
       "Path": "artifacts/validation-optimized/node-final.log",
-      "Bytes": 99858,
-      "Sha256": "20f61149cce2561a51faeb1d56411e6a7f09ef5e3cc7e1c44932251b2b10301c"
+      "Bytes": 99803,
+      "Sha256": "90ec8eec5b5755ac28505102eb83902467bbb5626ca8cb99bbeb7948a8ef924c"
     },
     {
       "Path": "artifacts/validation-optimized/node-record-final.log",
@@ -2917,6 +2917,11 @@
       "Sha256": "a358750bf6600a5e448cfb6e7704228b8f6759ab03a8571728def810a77dd27b"
     },
     {
+      "Path": "dist/docs/TEXT-REFERENCE-COMPOSITING.md",
+      "Bytes": 2044,
+      "Sha256": "fdee44d3b8dc37f150cef97c01ed56c23de3d26dc56701417df58a6d475a2496"
+    },
+    {
       "Path": "dist/docs/THREADING-PERFORMANCE.md",
       "Bytes": 2227,
       "Sha256": "1aa109801cbdd640ffa184a46117df452d4e8a8f627305b1a7f0fd468b790b1c"
@@ -2925,6 +2930,11 @@
       "Path": "dist/docs/THREADING.md",
       "Bytes": 16589,
       "Sha256": "fcee55b7cc53b84451ef65496c940cc03849a750ac0d8dfdb43ec685a6aed78e"
+    },
+    {
+      "Path": "dist/docs/UPSTREAM-NPM-PUBLICATION.json",
+      "Bytes": 827,
+      "Sha256": "d4bb8301cb0295778630974979d498bd66bcf255daff89ea4bd8c5fd090e9c78"
     },
     {
       "Path": "dist/docs/USAGE.md",
@@ -3289,7 +3299,7 @@
     {
       "Path": "dist/packages/browser/worker-assets/manifest.json",
       "Bytes": 30114,
-      "Sha256": "5f18f3cfd8deb21e958d563291a375f23cb3ac8cbccb92da148955144b9fdf0d"
+      "Sha256": "2eb746ffdcdd7ccacaf3ce0286717f0cd5eb00cadee3213ab15396a82f0ad78e"
     },
     {
       "Path": "dist/packages/browser/worker-assets/packages/animation/src/index.js",
@@ -5892,6 +5902,11 @@
       "Sha256": "a358750bf6600a5e448cfb6e7704228b8f6759ab03a8571728def810a77dd27b"
     },
     {
+      "Path": "docs/TEXT-REFERENCE-COMPOSITING.md",
+      "Bytes": 2044,
+      "Sha256": "fdee44d3b8dc37f150cef97c01ed56c23de3d26dc56701417df58a6d475a2496"
+    },
+    {
       "Path": "docs/THREADING-PERFORMANCE.md",
       "Bytes": 2227,
       "Sha256": "1aa109801cbdd640ffa184a46117df452d4e8a8f627305b1a7f0fd468b790b1c"
@@ -5900,6 +5915,11 @@
       "Path": "docs/THREADING.md",
       "Bytes": 16589,
       "Sha256": "fcee55b7cc53b84451ef65496c940cc03849a750ac0d8dfdb43ec685a6aed78e"
+    },
+    {
+      "Path": "docs/UPSTREAM-NPM-PUBLICATION.json",
+      "Bytes": 827,
+      "Sha256": "d4bb8301cb0295778630974979d498bd66bcf255daff89ea4bd8c5fd090e9c78"
     },
     {
       "Path": "docs/USAGE.md",
@@ -6249,7 +6269,7 @@
     {
       "Path": "packages/browser/worker-assets/manifest.json",
       "Bytes": 30108,
-      "Sha256": "3e3ea7fa70c5467e3a40b71c0fc17ec4eaf3d2a0b47ce4c69a1a00cde393f8db"
+      "Sha256": "12a8303878b0cc577640dd33145ebb7ea07931d5d534a1fb1a91b4f51663fec4"
     },
     {
       "Path": "packages/browser/worker-assets/packages/animation/src/index.js",
@@ -9028,8 +9048,8 @@
     },
     {
       "Path": "scripts/verify-release.mjs",
-      "Bytes": 11559,
-      "Sha256": "07f153f821d2cfb3a103d0f929c52c1fa6b988bebc620b6cdeb08d903a07ec29"
+      "Bytes": 13961,
+      "Sha256": "7e67f92419da0737bea57633c5d8bd9482fcc46a1782674763d4f19fe87588ab"
     },
     {
       "Path": "scripts/verify-vendor.mjs",
@@ -9218,8 +9238,8 @@
     },
     {
       "Path": "tests/text-quality.js",
-      "Bytes": 11433,
-      "Sha256": "ff622f6f9302854f6ee1a0c5bd7398a3bef8a16ddbc9c603365f3bf2cebdae1f"
+      "Bytes": 13752,
+      "Sha256": "b7650f6cddacfa4b682f6a5e11eff3b40709ff337de0d7154827d168895eab25"
     },
     {
       "Path": "tests/text-quality.py",
