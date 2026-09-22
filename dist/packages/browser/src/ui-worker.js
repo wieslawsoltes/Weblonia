@@ -18,9 +18,12 @@ export async function StartUiWorker(message,startup={}) {
         }
     }});
     try{
+        // Start the application graph before waiting for native initialization.
+        // Observe rejection immediately, then dispose the platform in our catch.
+        const applicationModule=import(ApplicationModule);applicationModule.catch(()=>{});
         platform=await InitializeWorkerSkia(Runtime,startup);InstallWorkerWindowFactory(platform);
         startup.Progress?.('application-module',ApplicationModule);
-        const module=await import(ApplicationModule),factory=module[ApplicationExport??'CreateWorkerApplication'];if(typeof factory!=='function')throw new TypeError('The application module must export its worker application factory.');
+        const module=await applicationModule,factory=module[ApplicationExport??'CreateWorkerApplication'];if(typeof factory!=='function')throw new TypeError('The application module must export its worker application factory.');
         application=await factory({Platform:platform,Options:ApplicationOptions,Snapshot,Host:channel,CreateTopLevel:()=>new WorkerTopLevel()});
         if(!application?.Root&&!application?.View)throw new TypeError('The application factory must return Root or View.');
         root=application.Root??new WorkerTopLevel();InstallWorkerTopLevel(root);if(application.View)root.Content=application.View;

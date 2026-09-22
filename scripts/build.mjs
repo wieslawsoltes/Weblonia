@@ -21,6 +21,31 @@ for (const input of inputs) {
     sources[name] = text;
 }
 await writeFile(path.join(compiled, 'index.js'), `${imports.join('\n')}\nexport const Builders = { ${builders.join(',\n')} };\nexport const Sources = ${JSON.stringify(sources)};\n`);
+// The synchronous index remains available to parity tests and consumers.
+// The application shell imports only MainView; route builders load on demand.
+await writeFile(path.join(compiled, 'lazy.js'), `import { Build as MainView } from './MainView.g.js';
+export const Builders = { MainView };
+export const Sources = ${JSON.stringify(sources)};
+const loaders = {
+${inputs.filter(x => path.basename(x, '.axaml') !== 'MainView').map(x => {
+    const id = path.basename(x, '.axaml');
+    return JSON.stringify(id) + ': () => import(' + JSON.stringify('./' + id + '.g.js') + ')';
+}).join(',\n')}
+};
+const pending = new Map();
+export function LoadBuilder(id) {
+    if (Object.hasOwn(Builders, id)) return Promise.resolve(Builders[id]);
+    if (!Object.hasOwn(loaders, id)) return Promise.reject(new Error('Unknown catalog builder: ' + id));
+    if (pending.has(id)) return pending.get(id);
+    const task = loaders[id]().then(module => {
+        if (typeof module.Build !== 'function') throw new TypeError('Invalid AOT builder: ' + id);
+        Builders[id] = module.Build; return module.Build;
+    });
+    pending.set(id, task);
+    task.then(() => pending.delete(id), () => pending.delete(id));
+    return task;
+}
+`);
 await (await import('./build-workers.mjs')).BuildWorkerAssets();
 const mappings = {};
 for (const folder of await readdir(path.join(root, 'packages'))) {
@@ -32,6 +57,9 @@ mappings['rxjs/operators'] = './vendor/rxjs.js';
 mappings['@wieslawsoltes/reactiveweb'] = './vendor/reactiveweb.browser.js';
 mappings['@wieslawsoltes/skiasharpweb/browser-text'] = './vendor/skiasharpweb/dist/lib/browser-text.js';
 mappings['@wieslawsoltes/skiasharpweb/browser'] = './vendor/skiasharpweb/dist/package/browser.js';
+mappings['@wieslawsoltes/avalonia-browser/worker-host'] = './packages/browser/src/isolated-host.js';
+mappings['@wieslawsoltes/avalonia-skia/wasm'] = './packages/skia/src/wasm-module-source.js';
+mappings['@wieslawsoltes/skiasharpweb/wasm'] = './vendor/skiasharpweb/dist/lib/wasm.js';
 function html(prefix) {
     const imports = Object.fromEntries(Object.entries(mappings).map(([k, v]) => [k, `${prefix}${v.slice(2)}`]));
     return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#6757d9"><title>Avalonia Web · Control Catalog</title><style>html,body,#app{width:100%;height:100%;margin:0;overflow:hidden}body{font-family:system-ui,sans-serif;background:#f6f7fb;color:#222634}#loading{position:absolute;inset:0;display:grid;place-content:center;gap:12px;text-align:center}#loading b{font-size:25px}#loading span{color:#6d7383;font-size:14px}.error{max-width:80vw;white-space:pre-wrap;color:#b63648}</style><script type="importmap">${JSON.stringify({ imports })}</script></head><body><main id="app" aria-label="Avalonia Web Control Catalog"><div id="loading"><b>Avalonia / Control Catalog</b><span>Initializing the native Skia renderer…</span></div></main><script type="module" src="./app.js"></script></body></html>`;

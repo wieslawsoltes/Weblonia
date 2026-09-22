@@ -1,0 +1,133 @@
+name: Refresh and measure startup assets
+on:
+  push:
+    branches: [maintenance/startup-initialization]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: refresh-startup-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  refresh:
+    if: github.repository == 'wieslawsoltes/Weblonia' && github.ref == 'refs/heads/maintenance/startup-initialization'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+    defaults:
+      run:
+        working-directory: application
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.sha }}
+          path: application
+      - uses: actions/checkout@v7
+        with:
+          repository: wieslawsoltes/SkiaSharpWeb
+          ref: d5a9e8573c747804930eb76a81d05d2c5dde2d3a
+          path: upstream-skia
+          persist-credentials: false
+      - uses: actions/checkout@v7
+        with:
+          ref: f78a20daab4ec4986ea6d630d8e7264cf2ad7606
+          path: baseline
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          package-manager-cache: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+      - name: Assemble the pinned upstream package inventory
+        working-directory: upstream-skia
+        run: |
+          npm ci --ignore-scripts
+          npm run build
+          node --test tests/wasm-startup.test.mjs
+      - name: Apply exact reviewed source edits once
+        run: |
+          python - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+          payload=Path('.maintenance/startup-edits.json')
+          if payload.exists():
+              spec=json.loads(payload.read_text()); assert spec['Schema']==1 and spec['OffsetUnit']=='UnicodeCodePoint'
+              planned=[]
+              for item in spec['Files']:
+                  p=Path(item['Path'])
+                  assert not p.is_absolute() and '..' not in p.parts and not p.is_symlink()
+                  data=p.read_bytes()
+                  assert hashlib.sha256(data).hexdigest()==item['Before'], 'Source baseline mismatch: '+str(p)
+                  text=data.decode('utf-8');end=len(text)
+                  for edit in sorted(item['Edits'],key=lambda x:x['Start'],reverse=True):
+                      pos,count=edit['Start'],edit['Delete']
+                      assert 0<=pos<=pos+count<=end
+                      text=text[:pos]+edit['Insert']+text[pos+count:];end=pos
+                  result=text.encode('utf-8')
+                  assert hashlib.sha256(result).hexdigest()==item['After'], 'Result mismatch: '+str(p)
+                  planned.append((p,result))
+              for p,data in planned:p.write_bytes(data)
+              payload.unlink()
+              print('Applied',len(planned),'exact hash-verified source changes.')
+          PY
+      - name: Adopt the merged upstream startup fix
+        run: python scripts/sync-skia-startup.py ../upstream-skia
+      - name: Rebuild and validate complete source and packages
+        run: |
+          npm run verify:vendor
+          npm run build
+          npm run verify:workers
+          mkdir -p artifacts/startup
+          if ! npm run test:record > artifacts/startup/node-console.log 2>&1; then tail -100 artifacts/startup/node-console.log; exit 1; fi
+          tail -12 artifacts/startup/node-console.log
+          npm run pack:all
+          npm run test:packages
+      - run: python -m pip install -r tests/requirements.txt
+      - run: python -m playwright install --with-deps chromium
+      - name: Diagnose system-browser tall-ink precision
+        run: python tests/text-ink-diagnostic.py > artifacts/startup/text-ink-diagnostic.log
+      - name: Qualify canonical HTTP workers and renderer restart
+        run: python tests/pages-smoke.py
+      - name: Cold-browser comparison against the published baseline
+        run: |
+          (cd ../baseline && npm run build)
+          python tests/startup-http.py --baseline ../baseline --trials 5
+      - name: Rebuild complete source manifest
+        run: python scripts/archive.py --output ../startup-archives
+      - name: Commit only reviewed sources, vendored runtime and regenerated assets
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -u
+          git add -A packages samples scripts tests vendor docs dist artifacts SOURCE-MANIFEST.json
+          git add -f artifacts/npm artifacts/validation-optimized/node-final.log
+          if ! git diff --cached --quiet; then
+            git commit -m 'perf: regenerate verified startup worker/package assets and evidence'
+            git push origin HEAD:maintenance/startup-initialization
+          fi
+      - name: Retain exact working source for review and failure diagnosis
+        if: always()
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile, ZIP_DEFLATED
+          out=Path('artifacts/startup');out.mkdir(parents=True,exist_ok=True)
+          with ZipFile(out/'review-source.zip','w',ZIP_DEFLATED) as archive:
+              for p in sorted(Path('.').rglob('*')):
+                  if p.is_symlink() or not p.is_file() or any(x in {'.git','artifacts','node_modules','__pycache__'} for x in p.parts):continue
+                  if p.suffix.lower() in {'.ttf','.otf','.woff','.woff2','.ttc','.otc','.eot','.pfa','.pfb'}:continue
+                  archive.write(p,p.as_posix())
+          PY
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: startup-verification
+          path: |
+            application/artifacts/startup/
+            application/artifacts/publication/pages-smoke.json
+            application/artifacts/validation-optimized/node-final.json
+            application/artifacts/validation-optimized/node-final.log
+            application/artifacts/package-consumer-result.json

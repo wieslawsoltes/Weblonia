@@ -7,7 +7,8 @@
   "sideEffects": true,
   "main": "./src/index.js",
   "exports": {
-    ".": "./src/index.js"
+    ".": "./src/index.js",
+    "./worker-host": "./src/isolated-host.js"
   },
   "files": [
     "src",
@@ -29,6 +30,7 @@
     "@wieslawsoltes/avalonia-skia": "0.6.2-alpha.1",
     "@wieslawsoltes/avalonia-styling": "0.6.2-alpha.1",
     "@wieslawsoltes/avalonia-media": "0.6.2-alpha.1",
-    "@wieslawsoltes/avalonia-rendering": "0.6.2-alpha.1"
+    "@wieslawsoltes/avalonia-rendering": "0.6.2-alpha.1",
+    "@wieslawsoltes/skiasharpweb": "git+https://github.com/wieslawsoltes/SkiaSharpWeb.git#d5a9e8573c747804930eb76a81d05d2c5dde2d3a"
   }
 }

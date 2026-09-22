@@ -15,7 +15,7 @@ test('text module matches the merged upstream Git blob and consumer pins that ex
     const gitHash = createHash('sha1').update(`blob ${content.length}\0`).update(content).digest('hex');
     assert.equal(gitHash, 'b883b4de1a15ca3c8df6a235c92a43905e5523de');
     const manifest = JSON.parse(await readFile(new URL('../packages/skia/package.json',import.meta.url)));
-    assert.equal(manifest.dependencies['@wieslawsoltes/skiasharpweb'], 'git+https://github.com/wieslawsoltes/SkiaSharpWeb.git#0a33427592e788d042ab69eedeb4bd7f29f35564');
+    assert.equal(manifest.dependencies['@wieslawsoltes/skiasharpweb'], 'git+https://github.com/wieslawsoltes/SkiaSharpWeb.git#d5a9e8573c747804930eb76a81d05d2c5dde2d3a');
 });
 test('shared clipped text planning is proportional to the viewport, not line length', () => {
     const plan = shared.CreateTextRasterPlan({Width:1e9},14,{ScaleX:1,ScaleY:1},128);

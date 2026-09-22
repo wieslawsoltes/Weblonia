@@ -38,6 +38,7 @@ const mappings = {
     'rxjs/operators': new URL('rxjs.js', vendor).href,
     '@wieslawsoltes/reactiveweb': new URL('reactiveweb.browser.js', vendor).href,
     '@wieslawsoltes/skiasharpweb/browser-text': new URL('skiasharpweb/dist/lib/browser-text.js', vendor).href,
+    '@wieslawsoltes/skiasharpweb/wasm': new URL('skiasharpweb/dist/lib/wasm.js', vendor).href,
     '@wieslawsoltes/skiasharpweb/browser': new URL('skiasharpweb/dist/package/browser.js', vendor).href,
     '@wieslawsoltes/skiasharpweb': new URL('skiasharpweb/dist/package/node.js', vendor).href
 };
@@ -50,6 +51,15 @@ import { ReactiveObject } from '@wieslawsoltes/reactiveweb';
 import { AvaloniaXamlCompiler } from '@wieslawsoltes/avalonia-markup-xaml';
 const names=${JSON.stringify(Packages.map(p=>p.Name))};
 for (const name of names) assert.ok(Object.keys(await import(name)).length > 0, name);
+const thinHost = await import('@wieslawsoltes/avalonia-browser/worker-host');
+const wasm = await import('@wieslawsoltes/avalonia-skia/wasm');
+assert.equal(thinHost.StartWorkerApplicationAsync, A.StartWorkerApplicationAsync);
+const module = new WebAssembly.Module(new Uint8Array([0,97,115,109,1,0,0,0]));
+const source = new wasm.SkiaWasmModuleSource({WasmModule:module});
+try {
+    const received = await wasm.ReceiveSkiaWasmModuleAsync(source.CreatePort(), 5000);
+    assert.ok(received instanceof WebAssembly.Module);
+} finally { source.Dispose(); }
 const model=new ReactiveObject({Text:'Packed modules'});
 const view=new A.StackPanel(); view.DataContext=model;
 const label=new A.TextBlock(); view.Children.Add(label);
@@ -69,10 +79,10 @@ assert.equal(A.BrowserThreadingMode.FullIsolation,'full-isolation');
 const {readFile}=await import('node:fs/promises');
 const worker=new URL('../worker-assets/render.js',import.meta.resolve('@wieslawsoltes/avalonia-browser'));
 assert.match(await readFile(worker,'utf8'),/render-worker/);
-console.log(JSON.stringify({Passed:true,Packages:names.length,FacadeExports:Object.keys(A).length,PublicRegistryInstalled:false}));
+console.log(JSON.stringify({Passed:true,Packages:names.length,FacadeExports:Object.keys(A).length,PublicRegistryInstalled:false,StartupSubpaths:true}));
 `);
-const run = spawnSync(process.execPath, ['--import', './register.mjs', 'consumer.mjs'], { cwd: fixture, encoding: 'utf8' });
-if (run.status !== 0) throw new Error(`${run.stdout}\n${run.stderr}`);
+const run = spawnSync(process.execPath, ['--import', './register.mjs', 'consumer.mjs'], { cwd: fixture, encoding: 'utf8', timeout: 30000 });
+if (run.error || run.status !== 0) throw new Error(`${run.error ?? ''}\n${run.stdout}\n${run.stderr}`);
 const report = JSON.parse(run.stdout.trim());
 Object.assign(report,{Version:Packages[0].Version,SourceFingerprint:fingerprint,FinalSourceFingerprint:SourceFingerprint(root)});
 if(report.SourceFingerprint!==report.FinalSourceFingerprint)throw new Error('Source changed during package qualification');

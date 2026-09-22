@@ -1,15 +1,18 @@
+import { SkiaWasmModuleSource } from "../../skia/src/wasm-module-source.js";
 import { Disposable, Event } from "../../base/src/index.js";
-import { GetBrowserWorkerUrls, BrowserThreadingMode } from './render-thread.js';
+import { GetBrowserWorkerUrls, BrowserThreadingMode } from './threading-options.js';
 import { ThreadChannel, TransferResult } from './thread-channel.js';
-import { BrowserStorageProvider, BrowserScreens } from './index.js';
+import { BrowserStorageProvider, BrowserScreens } from './browser-services.js';
 
 /** Thin document owner. No Avalonia controls, bindings, layout or native Skia
  * runtime are instantiated here. UI and render workers communicate directly. */
 export class BrowserWorkerApplication extends Disposable {
-    constructor(container,options={}){super();if(!container?.ownerDocument)throw new TypeError('A document container is required.');if(!options.ApplicationModule)throw new TypeError('A worker-safe ApplicationModule URL is required.');this.Container=container;this.Options=options;this.Window=container.ownerDocument.defaultView;this.Document=container.ownerDocument;this.Errors=new Event();this.Mode=BrowserThreadingMode.FullIsolation;this._events=[];this._inputFlight=false;this._inputSequence=0;this._latestEditSequence=0;this._listeners=[];this._requests=new Set();this._handles=new Map();this.Children=new Set();this.NativeHosts=new Map();this._nextHandle=1;this._fastRequests=new Map();this._nextFast=1;this.Statistics={EventsSent:0,EventBatches:0,CoalescedMoves:0,MaxQueuedEvents:0,AutomationWrites:0,MainHasSkiaRuntime:false};this._ready=new Promise((r,j)=>{this._readyResolve=r;this._readyReject=j;});this._ready.catch(()=>{});this.Startup={};}
+    constructor(container,options={}){super();if(!container?.ownerDocument)throw new TypeError('A document container is required.');if(!options.ApplicationModule)throw new TypeError('A worker-safe ApplicationModule URL is required.');this.Container=container;this.Options=options;this.Window=container.ownerDocument.defaultView;this.Document=container.ownerDocument;this.Errors=new Event();this.Mode=BrowserThreadingMode.FullIsolation;this._events=[];this._inputFlight=false;this._inputSequence=0;this._latestEditSequence=0;this._listeners=[];this._requests=new Set();this._handles=new Map();this.Children=new Set();this.NativeHosts=new Map();this._nextHandle=1;this._fastRequests=new Map();this._nextFast=1;this.Statistics={EventsSent:0,EventBatches:0,CoalescedMoves:0,MaxQueuedEvents:0,AutomationWrites:0,MainHasSkiaRuntime:false};this._ready=new Promise((r,j)=>{this._readyResolve=r;this._readyReject=j;});this._ready.catch(()=>{});this.Startup={};this.StartupEvents=[];}
     async StartAsync(){
         if(typeof Worker!=='function'||!this.Window.HTMLCanvasElement.prototype.transferControlToOffscreen)throw new Error('Full isolation requires workers and transferable OffscreenCanvas.');
         this._CreateDom();const urls={...GetBrowserWorkerUrls(),...this.Options.WorkerUrls};
+        const runtime={Backend:this.Options.Backend??'auto',AllowFallback:this.Options.AllowFallback,LoaderUrl:this.Options.LoaderUrl??urls.LoaderUrl,AssetBaseUrl:this.Options.AssetBaseUrl??new URL('../vendor/',import.meta.resolve("../../../vendor/skiasharpweb/dist/package/browser.js")).href,HandlerModules:this.Options.HandlerModules??[]};
+        if(this.Options.ShareWasmModule!==false)this._wasmSource=new SkiaWasmModuleSource({...runtime,WasmModule:this.Options.WasmModule,InitializationTimeout:this.Options.InitializationTimeout});
         this.UiWorker=new this.Window.Worker(this.Options.UiWorkerUrl??urls.UiWorkerUrl,{type:this.Options.UiWorkerType??'module',name:'Avalonia.UI'});
         this.RenderWorker=new this.Window.Worker(this.Options.RenderWorkerUrl??urls.RenderWorkerUrl,{type:this.Options.WorkerType??'module',name:'Avalonia.Composition.Render'});
         for(const [name,worker]of[['UI',this.UiWorker],['render',this.RenderWorker]]){
@@ -18,14 +21,22 @@ export class BrowserWorkerApplication extends Disposable {
             worker.onmessage=e=>this._WorkerMessage(e.data);
         }
         const control=new MessageChannel(),render=new MessageChannel(),input=new MessageChannel();this._ConnectFast(input.port1);this.Channel=new ThreadChannel(control.port1,{OnEvent:m=>this._Message(m),OnRequest:(m,v)=>this._Service(m,v),OnError:e=>this._Fail(e)});
-        const canvas=this.Canvas.transferControlToOffscreen();const runtime={Backend:this.Options.Backend??'auto',AllowFallback:this.Options.AllowFallback,LoaderUrl:this.Options.LoaderUrl??urls.LoaderUrl,AssetBaseUrl:this.Options.AssetBaseUrl??new URL('../vendor/',import.meta.resolve("../../../vendor/skiasharpweb/dist/package/browser.js")).href,HandlerModules:this.Options.HandlerModules??[]};
-        this._runtime=runtime;this._workerUrls=urls;this.RenderWorker.postMessage({Type:'initialize',Canvas:canvas,Port:render.port1,InputPort:input.port2,Options:runtime},[canvas,render.port1,input.port2]);
-        this.UiWorker.postMessage({Type:'initialize',Port:control.port2,RenderPort:render.port2,ApplicationModule:String(this.Options.ApplicationModule),ApplicationExport:this.Options.ApplicationExport??'CreateWorkerApplication',ApplicationOptions:this.Options.ApplicationOptions??{},Snapshot:this._Snapshot(),Runtime:runtime},[control.port2,render.port2]);
+        const canvas=this.Canvas.transferControlToOffscreen();
+        this._runtime=runtime;this._workerUrls=urls;
+        const renderTransfer=[canvas,render.port1,input.port2],uiTransfer=[control.port2,render.port2];
+        const renderRuntime=this._PrepareRuntime(runtime,renderTransfer),uiRuntime=this._PrepareRuntime(runtime,uiTransfer);
+        this.RenderWorker.postMessage({Type:'initialize',Canvas:canvas,Port:render.port1,InputPort:input.port2,Options:renderRuntime},renderTransfer);
+        this.UiWorker.postMessage({Type:'initialize',Port:control.port2,RenderPort:render.port2,ApplicationModule:String(this.Options.ApplicationModule),ApplicationExport:this.Options.ApplicationExport??'CreateWorkerApplication',ApplicationOptions:this.Options.ApplicationOptions??{},Snapshot:this._Snapshot(),Runtime:uiRuntime},uiTransfer);
         this._InstallEvents();this._initTimer=setTimeout(()=>this._Fail(new Error('Isolated application initialization timed out. Last stages: '+Object.entries(this.Startup).map(([role,status])=>role+': '+status.Stage+(status.Url?' ('+status.Url+')':'')).join('; '))),this.Options.InitializationTimeout??45000);return this._ready;
+    }
+    _PrepareRuntime(runtime,transfer){
+        if(!this._wasmSource)return runtime;
+        const WasmModulePort=this._wasmSource.CreatePort();transfer.push(WasmModulePort);
+        return{...runtime,WasmModulePort,InitializationTimeout:this.Options.InitializationTimeout??45000};
     }
     _WorkerMessage(message){
         if(this.IsDisposed||this.LastError)return;
-        if(message?.Type==='startup-progress')this.Startup[message.Role]=message;
+        if(message?.Type==='startup-progress'){this.Startup[message.Role]=message;if(this.StartupEvents.length>=64)this.StartupEvents.shift();this.StartupEvents.push({...message,ObservedAt:performance.now()});}
         else if(message?.Type==='bootstrap-error')this._Fail(new Error(message.Error));
     }
     _CreateDom(){
@@ -125,9 +136,9 @@ export class BrowserWorkerApplication extends Disposable {
         return this._Privileged('Open '+(value.Title||'an application window')+'?',async()=>{
             const popup=this.Window.open('','_blank',`popup=yes,width=${Math.round(value.Width)},height=${Math.round(value.Height)}`);if(!popup)throw new Error('The browser blocked this popup.');
             popup.document.title=value.Title;popup.document.documentElement.style.height='100%';popup.document.body.style.cssText='margin:0;height:100%;overflow:hidden;';const container=popup.document.createElement('div');container.style.cssText='width:100%;height:100%';popup.document.body.append(container);
-            const host=new BrowserWorkerApplication(container,{...this.Options,OwnsWindow:true});this.Children.add(host);host._CreateDom();host._runtime={...this._runtime,Backend:value.Backend};host._workerUrls=this._workerUrls;
+            const host=new BrowserWorkerApplication(container,{...this.Options,OwnsWindow:true});this.Children.add(host);host._CreateDom();host._runtime={...this._runtime,Backend:value.Backend};host._workerUrls=this._workerUrls;host._wasmSource=this._wasmSource;host._borrowsWasmSource=true;
             const control=new MessageChannel(),render=new MessageChannel();host.Channel=new ThreadChannel(control.port1,{OnEvent:m=>host._Message(m),OnRequest:(m,v)=>host._Service(m,v),OnError:e=>host._Fail(e)});
-            host.RenderWorker=new popup.Worker(host.Options.RenderWorkerUrl??host._workerUrls.RenderWorkerUrl,{type:host.Options.WorkerType??'module',name:'Avalonia.Composition.Window'});const canvas=host.Canvas.transferControlToOffscreen();host.RenderWorker.postMessage({Type:'initialize',Canvas:canvas,Port:render.port1,Options:host._runtime},[canvas,render.port1]);host.RenderWorker.onerror=e=>host._Fail(new Error(e.message || 'Secondary render worker entry failed.'));host.RenderWorker.onmessage=e=>host._WorkerMessage(e.data);host.RenderWorker.onmessageerror=()=>host._Fail(new Error('Secondary render worker startup message could not be deserialized.'));host._InstallEvents();
+            host.RenderWorker=new popup.Worker(host.Options.RenderWorkerUrl??host._workerUrls.RenderWorkerUrl,{type:host.Options.WorkerType??'module',name:'Avalonia.Composition.Window'});const canvas=host.Canvas.transferControlToOffscreen();const transfer=[canvas,render.port1];host.RenderWorker.postMessage({Type:'initialize',Canvas:canvas,Port:render.port1,Options:host._PrepareRuntime(host._runtime,transfer)},transfer);host.RenderWorker.onerror=e=>host._Fail(new Error(e.message || 'Secondary render worker entry failed.'));host.RenderWorker.onmessage=e=>host._WorkerMessage(e.data);host.RenderWorker.onmessageerror=()=>host._Fail(new Error('Secondary render worker startup message could not be deserialized.'));host._InstallEvents();
             return TransferResult({Port:control.port2,RenderPort:render.port2,Snapshot:host._Snapshot()},control.port2,render.port2);
         });
     }
@@ -138,7 +149,7 @@ export class BrowserWorkerApplication extends Disposable {
         const worker=this.RenderWorker=new this.Window.Worker(this.Options.RenderWorkerUrl??this._workerUrls.RenderWorkerUrl,{type:this.Options.WorkerType??'module',name:'Avalonia.Composition.Render'});
         worker.onerror=e=>this.Channel.Send({Type:'render-worker-failed',Message:e.message});worker.onmessage=e=>this._WorkerMessage(e.data);
         const channel=new MessageChannel(),input=new MessageChannel(),offscreen=canvas.transferControlToOffscreen();this._ConnectFast(input.port1);
-        worker.postMessage({Type:'initialize',Canvas:offscreen,Port:channel.port1,InputPort:input.port2,Options:this._runtime},[offscreen,channel.port1,input.port2]);this._InstallEvents();this._Queue({Type:'blur'});this._Queue({Type:'focus'});
+        const transfer=[offscreen,channel.port1,input.port2];worker.postMessage({Type:'initialize',Canvas:offscreen,Port:channel.port1,InputPort:input.port2,Options:this._PrepareRuntime(this._runtime,transfer)},transfer);this._InstallEvents();this._Queue({Type:'blur'});this._Queue({Type:'focus'});
         return TransferResult({Port:channel.port2},channel.port2);
     }
     async _Service(method,v){switch(method){
@@ -158,14 +169,14 @@ export class BrowserWorkerApplication extends Disposable {
     _Fail(error){if(this.LastError||this.IsDisposed)return;this.LastError=error;clearTimeout(this._initTimer);this._readyReject(error);
         // Before ready there is no application capable of recovering. Terminate
         // both owners so a late init cannot continue drawing into a failed host.
-        if(!this._initialized){this.UiWorker?.terminate();this.RenderWorker?.terminate();this.FastPort?.close();this.Channel?.Dispose();}
+        if(!this._initialized){if(!this._borrowsWasmSource)this._wasmSource?.Dispose();this.UiWorker?.terminate();this.RenderWorker?.terminate();this.FastPort?.close();this.Channel?.Dispose();}
         this.Errors.Raise(this,{Error:error});
     }
     async InvokeAsync(command,value=null){await this._ready;return this.Channel.RequestAsync('invoke',{Command:command,Value:value});}
-    async GetDiagnosticsAsync(){await this._ready;return{Mode:this.Mode,Host:{...this.Statistics,QueuedEvents:this._events.length,HasDocument:true},...await this.Channel.RequestAsync('diagnostics')};}
+    async GetDiagnosticsAsync(){await this._ready;return{Mode:this.Mode,Host:{...this.Statistics,NativePreparation:this._wasmSource?{...this._wasmSource.Statistics,PendingDeliveries:this._wasmSource.PendingDeliveries}:null,StartupEvents:[...this.StartupEvents],QueuedEvents:this._events.length,HasDocument:true},...await this.Channel.RequestAsync('diagnostics')};}
     async RestartRendererAsync(){await this._ready;return this.Channel.RequestAsync('restart-renderer');}
     async CapturePngAsync(){await this._ready;return this.Channel.RequestAsync('snapshot-png');}
     async DisposeAsync(){if(this.IsDisposed)return;try{await this.Channel?.RequestAsync('dispose');}finally{this.Dispose();}}
-    Dispose(){if(this.IsDisposed)return;super.Dispose();clearTimeout(this._initTimer);if(!this._initialized)this._readyReject(new Error('Application disposed during initialization.'));for(const f of this._listeners.splice(0))f();this._resize?.disconnect();for(const cancel of this._requests)cancel();this.FastPort?.close();for(const r of this._fastRequests.values()){clearTimeout(r.Timer);r.Reject(new Error('Application disposed.'));}this._fastRequests.clear();this.Channel?.Dispose();this.UiWorker?.terminate();this.RenderWorker?.terminate();for(const e of [this.Canvas,this.PlainInput,this.PasswordInput,this.Aria])e?.remove();for(const h of this.NativeHosts.values()){h.Disposed=true;h.Control?.Dispose?.();h.Wrapper.remove();}this.NativeHosts.clear();for(const child of this.Children){child.Dispose();if(child.Options.OwnsWindow)child.Window.close();}this.Children.clear();this._events=[];this.Nodes?.clear();this.Errors.Clear();}
+    Dispose(){if(this.IsDisposed)return;super.Dispose();if(!this._borrowsWasmSource)this._wasmSource?.Dispose();clearTimeout(this._initTimer);if(!this._initialized)this._readyReject(new Error('Application disposed during initialization.'));for(const f of this._listeners.splice(0))f();this._resize?.disconnect();for(const cancel of this._requests)cancel();this.FastPort?.close();for(const r of this._fastRequests.values()){clearTimeout(r.Timer);r.Reject(new Error('Application disposed.'));}this._fastRequests.clear();this.Channel?.Dispose();this.UiWorker?.terminate();this.RenderWorker?.terminate();for(const e of [this.Canvas,this.PlainInput,this.PasswordInput,this.Aria])e?.remove();for(const h of this.NativeHosts.values()){h.Disposed=true;h.Control?.Dispose?.();h.Wrapper.remove();}this.NativeHosts.clear();for(const child of this.Children){child.Dispose();if(child.Options.OwnsWindow)child.Window.close();}this.Children.clear();this._events=[];this.Nodes?.clear();this.Errors.Clear();}
 }
 export async function StartWorkerApplicationAsync(container,options){const host=new BrowserWorkerApplication(container,options);try{return await host.StartAsync();}catch(e){host.Dispose();throw e;}}

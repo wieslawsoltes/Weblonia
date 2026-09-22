@@ -1,7 +1,31 @@
 {
   "Repository": "wieslawsoltes/SkiaSharpWeb",
-  "PullRequest": 8,
-  "MergeCommit": "0a33427592e788d042ab69eedeb4bd7f29f35564",
-  "SourceBlob": "b883b4de1a15ca3c8df6a235c92a43905e5523de",
-  "NewNpmVersionPublished": false
+  "PullRequest": 9,
+  "Url": "https://github.com/wieslawsoltes/SkiaSharpWeb/pull/9",
+  "Merged": true,
+  "MergeCommit": "d5a9e8573c747804930eb76a81d05d2c5dde2d3a",
+  "PackageVersion": "0.5.1",
+  "HeadCommit": "6436b43150f0568d99c79699ed48f472a10e1da0",
+  "PackageReadinessRun": 35768154418,
+  "BlazorRun": 35768153200,
+  "AllValidatedJobsSucceeded": true,
+  "NativeWasmSha256": "698921da1c2d684dc52b9607cb2031aee9d9f4ddb06a6dca107265d684a73505",
+  "NativeWasmChanged": false,
+  "RuntimeFilesVerified": 111,
+  "LoaderTransformation": {
+    "name": "precompiled-module-v1",
+    "javaScriptOnly": true,
+    "nativeWasmSha256": "698921da1c2d684dc52b9607cb2031aee9d9f4ddb06a6dca107265d684a73505",
+    "originalArtifacts": {
+      "canvaskit.js": "ab5e415bb40d5a76ac20bf529dfe843d9eb0808bbb7aefa350f478330ee1df81",
+      "canvaskit.cjs": "ab5e415bb40d5a76ac20bf529dfe843d9eb0808bbb7aefa350f478330ee1df81"
+    },
+    "generatedArtifacts": {
+      "canvaskit.js": "6b290f30aacd7099b0adbb0e0742f60b9963aa958c8848d4772401969bbfcf3f",
+      "canvaskit.cjs": "6b290f30aacd7099b0adbb0e0742f60b9963aa958c8848d4772401969bbfcf3f"
+    },
+    "script": "scripts/packaging/prepare-wasm.mjs"
+  },
+  "NpmPublication": "Separate upstream release pipeline; source consumption is pinned to the reviewed merge.",
+  "PreviousTextRasterUpstreamEvidence": "docs/SKIASHARPWEB-UPSTREAM.json"
 }

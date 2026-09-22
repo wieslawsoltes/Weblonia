@@ -69,11 +69,12 @@ try:
                      ('render-worker', '?threading=render-worker&backend=canvas', 'render-worker'),
                      ('full-isolation', '?threading=full-isolation&backend=canvas', 'full-isolation')]
             for name, query, mode in cases:
-                errors, missing = [], []
+                errors, missing, requests = [], [], []
                 result = {'Name': name, 'ExpectedMode': mode, 'Passed': False}
                 started = time.monotonic()
                 context = browser.new_context(viewport={'width': 1200, 'height': 900},
                                               device_scale_factor=1.25)
+                context.on('request', lambda r: requests.append(r.url))
                 page = context.new_page()
                 page.on('pageerror', lambda e: errors.append(str(e)))
                 context.on('response', lambda r: missing.append(r.url)
@@ -84,12 +85,26 @@ try:
                     page.wait_for_function('globalThis.catalogReady || globalThis.catalogError', timeout=90000)
                     state = page.evaluate('({Ready:!!globalThis.catalogReady, Error:globalThis.catalogError??null})')
                     assert state['Ready'] and not state['Error'], str(state)
+                    result['ReadyMilliseconds'] = round((time.monotonic() - started) * 1000, 2)
+                    result['InitialRequests'] = len(requests)
+                    result['WasmRequests'] = sum(urlsplit(u).path.endswith('/canvaskit.wasm') for u in requests)
+                    # A single compiled module must feed independent UI/render instances.
+                    assert result['WasmRequests'] == 1, 'Duplicate native engine downloads: ' + str(result['WasmRequests'])
                     expected_workers = {'single': 0, 'render-worker': 1, 'full-isolation': 2}[mode]
                     assert len(page.workers) == expected_workers, 'Incorrect dedicated-worker count'
                     for worker in page.workers:
                         assert worker.url.startswith(origin + prefix), 'Noncanonical worker URL: ' + worker.url
                     if mode == 'full-isolation':
                         diagnostics = page.evaluate('async()=>await catalogHost.GetDiagnosticsAsync()')
+                        prepared = diagnostics['Host']['NativePreparation']
+                        assert prepared['Deliveries'] == 2 and prepared['CloneFallbacks'] == 0, str(prepared)
+                        assert prepared['PendingDeliveries'] == 0, str(prepared)
+                        result['NativePreparation'] = prepared
+                        main_modules = page.evaluate("performance.getEntriesByType('resource').map(e=>e.name)")
+                        assert not any('/packages/controls/' in u or '/vendor/skiasharpweb/dist/lib/index.js' in u for u in main_modules), 'Heavy application graph leaked into the DOM host'
+                        initial_builders = [u for u in requests if '/compiled/' in u and u.endswith('.g.js')]
+                        assert initial_builders and all(u.endswith('/MainView.g.js') for u in initial_builders), str(initial_builders)
+                        result['InitialBuilders'] = initial_builders
                         assert diagnostics['UI']['HasDocument'] is False
                         assert diagnostics['Renderer']['Worker']['HasDocument'] is False
                         page.evaluate("async()=>await catalogHost.InvokeAsync('Navigate','TableView')")
@@ -103,6 +118,11 @@ try:
                         let s='';for(let i=0;i<bytes.length;i+=16384)s+=String.fromCharCode(...bytes.subarray(i,i+16384));
                         return btoa(s);
                     }''', mode == 'full-isolation')
+                    if name == 'full-isolation':
+                        page.evaluate('async()=>await catalogHost.RestartRendererAsync()')
+                        page.evaluate("async()=>await catalogHost.InvokeAsync('Navigate','Buttons')")
+                        assert sum(urlsplit(u).path.endswith('/canvaskit.wasm') for u in requests) == 1, 'Restart redownloaded native code'
+                        result['RestartReusedNativeModule'] = True
                     image = Image.open(io.BytesIO(base64.b64decode(png))).convert('RGBA')
                     assert any(lo != hi for lo, hi in image.getextrema()[:3]), 'Blank native frame'
                     assert not errors and not missing, str({'Errors': errors, 'Missing': missing})

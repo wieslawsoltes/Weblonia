@@ -1,0 +1,16 @@
+{
+  "Repository": "wieslawsoltes/SkiaSharpWeb",
+  "PullRequest": 9,
+  "MergedCommit": "d5a9e8573c747804930eb76a81d05d2c5dde2d3a",
+  "Package": "@wieslawsoltes/skiasharpweb",
+  "Version": "0.5.1",
+  "ReleaseTag": "v0.5.1",
+  "ReleaseId": 394026434,
+  "ReleaseAssetId": 582022446,
+  "TarballSha256": "73d96fc4743146c596030e935aac8f499e511258bacf24cbb7118d44fd7a335d",
+  "PackageReadinessRun": 35769480279,
+  "NpmPublicationAndVerificationJob": 106887919262,
+  "VerifiedJobConclusion": "success",
+  "VerifiedSteps": ["Publish release tarball with provenance", "Download and verify the public npm artifact and consumers"],
+  "Scope": "Upstream GitHub Actions execution verified after merge. Weblonia itself continues to consume the exact pinned and hash-verified vendored runtime, not an anonymous public-registry installation."
+}
