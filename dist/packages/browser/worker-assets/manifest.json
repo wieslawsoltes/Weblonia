@@ -1,6 +1,6 @@
 {
   "Schema": 1,
-  "SourceFingerprint": "a56250f1f780aba043aeb137c4a74ed8bfcf1a848328f716623b14d4979bdd95",
+  "SourceFingerprint": "7cc69442a6c3b962007a83f72ffb91f07e5c891b442a66d23f392017ba1581ff",
   "SourceLoaderSha256": "6b290f30aacd7099b0adbb0e0742f60b9963aa958c8848d4772401969bbfcf3f",
   "LoaderTransformation": "Append export default CanvasKitInit;",
   "NativeWasm": "external; supplied via AssetBaseUrl",

@@ -1,10 +1,10 @@
 {
   "Version": "0.6.2-alpha.1",
-  "SourceFingerprint": "a56250f1f780aba043aeb137c4a74ed8bfcf1a848328f716623b14d4979bdd95",
+  "SourceFingerprint": "7cc69442a6c3b962007a83f72ffb91f07e5c891b442a66d23f392017ba1581ff",
   "XamlModules": 75,
   "BuildMode": "AOT direct construction modules",
   "NoEval": true,
-  "GeneratedAt": "2026-09-22T19:14:27.131Z",
+  "GeneratedAt": "2026-09-22T19:31:42.282Z",
   "RuntimeAssets": "local native SkiaSharpWeb + ReactiveWeb/RxJS",
   "FontFiles": 0
 }
