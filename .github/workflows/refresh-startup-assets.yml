@@ -80,7 +80,9 @@ jobs:
           npm run verify:vendor
           npm run build
           npm run verify:workers
-          npm run test:record
+          mkdir -p artifacts/startup
+          if ! npm run test:record > artifacts/startup/node-console.log 2>&1; then tail -100 artifacts/startup/node-console.log; exit 1; fi
+          tail -12 artifacts/startup/node-console.log
           npm run pack:all
           npm run test:packages
       - run: python -m pip install -r tests/requirements.txt
@@ -103,6 +105,19 @@ jobs:
             git commit -m 'perf: materialize verified startup sources and regenerate worker/package assets'
             git push origin HEAD:maintenance/startup-initialization
           fi
+      - name: Retain exact working source for review and failure diagnosis
+        if: always()
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile, ZIP_DEFLATED
+          out=Path('artifacts/startup');out.mkdir(parents=True,exist_ok=True)
+          with ZipFile(out/'review-source.zip','w',ZIP_DEFLATED) as archive:
+              for p in sorted(Path('.').rglob('*')):
+                  if p.is_symlink() or not p.is_file() or any(x in {'.git','artifacts','node_modules','__pycache__'} for x in p.parts):continue
+                  if p.suffix.lower() in {'.ttf','.otf','.woff','.woff2','.ttc','.otc','.eot','.pfa','.pfb'}:continue
+                  archive.write(p,p.as_posix())
+          PY
       - uses: actions/upload-artifact@v7
         if: always()
         with:
