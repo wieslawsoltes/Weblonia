@@ -21,7 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
-          ref: ${{ github.ref }}
+          ref: ${{ github.sha }}
           path: application
       - uses: actions/checkout@v7
         with:
@@ -87,6 +87,8 @@ jobs:
           npm run test:packages
       - run: python -m pip install -r tests/requirements.txt
       - run: python -m playwright install --with-deps chromium
+      - name: Diagnose system-browser tall-ink precision
+        run: python tests/text-ink-diagnostic.py > artifacts/startup/text-ink-diagnostic.log
       - name: Qualify canonical HTTP workers and renderer restart
         run: python tests/pages-smoke.py
       - name: Cold-browser comparison against the published baseline
@@ -99,10 +101,11 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -A packages samples scripts tests vendor docs dist artifacts SOURCE-MANIFEST.json .maintenance
+          git add -u
+          git add -A packages samples scripts tests vendor docs dist artifacts SOURCE-MANIFEST.json
           git add -f artifacts/npm artifacts/validation-optimized/node-final.log
           if ! git diff --cached --quiet; then
-            git commit -m 'perf: materialize verified startup sources and regenerate worker/package assets'
+            git commit -m 'perf: regenerate verified startup worker/package assets and evidence'
             git push origin HEAD:maintenance/startup-initialization
           fi
       - name: Retain exact working source for review and failure diagnosis
