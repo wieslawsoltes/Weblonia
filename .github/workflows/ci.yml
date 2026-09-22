@@ -45,7 +45,7 @@ jobs:
       - run: python tests/pages-smoke.py
       - run: python tests/startup-http.py
       - run: python tests/threading-browser.py
-      - run: python tests/threading-integration.py
+      - run: python tests/threading-integration.py --http
       - run: python tests/threading-quality.py
       - run: python tests/threading-catalog.py
       - run: python tests/threading-performance.py
