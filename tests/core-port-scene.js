@@ -19,7 +19,7 @@ export async function CreateCorePortScene(A, root) {
         </Canvas>`).Build();
     root.Content=view;
     const image=view.FindControl('drawing'),source=image.Source,group=source.Drawing,drawing=group.Children.Get(0),brush=drawing.Brush,geometry=drawing.Geometry;
-    const compositor=root.Compositor,values=compositor.CreatePropertySet(),visual=compositor.CreateSolidColorVisual();
+    const compositor=A.ElementComposition.GetElementVisual(view).Compositor,values=compositor.CreatePropertySet(),visual=compositor.CreateSolidColorVisual();
     visual.Size=new A.Vector(64,64);visual.Offset={X:0,Y:16,Z:0};visual.Color=A.Color.Parse('#0000ff');
     values.InsertBoolean('Enabled',true);values.InsertVector4('Components',{X:0,Y:0,Z:0,W:.5});values.InsertMatrix3x2('Placement',A.Matrix.CreateTranslation(120,0));
     const opacity=compositor.CreateExpressionAnimation('config.Enabled ? config.Components.W : 0.25'),offset=compositor.CreateExpressionAnimation('config.Placement.M31');

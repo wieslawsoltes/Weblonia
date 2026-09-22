@@ -300,7 +300,9 @@ export class XamlRuntimeContext {
             if (Object.hasOwn(t, `${member}Event`))
                 return t[`${member}Event`];
         const value = object[member];
-        return value?.Add && !(value instanceof Base.AvaloniaList) && (value instanceof Base.Event || !('Count' in value)) ? value : null;
+        // An arithmetic Point.Add (or a collection Add) is not an event.
+        // Custom event adapters must provide the full subscription/raise contract.
+        return value instanceof Base.Event || value && typeof value.Add === 'function' && typeof value.Remove === 'function' && typeof value.Raise === 'function' ? value : null;
     }
     Value(value, target, namespaces = metadata.get(target)?.Namespaces ?? {}, property = null) {
         if (!value || typeof value !== 'object' || value.Kind !== 'MarkupExtension') return value;

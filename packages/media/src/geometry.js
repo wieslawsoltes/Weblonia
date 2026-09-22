@@ -136,7 +136,7 @@ export class RectangleGeometry extends Geometry {
         return this.Transform ? this.Rect.TransformToAABB(this.Transform.Value ?? this.Transform) : this.Rect;
     }
 }
-DefineProperties(RectangleGeometry, { Rect: [Rect.Empty], RadiusX: [0], RadiusY: [0] });
+DefineProperties(RectangleGeometry, { Rect: [Rect.Empty, { Convert: v => v instanceof Rect ? v : Rect.Parse(v) }], RadiusX: [0, { Convert: Number }], RadiusY: [0, { Convert: Number }] });
 export class EllipseGeometry extends Geometry {
     constructor(rect = Rect.Empty) {
         super();
@@ -150,7 +150,7 @@ export class EllipseGeometry extends Geometry {
         return this.Rect;
     }
 }
-DefineProperties(EllipseGeometry, { Rect: [Rect.Empty] });
+DefineProperties(EllipseGeometry, { Rect: [Rect.Empty, { Convert: v => v instanceof Rect ? v : Rect.Parse(v) }] });
 export class LineGeometry extends Geometry {
     constructor(start = new Point(), end = new Point()) {
         super();
@@ -165,7 +165,7 @@ export class LineGeometry extends Geometry {
         return new Rect(Math.min(a.X, b.X), Math.min(a.Y, b.Y), Math.abs(b.X - a.X), Math.abs(b.Y - a.Y));
     }
 }
-DefineProperties(LineGeometry, { StartPoint: [new Point()], EndPoint: [new Point()] });
+DefineProperties(LineGeometry, { StartPoint: [new Point(), { Convert: v => v instanceof Point ? v : Point.Parse(v) }], EndPoint: [new Point(), { Convert: v => v instanceof Point ? v : Point.Parse(v) }] });
 export class GeometryGroup extends Geometry {
     constructor(children = []) {
         super();
