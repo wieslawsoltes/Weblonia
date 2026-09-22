@@ -1,4 +1,4 @@
-import { AvaloniaObject, DefineProperties, AvaloniaList, Point, Size, Rect, Matrix, Disposable } from '@wieslawsoltes/avalonia-base';
+import { AvaloniaObject, AvaloniaProperty, DefineProperties, AvaloniaList, Point, Size, Rect, Matrix, Disposable } from '@wieslawsoltes/avalonia-base';
 let backend = null;
 export function RegisterGeometryBackend(value) {
     backend = value;
@@ -44,9 +44,12 @@ export class StreamGeometry extends Geometry {
     get Data() {
         return this._data;
     }
-    set Data(v) {
-        this._data = String(v);
-        this._revision = (this._revision ?? 0) + 1;
+    set Data(v) { this._SetData(v); }
+    _SetData(v, bounds = null) {
+        this._verifyAlive(); const value = String(v);
+        if (value === this._data) { if (bounds) this._bounds = bounds; return; }
+        this._revision = (this._revision ?? 0) + 1; this._bounds = bounds;
+        this.SetAndRaise(StreamGeometry.DataProperty, '_data', value);
     }
     static Parse(value) {
         if (value instanceof StreamGeometry)
@@ -63,6 +66,7 @@ export class StreamGeometry extends Geometry {
         return new StreamGeometryContext(this);
     }
 }
+StreamGeometry.DataProperty = AvaloniaProperty.RegisterDirect(StreamGeometry, 'Data', o => o.Data, (o,v) => { o.Data = v; });
 export class StreamGeometryContext extends Disposable {
     constructor(geometry) {
         super();
@@ -70,9 +74,12 @@ export class StreamGeometryContext extends Disposable {
         this._commands = [];
         this._points = [];
     }
+    _VerifyOpen() { if (this.IsDisposed) throw new Error('StreamGeometryContext is disposed.'); }
     _point(p) {
-        this._points.push(p);
-        return `${p.X} ${p.Y}`;
+        this._VerifyOpen();
+        const point = new Point(p.X, p.Y);
+        this._points.push(point);
+        return `${point.X} ${point.Y}`;
     }
     BeginFigure(startPoint, _isFilled = true) {
         this._commands.push(`M${this._point(startPoint)}`);
@@ -90,21 +97,28 @@ export class StreamGeometryContext extends Disposable {
         this._commands.push(`A${size.Width} ${size.Height} ${rotationAngle} ${isLargeArc ? 1 : 0} ${sweepDirection === 'Clockwise' ? 1 : 0} ${this._point(point)}`);
     }
     EndFigure(isClosed = false) {
+        this._VerifyOpen();
         if (isClosed)
             this._commands.push('Z');
     }
     SetFillRule(rule) {
+        this._VerifyOpen();
         this._geometry.FillRule = rule;
     }
     Dispose() {
         if (this.IsDisposed)
             return;
-        this._geometry.Data = this._commands.join(' ');
+        const geometry = this._geometry, data = this._commands.join(' ');
+        let bounds = Rect.Empty;
         if (this._points.length) {
-            const xs = this._points.map(p => p.X), ys = this._points.map(p => p.Y), x = Math.min(...xs), y = Math.min(...ys);
-            this._geometry._bounds = new Rect(x, y, Math.max(...xs) - x, Math.max(...ys) - y);
+            let left=Infinity, top=Infinity, right=-Infinity, bottom=-Infinity;
+            for (const point of this._points) { left=Math.min(left,point.X); top=Math.min(top,point.Y); right=Math.max(right,point.X); bottom=Math.max(bottom,point.Y); }
+            bounds = new Rect(left, top, right-left, bottom-top);
         }
-        super.Dispose();
+        this._geometry=null; this._commands.length=this._points.length=0; super.Dispose();
+        // Publish fallback bounds before synchronous observers run. Curve bounds
+        // still come from native Skia when a geometry backend is registered.
+        geometry._SetData(data, bounds);
     }
 }
 export class RectangleGeometry extends Geometry {
@@ -114,7 +128,9 @@ export class RectangleGeometry extends Geometry {
     }
     get Data() {
         const r = this.Rect;
-        return `M${r.X} ${r.Y}H${r.Right}V${r.Bottom}H${r.X}Z`;
+        const rx = Math.min(Math.abs(this.RadiusX), Math.max(0, r.Width / 2)), ry = Math.min(Math.abs(this.RadiusY), Math.max(0, r.Height / 2));
+        if (!rx || !ry) return `M${r.X} ${r.Y}H${r.Right}V${r.Bottom}H${r.X}Z`;
+        return `M${r.X+rx} ${r.Y}H${r.Right-rx}A${rx} ${ry} 0 0 1 ${r.Right} ${r.Y+ry}V${r.Bottom-ry}A${rx} ${ry} 0 0 1 ${r.Right-rx} ${r.Bottom}H${r.X+rx}A${rx} ${ry} 0 0 1 ${r.X} ${r.Bottom-ry}V${r.Y+ry}A${rx} ${ry} 0 0 1 ${r.X+rx} ${r.Y}Z`;
     }
     get Bounds() {
         return this.Transform ? this.Rect.TransformToAABB(this.Transform.Value ?? this.Transform) : this.Rect;
