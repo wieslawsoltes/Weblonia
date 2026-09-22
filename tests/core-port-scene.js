@@ -34,7 +34,7 @@ export async function CreateCorePortScene(A, root) {
     return {
         State:()=>({Frames:frames,Services:captures,Dispatcher:{Value:value,Status:task.Status,Aborted:inactive.Status,Jobs:jobs},
             GroupCount:group.Children.Count,HasDocument:typeof document!=='undefined',RenderError:root.LastRenderError?.message??null}),
-        Change:async()=>{const before=frames;await A.Dispatcher.UIThread.InvokeAsync(()=>{brush.Color=A.Color.Parse('#00ff00');values.InsertBoolean('Enabled',false);},A.DispatcherPriority.Render);return{FramesBefore:before};},
+        Change:()=>A.Dispatcher.UIThread.InvokeAsync(()=>{const before=frames;brush.Color=A.Color.Parse('#00ff00');values.InsertBoolean('Enabled',false);return{FramesBefore:before};},A.DispatcherPriority.Render),
         Dispose:()=>{subscription.Dispose();A.ElementComposition.SetElementChildVisual(view,null);root.Content=previous;view.Dispose();source.Dispose();group.Dispose();drawing.Dispose();geometry.Dispose();brush.Dispose();animations.Dispose();opacity.Dispose();offset.Dispose();visual.Dispose();values.Dispose();}
     };
 }

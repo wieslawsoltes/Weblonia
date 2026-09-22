@@ -7,7 +7,7 @@ from pathlib import Path
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from threading import Thread
 from urllib.parse import urlsplit,parse_qs
-import base64,io,json,time
+import io,json,time
 from PIL import Image
 from playwright.sync_api import sync_playwright
 from verification_support import source_fingerprint
@@ -15,7 +15,7 @@ from threading_support import browser_executable
 ROOT=Path(__file__).resolve().parent.parent
 OUT=ROOT/'artifacts/core-port';OUT.mkdir(parents=True,exist_ok=True)
 report={'Version':json.loads((ROOT/'package.json').read_text())['version'],'SourceFingerprint':source_fingerprint(ROOT),'Completed':False,'Tests':[],'Errors':[],'MissingAssets':[],
-        'Interception':False,'WorkerBootstrapOverrides':False,'PhysicalGpuQualified':False,'PixelChannelTolerance':2}
+        'Interception':False,'WorkerBootstrapOverrides':False,'SnapshotForcesRender':False,'PhysicalGpuQualified':False,'PixelChannelTolerance':2}
 class Handler(SimpleHTTPRequestHandler):
     def __init__(self,*args,**kw):super().__init__(*args,directory=str(ROOT),**kw)
     def log_message(self,*args):pass
@@ -29,8 +29,10 @@ class Handler(SimpleHTTPRequestHandler):
         else:super().do_GET()
 server=ThreadingHTTPServer(('127.0.0.1',0),Handler);thread=Thread(target=server.serve_forever,daemon=True);thread.start()
 def pixels(page,mode):
-    data=page.evaluate('''async mode=>{const bytes=await(mode==='full-isolation'?catalogHost.CaptureRenderedFrameAsync():catalog.Root.Renderer.SnapshotPng());let s='';for(let i=0;i<bytes.length;i+=16384)s+=String.fromCharCode(...bytes.subarray(i,i+16384));return btoa(s)}''',mode)
-    return Image.open(io.BytesIO(base64.b64decode(data))).convert('RGBA')
+    # Capture only the browser-presented canvas. Native snapshot RPCs call render()
+    # and would accidentally repair a broken autonomous compositor invalidation.
+    return Image.open(io.BytesIO(page.locator('#app canvas').first.screenshot(timeout=10000))).convert('RGBA')
+
 try:
     with sync_playwright() as p:
         browser=p.chromium.launch(executable_path=browser_executable(),headless=True,args=['--no-sandbox','--disable-dev-shm-usage']);report['Browser']=browser.version
@@ -48,7 +50,15 @@ try:
                 before=pixels(page,mode)
                 change=page.evaluate("async mode=>mode==='full-isolation'?await catalogHost.InvokeAsync('ChangeCore'):await coreScene.Change()",mode)
                 page.wait_for_function("async ([mode,before])=>{const s=mode==='full-isolation'?await catalogHost.InvokeAsync('CoreState'):coreScene.State();return s.Frames>before;}",arg=[mode,change['FramesBefore']],timeout=10000)
-                after=pixels(page,mode);maximum=0
+                # A previously submitted frame may finish after mutation. Await the
+                # changed PRESENTED pixels, without injecting render/input calls.
+                deadline=time.monotonic()+10
+                while True:
+                    after=pixels(page,mode)
+                    if after.getpixel((32,32))[:3]==(0,255,0) and all(abs(a-b)<=2 for a,b in zip(after.getpixel((130,26)),(191,191,255,255))):break
+                    if time.monotonic()>=deadline:raise AssertionError('Autonomous presented pixels did not converge after the dispatcher mutation')
+                    page.wait_for_timeout(25)
+                maximum=0
                 for image,expectations in [(before,[((32,32),(255,0,0,255)),((130,26),(128,128,255,255)),((100,32),(255,255,255,255))]),(after,[((32,32),(0,255,0,255)),((130,26),(191,191,255,255)),((100,32),(255,255,255,255))])]:
                     for (x,y),expected in expectations:
                         actual=image.getpixel((x,y));error=max(abs(a-b) for a,b in zip(actual,expected));assert error<=2,{'Mode':mode,'Pixel':[x,y],'Actual':actual,'Expected':expected};maximum=max(maximum,error)
