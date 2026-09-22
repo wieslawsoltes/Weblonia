@@ -76,8 +76,8 @@
       "Name": "@wieslawsoltes/avalonia-browser",
       "Version": "0.6.2-alpha.1",
       "File": "wieslawsoltes-avalonia-browser-0.6.2-alpha.1.tgz",
-      "Bytes": 1412919,
-      "Sha256": "a6d3b287f030165669b6d1e92c2b5cf4defa1e775edbd4b6d99c8bdfb9cf19e2",
+      "Bytes": 1414956,
+      "Sha256": "9eccb48715a73e8da7f1d6e545ff3ad1196db4a55e4a79d5597d1393e5476d57",
       "Files": [
         "LICENSE",
         "NOTICE",
@@ -85,12 +85,14 @@
         "package.json",
         "src/automation-bridge.js",
         "src/automation-projection.js",
+        "src/browser-services.js",
         "src/index.js",
         "src/isolated-host.js",
         "src/native-host.js",
         "src/render-thread.js",
         "src/render-worker.js",
         "src/thread-channel.js",
+        "src/threading-options.js",
         "src/ui-worker.js",
         "src/worker-bootstrap.js",
         "src/worker-top-level.js",
@@ -106,12 +108,14 @@
         "worker-assets/packages/base/src/properties.js",
         "worker-assets/packages/browser/src/automation-bridge.js",
         "worker-assets/packages/browser/src/automation-projection.js",
+        "worker-assets/packages/browser/src/browser-services.js",
         "worker-assets/packages/browser/src/index.js",
         "worker-assets/packages/browser/src/isolated-host.js",
         "worker-assets/packages/browser/src/native-host.js",
         "worker-assets/packages/browser/src/render-thread.js",
         "worker-assets/packages/browser/src/render-worker.js",
         "worker-assets/packages/browser/src/thread-channel.js",
+        "worker-assets/packages/browser/src/threading-options.js",
         "worker-assets/packages/browser/src/ui-worker.js",
         "worker-assets/packages/browser/src/worker-bootstrap.js",
         "worker-assets/packages/browser/src/worker-top-level.js",
@@ -160,6 +164,7 @@
         "worker-assets/packages/skia/src/index.js",
         "worker-assets/packages/skia/src/text-raster.js",
         "worker-assets/packages/skia/src/text-service.js",
+        "worker-assets/packages/skia/src/wasm-module-source.js",
         "worker-assets/packages/skia/src/worker-runtime.js",
         "worker-assets/packages/styling/src/container-query.js",
         "worker-assets/packages/styling/src/index.js",
@@ -229,6 +234,7 @@
         "worker-assets/vendor/skiasharpweb/dist/lib/text-interop.js",
         "worker-assets/vendor/skiasharpweb/dist/lib/text-measure-completion.js",
         "worker-assets/vendor/skiasharpweb/dist/lib/text-path-completion.js",
+        "worker-assets/vendor/skiasharpweb/dist/lib/wasm.js",
         "worker-assets/vendor/skiasharpweb/dist/lib/web-component.js",
         "worker-assets/vendor/skiasharpweb/dist/lib/webgpu.js",
         "worker-assets/vendor/skiasharpweb/dist/licenses/font-engine-third-party/base64-js/package.json",
@@ -268,7 +274,6 @@
         "worker-assets/vendor/skiasharpweb/dist/vendor/native-build-manifest.json",
         "worker-assets/vendor/skiasharpweb/dist/vendor/pako-deflate.js",
         "worker-assets/vendor/skiasharpweb/dist/vendor/woff2.js",
-        "worker-assets/vendor/skiasharpweb/docs/BROWSER_TEXT.md",
         "worker-assets/vendor/skiasharpweb/package.json",
         "worker-assets/vendor/skiasharpweb/UPSTREAM.json"
       ],
@@ -279,7 +284,8 @@
         "@wieslawsoltes/avalonia-skia": "0.6.2-alpha.1",
         "@wieslawsoltes/avalonia-styling": "0.6.2-alpha.1",
         "@wieslawsoltes/avalonia-media": "0.6.2-alpha.1",
-        "@wieslawsoltes/avalonia-rendering": "0.6.2-alpha.1"
+        "@wieslawsoltes/avalonia-rendering": "0.6.2-alpha.1",
+        "@wieslawsoltes/skiasharpweb": "git+https://github.com/wieslawsoltes/SkiaSharpWeb.git#d5a9e8573c747804930eb76a81d05d2c5dde2d3a"
       }
     },
     {
@@ -514,8 +520,8 @@
       "Name": "@wieslawsoltes/avalonia-skia",
       "Version": "0.6.2-alpha.1",
       "File": "wieslawsoltes-avalonia-skia-0.6.2-alpha.1.tgz",
-      "Bytes": 19879,
-      "Sha256": "03d12467e64afbe76f313758c1de06f422e0289ac70fb33e8af33d8ac206e31e",
+      "Bytes": 21551,
+      "Sha256": "f2af6e021ec0c2c3d44324da7cafb4682dad3abc2af6d1dd940c21ef9cfeaf7d",
       "Files": [
         "LICENSE",
         "NOTICE",
@@ -524,13 +530,14 @@
         "src/index.js",
         "src/text-raster.js",
         "src/text-service.js",
+        "src/wasm-module-source.js",
         "src/worker-runtime.js"
       ],
       "Dependencies": {
         "@wieslawsoltes/avalonia-base": "0.6.2-alpha.1",
         "@wieslawsoltes/avalonia-controls": "0.6.2-alpha.1",
         "@wieslawsoltes/avalonia-media": "0.6.2-alpha.1",
-        "@wieslawsoltes/skiasharpweb": "git+https://github.com/wieslawsoltes/SkiaSharpWeb.git#0a33427592e788d042ab69eedeb4bd7f29f35564",
+        "@wieslawsoltes/skiasharpweb": "git+https://github.com/wieslawsoltes/SkiaSharpWeb.git#d5a9e8573c747804930eb76a81d05d2c5dde2d3a",
         "@wieslawsoltes/avalonia-rendering": "0.6.2-alpha.1"
       }
     },

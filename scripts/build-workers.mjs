@@ -15,6 +15,9 @@ async function Targets(assetRoot) {
     targets.set('@wieslawsoltes/reactiveweb', path.join(assetRoot, 'vendor/reactiveweb.browser.js'));
     targets.set('@wieslawsoltes/skiasharpweb/browser', path.join(assetRoot, 'vendor/skiasharpweb/dist/package/browser.js'));
     targets.set('@wieslawsoltes/skiasharpweb/browser-text', path.join(assetRoot, 'vendor/skiasharpweb/dist/lib/browser-text.js'));
+    targets.set('@wieslawsoltes/avalonia-browser/worker-host', path.join(assetRoot, 'packages/browser/src/isolated-host.js'));
+    targets.set('@wieslawsoltes/avalonia-skia/wasm', path.join(assetRoot, 'packages/skia/src/wasm-module-source.js'));
+    targets.set('@wieslawsoltes/skiasharpweb/wasm', path.join(assetRoot, 'vendor/skiasharpweb/dist/lib/wasm.js'));
     return targets;
 }
 function Rewrite(source, destination, targets) {

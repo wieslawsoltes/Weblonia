@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "name": "@wieslawsoltes/skiasharpweb",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "nativeRevision": "f446aec4ce9e0e95e0a504e875955de3eb521f75",
   "nativeArtifacts": {
-    "canvaskit.js": "ab5e415bb40d5a76ac20bf529dfe843d9eb0808bbb7aefa350f478330ee1df81",
-    "canvaskit.cjs": "ab5e415bb40d5a76ac20bf529dfe843d9eb0808bbb7aefa350f478330ee1df81",
+    "canvaskit.js": "6b290f30aacd7099b0adbb0e0742f60b9963aa958c8848d4772401969bbfcf3f",
+    "canvaskit.cjs": "6b290f30aacd7099b0adbb0e0742f60b9963aa958c8848d4772401969bbfcf3f",
     "canvaskit.wasm": "698921da1c2d684dc52b9607cb2031aee9d9f4ddb06a6dca107265d684a73505"
   },
   "fontsIncluded": false,
@@ -14,6 +14,20 @@
       "inputSha256": "0d5f0fa679f3c6f68eb2157e8041c543dd17c2c2f56be30169273944db6d331a",
       "outputSha256": "88aeabb7ea843da22e70e7c444977b4e73fb3cac2930621198532fde2b3a77e1",
       "kind": "WOFF2 static JavaScript invokers; embedded WASM unchanged"
+    },
+    {
+      "name": "precompiled-module-v1",
+      "javaScriptOnly": true,
+      "nativeWasmSha256": "698921da1c2d684dc52b9607cb2031aee9d9f4ddb06a6dca107265d684a73505",
+      "originalArtifacts": {
+        "canvaskit.js": "ab5e415bb40d5a76ac20bf529dfe843d9eb0808bbb7aefa350f478330ee1df81",
+        "canvaskit.cjs": "ab5e415bb40d5a76ac20bf529dfe843d9eb0808bbb7aefa350f478330ee1df81"
+      },
+      "generatedArtifacts": {
+        "canvaskit.js": "6b290f30aacd7099b0adbb0e0742f60b9963aa958c8848d4772401969bbfcf3f",
+        "canvaskit.cjs": "6b290f30aacd7099b0adbb0e0742f60b9963aa958c8848d4772401969bbfcf3f"
+      },
+      "script": "scripts/packaging/prepare-wasm.mjs"
     }
   ],
   "files": {
@@ -44,7 +58,7 @@
     "dist/lib/gpu-records.js": "cb7f222aee34c0fc16acbfb1a4d38661f7255765f3d98a7d2548413c912525ec",
     "dist/lib/gpu.js": "3de1606d47e14661a4cb1c6016e2870882c304423ec86016d0c299945e8f4200",
     "dist/lib/images.js": "f1a8a1b40cc82898c9420c318b4b8f3b7a3e81f3f2b759e3bd5712878f34b948",
-    "dist/lib/index.js": "b619a649c5701207e89dece4f4ea498df97cf844e3593fc8fd29b082b72d9f73",
+    "dist/lib/index.js": "348b31f0f6f7e600775655c2862a7c9b1ef37a1295895d274105332081c70546",
     "dist/lib/interop-values.js": "3a81b2f86f1f38dd879093d832a120f6ce264c2ce93242af6357113fc9422d4f",
     "dist/lib/layer-effects.js": "0d21039b9906e2827144970408d4633699b99b0d0025a702973ab2b122d2d752",
     "dist/lib/memory.js": "0ec8190220c593517467ddeb058c8cce21c88109514d2f9aaec47b0dd98e0a84",
@@ -66,6 +80,8 @@
     "dist/lib/text-interop.js": "195fc8975a692a0ce8dd32e0b046a3519468bf5175e82b64e96860f247beb751",
     "dist/lib/text-measure-completion.js": "a66ac6f219f00131f798135cebb37c7336cc2a07d04e48216546218c2206a179",
     "dist/lib/text-path-completion.js": "c6cc6c402004a1ff81eba6c7b3d0a0f902751a86d5cb202418b10a1bebe90dd5",
+    "dist/lib/wasm.d.ts": "da4b29bacad5f35ddcd8eafb721c12dc01de436fa85d6a5748f46f065c48dd95",
+    "dist/lib/wasm.js": "313d2a6675a086a39bebc87b4c7cc3f3b907e6b61b155243f0364b07192b1db5",
     "dist/lib/web-component.js": "a6210aa9f6a978c36c2a38b67e156c096688bb2416de4be178e597c1c5a35d9c",
     "dist/lib/webgpu.js": "953e6f29a63fb805fc500458a0e61685c13c92802a3083a2a3cbb2e5b0008565",
     "dist/licenses/FONTKIT-THIRD-PARTY.md": "2c2dbe91cdf29250e91cfe293e963f0686cba83afb193e2e5cbee15da48b08a5",
@@ -107,20 +123,20 @@
     "dist/package/browser.js": "dd74023090c6815e254eb6622b8d010f380287fd950602c170ea5952db956171",
     "dist/package/copy-assets.mjs": "5f2b30d01c787e5c18f606f134a753b7c591fa84beadcff5277554d7d01ff03f",
     "dist/package/core.d.ts": "8f4b0fca8c64ca9fc71eed934ec4e9df86cafba0090793a6fe9d556b676fc9be",
-    "dist/package/index.d.ts": "eb33e0489aa6cf0fe79f18e214278eb4b55d6a4008056e2690329a3f7135bc66",
+    "dist/package/index.d.ts": "d6998227f1b99408f3c0b3a75754841d135c98c46dc955dffea46543e7c5625d",
     "dist/package/node.cjs": "25aa7f595c9c4132a36a615dcd66c88c5c6cec5787c3131060e4957427120384",
     "dist/package/node.d.cts": "3461892ea65bce75d4daa703a2c4b4a9107314d730c22ea292aefd672b3e34a3",
     "dist/package/node.js": "73047a71c2b760b8093c8a1846fbe805f79c324bd4a9b2348c4eb1a89c5114ec",
     "dist/package/runtime.d.ts": "478619d5bf496e0fdd0734018f862d13e92eb97683aceb8016b15abcb5532d28",
-    "dist/package/sbom.cdx.json": "19351ba9c85a28dc36c84160174748e3a3b7c9a9d1089e437258621d09fa4e6b",
-    "dist/package/version.js": "29100224633662ae8d24a883da4ac07e1a49c39b015db2dcb7b73754d75b4f81",
+    "dist/package/sbom.cdx.json": "a90a304d560b5e0e8fafeb2da471ffd7f91e9d16b7dc2cf89bd05a69b1b2351e",
+    "dist/package/version.js": "50a69123e58b9fb57f118f8b4281ba0292b76ea08b6b3d2b5a00c8e2c883fb63",
     "dist/vendor/LICENSE-canvaskit": "d27678cba0d529e77201e2d2a053628143e986aad8f1e77f7039ad4366c8f978",
-    "dist/vendor/canvaskit.cjs": "ab5e415bb40d5a76ac20bf529dfe843d9eb0808bbb7aefa350f478330ee1df81",
-    "dist/vendor/canvaskit.js": "ab5e415bb40d5a76ac20bf529dfe843d9eb0808bbb7aefa350f478330ee1df81",
+    "dist/vendor/canvaskit.cjs": "6b290f30aacd7099b0adbb0e0742f60b9963aa958c8848d4772401969bbfcf3f",
+    "dist/vendor/canvaskit.js": "6b290f30aacd7099b0adbb0e0742f60b9963aa958c8848d4772401969bbfcf3f",
     "dist/vendor/canvaskit.wasm": "698921da1c2d684dc52b9607cb2031aee9d9f4ddb06a6dca107265d684a73505",
     "dist/vendor/font-instance.js": "71c17ec2d062c784ec912d30945f24c2855107b36a3fd30ef74de8aab9d6c737",
     "dist/vendor/fontkit.js": "180077d8e3f77fad31d0f640112264e02a3f8a1e04e3c72023ccd4f3fe78978a",
-    "dist/vendor/native-build-manifest.json": "302bb69a09b3776008bf7863a1453b19fc7cb6897347ecf3fe4ecd154b0ef8fb",
+    "dist/vendor/native-build-manifest.json": "3a40c7bb020045888303d314d80ad6c75bdec28dceb1e65404f40589fbcd72b0",
     "dist/vendor/pako-deflate.js": "81f789aed667e7954779ace6f1a8efe98b327f6989c91261014ee884608ce136",
     "dist/vendor/woff2.js": "88aeabb7ea843da22e70e7c444977b4e73fb3cac2930621198532fde2b3a77e1"
   }

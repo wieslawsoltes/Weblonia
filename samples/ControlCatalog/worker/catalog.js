@@ -4,7 +4,7 @@ import { Subject, debounceTime, distinctUntilChanged } from "../../../packages/b
 import { GetRuntimeDiagnostics, GetVisualTree } from "../../../packages/browser/worker-assets/packages/diagnostics/src/index.js";
 import { Catalog } from './manifest.js';
 import { ConfigureExtendedPage } from './extensions.js';
-import { Builders, Sources } from './compiled/index.js';
+import { Builders, Sources, LoadBuilder } from './compiled/lazy.js';
 const $ = (type, properties = {}, children = []) => {
     const c = new type();
     Object.assign(c, properties);
@@ -65,7 +65,8 @@ class DrawingDemo extends A.Control {
     }
 }
 export class CatalogController {
-    constructor() {
+    constructor({ LoadBuilder: loadBuilder = LoadBuilder } = {}) {
+        this._loadBuilder = loadBuilder;
         this.Model = new ReactiveObject({ Query: '', CurrentTitle: 'Build for the browser.', Breadcrumb: 'AVALONIA WEB  /  CONTROL CATALOG', Description: 'The familiar retained UI model, reimplemented in JavaScript and rendered by native Skia.', Status: 'Ready · JavaScript runtime · XamlX compiler integration', RendererStatus: 'Native Skia · loading' });
         this._query = new Subject();
         this._query.pipe(debounceTime(100), distinctUntilChanged()).subscribe(() => this.BuildNavigation());
@@ -136,6 +137,7 @@ export class CatalogController {
         this.Page = page;
     }
     async Home() {
+        ++this._generation;
         this.CurrentId = null;
         this.Model.CurrentTitle = 'Build for the browser.';
         this.Model.Breadcrumb = 'AVALONIA WEB  /  OVERVIEW';
@@ -191,8 +193,10 @@ export class CatalogController {
         this.Model.Description = entry.Description;
         this.Find('SourceEditor').Text = Sources[id];
         try {
+            const build = await this._loadBuilder(id);
+            if (generation !== this._generation) return;
             const vm = this.CreateModel();
-            const page = Builders[id](new A.AvaloniaXamlServices({ DataContext: vm, CodeBehind: this }));
+            const page = build(new A.AvaloniaXamlServices({ DataContext: vm, CodeBehind: this }));
             this._ReplacePage(page);
             this.PageModel = vm;
             this._pageLifetime.Add(vm);
@@ -208,6 +212,7 @@ export class CatalogController {
             return page;
         }
         catch (error) {
+            if (generation !== this._generation) return;
             this.Errors.push(`${id}: ${error.message}`);
             this.Model.Status = `${id}: ${error.message}`;
             this._ReplacePage(card('Page failed', text(error.stack, 13)));
@@ -411,6 +416,7 @@ export class CatalogController {
             this.Find('SourceEditor').Text = Sources.Buttons;
     }
     async ApplyXaml() {
+        ++this._generation;
         try {
             const source = this.Find('SourceEditor').Text;
             const compiler = new A.AvaloniaXamlCompiler();

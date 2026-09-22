@@ -1,11 +1,10 @@
+import { SkiaWasmModuleSource } from '@wieslawsoltes/avalonia-skia/wasm';
+import { BrowserThreadingMode, GetBrowserWorkerUrls } from './threading-options.js';
+export { BrowserThreadingMode, GetBrowserWorkerUrls } from './threading-options.js';
 import { Event, Disposable, Matrix } from '@wieslawsoltes/avalonia-base';
 import { Color } from '@wieslawsoltes/avalonia-media';
 import { CompositionBufferPool, EncodeCompositionBatch, CompositionChangeAccumulator, CompositionSceneRecorder } from '@wieslawsoltes/avalonia-rendering';
 
-export const BrowserThreadingMode = Object.freeze({ SingleThreaded: 'single', RenderWorker: 'render-worker', FullIsolation: 'full-isolation' });
-export function GetBrowserWorkerUrls(base = new URL('../worker-assets/', import.meta.url)) {
-    return { RenderWorkerUrl: new URL('render.js', base).href, UiWorkerUrl: new URL('ui.js', base).href, LoaderUrl: new URL('canvaskit-loader.mjs', base).href };
-}
 const asError = data => { const e = new Error(data?.Message ?? String(data)); e.name = data?.Name ?? 'WorkerError'; if (data?.Stack) e.stack = data.Stack; return e; };
 const deferred = () => { let Resolve, Reject; const PromiseValue = new Promise((r, j) => { Resolve = r; Reject = j; }); PromiseValue.catch(() => {}); return { Promise: PromiseValue, Resolve, Reject }; };
 
@@ -38,12 +37,21 @@ export class WorkerSkiaRenderer extends Disposable {
         worker.onerror = event => { this._Recover(new Error(`Render worker failed: ${event.message || 'could not load its entry script; check the worker URL, MIME type and CSP'}`)); };
         const channel = new MessageChannel(),input=new MessageChannel();this.FastInputPort=input.port1;this.FastInputPort.start();this.Connect(channel.port1);
         const canvas = this.Element.transferControlToOffscreen(); this._transferred = true;
-        worker.postMessage({ Type: 'initialize', Canvas: canvas, Port: channel.port2, InputPort:input.port2, Options: {
+        const runtime = {
             ...this.Options.WorkerOptions, Backend: this.Options.Backend ?? 'auto', AllowFallback: this.Options.AllowFallback,
             LoaderUrl: this.Options.LoaderUrl ?? urls.LoaderUrl,
             AssetBaseUrl: this.Options.AssetBaseUrl ?? new URL('../vendor/', import.meta.resolve('@wieslawsoltes/skiasharpweb/browser')).href,
             HandlerModules: this.Options.HandlerModules ?? [], PlatformOptions: this.Options.Skia ?? {},
-        } }, [canvas, channel.port2,input.port2]);
+        };
+        const transfer = [canvas, channel.port2, input.port2];
+        if (this.Options.ShareWasmModule !== false) {
+            this._wasmSource?.Dispose();
+            this._wasmSource = new SkiaWasmModuleSource({ ...runtime, WasmModule: this.Options.WasmModule ?? runtime.WasmModule, InitializationTimeout: this.Options.InitializationTimeout });
+            runtime.WasmModulePort = this._wasmSource.CreatePort();
+            runtime.InitializationTimeout = this.Options.InitializationTimeout ?? 45000;
+            transfer.push(runtime.WasmModulePort);
+        }
+        worker.postMessage({ Type: 'initialize', Canvas: canvas, Port: channel.port2, InputPort:input.port2, Options: runtime }, transfer);
         return this._ready.Promise;
     }
     Connect(port) {
@@ -111,7 +119,7 @@ export class WorkerSkiaRenderer extends Disposable {
         this.LastError = error;clearTimeout(this._batchTimer);clearTimeout(this._initializationTimer); this._ready.Reject(error);
         // A failed bootstrap owns transferred ports/canvas: stop it immediately,
         // not after the unrelated request timeout or an automatic startup retry.
-        if (!this.Backend) { this.Worker?.terminate(); this.FastInputPort?.close?.(); this.Port?.close?.(); }
+        if (!this.Backend) { this._wasmSource?.Dispose(); this.Worker?.terminate(); this.FastInputPort?.close?.(); this.Port?.close?.(); }
         for (const waiter of this._waiters.splice(0)) waiter.Reject(error);
         for (const waiter of [...this._processedWaiters.splice(0),...this._capturedProcessedWaiters.splice(0)]) waiter.Reject(error);
         for (const waiter of this.Accumulator.InFlight?.ProcessedWaiters ?? []) waiter.Reject(error);
@@ -215,7 +223,7 @@ export class WorkerSkiaRenderer extends Disposable {
         if (pendingInitialization) this._ready.Reject(new Error('Renderer disposed during initialization.'));
         const done = this.LastError || pendingInitialization ? Promise.resolve() : this.RequestAsync('dispose');
         for (const w of [...this._waiters.splice(0),...this._processedWaiters.splice(0),...this._capturedProcessedWaiters.splice(0),...(this.Accumulator.InFlight?.ProcessedWaiters??[])]) w.Reject(new Error('Renderer disposed.'));
-        this.Recorder.Dispose(); this.BufferPool.Clear(); super.Dispose();
+        this._wasmSource?.Dispose(); this.Recorder.Dispose(); this.BufferPool.Clear(); super.Dispose();
         const cleanup = () => { this.FastInputPort?.close();this.Port?.close(); this.Worker?.terminate(); this.Port = null; };
         done.catch(() => {}).finally(cleanup); this.FrameRendered.Clear(); this.Errors.Clear();
     }

@@ -1,3 +1,5 @@
+import { CompileWasmAsync, InstantiateWasmAsync } from "../../../vendor/skiasharpweb/dist/lib/wasm.js";
+import { ReceiveSkiaWasmModuleAsync } from './wasm-module-source.js';
 import { Initialize } from "../../../vendor/skiasharpweb/dist/package/browser.js";
 import { SkiaPlatform, SkiaDrawingContext } from './index.js';
 /** Explicit worker bootstrap for the pinned native engine. The generated ESM
@@ -7,10 +9,16 @@ export async function InitializeWorkerSkia(options = {}, startup = {}) {
     if (typeof WorkerGlobalScope === 'undefined' || !(globalThis instanceof WorkerGlobalScope)) throw new Error('InitializeWorkerSkia must run inside a dedicated worker.');
     if (!options.LoaderUrl || !options.AssetBaseUrl) throw new TypeError('Worker Skia requires explicit LoaderUrl and AssetBaseUrl.');
     startup.Progress?.('runtime-loader', options.LoaderUrl);
-    const factory = (await import(options.LoaderUrl)).default;
+    const wasmUrl = new URL('canvaskit.wasm', options.AssetBaseUrl);
+    const preparation = options.WasmModulePort
+        ? ReceiveSkiaWasmModuleAsync(options.WasmModulePort, options.InitializationTimeout ?? 45000)
+            .then(module => module ?? CompileWasmAsync(wasmUrl))
+        : options.WasmModule !== undefined ? Promise.resolve(options.WasmModule) : CompileWasmAsync(wasmUrl);
+    const [loader, module] = await Promise.all([import(options.LoaderUrl), preparation]);
+    const factory = loader.default;
     if (typeof factory !== 'function') throw new TypeError('The Skia worker loader must export a default initialization factory.');
-    startup.Progress?.('wasm-initialization', new URL('canvaskit.wasm', options.AssetBaseUrl));
-    const CanvasKit = await factory({ locateFile: name => new URL(name, options.AssetBaseUrl).href });
+    startup.Progress?.('wasm-initialization', wasmUrl);
+    const CanvasKit = await InstantiateWasmAsync(factory, module, { locateFile: name => new URL(name, options.AssetBaseUrl).href });
     startup.Progress?.('skia-platform');
     const api = await Initialize({ CanvasKit, fonts: false, assetBaseUrl: options.AssetBaseUrl });
     return SkiaPlatform.Instance = new SkiaPlatform(api, options.PlatformOptions ?? {});

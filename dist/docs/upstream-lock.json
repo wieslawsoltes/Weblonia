@@ -1,5 +1,5 @@
 {
-  "inspectedAt": "2026-09-21",
+  "inspectedAt": "2026-09-22",
   "Avalonia": {
     "repository": "AvaloniaUI/Avalonia",
     "commit": "334536066a6cf4df5dcfb1da22cb9ed80dd66e8e",
@@ -13,11 +13,11 @@
   },
   "SkiaSharpWeb": {
     "repository": "wieslawsoltes/SkiaSharpWeb",
-    "commit": "0a33427592e788d042ab69eedeb4bd7f29f35564",
-    "packageVersion": "0.5.0",
-    "browserTextExportPublishedToNpm": false,
-    "sourcePullRequest": 8,
-    "sourceDependency": "git+https://github.com/wieslawsoltes/SkiaSharpWeb.git#0a33427592e788d042ab69eedeb4bd7f29f35564"
+    "commit": "d5a9e8573c747804930eb76a81d05d2c5dde2d3a",
+    "packageVersion": "0.5.1",
+    "sourcePullRequest": 9,
+    "sourceDependency": "git+https://github.com/wieslawsoltes/SkiaSharpWeb.git#d5a9e8573c747804930eb76a81d05d2c5dde2d3a",
+    "publicationStatus": "See upstream 0.5.1 release; this checkout consumes exact reviewed source."
   },
   "ReactiveWeb": {
     "repository": "wieslawsoltes/ReactiveWeb",
