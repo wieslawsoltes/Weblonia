@@ -99,7 +99,7 @@
     {
       "Path": "artifacts/build-result.json",
       "Bytes": 342,
-      "Sha256": "e609b68873f58a1c33664da1ee59911ebcd19d2b77ac91c0b3851c624b3ae8bd"
+      "Sha256": "936c51b80c36e66da5f2935e1d73947d941467e0f08a02112f3577611c9666b1"
     },
     {
       "Path": "artifacts/build.log",
@@ -654,7 +654,7 @@
     {
       "Path": "artifacts/npm/manifest.json",
       "Bytes": 26008,
-      "Sha256": "b0512047abf91efca3af5537437b08a30f6a15d2829354c7425d5aa9dc5f6dfd"
+      "Sha256": "086072e44a6e5438d6e24cbda1b8c0ecdf8c9e5494d5edd186aa9968d380f030"
     },
     {
       "Path": "artifacts/npm/wieslawsoltes-avalonia-0.6.2-alpha.1.tgz",
@@ -674,7 +674,7 @@
     {
       "Path": "artifacts/npm/wieslawsoltes-avalonia-browser-0.6.2-alpha.1.tgz",
       "Bytes": 1414959,
-      "Sha256": "85e2bc1557daa7387408813edc15579e8cae1996ae5e1f39433c694d3bb08530"
+      "Sha256": "a4a8029c26dee3eb0fc9b05c69abf3bb7f8cfd7da74f33800a3acea14cd66931"
     },
     {
       "Path": "artifacts/npm/wieslawsoltes-avalonia-composition-0.6.2-alpha.1.tgz",
@@ -754,7 +754,7 @@
     {
       "Path": "artifacts/package-consumer-result.json",
       "Bytes": 343,
-      "Sha256": "e71df115889b5cab7d8e5f18aa5c9830f05f577303d7f6cfec78b85de69d7b52"
+      "Sha256": "8481dfe985fd72858d179c908916f10f07698f155c5bdbffedd321e87893ed0d"
     },
     {
       "Path": "artifacts/package-consumer.log",
@@ -778,8 +778,8 @@
     },
     {
       "Path": "artifacts/publication/pages-smoke.json",
-      "Bytes": 2362,
-      "Sha256": "5c176186b797cde422b47698c63c5fdd47a85289b5d99c66cc57fd79edaf6fcc"
+      "Bytes": 2365,
+      "Sha256": "edc5d7f3755c9168459d3db2846b84fa59c84688cdc583868410e4634b737178"
     },
     {
       "Path": "artifacts/publication/render-worker.png",
@@ -903,13 +903,13 @@
     },
     {
       "Path": "artifacts/startup/http-comparison.json",
-      "Bytes": 87400,
-      "Sha256": "a7b9bb10a6f7fa020d0601a489d666e28b5b231738ad071e3a04684da48bcba9"
+      "Bytes": 87534,
+      "Sha256": "e3b5f3449ce583991139db71df6836702f6f4f7720456b5b53607c64c684f028"
     },
     {
       "Path": "artifacts/startup/node-console.log",
-      "Bytes": 99888,
-      "Sha256": "8feeaa127ffd63a8bca323b5d8ed6b9795fb8f7c59d0eaa3a91790ef2c986bd1"
+      "Bytes": 99943,
+      "Sha256": "ba64c8bfb2099550663645f3d8d58fb65f30580317319255e2e5a6c2212ea6d7"
     },
     {
       "Path": "artifacts/startup/text-ink-diagnostic.json",
@@ -1759,12 +1759,12 @@
     {
       "Path": "artifacts/validation-optimized/node-final.json",
       "Bytes": 439,
-      "Sha256": "84b91cd47c4e8bb51ae3dc55a92e53c2cbac6c19d84a038a0c11ac61555ed9de"
+      "Sha256": "d30e2203d116b4dcc1b0933bf50b9e5a32158835bceac502340f5cbd43c63100"
     },
     {
       "Path": "artifacts/validation-optimized/node-final.log",
-      "Bytes": 99803,
-      "Sha256": "90ec8eec5b5755ac28505102eb83902467bbb5626ca8cb99bbeb7948a8ef924c"
+      "Bytes": 99858,
+      "Sha256": "1acad139382a15ffabd2c38878c3d8997c2950e35e70a8ad71a2d2a994106973"
     },
     {
       "Path": "artifacts/validation-optimized/node-record-final.log",
@@ -3299,7 +3299,7 @@
     {
       "Path": "dist/packages/browser/worker-assets/manifest.json",
       "Bytes": 30114,
-      "Sha256": "2eb746ffdcdd7ccacaf3ce0286717f0cd5eb00cadee3213ab15396a82f0ad78e"
+      "Sha256": "bce05b1e57db4506174eee02c0f59bcc8d6eb903dd5853192aaeb793d33e3b8c"
     },
     {
       "Path": "dist/packages/browser/worker-assets/packages/animation/src/index.js",
@@ -6269,7 +6269,7 @@
     {
       "Path": "packages/browser/worker-assets/manifest.json",
       "Bytes": 30108,
-      "Sha256": "12a8303878b0cc577640dd33145ebb7ea07931d5d534a1fb1a91b4f51663fec4"
+      "Sha256": "d63f51a224496dd254a5f39cb40eac07880f75501f956b89835318c421de09d4"
     },
     {
       "Path": "packages/browser/worker-assets/packages/animation/src/index.js",
@@ -9323,8 +9323,8 @@
     },
     {
       "Path": "tests/worker-startup.py",
-      "Bytes": 11879,
-      "Sha256": "37490d99f8164d4b26e5dd870b5149df1852fff4c621557ee66104d634d8533d"
+      "Bytes": 12264,
+      "Sha256": "69d97719b20d0b054b1eb81ac504e58cc97ccd75d5af26f45509ef2fc555c636"
     },
     {
       "Path": "tests/worker-startup.test.mjs",
