@@ -41,6 +41,12 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: '3.13'
+      - name: Assemble the pinned upstream package inventory
+        working-directory: upstream-skia
+        run: |
+          npm ci --ignore-scripts
+          npm run build
+          node --test tests/wasm-startup.test.mjs
       - name: Apply exact reviewed source edits once
         run: |
           python - <<'PY'
