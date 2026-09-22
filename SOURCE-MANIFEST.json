@@ -99,7 +99,7 @@
     {
       "Path": "artifacts/build-result.json",
       "Bytes": 342,
-      "Sha256": "270f49cad10f2bb1f89647cbed8c5a38f1d1ef7d98e503e782b0807f08bdcbf4"
+      "Sha256": "cf78ab5fc883b10ae11fc57f482f6d9aa529032070ed4d1ba4fcf2cf4671235b"
     },
     {
       "Path": "artifacts/build.log",
@@ -654,7 +654,7 @@
     {
       "Path": "artifacts/npm/manifest.json",
       "Bytes": 26008,
-      "Sha256": "e45b4d33a5eb8c76b6a545793909631ebec1a12040ff8bb8f65cc9b6a4473431"
+      "Sha256": "d90b97f4570d7ecdab454dfb2422c223cf743c76bfa965daa627a66e76829343"
     },
     {
       "Path": "artifacts/npm/wieslawsoltes-avalonia-0.6.2-alpha.1.tgz",
@@ -673,8 +673,8 @@
     },
     {
       "Path": "artifacts/npm/wieslawsoltes-avalonia-browser-0.6.2-alpha.1.tgz",
-      "Bytes": 1415343,
-      "Sha256": "87e9a6a8be5bb0c8816c18c66ae847e97e41ce7fbb3987d138f8c6db1bacb454"
+      "Bytes": 1415744,
+      "Sha256": "062d931b18973184c8882e05abbdf36f4cd1fb0795fddb1118526bcbad69c1b1"
     },
     {
       "Path": "artifacts/npm/wieslawsoltes-avalonia-composition-0.6.2-alpha.1.tgz",
@@ -713,8 +713,8 @@
     },
     {
       "Path": "artifacts/npm/wieslawsoltes-avalonia-opengl-0.6.2-alpha.1.tgz",
-      "Bytes": 5531,
-      "Sha256": "64b00d6aa43397bc7efe7c357afa24dc6d32c560517b7d9878f85c3a6250bffd"
+      "Bytes": 5943,
+      "Sha256": "cc19fbe91a88eac1c74a5de7ec855fb7cf25c758fa48f212131a70a5d8a9bd46"
     },
     {
       "Path": "artifacts/npm/wieslawsoltes-avalonia-reactiveui-0.6.2-alpha.1.tgz",
@@ -754,7 +754,7 @@
     {
       "Path": "artifacts/package-consumer-result.json",
       "Bytes": 343,
-      "Sha256": "97f77c6a954ae11ac46192110ad99523dd31b94fdcee150f897f8b621ca7568f"
+      "Sha256": "9700da6056dc68b286cbf3427188ab507c2c6cffba4c0e3156d6f034bf1aae38"
     },
     {
       "Path": "artifacts/package-consumer.log",
@@ -778,8 +778,8 @@
     },
     {
       "Path": "artifacts/publication/pages-smoke.json",
-      "Bytes": 2338,
-      "Sha256": "a4fa4369b8c6eec399262444888769e95c5f6765fad0ccee1a96c08c446a30d3"
+      "Bytes": 2351,
+      "Sha256": "5ab96e05b2c23285d23723f43ca4643f8a4e57e0c0b391f55da9648fe479c056"
     },
     {
       "Path": "artifacts/publication/render-worker.png",
@@ -903,23 +903,23 @@
     },
     {
       "Path": "artifacts/startup/http-comparison.json",
-      "Bytes": 87455,
-      "Sha256": "1fd3f20dc4bd069a28a1aad04e2aa35c293f247d5971dbe4bcc13c3284dfc1d3"
+      "Bytes": 87524,
+      "Sha256": "446367a7462512b47fb29742b12971110acca4799c1c823e8f77cae55e9326c5"
     },
     {
       "Path": "artifacts/startup/node-console.log",
-      "Bytes": 102594,
-      "Sha256": "df63f27a6bd4b143626593855399e73880e8c8e14b42f9b4317fc59b1ba4230c"
+      "Bytes": 104552,
+      "Sha256": "a228d1c820897ac44ed3ec321b6c20415d47077bd1eafa96a29a68d380e56cef"
     },
     {
       "Path": "artifacts/startup/text-ink-diagnostic.json",
       "Bytes": 15643,
-      "Sha256": "cf9c2d4aa63efcec7534bca3548a4b05796865aaa23fef44a6608dbe5ffd3682"
+      "Sha256": "a7d83e0c7e1c9efabd91d57d50eeb7a8566dd45ede2e513458523347c179551a"
     },
     {
       "Path": "artifacts/startup/text-ink-diagnostic.log",
       "Bytes": 15643,
-      "Sha256": "cf9c2d4aa63efcec7534bca3548a4b05796865aaa23fef44a6608dbe5ffd3682"
+      "Sha256": "a7d83e0c7e1c9efabd91d57d50eeb7a8566dd45ede2e513458523347c179551a"
     },
     {
       "Path": "artifacts/text-quality-results.json",
@@ -1759,12 +1759,12 @@
     {
       "Path": "artifacts/validation-optimized/node-final.json",
       "Bytes": 439,
-      "Sha256": "540cf3712e709c2ac38d8fd9829885ce00d0d5bb92a223db8709a0666f6099fe"
+      "Sha256": "b514db88e97e19e383000fb87deca617a7bbfc5c1049db24926cb0a98f50c004"
     },
     {
       "Path": "artifacts/validation-optimized/node-final.log",
-      "Bytes": 102509,
-      "Sha256": "e5594b7aec9afbea3dfc67f37c0ec8ca96492547d55a1a9e23e232193332dab6"
+      "Bytes": 104467,
+      "Sha256": "206cad78f6791a00cf2e0464cc1d8d0e50e60fda913bd6672243b365663362bf"
     },
     {
       "Path": "artifacts/validation-optimized/node-record-final.log",
@@ -2952,6 +2952,11 @@
       "Sha256": "7e77fff883e2ffce1f2c6594f1d8a74926bedf048e5e440e39734aa22fac4b7b"
     },
     {
+      "Path": "dist/docs/WORKER-OPENGL.md",
+      "Bytes": 1953,
+      "Sha256": "13dd82473c961a2b96646a81b983fca33f936f7dd0c31567a5535660644816db"
+    },
+    {
       "Path": "dist/docs/WORKER-STARTUP-FIX.md",
       "Bytes": 1921,
       "Sha256": "d58fba5b89b6bd84e1e311ee4a0d7229d9e265d4b44d136ac6750f3116503924"
@@ -3304,7 +3309,7 @@
     {
       "Path": "dist/packages/browser/worker-assets/manifest.json",
       "Bytes": 30114,
-      "Sha256": "d28dd8504f31257ad23571c68c7d62c6da4aa0559fa926a932844d8fb35c543d"
+      "Sha256": "9c96705686bb2f95b5afef7368e94a990df8c0994591ebc3d79835d7bf514d08"
     },
     {
       "Path": "dist/packages/browser/worker-assets/packages/animation/src/index.js",
@@ -3578,8 +3583,8 @@
     },
     {
       "Path": "dist/packages/browser/worker-assets/packages/opengl/src/index.js",
-      "Bytes": 11891,
-      "Sha256": "8c161960f8e0e4e934acc06b5b86c84a24bf15df4599add43abaf0e6eb7890a2"
+      "Bytes": 13044,
+      "Sha256": "be319602dc5070be82432c255afa79b0fb81a48e6ddbfc9ac3db354eb80e1eb6"
     },
     {
       "Path": "dist/packages/browser/worker-assets/packages/reactiveui/src/index.js",
@@ -4523,8 +4528,8 @@
     },
     {
       "Path": "dist/packages/opengl/src/index.js",
-      "Bytes": 11906,
-      "Sha256": "00033b79a8d2585c4cf1cc5eb5f1c852ae19fe5213559342fc45696b4ec1f56b"
+      "Bytes": 13059,
+      "Sha256": "499e22882f9fa29880dd358296b8b6d904defbe8a66cf4bac2bf0d052b53acd1"
     },
     {
       "Path": "dist/packages/reactiveui/LICENSE",
@@ -5942,6 +5947,11 @@
       "Sha256": "7e77fff883e2ffce1f2c6594f1d8a74926bedf048e5e440e39734aa22fac4b7b"
     },
     {
+      "Path": "docs/WORKER-OPENGL.md",
+      "Bytes": 1953,
+      "Sha256": "13dd82473c961a2b96646a81b983fca33f936f7dd0c31567a5535660644816db"
+    },
+    {
       "Path": "docs/WORKER-STARTUP-FIX.md",
       "Bytes": 1921,
       "Sha256": "d58fba5b89b6bd84e1e311ee4a0d7229d9e265d4b44d136ac6750f3116503924"
@@ -6279,7 +6289,7 @@
     {
       "Path": "packages/browser/worker-assets/manifest.json",
       "Bytes": 30108,
-      "Sha256": "c16fe9aac6e413cc9c13950fdcd27f264d82efc9fe1d239bf7e9507044789dc6"
+      "Sha256": "951e3272259b0463050c41d7c9c759b025320b8cbcb980b44dfee9874d12ff83"
     },
     {
       "Path": "packages/browser/worker-assets/packages/animation/src/index.js",
@@ -6553,8 +6563,8 @@
     },
     {
       "Path": "packages/browser/worker-assets/packages/opengl/src/index.js",
-      "Bytes": 11891,
-      "Sha256": "8c161960f8e0e4e934acc06b5b86c84a24bf15df4599add43abaf0e6eb7890a2"
+      "Bytes": 13044,
+      "Sha256": "be319602dc5070be82432c255afa79b0fb81a48e6ddbfc9ac3db354eb80e1eb6"
     },
     {
       "Path": "packages/browser/worker-assets/packages/reactiveui/src/index.js",
@@ -7498,8 +7508,8 @@
     },
     {
       "Path": "packages/opengl/src/index.js",
-      "Bytes": 11906,
-      "Sha256": "00033b79a8d2585c4cf1cc5eb5f1c852ae19fe5213559342fc45696b4ec1f56b"
+      "Bytes": 13059,
+      "Sha256": "499e22882f9fa29880dd358296b8b6d904defbe8a66cf4bac2bf0d052b53acd1"
     },
     {
       "Path": "packages/reactiveui/LICENSE",
@@ -9167,6 +9177,21 @@
       "Sha256": "66e209b3d6e2ca8206d986dde2f30049590c5d1da07bc7cb24aef3b3f0fb909e"
     },
     {
+      "Path": "tests/opengl-portable.test.mjs",
+      "Bytes": 6767,
+      "Sha256": "559bba3c62e90ebd9cae4b44ccd79c72e3e3f781460151f9893c3cd0efa169bb"
+    },
+    {
+      "Path": "tests/opengl-probe.js",
+      "Bytes": 1252,
+      "Sha256": "44e4d3e664a444bfc4797d879046675a4291bc7e18b54b5194ff4757975cda91"
+    },
+    {
+      "Path": "tests/opengl-worker-probe.js",
+      "Bytes": 541,
+      "Sha256": "dfb4d3c1ce226f9870066e7dbc74a887b5acf93ae80dbe7dafebd3331f941a68"
+    },
+    {
       "Path": "tests/pages-smoke.py",
       "Bytes": 9166,
       "Sha256": "436be1a84f1ff9e0706a68d667316fe92891342499b94ecacfbe5becc841970e"
@@ -9273,8 +9298,8 @@
     },
     {
       "Path": "tests/threading-catalog.py",
-      "Bytes": 2229,
-      "Sha256": "b89c341bc599673d00313489875fca685d13b5e63a74dcb00df448e0e0f70b56"
+      "Bytes": 5934,
+      "Sha256": "e06ea4e5e18f53e5b64907f5e9e9a7ac5ec83482762acbceeb8962169f8f4077"
     },
     {
       "Path": "tests/threading-integration.py",

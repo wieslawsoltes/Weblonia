@@ -1,6 +1,6 @@
 import { Disposable, Event, Rect, Size } from "../../base/src/index.js";
 import { Control } from "../../controls/src/index.js";
-import { Bitmap } from "../../media/src/index.js";
+import { WriteableBitmap } from "../../media/src/index.js";
 
 /** Browser GL capability, not a native pointer. A lease never exposes a foreign Skia context. */
 export class GlInterface {
@@ -89,53 +89,85 @@ export class BrowserGlContext extends Disposable {
     Dispose(){if(this.IsDisposed)return;this._lease?.Dispose();this.Canvas.removeEventListener('webglcontextlost',this._onLost);this.Canvas.removeEventListener('webglcontextrestored',this._onRestored);this.Lost.Clear();this.Restored.Clear();this.Gl.getExtension('WEBGL_lose_context')?.loseContext();super.Dispose();}
 }
 
-/** Dedicated WebGL2 surface -> RGBA readback -> native Skia image. No zero-copy claim. */
+/** UI-owned WebGL2 -> RGBA readback -> portable bitmap -> native Skia.
+ * Contexts/handles never cross workers. The direct renderer uploads locally;
+ * recording contexts publish immutable RGBA snapshots to their render worker.
+ * This is explicitly a readback/upload bridge, not zero-copy GPU interop. */
 export class OpenGlControlBase extends Control {
     constructor() {
         super();this.GlVersion=new GlVersion();this.Context=null;this.InitializationError=null;this.RenderError=new Event();this.MaxReadbackBytes=64*1024*1024;
-        this._frameRequested=true;this._bitmap=new Bitmap(null);this._pixels=null;this._flipped=null;this._glInitialized=false;
+        this._frameRequested=true;this._bitmap=null;this._pixels=null;this._flipped=null;this._glInitialized=false;
         this._lifetime.Add(this.AttachedToVisualTree.Add(()=>this.RequestNextFrameRendering()));
         this._lifetime.Add(this.DetachedFromVisualTree.Add(()=>this._Cleanup()));
         this._lifetime.Add(this.SizeChanged.Add(()=>this.RequestNextFrameRendering()));
     }
     get IsInitializedSuccessfully(){return this._glInitialized&&!this.Context?.IsLost;}
-    RequestNextFrameRendering(){this._frameRequested=true;this.InvalidateVisual();}
+    RequestNextFrameRendering(){if(this.IsDisposed)return;this._frameRequested=true;this.InvalidateVisual();}
     _Initialize() {
-        const root=this.GetVisualRoot();if(!root?._document)return false;
-        const canvas=root._document.createElement('canvas');this.Context=new BrowserGlContext(canvas);
-        this.Context.Lost.Add(()=>{this._glInitialized=false;this._bitmap._native?.Dispose();this._bitmap._native=null;this.OnOpenGlLost();});
+        const root=this.GetVisualRoot();if(!root)return false;
+        // The worker's _document is a semantic projection, not a DOM canvas
+        // factory. GL lives alongside its owning control on that UI worker.
+        let canvas;
+        if(root.IsWorkerRoot || !root._document) {
+            if(typeof OffscreenCanvas!=='function')throw new Error('Worker OpenGL requires OffscreenCanvas with WebGL2 support.');
+            canvas=new OffscreenCanvas(1,1);
+        } else canvas=root._document.createElement('canvas');
+        this.Context=new BrowserGlContext(canvas);
+        this.Context.Lost.Add(()=>{
+            this._glInitialized=false;this._ReleaseBitmap();this.InvalidateVisual();this.OnOpenGlLost();
+        });
         this.Context.Restored.Add(()=>{this._glInitialized=false;this.InitializationError=null;this.RequestNextFrameRendering();});
         return true;
     }
     Render(context) {
         super.Render(context);
-        if(this.InitializationError||!this.Bounds.Width||!this.Bounds.Height)return;
+        if(this.IsDisposed||this.InitializationError||!this.Bounds.Width||!this.Bounds.Height)return;
         try {
+            const scale=this.GetVisualRoot()?.RenderScaling??1;
+            const width=Math.max(1,Math.round(this.Bounds.Width*scale)),height=Math.max(1,Math.round(this.Bounds.Height*scale));
+            const count=width*height*4;
+            if(!Number.isFinite(scale)||scale<=0||!Number.isSafeInteger(count)||count<=0||
+                !Number.isFinite(this.MaxReadbackBytes)||this.MaxReadbackBytes<=0||count>this.MaxReadbackBytes)
+                throw new RangeError('WebGL readback exceeds the control buffer budget or has invalid dimensions.');
             if(!this.Context&&!this._Initialize())return;if(this.Context.IsLost)return;
-            const scale=this.GetVisualRoot()?.RenderScaling??1,width=Math.max(1,Math.round(this.Bounds.Width*scale)),height=Math.max(1,Math.round(this.Bounds.Height*scale));
-            const count=width*height*4;if(count>this.MaxReadbackBytes)throw new RangeError('WebGL readback exceeds the control buffer budget.');
             const canvas=this.Context.Canvas;
-            if(canvas.width!==width||canvas.height!==height){canvas.width=width;canvas.height=height;this._pixels=new Uint8Array(count);this._flipped=new Uint8Array(count);this._frameRequested=true;}
-            if(!this._pixels||this._pixels.length!==count){this._pixels=new Uint8Array(count);this._flipped=new Uint8Array(count);}
+            if(canvas.width!==width||canvas.height!==height){canvas.width=width;canvas.height=height;this._frameRequested=true;}
+            if(!this._bitmap||this._bitmap.PixelSize.Width!==width||this._bitmap.PixelSize.Height!==height){
+                this._ReleaseBitmap();this._bitmap=new WriteableBitmap(new Size(width,height));
+                this._pixels=new Uint8Array(count);this._flipped=this._bitmap.Pixels;this._frameRequested=true;
+            }
             if(this._frameRequested) {
                 this._frameRequested=false;const lease=this.Context.MakeCurrent(),gl=this.Context.Gl;
                 try {
                     if(!this._glInitialized){this.OnOpenGlInit(this.Context.GlInterface);this._glInitialized=true;}
                     gl.bindFramebuffer(gl.FRAMEBUFFER,null);gl.viewport(0,0,width,height);
                     this.OnOpenGlRender(this.Context.GlInterface,0);
-                    gl.bindFramebuffer(gl.READ_FRAMEBUFFER,null);gl.pixelStorei(gl.PACK_ALIGNMENT,1);gl.readPixels(0,0,width,height,gl.RGBA,gl.UNSIGNED_BYTE,this._pixels);
-                    const stride=width*4;for(let y=0;y<height;y++)this._flipped.set(this._pixels.subarray(y*stride,(y+1)*stride),(height-y-1)*stride);
-                    const S=context.Api;
-                    if(!S)throw new Error('OpenGL interop requires SkiaDrawingContext.');
-                    const image=S.SKImage.FromPixels(new S.SKImageInfo(width,height,S.SKColorType.Rgba8888,S.SKAlphaType.Unpremul),this._flipped);
-                    this._bitmap._native?.Dispose();this._bitmap._native=image;this._bitmap.PixelSize=new Size(width,height);
+                    gl.bindFramebuffer(gl.READ_FRAMEBUFFER,null);gl.pixelStorei(gl.PACK_ALIGNMENT,1);
+                    gl.readPixels(0,0,width,height,gl.RGBA,gl.UNSIGNED_BYTE,this._pixels);
+                    const stride=width*4;
+                    for(let y=0;y<height;y++)this._flipped.set(this._pixels.subarray(y*stride,(y+1)*stride),(height-y-1)*stride);
+                    // Invalidate a prior direct-mode upload as well as notifying
+                    // the portable registry. Its descriptor owns a byte COPY,
+                    // so an in-flight frame never aliases this reusable buffer.
+                    this._bitmap._native?.Dispose();this._bitmap._native=null;
+                    this._bitmap.Changed.Raise(this._bitmap,{});
                 } finally{lease.Dispose();}
             }
-            if(this._bitmap._native)context.DrawImage(this._bitmap,new Rect(0,0,this._bitmap.PixelSize.Width,this._bitmap.PixelSize.Height),new Rect(this.Bounds.Size));
-        } catch(error){this.InitializationError=error;this.RenderError.Raise(this,{Error:error});this.GetVisualRoot()?.RenderError.Raise(this,{Error:error});}
+            context.DrawImage(this._bitmap,new Rect(0,0,width,height),new Rect(this.Bounds.Size));
+        } catch(error){this.InitializationError=error;this.RenderError.Raise(this,{Error:error});this.GetVisualRoot()?.RenderError?.Raise(this,{Error:error});}
     }
     OnOpenGlInit(){} OnOpenGlDeinit(){} OnOpenGlLost(){}
     OnOpenGlRender(){throw new Error('Override OnOpenGlRender(gl, framebuffer).');}
-    _Cleanup(){if(this.Context){if(this._glInitialized&&!this.Context.IsLost){const lease=this.Context.MakeCurrent();try{this.OnOpenGlDeinit(this.Context.GlInterface);}finally{lease.Dispose();}}this.Context.Dispose();this.Context=null;}this._glInitialized=false;this._bitmap._native?.Dispose();this._bitmap._native=null;this._pixels=null;this._flipped=null;this.InitializationError=null;}
-    Dispose(){if(this.IsDisposed)return;this._Cleanup();this._bitmap.Dispose();this.RenderError.Clear();super.Dispose();}
+    _ReleaseBitmap(){this._bitmap?.Dispose();this._bitmap=null;this._pixels=null;this._flipped=null;}
+    _Cleanup(){
+        const context=this.Context;
+        try{
+            if(context&&this._glInitialized&&!context.IsLost){
+                const lease=context.MakeCurrent();try{this.OnOpenGlDeinit(context.GlInterface);}finally{lease.Dispose();}
+            }
+        }finally{
+            try{context?.Dispose();}finally{this.Context=null;this._glInitialized=false;this._ReleaseBitmap();this.InitializationError=null;this._frameRequested=true;}
+        }
+    }
+    Dispose(){if(this.IsDisposed)return;try{this._Cleanup();}finally{this.RenderError.Clear();super.Dispose();}}
 }
