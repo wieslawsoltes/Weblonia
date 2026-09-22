@@ -1,10 +1,11 @@
 {
   "Passed": true,
   "Packages": 18,
-  "FacadeExports": 506,
+  "FacadeExports": 521,
   "PublicRegistryInstalled": false,
   "StartupSubpaths": true,
+  "CorePortApis": true,
   "Version": "0.6.2-alpha.1",
-  "SourceFingerprint": "c487943d1018ebf68e592ba490d848bff52ec36fccec8a9a4af1dc347bd45017",
-  "FinalSourceFingerprint": "c487943d1018ebf68e592ba490d848bff52ec36fccec8a9a4af1dc347bd45017"
+  "SourceFingerprint": "99eadad54483792c5fdf81d848fe59e4d5b862ddbd78c8270f035cc394303717",
+  "FinalSourceFingerprint": "99eadad54483792c5fdf81d848fe59e4d5b862ddbd78c8270f035cc394303717"
 }

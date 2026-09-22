@@ -1,27 +1,65 @@
 {
   "Version": "0.6.2-alpha.1",
-  "SourceFingerprint": "93c095505d6ae58d74e38e68e6296edf5f0ee81ed427f9d3042d26314d241cab",
+  "SourceFingerprint": "99eadad54483792c5fdf81d848fe59e4d5b862ddbd78c8270f035cc394303717",
   "Completed": true,
   "Tests": [
     {
       "Name": "source HTTP render-worker",
-      "Passed": false,
-      "Error": "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:42687/?threading=render-worker&backend=canvas\nCall log:\n  - navigating to \"http://127.0.0.1:42687/?threading=render-worker&backend=canvas\", waiting until \"load\"\n"
+      "Passed": true,
+      "Milliseconds": 1596.08,
+      "Evidence": {
+        "Url": "http://127.0.0.1:55129/?threading=render-worker&backend=canvas",
+        "HttpStatus": 200,
+        "NavigationStatus": 200,
+        "Interception": false,
+        "CanonicalWorkerUrls": [
+          "http://127.0.0.1:55129/packages/browser/worker-assets/render.js"
+        ]
+      }
     },
     {
       "Name": "source HTTP full-isolation",
-      "Passed": false,
-      "Error": "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:60169/?threading=full-isolation&backend=canvas\nCall log:\n  - navigating to \"http://127.0.0.1:60169/?threading=full-isolation&backend=canvas\", waiting until \"load\"\n"
+      "Passed": true,
+      "Milliseconds": 1516.47,
+      "Evidence": {
+        "Url": "http://127.0.0.1:40009/?threading=full-isolation&backend=canvas",
+        "HttpStatus": 200,
+        "NavigationStatus": 200,
+        "Interception": false,
+        "CanonicalWorkerUrls": [
+          "http://127.0.0.1:40009/packages/browser/worker-assets/ui.js",
+          "http://127.0.0.1:40009/packages/browser/worker-assets/render.js"
+        ]
+      }
     },
     {
       "Name": "dist HTTP render-worker",
-      "Passed": false,
-      "Error": "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:38983/?threading=render-worker&backend=canvas\nCall log:\n  - navigating to \"http://127.0.0.1:38983/?threading=render-worker&backend=canvas\", waiting until \"load\"\n"
+      "Passed": true,
+      "Milliseconds": 1614.36,
+      "Evidence": {
+        "Url": "http://127.0.0.1:39557/?threading=render-worker&backend=canvas",
+        "HttpStatus": 200,
+        "NavigationStatus": 200,
+        "Interception": false,
+        "CanonicalWorkerUrls": [
+          "http://127.0.0.1:39557/packages/browser/worker-assets/render.js"
+        ]
+      }
     },
     {
       "Name": "dist HTTP full-isolation",
-      "Passed": false,
-      "Error": "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:51343/?threading=full-isolation&backend=canvas\nCall log:\n  - navigating to \"http://127.0.0.1:51343/?threading=full-isolation&backend=canvas\", waiting until \"load\"\n"
+      "Passed": true,
+      "Milliseconds": 1486.64,
+      "Evidence": {
+        "Url": "http://127.0.0.1:45365/?threading=full-isolation&backend=canvas",
+        "HttpStatus": 200,
+        "NavigationStatus": 200,
+        "Interception": false,
+        "CanonicalWorkerUrls": [
+          "http://127.0.0.1:45365/packages/browser/worker-assets/ui.js",
+          "http://127.0.0.1:45365/packages/browser/worker-assets/render.js"
+        ]
+      }
     }
   ],
   "Errors": [],
@@ -32,9 +70,9 @@
   "InitializationReplay": false,
   "PoliciesChanged": false,
   "Transport": "ordinary-http",
-  "Browser": "144.0.7559.96",
-  "Passed": 0,
-  "Failed": 4,
-  "FinalSourceFingerprint": "93c095505d6ae58d74e38e68e6296edf5f0ee81ed427f9d3042d26314d241cab",
-  "BlockedByBrowserPolicy": true
+  "Browser": "152.0.7977.0",
+  "Passed": 4,
+  "Failed": 0,
+  "FinalSourceFingerprint": "99eadad54483792c5fdf81d848fe59e4d5b862ddbd78c8270f035cc394303717",
+  "BlockedByBrowserPolicy": false
 }

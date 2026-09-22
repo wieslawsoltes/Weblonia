@@ -1,6 +1,6 @@
 import { Point, Size, Rect, Matrix, Disposable } from "../../base/src/index.js";
-import { DrawingContext, GetTextServiceVersion } from "../../media/src/index.js";
-import { CompositionObject, CompositionCustomVisual, CompositionDrawListVisual } from "../../composition/src/index.js";
+import { DrawingContext, DrawingImage, GetTextServiceVersion } from "../../media/src/index.js";
+import { CompositionObject, CompositionAnimationGroup, CompositionCustomVisual, CompositionDrawListVisual } from "../../composition/src/index.js";
 import { CompositionResourceRegistry, MatrixValues, RectValues } from './resources.js';
 import { CaptureScrollPolicy } from './scrolling.js';
 import { CompositionProtocolError } from './protocol.js';
@@ -18,7 +18,10 @@ export class PortableDrawingContext extends DrawingContext {
     DrawEllipse(...args) { this._command(DrawingOpcode.Ellipse, args); }
     DrawLine(...args) { this._command(DrawingOpcode.Line, args); }
     DrawGeometry(...args) { this._command(DrawingOpcode.Geometry, args); }
-    DrawImage(...args) { this._command(DrawingOpcode.Image, args); }
+    DrawImage(source, sourceRect, destRect) {
+        if (source instanceof DrawingImage) source.Draw(this, sourceRect, destRect);
+        else this._command(DrawingOpcode.Image, [source, sourceRect, destRect]);
+    }
     DrawTextLayout(...args) { this._command(DrawingOpcode.Text, args); }
     DrawCaret(...args) { this._command(DrawingOpcode.Caret, args); }
     DrawAcrylic(...args) { this._command(DrawingOpcode.Acrylic, args); }
@@ -130,7 +133,7 @@ export class CompositionSceneRecorder {
         const next = new Map();
         if (!compositor || compositor.IsDisposed) return next;
         for (const object of compositor._objects) {
-            if (object.IsDisposed) continue;
+            if (object.IsDisposed || object instanceof CompositionAnimationGroup) continue;
             const old = this._composition.get(object.Id), version = object._transportVersion ?? compositor.Revision;
             if (old && old.Version === version && old.FontVersion === this._fontVersion) { next.set(object.Id, old); continue; }
             // Defaults must be materialized before cross-realm serialization.

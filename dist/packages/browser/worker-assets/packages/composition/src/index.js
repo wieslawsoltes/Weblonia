@@ -1,3 +1,4 @@
+import { CopyCompositionValue, DefaultCompositionValue, ValidateCompositionKey, CompositionValueTypes } from './values.js';
 import { Disposable, Event, CompositeDisposable, Point, Vector, Size, Rect, Matrix } from "../../base/src/index.js";
 import { Brush, SolidColorBrush, Color, Colors, Bitmap } from "../../media/src/index.js";
 import { Clock, ParseDuration, Interpolate, LinearEasing } from "../../animation/src/index.js";
@@ -47,18 +48,53 @@ export class CompositionObject extends Disposable {
         if(name.startsWith('_')||['constructor','prototype','__proto__'].includes(name)||!(name in this))throw new ReferenceError(`Composition member '${name}' is not available.`);
         return this._Read(name);
     }
-    StartAnimation(propertyName,animation) {
-        if(!(animation instanceof CompositionAnimation)||animation.Compositor!==this.Compositor)throw new TypeError('Animation belongs to a different compositor.');
+    _PrepareAnimation(propertyName, animation, startedAt) {
+        if (this.IsDisposed) throw new Error('Composition object is disposed.');
+        if (!(animation instanceof CompositionAnimation) || animation.IsDisposed || animation.Compositor !== this.Compositor)
+            throw new TypeError('A live animation from the same compositor is required.');
         const [property,component,...rest]=String(propertyName).split('.');
-        if(rest.length||property.startsWith('_')||['constructor','prototype','__proto__'].includes(property)||!(property in this)||component&&!['X','Y','Z','W'].includes(component))throw new RangeError(`Invalid animation property '${propertyName}'.`);
-        animation.Validate();this.StopAnimation(propertyName);
-        const base=clone(this._Read(property)),start=clone(component?base?.[component]:base);
-        const state={Name:propertyName,Property:property,Component:component,Base:base,Start:start,Animation:animation.Clone(),StartedAt:this.Compositor.Clock.Now()};
-        this._animations.set(propertyName,state);this.Compositor._animatedObjects.add(this);this.Compositor._EnsureClock();this.Compositor._Dirty(this);
+        if(rest.length||property.startsWith('_')||['constructor','prototype','__proto__'].includes(property)||!(property in this)||component&&!['X','Y','Z','W'].includes(component))
+            throw new RangeError(`Invalid animation property '${propertyName}'.`);
+        animation.Validate();
+        const base=clone(this._Read(property));
+        if(component && !Number.isFinite(base?.[component])) throw new RangeError(`Invalid animation component '${propertyName}'.`);
+        return {Name:propertyName,Property:property,Component:component,Base:base,Start:clone(component?base[component]:base),Animation:animation.Clone(),StartedAt:startedAt};
+    }
+    _InstallAnimation(state) {
+        this.StopAnimation(state.Name); this._animations.set(state.Name,state);
+        this.Compositor._animatedObjects.add(this); this.Compositor._Dirty(this);
+    }
+    StartAnimation(propertyName,animation) {
+        const state=this._PrepareAnimation(propertyName,animation,this.Compositor.Clock.Now());
+        this._InstallAnimation(state); this.Compositor._EnsureClock();
+    }
+    StartAnimationGroup(group) {
+        const animations = this._GroupAnimations(group), startedAt=this.Compositor.Clock.Now();
+        // Prepare every clone before replacing any running state. A bad target,
+        // foreign resource or throwing clone cannot leave a half-started group.
+        const states=[];
+        try { for(const a of animations){if(!a.Target)throw new Error('Grouped animations require a Target.');states.push(this._PrepareAnimation(a.Target,a,startedAt));} }
+        catch(error){for(const state of states)state.Animation.Dispose();throw error;}
+        for(const state of states)this._InstallAnimation(state);
+        if(states.length)this.Compositor._EnsureClock();
+    }
+    StopAnimationGroup(group) {
+        const targets=this._GroupAnimations(group).map(a=>{if(!a.Target)throw new Error('Grouped animations require a Target.');return a.Target;});
+        for(const target of targets)this.StopAnimation(target);
+    }
+    _GroupAnimations(group) {
+        if(!(group instanceof CompositionAnimationGroup || group instanceof CompositionAnimation)||group.IsDisposed||group.Compositor!==this.Compositor)
+            throw new TypeError('A live animation or group from this compositor is required.');
+        return group instanceof CompositionAnimationGroup ? group.Animations.slice() : [group];
     }
     StopAnimation(name) {
         const state=this._animations.get(name);this._animations.delete(name);
-        this._animated.delete(state?.Property??String(name).split('.')[0]);
+        const [property,component]=String(name).split('.');
+        if(component && this._animated.has(property)) {
+            const value=clone(this._animated.get(property)),base=this._committed[property]??this[property];
+            value[component]=base?.[component];this._animated.set(property,value);
+            if(![...this._animations.values()].some(s=>s.Property===property))this._animated.delete(property);
+        } else this._animated.delete(state?.Property??property);
         if(!this._animations.size)this.Compositor._animatedObjects.delete(this);
         this.Compositor._Dirty(this);this.Compositor._ReleaseIdleClock();
     }
@@ -168,10 +204,15 @@ export class CompositionVisual extends CompositionObject {
         return matrix;
     }
     _PushState(context, includeTransform = true) {
-        const states=includeTransform?[context.PushTransform(this.GetLocalTransform())]:[];const opacity=this._Read('Opacity');if(opacity<1)states.push(context.PushOpacity(opacity));
-        const size=this._Read('Size');if(this._Read('ClipToBounds'))states.push(context.PushClip(new Rect(0,0,size.X,size.Y)));
-        if(this._Read('Clip'))states.push(context.PushGeometryClip(this._Read('Clip')));if(this._Read('Effect'))states.push(context.PushEffect(this._Read('Effect')));
-        return Disposable.Create(()=>{for(const state of states.reverse())state.Dispose();});
+        const states = [], unwind = () => { const errors = []; while (states.length) { try { states.pop().Dispose(); } catch (e) { errors.push(e); } } if (errors.length) throw new AggregateError(errors, 'Composition drawing state cleanup failed.'); };
+        try {
+            if (includeTransform) states.push(context.PushTransform(this.GetLocalTransform()));
+            const opacity=this._Read('Opacity'); if(opacity<1) states.push(context.PushOpacity(opacity));
+            const size=this._Read('Size'); if(this._Read('ClipToBounds')) states.push(context.PushClip(new Rect(0,0,size.X,size.Y)));
+            if(this._Read('Clip')) states.push(context.PushGeometryClip(this._Read('Clip')));
+            if(this._Read('Effect')) states.push(context.PushEffect(this._Read('Effect')));
+        } catch (error) { try { unwind(); } catch (cleanup) { throw new AggregateError([error,cleanup], 'Composition drawing push failed.'); } throw error; }
+        return Disposable.Create(unwind);
     }
     Render(context){if(this.IsDisposed||!this._Read('IsVisible')||this._Read('Opacity')<=0)return;const state=this._PushState(context);try{this._RenderCore(context);}finally{state.Dispose();}}
     _RenderCore(){}
@@ -256,23 +297,44 @@ export class CompositionColorBrush extends CompositionBrush {}
 define(CompositionColorBrush,{Color:()=>Colors.Transparent});
 export class CompositionSurfaceBrush extends CompositionBrush {}
 define(CompositionSurfaceBrush,{Surface:null,Stretch:'Uniform'});
+export const CompositionGetValueStatus = Object.freeze({Succeeded:'Succeeded',TypeMismatch:'TypeMismatch',NotFound:'NotFound'});
 export class CompositionPropertySet extends CompositionObject {
-    InsertScalar(name,value){if(!Number.isFinite(value))throw new TypeError('Scalar must be finite.');this._Insert(name,Number(value));}
-    InsertVector2(name,value){this._Insert(name,new Vector(value.X,value.Y));}
-    InsertVector3(name,value){this._Insert(name,{X:value.X,Y:value.Y,Z:value.Z});}
-    InsertColor(name,value){this._Insert(name,Color.Parse(value));}
-    _Insert(name,value){if(!/^[A-Za-z]\w*$/.test(name)||name in this&&!Object.hasOwn(this._values,name))throw new RangeError('Invalid property-set key.');this._Set(name,value);}
-    TryGetScalar(name){const value=this._values[name];return {Status:typeof value==='number'?'Succeeded':value===undefined?'NotFound':'TypeMismatch',Value:value};}
-    GetExpressionValue(name){if(!Object.hasOwn(this._values,name))throw new ReferenceError(`Property '${name}' is not in the property set.`);return this._Read(name);}
+    constructor(compositor) { super(compositor); this._types=new Map(); }
+    _InsertTyped(name,type,value) {
+        ValidateCompositionKey(name);
+        if(name in this && !Object.hasOwn(this._values,name))throw new RangeError('Invalid property-set key.');
+        value=CopyCompositionValue(type,value);this._Set(name,value);this._types.set(name,type);
+    }
+    _TryGet(name,type) {
+        ValidateCompositionKey(name);
+        const declared=this._types.get(name),Status=declared===undefined?'NotFound':declared===type?'Succeeded':'TypeMismatch';
+        return {Status,Value:Status==='Succeeded'?CopyCompositionValue(type,this._values[name]):DefaultCompositionValue(type)};
+    }
+    GetExpressionValue(name) {
+        ValidateCompositionKey(name);
+        if(!Object.hasOwn(this._values,name))throw new ReferenceError(`Property '${name}' is not in the property set.`);
+        return clone(this._Read(name));
+    }
+    Dispose() { if(!this.IsDisposed){this._types.clear();super.Dispose();} }
+}
+for(const type of CompositionValueTypes) {
+    Object.defineProperty(CompositionPropertySet.prototype,`Insert${type}`,{value:function(name,value){this._InsertTyped(name,type,value);}});
+    Object.defineProperty(CompositionPropertySet.prototype,`TryGet${type}`,{value:function(name){return this._TryGet(name,type);}});
 }
 export class CompositionAnimation extends Disposable {
     constructor(compositor){super();this.Compositor=compositor;this.Target='';this.Duration=1000;this.DelayTime=0;this.IterationCount=1;this.IterationBehavior='Count';this.Direction='Normal';this.StopBehavior='SetToFinalValue';this.Parameters=new Map();}
-    SetScalarParameter(name,value){this.Parameters.set(name,Number(value));}
-    SetVector2Parameter(name,value){this.Parameters.set(name,new Vector(value.X,value.Y));}
-    SetVector3Parameter(name,value){this.Parameters.set(name,{X:value.X,Y:value.Y,Z:value.Z});}
-    SetColorParameter(name,value){this.Parameters.set(name,Color.Parse(value));}
-    SetReferenceParameter(name,value){if(!(value instanceof CompositionObject)||value.Compositor!==this.Compositor)throw new TypeError('Reference parameter requires an object from this compositor.');this.Parameters.set(name,value);}
-    ClearParameter(name){this.Parameters.delete(name);}
+    _SetParameter(name,type,value) {
+        if(this.IsDisposed)throw new Error('Composition animation is disposed.');
+        this.Parameters.set(ValidateCompositionKey(name),CopyCompositionValue(type,value));
+    }
+    SetReferenceParameter(name,value) {
+        if(this.IsDisposed||!(value instanceof CompositionObject)||value.IsDisposed||value.Compositor!==this.Compositor)
+            throw new TypeError('Reference parameter requires a live object from this compositor.');
+        this.Parameters.set(ValidateCompositionKey(name),value);
+    }
+    ClearParameter(name){this.Parameters.delete(ValidateCompositionKey(name));}
+    ClearAllParameters(){this.Parameters.clear();}
+    Dispose(){if(!this.IsDisposed){this.Parameters.clear();super.Dispose();}}
     Clone(){const result=Object.assign(Object.create(Object.getPrototypeOf(this)),this);result.Parameters=new Map([...this.Parameters].map(([k,v])=>[k,clone(v)]));if(this.KeyFrames)result.KeyFrames=this.KeyFrames.map(frame=>({...frame,Value:clone(frame.Value)}));return result;}
     Validate(){if(ParseDuration(this.Duration)<0||ParseDuration(this.DelayTime)<0||!Number.isFinite(ParseDuration(this.Duration))||!(this.IterationCount>0))throw new RangeError('Invalid composition animation timing.');}
     _Environment(start,target){return {...Object.fromEntries(this.Parameters),this:{StartingValue:start,CurrentValue:start,Target:target}};}
@@ -308,13 +370,21 @@ export class ExpressionAnimation extends CompositionAnimation {
     Validate(){if(!this._ast)throw new Error('An expression animation must contain an expression.');}
     Sample(time,start,target){return {HasValue:true,Value:this._ast.Evaluate(this._Environment(start,target)),Done:false};}
 }
-export class CompositionAnimationGroup extends CompositionAnimation {
+for(const type of CompositionValueTypes) Object.defineProperty(CompositionAnimation.prototype,`Set${type}Parameter`,{value:function(name,value){this._SetParameter(name,type,value);}});
+/** Client-only grouping resource: running animations are cloned and flattened
+ * into normal server animation descriptors, never serialized as a group object. */
+export class CompositionAnimationGroup extends CompositionObject {
     constructor(compositor){super(compositor);this.Animations=[];}
-    Add(animation){if(animation.Compositor!==this.Compositor)throw new Error('Animation has a different compositor.');this.Animations.push(animation);}
+    Add(animation){
+        if(this.IsDisposed||!(animation instanceof CompositionAnimation)||animation.IsDisposed||animation.Compositor!==this.Compositor)
+            throw new TypeError('Animation requires a live group and matching compositor.');
+        this.Animations.push(animation);
+    }
+    Remove(animation){const i=this.Animations.indexOf(animation);if(i<0)return false;this.Animations.splice(i,1);return true;}
+    RemoveAll(){this.Animations.length=0;}
     [Symbol.iterator](){return this.Animations[Symbol.iterator]();}
+    Dispose(){if(!this.IsDisposed){this.RemoveAll();super.Dispose();}}
 }
-CompositionObject.prototype.StartAnimationGroup=function(group){for(const animation of group){if(!animation.Target)throw new Error('Grouped animations require a Target.');this.StartAnimation(animation.Target,animation);}};
-CompositionObject.prototype.StopAnimationGroup=function(group){for(const animation of group)this.StopAnimation(animation.Target);};
 
 export class CompositionDrawListVisual extends CompositionVisual {
     constructor(compositor,control){super(compositor);this.Control=control;this.Size=new Vector(control.Bounds.Width,control.Bounds.Height);}

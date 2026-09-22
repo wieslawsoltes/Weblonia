@@ -128,7 +128,7 @@ export class CompositionResourceRegistry {
         if (value instanceof FontFamily) return String(value);
         if (value instanceof Brush || value instanceof ImmutableSolidColorBrush) return this._Brush(value);
         if (value instanceof Pen) return { $: 'Pen', V: [this.Encode(value.Brush), value.Thickness, this.Encode(value.DashStyle), value.LineCap, value.LineJoin, value.MiterLimit] };
-        if (value instanceof DashStyle) return { $: 'DashStyle', V: [value.Dashes.slice(), value.Offset] };
+        if (value instanceof DashStyle) return { $: 'DashStyle', V: [Array.from(value.Dashes ?? []), value.Offset] };
         if (value instanceof BoxShadow) return { $: 'BoxShadow', V: { OffsetX: value.OffsetX, OffsetY: value.OffsetY, Blur: value.Blur, Spread: value.Spread, Color: this.Encode(value.Color), IsInset: value.IsInset } };
         if (value instanceof BlurEffect) return { $: 'BlurEffect', Radius: value.Radius };
         if (value instanceof DropShadowEffect) return { $: 'DropShadowEffect', V: { OffsetX: value.OffsetX, OffsetY: value.OffsetY, BlurRadius: value.BlurRadius, Color: this.Encode(value.Color), Opacity: value.Opacity } };

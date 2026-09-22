@@ -1,0 +1,114 @@
+{
+  "Version": "0.6.2-alpha.1",
+  "SourceFingerprint": "99eadad54483792c5fdf81d848fe59e4d5b862ddbd78c8270f035cc394303717",
+  "Completed": true,
+  "Tests": [
+    {
+      "Mode": "single",
+      "Passed": true,
+      "MaximumChannelError": 1,
+      "ComparedChannels": 4,
+      "AutonomousRedraw": true,
+      "WorkerCount": 0,
+      "State": {
+        "Frames": 1,
+        "Services": [
+          {
+            "Property": "Text",
+            "Type": "TextBlock",
+            "BaseUri": "https://example.test/core.axaml"
+          }
+        ],
+        "Dispatcher": {
+          "Value": 17,
+          "Status": 2,
+          "Aborted": 1,
+          "Jobs": [
+            "normal"
+          ]
+        },
+        "GroupCount": 1,
+        "HasDocument": true,
+        "RenderError": null
+      },
+      "Errors": [],
+      "MissingAssets": [],
+      "Milliseconds": 1213.77
+    },
+    {
+      "Mode": "render-worker",
+      "Passed": true,
+      "MaximumChannelError": 1,
+      "ComparedChannels": 4,
+      "AutonomousRedraw": true,
+      "WorkerCount": 1,
+      "State": {
+        "Frames": 2,
+        "Services": [
+          {
+            "Property": "Text",
+            "Type": "TextBlock",
+            "BaseUri": "https://example.test/core.axaml"
+          }
+        ],
+        "Dispatcher": {
+          "Value": 17,
+          "Status": 2,
+          "Aborted": 1,
+          "Jobs": [
+            "normal"
+          ]
+        },
+        "GroupCount": 1,
+        "HasDocument": true,
+        "RenderError": null
+      },
+      "Errors": [],
+      "MissingAssets": [],
+      "Milliseconds": 1647.28
+    },
+    {
+      "Mode": "full-isolation",
+      "Passed": true,
+      "MaximumChannelError": 1,
+      "ComparedChannels": 4,
+      "AutonomousRedraw": true,
+      "WorkerCount": 2,
+      "State": {
+        "Frames": 2,
+        "Services": [
+          {
+            "Property": "Text",
+            "Type": "TextBlock",
+            "BaseUri": "https://example.test/core.axaml"
+          }
+        ],
+        "Dispatcher": {
+          "Value": 17,
+          "Status": 2,
+          "Aborted": 1,
+          "Jobs": [
+            "normal"
+          ]
+        },
+        "GroupCount": 1,
+        "HasDocument": false,
+        "RenderError": null
+      },
+      "Errors": [],
+      "MissingAssets": [],
+      "Milliseconds": 1555.24
+    }
+  ],
+  "Errors": [],
+  "MissingAssets": [],
+  "Interception": false,
+  "WorkerBootstrapOverrides": false,
+  "SnapshotForcesRender": false,
+  "PhysicalGpuQualified": false,
+  "PixelChannelTolerance": 2,
+  "Browser": "152.0.7977.0",
+  "Passed": 3,
+  "Failed": 0,
+  "FinalSourceFingerprint": "99eadad54483792c5fdf81d848fe59e4d5b862ddbd78c8270f035cc394303717"
+}
