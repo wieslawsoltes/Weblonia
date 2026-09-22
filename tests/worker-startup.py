@@ -53,7 +53,12 @@ def run_case(browser,mode,variant='source',failure=None,slow=False,backend='canv
  origin='http://localhost:4173';context=browser.new_context(viewport={'width':1200,'height':900},device_scale_factor=1.25)
  errors=[];missing=[];expected=[];requests=[];extra={'Backend':backend};started=time.monotonic()
  if failure=='loader':extra['LoaderUrl']=origin+prefix+'__missing_loader__.mjs'
- if failure=='pending':extra.update(LoaderUrl=origin+prefix+'__pending_loader__.mjs',InitializationTimeout=2000)
+ # This deadline covers BOTH the intercepted module graph and the deliberately
+ # pending factory. Use the normal 10s loading budget: a 2s deadline could expire
+ # at runtime-loader on a busy CI runner before the intended WASM stall exists.
+ # The assertion below still requires the exact wasm-initialization stage, an
+ # actual timeout, no ready signal and complete worker teardown.
+ if failure=='pending':extra.update(LoaderUrl=origin+prefix+'__pending_loader__.mjs',InitializationTimeout=10000)
  if failure=='application':extra['ApplicationModule']=origin+prefix+'__missing_application__.js'
  def asset(route):
   relative=unquote(urlparse(route.request.url).path)
