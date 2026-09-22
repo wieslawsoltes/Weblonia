@@ -83,9 +83,9 @@ export class XamlAstTransformer {
     Visit(context, node) {
         let transformed = this.Transform(context, node);
         context.Parents.push(transformed);
-        if (transformed.Children)
-            transformed.Children = transformed.Children.map(child => this.Visit(context, child));
-        context.Parents.pop();
+        try {
+            if (transformed.Children) transformed.Children = transformed.Children.map(child => this.Visit(context, child));
+        } finally { context.Parents.pop(); }
         return transformed;
     }
 }
@@ -161,7 +161,7 @@ export class JavaScriptXamlEmitter {
             if ('Text' in node && !node.Type)
                 return literal(node.PreserveWhitespace ? node.Text : node.Text.replace(/\s+/g, ' ').trim());
             const variable = `v${id++}`, name = node.Type.Name;
-            if (['ControlTemplate', 'DataTemplate', 'TreeDataTemplate', 'ItemsPanelTemplate'].includes(name)) {
+            if (['', 'https://github.com/avaloniaui', 'http://schemas.avaloniaui.net'].includes(node.Type.XmlNamespace) && ['ControlTemplate', 'DataTemplate', 'TreeDataTemplate', 'ItemsPanelTemplate'].includes(name)) {
                 lines.push(`  const ${variable} = ctx.CreateTemplate(${literal(node)});`);
                 return variable;
             }

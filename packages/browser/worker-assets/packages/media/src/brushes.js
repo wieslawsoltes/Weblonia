@@ -1,4 +1,4 @@
-import { AvaloniaObject, DefineProperties, AvaloniaList, RelativePoint, Point, MathUtilities } from "../../base/src/index.js";
+import { AvaloniaObject, DefineProperties, AvaloniaList, RelativePoint, Point, MathUtilities, Event } from "../../base/src/index.js";
 import { ColorNames } from './color-names.js';
 const byte = v => Math.round(MathUtilities.Clamp(Number(v), 0, 255));
 export class Color {
@@ -176,9 +176,9 @@ export class VisualBrush extends Brush {
     }
 }
 DefineProperties(VisualBrush, { Visual: [null], Stretch: ['Uniform'], TileMode: ['None'], AlignmentX: ['Center'], AlignmentY: ['Center'] });
-export class Pen {
-    constructor(brush = Brushes.Black, thickness = 1, dashStyle = null, lineCap = 'Flat', lineJoin = 'Miter', miterLimit = 10) {
-        this.Brush = brush;
+export class Pen extends AvaloniaObject {
+    constructor(brush = null, thickness = 1, dashStyle = null, lineCap = 'Flat', lineJoin = 'Miter', miterLimit = 10) {
+        super(); this.Brush = brush;
         this.Thickness = thickness;
         this.DashStyle = dashStyle;
         this.LineCap = lineCap;
@@ -186,14 +186,23 @@ export class Pen {
         this.MiterLimit = miterLimit;
     }
 }
-export class DashStyle {
+DefineProperties(Pen, { Brush: [null, { Convert: v => v == null ? null : Brush.Parse(v) }], Thickness: [1, { Convert: Number }], DashStyle: [null], LineCap: ['Flat'], LineJoin: ['Miter'], MiterLimit: [10, { Convert: Number }] });
+export class DashStyle extends AvaloniaObject {
     constructor(dashes = [], offset = 0) {
-        this.Dashes = Array.from(dashes);
+        super(); this.Invalidated = new Event(); this.Changed = this.Invalidated;
+        this.Dashes = dashes;
         this.Offset = offset;
     }
-    static Dash = new DashStyle([2, 2]);
-    static Dot = new DashStyle([0, 2]);
+    OnPropertyChanged(change) {
+        super.OnPropertyChanged(change);
+        if (change.Property.Name === 'Dashes') { this._dashesSubscription?.Dispose(); this._dashesSubscription = this.Dashes?.CollectionChanged.Add(() => this.Invalidated?.Raise(this, {})); }
+        this.Invalidated?.Raise(this, {});
+    }
+    Dispose() { if (!this.IsDisposed) { this._dashesSubscription?.Dispose(); this.Invalidated.Clear(); super.Dispose(); } }
+    static get Dash() { return this._dash ??= new DashStyle([2, 2]); }
+    static get Dot() { return this._dot ??= new DashStyle([0, 2]); }
 }
+DefineProperties(DashStyle, { Dashes: [null, { Convert: v => v instanceof AvaloniaList ? v : new AvaloniaList(v ?? []) }], Offset: [0, { Convert: Number }] });
 export class BoxShadow {
     constructor({ OffsetX = 0, OffsetY = 0, Blur = 0, Spread = 0, Color: color = Colors.Black, IsInset = false } = {}) {
         Object.assign(this, { OffsetX, OffsetY, Blur, Spread, Color: Color.Parse(color), IsInset });

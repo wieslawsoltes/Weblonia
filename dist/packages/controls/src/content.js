@@ -809,16 +809,9 @@ export class Image extends Control {
         if (!this.Source)
             return;
         if (this.Source instanceof DrawingImage) {
-            const drawing = this.Source.Drawing, b = drawing.Bounds;
-            if (!b.Width || !b.Height)
-                return;
-            const dest = this._Destination(b.Size), state = ctx.PushTransform(Matrix.CreateTranslation(-b.X, -b.Y).Multiply(Matrix.CreateScale(dest.Width / b.Width, dest.Height / b.Height)).Multiply(Matrix.CreateTranslation(dest.X, dest.Y)));
-            try {
-                ctx.DrawDrawing(drawing);
-            }
-            finally {
-                state.Dispose();
-            }
+            const size = this.Source.Size;
+            if (!size.Width || !size.Height) return;
+            ctx.DrawImage(this.Source, new Rect(size), this._Destination(size));
         }
         else {
             const size = this.Source.PixelSize ?? this.Source.Size;

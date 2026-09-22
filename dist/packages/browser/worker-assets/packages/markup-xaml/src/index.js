@@ -1,3 +1,5 @@
+import { XamlServiceProvider } from './services.js';
+export * from './services.js';
 import * as Base from "../../base/src/index.js";
 import * as Media from "../../media/src/index.js";
 import * as Controls from "../../controls/src/index.js";
@@ -145,6 +147,7 @@ export class XamlRuntimeContext {
         this._objects = [];
         this._disposed = false;
         this._argumentDepth = 0;
+        this._parents = []; this._baseUris = []; this._extensionDepth = 0;
     }
     BeginArguments() { ++this._argumentDepth; }
     EndArguments() { if (--this._argumentDepth < 0) throw new Error('Unbalanced argument scope.'); }
@@ -175,6 +178,22 @@ export class XamlRuntimeContext {
         if (!metadata.has(object))
             metadata.set(object, { Namespaces: node.Namespaces, Node: node, Key: Base.UnsetValue });
         this._objects.push(object);
+        const meta = metadata.get(object);
+        for (const attribute of node.Attributes ?? []) {
+            if (isXamlNamespace(attribute.Namespace) && attribute.Name === 'CompileBindings')
+                meta.CompileBindings = Controls.BooleanValue(attribute.Value);
+            if (isXamlNamespace(attribute.Namespace) && attribute.Name === 'DataType') meta.DataType = attribute.Value;
+        }
+        let baseUri = this._baseUris.at(-1) ?? this.Options.BaseUri ?? this.Options.SourceFile ?? null;
+        const xmlBase = node.Attributes?.find(a => a.Namespace === XamlNamespaces.Xml && a.Name === 'base');
+        if (xmlBase) {
+            try { baseUri = new URL(xmlBase.Value, baseUri ?? undefined).href; }
+            catch { throw new XamlParseException('xml:base requires a valid URI and an absolute base URI.', xmlBase.Line, xmlBase.Position); }
+        }
+        meta.BaseUri = baseUri;
+        meta.DataTypeContext = meta.DataType ? { Name: meta.DataType, Namespaces: node.Namespaces }
+            : metadata.get(this._parents.at(-1))?.DataTypeContext ?? this.Options.DataTypeContext ?? null;
+        this._parents.push(object); this._baseUris.push(baseUri);
         if (!this.RootObject && !this._argumentDepth) {
             this.RootObject = object;
             if (object instanceof Controls.Control) {
@@ -188,7 +207,39 @@ export class XamlRuntimeContext {
         object.BeginInit?.();
     }
     End(object) {
-        object.EndInit?.();
+        if (this._parents.at(-1) !== object) throw new Error('Unbalanced XAML object construction.');
+        try { object.EndInit?.(); }
+        finally { this._parents.pop(); this._baseUris.pop(); }
+    }
+    _TargetProperty(target, name, namespaces) {
+        const member = getProperty(target, name, this.Registry, namespaces);
+        return member.Property ?? Object.freeze({ Name: member.Name, DeclaringType: target.constructor });
+    }
+    CreateServiceProvider(target, property = null, namespaces = {}) {
+        return new XamlServiceProvider(this, target, property, namespaces);
+    }
+    _ProvideValue(extension, target, property, namespaces) {
+        if (++this._extensionDepth > (this.Options.MaxMarkupExtensionDepth ?? 64)) {
+            --this._extensionDepth; throw new XamlParseException('Markup extension recursion limit exceeded.');
+        }
+        try {
+            const provider = this.CreateServiceProvider(target, property, namespaces);
+            if (metadata.has(extension)) provider.BaseUri = metadata.get(extension).BaseUri ?? provider.BaseUri;
+            const result = extension.ProvideValue(provider);
+            if (typeof result?.then === 'function') {
+                Promise.resolve(result).catch(() => {});
+                throw new XamlParseException('ProvideValue must return synchronously.');
+            }
+            return result;
+        } finally { --this._extensionDepth; }
+    }
+    _UseCompiledBindings(target) {
+        if (metadata.get(target)?.CompileBindings != null) return metadata.get(target).CompileBindings;
+        for (let i = this._parents.length - 1; i >= 0; --i) {
+            const value = metadata.get(this._parents[i])?.CompileBindings;
+            if (value != null) return value;
+        }
+        return this.Options.CompileBindings ?? false;
     }
     Attribute(object, attribute, namespaces) {
         const ns = attribute.Namespace, name = attribute.Name, raw = attribute.CompiledValue ?? MarkupExtensionParser.Parse(attribute.Value);
@@ -230,7 +281,7 @@ export class XamlRuntimeContext {
             this._pendingEvents.push({ Object: object, Event: event, Handler: attribute.Value });
             return;
         }
-        this.Set(object, name, this.Value(raw, object, namespaces), namespaces, attribute);
+        this.Set(object, name, this.Value(raw, object, namespaces, this._TargetProperty(object, name, namespaces)), namespaces, attribute);
     }
     _FindEvent(object, name) {
         const attached = name.includes('.'), member = attached ? name.split('.').at(-1) : name;
@@ -249,55 +300,57 @@ export class XamlRuntimeContext {
             if (Object.hasOwn(t, `${member}Event`))
                 return t[`${member}Event`];
         const value = object[member];
-        return value?.Add && !(value instanceof Base.AvaloniaList) && (value instanceof Base.Event || !('Count' in value)) ? value : null;
+        // An arithmetic Point.Add (or a collection Add) is not an event.
+        // Custom event adapters must provide the full subscription/raise contract.
+        return value instanceof Base.Event || value && typeof value.Add === 'function' && typeof value.Remove === 'function' && typeof value.Raise === 'function' ? value : null;
     }
-    Value(value, target, namespaces = metadata.get(target)?.Namespaces ?? {}) {
-        if (!value || typeof value !== 'object' || value.Kind !== 'MarkupExtension')
-            return value;
-        const name = value.Name.split(':').at(-1), positional = value.PositionalArguments.map(v => this.Value(v, target, namespaces)), args = Object.fromEntries(Object.entries(value.NamedArguments).map(([key, val]) => [key, this.Value(val, target, namespaces)]));
-        if (name === 'Null')
-            return null;
-        if (name === 'Type')
-            return this.Registry.ResolveType(positional[0] ?? args.TypeName, namespaces);
-        if (name === 'Static')
-            return this.Registry.ResolveStatic(positional[0] ?? args.Member, namespaces);
-        if (name === 'Reference')
-            return new ReferenceExtension(positional[0] ?? args.Name);
-        if (name === 'StaticResource')
-            return new Styling.StaticResourceExtension(positional[0] ?? args.ResourceKey);
-        if (name === 'DynamicResource')
-            return new Styling.DynamicResourceExtension(positional[0] ?? args.ResourceKey);
-        if (['Binding', 'CompiledBinding', 'ReflectionBinding', 'TemplateBinding'].includes(name)) {
-            const Ctor = name === 'CompiledBinding' ? Data.CompiledBindingExtension : name === 'ReflectionBinding' ? Data.ReflectionBindingExtension : name === 'TemplateBinding' ? Data.TemplateBinding : Data.Binding;
-            const binding = new Ctor(positional[0] ?? args.Path ?? '');
-            for (const [key, val] of Object.entries(args)) {
-                if (prohibited.has(key) || !(key in binding))
-                    throw new XamlParseException(`Unknown ${name} argument '${key}'.`);
-                binding[key] = val;
+    Value(value, target, namespaces = metadata.get(target)?.Namespaces ?? {}, property = null) {
+        if (!value || typeof value !== 'object' || value.Kind !== 'MarkupExtension') return value;
+        const resolved = this.Registry.ResolveName(value.Name, namespaces);
+        const name = resolved.Name, builtin = avaloniaNamespaces.includes(resolved.Namespace) || isXamlNamespace(resolved.Namespace);
+        const positional = value.PositionalArguments.map(v => this.Value(v, target, namespaces, property));
+        const named = value.NamedArguments;
+        const argument = key => this.Value(named[key], target, namespaces, property);
+        if (builtin) {
+            if (name === 'Null') return null;
+            if (name === 'Type') return this.Registry.ResolveType(positional[0] ?? argument('TypeName'), namespaces);
+            if (name === 'Static') return this.Registry.ResolveStatic(positional[0] ?? argument('Member'), namespaces);
+            if (name === 'Reference') return new ReferenceExtension(positional[0] ?? argument('Name'));
+            if (name === 'StaticResource') return new Styling.StaticResourceExtension(positional[0] ?? argument('ResourceKey'));
+            if (name === 'DynamicResource') return new Styling.DynamicResourceExtension(positional[0] ?? argument('ResourceKey'));
+            if (['Binding', 'CompiledBinding', 'ReflectionBinding', 'TemplateBinding'].includes(name)) {
+                const compiled = name === 'CompiledBinding' || name === 'Binding' && this._UseCompiledBindings(target);
+                const Ctor = compiled ? Data.CompiledBindingExtension : name === 'ReflectionBinding' ? Data.ReflectionBindingExtension : name === 'TemplateBinding' ? Data.TemplateBinding : Data.Binding;
+                const binding = new Ctor(positional[0] ?? argument('Path') ?? '');
+                for (const [key, val] of Object.entries(named)) {
+                    if (prohibited.has(key) || !(key in binding)) throw new XamlParseException(`Unknown ${name} argument '${key}'.`);
+                    binding[key] = this.Value(val, binding, namespaces, this._TargetProperty(binding, key, namespaces));
+                }
+                if (binding.IsCompiled) Data.CompiledBindingPath.Parse(binding.Path); else Data.PropertyPath.Parse(binding.Path);
+                return binding;
             }
-            if (binding.IsCompiled) Data.CompiledBindingPath.Parse(binding.Path);
-            else Data.PropertyPath.Parse(binding.Path);
-            return binding;
+            if (name === 'RelativeSource') {
+                const relative = new Data.RelativeSource(positional[0] ?? argument('Mode') ?? (named.AncestorType ? 'FindAncestor' : 'Self'));
+                for (const [key, raw] of Object.entries(named)) {
+                    if (prohibited.has(key) || !(key in relative)) throw new XamlParseException(`Unknown RelativeSource argument '${key}'.`);
+                    const val = this.Value(raw, relative, namespaces, this._TargetProperty(relative, key, namespaces));
+                    relative[key] = key === 'AncestorType' && typeof val === 'string' ? this.Registry.ResolveType(val, namespaces) : key === 'AncestorLevel' ? Number(val) : val;
+                }
+                return relative;
+            }
         }
-        if (name === 'RelativeSource') {
-            const relative = new Data.RelativeSource(positional[0] ?? args.Mode ?? (args.AncestorType ? 'FindAncestor' : 'Self'));
-            for (const [key, val] of Object.entries(args))
-                relative[key] = key === 'AncestorType' && typeof val === 'string' ? this.Registry.ResolveType(val, namespaces) : key === 'AncestorLevel' ? Number(val) : val;
-            return relative;
-        }
-        const { Name, Namespace } = this.Registry.ResolveName(value.Name, namespaces);
-        const descriptor = this.Registry.FindType(Name, Namespace) ?? this.Registry.FindType(Name + 'Extension', Namespace);
-        if (!descriptor)
-            throw new XamlParseException(`Markup extension '${value.Name}' is not registered.`);
+        const descriptor = this.Registry.FindType(name, resolved.Namespace) ?? this.Registry.FindType(name + 'Extension', resolved.Namespace);
+        if (!descriptor) throw new XamlParseException(`Markup extension '${value.Name}' is not registered.`);
         const extension = XamlOverloadResolver.Construct(descriptor, positional);
-        for (const [key, val] of Object.entries(args)) {
-            if (prohibited.has(key) || !(key in extension))
-                throw new XamlParseException(`Unknown extension argument '${key}'.`);
-            extension[key] = val;
+        this._objects.push(extension);
+        // The outer extension must exist before evaluating its named arguments.
+        // Inner extensions see the real immediate target, not the final control.
+        for (const [key, val] of Object.entries(named)) {
+            if (prohibited.has(key) || !(key in extension)) throw new XamlParseException(`Unknown extension argument '${key}'.`);
+            extension[key] = this.Value(val, extension, namespaces, this._TargetProperty(extension, key, namespaces));
         }
-        if (!extension.ProvideValue)
-            throw new XamlParseException(`${Name} does not implement ProvideValue.`);
-        return extension.ProvideValue({ TargetObject: target, RootObject: this.RootObject, NameScope: this.Scope, Registry: this.Registry });
+        if (typeof extension.ProvideValue !== 'function') throw new XamlParseException(`${name} does not implement ProvideValue.`);
+        return this._ProvideValue(extension, target, property, namespaces);
     }
     _ResolveReference(value, target) {
         if (value instanceof ReferenceExtension)
@@ -314,6 +367,8 @@ export class XamlRuntimeContext {
             return;
         }
         const member = getProperty(target, name, this.Registry, namespaces);
+        if (metadata.has(value) && typeof value.ProvideValue === 'function' && !(value instanceof Styling.StaticResourceExtension))
+            value = this._ProvideValue(value, target, member.Property ?? this._TargetProperty(target, name, namespaces), namespaces);
         if (target instanceof Styling.Setter && member.Name === 'Value') {
             target.Value = value;
             return;
@@ -375,13 +430,9 @@ export class XamlRuntimeContext {
     _ValidateCompiledBinding(target, binding, namespaces) {
         if (!binding.IsCompiled)
             return;
-        let typeName;
-        for (let node = target; node; node = node.Parent ?? node.VisualParent) {
-            typeName = metadata.get(node)?.DataType;
-            if (typeName)
-                break;
-        }
-        typeName ??= metadata.get(this.RootObject)?.DataType;
+        const typeContext = metadata.get(target)?.DataTypeContext ?? this.Options.DataTypeContext;
+        const typeName = typeContext?.Name;
+        namespaces = typeContext?.Namespaces ?? namespaces;
         binding.CompiledPath = Data.CompiledBindingPath.Parse(binding.Path);
         const path = binding.CompiledPath.Elements;
         if (!typeName)
@@ -426,7 +477,7 @@ export class XamlRuntimeContext {
         const name = qualifiedName.slice(qualifiedName.lastIndexOf('.') + 1);
         if (qualifiedName.startsWith('Design.'))
             return;
-        const member = getProperty(target, name, this.Registry, node?.Namespaces), current = target[name];
+        const member = getProperty(target, qualifiedName, this.Registry, node?.Namespaces), current = target[member.Name];
         if (current instanceof Styling.ResourceDictionary && values.length === 1 && values[0] instanceof Styling.ResourceDictionary) {
             const other = values[0];
             for (const [key, value] of other)
@@ -442,7 +493,7 @@ export class XamlRuntimeContext {
         }
         if (values.length !== 1)
             throw new XamlParseException(`Property '${name}' requires exactly one value.`, node.Line, node.Position);
-        this.Set(target, name, this._ScalarValue(values[0]), node.Namespaces, node);
+        this.Set(target, qualifiedName, this._ScalarValue(values[0]), node.Namespaces, node);
     }
     Content(target, value, node = null) {
         if (value == null)
@@ -463,6 +514,8 @@ export class XamlRuntimeContext {
             else this.Set(target, contentProperty, value);
             return;
         }
+        if (target instanceof Media.DrawingImage) { this.Set(target, 'Drawing', value); return; }
+        if (target instanceof Media.GeometryDrawing && value instanceof Media.Geometry) { this.Set(target, 'Geometry', value); return; }
         if (target instanceof Styling.Style) {
             if (value instanceof Styling.Setter)
                 target.Setters.Add(value);
@@ -560,19 +613,34 @@ export class XamlRuntimeContext {
         const children = node.Children.filter(c => !isText(c));
         if (children.length !== 1)
             throw new XamlParseException(`${node.Type.Name} requires one root object.`, node.Line, node.Position);
-        const templateType = node.Type.Name, parentContext = this, dataType = node.Attributes.find(a => a.Name === 'DataType')?.Value;
+        const templateType = node.Type.Name;
+        const compilation = node.Attributes.find(a => isXamlNamespace(a.Namespace) && a.Name === 'CompileBindings');
+        const dataType = node.Attributes.find(a => a.Name === 'DataType')?.Value;
+        let baseUri = this._baseUris.at(-1) ?? this.Options.BaseUri ?? this.Options.SourceFile;
+        const xmlBase = node.Attributes.find(a => a.Namespace === XamlNamespaces.Xml && a.Name === 'base');
+        if (xmlBase) {
+            try { baseUri = new URL(xmlBase.Value, baseUri ?? undefined).href; }
+            catch { throw new XamlParseException('xml:base requires a valid URI and an absolute base URI.', xmlBase.Line, xmlBase.Position); }
+        }
+        const parentOptions = { ...this.Options,
+            RootObject: this.Options.RootObject ?? this.RootObject,
+            CompileBindings: compilation ? Controls.BooleanValue(compilation.Value) : this._UseCompiledBindings(this._parents.at(-1)),
+            DataTypeContext: dataType ? {Name:dataType,Namespaces:node.Namespaces} : metadata.get(this._parents.at(-1))?.DataTypeContext ?? this.Options.DataTypeContext,
+            BaseUri: baseUri, ParentProvider: this.CreateServiceProvider(this._parents.at(-1), null, node.Namespaces),
+        }, resourceParent = this.RootObject;
         const build = (data, scope) => {
-            const context = new XamlRuntimeContext({ ...parentContext.Options, NameScope: scope ?? new Controls.NameScope(), DataContext: data, ResourceParent: parentContext.RootObject });
+            const context = new XamlRuntimeContext({ ...parentOptions, NameScope: scope ?? new Controls.NameScope(), DataContext: data, ResourceParent: resourceParent });
             return context.Build(children[0]);
         };
         let template;
         if (templateType === 'ControlTemplate')
             template = new Controls.ControlTemplate((owner, scope) => {
-                const context = new XamlRuntimeContext({ ...parentContext.Options, NameScope: scope, DataContext: owner.DataContext, ResourceParent: owner });
-                const result = context._BuildNode(children[0]);
-                for (const v of [result, ...result.GetVisualDescendants()])
-                    v.TemplatedParent = owner;
-                return context.Complete(result);
+                const context = new XamlRuntimeContext({ ...parentOptions, NameScope: scope, DataContext: owner.DataContext, ResourceParent: owner });
+                try {
+                    const result = context._BuildNode(children[0]);
+                    for (const v of [result, ...result.GetVisualDescendants()]) v.TemplatedParent = owner;
+                    return context.Complete(result);
+                } catch (error) { context.Abort(); throw error; }
             });
         else if (templateType === 'ItemsPanelTemplate')
             template = new Controls.ItemsPanelTemplate(() => build(undefined));
@@ -596,7 +664,7 @@ export class XamlRuntimeContext {
     _BuildNode(node, instance = null) {
         if (isText(node))
             return node.PreserveWhitespace ? node.Text : node.Text.replace(/\s+/g, ' ').trim();
-        if (['ControlTemplate', 'DataTemplate', 'TreeDataTemplate', 'ItemsPanelTemplate'].includes(node.Type.Name))
+        if (avaloniaNamespaces.includes(node.Type.XmlNamespace) && ['ControlTemplate', 'DataTemplate', 'TreeDataTemplate', 'ItemsPanelTemplate'].includes(node.Type.Name))
             return this.CreateTemplate(node);
         if (isXamlNamespace(node.Type.XmlNamespace) && ['String', 'Double', 'Single', 'Int32', 'Int64', 'Boolean', 'Null'].includes(node.Type.Name))
             return this.Scalar(node);
@@ -669,8 +737,11 @@ export class XamlRuntimeContext {
             this._CleanupFailedBuild();
             throw e;
         }
+        const result = this._ScalarValue(root);
         this._disposed = true;
-        return this._ScalarValue(root);
+        this._objects.length = this._parents.length = this._baseUris.length = 0;
+        this._pendingBindings.length = this._pendingEvents.length = 0;
+        return result;
     }
     Abort() { this._CleanupFailedBuild(); }
     _CleanupFailedBuild() {
@@ -681,6 +752,7 @@ export class XamlRuntimeContext {
             }
         this._pendingBindings.length = this._pendingEvents.length = this._pendingValues.length = 0;
         this._argumentDepth = 0;
+        this._parents.length = this._baseUris.length = 0;
         this._disposed = true;
         this.Options.OnCleanupErrors?.(errors);
     }

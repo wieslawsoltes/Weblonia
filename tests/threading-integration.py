@@ -2,13 +2,17 @@
 renderer restart and multiwindow integration. No fake workers or GUI policy edits.
 """
 from pathlib import Path
-import json,time
+import argparse,json,time
+from contextlib import ExitStack
+from integration_host import catalog_http_server,load_http_catalog,wait_window_open
 from PIL import ImageChops
 from playwright.sync_api import sync_playwright
 from threading_support import browser_executable,ROOT,install_assets,load,invoke,png
 from verification_support import source_fingerprint
+parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--http',action='store_true');args=parser.parse_args()
 out=ROOT/'artifacts/threading';out.mkdir(exist_ok=True)
 report={'Version':json.loads((ROOT/'package.json').read_text())['version'],'SourceFingerprint':source_fingerprint(ROOT),'Completed':False,'Tests':[],'Errors':[],'MissingAssets':[],'Qualification':'Chromium raster, real dedicated workers, emulated browser input; no physical GPU/touch/IME or screen reader qualification.'}
+report.update(Interception=not args.http,WorkerBootstrapOverrides=not args.http,Transport='ordinary-http' if args.http else 'intercepted-local-assets')
 def save():(out/'integration-results.json').write_text(json.dumps(report,indent=2))
 def require(v,m):
  if not v:raise AssertionError(m)
@@ -21,9 +25,12 @@ def check(name,action):
 def settle(page):
  page.evaluate('async()=>{await catalogHost.InvokeAsync("Invalidate");return true}')
  page.wait_for_timeout(80)
-with sync_playwright()as p:
+with ExitStack() as cleanup, sync_playwright()as p:
  browser=p.chromium.launch(executable_path=browser_executable(),headless=True,args=['--no-sandbox','--disable-dev-shm-usage'])
- context=browser.new_context(viewport={'width':1200,'height':900});install_assets(context,report['MissingAssets']);page=load(context,'full-isolation',report['Errors'])
+ context=browser.new_context(viewport={'width':1200,'height':900})
+ if args.http:page=load_http_catalog(context,cleanup.enter_context(catalog_http_server()),report['Errors'],report['MissingAssets'])
+ else:install_assets(context,report['MissingAssets']);page=load(context,'full-isolation',report['Errors'])
+ report['Browser']=browser.version;report['InitialWorkerUrls']=[w.url for w in page.workers]
  def editor():
   invoke(page,'Navigate','TextBox');d=invoke(page,'GetControl','NameEditor');r=d['Bounds'];page.mouse.click(r['X']+25,r['Y']+r['Height']/2)
   page.wait_for_function('catalogHost.Input&&!catalogHost.Input.hidden&&document.activeElement===catalogHost.Input')
@@ -93,22 +100,13 @@ with sync_playwright()as p:
   page.emulate_media(reduced_motion='reduce',color_scheme='dark');page.wait_for_timeout(100);v=invoke(page,'GetPlatform');require(v['ReducedMotion'] and v['Theme']=='Dark',str(v));page.emulate_media(reduced_motion='no-preference',color_scheme='light');page.wait_for_timeout(80);return v
  check('live browser platform preferences are forwarded into the UI worker',media)
  def window():
-  invoke(page,'NewWindow');page.wait_for_timeout(120)
-  if page.locator('dialog').count():page.locator('dialog button',has_text='Continue').click()
-  popup=context.wait_for_event('page',timeout=15000)if len(context.pages)==1 else context.pages[-1]
-  deadline=time.monotonic()+30;s=invoke(page,'GetWindowState')
-  while not s['Opened'] and not s['Error'] and time.monotonic()<deadline:page.wait_for_timeout(100);s=invoke(page,'GetWindowState')
+  invoke(page,'NewWindow');s=wait_window_open(page,invoke)
+  popup=context.pages[-1]
   require(s['Opened'] and not s['Error'],str(s));require(popup.locator('canvas').count()==1,'window missing canvas')
   popup.screenshot(path=str(out/'isolated-browser-window.png'));invoke(page,'CloseWindow');popup.wait_for_event('close',timeout=10000)if not popup.is_closed()else None;return{'Opened':True,'Closed':popup.is_closed(),'SharedUIWorker':True,'IndependentRenderWorker':True}
  check('worker-owned Window opens a real browser window with its own render worker',window)
  def modal():
-  invoke(page,'NewModal');page.wait_for_timeout(150)
-  if page.locator('dialog').count():page.locator('dialog button',has_text='Continue').click()
-  deadline=time.monotonic()+30
-  while time.monotonic()<deadline:
-   state=invoke(page,'GetWindowState')
-   if state['Opened'] or state['Error']:break
-   page.wait_for_timeout(100)
+  invoke(page,'NewModal');state=wait_window_open(page,invoke)
   require(state['Opened'] and not state['OwnerEnabled'],str(state));invoke(page,'CloseModal',{'Accepted':True,'Value':42});page.wait_for_timeout(100);result=invoke(page,'GetModalState');require(result['Completed'] and result['OwnerEnabled'] and result['Result']=={'Accepted':True,'Value':42},str(result));return result
  check('real isolated modal window blocks owner and returns its exact result',modal)
  report['FinalDiagnostics']=page.evaluate('async()=>await catalogHost.GetDiagnosticsAsync()')

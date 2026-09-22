@@ -1,6 +1,6 @@
 {
   "Version": "0.6.2-alpha.1",
-  "SourceFingerprint": "93c095505d6ae58d74e38e68e6296edf5f0ee81ed427f9d3042d26314d241cab",
+  "SourceFingerprint": "99eadad54483792c5fdf81d848fe59e4d5b862ddbd78c8270f035cc394303717",
   "Completed": true,
   "Tests": [
     {
@@ -105,7 +105,7 @@
       "Evidence": {
         "MovingPixels": true,
         "RetainedSiblingUnchanged": true,
-        "StoppedContentRecords": 281
+        "StoppedContentRecords": 293
       }
     },
     {
@@ -187,7 +187,7 @@
       "Evidence": {
         "MovingPixels": true,
         "RetainedSiblingUnchanged": true,
-        "StoppedContentRecords": 293
+        "StoppedContentRecords": 292
       }
     },
     {
@@ -239,15 +239,15 @@
       "Name": "full-isolation render-side custom invalidation survives render completion",
       "Passed": true,
       "Evidence": {
-        "HandlerRenderCalls": 3
+        "HandlerRenderCalls": 2
       }
     }
   ],
   "Errors": [],
   "MissingAssets": [],
   "Qualification": "Chromium native Skia raster; real module workers importing production startup; asset interception only. No pointer nudge or forced render before autonomous-state/pixel assertions.",
-  "Browser": "144.0.7559.96",
+  "Browser": "152.0.7977.0",
   "Passed": 26,
   "Failed": 0,
-  "FinalSourceFingerprint": "93c095505d6ae58d74e38e68e6296edf5f0ee81ed427f9d3042d26314d241cab"
+  "FinalSourceFingerprint": "99eadad54483792c5fdf81d848fe59e4d5b862ddbd78c8270f035cc394303717"
 }

@@ -1,0 +1,94 @@
+name: Core port reference and generation
+on:
+  push:
+    branches: [feature/core-xaml-composition-parity]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: core-port-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  refresh:
+    if: github.repository == 'wieslawsoltes/Weblonia' && github.ref == 'refs/heads/feature/core-xaml-composition-parity'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          package-manager-cache: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+      - name: Materialize reviewed source for ordinary PR review
+        shell: bash
+        run: |
+          python scripts/apply-core-edits.py
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -u
+          git add -A packages scripts tests docs .github
+          # Workflow edits are published through the authorized GitHub connector,
+          # never through the contents-only Actions token. Restore only this file.
+          git restore --source=HEAD --staged --worktree .github/workflows/ci.yml
+          if ! git diff --cached --quiet; then
+            git commit -m 'feat: materialize core port sources for review; qualification pending'
+            git push origin HEAD:feature/core-xaml-composition-parity
+          fi
+      - run: python -m pip install -r tests/requirements.txt
+      - run: python -m playwright install --with-deps chromium
+      - name: Validate new integration path first
+        run: |
+          npm run build
+          python tests/core-port-browser.py
+      - name: Qualify core port and every existing release gate
+        shell: bash
+        run: |
+          mkdir -p artifacts/core-port
+          if ! bash scripts/qualify-core-port.sh > artifacts/core-port/qualification.log 2>&1; then
+            tail -160 artifacts/core-port/qualification.log
+            exit 1
+          fi
+          tail -50 artifacts/core-port/qualification.log
+      - name: Rebuild font-free source manifest and all archives
+        run: python scripts/archive.py --output /tmp/core-port-release
+      - name: Commit qualified generated workers, packages and reports
+        shell: bash
+        run: |
+          git add -u
+          git add -A packages samples scripts tests docs dist .github SOURCE-MANIFEST.json
+          git add -f artifacts
+          if ! git diff --cached --quiet; then
+            git commit -m 'build: regenerate qualified core port worker and package assets'
+            git push origin HEAD:feature/core-xaml-composition-parity
+          fi
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: core-port-qualification
+          path: artifacts/
+      - name: Preserve exact working source for review and recovery
+        if: always()
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile,ZIP_DEFLATED
+          with ZipFile('/tmp/core-port-review-source.zip','w',ZIP_DEFLATED) as archive:
+              for p in sorted(Path('.').rglob('*')):
+                  if p.is_symlink() or not p.is_file() or any(x in {'.git','artifacts','node_modules','__pycache__','.maintenance'} for x in p.parts):continue
+                  if p.suffix.lower() in {'.ttf','.otf','.woff','.woff2','.ttc','.otc','.eot','.pfa','.pfb'}:continue
+                  archive.write(p,p.as_posix())
+          PY
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: core-port-source
+          path: |
+            /tmp/core-port-review-source.zip
+            /tmp/core-port-release/

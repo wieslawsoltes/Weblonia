@@ -45,7 +45,11 @@ current(automation, 'Incremental automation');
 require(automation.Completed && automation.Failed === 0 && automation.Passed > 0 && !automation.PageErrors.length && !automation.MissingAssets.length, 'Incremental automation failed');
 const consumer = await read('artifacts/package-consumer-result.json');
 current(consumer, 'Packed consumer');
-require(consumer.Passed && consumer.Packages === 18 && consumer.StartupSubpaths && !consumer.PublicRegistryInstalled, 'Packed offline consumer failed');
+require(consumer.Passed && consumer.Packages === 18 && consumer.StartupSubpaths && consumer.CorePortApis && !consumer.PublicRegistryInstalled, 'Packed offline consumer failed');
+const corePort = await read('artifacts/core-port/browser-results.json');
+current(corePort, 'Core port browser');
+require(corePort.Completed && corePort.Passed === 3 && corePort.Failed === 0 && !corePort.Interception && !corePort.WorkerBootstrapOverrides
+    && !corePort.Errors.length && !corePort.MissingAssets.length && corePort.Tests.every(t => t.Passed && t.AutonomousRedraw && t.ComparedChannels === 4 && t.MaximumChannelError <= 2), 'Core/XAML/drawing/composition HTTP qualification failed');
 const build = await read('artifacts/build-result.json');
 current(build, 'Build', false, false);
 require(build.XamlModules === 75 && build.NoEval && build.FontFiles === 0, 'AOT build contract changed');
@@ -128,7 +132,7 @@ const report = {
     },
     IncrementalAutomationTests: automation,
     AutonomousInvalidationTests: invalidation, RecoveredWorkerPerformance: workerPerformance,
-    PackedPackageConsumer: consumer, PagesStartup: pages, ColdStartup: coldStartup,
+    CorePortBrowser: corePort, PackedPackageConsumer: consumer, PagesStartup: pages, ColdStartup: coldStartup,
     WorkerGraph:workerGraph, ModuleWorkerStartup:startup, HttpWorkerStartup:httpStartup, OrdinaryHttpWorkersQualified:!!httpStartup?.Completed&&httpStartup.Failed===0, ThreadedBrowser:threaded.browser, ThreadedIntegration:threaded.integration, ThreadedQuality:threaded.quality, ThreadedCatalog:threaded.catalog, ThreadingPerformance:threadPerformance,
     Performance: { HistoricalIntermediateReports: 'artifacts/history/performance-session/', Current: 'artifacts/threading/performance-results.json', Startup: 'artifacts/startup/http-comparison.json', Scope: 'Current source in all three topologies; separate UI CPU and submission latency, equal native raster scale/quality. No physical GPU FPS qualification.' },
     PhysicalGpuQualified: false, PhysicalTouchQualified: false, PhysicalImeQualified: false, ScreenReaderQualified: false,

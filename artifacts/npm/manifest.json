@@ -54,8 +54,8 @@
       "Name": "@wieslawsoltes/avalonia-base",
       "Version": "0.6.2-alpha.1",
       "File": "wieslawsoltes-avalonia-base-0.6.2-alpha.1.tgz",
-      "Bytes": 13456,
-      "Sha256": "c2bd92c6d78dc3450afff019bcbb0c207b358b7a2a7f608c547f61af2f905728",
+      "Bytes": 16589,
+      "Sha256": "45b094888c83e3e51c3ade24e17fcec4cc9bde2a9496aa845ad7f92f8a3e6c20",
       "Files": [
         "LICENSE",
         "NOTICE",
@@ -76,8 +76,8 @@
       "Name": "@wieslawsoltes/avalonia-browser",
       "Version": "0.6.2-alpha.1",
       "File": "wieslawsoltes-avalonia-browser-0.6.2-alpha.1.tgz",
-      "Bytes": 1415744,
-      "Sha256": "062d931b18973184c8882e05abbdf36f4cd1fb0795fddb1118526bcbad69c1b1",
+      "Bytes": 1425879,
+      "Sha256": "4de22130617f0694a9decfcabfefe67d6e1a13e24ebdbc5a030a2d5b91965de1",
       "Files": [
         "LICENSE",
         "NOTICE",
@@ -121,6 +121,7 @@
         "worker-assets/packages/browser/src/worker-top-level.js",
         "worker-assets/packages/composition/src/expression.js",
         "worker-assets/packages/composition/src/index.js",
+        "worker-assets/packages/composition/src/values.js",
         "worker-assets/packages/controls/src/advanced.js",
         "worker-assets/packages/controls/src/automation.js",
         "worker-assets/packages/controls/src/content.js",
@@ -142,6 +143,7 @@
         "worker-assets/packages/diagnostics/src/index.js",
         "worker-assets/packages/headless/src/index.js",
         "worker-assets/packages/markup-xaml/src/index.js",
+        "worker-assets/packages/markup-xaml/src/services.js",
         "worker-assets/packages/media/src/brushes.js",
         "worker-assets/packages/media/src/color-names.js",
         "worker-assets/packages/media/src/drawing.js",
@@ -292,15 +294,16 @@
       "Name": "@wieslawsoltes/avalonia-composition",
       "Version": "0.6.2-alpha.1",
       "File": "wieslawsoltes-avalonia-composition-0.6.2-alpha.1.tgz",
-      "Bytes": 11509,
-      "Sha256": "4fb39b10e8c227b49251136ba367ed038a0d0f3a09b620f011322b693248b396",
+      "Bytes": 13107,
+      "Sha256": "9e67c2ff07fa5fc1f35f01f871d333952479666d015f8ae4a49b91ddd87b0b77",
       "Files": [
         "LICENSE",
         "NOTICE",
         "README.md",
         "package.json",
         "src/expression.js",
-        "src/index.js"
+        "src/index.js",
+        "src/values.js"
       ],
       "Dependencies": {
         "@wieslawsoltes/avalonia-base": "0.6.2-alpha.1",
@@ -314,8 +317,8 @@
       "Name": "@wieslawsoltes/avalonia-controls",
       "Version": "0.6.2-alpha.1",
       "File": "wieslawsoltes-avalonia-controls-0.6.2-alpha.1.tgz",
-      "Bytes": 73850,
-      "Sha256": "2e93755aa41883b75997dd3c57a0e6485ff943e72d06bd6434085a134d060319",
+      "Bytes": 73766,
+      "Sha256": "968dbada1c0f9b6ea7990e2fa08194164abefef56f3e15989d993e42cade9a32",
       "Files": [
         "LICENSE",
         "NOTICE",
@@ -404,14 +407,15 @@
       "Name": "@wieslawsoltes/avalonia-markup-xaml",
       "Version": "0.6.2-alpha.1",
       "File": "wieslawsoltes-avalonia-markup-xaml-0.6.2-alpha.1.tgz",
-      "Bytes": 10967,
-      "Sha256": "44fa7f9a4f7523a22dbbe9204e6b39cf290de7f49aca81d1e803f955c57f65c0",
+      "Bytes": 12951,
+      "Sha256": "28e1b2e58de950d94fe1819aec2d7297c35e93e98b2d4a1534fba3f5662fd832",
       "Files": [
         "LICENSE",
         "NOTICE",
         "README.md",
         "package.json",
-        "src/index.js"
+        "src/index.js",
+        "src/services.js"
       ],
       "Dependencies": {
         "@wieslawsoltes/avalonia-base": "0.6.2-alpha.1",
@@ -426,8 +430,8 @@
       "Name": "@wieslawsoltes/avalonia-media",
       "Version": "0.6.2-alpha.1",
       "File": "wieslawsoltes-avalonia-media-0.6.2-alpha.1.tgz",
-      "Bytes": 22300,
-      "Sha256": "b6a171c03dc0f5ad85bcd55adbd716ff859f39d01ec1b146b5a19fc5fa462c23",
+      "Bytes": 26543,
+      "Sha256": "d335a0936b61ba138c0a71f135a0efb136626e3e10381c4820f533a1ad409109",
       "Files": [
         "LICENSE",
         "NOTICE",
@@ -494,8 +498,8 @@
       "Name": "@wieslawsoltes/avalonia-rendering",
       "Version": "0.6.2-alpha.1",
       "File": "wieslawsoltes-avalonia-rendering-0.6.2-alpha.1.tgz",
-      "Bytes": 28717,
-      "Sha256": "12b500c62fbd3b544b9ca49f3ebdf455719068e7472f22e3298fb019dc65d9cb",
+      "Bytes": 28802,
+      "Sha256": "7ddf0fd99c42efc98da9225387da9749e99e802e52b30d7c1049437aa6924f8a",
       "Files": [
         "LICENSE",
         "NOTICE",
@@ -520,8 +524,8 @@
       "Name": "@wieslawsoltes/avalonia-skia",
       "Version": "0.6.2-alpha.1",
       "File": "wieslawsoltes-avalonia-skia-0.6.2-alpha.1.tgz",
-      "Bytes": 21551,
-      "Sha256": "f2af6e021ec0c2c3d44324da7cafb4682dad3abc2af6d1dd940c21ef9cfeaf7d",
+      "Bytes": 21651,
+      "Sha256": "faa28aa448c2f34209d3ebea34d910c42192fbb03d8af6558b2a54164351ad73",
       "Files": [
         "LICENSE",
         "NOTICE",
@@ -587,8 +591,8 @@
       "Name": "@wieslawsoltes/xamlx",
       "Version": "0.6.2-alpha.1",
       "File": "wieslawsoltes-xamlx-0.6.2-alpha.1.tgz",
-      "Bytes": 10250,
-      "Sha256": "1fbefb4cf9f802a65cb1dd3b557ff680fec8a129854b82966ef57442ae448262",
+      "Bytes": 10293,
+      "Sha256": "80769894e92b9e2b9d243d8318970bfed0e632a35de42c0a6f679865ad44249d",
       "Files": [
         "LICENSE",
         "NOTICE",

@@ -3,7 +3,7 @@ export { ConfigureCanvasText, CreateTextRasterPlan, GetDeviceTextGeometry } from
 import { SkiaTextService } from './text-service.js';
 import { Initialize } from '@wieslawsoltes/skiasharpweb/browser';
 import { Rect, Size, Point, Matrix, Disposable, Event, CompositeDisposable } from '@wieslawsoltes/avalonia-base';
-import { DrawingContext, Color, Colors, BrushColor, LinearGradientBrush, RadialGradientBrush, ConicGradientBrush, ImageBrush, VisualBrush, BlurEffect, DropShadowEffect, Bitmap, WriteableBitmap, RenderTargetBitmap, RegisterGeometryBackend, RegisterTextMetricsProvider, RegisterTextLayoutProvider, InvalidateTextServices } from '@wieslawsoltes/avalonia-media';
+import { DrawingContext, DrawingImage, Color, Colors, BrushColor, LinearGradientBrush, RadialGradientBrush, ConicGradientBrush, ImageBrush, VisualBrush, BlurEffect, DropShadowEffect, Bitmap, WriteableBitmap, RenderTargetBitmap, RegisterGeometryBackend, RegisterTextMetricsProvider, RegisterTextLayoutProvider, InvalidateTextServices } from '@wieslawsoltes/avalonia-media';
 import { Image } from '@wieslawsoltes/avalonia-controls';
 export class LruCache {
     constructor(maxEntries = 512, maxBytes = 64 * 1024 * 1024) {
@@ -177,7 +177,7 @@ export class SkiaPlatform extends Disposable {
         return this.Paths.Set(key, path);
     }
     async LoadBitmap(bitmap) {
-        if (!bitmap || bitmap.IsDisposed || bitmap instanceof WriteableBitmap || bitmap._native)
+        if (!bitmap || bitmap.IsDisposed || bitmap instanceof DrawingImage || bitmap instanceof WriteableBitmap || bitmap._native)
             return bitmap;
         if (bitmap._load)
             return bitmap._load;
@@ -489,52 +489,43 @@ export class SkiaDrawingContext extends DrawingContext {
             } };
     }
     OnPush(kind, value) {
-        const C = this.Canvas, previousClip = this._deviceClip;
-        if (kind === 'Effect') {
-            let filter = null;
-            if (value instanceof BlurEffect) filter = this.Api.SKImageFilter.CreateBlur(value.Radius / 2, value.Radius / 2);
-            else if (value instanceof DropShadowEffect) filter = this.Api.SKImageFilter.CreateDropShadow(value.OffsetX, value.OffsetY, value.BlurRadius / 2, value.BlurRadius / 2, this.Color(value.Color, value.Opacity));
-            else throw new TypeError(`Unsupported effect ${value?.constructor?.name}.`);
-            const paint = new this.Api.SKPaint(); paint.ImageFilter = filter;
-            C.SaveLayer(paint); this._nativeStates.push({ Paint: paint, Filter: filter });
+        const C = this.Canvas, state = { PreviousClip: this._deviceClip }; let count = null;
+        try {
+            if (kind === 'Effect') {
+                if (value instanceof BlurEffect) state.Filter = this.Api.SKImageFilter.CreateBlur(value.Radius / 2, value.Radius / 2);
+                else if (value instanceof DropShadowEffect) state.Filter = this.Api.SKImageFilter.CreateDropShadow(value.OffsetX, value.OffsetY, value.BlurRadius / 2, value.BlurRadius / 2, this.Color(value.Color, value.Opacity));
+                else throw new TypeError(`Unsupported effect ${value?.constructor?.name}.`);
+                state.Paint = new this.Api.SKPaint(); state.Paint.ImageFilter = state.Filter; count = C.SaveLayer(state.Paint);
+            } else if (kind === 'Opacity') {
+                state.Paint = new this.Api.SKPaint({ Color: this.Color(Colors.White, value) }); count = C.SaveLayer(state.Paint);
+            } else if (kind === 'OpacityMask') { count = C.SaveLayer(); state.Mask = value; }
+            else {
+                count = C.Save();
+                if (kind === 'Transform') C.Concat(matrixArray(value));
+                else if (kind === 'Clip') C.ClipRect(this.Rect(value));
+                else if (kind === 'GeometryClip') C.ClipPath(this.Platform.GetPath(value));
+                else throw new TypeError(`Unsupported drawing state '${kind}'.`);
+            }
+            this._nativeStates.push(state);
+            if (kind !== 'Transform') this._deviceClip = null;
+        } catch (error) {
+            try { if (count != null) C.RestoreToCount(count); }
+            finally { state.Paint?.Dispose(); state.Filter?.Dispose(); }
+            throw error;
         }
-        else if (kind === 'Opacity') {
-            const p = new this.Api.SKPaint({ Color: this.Color(Colors.White, value) });
-            C.SaveLayer(p);
-            this._nativeStates.push({ Paint: p });
-        }
-        else if (kind === 'OpacityMask') {
-            C.SaveLayer();
-            this._nativeStates.push({ Mask: value });
-        }
-        else {
-            C.Save();
-            this._nativeStates.push({});
-            if (kind === 'Transform')
-                C.Concat(matrixArray(value));
-            else if (kind === 'Clip')
-                C.ClipRect(this.Rect(value));
-            else if (kind === 'GeometryClip')
-                C.ClipPath(this.Platform.GetPath(value));
-        }
-        this._nativeStates.at(-1).PreviousClip = previousClip;
-        if (kind !== 'Transform') this._deviceClip = null;
     }
     OnPop() {
         const state = this._nativeStates.pop();
-        if (state.Mask) {
-            const p = this._Paint(state.Mask.Brush, null, state.Mask.Bounds, this.Api.SKBlendMode.DstIn);
-            try {
-                this.Canvas.DrawRect(this.Rect(state.Mask.Bounds), p.Paint);
+        try {
+            if (state.Mask) {
+                const p = this._Paint(state.Mask.Brush, null, state.Mask.Bounds, this.Api.SKBlendMode.DstIn);
+                try { this.Canvas.DrawRect(this.Rect(state.Mask.Bounds), p.Paint); }
+                finally { p.Dispose(); }
             }
-            finally {
-                p.Dispose();
-            }
+        } finally {
+            try { this.Canvas.Restore(); }
+            finally { this._deviceClip = state.PreviousClip ?? null; state.Paint?.Dispose(); state.Filter?.Dispose(); }
         }
-        this.Canvas.Restore();
-        this._deviceClip = state.PreviousClip ?? null;
-        state.Paint?.Dispose();
-        state.Filter?.Dispose();
     }
     _FillStroke(brush, pen, bounds, draw) {
         if (brush) {
@@ -629,6 +620,7 @@ export class SkiaDrawingContext extends DrawingContext {
         this._FillStroke(brush, pen, bounds, paint => this.Canvas.DrawPath(path, paint));
     }
     DrawImage(source, sourceRect, destRect) {
+        if (source instanceof DrawingImage) { source.Draw(this, sourceRect, destRect); return; }
         const image = source?._native ? source._native : this.Platform.GetImage(source);
         if (!image)
             return;
