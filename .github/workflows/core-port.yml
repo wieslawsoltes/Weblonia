@@ -1,0 +1,55 @@
+name: Core port reference and generation
+on:
+  push:
+    branches: [feature/core-xaml-composition-parity]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source:
+    if: github.repository == 'wieslawsoltes/Weblonia' && github.ref == 'refs/heads/feature/core-xaml-composition-parity'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.sha }}
+          path: application
+          persist-credentials: false
+      - uses: actions/checkout@v7
+        with:
+          repository: AvaloniaUI/Avalonia
+          ref: dff6a87665aa456c37b8cf89647e007f4c3066d7
+          path: upstream-avalonia
+          persist-credentials: false
+      - uses: actions/checkout@v7
+        with:
+          repository: kekekeks/XamlX
+          ref: 7ef6aef496ab6e8dcf3df04bef697be49db37c04
+          path: upstream-xamlx
+          persist-credentials: false
+      - name: Archive exact source and upstream text references
+        run: |
+          python - <<'PY'
+          import hashlib,json,subprocess
+          from pathlib import Path
+          from zipfile import ZipFile,ZIP_DEFLATED
+          out=Path('review-artifacts');out.mkdir()
+          for name in ['application','upstream-avalonia','upstream-xamlx']:
+              root=Path(name);entries=[]
+              paths=subprocess.check_output(['git','ls-files','-z'],cwd=root).decode().split('\0')
+              with ZipFile(out/(name+'.zip'),'w',ZIP_DEFLATED) as z:
+                  for path in paths:
+                      p=root/path
+                      if not path or not p.is_file() or p.is_symlink():continue
+                      if p.suffix.lower() in {'.ttf','.otf','.woff','.woff2','.ttc','.otc','.eot','.pfa','.pfb'}:continue
+                      if name!='application' and p.suffix.lower() not in {'.cs','.csproj','.props','.targets','.sln','.slnx','.xml','.xaml','.axaml','.json','.md','.txt','.yml','.yaml'} and p.name not in {'LICENSE','NOTICE','.gitmodules'}:continue
+                      data=p.read_bytes();z.writestr(path,data)
+                      entries.append({'Path':path,'Sha256':hashlib.sha256(data).hexdigest()})
+              (out/(name+'-manifest.json')).write_text(json.dumps({'Commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=root).decode().strip(),'Files':entries},indent=2))
+          PY
+      - uses: actions/upload-artifact@v7
+        with:
+          name: core-port-references
+          path: review-artifacts/
+          retention-days: 7
