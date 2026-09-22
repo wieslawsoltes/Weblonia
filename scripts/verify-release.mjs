@@ -37,15 +37,15 @@ for (const scale of [1, 1.25]) {
 }
 const text = await read('artifacts/text-quality-results.json');
 current(text, 'Text quality');
-require(text.Completed && text.Failed === 0 && text.Passed > 0 && !text.PageErrors.length && !text.MissingAssets.length && text.Tests.every(t => t.Passed), 'Text quality run failed');
+require(text.Completed && text.Failed === 0 && text.Passed >= 29 && !text.PageErrors.length && !text.MissingAssets.length && text.Tests.every(t => t.Passed), 'Text quality run failed');
 const pixels = text.Tests.filter(t => t.MaximumChannelError != null);
-require(pixels.length > 0 && pixels.every(t => t.ComparedChannels === 4 && t.MaximumChannelError <= text.PixelChannelTolerance && !t.PixelsAboveTolerance && !t.MissingInkPixels), 'Text/caret RGBA comparison failed');
+require(text.PixelChannelTolerance === 2 && pixels.length >= 27 && pixels.every(t => t.ComparedChannels === 4 && t.MaximumChannelError <= text.PixelChannelTolerance && !t.PixelsAboveTolerance && !t.MissingInkPixels), 'Text/caret RGBA comparison failed');
 const automation = await read('artifacts/validation-optimized/automation-final.json');
 current(automation, 'Incremental automation');
 require(automation.Completed && automation.Failed === 0 && automation.Passed > 0 && !automation.PageErrors.length && !automation.MissingAssets.length, 'Incremental automation failed');
 const consumer = await read('artifacts/package-consumer-result.json');
 current(consumer, 'Packed consumer');
-require(consumer.Passed && consumer.Packages === 18 && !consumer.PublicRegistryInstalled, 'Packed offline consumer failed');
+require(consumer.Passed && consumer.Packages === 18 && consumer.StartupSubpaths && !consumer.PublicRegistryInstalled, 'Packed offline consumer failed');
 const build = await read('artifacts/build-result.json');
 current(build, 'Build', false, false);
 require(build.XamlModules === 75 && build.NoEval && build.FontFiles === 0, 'AOT build contract changed');
@@ -70,6 +70,24 @@ const invalidation=await read('artifacts/invalidation/browser-results.json');cur
 require(invalidation.Completed&&invalidation.Failed===0&&invalidation.Passed>=26&&!invalidation.Errors.length&&!invalidation.MissingAssets.length&&invalidation.Tests.every(t=>t.Passed),'Autonomous invalidation did not pass in all three modes');
 const workerPerformance=await read('artifacts/threading/worker-performance-results.json');current(workerPerformance,'Recovered worker performance');
 require(workerPerformance.Completed&&workerPerformance.Failed===0&&workerPerformance.Passed>=9&&!workerPerformance.Errors.length&&!workerPerformance.MissingAssets.length&&workerPerformance.Tests.every(t=>t.Passed),'Recovered worker performance regressions failed');
+// Structural startup gates are deterministic. Timing is evidence, not a flaky
+// wall-clock threshold. These reports have no Version field; bind both ends to
+// the exact source fingerprint instead of trusting stale committed measurements.
+const pages = await read('artifacts/publication/pages-smoke.json');
+const coldStartup = await read('artifacts/startup/http-comparison.json');
+for (const [name, value] of [['Pages startup', pages], ['Cold startup', coldStartup]])
+    require(value.Completed && value.SourceFingerprint === fingerprint && value.FinalSourceFingerprint === fingerprint,
+        `${name}: incomplete or stale source evidence`);
+require(pages.Passed === 4 && pages.Failed === 0 && pages.Tests.length === 4 && !pages.Interception && !pages.WorkerBootstrapOverrides
+    && pages.SitePrefix === '/Weblonia/' && pages.Tests.every(t => t.Passed && t.WasmRequests === 1 && !t.Errors.length && !t.MissingAssets.length), 'Canonical Pages startup did not pass');
+require(pages.Tests.find(t => t.Name === 'default')?.ExpectedMode === 'full-isolation'
+    && pages.Tests.find(t => t.Name === 'full-isolation')?.RestartReusedNativeModule, 'Default or renderer restart no longer shares native preparation');
+const optimizedTrials = coldStartup.Trials.filter(t => t.Variant === 'optimized');
+require(coldStartup.Passed && coldStartup.ColdBrowserPerTrial && !coldStartup.Interception && !coldStartup.WorkerOverrides
+    && optimizedTrials.length >= 3 && coldStartup.Trials.every(t => t.Passed && !t.Errors.length), 'Cold startup trials did not complete');
+require(optimizedTrials.every(t => t.WasmRequests === 1 && t.AotBuilderRequests === 1 && t.PngBytes > 256
+    && t.Diagnostics.Host.MainHasSkiaRuntime === false && t.Diagnostics.Host.NativePreparation.Deliveries === 2
+    && t.Diagnostics.Host.NativePreparation.PendingDeliveries === 0), 'Startup duplicated native downloads, eagerly loaded XAML, or leaked module delivery ports');
 const files = [];
 async function scan(dir) {
     for (const e of await readdir(dir, { withFileTypes: true })) {
@@ -86,7 +104,8 @@ const report = {
     FullAvaloniaParity: false, FullXamlXParity: false, FullUpstreamClonesIncluded: false, OriginalCatalogSubexamplesFullyPorted: false,
     Recovery: await read('docs/recovery/recovery-invalidation.json'),
     UpstreamSkia: await read('docs/SKIASHARPWEB-UPSTREAM.json'),
-    SkiaSourceChangedThisRelease: false,
+    UpstreamSkiaStartup: await read('docs/STARTUP-UPSTREAM.json'),
+    SkiaSourceChangedThisRelease: true, NativeWasmChangedThisRelease: false,
     WorkspacePackages: consumer.Packages, FacadeExports: consumer.FacadeExports,
     LibraryJavaScriptFiles: files.length, LibraryJavaScriptLines: lines, AotXamlModules: build.XamlModules, CatalogRoutes: 74,
     NodeTests: { Passed: node.Pass, Failed: node.Fail, Skipped: node.Skip, Completed: node.Completed, FinalLog: 'artifacts/validation-optimized/node-final.log' },
@@ -109,13 +128,14 @@ const report = {
     },
     IncrementalAutomationTests: automation,
     AutonomousInvalidationTests: invalidation, RecoveredWorkerPerformance: workerPerformance,
-    PackedPackageConsumer: consumer,
+    PackedPackageConsumer: consumer, PagesStartup: pages, ColdStartup: coldStartup,
     WorkerGraph:workerGraph, ModuleWorkerStartup:startup, HttpWorkerStartup:httpStartup, OrdinaryHttpWorkersQualified:!!httpStartup?.Completed&&httpStartup.Failed===0, ThreadedBrowser:threaded.browser, ThreadedIntegration:threaded.integration, ThreadedQuality:threaded.quality, ThreadedCatalog:threaded.catalog, ThreadingPerformance:threadPerformance,
-    Performance: { HistoricalIntermediateReports: 'artifacts/history/performance-session/', Current: 'artifacts/threading/performance-results.json', Scope: 'Current source in all three topologies; separate UI CPU and submission latency, equal native raster scale/quality. No physical GPU FPS qualification.' },
+    Performance: { HistoricalIntermediateReports: 'artifacts/history/performance-session/', Current: 'artifacts/threading/performance-results.json', Startup: 'artifacts/startup/http-comparison.json', Scope: 'Current source in all three topologies; separate UI CPU and submission latency, equal native raster scale/quality. No physical GPU FPS qualification.' },
     PhysicalGpuQualified: false, PhysicalTouchQualified: false, PhysicalImeQualified: false, ScreenReaderQualified: false,
     SafariQualified: false, FirefoxQualified: false, PublicRegistryInstalled: false, UpstreamGitDependencyInstalled: false,
     SkiaDependencyResolution: 'immutable Git dependency in manifest; bundled assets used by verified offline consumer',
-    AvaloniaRemoteChanges: false, SkiaRemoteChangesThisRelease: false, NewNpmReleasePublished: false, FontFiles: 0,
+    AvaloniaRemoteChanges: false, SkiaRemoteChangesThisRelease: true, NewNpmReleasePublished: false,
+    UpstreamNpmRelease: { Package: '@wieslawsoltes/skiasharpweb', Version: '0.5.1', VerificationRun: 35769480279, VerificationJob: 106887919262, Source: 'docs/UPSTREAM-NPM-PUBLICATION.json' }, FontFiles: 0,
     HistoricalLogs: 'Earlier reports and interrupted/progress runs are retained as history. Only final reports with this version and source fingerprint qualify this release.'
 };
 await writeFile(path.join(root, 'docs/VERIFICATION.json'), JSON.stringify(report, null, 2) + '\n');

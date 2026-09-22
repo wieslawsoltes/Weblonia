@@ -15,7 +15,7 @@ export async function RunTextQuality() {
         try { const details = fn(); results.push({ Name: name, Passed: true, ...details }); }
         catch (error) { results.push({ Name: name, Passed: false, Error: error.stack }); }
     }
-    function compare(name, { text, size = 24, family = 'serif', style = 'Normal', scale = 1, scaleY = scale, spacing = 0, width = 760, snapshot = false, x = 14.37, y = 20.21, color = '#000000' }) {
+    function compare(name, { text, size = 24, family = 'serif', style = 'Normal', scale = 1, scaleY = scale, spacing = 0, width = 760, snapshot = false, x = 14.37, y = 20.21, color = '#000000', referenceComposition = 'direct' }) {
         const w = Math.ceil(width * scale), h = Math.ceil(125 * scaleY), origin = new A.Point(x, y), before = platform.GetDiagnostics();
         const surface = S.SKSurface.Create(new S.SKImageInfo(w, h)), context = new A.SkiaDrawingContext(platform, surface.Canvas, scale);
         const ref = document.createElement('canvas'); ref.width = w; ref.height = h;
@@ -26,16 +26,38 @@ export async function RunTextQuality() {
             context.DrawTextLayout(layout, origin);
             r.setTransform(scale, 0, 0, scaleY, .31, .63); A.ConfigureCanvasText(r, layout.Typeface, size, layout); r.fillStyle = color;
             for (const line of layout.TextLines) r.fillText(line.Text, origin.X + line.X, origin.Y + line.Y + line.Baseline);
+            let directReference = null;
+            if (referenceComposition === 'isolated-lines') {
+                // The production system-font path caches one transparent layer per
+                // line. Compare the SAME compositing boundary, independently: a
+                // full-viewport Canvas2D layer, no production culling, tile planner,
+                // phase rebasing or native Skia API. Repeated overlapping marks
+                // accumulate different 8-bit rounding when drawn directly onto
+                // opaque white versus first onto transparent black (Chromium 152).
+                // Keep direct output as diagnostic evidence; NEVER raise tolerance.
+                directReference = r.getImageData(0, 0, w, h).data;
+                r.resetTransform(); r.fillStyle = 'white'; r.fillRect(0, 0, w, h);
+                const layer = document.createElement('canvas'); layer.width = w; layer.height = h;
+                const l = layer.getContext('2d', { willReadFrequently: true });
+                A.ConfigureCanvasText(l, layout.Typeface, size, layout); l.fillStyle = color;
+                for (const line of layout.TextLines) {
+                    l.resetTransform(); l.clearRect(0, 0, w, h);
+                    l.setTransform(scale, 0, 0, scaleY, .31, .63);
+                    l.fillText(line.Text, origin.X + line.X, origin.Y + line.Y + line.Baseline);
+                    r.drawImage(layer, 0, 0);
+                }
+            } else assert(referenceComposition === 'direct', 'Unknown reference compositing mode');
             const image = surface.Snapshot(); let actual;
             try { actual = image.ReadPixels(new S.SKImageInfo(w, h, S.SKColorType.Rgba8888, S.SKAlphaType.Unpremul)); }
             finally { image.Dispose(); }
             assert(actual?.length === w * h * 4, 'Missing native Skia pixel data');
             const expected = r.getImageData(0, 0, w, h).data;
-            let max = 0, sum = 0, differences = 0, ink = 0, missingInk = 0;
+            let max = 0, sum = 0, differences = 0, ink = 0, missingInk = 0, directMaximum = 0;
             for (let i = 0; i < expected.length; i += 4) {
                 let pixelDelta = 0;
                 for (let channel = 0; channel < 4; channel++) {
                     const delta = Math.abs(actual[i + channel] - expected[i + channel]);
+                    if (directReference) directMaximum = Math.max(directMaximum, Math.abs(expected[i + channel] - directReference[i + channel]));
                     max = Math.max(max, delta); pixelDelta = Math.max(pixelDelta, delta); sum += delta;
                 }
                 if (pixelDelta > 2) ++differences;
@@ -54,7 +76,7 @@ export async function RunTextQuality() {
                 canvas.getContext('2d').putImageData(new ImageData(new Uint8ClampedArray(actual), w, h), 0, 0);
                 card.append(caption, canvas); gallery.append(card);
             }
-            return { Lines: layout.TextLines.length, TextLinesVisited: platform.GetDiagnostics().TextLinesVisited - before.TextLinesVisited, DeviceScaleX: scale, DeviceScaleY: scaleY, MaximumChannelError: max, ComparedChannels: 4, MeanChannelError: sum / (w * h * 4), PixelsAboveTolerance: differences, ReferenceInkPixels: ink, MissingInkPixels: missingInk };
+            return { ReferenceComposition: referenceComposition, DirectVersusIsolatedMaximum: directReference ? directMaximum : null, Lines: layout.TextLines.length, TextLinesVisited: platform.GetDiagnostics().TextLinesVisited - before.TextLinesVisited, DeviceScaleX: scale, DeviceScaleY: scaleY, MaximumChannelError: max, ComparedChannels: 4, MeanChannelError: sum / (w * h * 4), PixelsAboveTolerance: differences, ReferenceInkPixels: ink, MissingInkPixels: missingInk };
         } finally { layout.Dispose(); surface.Dispose(); }
     }
     for (const scale of [1, 1.25, 1.5, 2, 3]) {
@@ -73,7 +95,12 @@ export async function RunTextQuality() {
     execute('ink-aware line culling preserves combining marks above their line boxes', () => {
         const lines = Array.from({length:2000}, () => 'text line');
         lines[1002] = 'a' + '\u0301'.repeat(18) + ' e' + '\u0308'.repeat(18);
-        return compare('Overhanging line ink', { text: lines.join('\n'), family: 'serif', size: 24, scale: 1.5, y: -33600.4, width: 500, snapshot: true });
+        return compare('Overhanging line ink', { text: lines.join('\n'), family: 'serif', size: 24, scale: 1.5, y: -33600.4, width: 500, snapshot: true, referenceComposition: 'isolated-lines' });
+    });
+    for (const color of ['#335bb5', 'rgba(51,91,181,0.5)']) execute(`overlapping combining marks retain isolated RGBA composition ${color}`, () => {
+        const text = 'a' + '\u0301'.repeat(18) + ' e' + '\u0308'.repeat(18);
+        return compare('Isolated overlapping ink', { text, family: 'serif', size: 24, scale: 1.5, y: 88.4, width: 500,
+            color, referenceComposition: 'isolated-lines' });
     });
     for (const scale of [1, 1.25, 1.5, 2, 3]) execute(`caret remains pixel-aligned and one nominal DIP / ${scale}x`, () => {
         const w = Math.ceil(100 * scale), h = Math.ceil(60 * scale), rect = new A.Rect(12.37, 8.11, 1, 20.18);
