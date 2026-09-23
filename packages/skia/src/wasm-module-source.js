@@ -17,12 +17,18 @@ export class SkiaWasmModuleSource {
         this.Promise.then(() => this.Statistics.PreparationMilliseconds = performance.now() - started,
             () => this.Statistics.PreparationMilliseconds = performance.now() - started);
     }
-    CreatePort() {
+    CreatePort({ Signal } = {}) {
+        Signal?.throwIfAborted();
         if (this.IsDisposed) throw new Error('Skia module source is disposed.');
         const { port1, port2 } = new MessageChannel();
         let requested = false, result, complete = false, timer;
-        const close = () => { complete = true; clearTimeout(timer); this._ports.delete(port1); port1.onmessage = null; port1.onmessageerror = null; port1.close(); };
+        const abort = () => {
+            try { port1.postMessage({ Type: 'skia-module-error', Message: Signal.reason?.message ?? 'Skia module delivery canceled.' }); } catch {}
+            close();
+        };
+        const close = () => { complete = true; Signal?.removeEventListener('abort', abort); clearTimeout(timer); this._ports.delete(port1); port1.onmessage = null; port1.onmessageerror = null; port1.close(); };
         this._ports.set(port1, close);
+        Signal?.addEventListener('abort', abort, { once: true });
         const send = () => {
             if (!requested || !result || complete || this.IsDisposed) return;
             complete = true;

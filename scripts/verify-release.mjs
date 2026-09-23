@@ -72,7 +72,7 @@ const inventory = await read('artifacts/npm/manifest.json');
 require(inventory.Packages.length === 18 && inventory.Packages.every(p => p.Version === pkg.version), 'Packed library versions disagree');
 const workerGraph=await VerifyWorkerAssets();
 const threaded={};
-for(const [name,minimum]of [['browser',39],['integration',17],['quality',12],['catalog',148]]){
+for(const [name,minimum]of [['browser',39],['integration',19],['quality',12],['catalog',148]]){
  const result=await read(`artifacts/threading/${name}-results.json`);current(result,`Threaded ${name}`);
  require(result.Completed&&result.Failed===0&&result.Passed>=minimum&&!result.Errors.length&&!result.MissingAssets.length&&result.Tests.every(t=>t.Passed),`Threaded ${name} did not complete cleanly`);
  for(const t of result.Tests)if(t.Evidence?.MaximumChannelError!=null)require(t.Evidence.Channels===4||name==='integration',`Threaded ${name} did not compare all RGBA channels`);
