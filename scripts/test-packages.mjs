@@ -117,7 +117,14 @@ const mappedDocument = X.XDocumentXamlParser.Parse('<Border xmlns="urn:packed-ol
 assert.equal(mappedDocument.Root.Type.XmlNamespace,'https://github.com/avaloniaui');
 const namespaceView=new AvaloniaXamlCompiler({CompatibleNamespaces:namespaceOptions.CompatibleNamespaces}).Compile('<Border xmlns="urn:packed-old" xmlns:l="urn:packed-old" xmlns:d="urn:design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" l:Canvas.Left="9"><d:Missing/></Border>').Build();
 assert.equal(A.Canvas.GetLeft(namespaceView),9);assert.equal(namespaceView.Child,null);namespaceView.Dispose();
-console.log(JSON.stringify({Passed:true,XamlNamespaceApis:true,EffectTransitionApis:true,GlyphPathApis:true,ImplicitAnimationApis:true,Packages:names.length,FacadeExports:Object.keys(A).length,PublicRegistryInstalled:false,StartupSubpaths:true,CorePortApis:true}));
+const aggregateTarget = new A.TextBlock();aggregateTarget.DataContext=new ReactiveObject({First:3,Second:4});
+const childAggregate = new A.MultiBinding([new A.Binding('First'),new A.Binding('Second')],values=>values.reduce((x,y)=>x+y,0));
+const aggregate = new A.MultiBinding([childAggregate]);aggregate.StringFormat='Total: {0:F1}';aggregate.ConverterCulture='en-US';
+A.BindingOperations.Apply(aggregateTarget,A.TextBlock.TextProperty,aggregate);assert.equal(aggregateTarget.Text,'Total: 7.0');
+aggregateTarget.DataContext.Second=5;assert.equal(aggregateTarget.Text,'Total: 8.0');aggregateTarget.Dispose();
+assert.equal(new A.StringFormatMultiValueConverter('{0}/{1}').Convert(['a','b']), 'a/b');
+assert.equal(new A.StringFormatValueConverter('F1').Convert(3.5,String,null,'de-DE'), '3,5');
+console.log(JSON.stringify({Passed:true,MultiBindingApis:true,XamlNamespaceApis:true,EffectTransitionApis:true,GlyphPathApis:true,ImplicitAnimationApis:true,Packages:names.length,FacadeExports:Object.keys(A).length,PublicRegistryInstalled:false,StartupSubpaths:true,CorePortApis:true}));
 `);
 const run = spawnSync(process.execPath, ['--import', './register.mjs', 'consumer.mjs'], { cwd: fixture, encoding: 'utf8', timeout: 30000 });
 if (run.error || run.status !== 0) throw new Error(`${run.error ?? ''}\n${run.stdout}\n${run.stderr}`);
