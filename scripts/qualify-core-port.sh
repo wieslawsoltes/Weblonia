@@ -6,6 +6,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 node --import ./scripts/register-loader.mjs scripts/compile-glyph-fixture.mjs
 node --import ./scripts/register-loader.mjs scripts/compile-effects-fixture.mjs
+node --import ./scripts/register-loader.mjs scripts/compile-namespace-fixture.mjs
 npm run verify:vendor
 npm run test:record
 npm run build
@@ -41,5 +42,6 @@ python tests/core-port-browser.py
 python tests/implicit-animations-browser.py
 python tests/glyph-geometry-browser.py
 python tests/effects-transitions-browser.py
+python tests/xaml-namespaces-browser.py
 npm run verify:release
 npm run benchmark
