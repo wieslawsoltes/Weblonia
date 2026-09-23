@@ -1,6 +1,6 @@
 {
   "Version": "0.6.2-alpha.1",
-  "SourceFingerprint": "da0bc93ba76cc77ee6406107721abf30d4390c255a616f85d86a2cdf8f636c63",
+  "SourceFingerprint": "0e6ad3cce5334a9edc3b6cd0822e0285bfb63459fcc00075f9ee676730dc638a",
   "Completed": true,
   "Tests": [
     {
@@ -21,7 +21,7 @@
       "WorkerCount": 0,
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 2397.25
+      "Milliseconds": 2493.07
     },
     {
       "Mode": "render-worker",
@@ -33,15 +33,15 @@
       "CompletedRunNotReplayed": true,
       "ClearedDefinitions": true,
       "IntermediatePositions": [
-        20,
-        35
+        24,
+        39
       ],
       "ComparedChannels": 4,
       "MaximumChannelError": 1,
       "WorkerCount": 1,
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 2755.47
+      "Milliseconds": 3182.96
     },
     {
       "Mode": "full-isolation",
@@ -60,7 +60,7 @@
       "WorkerCount": 2,
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 2613.04
+      "Milliseconds": 2805.68
     }
   ],
   "Errors": [],
@@ -70,8 +70,8 @@
   "SnapshotForcesRender": false,
   "PhysicalGpuQualified": false,
   "PixelChannelTolerance": 2,
-  "Browser": "153.0.8010.0",
+  "Browser": "152.0.7977.0",
   "Passed": 3,
   "Failed": 0,
-  "FinalSourceFingerprint": "da0bc93ba76cc77ee6406107721abf30d4390c255a616f85d86a2cdf8f636c63"
+  "FinalSourceFingerprint": "0e6ad3cce5334a9edc3b6cd0822e0285bfb63459fcc00075f9ee676730dc638a"
 }

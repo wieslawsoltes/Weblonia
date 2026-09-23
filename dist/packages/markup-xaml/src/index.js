@@ -242,9 +242,11 @@ export class XamlRuntimeContext {
         return this.Options.CompileBindings ?? false;
     }
     Attribute(object, attribute, namespaces) {
-        const ns = attribute.Namespace, name = attribute.Name, raw = attribute.CompiledValue ?? MarkupExtensionParser.Parse(attribute.Value);
+        const ns = attribute.Namespace, localName = attribute.Name;
+        const name = localName.includes('.') && attribute.Prefix ? `${attribute.Prefix}:${localName}` : localName;
         if ([XamlNamespaces.Design, XamlNamespaces.Compatibility, XamlNamespaces.Xml].includes(ns))
             return;
+        const raw = attribute.CompiledValue ?? MarkupExtensionParser.Parse(attribute.Value);
         if (isXamlNamespace(ns)) {
             if (['TypeArguments', 'FactoryMethod'].includes(name)) return;
             if (name === 'Key') {
@@ -270,6 +272,8 @@ export class XamlRuntimeContext {
             }
             throw new XamlParseException(`XAML directive 'x:${name}' is not implemented.`, attribute.Line, attribute.Position);
         }
+        if (ns && !localName.includes('.'))
+            throw new XamlParseException(`Unknown namespaced XAML directive '${attribute.QualifiedName}'.`, attribute.Line, attribute.Position, this.Options.SourceFile);
         if (name === 'Classes') {
             object.Classes.Replace(attribute.Value);
             return;
@@ -474,8 +478,9 @@ export class XamlRuntimeContext {
         }
     }
     Property(target, qualifiedName, values, node) {
+        if (node?.Prefix && !qualifiedName.includes(':')) qualifiedName = `${node.Prefix}:${qualifiedName}`;
         const name = qualifiedName.slice(qualifiedName.lastIndexOf('.') + 1);
-        if (qualifiedName.startsWith('Design.'))
+        if (avaloniaNamespaces.includes(node?.Type?.XmlNamespace) && node.Type.Name.startsWith('Design.'))
             return;
         const member = getProperty(target, qualifiedName, this.Registry, node?.Namespaces), current = target[member.Name];
         if (member.Property === Base.Animatable.TransitionsProperty) {
@@ -690,7 +695,7 @@ export class XamlRuntimeContext {
         for (const child of node.Children) {
             if (directives.includes(child)) continue;
             if (child.Type?.Name.includes('.')) {
-                if (child.Type.Name.startsWith('Design.'))
+                if (avaloniaNamespaces.includes(child.Type.XmlNamespace) && child.Type.Name.startsWith('Design.'))
                     continue;
                 const values = child.Children.map(c => this._BuildNode(c));
                 this.Property(object, child.Type.Name, values, child);

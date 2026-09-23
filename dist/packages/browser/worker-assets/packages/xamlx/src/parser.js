@@ -1,3 +1,5 @@
+import { ApplyXamlCompatibility } from './compatibility.js';
+
 export class XamlParseException extends SyntaxError {
     constructor(message, line = 1, column = 1, source = '') {
         super(`${source ? source + ':' : ''}${line}:${column}: ${message}`);
@@ -64,9 +66,11 @@ export class XamlXmlParser {
         this.Options = { MaxCharacters: 4 * 1024 * 1024, MaxDepth: 128, MaxNodes: 100000, ...options };
     }
     Parse(input) {
-        const text = String(input);
-        if (text.length > this.Options.MaxCharacters)
+        const original = String(input);
+        if (original.length > this.Options.MaxCharacters)
             throw new XamlParseException('XAML exceeds the configured character limit.');
+        // XML line-end normalization precedes attribute normalization and entity expansion.
+        const text = original.replace(/\r\n?/g, '\n').replace(/^\uFEFF/, '');
         let i = 0, line = 1, column = 1, nodes = 0, root = null;
         const stack = [];
         const error = message => {
@@ -83,16 +87,28 @@ export class XamlXmlParser {
             }
         };
         const whitespace = () => {
-            while (i < text.length && /\s/.test(text[i]))
+            while (i < text.length && /[ \t\r\n]/.test(text[i]))
                 advance(1);
         };
         const name = () => {
             const match = /^[A-Za-z_\p{L}][\w.\-:\p{L}\p{N}]*/u.exec(text.slice(i));
             if (!match)
                 error('Expected an XML name.');
+            const q = match[0].split(':');
+            if (q.length > 2 || q.some(part => !part || !/^[A-Za-z_\p{L}]/u.test(part)))
+                error('Invalid XML qualified name.');
             advance(match[0].length);
             return match[0];
         };
+        const isXmlCharacter = cp => cp === 9 || cp === 10 || cp === 13 ||
+            cp >= 0x20 && cp <= 0xD7FF || cp >= 0xE000 && cp <= 0xFFFD || cp >= 0x10000 && cp <= 0x10FFFF;
+        // Validate even ignored subtrees: compatibility is not an XML-validation bypass.
+        for (let n = 0, l = 1, c = 1; n < text.length;) {
+            const cp = text.codePointAt(n);
+            if (!isXmlCharacter(cp)) throw new XamlParseException('Invalid XML character.', l, c, this.Options.SourceFile);
+            const width = cp > 0xFFFF ? 2 : 1; n += width;
+            if (cp === 10) { l++; c = 1; } else c += width;
+        }
         const decode = value => {
             if (/&(?![^&;\s]+;)/.test(value))
                 error('Unescaped ampersand in XML content.');
@@ -100,9 +116,9 @@ export class XamlXmlParser {
                 const known = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'" };
                 if (Object.hasOwn(known, entity))
                     return known[entity];
-                if (/^#(?:x[0-9a-f]+|\d+)$/i.test(entity)) {
+                if (/^#(?:x[0-9a-fA-F]+|[0-9]+)$/.test(entity)) {
                     const cp = entity[1].toLowerCase() === 'x' ? parseInt(entity.slice(2), 16) : Number(entity.slice(1));
-                    if (cp <= 0 || cp > 0x10FFFF || cp >= 0xD800 && cp <= 0xDFFF)
+                    if (!isXmlCharacter(cp))
                         error('Invalid XML character reference.');
                     return String.fromCodePoint(cp);
                 }
@@ -111,13 +127,13 @@ export class XamlXmlParser {
         };
         const appendText = (value, atLine, atColumn, cdata = false) => {
             if (!stack.length) {
-                if (value.trim())
+                if (/[^ \t\r\n]/.test(value))
                     error('Text is not allowed outside the root element.');
                 return;
             }
             const parent = stack.at(-1);
             const decoded = cdata ? value : decode(value);
-            if (decoded.trim() || parent.PreserveWhitespace) {
+            if (/[^ \t\r\n]/.test(decoded) || parent.PreserveWhitespace) {
                 if (++nodes > this.Options.MaxNodes)
                     error('XAML exceeds the configured node limit.');
                 parent.Node.Children.push(new XamlAstTextNode(decoded, atLine, atColumn, parent.PreserveWhitespace));
@@ -127,6 +143,7 @@ export class XamlXmlParser {
             if (text[i] !== '<') {
                 const end = text.indexOf('<', i), length = (end < 0 ? text.length : end) - i, l = line, c = column, value = text.slice(i, i + length);
                 advance(length);
+                if (value.includes(']]>')) error('CDATA terminator is not allowed in character data.');
                 appendText(value, l, c);
                 continue;
             }
@@ -140,6 +157,7 @@ export class XamlXmlParser {
                 continue;
             }
             if (text.startsWith('<![CDATA[', i)) {
+                if (!stack.length) error('CDATA is not allowed outside the root element.');
                 const end = text.indexOf(']]>', i + 9);
                 if (end < 0)
                     error('Unterminated CDATA section.');
@@ -172,9 +190,11 @@ export class XamlXmlParser {
             const atLine = line, atColumn = column;
             advance(1);
             const qualifiedName = name(), attrs = [];
-            whitespace();
+            let separator = i; whitespace();
+            let hasSeparator = i > separator;
             const rawNames = new Set();
             while (i < text.length && text[i] !== '>' && !text.startsWith('/>', i)) {
+                if (!hasSeparator) error('XML attributes must be separated by whitespace.');
                 const l = line, c = column, qname = name();
                 if (rawNames.has(qname))
                     error(`Duplicate attribute '${qname}'.`);
@@ -194,17 +214,24 @@ export class XamlXmlParser {
                 const raw = text.slice(i, end);
                 if (raw.includes('<'))
                     error('XML attribute values cannot contain <.');
-                const value = decode(raw);
+                const value = decode(raw.replace(/[\t\n\r]/g, ' '));
                 advance(end - i + 1);
                 attrs.push({ QualifiedName: qname, Value: value, Line: l, Position: c });
-                whitespace();
+                separator = i; whitespace(); hasSeparator = i > separator;
             }
             const namespaces = { xml: XamlNamespaces.Xml, ...(stack.at(-1)?.Node.Namespaces ?? {}) };
-            for (const attr of attrs)
-                if (attr.QualifiedName === 'xmlns')
-                    namespaces[''] = attr.Value;
-                else if (attr.QualifiedName.startsWith('xmlns:'))
-                    namespaces[attr.QualifiedName.slice(6)] = attr.Value;
+            for (const attr of attrs) {
+                if (attr.QualifiedName !== 'xmlns' && !attr.QualifiedName.startsWith('xmlns:')) continue;
+                const prefix = attr.QualifiedName === 'xmlns' ? '' : attr.QualifiedName.slice(6);
+                if (prefix === 'xmlns' || attr.Value === 'http://www.w3.org/2000/xmlns/' ||
+                    prefix === 'xml' && attr.Value !== XamlNamespaces.Xml || prefix !== 'xml' && attr.Value === XamlNamespaces.Xml ||
+                    prefix && !attr.Value)
+                    error('Invalid reserved XML namespace binding.');
+                // These keys cannot safely cross the existing plain-object worker/AOT ABI.
+                if (['__proto__', 'constructor', 'prototype'].includes(prefix))
+                    error('Unsafe XML namespace prefix.');
+                namespaces[prefix] = attr.Value;
+            }
             const resolveName = (q, attribute = false) => {
                 const index = q.indexOf(':'), prefix = index < 0 ? '' : q.slice(0, index), local = index < 0 ? q : q.slice(index + 1);
                 if (prefix && !Object.hasOwn(namespaces, prefix))
@@ -213,6 +240,7 @@ export class XamlXmlParser {
             };
             const elementName = resolveName(qualifiedName), node = new XamlAstObjectNode(new XamlAstXmlTypeReference(elementName.Namespace, elementName.Name, atLine, atColumn), atLine, atColumn);
             node.Namespaces = namespaces;
+            if (elementName.Prefix) node.Prefix = elementName.Prefix;
             const expandedAttributes = new Set();
             let preserveWhitespace = stack.at(-1)?.PreserveWhitespace ?? false;
             for (const attr of attrs) {
@@ -223,8 +251,10 @@ export class XamlXmlParser {
                 if (expandedAttributes.has(expanded))
                     error(`Duplicate expanded attribute '${attr.Name}'.`);
                 expandedAttributes.add(expanded);
-                if (attr.Namespace === XamlNamespaces.Xml && attr.Name === 'space')
+                if (attr.Namespace === XamlNamespaces.Xml && attr.Name === 'space') {
+                    if (!['preserve', 'default'].includes(attr.Value)) error('xml:space must be preserve or default.');
                     preserveWhitespace = attr.Value === 'preserve';
+                }
                 node.Attributes.push(attr);
             }
             if (++nodes > this.Options.MaxNodes)
@@ -251,7 +281,18 @@ export class XamlXmlParser {
             error(`Unclosed element '${stack.at(-1).QualifiedName}'.`);
         if (!root)
             error('XAML has no root element.');
-        return new XamlDocument(root, this.Options.SourceFile);
+        return ApplyXamlCompatibility(new XamlDocument(root, this.Options.SourceFile), this.Options);
+    }
+}
+/** Public names retained from XamlX. No CLR TextReader is required in JavaScript. */
+export class XDocumentXamlParserSettings {
+    constructor(options = {}) { this.CompatibleNamespaces = null; Object.assign(this, options); }
+}
+export class XDocumentXamlParser {
+    static Parse(text, compatibilityMappings = null) {
+        const options = compatibilityMappings instanceof XDocumentXamlParserSettings
+            ? compatibilityMappings : { CompatibleNamespaces: compatibilityMappings };
+        return XamlXmlParser.Parse(text, options);
     }
 }
 export class MarkupExtensionParser {

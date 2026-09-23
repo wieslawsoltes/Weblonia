@@ -1,4 +1,4 @@
-import { WaitForWindowDocumentAsync, WaitForSecondaryRendererAsync, SecondaryWorkerError } from './secondary-startup.js';
+import { OpenSecondaryDocumentAsync, WaitForSecondaryRendererAsync, SecondaryWorkerError } from './secondary-startup.js';
 import { SkiaWasmModuleSource } from "../../skia/src/wasm-module-source.js";
 import { Disposable, Event } from "../../base/src/index.js";
 import { GetBrowserWorkerUrls, BrowserThreadingMode } from './threading-options.js';
@@ -138,13 +138,13 @@ export class BrowserWorkerApplication extends Disposable {
             this._startupAbort.signal.throwIfAborted();
             // Open synchronously inside the actual user activation. Native setup
             // may then wait for the new document, with the popup still owned here.
-            const popup = this.Window.open('', '_blank', `popup=yes,width=${Math.round(value.Width)},height=${Math.round(value.Height)}`);
-            if (!popup) throw new Error('The browser blocked this popup.');
             const deadline = performance.now() + Math.min(this.Options.InitializationTimeout ?? 45000, this.Channel?.Timeout ?? 30000);
-            let host;
+            let host, popup;
             const ports = [];
             try {
-                await WaitForWindowDocumentAsync(popup, {Signal:this._startupAbort.signal, Timeout:deadline-performance.now()});
+                popup = await OpenSecondaryDocumentAsync(this.Window, this.Options.SecondaryWindowUrl ?? new URL('./secondary-window.html', import.meta.url),
+                    `popup=yes,width=${Math.round(value.Width)},height=${Math.round(value.Height)}`,
+                    {Signal:this._startupAbort.signal, Timeout:deadline-performance.now()});
                 const doc = popup.document;
                 doc.title = value.Title;
                 doc.documentElement.style.height = '100%';
@@ -187,7 +187,7 @@ export class BrowserWorkerApplication extends Disposable {
             } catch (error) {
                 host?.Dispose();
                 for (const port of ports) port.close();
-                popup.close();
+                popup?.close();
                 throw error;
             }
         });

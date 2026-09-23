@@ -129,6 +129,8 @@ export function InstallWorkerWindowFactory(platform) {
             connection.Send({Type:'ready'});
             return root;
         }).catch(error => {
+            // Preserve startup failures even before a renderer/host is attached.
+            root.LastRenderError = error;
             connection?.Send({Type:'close-window'});
             connection?.Dispose();
             renderPort?.close();
