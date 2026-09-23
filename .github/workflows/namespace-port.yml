@@ -1,0 +1,78 @@
+name: Qualify XAML namespaces and committed window documents
+on:
+  push:
+    branches: [feature/xaml-namespace-parity]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: namespace-port-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  qualify:
+    if: github.repository == 'wieslawsoltes/Weblonia' && github.ref == 'refs/heads/feature/xaml-namespace-parity'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          package-manager-cache: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+      - name: Materialize exact reviewed source
+        run: |
+          python scripts/apply-namespace-edits.py
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -u
+          git add -A packages scripts tests docs samples
+          if ! git diff --cached --quiet; then
+            git commit -m 'feat: materialize XAML namespace and committed window document implementations'
+            git push origin HEAD:feature/xaml-namespace-parity
+          fi
+      - run: python -m pip install -r tests/requirements.txt
+      - run: python -m playwright install --with-deps chromium
+      - name: Qualify new HTTP namespace and repeated-window paths first
+        run: |
+          node --import ./scripts/register-loader.mjs scripts/compile-namespace-fixture.mjs
+          npm run build
+          python tests/xaml-namespaces-browser.py
+          python tests/threading-integration.py --http
+      - name: Run every existing and new release gate
+        run: |
+          mkdir -p artifacts/xaml-namespaces
+          if ! bash scripts/qualify-core-port.sh > artifacts/xaml-namespaces/qualification.log 2>&1; then
+            tail -160 artifacts/xaml-namespaces/qualification.log
+            exit 1
+          fi
+          tail -40 artifacts/xaml-namespaces/qualification.log
+      - name: Rebuild current source manifest and archives
+        run: |
+          cp docs/VERIFICATION.json dist/docs/VERIFICATION.json
+          python scripts/archive.py --output /tmp/namespace-port-release
+      - name: Commit qualified generated assets and evidence
+        run: |
+          git add -u
+          git add -A packages samples scripts tests docs dist SOURCE-MANIFEST.json
+          git add -f artifacts
+          if ! git diff --cached --quiet; then
+            git commit -m 'build: regenerate qualified namespace worker assets packages and evidence'
+            git push origin HEAD:feature/xaml-namespace-parity
+          fi
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: namespace-port-qualification
+          path: artifacts/
+      - uses: actions/upload-artifact@v7
+        if: success()
+        with:
+          name: namespace-port-release
+          path: /tmp/namespace-port-release/

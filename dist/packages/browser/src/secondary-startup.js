@@ -59,3 +59,39 @@ export function WaitForSecondaryRendererAsync(worker, url, start, options) {
         start();
     });
 }
+
+/** Give the secondary worker a committed same-origin owner Document. A fresh
+ * WindowProxy can initially expose a complete about:blank document even when a
+ * navigation is pending. Readiness is acknowledged by the actual host page,
+ * correlated by both WindowProxy identity and an unguessable fragment token.
+ * No worker retry or elapsed-time readiness heuristic is involved.
+ */
+export async function OpenSecondaryDocumentAsync(owner, url, features, options = {}) {
+    const target = new URL(url, owner.location.href);
+    if (target.origin !== owner.location.origin || !['http:', 'https:'].includes(target.protocol))
+        throw new TypeError('Secondary window host must be an HTTP(S) document on the application origin.');
+    if (target.username || target.password) throw new TypeError('Secondary window host cannot include credentials.');
+    const token = owner.crypto.randomUUID();
+    target.hash = 'avalonia-window=' + token;
+    let popup;
+    try {
+        await observe(options, (listen, finish) => {
+            listen(owner, 'message', event => {
+                if (event.source !== popup || event.origin !== target.origin ||
+                    event.data?.Type !== 'avalonia-secondary-document-ready' || event.data.Token !== token) return;
+                try {
+                    if (popup.closed || popup.location.href !== target.href || popup.document.readyState !== 'complete')
+                        throw new Error('Secondary host document changed before readiness acknowledgement.');
+                    finish();
+                } catch (error) { finish(error); }
+            });
+            // All listeners are installed before the synchronously activated open.
+            popup = owner.open(target.href, '_blank', features);
+            if (!popup) throw new Error('The browser blocked this popup.');
+        });
+        return popup;
+    } catch (error) {
+        try { popup?.close(); } catch { /* preserve the original failure */ }
+        throw error;
+    }
+}

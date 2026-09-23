@@ -111,10 +111,11 @@ with ExitStack() as cleanup, sync_playwright()as p:
  check('real isolated modal window blocks owner and returns its exact result',modal)
  def secondary_lifetime():
   rounds=[]
-  for index in range(6):
+  for index in range(12):
    modal=index%2==1;invoke(page,'NewModal' if modal else 'NewWindow');state=wait_window_open(page,invoke)
    require(state['Opened'] and not state['Error'],str(state))
    require(page.evaluate('catalogHost.Children.size')==1,'Closed child hosts remained registered')
+   require('/packages/browser/src/secondary-window.html#avalonia-window=' in context.pages[-1].url,'Secondary window lacks a committed host document')
    if modal:
     result={'Accepted':True,'Iteration':index};invoke(page,'CloseModal',result)
     page.wait_for_function('async()=>{const s=await catalogHost.InvokeAsync("GetModalState");return s.Completed&&s.OwnerEnabled;}')

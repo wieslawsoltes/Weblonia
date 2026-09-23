@@ -412,7 +412,7 @@
       "Name": "1000 warm TextBlock redraws do not build layouts, rasterize, upload or measure",
       "Passed": true,
       "Redraws": 1000,
-      "Milliseconds": 443.79999999998836,
+      "Milliseconds": 579.2000000000116,
       "WorkDelta": {
         "TextRasterizations": 0,
         "TextUploads": 0,
@@ -472,12 +472,12 @@
     },
     "TextService": "Native SkParagraph for registered fonts; browser system-font fallback"
   },
-  "Browser": "153.0.8010.0",
+  "Browser": "152.0.7977.0",
   "Mode": "local-asset-interception",
   "PageErrors": [],
   "MissingAssets": [],
   "Completed": true,
   "Version": "0.6.2-alpha.1",
-  "SourceFingerprint": "da0bc93ba76cc77ee6406107721abf30d4390c255a616f85d86a2cdf8f636c63",
-  "FinalSourceFingerprint": "da0bc93ba76cc77ee6406107721abf30d4390c255a616f85d86a2cdf8f636c63"
+  "SourceFingerprint": "0e6ad3cce5334a9edc3b6cd0822e0285bfb63459fcc00075f9ee676730dc638a",
+  "FinalSourceFingerprint": "0e6ad3cce5334a9edc3b6cd0822e0285bfb63459fcc00075f9ee676730dc638a"
 }

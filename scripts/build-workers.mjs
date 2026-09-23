@@ -35,7 +35,7 @@ async function CopyGraph(from, to, targets) {
         const source = path.join(from, entry.name), target = path.join(to, entry.name);
         if (entry.isDirectory()) await CopyGraph(source, target, targets);
         else if (/\.(?:js|mjs)$/.test(entry.name)) await writeFile(target, Rewrite(await readFile(source, 'utf8'), target, targets));
-        else if (/\.(json|txt|md|cjs)$/.test(entry.name) && !entry.name.includes('canvaskit.cjs')) await cp(source, target);
+        else if ((entry.name === 'secondary-window.html' || /\.(json|txt|md|cjs)$/.test(entry.name)) && !entry.name.includes('canvaskit.cjs')) await cp(source, target);
     }
 }
 async function Inventory(directory) {

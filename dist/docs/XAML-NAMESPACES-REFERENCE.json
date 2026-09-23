@@ -1,0 +1,34 @@
+{
+  "Repository": "kekekeks/XamlX",
+  "Commit": "7ef6aef496ab6e8dcf3df04bef697be49db37c04",
+  "Sources": [
+    {
+      "Path": "src/XamlX/Parsers/CompatibleXmlReader.cs",
+      "Blob": "0b80b0b87a3ba51d2fc167151db947caae52d465"
+    },
+    {
+      "Path": "src/XamlX/Parsers/XDocumentXamlParser.cs",
+      "Blob": "7b8d738613053c728a365f512bc1210a80f2da33"
+    }
+  ],
+  "Standards": [
+    {
+      "Url": "https://www.w3.org/TR/xml/",
+      "Sections": [
+        "2.2 Characters",
+        "2.11 End-of-Line Handling",
+        "3.3.3 Attribute-Value Normalization"
+      ]
+    },
+    {
+      "Url": "https://html.spec.whatwg.org/multipage/workers.html#dom-worker",
+      "Scope": "Worker outside-settings and document ownership"
+    }
+  ],
+  "PostMergeWindowFailure": {
+    "Run": 35895993579,
+    "Artifact": 10766957258,
+    "Sha256": "e85b5d1658053bddb31a648acfe5b6981b4b967d764968d174f791e7e7fc5ea7",
+    "ExactBrowserCauseEstablished": false
+  }
+}

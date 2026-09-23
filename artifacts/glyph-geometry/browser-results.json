@@ -1,6 +1,6 @@
 {
   "Version": "0.6.2-alpha.1",
-  "SourceFingerprint": "da0bc93ba76cc77ee6406107721abf30d4390c255a616f85d86a2cdf8f636c63",
+  "SourceFingerprint": "0e6ad3cce5334a9edc3b6cd0822e0285bfb63459fcc00075f9ee676730dc638a",
   "Completed": true,
   "Tests": [
     {
@@ -24,7 +24,7 @@
       },
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 1054.37
+      "Milliseconds": 1195.84
     },
     {
       "Mode": "single",
@@ -47,7 +47,7 @@
       },
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 1027.35
+      "Milliseconds": 1196.1
     },
     {
       "Mode": "render-worker",
@@ -70,7 +70,7 @@
       },
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 1840.19
+      "Milliseconds": 2148.99
     },
     {
       "Mode": "render-worker",
@@ -93,7 +93,7 @@
       },
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 1856.78
+      "Milliseconds": 2124.34
     },
     {
       "Mode": "full-isolation",
@@ -116,7 +116,7 @@
       },
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 1889.37
+      "Milliseconds": 2040.0
     },
     {
       "Mode": "full-isolation",
@@ -139,7 +139,7 @@
       },
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 1759.33
+      "Milliseconds": 1991.0
     }
   ],
   "Errors": [],
@@ -150,8 +150,8 @@
   "FontFilesDistributed": false,
   "PhysicalGpuQualified": false,
   "PixelChannelTolerance": 2,
-  "Browser": "153.0.8010.0",
+  "Browser": "152.0.7977.0",
   "Passed": 6,
   "Failed": 0,
-  "FinalSourceFingerprint": "da0bc93ba76cc77ee6406107721abf30d4390c255a616f85d86a2cdf8f636c63"
+  "FinalSourceFingerprint": "0e6ad3cce5334a9edc3b6cd0822e0285bfb63459fcc00075f9ee676730dc638a"
 }

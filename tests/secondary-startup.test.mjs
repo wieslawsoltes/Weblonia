@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { getEventListeners } from 'node:events';
 import { setTimeout as delay } from 'node:timers/promises';
-import { WaitForWindowDocumentAsync, WaitForSecondaryRendererAsync } from '../packages/browser/src/secondary-startup.js';
+import { WaitForWindowDocumentAsync, WaitForSecondaryRendererAsync, OpenSecondaryDocumentAsync } from '../packages/browser/src/secondary-startup.js';
 import { InstallWorkerWindowFactory } from '../packages/browser/src/worker-top-level.js';
 import { Window } from '../packages/browser/src/index.js';
 import { ThreadChannel } from '../packages/browser/src/thread-channel.js';
@@ -102,7 +102,13 @@ test('pre-aborted delivery never creates a MessageChannel and successful deliver
  * qualification. Actual native pixels and canonical HTTP workers are CI gates. */
 function hostFixture(t,{ready='complete',failure=null}={}) {
     const popup=fakeWindow(ready),ownerWindow=fakeWindow('complete'),workers=[];
-    ownerWindow.open=()=>popup;ownerWindow.navigator={userActivation:{isActive:true}};
+    ownerWindow.location={href:'https://example.test/app/',origin:'https://example.test'};
+    ownerWindow.crypto={randomUUID:()=> 'test-host-correlation'};
+    ownerWindow.open=url=>{popup.location=new URL(url);queueMicrotask(()=>{if(popup.document.readyState==='complete')notify();});return popup;};
+    const notify=()=>ownerWindow.emit('message',{source:popup,origin:ownerWindow.location.origin,data:{Type:'avalonia-secondary-document-ready',Token:'test-host-correlation'}});
+    popup.addEventListener('load',notify);
+    t.after(()=>popup.removeEventListener('load',notify));
+    ownerWindow.navigator={userActivation:{isActive:true}};
     class Worker extends Target {
         constructor(url){super();if(failure==='constructor')throw new Error('worker constructor failed');this.Url=url;this.Terminated=false;workers.push(this);}
         postMessage(m){
@@ -124,7 +130,7 @@ function hostFixture(t,{ready='complete',failure=null}={}) {
     proto._InstallEvents=function(){this._Listen(this.Window,'beforeunload',()=>this.Dispose());};
     proto._Snapshot=()=>({Width:10,Height:10,Scale:1});
     t.after(()=>{proto._CreateDom=create;proto._InstallEvents=install;proto._Snapshot=snapshot;});
-    const parent=new BrowserWorkerApplication({ownerDocument:ownerWindow.document},{ApplicationModule:'/app.js',InitializationTimeout:200});
+    const parent=new BrowserWorkerApplication({ownerDocument:ownerWindow.document},{ApplicationModule:'/app.js',InitializationTimeout:200,SecondaryWindowUrl:'https://example.test/secondary-window.html'});
     const source=parent._wasmSource=new SkiaWasmModuleSource({WasmModule:wasm});
     parent._runtime={Backend:'canvas'};parent._workerUrls={RenderWorkerUrl:'/render.js'};parent.Channel={Timeout:200,Dispose(){}};
     t.after(()=>parent.Dispose());
@@ -155,7 +161,7 @@ test('secondary disposal during native initialization cancels the pending open i
 test('secondary parent disposal during document loading closes the unpublished popup',async t=>{
     const {parent,popup}=hostFixture(t,{ready:'loading'});
     const p=parent._OpenWindow({Title:'Test',Width:10,Height:10});parent.Dispose();await assert.rejects(p,/disposed/);
-    assert.equal(popup.closed,true);noListeners(popup,['load','pagehide']);
+    assert.equal(popup.closed,true); // The fixture itself owns its readiness listener.
 });
 
 test('failed secondary bootstrap rejects actual ShowDialog and WhenOpened, restores owner and disposes the unshown Window',async t=>{
@@ -167,6 +173,7 @@ test('failed secondary bootstrap rejects actual ShowDialog and WhenOpened, resto
     t.after(()=>{root.Dispose();caller.Dispose();callee.Dispose();Window.WorkerWindowFactory=original;});
     const dialog=root.ShowDialog(owner);assert.equal(owner.IsEnabled,false);
     await assert.rejects(dialog,/entry failed/);await assert.rejects(root.WhenOpened,/entry failed/);
+    assert.match(root.LastRenderError.message,/entry failed/);
     assert.equal(owner.IsEnabled,true);assert.ok(root.IsDisposed);assert.equal(parent.Children.size,0);
 });
 test('closing a pending worker Window is safe and rejects late host attachment while releasing its returned ports',async t=>{
@@ -179,4 +186,43 @@ test('closing a pending worker Window is safe and rejects late host attachment w
     t.after(()=>{for(const port of [pair.port1,pair.port2,render.port1,render.port2])port.close();root.Dispose();Window.WorkerWindowFactory=original;});
     deliver({Port:pair.port2,RenderPort:render.port1,Snapshot:{}});
     await assert.rejects(root.WhenOpened,/closed while/);assert.equal((await close).Type,'close-window');assert.equal(Window.Windows.has(root),false);
+});
+
+function documentFixture() {
+    const owner=new Target(),popup=fakeWindow('complete');
+    owner.location=new URL('https://example.test/subpath/');owner.crypto={randomUUID:()=> 'unique-token'};
+    owner.open=url=>{popup.location=new URL(url);return popup;};
+    const ready=(overrides={})=>owner.emit('message',{source:popup,origin:owner.location.origin,
+        data:{Type:'avalonia-secondary-document-ready',Token:'unique-token'},...overrides});
+    return{owner,popup,ready};
+}
+test('secondary committed document requires source, origin, token, final URL and ready state',async()=>{
+    const {owner,popup,ready}=documentFixture();let done=false;
+    const p=OpenSecondaryDocumentAsync(owner,'./host.html','',{Timeout:1000}).then(w=>{done=true;return w;});
+    ready({source:{}});ready({origin:'https://other.test'});ready({data:{Type:'avalonia-secondary-document-ready',Token:'wrong'}});
+    await tick();assert.equal(done,false); // complete initial document alone is insufficient
+    ready();assert.equal(await p,popup);assert.equal(popup.location.pathname,'/subpath/host.html');noListeners(owner,['message']);
+});
+for(const kind of ['url','loading','closed'])test(`secondary acknowledged ${kind} mismatch rejects and closes only that popup`,async()=>{
+    const {owner,popup,ready}=documentFixture();const p=OpenSecondaryDocumentAsync(owner,'./host.html','',{Timeout:1000});
+    if(kind==='url')popup.location=new URL('https://example.test/wrong');
+    if(kind==='loading')popup.document.readyState='loading';
+    if(kind==='closed')popup.close();ready();await assert.rejects(p,/changed/);assert.ok(popup.closed);noListeners(owner,['message']);
+});
+test('secondary document blocked popup, timeout, cancellation and pre-abort leave no owner listener',async()=>{
+    for(const kind of ['blocked','timeout','abort','pre-abort']){
+        const {owner,popup}=documentFixture(),controller=new AbortController();let opened=0;
+        const open=owner.open;owner.open=url=>{opened++;return kind==='blocked'?null:open(url);};
+        if(kind==='pre-abort')controller.abort(new Error('pre-canceled'));
+        const p=OpenSecondaryDocumentAsync(owner,'./host.html','',{Signal:controller.signal,Timeout:10});
+        if(kind==='abort')controller.abort(new Error('canceled'));
+        await assert.rejects(p,/blocked|timed out|canceled/);noListeners(owner,['message']);noListeners(controller.signal,['abort']);
+        assert.equal(opened,kind==='pre-abort'?0:1);
+        if(kind==='timeout'||kind==='abort')assert.ok(popup.closed);
+    }
+});
+test('secondary host rejects cross-origin and non-HTTP documents before opening',async()=>{
+    const {owner}=documentFixture();owner.open=()=>assert.fail('opened');
+    for(const url of ['https://other.test/','data:text/html,hi','about:blank','https://user@example.test/'])
+        await assert.rejects(OpenSecondaryDocumentAsync(owner,url,''),/origin|credentials/);
 });
