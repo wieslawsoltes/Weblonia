@@ -1,4 +1,4 @@
-import { AvaloniaObject, DefineProperties, AvaloniaList, RelativePoint, Point, MathUtilities, Event } from '@wieslawsoltes/avalonia-base';
+import { AvaloniaObject, Animatable, DefineProperties, AvaloniaList, RelativePoint, Point, MathUtilities, Event } from '@wieslawsoltes/avalonia-base';
 import { ColorNames } from './color-names.js';
 const byte = v => Math.round(MathUtilities.Clamp(Number(v), 0, 255));
 export class Color {
@@ -95,7 +95,7 @@ export const Colors = new Proxy({ Transparent: new Color(0, 255, 255, 255) }, { 
             return target[p];
         return target[p] ??= Color.Parse(p);
     } });
-export class Brush extends AvaloniaObject {
+export class Brush extends Animatable {
     static Parse(s) {
         return s instanceof Brush ? s : new SolidColorBrush(Color.Parse(s));
     }
@@ -208,17 +208,6 @@ export class BoxShadow {
         Object.assign(this, { OffsetX, OffsetY, Blur, Spread, Color: Color.Parse(color), IsInset });
     }
 }
-export class BlurEffect extends AvaloniaObject {
-    constructor(radius = 5) { super(); this.Radius = radius; }
-}
-DefineProperties(BlurEffect, { Radius: [5, { Convert: Number, Validate: value => Number.isFinite(value) && value >= 0 }] });
-export class DropShadowEffect extends AvaloniaObject {
-    constructor(options = {}) { super(); Object.assign(this, options); }
-}
-DefineProperties(DropShadowEffect, {
-    OffsetX: [0, { Convert: Number }], OffsetY: [0, { Convert: Number }],
-    BlurRadius: [5, { Convert: Number }], Color: [Colors.Black, { Convert: Color.Parse }], Opacity: [1, { Convert: Number }],
-});
 export class BitmapCache extends AvaloniaObject {
     constructor(renderAtScale = 1) { super(); this.RenderAtScale = renderAtScale; }
 }

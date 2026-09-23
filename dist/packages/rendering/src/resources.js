@@ -1,6 +1,6 @@
 import { Point, Vector, Size, Rect, Matrix, RelativePoint, Event } from '@wieslawsoltes/avalonia-base';
 import { Color, Brush, SolidColorBrush, ImmutableSolidColorBrush, LinearGradientBrush, RadialGradientBrush, ConicGradientBrush,
-    GradientStop, ImageBrush, VisualBrush, Pen, DashStyle, BoxShadow, BlurEffect, DropShadowEffect, ExperimentalAcrylicMaterial,
+    GradientStop, ImageBrush, VisualBrush, Pen, DashStyle, BoxShadow, IBlurEffect, IDropShadowEffect, IEffect, EffectExtensions, ImmutableBlurEffect, ImmutableDropShadowEffect, ImmutableDropShadowDirectionEffect, ExperimentalAcrylicMaterial,
     GlyphTypeface, GlyphRun, GlyphInfo, ImmutableGlyphRunReference, Geometry, StreamGeometry, Typeface, FontFamily, Bitmap, WriteableBitmap, TextLayout, GetTextServiceVersion } from '@wieslawsoltes/avalonia-media';
 import { CompositionProtocolError, SameCompositionValue } from './protocol.js';
 
@@ -130,8 +130,13 @@ export class CompositionResourceRegistry {
         if (value instanceof Pen) return { $: 'Pen', V: [this.Encode(value.Brush), value.Thickness, this.Encode(value.DashStyle), value.LineCap, value.LineJoin, value.MiterLimit] };
         if (value instanceof DashStyle) return { $: 'DashStyle', V: [Array.from(value.Dashes ?? []), value.Offset] };
         if (value instanceof BoxShadow) return { $: 'BoxShadow', V: { OffsetX: value.OffsetX, OffsetY: value.OffsetY, Blur: value.Blur, Spread: value.Spread, Color: this.Encode(value.Color), IsInset: value.IsInset } };
-        if (value instanceof BlurEffect) return { $: 'BlurEffect', Radius: value.Radius };
-        if (value instanceof DropShadowEffect) return { $: 'DropShadowEffect', V: { OffsetX: value.OffsetX, OffsetY: value.OffsetY, BlurRadius: value.BlurRadius, Color: this.Encode(value.Color), Opacity: value.Opacity } };
+        if (value instanceof IEffect) {
+            const effect = EffectExtensions.ToImmutable(value);
+            if (effect instanceof IBlurEffect) return { $: 'BlurEffect', Radius: effect.Radius };
+            if (EffectExtensions.GetKind(effect) === 'direction') return { $: 'DropShadowDirectionEffect', V: {
+                Direction: effect.Direction, ShadowDepth: effect.ShadowDepth, BlurRadius: effect.BlurRadius, Color: this.Encode(effect.Color), Opacity: effect.Opacity } };
+            return { $: 'DropShadowEffect', V: { OffsetX: effect.OffsetX, OffsetY: effect.OffsetY, BlurRadius: effect.BlurRadius, Color: this.Encode(effect.Color), Opacity: effect.Opacity } };
+        }
         if (value instanceof ExperimentalAcrylicMaterial) return { $: 'Acrylic', V: { TintColor: this.Encode(value.TintColor), TintOpacity: value.TintOpacity, MaterialOpacity: value.MaterialOpacity, FallbackColor: this.Encode(value.FallbackColor), BlurRadius: value.BlurRadius } };
         if (value instanceof Geometry) {
             const description = value.GetPathDescription();
@@ -199,8 +204,24 @@ export class CompositionResourceResolver {
             case 'Pen': return new Pen(...value.V.map(this.Decode));
             case 'DashStyle': return new DashStyle(...value.V);
             case 'BoxShadow': return new BoxShadow(this.Decode(value.V));
-            case 'BlurEffect': return new BlurEffect(value.Radius);
-            case 'DropShadowEffect': return new DropShadowEffect(this.Decode(value.V));
+            case 'BlurEffect': case 'DropShadowEffect': case 'DropShadowDirectionEffect': {
+                try {
+                    if (value.$ === 'BlurEffect') {
+                        if (Object.keys(value).some(k => !['$', 'Radius'].includes(k))) error('Invalid blur descriptor fields.');
+                        return new ImmutableBlurEffect(value.Radius);
+                    }
+                    if (Object.keys(value).some(k => !['$', 'V'].includes(k))) error('Invalid shadow descriptor fields.');
+                    const v = value.V, direction = value.$ === 'DropShadowDirectionEffect';
+                    const keys = direction ? ['Direction','ShadowDepth','BlurRadius','Color','Opacity'] : ['OffsetX','OffsetY','BlurRadius','Color','Opacity'];
+                    if (!v || Array.isArray(v) || Object.keys(v).length !== keys.length || keys.some(k => !Object.hasOwn(v, k))) error('Invalid shadow descriptor fields.');
+                    const channels = v.Color?.V;
+                    if (v.Color?.$ !== 'Color' || !Array.isArray(channels) || channels.length !== 4 || channels.some(c => !Number.isInteger(c) || c < 0 || c > 255)) error('Invalid shadow color.');
+                    const c = new Color(...channels);
+                    return direction ? new ImmutableDropShadowDirectionEffect(v.Direction, v.ShadowDepth, v.BlurRadius, c, v.Opacity)
+                        : new ImmutableDropShadowEffect(v.OffsetX, v.OffsetY, v.BlurRadius, c, v.Opacity);
+                } catch (failure) { error(`Invalid effect descriptor: ${failure.message}`); }
+                break;
+            }
             case 'Acrylic': return new ExperimentalAcrylicMaterial(this.Decode(value.V));
             case 'Brush': {
                 const T = brushTypes[value.Type]; if (!T) error('Unknown brush descriptor.'); const brush = new T();

@@ -3,43 +3,43 @@
   "Node": "v22.23.2",
   "Architecture": "x64",
   "Platform": "linux",
-  "Cpu": "AMD EPYC 9V45 96-Core Processor",
+  "Cpu": "AMD EPYC 9V74 80-Core Processor",
   "Scope": "Single-process JavaScript microbenchmarks with a counting fixed-width metrics provider; not end-to-end UI/GPU frame rate",
   "SamplesPerCase": 5,
   "Results": [
     {
       "Name": "5000 unchanged TextBlock renders",
-      "MedianMilliseconds": 0.8166580000000181,
-      "MinMilliseconds": 0.6761869999999988,
-      "MaxMilliseconds": 2.669614000000024,
+      "MedianMilliseconds": 0.9950309999999831,
+      "MinMilliseconds": 0.5604679999999576,
+      "MaxMilliseconds": 3.255160999999987,
       "Samples": [
         {
           "Iterations": 5000,
-          "Milliseconds": 2.669614000000024,
+          "Milliseconds": 3.255160999999987,
           "Measurements": 0,
           "Layouts": 0
         },
         {
           "Iterations": 5000,
-          "Milliseconds": 0.8166580000000181,
+          "Milliseconds": 0.9950309999999831,
           "Measurements": 0,
           "Layouts": 0
         },
         {
           "Iterations": 5000,
-          "Milliseconds": 0.6761869999999988,
+          "Milliseconds": 0.9986959999999954,
           "Measurements": 0,
           "Layouts": 0
         },
         {
           "Iterations": 5000,
-          "Milliseconds": 1.0019869999999855,
+          "Milliseconds": 0.5604679999999576,
           "Measurements": 0,
           "Layouts": 0
         },
         {
           "Iterations": 5000,
-          "Milliseconds": 0.7994720000000086,
+          "Milliseconds": 0.8503759999999829,
           "Measurements": 0,
           "Layouts": 0
         }
@@ -47,37 +47,37 @@
     },
     {
       "Name": "100 repeated caret hit tests on a 5000-character line",
-      "MedianMilliseconds": 0.11754700000000184,
-      "MinMilliseconds": 0.11116799999999216,
-      "MaxMilliseconds": 0.134081000000009,
+      "MedianMilliseconds": 0.1641520000000014,
+      "MinMilliseconds": 0.15378799999996318,
+      "MaxMilliseconds": 0.1769109999999614,
       "Samples": [
         {
           "Iterations": 100,
-          "Milliseconds": 0.11754700000000184,
+          "Milliseconds": 0.1641520000000014,
           "Measurements": 0,
           "FirstHitMeasurements": 12
         },
         {
           "Iterations": 100,
-          "Milliseconds": 0.134081000000009,
+          "Milliseconds": 0.15378799999996318,
           "Measurements": 0,
           "FirstHitMeasurements": 12
         },
         {
           "Iterations": 100,
-          "Milliseconds": 0.13404199999999378,
+          "Milliseconds": 0.1749690000000328,
           "Measurements": 0,
           "FirstHitMeasurements": 12
         },
         {
           "Iterations": 100,
-          "Milliseconds": 0.11659600000001547,
+          "Milliseconds": 0.1769109999999614,
           "Measurements": 0,
           "FirstHitMeasurements": 12
         },
         {
           "Iterations": 100,
-          "Milliseconds": 0.11116799999999216,
+          "Milliseconds": 0.1588649999999916,
           "Measurements": 0,
           "FirstHitMeasurements": 12
         }
@@ -85,70 +85,70 @@
     },
     {
       "Name": "20 wrapped layouts of a 10000-character line",
-      "MedianMilliseconds": 2.9531499999999937,
-      "MinMilliseconds": 2.834462000000002,
-      "MaxMilliseconds": 4.9857470000000035,
+      "MedianMilliseconds": 4.592506999999955,
+      "MinMilliseconds": 4.386552999999992,
+      "MaxMilliseconds": 8.64838199999997,
       "Samples": [
         {
           "Iterations": 20,
-          "Milliseconds": 4.9857470000000035,
+          "Milliseconds": 8.64838199999997,
           "Measurements": 840
         },
         {
           "Iterations": 20,
-          "Milliseconds": 2.9531499999999937,
+          "Milliseconds": 4.386552999999992,
           "Measurements": 840
         },
         {
           "Iterations": 20,
-          "Milliseconds": 3.1618550000000027,
+          "Milliseconds": 5.07737400000002,
           "Measurements": 840
         },
         {
           "Iterations": 20,
-          "Milliseconds": 2.8924590000000023,
+          "Milliseconds": 4.590364000000022,
           "Measurements": 840
         },
         {
           "Iterations": 20,
-          "Milliseconds": 2.834462000000002,
+          "Milliseconds": 4.592506999999955,
           "Measurements": 840
         }
       ]
     },
     {
       "Name": "5000 nested compiled-binding leaf updates",
-      "MedianMilliseconds": 4.398163999999952,
-      "MinMilliseconds": 3.9718919999999684,
-      "MaxMilliseconds": 15.025052000000017,
+      "MedianMilliseconds": 7.019765000000007,
+      "MinMilliseconds": 5.925196999999969,
+      "MaxMilliseconds": 19.422185000000013,
       "Samples": [
         {
           "Iterations": 5000,
-          "Milliseconds": 15.025052000000017,
+          "Milliseconds": 19.422185000000013,
           "AncestorReads": 0,
           "NewSubscriptions": 0
         },
         {
           "Iterations": 5000,
-          "Milliseconds": 5.484356999999989,
+          "Milliseconds": 10.863786000000005,
           "AncestorReads": 0,
           "NewSubscriptions": 0
         },
         {
           "Iterations": 5000,
-          "Milliseconds": 4.398163999999952,
+          "Milliseconds": 7.019765000000007,
           "AncestorReads": 0,
           "NewSubscriptions": 0
         },
         {
           "Iterations": 5000,
-          "Milliseconds": 4.380585999999994,
+          "Milliseconds": 5.925196999999969,
           "AncestorReads": 0,
           "NewSubscriptions": 0
         },
         {
           "Iterations": 5000,
-          "Milliseconds": 3.9718919999999684,
+          "Milliseconds": 6.757607000000007,
           "AncestorReads": 0,
           "NewSubscriptions": 0
         }

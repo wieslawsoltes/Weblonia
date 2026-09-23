@@ -98,7 +98,17 @@ const pathGeometry=new A.PathGeometry([figure]);assert.ok(pathGeometry instanceo
 const glyphInfo=new A.GlyphInfo(1,0,12,new A.Vector(.5,1));assert.equal(glyphInfo.GlyphAdvance,12);assert.ok(Object.isFrozen(glyphInfo.GlyphOffset));
 assert.equal(typeof A.GlyphRun,'function');assert.equal(typeof A.GlyphTypeface.FromData,'function');assert.equal(typeof A.GlyphRunDrawing,'function');
 pathGeometry.Dispose();for(const segment of figure.Segments)segment.Dispose();figure.Dispose();
-console.log(JSON.stringify({Passed:true,GlyphPathApis:true,ImplicitAnimationApis:true,Packages:names.length,FacadeExports:Object.keys(A).length,PublicRegistryInstalled:false,StartupSubpaths:true,CorePortApis:true}));
+const transitionOwner = new A.Animatable(), effectProperty = A.AvaloniaProperty.RegisterAttached(class PackageEffect {},'PackageEffect',null);
+const transitionClock = new A.ManualClock(), effectTransition = new A.EffectTransition(effectProperty,100);
+transitionOwner.Clock = transitionClock;transitionOwner.Transitions = new A.Transitions([effectTransition]);
+transitionOwner.SetValue(effectProperty,A.Effect.Parse('blur(12)'));transitionClock.Advance(50);
+assert.equal(transitionOwner.GetValue(effectProperty).Radius,6);transitionClock.Advance(50);
+assert.equal(transitionOwner.GetValue(effectProperty).Radius,12);assert.equal(transitionClock._listeners.size,0);
+const directionEffect = new A.DropShadowDirectionEffect({Direction:90,ShadowDepth:12});
+const frozenEffect = directionEffect.ToImmutable();assert.ok(frozenEffect instanceof A.IDropShadowEffect);assert.equal(frozenEffect.Direction,90);assert.equal(frozenEffect.OffsetY,12);
+assert.equal(A.EffectExtensions.GetEffectOutputPadding(new A.ImmutableBlurEffect(2)).Left,3);
+transitionOwner.Dispose();effectTransition.Dispose();directionEffect.Dispose();
+console.log(JSON.stringify({Passed:true,EffectTransitionApis:true,GlyphPathApis:true,ImplicitAnimationApis:true,Packages:names.length,FacadeExports:Object.keys(A).length,PublicRegistryInstalled:false,StartupSubpaths:true,CorePortApis:true}));
 `);
 const run = spawnSync(process.execPath, ['--import', './register.mjs', 'consumer.mjs'], { cwd: fixture, encoding: 'utf8', timeout: 30000 });
 if (run.error || run.status !== 0) throw new Error(`${run.error ?? ''}\n${run.stdout}\n${run.stderr}`);

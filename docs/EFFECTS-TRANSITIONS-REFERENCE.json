@@ -1,0 +1,76 @@
+{
+  "Repository": "AvaloniaUI/Avalonia",
+  "Ref": "dff6a87665aa456c37b8cf89647e007f4c3066d7",
+  "Files": [
+    {
+      "Path": "src/Avalonia.Base/Media/Effects/Effect.cs",
+      "Blob": "abc1480d9d7c05ba0feab690464f9fe3433aa766",
+      "Url": "https://github.com/AvaloniaUI/Avalonia/blob/dff6a87665aa456c37b8cf89647e007f4c3066d7/src/Avalonia.Base/Media/Effects/Effect.cs"
+    },
+    {
+      "Path": "src/Avalonia.Base/Media/Effects/DropShadowEffect.cs",
+      "Blob": "b9420a18962a844764f8affe09eea8a4b20bf95e",
+      "Url": "https://github.com/AvaloniaUI/Avalonia/blob/dff6a87665aa456c37b8cf89647e007f4c3066d7/src/Avalonia.Base/Media/Effects/DropShadowEffect.cs"
+    },
+    {
+      "Path": "src/Avalonia.Base/Media/Effects/IDropShadowEffect.cs",
+      "Blob": "bb97410d7f2e52f56c6b96f502dac951b22c73c1",
+      "Url": "https://github.com/AvaloniaUI/Avalonia/blob/dff6a87665aa456c37b8cf89647e007f4c3066d7/src/Avalonia.Base/Media/Effects/IDropShadowEffect.cs"
+    },
+    {
+      "Path": "src/Avalonia.Base/Media/Effects/IBlurEffect.cs",
+      "Blob": "716159747c7b930a928df94ac50c08173e9ccedf",
+      "Url": "https://github.com/AvaloniaUI/Avalonia/blob/dff6a87665aa456c37b8cf89647e007f4c3066d7/src/Avalonia.Base/Media/Effects/IBlurEffect.cs"
+    },
+    {
+      "Path": "src/Avalonia.Base/Media/Effects/EffectTransition.cs",
+      "Blob": "d73d82fb2a445d9c345fbd39e3cfd9187d12fc30",
+      "Url": "https://github.com/AvaloniaUI/Avalonia/blob/dff6a87665aa456c37b8cf89647e007f4c3066d7/src/Avalonia.Base/Media/Effects/EffectTransition.cs"
+    },
+    {
+      "Path": "src/Avalonia.Base/Media/Effects/EffectAnimator.cs",
+      "Blob": "a81e58f2d03fbfc453513b7aff9a9baec717a4bb",
+      "Url": "https://github.com/AvaloniaUI/Avalonia/blob/dff6a87665aa456c37b8cf89647e007f4c3066d7/src/Avalonia.Base/Media/Effects/EffectAnimator.cs"
+    },
+    {
+      "Path": "src/Avalonia.Base/Media/Effects/EffectExtesions.cs",
+      "Blob": "adc287607b8e14169bf218d0b80eaca5b7a900d2",
+      "Url": "https://github.com/AvaloniaUI/Avalonia/blob/dff6a87665aa456c37b8cf89647e007f4c3066d7/src/Avalonia.Base/Media/Effects/EffectExtesions.cs"
+    },
+    {
+      "Path": "src/Avalonia.Base/Animation/Animatable.cs",
+      "Blob": "8bcb61ff99bf05c31fc1504ba82accc8f8cca6e1",
+      "Url": "https://github.com/AvaloniaUI/Avalonia/blob/dff6a87665aa456c37b8cf89647e007f4c3066d7/src/Avalonia.Base/Animation/Animatable.cs"
+    },
+    {
+      "Path": "src/Avalonia.Base/Animation/TransitionBase.cs",
+      "Blob": "864cd1bf7ad37d7da05d51f0ab8104a5d0d6bd4a",
+      "Url": "https://github.com/AvaloniaUI/Avalonia/blob/dff6a87665aa456c37b8cf89647e007f4c3066d7/src/Avalonia.Base/Animation/TransitionBase.cs"
+    },
+    {
+      "Path": "src/Avalonia.Base/Animation/Transition.cs",
+      "Blob": "2ad92c9183d74da299713ef61524e36fe306a905",
+      "Url": "https://github.com/AvaloniaUI/Avalonia/blob/dff6a87665aa456c37b8cf89647e007f4c3066d7/src/Avalonia.Base/Animation/Transition.cs"
+    },
+    {
+      "Path": "src/Avalonia.Base/Animation/Animators/ColorAnimator.cs",
+      "Blob": "719d0d67abfd95061498d5f19ccc5e25cd5147be",
+      "Url": "https://github.com/AvaloniaUI/Avalonia/blob/dff6a87665aa456c37b8cf89647e007f4c3066d7/src/Avalonia.Base/Animation/Animators/ColorAnimator.cs"
+    },
+    {
+      "Path": "src/Skia/Avalonia.Skia/DrawingContextImpl.Effects.cs",
+      "Blob": "b661ad467d228ca7b8ca3f043cf46263c7ffc513",
+      "Url": "https://github.com/AvaloniaUI/Avalonia/blob/dff6a87665aa456c37b8cf89647e007f4c3066d7/src/Skia/Avalonia.Skia/DrawingContextImpl.Effects.cs"
+    },
+    {
+      "Path": "src/Skia/Avalonia.Skia/DrawingContextImpl.cs",
+      "Blob": "eb95fb56b291219c6a2c4e5c71950ad367713b4f",
+      "Url": "https://github.com/AvaloniaUI/Avalonia/blob/dff6a87665aa456c37b8cf89647e007f4c3066d7/src/Skia/Avalonia.Skia/DrawingContextImpl.cs"
+    }
+  ],
+  "IntentionalCorrections": [
+    "Directional ToImmutable uses Direction/ShadowDepth, not OffsetX/OffsetY in a polar constructor.",
+    "Effect equality when replacing a property value retains mutable-resource subscription semantics."
+  ],
+  "FullParity": false
+}

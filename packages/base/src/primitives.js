@@ -2,7 +2,10 @@ export const MathUtilities = Object.freeze({
     Clamp: (v, min, max) => Math.max(min, Math.min(max, v)),
     AreClose: (a, b, epsilon = 1e-6) => a === b || Math.abs(a - b) <= epsilon * Math.max(1, Math.abs(a), Math.abs(b)),
 });
-export const AreValuesEqual = (a, b) => Object.is(a, b) || (a != null && typeof a.Equals === 'function' && a.Equals(b));
+// Some erased interfaces expose typed value equality without replacing the
+// reference semantics needed when switching back to an observable resource.
+export const AreValuesEqual = (a, b) => Object.is(a, b) || (a != null &&
+    (typeof a._EqualsValue === 'function' ? a._EqualsValue(b) : typeof a.Equals === 'function' && a.Equals(b)));
 function numbers(value, allowed) {
     const a = String(value).trim().split(/[\s,]+/).filter(Boolean).map(Number);
     if (!allowed.includes(a.length) || a.some(v => !Number.isFinite(v)))

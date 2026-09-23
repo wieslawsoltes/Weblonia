@@ -1,5 +1,5 @@
 import { AvaloniaList, AvaloniaProperty, BindingPriority, Disposable, CompositeDisposable, Point, Size, Rect, Thickness, CornerRadius, Matrix, MathUtilities } from '@wieslawsoltes/avalonia-base';
-import { Color, SolidColorBrush } from '@wieslawsoltes/avalonia-media';
+import { Color, SolidColorBrush, IEffect, EffectExtensions } from '@wieslawsoltes/avalonia-media';
 import { ContentControl } from '@wieslawsoltes/avalonia-controls';
 export class Easing {
     Ease(progress) {
@@ -177,6 +177,7 @@ export class ManualClock extends Clock {
 }
 export function Interpolate(a, b, t) {
     const lerp = (x, y) => x + (y - x) * t;
+    if (a instanceof IEffect || b instanceof IEffect) return EffectExtensions.Interpolate(a, b, t);
     if (typeof a === 'number' && typeof b === 'number')
         return lerp(a, b);
     if (a instanceof Color && b instanceof Color)
@@ -201,7 +202,7 @@ export class Animation {
         this.Clock = null;
     }
     RunAsync(control, cancellationToken = null) {
-        const duration = ParseDuration(this.Duration), delay = ParseDuration(this.Delay), gap = ParseDuration(this.DelayBetweenIterations), count = Number(this.IterationCount?.Value ?? this.IterationCount), clock = this.Clock ?? Clock.GlobalClock;
+        const duration = ParseDuration(this.Duration), delay = ParseDuration(this.Delay), gap = ParseDuration(this.DelayBetweenIterations), count = Number(this.IterationCount?.Value ?? this.IterationCount), clock = this.Clock ?? control.Clock ?? Clock.GlobalClock;
         if (!(duration >= 0) || !(delay >= 0) || !(gap >= 0) || !(count > 0))
             return Promise.reject(new RangeError('Animation duration/delay/count is invalid.'));
         const tracks = new Map();
@@ -216,6 +217,7 @@ export class Animation {
                 tracks.get(p).push({ Cue: keyFrame.Cue instanceof Cue ? keyFrame.Cue.CueValue : Cue.Parse(keyFrame.Cue).CueValue, Value: convert ? convert(setter.Value) : setter.Value, Easing: keyFrame.KeySpline });
             }
         for (const [p, keys] of tracks) {
+            for (const frame of keys) if (frame.Value instanceof IEffect) frame.Value = EffectExtensions.ToImmutable(frame.Value);
             keys.sort((a, b) => a.Cue - b.Cue);
             if (!keys.length || keys[0].Cue > 0)
                 keys.unshift({ Cue: 0, Value: control.GetValue(p) });
@@ -304,33 +306,7 @@ export class Animation {
         });
     }
 }
-export class Transition {
-    constructor(property = null, duration = 200) {
-        this.Property = property;
-        this.Duration = duration;
-        this.Delay = 0;
-        this.Easing = new CubicEaseOut();
-    }
-    async Apply(control, oldValue, newValue, cancellationToken) {
-        const animation = new Animation();
-        animation.Duration = this.Duration;
-        animation.Delay = this.Delay;
-        animation.Easing = this.Easing;
-        animation.Children.Add(new KeyFrame(0, [{ Property: this.Property, Value: oldValue }]));
-        animation.Children.Add(new KeyFrame(1, [{ Property: this.Property, Value: newValue }]));
-        await animation.RunAsync(control, cancellationToken);
-    }
-}
-export class DoubleTransition extends Transition {
-}
-export class ColorTransition extends Transition {
-}
-export class BrushTransition extends Transition {
-}
-export class ThicknessTransition extends Transition {
-}
-export class Transitions extends AvaloniaList {
-}
+export * from './transitions.js';
 export class TransitioningContentControl extends ContentControl {
     constructor() {
         super();

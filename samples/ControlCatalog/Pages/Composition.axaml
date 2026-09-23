@@ -6,4 +6,14 @@
 <StackPanel Orientation="Horizontal" Spacing="12"><Button Name="MoveImplicitComposition" Content="Move implicitly / retarget"/><Button Name="ClearImplicitComposition" Content="Clear implicit animations"/></StackPanel>
 <TextBlock Name="CompositionStatus"/>
 </StackPanel></Border>
+<Border Classes="card"><StackPanel Spacing="14">
+<TextBlock Text="Effects and property transitions" FontSize="19" FontWeight="SemiBold"/>
+<TextBlock Text="A XAML EffectTransition animates the native filter. Repeated clicks retarget its current value; the directional shadow also has independent animatable properties." TextWrapping="Wrap"/>
+<Border Padding="36" Background="#f0f1f7" CornerRadius="12"><Border Name="EffectsDemo" Width="132" Height="68" Background="#6757d9" CornerRadius="10" Effect="drop-shadow(12 10 10 #90222634)">
+<Border.Transitions><EffectTransition Property="Effect" Duration="0:0:0.6"/></Border.Transitions>
+<TextBlock Text="Native Skia" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+</Border></Border>
+<StackPanel Orientation="Horizontal" Spacing="10"><Button Name="ToggleEffectsDemo" Content="Blur / shadow"/><Button Name="RotateEffectsDemo" Content="Rotate shadow"/><Button Name="ClearEffectsDemo" Content="Clear effect"/></StackPanel>
+<TextBlock Name="EffectsDemoStatus" Text="Immutable effect parsing · reusable transitions · retained native filters" TextWrapping="Wrap"/>
+</StackPanel></Border>
 </StackPanel>

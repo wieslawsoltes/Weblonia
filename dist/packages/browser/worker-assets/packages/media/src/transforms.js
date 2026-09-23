@@ -1,5 +1,5 @@
-import { AvaloniaObject, DefineProperties, AvaloniaList, Matrix, Event, CompositeDisposable } from "../../base/src/index.js";
-export class Transform extends AvaloniaObject {
+import { AvaloniaObject, Animatable, DefineProperties, AvaloniaList, Matrix, Event, CompositeDisposable } from "../../base/src/index.js";
+export class Transform extends Animatable {
     constructor() {
         super();
         this.Changed = new Event();

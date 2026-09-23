@@ -478,6 +478,11 @@ export class XamlRuntimeContext {
         if (qualifiedName.startsWith('Design.'))
             return;
         const member = getProperty(target, qualifiedName, this.Registry, node?.Namespaces), current = target[member.Name];
+        if (member.Property === Base.Animatable.TransitionsProperty) {
+            const transitions = values.length === 1 && values[0] instanceof Base.Transitions ? values[0] : new Base.Transitions(values);
+            this.Set(target, qualifiedName, transitions, node.Namespaces, node);
+            return;
+        }
         if (current instanceof Styling.ResourceDictionary && values.length === 1 && values[0] instanceof Styling.ResourceDictionary) {
             const other = values[0];
             for (const [key, value] of other)

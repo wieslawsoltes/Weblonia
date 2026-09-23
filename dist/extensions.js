@@ -95,6 +95,26 @@ export async function ConfigureExtendedPage(catalog, id, page, model) {
         life.Add(find('StopComposition').Click.Add(() => { tile.StopAllAnimations(); follower.StopAllAnimations(); find('CompositionStatus').Text = 'Stopped · base values restored'; }));
         life.Add(A.Disposable.Create(() => { tile.StopAnimation('Offset.X'); follower.StopAnimation('Offset'); implicitAnimations.Dispose();implicitGroup.Dispose();implicitOffset.Dispose();implicitScale.Dispose();group.Dispose(); tile.Dispose(); follower.Dispose(); animation.Dispose(); expression.Dispose(); }));
         find('CompositionStatus').Text = 'Ready · committed child visuals attached to the control';
+        const effectTarget = find('EffectsDemo'), effectStatus = find('EffectsDemoStatus');
+        const shadow = new A.DropShadowDirectionEffect({ Direction: 35, ShadowDepth: 16, BlurRadius: 12, Color: '#90222634' });
+        const rotateTransition = new A.DoubleTransition(A.DropShadowDirectionEffect.DirectionProperty, 650);
+        shadow.Transitions = new A.Transitions([rotateTransition]);
+        let blurSelected = false;
+        life.Add(find('ToggleEffectsDemo').Click.Add(() => {
+            blurSelected = !blurSelected; effectTarget.Effect = blurSelected ? A.Effect.Parse('blur(9)') : shadow;
+            effectStatus.Text = 'EffectTransition · ' + (blurSelected ? 'blur' : 'directional shadow') + ' · click again to retarget';
+        }));
+        life.Add(find('RotateEffectsDemo').Click.Add(() => {
+            blurSelected = false; effectTarget.Effect = shadow; const direction = (shadow.Direction + 90) % 360; shadow.Direction = direction;
+            effectStatus.Text = 'Animating Direction to ' + direction.toFixed(0) + '° · depth ' + shadow.ShadowDepth;
+        }));
+        life.Add(find('ClearEffectsDemo').Click.Add(() => {
+            effectTarget.Effect = null; effectStatus.Text = 'Transitioning to no effect; normal rendered content is preserved';
+        }));
+        life.Add(A.Disposable.Create(() => {
+            effectTarget.DisableTransitions(); effectTarget.Transitions?.Get(0).Dispose();
+            shadow.Dispose(); rotateTransition.Dispose();
+        }));
     }
     if (['OpenGL', 'OpenGLLease', 'OpenGLInterop'].includes(id)) {
         const gl = new TriangleControl(), status = find('GlStatus');
