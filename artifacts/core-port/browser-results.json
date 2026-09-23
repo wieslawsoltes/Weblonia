@@ -1,6 +1,6 @@
 {
   "Version": "0.6.2-alpha.1",
-  "SourceFingerprint": "0e6ad3cce5334a9edc3b6cd0822e0285bfb63459fcc00075f9ee676730dc638a",
+  "SourceFingerprint": "6bbc379ecb3ff0e14339de517f36b843bf93682c5cac400b0ac205f740edd56b",
   "Completed": true,
   "Tests": [
     {
@@ -33,7 +33,7 @@
       },
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 1220.22
+      "Milliseconds": 1173.45
     },
     {
       "Mode": "render-worker",
@@ -65,7 +65,7 @@
       },
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 1654.51
+      "Milliseconds": 1581.26
     },
     {
       "Mode": "full-isolation",
@@ -97,7 +97,7 @@
       },
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 1545.42
+      "Milliseconds": 1435.17
     }
   ],
   "Errors": [],
@@ -110,5 +110,5 @@
   "Browser": "152.0.7977.0",
   "Passed": 3,
   "Failed": 0,
-  "FinalSourceFingerprint": "0e6ad3cce5334a9edc3b6cd0822e0285bfb63459fcc00075f9ee676730dc638a"
+  "FinalSourceFingerprint": "6bbc379ecb3ff0e14339de517f36b843bf93682c5cac400b0ac205f740edd56b"
 }

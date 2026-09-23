@@ -1,6 +1,6 @@
 {
   "Version": "0.6.2-alpha.1",
-  "SourceFingerprint": "0e6ad3cce5334a9edc3b6cd0822e0285bfb63459fcc00075f9ee676730dc638a",
+  "SourceFingerprint": "6bbc379ecb3ff0e14339de517f36b843bf93682c5cac400b0ac205f740edd56b",
   "Completed": true,
   "Tests": [
     {
@@ -14,14 +14,14 @@
       "ClearedDefinitions": true,
       "IntermediatePositions": [
         20,
-        35
+        39
       ],
       "ComparedChannels": 4,
       "MaximumChannelError": 1,
       "WorkerCount": 0,
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 2493.07
+      "Milliseconds": 2499.24
     },
     {
       "Mode": "render-worker",
@@ -37,11 +37,11 @@
         39
       ],
       "ComparedChannels": 4,
-      "MaximumChannelError": 1,
+      "MaximumChannelError": 2,
       "WorkerCount": 1,
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 3182.96
+      "Milliseconds": 2854.74
     },
     {
       "Mode": "full-isolation",
@@ -60,7 +60,7 @@
       "WorkerCount": 2,
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 2805.68
+      "Milliseconds": 2751.04
     }
   ],
   "Errors": [],
@@ -73,5 +73,5 @@
   "Browser": "152.0.7977.0",
   "Passed": 3,
   "Failed": 0,
-  "FinalSourceFingerprint": "0e6ad3cce5334a9edc3b6cd0822e0285bfb63459fcc00075f9ee676730dc638a"
+  "FinalSourceFingerprint": "6bbc379ecb3ff0e14339de517f36b843bf93682c5cac400b0ac205f740edd56b"
 }
