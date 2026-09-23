@@ -1,6 +1,6 @@
 {
   "Version": "0.6.2-alpha.1",
-  "SourceFingerprint": "87449554cb1c393cfd60fa9b2e84b434c7f478842cbfe90508c52d4bfac00fc6",
+  "SourceFingerprint": "60cd8388689d7d059b1ad7ca8e78700f2933413d2a01e79aecc92d1cfb7593f1",
   "Completed": true,
   "Tests": [
     {
@@ -167,5 +167,5 @@
   "Qualification": "Actual native Skia raster in Chromium; compare identical 0.6 source in three topologies. System font used by test only; no font redistribution or physical GPU qualification.",
   "Passed": 12,
   "Failed": 0,
-  "FinalSourceFingerprint": "87449554cb1c393cfd60fa9b2e84b434c7f478842cbfe90508c52d4bfac00fc6"
+  "FinalSourceFingerprint": "60cd8388689d7d059b1ad7ca8e78700f2933413d2a01e79aecc92d1cfb7593f1"
 }

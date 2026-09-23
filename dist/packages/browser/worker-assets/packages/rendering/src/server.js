@@ -18,7 +18,7 @@ const plainId = id => Number.isSafeInteger(id) && id > 0;
 function validateCommands(commands) {
     if (!Array.isArray(commands) || commands.length > 200000) fail('Invalid display list.'); let depth = 0;
     for (const command of commands) {
-        if (!Array.isArray(command) || !Number.isInteger(command[0]) || command[0] < 1 || command[0] > 10) fail('Invalid drawing opcode.');
+        if (!Array.isArray(command) || !Number.isInteger(command[0]) || command[0] < 1 || command[0] > 11) fail('Invalid drawing opcode.');
         if (command[0] === DrawingOpcode.Push) { if (!['Transform','Clip','GeometryClip','Opacity','Effect','OpacityMask'].includes(command[1]) || ++depth > 96) fail('Invalid drawing push.'); }
         if (command[0] === DrawingOpcode.Pop && --depth < 0) fail('Display-list pop underflow.');
     }
@@ -226,7 +226,7 @@ export class ServerCompositionScene {
         }
         for (const id of dirtyResources) {
             const entry = resources.get(id), prior = this._validation.Resources.get(id);
-            if (!['Text','Image','Geometry','Font'].includes(entry.Kind) || !Array.isArray(entry.Depends) || entry.Depends.some(x=>!plainId(x))) fail('Invalid resource descriptor.');
+            if (!['Text','Image','Geometry','Font','GlyphTypeface','GlyphRun'].includes(entry.Kind) || !Array.isArray(entry.Depends) || entry.Depends.some(x=>!plainId(x))) fail('Invalid resource descriptor.');
             if (entry.Kind === 'Image' && entry.Data.Pixels && (!Number.isSafeInteger(entry.Data.Width) || !Number.isSafeInteger(entry.Data.Height) || entry.Data.Width < 1 || entry.Data.Height < 1 || entry.Data.Pixels.byteLength !== entry.Data.Width * entry.Data.Height * 4)) fail('Invalid image dimensions/pixels.');
             const references = this._references.Get(entry), edges = [...new Set([...entry.Depends, ...references.Resources])];
             if (!prior || !SameCompositionValue(prior.Children, edges)) resourceGraphChanged = true;

@@ -7,68 +7,68 @@
       "Name": "default",
       "ExpectedMode": "full-isolation",
       "Passed": true,
-      "ReadyMilliseconds": 1593.86,
-      "InitialRequests": 281,
+      "ReadyMilliseconds": 1571.53,
+      "InitialRequests": 292,
       "WasmRequests": 1,
       "NativePreparation": {
-        "PreparationMilliseconds": 78.5,
+        "PreparationMilliseconds": 72.39999999996508,
         "Deliveries": 2,
         "CloneFallbacks": 0,
         "PendingDeliveries": 0
       },
       "InitialBuilders": [
-        "http://127.0.0.1:42027/Weblonia/worker/compiled/MainView.g.js"
+        "http://127.0.0.1:45251/Weblonia/worker/compiled/MainView.g.js"
       ],
       "Workers": 2,
       "Width": 1500,
       "Height": 1125,
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 2579
+      "Milliseconds": 2419
     },
     {
       "Name": "single",
       "ExpectedMode": "single",
       "Passed": true,
-      "ReadyMilliseconds": 1011.01,
-      "InitialRequests": 145,
+      "ReadyMilliseconds": 925.15,
+      "InitialRequests": 151,
       "WasmRequests": 1,
       "Workers": 0,
       "Width": 1500,
       "Height": 1125,
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 1555
+      "Milliseconds": 1364
     },
     {
       "Name": "render-worker",
       "ExpectedMode": "render-worker",
       "Passed": true,
-      "ReadyMilliseconds": 1436.48,
-      "InitialRequests": 263,
+      "ReadyMilliseconds": 1339.83,
+      "InitialRequests": 274,
       "WasmRequests": 1,
       "Workers": 1,
       "Width": 1500,
       "Height": 1125,
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 1996
+      "Milliseconds": 1896
     },
     {
       "Name": "full-isolation",
       "ExpectedMode": "full-isolation",
       "Passed": true,
-      "ReadyMilliseconds": 1521.3,
-      "InitialRequests": 281,
+      "ReadyMilliseconds": 1553.32,
+      "InitialRequests": 292,
       "WasmRequests": 1,
       "NativePreparation": {
-        "PreparationMilliseconds": 70.10000000009313,
+        "PreparationMilliseconds": 73,
         "Deliveries": 2,
         "CloneFallbacks": 0,
         "PendingDeliveries": 0
       },
       "InitialBuilders": [
-        "http://127.0.0.1:42027/Weblonia/worker/compiled/MainView.g.js"
+        "http://127.0.0.1:45251/Weblonia/worker/compiled/MainView.g.js"
       ],
       "RestartReusedNativeModule": true,
       "Workers": 2,
@@ -76,15 +76,15 @@
       "Height": 1125,
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 2720
+      "Milliseconds": 2885
     }
   ],
-  "SourceFingerprint": "87449554cb1c393cfd60fa9b2e84b434c7f478842cbfe90508c52d4bfac00fc6",
+  "SourceFingerprint": "60cd8388689d7d059b1ad7ca8e78700f2933413d2a01e79aecc92d1cfb7593f1",
   "Interception": false,
   "WorkerBootstrapOverrides": false,
   "IsolationHeaders": false,
   "HardwareGPUQualified": false,
   "SitePrefix": "/Weblonia/",
   "Browser": "143.0.7499.4",
-  "FinalSourceFingerprint": "87449554cb1c393cfd60fa9b2e84b434c7f478842cbfe90508c52d4bfac00fc6"
+  "FinalSourceFingerprint": "60cd8388689d7d059b1ad7ca8e78700f2933413d2a01e79aecc92d1cfb7593f1"
 }

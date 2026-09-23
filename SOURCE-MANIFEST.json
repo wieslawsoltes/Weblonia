@@ -8,13 +8,18 @@
     },
     {
       "Path": ".github/workflows/ci.yml",
-      "Bytes": 2252,
-      "Sha256": "8057d6f5a4523de335e1c4ede01176881a852310184cae7bd7b906bfdeb5919c"
+      "Bytes": 2392,
+      "Sha256": "00236e340a393f4f6496af28d77ffb21bf7f483dcd4c8bdadd9d3b212e01263c"
     },
     {
       "Path": ".github/workflows/core-port.yml",
       "Bytes": 3893,
       "Sha256": "c524991dbdf6d4c4235e283671759f61100664080c59c9d04e920e299ff12a1a"
+    },
+    {
+      "Path": ".github/workflows/glyph-port.yml",
+      "Bytes": 3023,
+      "Sha256": "2fa3cac69d9c606b7c88e908263956d64eecf619b66213da2e0f27ccac3ce149"
     },
     {
       "Path": ".github/workflows/implicit-port.yml",
@@ -73,8 +78,8 @@
     },
     {
       "Path": "artifacts/benchmark-current.json",
-      "Bytes": 4246,
-      "Sha256": "c8f040f6e339b8c42b3f87416fa18bd02da6bbecb3f668c769143f44fafedccb"
+      "Bytes": 4264,
+      "Sha256": "f911f762cd9b72f3a08d0ff53b07225d25c6f71b51a047f46f8bcf5d5e660862"
     },
     {
       "Path": "artifacts/benchmark.log",
@@ -88,8 +93,8 @@
     },
     {
       "Path": "artifacts/browser-results.json",
-      "Bytes": 14093,
-      "Sha256": "f992734ed46e1fa828bf910d01bd722b4852b0b385e4c71f08314e443acc94d5"
+      "Bytes": 14095,
+      "Sha256": "0b27e2d5b23c16dc9db23a5a1f2a2e5117201b696302b4303d090acee75e8b99"
     },
     {
       "Path": "artifacts/browser-software-tests.log",
@@ -109,7 +114,7 @@
     {
       "Path": "artifacts/build-result.json",
       "Bytes": 342,
-      "Sha256": "f68c25408c481c8f6303045c1c548556595b25e6ad2b02e6619f65d02b81a51d"
+      "Sha256": "9a6250ba462f5fbdc096f0b65f312027debbbfefe4f0e7d08f8e21bbaca016a9"
     },
     {
       "Path": "artifacts/build.log",
@@ -119,7 +124,7 @@
     {
       "Path": "artifacts/core-port/browser-results.json",
       "Bytes": 2687,
-      "Sha256": "7360d2616e32fa52b981ba5048d46d298b6765b91305866d37f6d6f3e86187a8"
+      "Sha256": "2f321b1199324a4f97861da8c11cc1e7077b4ec349733a5000a778f563eea08d"
     },
     {
       "Path": "artifacts/core-port/full-isolation-after.png",
@@ -155,6 +160,76 @@
       "Path": "artifacts/core-port/single-before.png",
       "Bytes": 4085,
       "Sha256": "9112dd9ade4c4e3aaa1e4be0fc7eddd56319c6bdfb7dec95d19e6b6b18f7e358"
+    },
+    {
+      "Path": "artifacts/glyph-geometry/browser-results.json",
+      "Bytes": 3826,
+      "Sha256": "ad64a6a7718c6d2f155073d38bf431d8443d4e687fe651db078a91076e831a81"
+    },
+    {
+      "Path": "artifacts/glyph-geometry/full-isolation-aot-after.png",
+      "Bytes": 2138,
+      "Sha256": "09f8643f55eb986f66c8d9cd051442355e0c671cd3f59298cd1833d966260460"
+    },
+    {
+      "Path": "artifacts/glyph-geometry/full-isolation-aot-before.png",
+      "Bytes": 2200,
+      "Sha256": "1d95be284c9623b1f2e2f6031d6a734a8bd0aecfe006d36b8c34c202e3797c45"
+    },
+    {
+      "Path": "artifacts/glyph-geometry/full-isolation-runtime-after.png",
+      "Bytes": 2138,
+      "Sha256": "09f8643f55eb986f66c8d9cd051442355e0c671cd3f59298cd1833d966260460"
+    },
+    {
+      "Path": "artifacts/glyph-geometry/full-isolation-runtime-before.png",
+      "Bytes": 2200,
+      "Sha256": "1d95be284c9623b1f2e2f6031d6a734a8bd0aecfe006d36b8c34c202e3797c45"
+    },
+    {
+      "Path": "artifacts/glyph-geometry/qualification.log",
+      "Bytes": 197033,
+      "Sha256": "f58ffabd3fb77b83f85a46932af45bbef49265fb17d0e2ab039480a6bc42cff8"
+    },
+    {
+      "Path": "artifacts/glyph-geometry/render-worker-aot-after.png",
+      "Bytes": 2138,
+      "Sha256": "09f8643f55eb986f66c8d9cd051442355e0c671cd3f59298cd1833d966260460"
+    },
+    {
+      "Path": "artifacts/glyph-geometry/render-worker-aot-before.png",
+      "Bytes": 2200,
+      "Sha256": "1d95be284c9623b1f2e2f6031d6a734a8bd0aecfe006d36b8c34c202e3797c45"
+    },
+    {
+      "Path": "artifacts/glyph-geometry/render-worker-runtime-after.png",
+      "Bytes": 2138,
+      "Sha256": "09f8643f55eb986f66c8d9cd051442355e0c671cd3f59298cd1833d966260460"
+    },
+    {
+      "Path": "artifacts/glyph-geometry/render-worker-runtime-before.png",
+      "Bytes": 2200,
+      "Sha256": "1d95be284c9623b1f2e2f6031d6a734a8bd0aecfe006d36b8c34c202e3797c45"
+    },
+    {
+      "Path": "artifacts/glyph-geometry/single-aot-after.png",
+      "Bytes": 2138,
+      "Sha256": "09f8643f55eb986f66c8d9cd051442355e0c671cd3f59298cd1833d966260460"
+    },
+    {
+      "Path": "artifacts/glyph-geometry/single-aot-before.png",
+      "Bytes": 2200,
+      "Sha256": "1d95be284c9623b1f2e2f6031d6a734a8bd0aecfe006d36b8c34c202e3797c45"
+    },
+    {
+      "Path": "artifacts/glyph-geometry/single-runtime-after.png",
+      "Bytes": 2138,
+      "Sha256": "09f8643f55eb986f66c8d9cd051442355e0c671cd3f59298cd1833d966260460"
+    },
+    {
+      "Path": "artifacts/glyph-geometry/single-runtime-before.png",
+      "Bytes": 2200,
+      "Sha256": "1d95be284c9623b1f2e2f6031d6a734a8bd0aecfe006d36b8c34c202e3797c45"
     },
     {
       "Path": "artifacts/history/performance-session/README.md",
@@ -414,7 +489,7 @@
     {
       "Path": "artifacts/implicit-animations/browser-results.json",
       "Bytes": 1963,
-      "Sha256": "827a36274c454e1a89f2bd365feb7a083d90e5cfa11425c0b7267344edfa2091"
+      "Sha256": "dee18272c28cd1b4c80f116bed1dab34a6d46fc4f9d116ae6d589120d8ea3474"
     },
     {
       "Path": "artifacts/implicit-animations/full-isolation-cleared.png",
@@ -428,8 +503,8 @@
     },
     {
       "Path": "artifacts/implicit-animations/full-isolation-intermediate.png",
-      "Bytes": 4609,
-      "Sha256": "96b255dd4eb9497a6cf82302482ad7f46f0cb66b2d2e17c76061de9e34050d08"
+      "Bytes": 4610,
+      "Sha256": "0a93b90b911f056f209bd2ced3e0fea40815fc823b603fd45d7283124e662a5e"
     },
     {
       "Path": "artifacts/implicit-animations/full-isolation-retargeted.png",
@@ -453,13 +528,13 @@
     },
     {
       "Path": "artifacts/implicit-animations/render-worker-intermediate.png",
-      "Bytes": 4612,
-      "Sha256": "a0f43f2a4cb983808c94c03f8e53132d25d86d19a5ad0112f8c79aafb7b66aa8"
+      "Bytes": 4613,
+      "Sha256": "5c2b2059982a45c3099af0b029fc0f099c8325fb18fb7109b5e38505f192c84a"
     },
     {
       "Path": "artifacts/implicit-animations/render-worker-retargeted.png",
-      "Bytes": 4598,
-      "Sha256": "c6a820f61733abe77671ae263b9d4d206d6252b6f0299e91d4016ec8c4c9975b"
+      "Bytes": 4611,
+      "Sha256": "915e684941898507ee79558eca2b31c0b700e20057ffaf2ab1fb781b74eabfc7"
     },
     {
       "Path": "artifacts/implicit-animations/single-cleared.png",
@@ -474,7 +549,7 @@
     {
       "Path": "artifacts/implicit-animations/single-intermediate.png",
       "Bytes": 4613,
-      "Sha256": "a81404c549cac6f76ea0fa4c20df0061a0e098de68e345e8e91660b720401c2e"
+      "Sha256": "376c746309103f449a70e5e577cfc0c9213c3b625cd1ed744d8eb95b8b217771"
     },
     {
       "Path": "artifacts/implicit-animations/single-retargeted.png",
@@ -594,7 +669,7 @@
     {
       "Path": "artifacts/invalidation/browser-results.json",
       "Bytes": 6574,
-      "Sha256": "ff10e9d10cf00ae9553f8cdc15629023d7a26f5f73d9169a619b1af6c33660b5"
+      "Sha256": "73a7994c7801439dba899499183b5f19d4926749d1453b1882be9b6ceda64eb5"
     },
     {
       "Path": "artifacts/invalidation/final-logs/automation.log",
@@ -773,8 +848,8 @@
     },
     {
       "Path": "artifacts/npm/manifest.json",
-      "Bytes": 26182,
-      "Sha256": "a97ffc8b257cf95eaf309a959aad0534a895360845a6a2fcdfed2a75c8f12f2c"
+      "Bytes": 26647,
+      "Sha256": "2f91e689bb1415e6e84f1c6b306a1123bbd9d0400191758c68a480be163620d6"
     },
     {
       "Path": "artifacts/npm/wieslawsoltes-avalonia-0.6.2-alpha.1.tgz",
@@ -793,8 +868,8 @@
     },
     {
       "Path": "artifacts/npm/wieslawsoltes-avalonia-browser-0.6.2-alpha.1.tgz",
-      "Bytes": 1429766,
-      "Sha256": "13ec1db71197f955a5f1233b13f2f1ca6ee525b6d4efd98899a0ad9116f54435"
+      "Bytes": 1446605,
+      "Sha256": "4320f42c5ef35382757e91277bd78ebc55f1c5f411c5660bd443b5a0e506ae0b"
     },
     {
       "Path": "artifacts/npm/wieslawsoltes-avalonia-composition-0.6.2-alpha.1.tgz",
@@ -823,13 +898,13 @@
     },
     {
       "Path": "artifacts/npm/wieslawsoltes-avalonia-markup-xaml-0.6.2-alpha.1.tgz",
-      "Bytes": 12951,
-      "Sha256": "28e1b2e58de950d94fe1819aec2d7297c35e93e98b2d4a1534fba3f5662fd832"
+      "Bytes": 12955,
+      "Sha256": "4c7b88dabed73c394edc8dbad58ae7abb4a855ac50c8c59b76a577a0b77f501e"
     },
     {
       "Path": "artifacts/npm/wieslawsoltes-avalonia-media-0.6.2-alpha.1.tgz",
-      "Bytes": 26543,
-      "Sha256": "d335a0936b61ba138c0a71f135a0efb136626e3e10381c4820f533a1ad409109"
+      "Bytes": 37532,
+      "Sha256": "a385de3c67b1194d339b460a91b6f98ad7a51908038dce2f2d9cd002fa9c1911"
     },
     {
       "Path": "artifacts/npm/wieslawsoltes-avalonia-opengl-0.6.2-alpha.1.tgz",
@@ -843,13 +918,13 @@
     },
     {
       "Path": "artifacts/npm/wieslawsoltes-avalonia-rendering-0.6.2-alpha.1.tgz",
-      "Bytes": 30265,
-      "Sha256": "efeff4bcdf542b46ed50a8312f84f64b8624c84910d0336b741c9c98db53359d"
+      "Bytes": 30847,
+      "Sha256": "6c814a5eea4490f8fb48a2e10aedf3c54cf11a4f14d6126680f4b8fe564a47b0"
     },
     {
       "Path": "artifacts/npm/wieslawsoltes-avalonia-skia-0.6.2-alpha.1.tgz",
-      "Bytes": 21651,
-      "Sha256": "faa28aa448c2f34209d3ebea34d910c42192fbb03d8af6558b2a54164351ad73"
+      "Bytes": 25067,
+      "Sha256": "b79839d9f53015820144abd5452e24f424bc43d34f6d95b0e8d3422b70f4edbf"
     },
     {
       "Path": "artifacts/npm/wieslawsoltes-avalonia-styling-0.6.2-alpha.1.tgz",
@@ -873,8 +948,8 @@
     },
     {
       "Path": "artifacts/package-consumer-result.json",
-      "Bytes": 400,
-      "Sha256": "b2a8605ecdeae05a870439e2cfba153327cf7346499af1ce12fe92800dc4ac76"
+      "Bytes": 425,
+      "Sha256": "4089d5c44354b6b84f6deeac40b95211bfc6366c96592774df916a311c690b95"
     },
     {
       "Path": "artifacts/package-consumer.log",
@@ -898,8 +973,8 @@
     },
     {
       "Path": "artifacts/publication/pages-smoke.json",
-      "Bytes": 2353,
-      "Sha256": "ffc5f870b6aaa893f09399a18869778af638e0bae1386cd7b3ec749ad905219a"
+      "Bytes": 2351,
+      "Sha256": "228ea9eadf5293b964adb076ab95143597025d1acc710831e461681eef9fc9b0"
     },
     {
       "Path": "artifacts/publication/render-worker.png",
@@ -938,8 +1013,8 @@
     },
     {
       "Path": "artifacts/screenshots/composition.png",
-      "Bytes": 88983,
-      "Sha256": "27df86090f8f3286228c900253acf9f12e00d203c835ffea0ed0d996e0d0422c"
+      "Bytes": 88987,
+      "Sha256": "e504b861d17e4b063563ab114430c9f8c4e06b742e814214376ac72263a9a566"
     },
     {
       "Path": "artifacts/screenshots/container-queries.png",
@@ -1003,8 +1078,8 @@
     },
     {
       "Path": "artifacts/screenshots/touch-scroll.png",
-      "Bytes": 89784,
-      "Sha256": "0963a4297e832632125b0d725a67e15562e6620cc628163f36f4b2884900766a"
+      "Bytes": 89482,
+      "Sha256": "83bfe4552cd4718fcf986b89909ccc5e09710a4299c846e6430a4a129941208d"
     },
     {
       "Path": "artifacts/screenshots/virtual-list.png",
@@ -1019,17 +1094,17 @@
     {
       "Path": "artifacts/scrollbar-browser-1.25.json",
       "Bytes": 4332,
-      "Sha256": "4d352ccbeb0cf02cc6587fcd72724a9e86edeb62c72c04afaf854200e3ae6c16"
+      "Sha256": "764d34adf5f9002c2fcb3550ec4e225c98dfc9367f4b59dc5c9ed00a490f3361"
     },
     {
       "Path": "artifacts/scrollbar-browser-1.json",
       "Bytes": 4321,
-      "Sha256": "9ccb1eee0f541032a5aab7e237dd55397c985633a09f4f1d84da0ecaf68018b4"
+      "Sha256": "9f295695c2ce070fd41207e532733f2c8fd9ca37878c63a0bf4bd3e8a142d365"
     },
     {
       "Path": "artifacts/startup/http-comparison.json",
-      "Bytes": 33173,
-      "Sha256": "d4c979b03c65453827606662e6f478bc716a1aa636c6b57b55c21885462652d8"
+      "Bytes": 33147,
+      "Sha256": "7333016a37f1484abafab3491656fdb56daefbd23a8b3a7e8aa5a75b8f3a30b2"
     },
     {
       "Path": "artifacts/startup/text-ink-diagnostic.json",
@@ -1039,7 +1114,7 @@
     {
       "Path": "artifacts/text-quality-results.json",
       "Bytes": 13748,
-      "Sha256": "f14697da38351eda18ed2f227da2ad396f7696825d5b7669aff02de02fa99154"
+      "Sha256": "7fa3cdf48449558e7c976a0e9fa588ab932f43fe2c87ee3616b16520e7abf9ae"
     },
     {
       "Path": "artifacts/text-quality-tests.log",
@@ -1053,8 +1128,8 @@
     },
     {
       "Path": "artifacts/threading/browser-results.json",
-      "Bytes": 21927,
-      "Sha256": "ade19f46fc6c279a40c2978477ec637f89c24c14169af4024a1c2a4804049e85"
+      "Bytes": 21805,
+      "Sha256": "b3a99f172a1445488cc6c92f99852161370c64653a7089b7cca2d88019b3d782"
     },
     {
       "Path": "artifacts/threading/build-final.log",
@@ -1068,8 +1143,8 @@
     },
     {
       "Path": "artifacts/threading/catalog-results.json",
-      "Bytes": 30981,
-      "Sha256": "782735dbbcdd2ae3e7e1811f2338a0bb7489b1e400a6902e311bbb0bc3d33b8a"
+      "Bytes": 30983,
+      "Sha256": "13f54f2c59c04c914d7e4ce2f92f801d1627ccbf90af076daf836d69ce6639ce"
     },
     {
       "Path": "artifacts/threading/final-suite-status.log",
@@ -1088,8 +1163,8 @@
     },
     {
       "Path": "artifacts/threading/http-startup-results.json",
-      "Bytes": 2425,
-      "Sha256": "849fb493f6d1692f91e3678d4fd2156cf74135b751ae075f4cb266bc0910300e"
+      "Bytes": 2427,
+      "Sha256": "f4e9237bb8a406075e26d2b710f093d3a68f1327e755ae8bf450ae72728cf2ad"
     },
     {
       "Path": "artifacts/threading/integration-final.log",
@@ -1099,12 +1174,12 @@
     {
       "Path": "artifacts/threading/integration-http-server.log",
       "Bytes": 37,
-      "Sha256": "774a4faff0227c13836ef2fe8ebc540af6572992348c488364b2cdede4500c6a"
+      "Sha256": "8b21a3c3dea94bf4cfc86a738619ee744f66a8206564a2389d571e251d70497b"
     },
     {
       "Path": "artifacts/threading/integration-results.json",
-      "Bytes": 20758,
-      "Sha256": "2cf0e0da4416ae2901c9b7a0803fad5e34e16c41f2642a0c2c9d300d844c68d9"
+      "Bytes": 20779,
+      "Sha256": "3265998bfc822fab639dfa60320dfae6aedbd48c8d0d471181af2dc8ee1475be"
     },
     {
       "Path": "artifacts/threading/inventory-final.log",
@@ -1218,8 +1293,8 @@
     },
     {
       "Path": "artifacts/threading/performance-results.json",
-      "Bytes": 187717,
-      "Sha256": "b501adb0f7fdd8099839a02e52c3001a6129645599b8d71d856a1eee3d6becc5"
+      "Bytes": 187562,
+      "Sha256": "f4ed5f5c19b259a6b9ba6bff1042204d0efe1b9fd3b538161a2012abcbc9dbf9"
     },
     {
       "Path": "artifacts/threading/quality-final.log",
@@ -1229,7 +1304,7 @@
     {
       "Path": "artifacts/threading/quality-results.json",
       "Bytes": 4574,
-      "Sha256": "abe579f54d8876ed18e24991c4c4626fa7acc4901bf98e910666d541395b257e"
+      "Sha256": "82112a2277b732e9430467a591ea1a717e485f6ada4c675aaa4c63e4d72affdd"
     },
     {
       "Path": "artifacts/threading/release-final.log",
@@ -1243,8 +1318,8 @@
     },
     {
       "Path": "artifacts/threading/startup-results.json",
-      "Bytes": 17907,
-      "Sha256": "1f42a47bff8738135472547006111059254a41f10ed6bfd717eeb815c45728c4"
+      "Bytes": 17912,
+      "Sha256": "ba528f2878fa98c4de5eb206ab8aa1f2243854dbc7b502d7e3fbd8da65cf7278"
     },
     {
       "Path": "artifacts/threading/vendor-final.log",
@@ -1258,8 +1333,8 @@
     },
     {
       "Path": "artifacts/threading/worker-performance-results.json",
-      "Bytes": 57491,
-      "Sha256": "b6fe788d33672fdd1783537ce50d9cf616dfe767c4c34485baec3a59b6347c7c"
+      "Bytes": 57460,
+      "Sha256": "7a4c84f48cc3163100352e50d18541d196e14bb33a91d6c85a0888ccf58097e4"
     },
     {
       "Path": "artifacts/threading/worker-table.png",
@@ -1798,8 +1873,8 @@
     },
     {
       "Path": "artifacts/validation-optimized/automation-final.json",
-      "Bytes": 2725,
-      "Sha256": "724b54d568bc78f28c49d96963b2f037f0cec9c15d8b5e4103866cbced6e97a4"
+      "Bytes": 2723,
+      "Sha256": "809ce7e175669744b74f0ee9bf528881412296b69adba240e25349a56354cff0"
     },
     {
       "Path": "artifacts/validation-optimized/automation-final.log",
@@ -1879,12 +1954,12 @@
     {
       "Path": "artifacts/validation-optimized/node-final.json",
       "Bytes": 439,
-      "Sha256": "f08eedd30812982f77ddd36376b4fdcdc7dc5a176a9db43d5226d107911e4bcf"
+      "Sha256": "d17784982b2bede77110ce860e0f14d584193804c6f4ea75db298a506dd5eb31"
     },
     {
       "Path": "artifacts/validation-optimized/node-final.log",
-      "Bytes": 141396,
-      "Sha256": "3ad008ff08683e9cde9a53b33479f3a113c3d32bf55aa529c117992db96cd476"
+      "Bytes": 158452,
+      "Sha256": "f0a3fa4ea6f7b920cbc1dd4b91a754e229e6ce1d8db73357a164f4b9446f84d6"
     },
     {
       "Path": "artifacts/validation-optimized/node-record-final.log",
@@ -1958,8 +2033,8 @@
     },
     {
       "Path": "artifacts/verification-summary.json",
-      "Bytes": 441585,
-      "Sha256": "18518e82bf58e408fcd61432ff2575bd895b1379388c49434f042f2c21ef88b9"
+      "Bytes": 445468,
+      "Sha256": "cd467d11ff75a065f07643db3a583610050a23031d93be0c50cf2c82331c8c79"
     },
     {
       "Path": "artifacts/worker-startup/auto-startup.log",
@@ -2283,8 +2358,8 @@
     },
     {
       "Path": "dist/Pages/CustomDrawing.axaml",
-      "Bytes": 329,
-      "Sha256": "701c47a6e6c2a3736bf9bfa11a978aa73bedc67e21b20e0cbab51e3892643b17"
+      "Bytes": 1012,
+      "Sha256": "9697cb50cdc8871177869d093c679216bd16d61974bf7e75b8990d388be42249"
     },
     {
       "Path": "dist/Pages/DataValidation.axaml",
@@ -2548,8 +2623,8 @@
     },
     {
       "Path": "dist/catalog.js",
-      "Bytes": 39799,
-      "Sha256": "1334b42bacf357ab9262d24b956d7effe7e60b8e03471fc7be8ab8eb12fa1ff5"
+      "Bytes": 40843,
+      "Sha256": "9698a66ae8739e7c86394162ab077a39f3ed871bd2dac734ee2bdab7f93ff675"
     },
     {
       "Path": "dist/catalog.json",
@@ -2678,8 +2753,8 @@
     },
     {
       "Path": "dist/compiled/CustomDrawing.g.js",
-      "Bytes": 26246,
-      "Sha256": "48f0db31bc4af20cef972d5bdeddd8bf1a8195d3430f0d9e3e6639bca280f10d"
+      "Bytes": 116721,
+      "Sha256": "8491a7eafab76c3b56223b477ebac4c06a4a454aabae5ffd3d48d5f42ce2fb34"
     },
     {
       "Path": "dist/compiled/DataValidation.g.js",
@@ -2933,13 +3008,13 @@
     },
     {
       "Path": "dist/compiled/index.js",
-      "Bytes": 59834,
-      "Sha256": "4e280f09c867f0bbb77e975bec526ff86f4e3b26f27b30bb9bdc9b35610e2a3f"
+      "Bytes": 60567,
+      "Sha256": "8ad16340e3c91775008b9a29fa2b7d095cf28e07762b75d90d385629797699c9"
     },
     {
       "Path": "dist/compiled/lazy.js",
-      "Bytes": 56942,
-      "Sha256": "8e6a302efddb517311c9440d632cc150af6f041800aa8a6cae8f15d1a2920115"
+      "Bytes": 57675,
+      "Sha256": "24c546cfb29e9214e1a273c7cd5a106f00bc4beaa00d9e303f00310a1023d89e"
     },
     {
       "Path": "dist/docs/API-INVENTORY.md",
@@ -2975,6 +3050,16 @@
       "Path": "dist/docs/GESTURES-AND-UPSTREAM.md",
       "Bytes": 7370,
       "Sha256": "80ba214e832ed696b65a99ca04ef1793fe93072ce8e2c3fbe0e687b87b1670a4"
+    },
+    {
+      "Path": "dist/docs/GLYPH-PATH-PORT.md",
+      "Bytes": 8337,
+      "Sha256": "bbed73a26d0b6d61c4ffb74f370ff134841b6ecf3f43aa728b0106d00cad8c47"
+    },
+    {
+      "Path": "dist/docs/GLYPH-PATH-REFERENCE.json",
+      "Bytes": 1816,
+      "Sha256": "e3748de009eb1725a12bea8f999215e5050b04426113fec90d15093633b0430e"
     },
     {
       "Path": "dist/docs/HTTP-WINDOW-QUALIFICATION.md",
@@ -3093,8 +3178,8 @@
     },
     {
       "Path": "dist/docs/VERIFICATION.json",
-      "Bytes": 438614,
-      "Sha256": "69cc85d3aa4a709f45e0e0b73f05547bb58ce034188090e5c30fff08cc57bc9a"
+      "Bytes": 445468,
+      "Sha256": "cd467d11ff75a065f07643db3a583610050a23031d93be0c50cf2c82331c8c79"
     },
     {
       "Path": "dist/docs/WORKER-OPENGL.md",
@@ -3235,6 +3320,11 @@
       "Path": "dist/extensions.js",
       "Bytes": 12694,
       "Sha256": "793a8f12eaf48ae7260eeea5fa15ca2f7da8e3908f4bfbc03138e5b2eaccc28f"
+    },
+    {
+      "Path": "dist/glyph-path-demo.js",
+      "Bytes": 2790,
+      "Sha256": "c7d484b3e10c1ded82d89879ed43a2ef88be20a2df85900df4767497c07229c9"
     },
     {
       "Path": "dist/index.html",
@@ -3453,8 +3543,8 @@
     },
     {
       "Path": "dist/packages/browser/worker-assets/manifest.json",
-      "Bytes": 30336,
-      "Sha256": "83e6896189a3a0702f318d0e2c200696eb4c79cdf9e0538b5284d2892df35338"
+      "Bytes": 30984,
+      "Sha256": "e905593e6898d4a904113e9a141ab9390af390b63c9bf1d728d6b6ddf2517ea3"
     },
     {
       "Path": "dist/packages/browser/worker-assets/packages/animation/src/index.js",
@@ -3678,8 +3768,8 @@
     },
     {
       "Path": "dist/packages/browser/worker-assets/packages/markup-xaml/src/index.js",
-      "Bytes": 45407,
-      "Sha256": "ca9c42bcaf1c424931e38c2c2ae08e6594259b6282850c7db26e29acae2958de"
+      "Bytes": 45417,
+      "Sha256": "9914d158833bca62d9635ecc50a20ff84ebb371f978a587c7c6e1ce21c7bd2f9"
     },
     {
       "Path": "dist/packages/browser/worker-assets/packages/markup-xaml/src/services.js",
@@ -3698,18 +3788,33 @@
     },
     {
       "Path": "dist/packages/browser/worker-assets/packages/media/src/drawing.js",
-      "Bytes": 22675,
-      "Sha256": "abb74e57eb8cfafb1b56eff403ee6ebe35783c84b43ba45bbbf039b4d74dd0c0"
+      "Bytes": 23910,
+      "Sha256": "ef8d34c16002fba2536ca17c9fe585f4857fb7a4e13ac702a8e65200db0d34c8"
+    },
+    {
+      "Path": "dist/packages/browser/worker-assets/packages/media/src/geometry-resource.js",
+      "Bytes": 2475,
+      "Sha256": "0085b77e840fa98457d9a1b7432ef9cc0e32c29ab6fa5f6902ee6c6db4d1d149"
     },
     {
       "Path": "dist/packages/browser/worker-assets/packages/media/src/geometry.js",
-      "Bytes": 10083,
-      "Sha256": "b8c5ddb8127d810cc7568b07f564d94d9f56f1f1546e12248330624d3cfaa10f"
+      "Bytes": 26336,
+      "Sha256": "3d9ec86825481b24802394c85aeb7fb1a40c07e3f63d32797756ee48b2281d86"
+    },
+    {
+      "Path": "dist/packages/browser/worker-assets/packages/media/src/glyph-run.js",
+      "Bytes": 17938,
+      "Sha256": "e540c83f83623f880edb4c0ff0c7b5e3a25ec277877113720623a37875151b8a"
     },
     {
       "Path": "dist/packages/browser/worker-assets/packages/media/src/index.js",
-      "Bytes": 252,
-      "Sha256": "15838d8bfa2ac935545327ca85a8e6868f5d2397eedff28ff102decbccefe9cf"
+      "Bytes": 284,
+      "Sha256": "1ea68673d7e62a809d99393b159b5e19c7fc7d148a8e0787be1d53e8ceaa2e52"
+    },
+    {
+      "Path": "dist/packages/browser/worker-assets/packages/media/src/path-parser.js",
+      "Bytes": 4489,
+      "Sha256": "705f6baa4e8e586dc078b25223c8f0ce05fe3d138e2c7cee0fed83e54a96b3ef"
     },
     {
       "Path": "dist/packages/browser/worker-assets/packages/media/src/text-cache.js",
@@ -3758,8 +3863,8 @@
     },
     {
       "Path": "dist/packages/browser/worker-assets/packages/rendering/src/recording.js",
-      "Bytes": 18876,
-      "Sha256": "d0ca9bd2505569a3fc67c994838fdaa180b61b7b7c895afcaf0e427dd0d762c2"
+      "Bytes": 19054,
+      "Sha256": "2355bd9b05e30c03ebe2a14262550902a816e0070aaddd9a5660f76421304e4c"
     },
     {
       "Path": "dist/packages/browser/worker-assets/packages/rendering/src/references.js",
@@ -3768,8 +3873,8 @@
     },
     {
       "Path": "dist/packages/browser/worker-assets/packages/rendering/src/resources.js",
-      "Bytes": 19814,
-      "Sha256": "df68a95650521c88e6db568443633472d51893754ad0fa8e5a1f16ceeb8e8365"
+      "Bytes": 22246,
+      "Sha256": "e65df32d062a3b50f1bb05837eaeacbbcb092697813cde045978e6a9cce50c2f"
     },
     {
       "Path": "dist/packages/browser/worker-assets/packages/rendering/src/scrolling.js",
@@ -3778,13 +3883,23 @@
     },
     {
       "Path": "dist/packages/browser/worker-assets/packages/rendering/src/server.js",
-      "Bytes": 38999,
-      "Sha256": "2db995f7f5b37ef4e7a3596b3de906c9cd62db8a24699e692f830f082014e0dd"
+      "Bytes": 39026,
+      "Sha256": "ec8a1c13a87beb31f959af65732cb9b5e7696cbc5a1d65efb99abacaf6787d45"
+    },
+    {
+      "Path": "dist/packages/browser/worker-assets/packages/skia/src/geometry-backend.js",
+      "Bytes": 4761,
+      "Sha256": "c12c94b0b0e8306ee2a2c479ec435885377083f27b218d3947b547afff542ba3"
+    },
+    {
+      "Path": "dist/packages/browser/worker-assets/packages/skia/src/glyph-backend.js",
+      "Bytes": 6233,
+      "Sha256": "0302359e6e1390d2bcccc42c8f8debbff168266a0c2ffc243d32a99522bb83b2"
     },
     {
       "Path": "dist/packages/browser/worker-assets/packages/skia/src/index.js",
-      "Bytes": 46216,
-      "Sha256": "1c52a264b3a9a121bba775b2a15a8e9c2320031473987245f0717e76dc71c63d"
+      "Bytes": 45583,
+      "Sha256": "391508a599bec8e083edfe41ecce2845a19365562203bf76b8a8bbf584e42f8e"
     },
     {
       "Path": "dist/packages/browser/worker-assets/packages/skia/src/text-raster.js",
@@ -4593,8 +4708,8 @@
     },
     {
       "Path": "dist/packages/markup-xaml/src/index.js",
-      "Bytes": 45428,
-      "Sha256": "4176c5ce030e94fc3341e0cfcf5cbd1cb64b7f11413ab6e51b0d2da7e4cee6a1"
+      "Bytes": 45438,
+      "Sha256": "2ca57d8e450b65f19d9b59a3e6ab5b90faccf721ba7357371d31c860017ecf6a"
     },
     {
       "Path": "dist/packages/markup-xaml/src/services.js",
@@ -4633,18 +4748,33 @@
     },
     {
       "Path": "dist/packages/media/src/drawing.js",
-      "Bytes": 22680,
-      "Sha256": "2bfb641a36f58d03d16f997dd7e1a9a197347088e24c16bea0e8dd98fa478c6b"
+      "Bytes": 23915,
+      "Sha256": "5f8025c1acb4a296b00ab3f984220a590d4154070c3d1cace5c0d09111ca1a83"
+    },
+    {
+      "Path": "dist/packages/media/src/geometry-resource.js",
+      "Bytes": 2480,
+      "Sha256": "9e6d2a37f9a80eb4e854f515d6191dc19d673c6765c0cb66d8f3aa3697587197"
     },
     {
       "Path": "dist/packages/media/src/geometry.js",
-      "Bytes": 10088,
-      "Sha256": "0803f30d4c0246ee0668f9a56c856e36c807f5b01c1372173170c8220fb50511"
+      "Bytes": 26341,
+      "Sha256": "1e73fa83e6ed51400ef1f961c599a0d96528c43dc1dac26472cf7911ac8a6020"
+    },
+    {
+      "Path": "dist/packages/media/src/glyph-run.js",
+      "Bytes": 17943,
+      "Sha256": "04790118d9666b5117e8ead5a8895de60d38e24bd9dae2fa8159a29034826ea2"
     },
     {
       "Path": "dist/packages/media/src/index.js",
-      "Bytes": 252,
-      "Sha256": "15838d8bfa2ac935545327ca85a8e6868f5d2397eedff28ff102decbccefe9cf"
+      "Bytes": 284,
+      "Sha256": "1ea68673d7e62a809d99393b159b5e19c7fc7d148a8e0787be1d53e8ceaa2e52"
+    },
+    {
+      "Path": "dist/packages/media/src/path-parser.js",
+      "Bytes": 4494,
+      "Sha256": "fe9861570e4be6279abb4496ff727ec30769f1c203cf0540d5b4d9b2836e3316"
     },
     {
       "Path": "dist/packages/media/src/text-cache.js",
@@ -4753,8 +4883,8 @@
     },
     {
       "Path": "dist/packages/rendering/src/recording.js",
-      "Bytes": 18891,
-      "Sha256": "f683419160a0b1033f323a6eecafd6f33ef1cead74906b396c3a31491aed50d0"
+      "Bytes": 19069,
+      "Sha256": "e3149fa9edd2a1b35710a601aeb875b02849c9379c5413fdff483e599cb1fa78"
     },
     {
       "Path": "dist/packages/rendering/src/references.js",
@@ -4763,8 +4893,8 @@
     },
     {
       "Path": "dist/packages/rendering/src/resources.js",
-      "Bytes": 19824,
-      "Sha256": "32b02a1ab4443401d9cd5a5240e6572d8b0480274ba5b3577f135a3870c1ffa8"
+      "Bytes": 22256,
+      "Sha256": "b46bdfd31b36b988095ae16c6e5c4cdea1b046efa8cacf7e3b8cbecf0260c671"
     },
     {
       "Path": "dist/packages/rendering/src/scrolling.js",
@@ -4773,8 +4903,8 @@
     },
     {
       "Path": "dist/packages/rendering/src/server.js",
-      "Bytes": 39024,
-      "Sha256": "215704fe95c7fc6d7a3d5cea42166ec7408a9e4f8afaccbad2b8a0f1accf0520"
+      "Bytes": 39051,
+      "Sha256": "2df07a761fd803456539613b656474afb57d063d202850da913a5caa2f8fe757"
     },
     {
       "Path": "dist/packages/skia/LICENSE",
@@ -4797,9 +4927,19 @@
       "Sha256": "b51c47f13358e1bbaa2805b7cbafb05d863bd5804afa4d778dc7a0c2ee788887"
     },
     {
+      "Path": "dist/packages/skia/src/geometry-backend.js",
+      "Bytes": 4771,
+      "Sha256": "6e6cf2c6b6491b4912612d3475fcc2876c6c0a378b16eb0a55532ed65b59866e"
+    },
+    {
+      "Path": "dist/packages/skia/src/glyph-backend.js",
+      "Bytes": 6243,
+      "Sha256": "c92301811f5eef927e7b0238037c4864e1f73daa4b780e02cc7da18bfee1c993"
+    },
+    {
       "Path": "dist/packages/skia/src/index.js",
-      "Bytes": 46214,
-      "Sha256": "da6d73434ef8f3fe6c30966a07b87a1335f948ce717e1b0ba186447135256749"
+      "Bytes": 45586,
+      "Sha256": "494d7f19d54008ce0ac39bb56c59cb6ba06951067d47de979940134574a0e224"
     },
     {
       "Path": "dist/packages/skia/src/text-raster.js",
@@ -5558,8 +5698,8 @@
     },
     {
       "Path": "dist/worker/catalog.js",
-      "Bytes": 39953,
-      "Sha256": "85051a681994adc823f42d36038273d3608481546f78bc7859e6e5fb50e9047a"
+      "Bytes": 40997,
+      "Sha256": "fde0df4f251749810e548204e83164cae36816583150ae56e99db129ec60f23d"
     },
     {
       "Path": "dist/worker/catalog.json",
@@ -5688,8 +5828,8 @@
     },
     {
       "Path": "dist/worker/compiled/CustomDrawing.g.js",
-      "Bytes": 26246,
-      "Sha256": "48f0db31bc4af20cef972d5bdeddd8bf1a8195d3430f0d9e3e6639bca280f10d"
+      "Bytes": 116721,
+      "Sha256": "8491a7eafab76c3b56223b477ebac4c06a4a454aabae5ffd3d48d5f42ce2fb34"
     },
     {
       "Path": "dist/worker/compiled/DataValidation.g.js",
@@ -5943,18 +6083,23 @@
     },
     {
       "Path": "dist/worker/compiled/index.js",
-      "Bytes": 59834,
-      "Sha256": "4e280f09c867f0bbb77e975bec526ff86f4e3b26f27b30bb9bdc9b35610e2a3f"
+      "Bytes": 60567,
+      "Sha256": "8ad16340e3c91775008b9a29fa2b7d095cf28e07762b75d90d385629797699c9"
     },
     {
       "Path": "dist/worker/compiled/lazy.js",
-      "Bytes": 56942,
-      "Sha256": "8e6a302efddb517311c9440d632cc150af6f041800aa8a6cae8f15d1a2920115"
+      "Bytes": 57675,
+      "Sha256": "24c546cfb29e9214e1a273c7cd5a106f00bc4beaa00d9e303f00310a1023d89e"
     },
     {
       "Path": "dist/worker/extensions.js",
       "Bytes": 12735,
       "Sha256": "a8bf83e7f726ccb5c708b281bb2940bb3298671e68fa03e337110f4ee12c6f0e"
+    },
+    {
+      "Path": "dist/worker/glyph-path-demo.js",
+      "Bytes": 2831,
+      "Sha256": "803919ab52db785d3dcc7347f4733c9b841f784b73d1c3499ad94c5d0bd7e491"
     },
     {
       "Path": "dist/worker/manifest.js",
@@ -6015,6 +6160,16 @@
       "Path": "docs/GESTURES-AND-UPSTREAM.md",
       "Bytes": 7370,
       "Sha256": "80ba214e832ed696b65a99ca04ef1793fe93072ce8e2c3fbe0e687b87b1670a4"
+    },
+    {
+      "Path": "docs/GLYPH-PATH-PORT.md",
+      "Bytes": 8337,
+      "Sha256": "bbed73a26d0b6d61c4ffb74f370ff134841b6ecf3f43aa728b0106d00cad8c47"
+    },
+    {
+      "Path": "docs/GLYPH-PATH-REFERENCE.json",
+      "Bytes": 1816,
+      "Sha256": "e3748de009eb1725a12bea8f999215e5050b04426113fec90d15093633b0430e"
     },
     {
       "Path": "docs/HTTP-WINDOW-QUALIFICATION.md",
@@ -6133,8 +6288,8 @@
     },
     {
       "Path": "docs/VERIFICATION.json",
-      "Bytes": 441585,
-      "Sha256": "18518e82bf58e408fcd61432ff2575bd895b1379388c49434f042f2c21ef88b9"
+      "Bytes": 445468,
+      "Sha256": "cd467d11ff75a065f07643db3a583610050a23031d93be0c50cf2c82331c8c79"
     },
     {
       "Path": "docs/WORKER-OPENGL.md",
@@ -6478,8 +6633,8 @@
     },
     {
       "Path": "packages/browser/worker-assets/manifest.json",
-      "Bytes": 30330,
-      "Sha256": "cfe5ba83bdfe453489dda1c92caa3dcd5da10502a9fb2f137fe65b1b46646b78"
+      "Bytes": 30978,
+      "Sha256": "a174fd0a9ffe6c3ecad0f21d912023e4de2a645dee074b27aa7a6db0d4b62daa"
     },
     {
       "Path": "packages/browser/worker-assets/packages/animation/src/index.js",
@@ -6703,8 +6858,8 @@
     },
     {
       "Path": "packages/browser/worker-assets/packages/markup-xaml/src/index.js",
-      "Bytes": 45407,
-      "Sha256": "ca9c42bcaf1c424931e38c2c2ae08e6594259b6282850c7db26e29acae2958de"
+      "Bytes": 45417,
+      "Sha256": "9914d158833bca62d9635ecc50a20ff84ebb371f978a587c7c6e1ce21c7bd2f9"
     },
     {
       "Path": "packages/browser/worker-assets/packages/markup-xaml/src/services.js",
@@ -6723,18 +6878,33 @@
     },
     {
       "Path": "packages/browser/worker-assets/packages/media/src/drawing.js",
-      "Bytes": 22675,
-      "Sha256": "abb74e57eb8cfafb1b56eff403ee6ebe35783c84b43ba45bbbf039b4d74dd0c0"
+      "Bytes": 23910,
+      "Sha256": "ef8d34c16002fba2536ca17c9fe585f4857fb7a4e13ac702a8e65200db0d34c8"
+    },
+    {
+      "Path": "packages/browser/worker-assets/packages/media/src/geometry-resource.js",
+      "Bytes": 2475,
+      "Sha256": "0085b77e840fa98457d9a1b7432ef9cc0e32c29ab6fa5f6902ee6c6db4d1d149"
     },
     {
       "Path": "packages/browser/worker-assets/packages/media/src/geometry.js",
-      "Bytes": 10083,
-      "Sha256": "b8c5ddb8127d810cc7568b07f564d94d9f56f1f1546e12248330624d3cfaa10f"
+      "Bytes": 26336,
+      "Sha256": "3d9ec86825481b24802394c85aeb7fb1a40c07e3f63d32797756ee48b2281d86"
+    },
+    {
+      "Path": "packages/browser/worker-assets/packages/media/src/glyph-run.js",
+      "Bytes": 17938,
+      "Sha256": "e540c83f83623f880edb4c0ff0c7b5e3a25ec277877113720623a37875151b8a"
     },
     {
       "Path": "packages/browser/worker-assets/packages/media/src/index.js",
-      "Bytes": 252,
-      "Sha256": "15838d8bfa2ac935545327ca85a8e6868f5d2397eedff28ff102decbccefe9cf"
+      "Bytes": 284,
+      "Sha256": "1ea68673d7e62a809d99393b159b5e19c7fc7d148a8e0787be1d53e8ceaa2e52"
+    },
+    {
+      "Path": "packages/browser/worker-assets/packages/media/src/path-parser.js",
+      "Bytes": 4489,
+      "Sha256": "705f6baa4e8e586dc078b25223c8f0ce05fe3d138e2c7cee0fed83e54a96b3ef"
     },
     {
       "Path": "packages/browser/worker-assets/packages/media/src/text-cache.js",
@@ -6783,8 +6953,8 @@
     },
     {
       "Path": "packages/browser/worker-assets/packages/rendering/src/recording.js",
-      "Bytes": 18876,
-      "Sha256": "d0ca9bd2505569a3fc67c994838fdaa180b61b7b7c895afcaf0e427dd0d762c2"
+      "Bytes": 19054,
+      "Sha256": "2355bd9b05e30c03ebe2a14262550902a816e0070aaddd9a5660f76421304e4c"
     },
     {
       "Path": "packages/browser/worker-assets/packages/rendering/src/references.js",
@@ -6793,8 +6963,8 @@
     },
     {
       "Path": "packages/browser/worker-assets/packages/rendering/src/resources.js",
-      "Bytes": 19814,
-      "Sha256": "df68a95650521c88e6db568443633472d51893754ad0fa8e5a1f16ceeb8e8365"
+      "Bytes": 22246,
+      "Sha256": "e65df32d062a3b50f1bb05837eaeacbbcb092697813cde045978e6a9cce50c2f"
     },
     {
       "Path": "packages/browser/worker-assets/packages/rendering/src/scrolling.js",
@@ -6803,13 +6973,23 @@
     },
     {
       "Path": "packages/browser/worker-assets/packages/rendering/src/server.js",
-      "Bytes": 38999,
-      "Sha256": "2db995f7f5b37ef4e7a3596b3de906c9cd62db8a24699e692f830f082014e0dd"
+      "Bytes": 39026,
+      "Sha256": "ec8a1c13a87beb31f959af65732cb9b5e7696cbc5a1d65efb99abacaf6787d45"
+    },
+    {
+      "Path": "packages/browser/worker-assets/packages/skia/src/geometry-backend.js",
+      "Bytes": 4761,
+      "Sha256": "c12c94b0b0e8306ee2a2c479ec435885377083f27b218d3947b547afff542ba3"
+    },
+    {
+      "Path": "packages/browser/worker-assets/packages/skia/src/glyph-backend.js",
+      "Bytes": 6233,
+      "Sha256": "0302359e6e1390d2bcccc42c8f8debbff168266a0c2ffc243d32a99522bb83b2"
     },
     {
       "Path": "packages/browser/worker-assets/packages/skia/src/index.js",
-      "Bytes": 46216,
-      "Sha256": "1c52a264b3a9a121bba775b2a15a8e9c2320031473987245f0717e76dc71c63d"
+      "Bytes": 45583,
+      "Sha256": "391508a599bec8e083edfe41ecce2845a19365562203bf76b8a8bbf584e42f8e"
     },
     {
       "Path": "packages/browser/worker-assets/packages/skia/src/text-raster.js",
@@ -7618,8 +7798,8 @@
     },
     {
       "Path": "packages/markup-xaml/src/index.js",
-      "Bytes": 45428,
-      "Sha256": "4176c5ce030e94fc3341e0cfcf5cbd1cb64b7f11413ab6e51b0d2da7e4cee6a1"
+      "Bytes": 45438,
+      "Sha256": "2ca57d8e450b65f19d9b59a3e6ab5b90faccf721ba7357371d31c860017ecf6a"
     },
     {
       "Path": "packages/markup-xaml/src/services.js",
@@ -7658,18 +7838,33 @@
     },
     {
       "Path": "packages/media/src/drawing.js",
-      "Bytes": 22680,
-      "Sha256": "2bfb641a36f58d03d16f997dd7e1a9a197347088e24c16bea0e8dd98fa478c6b"
+      "Bytes": 23915,
+      "Sha256": "5f8025c1acb4a296b00ab3f984220a590d4154070c3d1cace5c0d09111ca1a83"
+    },
+    {
+      "Path": "packages/media/src/geometry-resource.js",
+      "Bytes": 2480,
+      "Sha256": "9e6d2a37f9a80eb4e854f515d6191dc19d673c6765c0cb66d8f3aa3697587197"
     },
     {
       "Path": "packages/media/src/geometry.js",
-      "Bytes": 10088,
-      "Sha256": "0803f30d4c0246ee0668f9a56c856e36c807f5b01c1372173170c8220fb50511"
+      "Bytes": 26341,
+      "Sha256": "1e73fa83e6ed51400ef1f961c599a0d96528c43dc1dac26472cf7911ac8a6020"
+    },
+    {
+      "Path": "packages/media/src/glyph-run.js",
+      "Bytes": 17943,
+      "Sha256": "04790118d9666b5117e8ead5a8895de60d38e24bd9dae2fa8159a29034826ea2"
     },
     {
       "Path": "packages/media/src/index.js",
-      "Bytes": 252,
-      "Sha256": "15838d8bfa2ac935545327ca85a8e6868f5d2397eedff28ff102decbccefe9cf"
+      "Bytes": 284,
+      "Sha256": "1ea68673d7e62a809d99393b159b5e19c7fc7d148a8e0787be1d53e8ceaa2e52"
+    },
+    {
+      "Path": "packages/media/src/path-parser.js",
+      "Bytes": 4494,
+      "Sha256": "fe9861570e4be6279abb4496ff727ec30769f1c203cf0540d5b4d9b2836e3316"
     },
     {
       "Path": "packages/media/src/text-cache.js",
@@ -7778,8 +7973,8 @@
     },
     {
       "Path": "packages/rendering/src/recording.js",
-      "Bytes": 18891,
-      "Sha256": "f683419160a0b1033f323a6eecafd6f33ef1cead74906b396c3a31491aed50d0"
+      "Bytes": 19069,
+      "Sha256": "e3149fa9edd2a1b35710a601aeb875b02849c9379c5413fdff483e599cb1fa78"
     },
     {
       "Path": "packages/rendering/src/references.js",
@@ -7788,8 +7983,8 @@
     },
     {
       "Path": "packages/rendering/src/resources.js",
-      "Bytes": 19824,
-      "Sha256": "32b02a1ab4443401d9cd5a5240e6572d8b0480274ba5b3577f135a3870c1ffa8"
+      "Bytes": 22256,
+      "Sha256": "b46bdfd31b36b988095ae16c6e5c4cdea1b046efa8cacf7e3b8cbecf0260c671"
     },
     {
       "Path": "packages/rendering/src/scrolling.js",
@@ -7798,8 +7993,8 @@
     },
     {
       "Path": "packages/rendering/src/server.js",
-      "Bytes": 39024,
-      "Sha256": "215704fe95c7fc6d7a3d5cea42166ec7408a9e4f8afaccbad2b8a0f1accf0520"
+      "Bytes": 39051,
+      "Sha256": "2df07a761fd803456539613b656474afb57d063d202850da913a5caa2f8fe757"
     },
     {
       "Path": "packages/skia/LICENSE",
@@ -7822,9 +8017,19 @@
       "Sha256": "b51c47f13358e1bbaa2805b7cbafb05d863bd5804afa4d778dc7a0c2ee788887"
     },
     {
+      "Path": "packages/skia/src/geometry-backend.js",
+      "Bytes": 4771,
+      "Sha256": "6e6cf2c6b6491b4912612d3475fcc2876c6c0a378b16eb0a55532ed65b59866e"
+    },
+    {
+      "Path": "packages/skia/src/glyph-backend.js",
+      "Bytes": 6243,
+      "Sha256": "c92301811f5eef927e7b0238037c4864e1f73daa4b780e02cc7da18bfee1c993"
+    },
+    {
       "Path": "packages/skia/src/index.js",
-      "Bytes": 46214,
-      "Sha256": "da6d73434ef8f3fe6c30966a07b87a1335f948ce717e1b0ba186447135256749"
+      "Bytes": 45586,
+      "Sha256": "494d7f19d54008ce0ac39bb56c59cb6ba06951067d47de979940134574a0e224"
     },
     {
       "Path": "packages/skia/src/text-raster.js",
@@ -8083,8 +8288,8 @@
     },
     {
       "Path": "samples/ControlCatalog/Pages/CustomDrawing.axaml",
-      "Bytes": 329,
-      "Sha256": "701c47a6e6c2a3736bf9bfa11a978aa73bedc67e21b20e0cbab51e3892643b17"
+      "Bytes": 1012,
+      "Sha256": "9697cb50cdc8871177869d093c679216bd16d61974bf7e75b8990d388be42249"
     },
     {
       "Path": "samples/ControlCatalog/Pages/DataValidation.axaml",
@@ -8343,8 +8548,8 @@
     },
     {
       "Path": "samples/ControlCatalog/catalog.js",
-      "Bytes": 39799,
-      "Sha256": "1334b42bacf357ab9262d24b956d7effe7e60b8e03471fc7be8ab8eb12fa1ff5"
+      "Bytes": 40843,
+      "Sha256": "9698a66ae8739e7c86394162ab077a39f3ed871bd2dac734ee2bdab7f93ff675"
     },
     {
       "Path": "samples/ControlCatalog/catalog.json",
@@ -8473,8 +8678,8 @@
     },
     {
       "Path": "samples/ControlCatalog/compiled/CustomDrawing.g.js",
-      "Bytes": 26246,
-      "Sha256": "48f0db31bc4af20cef972d5bdeddd8bf1a8195d3430f0d9e3e6639bca280f10d"
+      "Bytes": 116721,
+      "Sha256": "8491a7eafab76c3b56223b477ebac4c06a4a454aabae5ffd3d48d5f42ce2fb34"
     },
     {
       "Path": "samples/ControlCatalog/compiled/DataValidation.g.js",
@@ -8728,18 +8933,23 @@
     },
     {
       "Path": "samples/ControlCatalog/compiled/index.js",
-      "Bytes": 59834,
-      "Sha256": "4e280f09c867f0bbb77e975bec526ff86f4e3b26f27b30bb9bdc9b35610e2a3f"
+      "Bytes": 60567,
+      "Sha256": "8ad16340e3c91775008b9a29fa2b7d095cf28e07762b75d90d385629797699c9"
     },
     {
       "Path": "samples/ControlCatalog/compiled/lazy.js",
-      "Bytes": 56942,
-      "Sha256": "8e6a302efddb517311c9440d632cc150af6f041800aa8a6cae8f15d1a2920115"
+      "Bytes": 57675,
+      "Sha256": "24c546cfb29e9214e1a273c7cd5a106f00bc4beaa00d9e303f00310a1023d89e"
     },
     {
       "Path": "samples/ControlCatalog/extensions.js",
       "Bytes": 12694,
       "Sha256": "793a8f12eaf48ae7260eeea5fa15ca2f7da8e3908f4bfbc03138e5b2eaccc28f"
+    },
+    {
+      "Path": "samples/ControlCatalog/glyph-path-demo.js",
+      "Bytes": 2790,
+      "Sha256": "c7d484b3e10c1ded82d89879ed43a2ef88be20a2df85900df4767497c07229c9"
     },
     {
       "Path": "samples/ControlCatalog/index.html",
@@ -8773,8 +8983,8 @@
     },
     {
       "Path": "samples/ControlCatalog/worker/catalog.js",
-      "Bytes": 39977,
-      "Sha256": "d4e6bfcadb8a3e742b6fb50debc00cb0726c5c1cb15c0a293e113fa87c2daed4"
+      "Bytes": 41021,
+      "Sha256": "cd2d8e90449a60481408765f640db65ba3698078e4d2becb1c18a139982a7398"
     },
     {
       "Path": "samples/ControlCatalog/worker/catalog.json",
@@ -8903,8 +9113,8 @@
     },
     {
       "Path": "samples/ControlCatalog/worker/compiled/CustomDrawing.g.js",
-      "Bytes": 26246,
-      "Sha256": "48f0db31bc4af20cef972d5bdeddd8bf1a8195d3430f0d9e3e6639bca280f10d"
+      "Bytes": 116721,
+      "Sha256": "8491a7eafab76c3b56223b477ebac4c06a4a454aabae5ffd3d48d5f42ce2fb34"
     },
     {
       "Path": "samples/ControlCatalog/worker/compiled/DataValidation.g.js",
@@ -9158,18 +9368,23 @@
     },
     {
       "Path": "samples/ControlCatalog/worker/compiled/index.js",
-      "Bytes": 59834,
-      "Sha256": "4e280f09c867f0bbb77e975bec526ff86f4e3b26f27b30bb9bdc9b35610e2a3f"
+      "Bytes": 60567,
+      "Sha256": "8ad16340e3c91775008b9a29fa2b7d095cf28e07762b75d90d385629797699c9"
     },
     {
       "Path": "samples/ControlCatalog/worker/compiled/lazy.js",
-      "Bytes": 56942,
-      "Sha256": "8e6a302efddb517311c9440d632cc150af6f041800aa8a6cae8f15d1a2920115"
+      "Bytes": 57675,
+      "Sha256": "24c546cfb29e9214e1a273c7cd5a106f00bc4beaa00d9e303f00310a1023d89e"
     },
     {
       "Path": "samples/ControlCatalog/worker/extensions.js",
       "Bytes": 12741,
       "Sha256": "4f1e6fd37683b6b43fe5efe2e049ae81801a3dc302a577ccb1ab53956f8d7111"
+    },
+    {
+      "Path": "samples/ControlCatalog/worker/glyph-path-demo.js",
+      "Bytes": 2837,
+      "Sha256": "a20f8156261ae4dc64bb58a49f61758bcf2a7c7920d14feba6b9e438bf4e6078"
     },
     {
       "Path": "samples/ControlCatalog/worker/manifest.js",
@@ -9202,6 +9417,11 @@
       "Sha256": "259f89e9b5739a794f8488ac1877998a2d707d02a0ea0ec982b9ea677575885e"
     },
     {
+      "Path": "scripts/apply-glyph-edits.py",
+      "Bytes": 2298,
+      "Sha256": "001244184b8fc4e7ea117935d61a0fbac428401919149307b9396bb09d1d3cf3"
+    },
+    {
       "Path": "scripts/apply-implicit-edits.py",
       "Bytes": 2375,
       "Sha256": "69a79101f23f65290a4b8041949f31aa4b0b033e358f54701c38d5b64c6b6a38"
@@ -9232,6 +9452,11 @@
       "Sha256": "437c3471733b1f395ba60662ef8bb2bb63574c08b34c2a7f063f59af8922f4f0"
     },
     {
+      "Path": "scripts/compile-glyph-fixture.mjs",
+      "Bytes": 888,
+      "Sha256": "52f134b9e9f79d956339d99f3513f4d8e48ff7083c7129e6cbba8826010da9ef"
+    },
+    {
       "Path": "scripts/inventory.mjs",
       "Bytes": 1971,
       "Sha256": "b2b8ca26ed64f4a5b70bad5d4262d135c08541cdf4f971da5e7b1facf8577c8e"
@@ -9253,8 +9478,8 @@
     },
     {
       "Path": "scripts/qualify-core-port.sh",
-      "Bytes": 1401,
-      "Sha256": "5480a9bc320fda0bf1a8b1c1aeff0ee192b1ca8d2264641098dd315ecf54ce4a"
+      "Bytes": 1518,
+      "Sha256": "49b3cbb26941d38247ec9fc36f80ceb5c84594de9edd8d62e5c9f48ff9c80a29"
     },
     {
       "Path": "scripts/register-loader.mjs",
@@ -9283,8 +9508,8 @@
     },
     {
       "Path": "scripts/test-packages.mjs",
-      "Bytes": 8482,
-      "Sha256": "3196a8d1ac9deac0754ce49c0cadd22a2f22db645822f8d2233bce152056715b"
+      "Bytes": 9252,
+      "Sha256": "684a2e700840e5e0d9d58511fa0cf1aece6b56961223f887c7b0818fd903038d"
     },
     {
       "Path": "scripts/validate-node.mjs",
@@ -9293,8 +9518,8 @@
     },
     {
       "Path": "scripts/verify-release.mjs",
-      "Bytes": 15378,
-      "Sha256": "d2046378f67a7709e8e725771c9d47b869d37862353d2884a89d0f9963e998ce"
+      "Bytes": 16369,
+      "Sha256": "2d724c984de417ddfe31273a349efb95aef48286aecfde1a25c8fef819227eb3"
     },
     {
       "Path": "scripts/verify-vendor.mjs",
@@ -9385,6 +9610,36 @@
       "Path": "tests/gestures.test.mjs",
       "Bytes": 14981,
       "Sha256": "63103e024ba1efa815efe3d8dbaa4e47b1927c16f5a52927dfdbb255f1bfad79"
+    },
+    {
+      "Path": "tests/glyph-geometry-aot.js",
+      "Bytes": 40687,
+      "Sha256": "5e490107c57a8627e86cc6957b987ea83ca539407d16713148d43bb266abf579"
+    },
+    {
+      "Path": "tests/glyph-geometry-browser.py",
+      "Bytes": 8820,
+      "Sha256": "57b020abd27da8a7eaad922e3e5f3141d67333a4c6a65f0e91e9227bb40a409d"
+    },
+    {
+      "Path": "tests/glyph-geometry-scene.js",
+      "Bytes": 3173,
+      "Sha256": "b43163674528249c35ba693c9202c280f4793cd3a7f6fe36ca6312e5106b55f1"
+    },
+    {
+      "Path": "tests/glyph-geometry-worker.js",
+      "Bytes": 737,
+      "Sha256": "a4046959b370176dcc073e58b9c716cbdc2eaf9dcb700f8f130dc2a8c36f6d42"
+    },
+    {
+      "Path": "tests/glyph-geometry-worker.test.mjs",
+      "Bytes": 8898,
+      "Sha256": "45d7d76c56025568fc0162ef088217d0f1d1e762389a81ae27ee149202f8598e"
+    },
+    {
+      "Path": "tests/glyph-run.test.mjs",
+      "Bytes": 12283,
+      "Sha256": "5af4950e9935ab5a5657abd648c17a815df340df7ccfe17a2c08778c076ff18e"
     },
     {
       "Path": "tests/http-smoke.py",
@@ -9485,6 +9740,11 @@
       "Path": "tests/pages-smoke.py",
       "Bytes": 9166,
       "Sha256": "436be1a84f1ff9e0706a68d667316fe92891342499b94ecacfbe5becc841970e"
+    },
+    {
+      "Path": "tests/path-geometry-parity.test.mjs",
+      "Bytes": 12632,
+      "Sha256": "130378b04a8423510ea2146cbdf33083fada839f48cd2f0cfa96e2519948020d"
     },
     {
       "Path": "tests/performance-trace.py",

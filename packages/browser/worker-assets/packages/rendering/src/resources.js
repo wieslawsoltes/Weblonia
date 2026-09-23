@@ -1,7 +1,7 @@
 import { Point, Vector, Size, Rect, Matrix, RelativePoint, Event } from "../../base/src/index.js";
 import { Color, Brush, SolidColorBrush, ImmutableSolidColorBrush, LinearGradientBrush, RadialGradientBrush, ConicGradientBrush,
     GradientStop, ImageBrush, VisualBrush, Pen, DashStyle, BoxShadow, BlurEffect, DropShadowEffect, ExperimentalAcrylicMaterial,
-    Geometry, StreamGeometry, Typeface, FontFamily, Bitmap, WriteableBitmap, TextLayout, GetTextServiceVersion } from "../../media/src/index.js";
+    GlyphTypeface, GlyphRun, GlyphInfo, ImmutableGlyphRunReference, Geometry, StreamGeometry, Typeface, FontFamily, Bitmap, WriteableBitmap, TextLayout, GetTextServiceVersion } from "../../media/src/index.js";
 import { CompositionProtocolError, SameCompositionValue } from './protocol.js';
 
 const error = message => { throw new CompositionProtocolError(message); };
@@ -134,8 +134,20 @@ export class CompositionResourceRegistry {
         if (value instanceof DropShadowEffect) return { $: 'DropShadowEffect', V: { OffsetX: value.OffsetX, OffsetY: value.OffsetY, BlurRadius: value.BlurRadius, Color: this.Encode(value.Color), Opacity: value.Opacity } };
         if (value instanceof ExperimentalAcrylicMaterial) return { $: 'Acrylic', V: { TintColor: this.Encode(value.TintColor), TintOpacity: value.TintOpacity, MaterialOpacity: value.MaterialOpacity, FallbackColor: this.Encode(value.FallbackColor), BlurRadius: value.BlurRadius } };
         if (value instanceof Geometry) {
-            const data = value.Data, transform = value.Transform?.Value ?? value.Transform;
-            return this.Define('Geometry', value, `${data}|${value.FillRule}|${transform ? MatrixValues(transform).join(',') : ''}`, () => ({ Data: data, FillRule: value.FillRule, Transform: this.Encode(transform) }));
+            const description = value.GetPathDescription();
+            const ref = this.Define('Geometry', value, value.PathSignature, () => ({ Path: description }));
+            if (!this._subscriptions.has(ref.$ref)) this._subscriptions.set(ref.$ref, value.Changed.Add(() => this.Invalidate(value)));
+            return ref;
+        }
+        if (value instanceof GlyphTypeface) {
+            const descriptor = value._Descriptor();
+            return this.Define('GlyphTypeface', value._Identity(), 0, () => ({Bytes:cloneBytes(descriptor.Bytes),FontIndex:descriptor.FontIndex}));
+        }
+        if (value instanceof GlyphRun || value instanceof ImmutableGlyphRunReference) {
+            const descriptor = value._Descriptor();
+            const ref = this.Define('GlyphRun', value, descriptor, () => ({...descriptor,Typeface:this.Encode(value.GlyphTypeface)}));
+            if (value.Changed && !this._subscriptions.has(ref.$ref)) this._subscriptions.set(ref.$ref, value.Changed.Add(() => this.Invalidate(value)));
+            return ref;
         }
         if (value instanceof Bitmap) return this._Bitmap(value);
         if (value instanceof TextLayout || value.TextLines && value.Typeface) {
@@ -212,8 +224,29 @@ export class CompositionResourceResolver {
         let result;
         try {
             const data = entry.Data;
-            if (entry.Kind === 'Geometry') { result = new StreamGeometry(data.Data); result.FillRule = data.FillRule; result.Transform = this.Decode(data.Transform); }
-            else if (entry.Kind === 'Text') {
+            if (entry.Kind === 'Geometry') {
+                if (data.Path) result = Geometry.FromPathDescription(data.Path);
+                else { result = new StreamGeometry(data.Data); result.FillRule = data.FillRule; result.Transform = this.Decode(data.Transform); }
+                // Reject malformed native path programs while the transaction is
+                // still provisional, rather than poisoning a future render frame.
+                try { for (const role of ['all','fill','stroke']) this.Platform.GetPath(result, role); }
+                catch (error) { result.Dispose(); throw error; }
+            }
+            else if (entry.Kind === 'GlyphTypeface') {
+                result = this.Platform.CreateGlyphTypeface(data.Bytes, {FontIndex:data.FontIndex});
+            } else if (entry.Kind === 'GlyphRun') {
+                if (!Array.isArray(data.Glyphs) || data.Glyphs.length > 1000000 ||
+                    !Array.isArray(data.Baseline) || data.Baseline.length !== 2 || !data.Baseline.every(Number.isFinite) ||
+                    typeof data.Characters !== 'string') error('Invalid glyph-run descriptor.');
+                const infos = data.Glyphs.map(g => {
+                    if (!Array.isArray(g) || g.length !== 5) error('Invalid positioned glyph descriptor.');
+                    return new GlyphInfo(g[0],g[1],g[2],new Vector(g[3],g[4]));
+                });
+                const face = this.Decode(data.Typeface);
+                if (!(face instanceof GlyphTypeface)) error('Glyph-run typeface reference has the wrong resource kind.');
+                result = new GlyphRun(face,data.Size,data.Characters,infos,new Point(...data.Baseline),data.BiDiLevel);
+                try { result._GetNative(this.Platform); } catch (error) { result.Dispose(); throw error; }
+            } else if (entry.Kind === 'Text') {
                 const d = this.Decode(data);
                 if (d.Native) {
                     result = new TextLayout(d.Text, d.Typeface, d.FontSize, d.Foreground, d);
