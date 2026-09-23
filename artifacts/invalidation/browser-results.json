@@ -1,6 +1,6 @@
 {
   "Version": "0.6.2-alpha.1",
-  "SourceFingerprint": "9608886d60f15a5b9fbe15cdcd4ccef1d08ab046caad57ea9c14bb72bb6487bc",
+  "SourceFingerprint": "823483213634908bb0256e90b19b79810cd220ea40e2be9da81c99ee333b3b89",
   "Completed": true,
   "Tests": [
     {
@@ -105,7 +105,7 @@
       "Evidence": {
         "MovingPixels": true,
         "RetainedSiblingUnchanged": true,
-        "StoppedContentRecords": 282
+        "StoppedContentRecords": 280
       }
     },
     {
@@ -246,8 +246,8 @@
   "Errors": [],
   "MissingAssets": [],
   "Qualification": "Chromium native Skia raster; real module workers importing production startup; asset interception only. No pointer nudge or forced render before autonomous-state/pixel assertions.",
-  "Browser": "152.0.7977.0",
+  "Browser": "153.0.8010.0",
   "Passed": 26,
   "Failed": 0,
-  "FinalSourceFingerprint": "9608886d60f15a5b9fbe15cdcd4ccef1d08ab046caad57ea9c14bb72bb6487bc"
+  "FinalSourceFingerprint": "823483213634908bb0256e90b19b79810cd220ea40e2be9da81c99ee333b3b89"
 }

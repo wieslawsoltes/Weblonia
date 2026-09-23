@@ -15,6 +15,15 @@ export const MultiBindingXaml = `<Canvas xmlns="https://github.com/avaloniaui" x
             <Binding Path="Tag" RelativeSource="{RelativeSource Self}"/>
         </MultiBinding></TextBlock.Text>
     </TextBlock>
+    <TextBlock x:Name="SingleFormat" Canvas.Left="16" Canvas.Top="108">
+        <TextBlock.Text><Binding Path="Value" StringFormat="{}{{{0,8:F1}}}" ConverterCulture="en-US"/></TextBlock.Text>
+    </TextBlock>
+    <TextBlock x:Name="ReflectedFormat" Canvas.Left="16" Canvas.Top="136">
+        <TextBlock.Text><ReflectionBinding Path="Value" StringFormat="N2" ConverterCulture="pl-PL"/></TextBlock.Text>
+    </TextBlock>
+    <TextBlock x:Name="NullFormat" Canvas.Left="16" Canvas.Top="164">
+        <TextBlock.Text><Binding Path="Nullable" TargetNullValue="NULL" StringFormat="[{0}]"/></TextBlock.Text>
+    </TextBlock>
 </Canvas>`;
 export function MultiBindingRegistry(A) {
     const registry = new A.XamlTypeRegistry().RegisterAssembly(A);
@@ -22,15 +31,15 @@ export function MultiBindingRegistry(A) {
     class ColorExtension { ProvideValue() { return { Convert: values => values[0] ? 'Red' : 'Lime' }; } }
     registry.RegisterType('SumExtension', SumExtension, 'urn:weblonia:multibinding');
     registry.RegisterType('ColorExtension', ColorExtension, 'urn:weblonia:multibinding');
-    registry.RegisterModel('Model', { Left: Number, Delta: Number, Margin: Number, Enabled: Boolean, Ready: Boolean, Status: String, Value: Number }, 'urn:weblonia:multibinding');
+    registry.RegisterModel('Model', { Left: Number, Delta: Number, Margin: Number, Enabled: Boolean, Ready: Boolean, Status: String, Value: Number, Nullable: Object }, 'urn:weblonia:multibinding');
     return registry;
 }
 export function MultiBindingModel(A) {
     class Model extends A.AvaloniaObject {}
-    A.DefineProperties(Model, { Left: [8], Delta: [8], Margin: [0], Enabled: [true], Ready: [true], Status: ['ready'], Value: [42.5] });
+    A.DefineProperties(Model, { Left: [8], Delta: [8], Margin: [0], Enabled: [true], Ready: [true], Status: ['ready'], Value: [42.5], Nullable: [null] });
     return new Model();
 }
 export function ChangeMultiBinding(model) {
     model.Left = 40; model.Delta = 24; model.Margin = 16;
-    model.Enabled = false; model.Status = 'updated'; model.Value = 99;
+    model.Enabled = false; model.Status = 'updated'; model.Value = 99; model.Nullable = 13;
 }

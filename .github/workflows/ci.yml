@@ -18,6 +18,7 @@ jobs:
         with:
           python-version: '3.13'
       - run: python scripts/apply-multibinding-edits.py
+      - run: python scripts/apply-single-binding-edits.py
       - run: python scripts/apply-glyph-edits.py
       - run: python scripts/apply-secondary-edits.py
       - run: node --import ./scripts/register-loader.mjs scripts/compile-glyph-fixture.mjs

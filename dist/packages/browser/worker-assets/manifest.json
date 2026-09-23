@@ -1,6 +1,6 @@
 {
   "Schema": 1,
-  "SourceFingerprint": "9608886d60f15a5b9fbe15cdcd4ccef1d08ab046caad57ea9c14bb72bb6487bc",
+  "SourceFingerprint": "823483213634908bb0256e90b19b79810cd220ea40e2be9da81c99ee333b3b89",
   "SourceLoaderSha256": "6b290f30aacd7099b0adbb0e0742f60b9963aa958c8848d4772401969bbfcf3f",
   "LoaderTransformation": "Append export default CanvasKitInit;",
   "NativeWasm": "external; supplied via AssetBaseUrl",
@@ -54,7 +54,7 @@
     "packages/controls/src/scroll-bar.js": "28772682cd80f2a37bf648fb82dcc76acd5cd8fc2f26f976bd245e564d30c44b",
     "packages/controls/src/table-view.js": "9d4a252b7fd9e4a09b8154e9eb5b57df3cdec541501472847478da8316b533e7",
     "packages/controls/src/templated-control.js": "c08cd25c06f843d0243922107dcd37a75075099755c76511cef7f41e78822ee8",
-    "packages/data/src/binding.js": "01887ec24781ca4a33ed22e4424806c55dbb6f0739b4b91dfa71ffa67bf712df",
+    "packages/data/src/binding.js": "2b76e0a50a3af95bb1b073b6316f8f7ef377e7aaaaa2d702e80d73f3951584c9",
     "packages/data/src/formatting.js": "81dcd9597f59e61bccb9d42fc58aca9f58465290cdd91b234eb53a934b897190",
     "packages/data/src/index.js": "e4842cf1845af28f91cc756d59b802ac5f3e857b9e1677eb12452000e5308946",
     "packages/data/src/selection.js": "072e64f0b4316e6748feaeec15aca3075250d5a4a16d838eeace68454e033568",
