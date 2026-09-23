@@ -36,8 +36,20 @@ server=ThreadingHTTPServer(('127.0.0.1',0),Handler);thread=Thread(target=server.
 origin=f'http://127.0.0.1:{server.server_port}'
 before=[((45,30),(255,0,0,255)),((45,15),(255,255,255,255)),((26,90),(0,0,0,255)),((86,90),(255,255,255,255))]
 after=[((45,30),(255,0,0,255)),((45,15),(0,0,0,255)),((26,90),(255,255,255,255)),((86,90),(0,0,255,255))]
+def save():
+    (OUT/'browser-results.json').write_text(json.dumps(report,indent=2)+'\n')
+def evaluate(page,expression,argument=None,label='command'):
+    # Playwright evaluate itself has no operation deadline. Bound async fixture
+    # promises rather than leaving a stalled mount/teardown alive for the whole
+    # job. This only observes completion; it does not request frames or retry.
+    print('STAGE',mode,aot,label,flush=True)
+    return page.evaluate("""async argument=>{let timer;try{return await Promise.race([
+        Promise.resolve().then(()=>("""+expression+""")(argument)),
+        new Promise((_,reject)=>{timer=setTimeout(()=>reject(new Error('Glyph fixture timed out during '+"""+json.dumps(label)+"""+'; render error: '+globalThis.catalog?.Root?.LastRenderError?.message)),45000);})
+    ]);}finally{clearTimeout(timer);}}""",argument)
 def wait_pixels(page,expected):
     deadline=time.monotonic()+10
+    print('STAGE',mode,aot,'presented pixels',flush=True)
     while True:
         # Locator screenshots capture the already-presented canvas, never call the renderer.
         image=Image.open(io.BytesIO(page.locator('#app canvas').first.screenshot(timeout=10000))).convert('RGBA')
@@ -55,32 +67,35 @@ try:
                 page.on('request',lambda r:fonts.append(r.url) if r.url.endswith('/system-font.ttf') else None)
                 entry={'Mode':mode,'Aot':aot,'Passed':False};started=time.monotonic()
                 try:
+                    print('STAGE',mode,aot,'navigation',flush=True)
                     page.goto(origin+'/tests/glyph-geometry-entry.html?mode='+mode);page.wait_for_function('globalThis.catalogReady||globalThis.catalogError',timeout=60000);assert not page.evaluate('globalThis.catalogError')
-                    state=page.evaluate('''async([mode,url,aot])=>{
+                    state=evaluate(page,'''async([mode,url,aot])=>{
                         if(mode==='full-isolation')return await catalogHost.InvokeAsync('MountGlyphGeometry',url,aot);
                         const A=await import('@wieslawsoltes/avalonia'),{CreateGlyphGeometryScene}=await import('/tests/glyph-geometry-scene.js');
                         globalThis.glyphGeometry=await CreateGlyphGeometryScene(A,catalog.Root,url,aot);return glyphGeometry.State();
-                    }''',[mode,origin+'/tests/system-font.ttf',aot])
+                    }''',[mode,origin+'/tests/system-font.ttf',aot],label='mount')
                     assert state['Aot']==aot and state['HasDocument']==(mode!='full-isolation') and not state['RenderError'],state
                     initial,error1=wait_pixels(page,before)
-                    change=page.evaluate("async mode=>mode==='full-isolation'?await catalogHost.InvokeAsync('ChangeGlyphGeometry'):await glyphGeometry.Change()",mode)
+                    change=evaluate(page,"async mode=>mode==='full-isolation'?await catalogHost.InvokeAsync('ChangeGlyphGeometry'):await glyphGeometry.Change()",mode)
                     updated,error2=wait_pixels(page,after)
-                    current=page.evaluate("async mode=>mode==='full-isolation'?await catalogHost.InvokeAsync('GlyphGeometryState'):glyphGeometry.State()",mode)
+                    current=evaluate(page,"async mode=>mode==='full-isolation'?await catalogHost.InvokeAsync('GlyphGeometryState'):glyphGeometry.State()",mode)
                     assert current['Frames']>change['FramesBefore'] and not current['RenderError'],current
                     if mode!='single':
-                        page.evaluate("async mode=>mode==='full-isolation'?await catalogHost.RestartRendererAsync():await catalog.Root.Renderer.RestartAsync()",mode)
+                        evaluate(page,"async mode=>{if(mode==='full-isolation')await catalogHost.RestartRendererAsync();else await catalog.Root.Renderer.RestartAsync();}",mode,label='restart')
                         _,error3=wait_pixels(page,after)
                     else:error3=0
                     assert len(fonts)==1,fonts
                     assert not errors and not missing,{'Errors':errors,'MissingAssets':missing}
                     label=mode+('-aot' if aot else '-runtime');initial.save(OUT/(label+'-before.png'));updated.save(OUT/(label+'-after.png'))
                     entry.update(Passed=True,MaximumChannelError=max(error1,error2,error3),ComparedChannels=4,AutonomousRedraw=True,RestartPassed=mode!='single',FontRequests=len(fonts),WorkerCount=len(page.workers),State=current)
-                    if mode=='full-isolation':page.evaluate('async()=>await catalogHost.DisposeAsync()')
-                    else:page.evaluate('glyphGeometry.Dispose();catalog.Root.Dispose();undefined')
-                except Exception as e:entry['Error']=str(e)
+                    if mode=='full-isolation':evaluate(page,'async()=>await catalogHost.DisposeAsync()',label='dispose')
+                    else:evaluate(page,'()=>{glyphGeometry.Dispose();catalog.Root.Dispose();}',label='dispose')
+                except Exception as e:entry.update(Passed=False,Error=str(e))
                 finally:
-                    entry.update(Errors=errors,MissingAssets=missing,Milliseconds=round((time.monotonic()-started)*1000,2));report['Errors'].extend(errors);report['MissingAssets'].extend(missing);report['Tests'].append(entry);context.close();print(('PASS' if entry['Passed'] else 'FAIL'),mode,aot,entry.get('Error',''),flush=True)
+                    entry.update(Errors=errors,MissingAssets=missing,Milliseconds=round((time.monotonic()-started)*1000,2));report['Errors'].extend(errors);report['MissingAssets'].extend(missing);report['Tests'].append(entry);save();context.close();print(('PASS' if entry['Passed'] else 'FAIL'),mode,aot,entry.get('Error',''),flush=True)
         browser.close()
-finally:server.shutdown();server.server_close();thread.join()
+finally:
+    print('STAGE HTTP server shutdown',flush=True)
+    server.shutdown();server.server_close();thread.join(timeout=5)
 report.update(Completed=True,Passed=sum(t['Passed']for t in report['Tests']),Failed=sum(not t['Passed']for t in report['Tests']),FinalSourceFingerprint=source_fingerprint(ROOT))
-(OUT/'browser-results.json').write_text(json.dumps(report,indent=2)+'\n');raise SystemExit(1 if report['Failed'] or report['Errors'] or report['MissingAssets'] else 0)
+save();raise SystemExit(1 if report['Failed'] or report['Errors'] or report['MissingAssets'] else 0)

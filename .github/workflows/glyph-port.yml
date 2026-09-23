@@ -7,7 +7,7 @@ permissions:
   contents: read
 concurrency:
   group: glyph-port-${{ github.ref }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 jobs:
   qualify:
     if: github.repository == 'wieslawsoltes/Weblonia' && github.ref == 'refs/heads/feature/glyphrun-pathgeometry-parity'
