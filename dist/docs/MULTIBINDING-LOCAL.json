@@ -1,0 +1,124 @@
+{
+  "Version": "0.6.2-alpha.1",
+  "SourceFingerprint": "557221c8c8201ab4b782d484cc47e965067a2d1c1731fc4cb8806ae8206e1e9b",
+  "BaseCommit": "f60cb93e02bbcac2f905834ab2f0a4709b8ca73c",
+  "GeneratedAt": "2026-09-23T19:58:22.780399+00:00",
+  "FullReleaseQualified": false,
+  "Remote": {
+    "Pushed": false,
+    "PullRequest": null,
+    "Merged": false,
+    "Deployed": false,
+    "NpmPublished": false,
+    "Reason": "This session exposes GitHub read/download tools only, and no authenticated local GitHub CLI is configured."
+  },
+  "Node": {
+    "Version": "0.6.2-alpha.1",
+    "SourceFingerprint": "557221c8c8201ab4b782d484cc47e965067a2d1c1731fc4cb8806ae8206e1e9b",
+    "StartedAt": "2026-09-23T19:47:26.609Z",
+    "Completed": true,
+    "Passed": true,
+    "ExitCode": 0,
+    "CompletedAt": "2026-09-23T19:47:36.131Z",
+    "Tests": 963,
+    "Pass": 963,
+    "Fail": 0,
+    "Skip": 0,
+    "Cancelled": 0,
+    "FinalSourceFingerprint": "557221c8c8201ab4b782d484cc47e965067a2d1c1731fc4cb8806ae8206e1e9b"
+  },
+  "PackedConsumers": {
+    "Passed": true,
+    "MultiBindingApis": true,
+    "XamlNamespaceApis": true,
+    "EffectTransitionApis": true,
+    "GlyphPathApis": true,
+    "ImplicitAnimationApis": true,
+    "Packages": 18,
+    "FacadeExports": 561,
+    "PublicRegistryInstalled": false,
+    "StartupSubpaths": true,
+    "CorePortApis": true,
+    "Version": "0.6.2-alpha.1",
+    "SourceFingerprint": "557221c8c8201ab4b782d484cc47e965067a2d1c1731fc4cb8806ae8206e1e9b",
+    "FinalSourceFingerprint": "557221c8c8201ab4b782d484cc47e965067a2d1c1731fc4cb8806ae8206e1e9b"
+  },
+  "Build": {
+    "AotModules": 75,
+    "WorkerAssets": 564,
+    "NativeWasmDuplicated": false
+  },
+  "NewNodeTests": 70,
+  "PreviousImplementationRegressionCheck": {
+    "Selected": 7,
+    "Failed": 6,
+    "Passed": 1,
+    "Report": "artifacts/multibinding/local/original-regressions.log",
+    "Scope": "New selected tests executed with baseline binding.js restored, then current implementation restored. Not a full old-source suite."
+  },
+  "TextQuality": {
+    "Passed": 29,
+    "Failed": 0,
+    "PixelComparisons": 27,
+    "MaximumChannelError": 1,
+    "MissingInkPixels": 0,
+    "Tolerance": 2,
+    "Browser": "144.0.7559.96",
+    "Report": "artifacts/text-quality-results.json",
+    "Scope": "Local asset-intercepted browser; actual native Skia pixel comparisons, not ordinary HTTP or physical GPU."
+  },
+  "MultiBindingBrowserDiagnostic": {
+    "Passed": 6,
+    "Failed": 0,
+    "MaximumChannelError": 0,
+    "Interception": true,
+    "WorkerBootstrapOverrides": true,
+    "SnapshotForcesRender": false,
+    "Browser": "144.0.7559.96",
+    "Report": "artifacts/multibinding/local/intercepted-browser-results.json",
+    "Scope": "Runtime/direct AOT in single/render-worker/full-isolation; analytic presented pixels, autonomous updates, subscriptions and worker restart. Local diagnostic cannot satisfy the ordinary HTTP gate."
+  },
+  "MultiBindingOrdinaryHttp": {
+    "Passed": 0,
+    "Failed": 6,
+    "Completed": true,
+    "PolicyBlocked": true,
+    "Browser": "144.0.7559.96",
+    "Report": "artifacts/multibinding/browser-results.json",
+    "Error": "ERR_BLOCKED_BY_ADMINISTRATOR"
+  },
+  "CatalogDiagnostic": {
+    "Completed": false,
+    "ObservedPassed": 104,
+    "ObservedFailed": 0,
+    "ObservedSkipped": 3,
+    "CurrentTest": "focused password editing uses a protected native input and clears inactive buffers",
+    "Report": "artifacts/multibinding/local/catalog-diagnostic-incomplete.json",
+    "Scope": "Explicit Canvas/single local override; interrupted at external process timeout. This is NOT a complete catalog pass."
+  },
+  "Preserved": {
+    "SkiaSharpWebVersion": "0.5.1",
+    "SkiaCommit": "d5a9e8573c747804930eb76a81d05d2c5dde2d3a",
+    "NativeWasmSha256": "698921da1c2d684dc52b9607cb2031aee9d9f4ddb06a6dca107265d684a73505",
+    "DefaultThreading": "full-isolation",
+    "SharedNativeCompilation": true,
+    "LazyAot": true
+  },
+  "FullAvaloniaParity": false,
+  "FullXamlXParity": false,
+  "PhysicalGpuQualified": false,
+  "SafariQualified": false,
+  "FirefoxQualified": false,
+  "FontFiles": 0,
+  "Pending": "Run bash scripts/qualify-core-port.sh on a browser host that permits ordinary HTTP, then the exact qualified-head PR CI. No failed/skipped policy gate may be treated as passing.",
+  "HistoricalEvidence": "Previous committed reports are preserved but do not qualify this changed source. Baseline full verification is docs/history/pre-multibinding-VERIFICATION.json. Only reports with this source fingerprint and completed success apply.",
+  "EvidenceFiles": {
+    "artifacts/validation-optimized/node-final.json": "af9538ab663c99715c699bdac0386e86402369259045421b6b58ef326b16c16a",
+    "artifacts/validation-optimized/node-final.log": "047be9d74264e32cb803e4a9ea0d82adde4d8832d8cf17213e1819ea1e8ae41a",
+    "artifacts/package-consumer-result.json": "1cc828daf597c1f1e278e4bf28bdfbf3eba3d5e66195770e3905f92002b353b3",
+    "artifacts/text-quality-results.json": "6f67b5699dd3f5cbc277da26b522f64f2df381457cc650149fc0e9f3e6102d6f",
+    "artifacts/multibinding/browser-results.json": "13925706e4c2e2721851abe8ca5a140d6491b601cd5bd1ed99ad124641cbfc70",
+    "artifacts/multibinding/local/intercepted-browser-results.json": "50978e4950c25cf66002ea5ee442213d112e69c34ca15108c58cfa1378236331",
+    "artifacts/multibinding/local/original-regressions.log": "3df438ba06aaf9944a75fe9ecb8dbc4b3d397c88100780fe106b34e531fb90d2"
+  }
+}

@@ -1,15 +1,16 @@
 {
   "Passed": true,
+  "MultiBindingApis": true,
   "XamlNamespaceApis": true,
   "EffectTransitionApis": true,
   "GlyphPathApis": true,
   "ImplicitAnimationApis": true,
   "Packages": 18,
-  "FacadeExports": 559,
+  "FacadeExports": 561,
   "PublicRegistryInstalled": false,
   "StartupSubpaths": true,
   "CorePortApis": true,
   "Version": "0.6.2-alpha.1",
-  "SourceFingerprint": "0e6ad3cce5334a9edc3b6cd0822e0285bfb63459fcc00075f9ee676730dc638a",
-  "FinalSourceFingerprint": "0e6ad3cce5334a9edc3b6cd0822e0285bfb63459fcc00075f9ee676730dc638a"
+  "SourceFingerprint": "9608886d60f15a5b9fbe15cdcd4ccef1d08ab046caad57ea9c14bb72bb6487bc",
+  "FinalSourceFingerprint": "9608886d60f15a5b9fbe15cdcd4ccef1d08ab046caad57ea9c14bb72bb6487bc"
 }

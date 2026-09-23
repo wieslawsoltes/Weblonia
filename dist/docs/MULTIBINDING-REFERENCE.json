@@ -1,0 +1,31 @@
+{
+  "Repository": "AvaloniaUI/Avalonia",
+  "Commit": "dff6a87665aa456c37b8cf89647e007f4c3066d7",
+  "Files": [
+    {
+      "Path": "src/Avalonia.Base/Data/MultiBinding.cs",
+      "BlobSha": "37ea8ec368df107016b7b84f8b4c30b9d31fdbc8"
+    },
+    {
+      "Path": "src/Avalonia.Base/Data/Core/MultiBindingExpression.cs",
+      "BlobSha": "2c8a0c73fb5041871df6de25fde0a7375e4f92f6"
+    },
+    {
+      "Path": "src/Avalonia.Base/Data/Converters/StringFormatMultiValueConverter.cs",
+      "BlobSha": "606ac9e6fa810bfd592f866d67d0e22a296f803b"
+    },
+    {
+      "Path": "src/Avalonia.Base/Data/Converters/StringFormatValueConverter.cs",
+      "BlobSha": "88cd1f38af9b9976842cec4dff4d91cd30e17dfa"
+    },
+    {
+      "Path": "tests/Avalonia.Markup.UnitTests/Data/MultiBindingTests.cs",
+      "BlobSha": "0be9b1649a9f6e6337e5e0b36d344ffb2426958a"
+    }
+  ],
+  "Documentation": [
+    "https://docs.avaloniaui.net/docs/data-binding/multi-binding",
+    "https://v11.docs.avaloniaui.net/docs/guides/data-binding/how-to-bind-multiple-properties/"
+  ],
+  "Scope": "API/behavioral reference; implementation-specific differences are documented in MULTIBINDING-PORT.md."
+}

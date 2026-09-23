@@ -1,30 +1,10 @@
 {
   "Version": "0.6.2-alpha.1",
-  "SourceFingerprint": "0e6ad3cce5334a9edc3b6cd0822e0285bfb63459fcc00075f9ee676730dc638a",
+  "SourceFingerprint": "9608886d60f15a5b9fbe15cdcd4ccef1d08ab046caad57ea9c14bb72bb6487bc",
   "Completed": true,
   "Tests": [
     {
       "Mode": "single",
-      "Passed": true,
-      "AutonomousRedraw": true,
-      "BindingDrivenLayout": true,
-      "GroupedTrigger": true,
-      "Retargeted": true,
-      "CompletedRunNotReplayed": true,
-      "ClearedDefinitions": true,
-      "IntermediatePositions": [
-        20,
-        35
-      ],
-      "ComparedChannels": 4,
-      "MaximumChannelError": 1,
-      "WorkerCount": 0,
-      "Errors": [],
-      "MissingAssets": [],
-      "Milliseconds": 2493.07
-    },
-    {
-      "Mode": "render-worker",
       "Passed": true,
       "AutonomousRedraw": true,
       "BindingDrivenLayout": true,
@@ -38,10 +18,30 @@
       ],
       "ComparedChannels": 4,
       "MaximumChannelError": 1,
+      "WorkerCount": 0,
+      "Errors": [],
+      "MissingAssets": [],
+      "Milliseconds": 2195.44
+    },
+    {
+      "Mode": "render-worker",
+      "Passed": true,
+      "AutonomousRedraw": true,
+      "BindingDrivenLayout": true,
+      "GroupedTrigger": true,
+      "Retargeted": true,
+      "CompletedRunNotReplayed": true,
+      "ClearedDefinitions": true,
+      "IntermediatePositions": [
+        20,
+        35
+      ],
+      "ComparedChannels": 4,
+      "MaximumChannelError": 1,
       "WorkerCount": 1,
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 3182.96
+      "Milliseconds": 2473.31
     },
     {
       "Mode": "full-isolation",
@@ -53,14 +53,14 @@
       "CompletedRunNotReplayed": true,
       "ClearedDefinitions": true,
       "IntermediatePositions": [
-        25
+        26
       ],
       "ComparedChannels": 4,
       "MaximumChannelError": 1,
       "WorkerCount": 2,
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 2805.68
+      "Milliseconds": 2310.87
     }
   ],
   "Errors": [],
@@ -73,5 +73,5 @@
   "Browser": "152.0.7977.0",
   "Passed": 3,
   "Failed": 0,
-  "FinalSourceFingerprint": "0e6ad3cce5334a9edc3b6cd0822e0285bfb63459fcc00075f9ee676730dc638a"
+  "FinalSourceFingerprint": "9608886d60f15a5b9fbe15cdcd4ccef1d08ab046caad57ea9c14bb72bb6487bc"
 }
