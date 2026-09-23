@@ -13,6 +13,7 @@ const finite = values => Array.isArray(values) && values.every(Number.isFinite);
 const visualTypes = new Set(['CompositionContainerVisual','CompositionSolidColorVisual','CompositionSurfaceVisual','CompositionCustomVisual','CompositionDrawListVisual']);
 const objectTypes = new Set([...visualTypes,'CompositionDrawingSurface','CompositionColorBrush','CompositionSurfaceBrush','CompositionPropertySet']);
 const animationTypes = { ScalarKeyFrameAnimation, Vector2KeyFrameAnimation, Vector3KeyFrameAnimation, ColorKeyFrameAnimation, ExpressionAnimation };
+const valueTypes=new Set(['Scalar','Boolean','Color','Vector2','Vector3','Vector4','Quaternion','Matrix3x2','Matrix4x4']);
 const plainId = id => Number.isSafeInteger(id) && id > 0;
 function validateCommands(commands) {
     if (!Array.isArray(commands) || commands.length > 200000) fail('Invalid display list.'); let depth = 0;
@@ -53,12 +54,15 @@ const updatedIds = changes => new Set([...changes.Upsert.map(x => x.Id), ...(cha
 const metadataMap = (old, changes, full) => { const result = new Map(full ? [] : old); for (const id of changes.Remove) result.delete(id); return result; };
 const makeMatrix = values => new Matrix(...values);
 const popAll = states => { for (let i = states.length - 1; i >= 0; --i) states[i].Dispose(); };
-const sameState = (a, b) => a && a.StartedAt === b.StartedAt && a.Name === b.Name;
+const sameState = (a,b) => !!a && a.Name===b.Name && (b.Id!==undefined ? a.Id===b.Id : a.Id===undefined&&a.StartedAt===b.StartedAt);
+const componentValue=(state,value)=>state.Component?value?.[state.Component]:value;
+const writeAnimated=(map,values,state,value)=>map.set(state.Property,state.Component?{...(map.get(state.Property)??values[state.Property]),[state.Component]:value}:value);
+const sampleState=(target,state,epoch,current)=>state.Animation.Sample(Math.max(0,epoch-state.StartedAt),state.Start,target,state.FinalValue,componentValue(state,current));
 
 /** Server-owned composition objects contain no Avalonia property store, bindings,
  * controls or DOM references. All reads here are from committed scalar state. */
 class ServerCompositionObject {
-    constructor(id, scene) { this.Id = id; this.Scene = scene; this.Values = {}; this.Animated = new Map(); this.Animations = new Map(); this.Children = []; }
+    constructor(id, scene) { this.Id = id; this.Scene = scene; this.Values = {}; this.Animated = new Map(); this.Animations = new Map(); this.Instances = new Map(); this.Children = []; }
     Read(name) { return this.Animated.has(name) ? this.Animated.get(name) : this.Values[name]; }
     GetExpressionValue(name) { if (['__proto__','prototype','constructor'].includes(name) || !(name in this.Values)) throw new ReferenceError(`Unknown composition member ${name}.`); return this.Read(name); }
     Transform() {
@@ -91,21 +95,32 @@ class ServerCompositionObject {
             for (const child of this.Children) this.Scene.CompositionObjects.get(child)?.Render(context);
         } finally { state.Dispose(); }
     }
-    Tick(epoch) {
-        let changed = false;
-        for (const [name, state] of this.Animations) {
-            const sample = state.Animation.Sample(Math.max(0, epoch - state.StartedAt), state.Start, this);
-            if (sample.HasValue) {
-                if (state.Component) this.Animated.set(state.Property, { ...this.Read(state.Property), [state.Component]: sample.Value });
-                else this.Animated.set(state.Property, sample.Value);
-                changed = true;
-            }
-            if (sample.Done) { this.Animations.delete(name); if (state.Animation.StopBehavior === 'SetToInitialValue') this.Animated.delete(state.Property); }
+    PresentationAt(property,epoch) {
+        let value=this.Read(property);
+        for(const state of this.Animations.values())if(state.Property===property) {
+            const sample=sampleState(this,state,epoch,value);
+            if(sample.HasValue)value=state.Component?{...value,[state.Component]:sample.Value}:sample.Value;
         }
-        if (this.CustomHandler?._nextFrame) { this.CustomHandler._nextFrame = false; this.CustomHandler.OnAnimationFrameUpdate?.(epoch); changed = true; }
+        return value;
+    }
+    Tick(epoch) {
+        let changed=false;
+        for(const [name,state] of this.Animations) {
+            const sample=sampleState(this,state,epoch,this.Read(state.Property));
+            if(sample.HasValue){state.HasValue=true;state.LastValue=sample.Value;writeAnimated(this.Animated,this.Values,state,sample.Value);changed=true;}
+            if(sample.Done) {
+                state.Done=true;this.Animations.delete(name);
+                if(state.Animation.StopBehavior==='SetToInitialValue'){state.LastValue=state.Start;state.HasValue=true;writeAnimated(this.Animated,this.Values,state,state.Start);}
+                // Keep only bounded identity/presentation metadata for descriptors
+                // still present on the UI side. An unrelated commit must not replay a finished run.
+                state.Animation.Dispose();
+            }
+        }
+        if(this.CustomHandler?._nextFrame){this.CustomHandler._nextFrame=false;this.CustomHandler.OnAnimationFrameUpdate?.(epoch);changed=true;}
         return changed;
     }
-    Dispose() { this.CustomHandler?.OnDispose?.(); this.Animations.clear(); this.Animated.clear(); }
+    Dispose(){this.CustomHandler?.OnDispose?.();for(const state of this.Instances.values())state.Animation.Dispose();this.Instances.clear();this.Animations.clear();this.Animated.clear();}
+
 }
 class ServerVisual {
     constructor(id, scene) { this.VisualId = id; this.Scene = scene; this.Disposed = new Event(); this.IsDisposed = false; this.IsArrangeValid = true; this.IsAttachedToVisualTree = true; }
@@ -123,7 +138,7 @@ class ServerVisual {
     get CacheMode() { return { RenderAtScale: this.Descriptor.CacheScale }; }
     GetLocalTransform() {
         const c = this.Descriptor.SelfComposition == null ? null : this.Scene.CompositionObjects.get(this.Descriptor.SelfComposition);
-        const base=c?c.Transform().Multiply(this._transform):this._transform;
+        const base=c?(c.Type==='CompositionDrawListVisual'?c.Transform().Multiply(Matrix.CreateTranslation(-this.Bounds.X,-this.Bounds.Y)):c.Transform()).Multiply(this._transform):this._transform;
         if (!this.Scene.ScrollController.Adjustments.size) return base;
         const scroll=this.Scene.ScrollController.Transform(this.VisualId);return scroll?base.Multiply(scroll):base;
     }
@@ -220,6 +235,7 @@ export class ServerCompositionScene {
         for (const id of dirtyComposition) {
             const c = composition.get(id), prior = this._validation.Composition.get(id);
             if (!objectTypes.has(c.Type) || !Array.isArray(c.Children) || c.Children.some(x=>!plainId(x)) || !Array.isArray(c.Animations)) fail('Invalid composition object.');
+            if(c.PropertyTypes!=null&&(c.Type!=='CompositionPropertySet'||Array.isArray(c.PropertyTypes)||typeof c.PropertyTypes!=='object'||Object.entries(c.PropertyTypes).some(([k,v])=>!Object.hasOwn(c.Values,k)||!valueTypes.has(v))))fail('Invalid property-set type metadata.');
             if (c.Commands && c.Commands !== this.Composition.get(id)?.Commands) validateCommands(c.Commands);
             const info = { Data: c, References: this._references.Get(c), Children: c.Children };
             if (!prior || !SameCompositionValue(prior.Children, c.Children)) compositionGraphChanged = true;
@@ -278,6 +294,7 @@ export class ServerCompositionScene {
         }
         for (const [id, value] of this.Resolver.Values) if (resources.get(id) === this.Resources.get(id) && !changedResources.has(id)) resolver.Values.set(id, value);
         const newFonts = new Map(this._fonts), createdFonts = [];
+        const createdAnimations=[];
         try {
             // Registration precedes reconstruction of shaped/native text. UI and
             // rendering realms own independent handles for the exact same bytes.
@@ -303,12 +320,23 @@ export class ServerCompositionScene {
                 const prior = this.Composition.get(id), object = objects.get(id);
                 if (prior === data) continue;
                 const Values = Object.fromEntries(Object.entries(data.Values).map(([k, v]) => [k, decode(v)]));
-                const Animations = new Map();
+                const Animations=new Map(),Instances=new Map(),Animated=new Map(data.Animated.map(([k,v])=>[k,decode(v)]));
+                for(const old of object.Instances.values())Animated.delete(old.Property);
                 for (const a of data.Animations) {
-                    const old = object.Animations.get(a.Name), spec = a.Animation, Type = animationTypes[spec.Type]; if (!Type) fail('Unknown composition animation.');
-                    if (sameState(old, a)) { Animations.set(a.Name, old); continue; }
-                    const animation = new Type(null);
-                    for (const key of ['Duration','DelayTime','IterationCount','IterationBehavior','Direction','StopBehavior']) animation[key] = spec[key];
+                    const old=object.Instances.get(a.Name),spec=a.Animation,Type=animationTypes[spec.Type];if(!Type)fail('Unknown composition animation.');
+                    const parts=typeof a.Name==='string'?a.Name.split('.'):[];
+                    if(parts.length<1||parts.length>2||parts[0]!==a.Property||parts[1]!==a.Component||!Object.hasOwn(Values,a.Property)
+                        ||a.Property.startsWith('_')||['constructor','prototype','__proto__'].includes(a.Property)
+                        ||a.Component&&!['X','Y','Z','W'].includes(a.Component)||!Number.isFinite(a.StartedAt)
+                        ||a.Id!==undefined&&!plainId(a.Id)||Instances.has(a.Name))fail('Invalid animation instance.');
+                    if(batch.Generation===this.Generation&&sameState(old,a)) {
+                        if(!SameCompositionValue(old.Wire,a))fail('Animation identity was reused for a different immutable descriptor.');
+                        Instances.set(a.Name,old);if(!old.Done)Animations.set(a.Name,old);
+                        if(old.HasValue)writeAnimated(Animated,Values,old,old.LastValue);
+                        continue;
+                    }
+                    const animation=new Type(null);createdAnimations.push(animation);
+                    for (const key of ['Duration','DelayTime','IterationCount','IterationBehavior','Direction','StopBehavior','DelayBehavior']) if(spec[key]!==undefined)animation[key] = spec[key];
                     animation.Parameters = new Map(spec.Parameters.map(([k, v]) => [k, decode(v)]));
                     if (spec.Expression !== undefined) animation.Expression = spec.Expression;
                     if (spec.KeyFrames) for (const key of spec.KeyFrames) {
@@ -317,14 +345,23 @@ export class ServerCompositionScene {
                         if (key.Expression) animation.InsertExpressionKeyFrame(key.Progress, key.Expression, easing);
                         else animation.InsertKeyFrame(key.Progress, decode(key.Value), easing);
                     }
-                    animation.Validate(); Animations.set(a.Name, { ...a, Animation: animation, Base: decode(a.Base), Start: decode(a.Start) });
+                    animation.Validate();
+                    const Start=a.UseServerStartingValue&&prior&&batch.Generation===this.Generation?componentValue(a,object.PresentationAt(a.Property,a.StartedAt)):decode(a.Start);
+                    const targetValue=componentValue(a,Values[a.Property]);
+                    const inferredType=data.PropertyTypes?.[a.Property]&&!a.Component?data.PropertyTypes[a.Property]:typeof targetValue==='number'?'Scalar':typeof targetValue==='boolean'?'Boolean':targetValue instanceof Color?'Color'
+                        :targetValue instanceof Matrix?'Matrix3x2':targetValue&&'X' in Object(targetValue)?('Z' in targetValue?'Vector3':'Vector2'):null;
+                    if(!inferredType||a.ValueType&&a.ValueType!==inferredType||animation.ValueType&&animation.ValueType!==inferredType)fail('Animation value type does not match its target.');
+                    animation._targetValueType=inferredType;animation._ValidateResult(targetValue);animation._ValidateResult(Start);
+                    const state={...a,Wire:a,Animation:animation,Base:decode(a.Base),Start,
+                        FinalValue:a.HasFinalValue?decode(a.FinalValue):Start,HasValue:true,LastValue:Start,Done:false};
+                    Instances.set(a.Name,state);Animations.set(a.Name,state);writeAnimated(Animated,Values,state,Start);
                 }
                 let handler = object.CustomHandler;
                 if (data.Custom && (!handler || data.Custom.Module !== prior?.Custom?.Module || data.Custom.Export !== prior?.Custom?.Export)) {
                     if (!this.HandlerModules.has(data.Custom.Module)) fail('Custom compositor worker module was not registered by the host.');
                     const module = await import(data.Custom.Module), T = module[data.Custom.Export]; if (typeof T !== 'function') fail('Invalid custom compositor handler export.'); handler = new T();
                 }
-                objectStates.set(id, { Values, Animations, Handler: handler, CustomState: data.Custom?resolver.Decode(data.Custom.State):null, Commands: data.Commands?.map(c => c.map((v, i) => i ? resolver.Decode(v) : v)), Bitmap: data.Surface ? resolver.Decode(data.Surface) : null });
+                objectStates.set(id, { Values, Animations, Instances, Animated, Handler: handler, CustomState: data.Custom?resolver.Decode(data.Custom.State):null, Commands: data.Commands?.map(c => c.map((v, i) => i ? resolver.Decode(v) : v)), Bitmap: data.Surface ? resolver.Decode(data.Surface) : null });
             }
             const visualStates=new Map();
             for(const [id,data] of nodes){
@@ -346,8 +383,9 @@ export class ServerCompositionScene {
             for (const [id, state] of objectStates) {
                 const o = objects.get(id), d = composition.get(id), previous = this.Composition.get(id);
                 if (o.CustomHandler && o.CustomHandler !== state.Handler) o.CustomHandler.OnDispose?.();
-                o.Type = d.Type; o.Values = state.Values; o.Animations = state.Animations; o.Children = d.Children; o.Bitmap = state.Bitmap; o.Commands = state.Commands; o.CustomHandler = state.Handler;
-                o.Animated = new Map(d.Animated.map(([k, v]) => [k, resolver.Decode(v)]));
+                for(const [name,old] of o.Instances)if(state.Instances.get(name)!==old)old.Animation.Dispose();
+                o.Type = d.Type; o.Values = state.Values; o.Animations = state.Animations; o.Instances=state.Instances; o.Children = d.Children; o.Bitmap = state.Bitmap; o.Commands = state.Commands; o.CustomHandler = state.Handler;
+                o.Animated = state.Animated;
                 if (o.CustomHandler) {
                     const h = o.CustomHandler;
                     Object.defineProperty(h, 'EffectiveSize', { configurable: true, get: () => { const s = o.Read('Size'); return new Size(s.X, s.Y); } });
@@ -368,6 +406,7 @@ export class ServerCompositionScene {
             for (const [id, token] of this._fonts) if (!resources.has(id)) { token.Dispose(); this._fonts.delete(id); }
             ++this.Statistics.Transactions; this.Statistics.ApplyMilliseconds = performance.now() - start; this.Statistics.TotalApplyMilliseconds += this.Statistics.ApplyMilliseconds;
         } catch (e) {
+            for(const animation of createdAnimations)animation.Dispose();
             for (const [id, value] of resolver.Values) if (this.Resolver.Values.get(id) !== value) value?.Dispose?.();
             for (const id of createdFonts) newFonts.get(id)?.Dispose();
             throw e;
@@ -376,6 +415,15 @@ export class ServerCompositionScene {
     get HasAnimations() { for (const object of this.CompositionObjects.values()) if (object.Animations.size || object.CustomHandler?._nextFrame) return true; return false; }
     Tick(epoch = performance.timeOrigin + performance.now()) { let changed = false; for (const object of this.CompositionObjects.values()) changed = object.Tick(epoch) || changed; if (changed) { ++this.Statistics.AnimationTicks; ++this._dynamicContentVersion; } return changed; }
     Render(context) { if(this.ScrollController.Pending.length)this.ScrollController.Statistics.SpeculativeFrames++;this.Visuals.get(this.Root)?.RenderTree(context); }
+    GetAnimationReadback(ids=this.CompositionObjects.keys()) {
+        const encode=value=>value instanceof Matrix?{Matrix:[value.M11,value.M12,value.M21,value.M22,value.M31,value.M32]}:value instanceof Color?{Color:[value.A,value.R,value.G,value.B]}:value;
+        const result=[];
+        for(const id of ids){const object=this.CompositionObjects.get(id);if(!object)continue;
+            const animations=[...object.Instances.values()].filter(state=>state.UseServerStartingValue).map(state=>({Id:state.Id,Name:state.Name,Start:encode(state.Start)}));
+            if(animations.length)result.push({Id:id,Animations:animations});
+        }
+        return result;
+    }
     GetReadback() {
         const result = [];
         for (const [id, o] of this.CompositionObjects) result.push({ Id: id, Values: [...o.Animated].map(([k, v]) => [k, v instanceof Matrix ? { Matrix: [v.M11,v.M12,v.M21,v.M22,v.M31,v.M32] } : v instanceof Color ? { Color: [v.A,v.R,v.G,v.B] } : v]) });

@@ -72,6 +72,7 @@ export class WorkerSkiaRenderer extends Disposable {
                 clearTimeout(this._batchTimer);
                 if (message.Buffer?.byteLength) this.BufferPool.Return(message.Buffer);
                 const flight = this.Accumulator.InFlight;
+                this._ApplyAnimationReadback(message.AnimationState??[]);
                 this._AcknowledgeMessages(flight?.Snapshot);
                 this.Accumulator.Acknowledge(message.Sequence, message.Generation); this.Statistics.ProcessedSequence = message.Sequence;
                 for (const waiter of flight?.ProcessedWaiters ?? []) waiter.Resolve();
@@ -105,6 +106,21 @@ export class WorkerSkiaRenderer extends Disposable {
         if(!snapshot?.Composition.size)return;
         const objects=new Map([...(this.Root.Compositor?._objects??[])].map(o=>[o.Id,o]));
         for(const [id,descriptor]of snapshot.Composition){const last=descriptor.Custom?.Messages.at(-1)?.Sequence,object=objects.get(id);if(last&&object?._workerMessages)object._workerMessages=object._workerMessages.filter(m=>m.Sequence>last);}
+    }
+    _ApplyAnimationReadback(items) {
+        if(!items.length)return;
+        const objects=new Map([...(this.Root.Compositor?._objects??[])].map(object=>[object.Id,object]));
+        for(const entry of items){const object=objects.get(entry.Id);if(!object||object.IsDisposed)continue;
+            for(const value of entry.Animations){const state=object._animations.get(value.Name);
+                // An acknowledgement for an interrupted instance cannot rewrite its successor.
+                if(state?.Id===value.Id)state._serverStart=value.Start?.Matrix?new Matrix(...value.Start.Matrix):value.Start?.Color?new Color(...value.Start.Color):value.Start;
+            }
+        }
+    }
+    _RestoreAnimationStarts() {
+        for(const object of this.Root.Compositor?._objects??[])for(const state of object._animations.values())if(Object.hasOwn(state,'_serverStart')) {
+            state.Start=state._serverStart;if(!state.HasFinalValue)state.FinalValue=state.Start;
+        }
     }
     _ApplyReadback(items) {
         const objects = this.Root.Compositor?._objects; if (!objects || !items.length) return;
@@ -146,7 +162,7 @@ export class WorkerSkiaRenderer extends Disposable {
         for(const r of this.Accumulator.InFlight?.ProcessedWaiters??[])r.Reject(interrupted);
         for(const r of this._waiters.splice(0))r.Reject(interrupted);
         this.FastInputPort?.close();this.Port?.close();this.Worker?.terminate();this.Port=null;this.Worker=null;this.Backend=null;this.LastError=null;this._ready=deferred();
-        this.Accumulator.Reset();this._preparedRevision=0;this._preparedSequence=0;this._hiddenSubmission=false;this.Recorder.ResetServerState();this.Accumulator.Update(this.Recorder.Capture());this.Statistics.ProcessedSequence=this.Statistics.SubmittedSequence=0;++this.Statistics.Restarts;
+        this._RestoreAnimationStarts();this.Accumulator.Reset();this._preparedRevision=0;this._preparedSequence=0;this._hiddenSubmission=false;this.Recorder.ResetServerState();this.Accumulator.Update(this.Recorder.Capture());this.Statistics.ProcessedSequence=this.Statistics.SubmittedSequence=0;++this.Statistics.Restarts;
         if(this.Options.RestartRenderer){const result=await this.Options.RestartRenderer();this.Connect(result.Port);await this._ready.Promise;}
         else {
             if(!this.Element?.ownerDocument)throw new Error('The host must provide a replacement canvas/channel for this renderer.');

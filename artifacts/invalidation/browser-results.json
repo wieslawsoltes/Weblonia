@@ -1,6 +1,6 @@
 {
   "Version": "0.6.2-alpha.1",
-  "SourceFingerprint": "99eadad54483792c5fdf81d848fe59e4d5b862ddbd78c8270f035cc394303717",
+  "SourceFingerprint": "87449554cb1c393cfd60fa9b2e84b434c7f478842cbfe90508c52d4bfac00fc6",
   "Completed": true,
   "Tests": [
     {
@@ -105,7 +105,7 @@
       "Evidence": {
         "MovingPixels": true,
         "RetainedSiblingUnchanged": true,
-        "StoppedContentRecords": 293
+        "StoppedContentRecords": 295
       }
     },
     {
@@ -187,7 +187,7 @@
       "Evidence": {
         "MovingPixels": true,
         "RetainedSiblingUnchanged": true,
-        "StoppedContentRecords": 292
+        "StoppedContentRecords": 280
       }
     },
     {
@@ -249,5 +249,5 @@
   "Browser": "152.0.7977.0",
   "Passed": 26,
   "Failed": 0,
-  "FinalSourceFingerprint": "99eadad54483792c5fdf81d848fe59e4d5b862ddbd78c8270f035cc394303717"
+  "FinalSourceFingerprint": "87449554cb1c393cfd60fa9b2e84b434c7f478842cbfe90508c52d4bfac00fc6"
 }

@@ -8,13 +8,18 @@
     },
     {
       "Path": ".github/workflows/ci.yml",
-      "Bytes": 2143,
-      "Sha256": "4eb3dfda1844fa3e8f3bf1bc4e08238f74d53444472f093ba7c91c25daa10317"
+      "Bytes": 2252,
+      "Sha256": "8057d6f5a4523de335e1c4ede01176881a852310184cae7bd7b906bfdeb5919c"
     },
     {
       "Path": ".github/workflows/core-port.yml",
       "Bytes": 3893,
       "Sha256": "c524991dbdf6d4c4235e283671759f61100664080c59c9d04e920e299ff12a1a"
+    },
+    {
+      "Path": ".github/workflows/implicit-port.yml",
+      "Bytes": 2885,
+      "Sha256": "abb0135fc4ee68b1d31191329e91e88d3c4b86214d9917312d445b748deeec59"
     },
     {
       "Path": ".github/workflows/pages.yml",
@@ -68,8 +73,8 @@
     },
     {
       "Path": "artifacts/benchmark-current.json",
-      "Bytes": 4273,
-      "Sha256": "d4f2e5d099161a1c6798b67dfacb8c690b1d64fe3bf870d7f88b832862c8acb0"
+      "Bytes": 4246,
+      "Sha256": "c8f040f6e339b8c42b3f87416fa18bd02da6bbecb3f668c769143f44fafedccb"
     },
     {
       "Path": "artifacts/benchmark.log",
@@ -83,8 +88,8 @@
     },
     {
       "Path": "artifacts/browser-results.json",
-      "Bytes": 14086,
-      "Sha256": "3d0fd630b382a4cacdc075b4b59507413c31c0fe00a8b53fa1ff8dee7ed48fe0"
+      "Bytes": 14093,
+      "Sha256": "f992734ed46e1fa828bf910d01bd722b4852b0b385e4c71f08314e443acc94d5"
     },
     {
       "Path": "artifacts/browser-software-tests.log",
@@ -104,7 +109,7 @@
     {
       "Path": "artifacts/build-result.json",
       "Bytes": 342,
-      "Sha256": "bbe86525f2c7e67abedbaf1111eacc0ceb51e20aa12f93da043ca90e032c51ff"
+      "Sha256": "f68c25408c481c8f6303045c1c548556595b25e6ad2b02e6619f65d02b81a51d"
     },
     {
       "Path": "artifacts/build.log",
@@ -114,7 +119,7 @@
     {
       "Path": "artifacts/core-port/browser-results.json",
       "Bytes": 2687,
-      "Sha256": "002bea1bd71a77013cca08d1b3163ad2b3eef9111b52e04c3601690101beb480"
+      "Sha256": "7360d2616e32fa52b981ba5048d46d298b6765b91305866d37f6d6f3e86187a8"
     },
     {
       "Path": "artifacts/core-port/full-isolation-after.png",
@@ -407,6 +412,76 @@
       "Sha256": "601425f982f03cf2c912f559cb53010cdd07c8aefe8c8adb8cdd830415753620"
     },
     {
+      "Path": "artifacts/implicit-animations/browser-results.json",
+      "Bytes": 1963,
+      "Sha256": "827a36274c454e1a89f2bd365feb7a083d90e5cfa11425c0b7267344edfa2091"
+    },
+    {
+      "Path": "artifacts/implicit-animations/full-isolation-cleared.png",
+      "Bytes": 4598,
+      "Sha256": "6128df646b5315b31f5040405d7ac3253d994a1e392a69ddef4ad06373e165b5"
+    },
+    {
+      "Path": "artifacts/implicit-animations/full-isolation-initial.png",
+      "Bytes": 4605,
+      "Sha256": "4ee7f8ffe16142532716526fafe1956f59243f124324cc9310de5f13f932913a"
+    },
+    {
+      "Path": "artifacts/implicit-animations/full-isolation-intermediate.png",
+      "Bytes": 4609,
+      "Sha256": "96b255dd4eb9497a6cf82302482ad7f46f0cb66b2d2e17c76061de9e34050d08"
+    },
+    {
+      "Path": "artifacts/implicit-animations/full-isolation-retargeted.png",
+      "Bytes": 4598,
+      "Sha256": "c6a820f61733abe77671ae263b9d4d206d6252b6f0299e91d4016ec8c4c9975b"
+    },
+    {
+      "Path": "artifacts/implicit-animations/qualification.log",
+      "Bytes": 178058,
+      "Sha256": "166fc3db481706b3168e08a9734a0537b8e83eac7312823a16bb81be73014553"
+    },
+    {
+      "Path": "artifacts/implicit-animations/render-worker-cleared.png",
+      "Bytes": 4598,
+      "Sha256": "6128df646b5315b31f5040405d7ac3253d994a1e392a69ddef4ad06373e165b5"
+    },
+    {
+      "Path": "artifacts/implicit-animations/render-worker-initial.png",
+      "Bytes": 4605,
+      "Sha256": "4ee7f8ffe16142532716526fafe1956f59243f124324cc9310de5f13f932913a"
+    },
+    {
+      "Path": "artifacts/implicit-animations/render-worker-intermediate.png",
+      "Bytes": 4612,
+      "Sha256": "a0f43f2a4cb983808c94c03f8e53132d25d86d19a5ad0112f8c79aafb7b66aa8"
+    },
+    {
+      "Path": "artifacts/implicit-animations/render-worker-retargeted.png",
+      "Bytes": 4598,
+      "Sha256": "c6a820f61733abe77671ae263b9d4d206d6252b6f0299e91d4016ec8c4c9975b"
+    },
+    {
+      "Path": "artifacts/implicit-animations/single-cleared.png",
+      "Bytes": 4598,
+      "Sha256": "6128df646b5315b31f5040405d7ac3253d994a1e392a69ddef4ad06373e165b5"
+    },
+    {
+      "Path": "artifacts/implicit-animations/single-initial.png",
+      "Bytes": 4605,
+      "Sha256": "4ee7f8ffe16142532716526fafe1956f59243f124324cc9310de5f13f932913a"
+    },
+    {
+      "Path": "artifacts/implicit-animations/single-intermediate.png",
+      "Bytes": 4613,
+      "Sha256": "a81404c549cac6f76ea0fa4c20df0061a0e098de68e345e8e91660b720401c2e"
+    },
+    {
+      "Path": "artifacts/implicit-animations/single-retargeted.png",
+      "Bytes": 4598,
+      "Sha256": "c6a820f61733abe77671ae263b9d4d206d6252b6f0299e91d4016ec8c4c9975b"
+    },
+    {
       "Path": "artifacts/invalidation/attempts/first-pass/automation.log",
       "Bytes": 947,
       "Sha256": "e2d37024652132199133a89e49619ddffa7cb5ea4c594ea96df7f3ebd4b44498"
@@ -519,7 +594,7 @@
     {
       "Path": "artifacts/invalidation/browser-results.json",
       "Bytes": 6574,
-      "Sha256": "49f56cbc9b7a3bab699e6af0b3c51e379ff81628e79e4c1c0c7e97a364a377c0"
+      "Sha256": "ff10e9d10cf00ae9553f8cdc15629023d7a26f5f73d9169a619b1af6c33660b5"
     },
     {
       "Path": "artifacts/invalidation/final-logs/automation.log",
@@ -699,7 +774,7 @@
     {
       "Path": "artifacts/npm/manifest.json",
       "Bytes": 26182,
-      "Sha256": "91753f65baef6fe2e75ca64b3ea060c83dc33b42456da82ccf4d39ee59c56fce"
+      "Sha256": "a97ffc8b257cf95eaf309a959aad0534a895360845a6a2fcdfed2a75c8f12f2c"
     },
     {
       "Path": "artifacts/npm/wieslawsoltes-avalonia-0.6.2-alpha.1.tgz",
@@ -708,8 +783,8 @@
     },
     {
       "Path": "artifacts/npm/wieslawsoltes-avalonia-animation-0.6.2-alpha.1.tgz",
-      "Bytes": 6075,
-      "Sha256": "44cbd8cb96919726c4ccba266ad0ba8137f0af81e8d6db69e45433758461667c"
+      "Bytes": 6134,
+      "Sha256": "0419e502998ab0a31f42c39eecd91d6fa5bd96b6f89759e7bf5656ce39a3c67b"
     },
     {
       "Path": "artifacts/npm/wieslawsoltes-avalonia-base-0.6.2-alpha.1.tgz",
@@ -718,18 +793,18 @@
     },
     {
       "Path": "artifacts/npm/wieslawsoltes-avalonia-browser-0.6.2-alpha.1.tgz",
-      "Bytes": 1425879,
-      "Sha256": "4de22130617f0694a9decfcabfefe67d6e1a13e24ebdbc5a030a2d5b91965de1"
+      "Bytes": 1429766,
+      "Sha256": "13ec1db71197f955a5f1233b13f2f1ca6ee525b6d4efd98899a0ad9116f54435"
     },
     {
       "Path": "artifacts/npm/wieslawsoltes-avalonia-composition-0.6.2-alpha.1.tgz",
-      "Bytes": 13107,
-      "Sha256": "9e67c2ff07fa5fc1f35f01f871d333952479666d015f8ae4a49b91ddd87b0b77"
+      "Bytes": 15368,
+      "Sha256": "458dbc3ae858ea4745fd6892d50ce45a2bd6770740fa9493cd1b5a0d4fd58e64"
     },
     {
       "Path": "artifacts/npm/wieslawsoltes-avalonia-controls-0.6.2-alpha.1.tgz",
-      "Bytes": 73766,
-      "Sha256": "968dbada1c0f9b6ea7990e2fa08194164abefef56f3e15989d993e42cade9a32"
+      "Bytes": 73777,
+      "Sha256": "b527d61bb0e3e777f75be2515a436920a8fbaf442d0380648dfdcf041109d102"
     },
     {
       "Path": "artifacts/npm/wieslawsoltes-avalonia-data-0.6.2-alpha.1.tgz",
@@ -768,8 +843,8 @@
     },
     {
       "Path": "artifacts/npm/wieslawsoltes-avalonia-rendering-0.6.2-alpha.1.tgz",
-      "Bytes": 28802,
-      "Sha256": "7ddf0fd99c42efc98da9225387da9749e99e802e52b30d7c1049437aa6924f8a"
+      "Bytes": 30265,
+      "Sha256": "efeff4bcdf542b46ed50a8312f84f64b8624c84910d0336b741c9c98db53359d"
     },
     {
       "Path": "artifacts/npm/wieslawsoltes-avalonia-skia-0.6.2-alpha.1.tgz",
@@ -798,8 +873,8 @@
     },
     {
       "Path": "artifacts/package-consumer-result.json",
-      "Bytes": 367,
-      "Sha256": "9aa1c25f531b0d351f41d1edf4c7f06a7853c5820f33b3bf3fd622d8c7056754"
+      "Bytes": 400,
+      "Sha256": "b2a8605ecdeae05a870439e2cfba153327cf7346499af1ce12fe92800dc4ac76"
     },
     {
       "Path": "artifacts/package-consumer.log",
@@ -823,8 +898,8 @@
     },
     {
       "Path": "artifacts/publication/pages-smoke.json",
-      "Bytes": 2365,
-      "Sha256": "5e0537993fbc9a1bc400e00fc34f63d858c367c7f6c1c26c0d4b608cf78694ff"
+      "Bytes": 2353,
+      "Sha256": "ffc5f870b6aaa893f09399a18869778af638e0bae1386cd7b3ec749ad905219a"
     },
     {
       "Path": "artifacts/publication/render-worker.png",
@@ -863,8 +938,8 @@
     },
     {
       "Path": "artifacts/screenshots/composition.png",
-      "Bytes": 82014,
-      "Sha256": "6c8a685936aee2a7586ba7fc5b375fe09a66a64befd2c915b643946aff9c8699"
+      "Bytes": 88983,
+      "Sha256": "27df86090f8f3286228c900253acf9f12e00d203c835ffea0ed0d996e0d0422c"
     },
     {
       "Path": "artifacts/screenshots/container-queries.png",
@@ -928,8 +1003,8 @@
     },
     {
       "Path": "artifacts/screenshots/touch-scroll.png",
-      "Bytes": 89508,
-      "Sha256": "e4ca5cd9a73734dd5636da19bf268c1b4a5ef89b6d8aecdf51516834231a6137"
+      "Bytes": 89784,
+      "Sha256": "0963a4297e832632125b0d725a67e15562e6620cc628163f36f4b2884900766a"
     },
     {
       "Path": "artifacts/screenshots/virtual-list.png",
@@ -944,17 +1019,17 @@
     {
       "Path": "artifacts/scrollbar-browser-1.25.json",
       "Bytes": 4332,
-      "Sha256": "17776f1b0a1dbbac1d5a80699c99b0d1cc5c7de4be9f53883854698080370495"
+      "Sha256": "4d352ccbeb0cf02cc6587fcd72724a9e86edeb62c72c04afaf854200e3ae6c16"
     },
     {
       "Path": "artifacts/scrollbar-browser-1.json",
       "Bytes": 4321,
-      "Sha256": "71e84c7b06a531fc3556245fe6ece23e3c308072da0a9cd380b3cda8caee502e"
+      "Sha256": "9ccb1eee0f541032a5aab7e237dd55397c985633a09f4f1d84da0ecaf68018b4"
     },
     {
       "Path": "artifacts/startup/http-comparison.json",
-      "Bytes": 33120,
-      "Sha256": "e00600e1da8bd0d3c2c40f6ef0749ce70f5cad71f3acb6c06eb802e85af0defb"
+      "Bytes": 33173,
+      "Sha256": "d4c979b03c65453827606662e6f478bc716a1aa636c6b57b55c21885462652d8"
     },
     {
       "Path": "artifacts/startup/text-ink-diagnostic.json",
@@ -964,7 +1039,7 @@
     {
       "Path": "artifacts/text-quality-results.json",
       "Bytes": 13748,
-      "Sha256": "ff335472e8f0303ee32ca4dfadb38f68eeca0974bcad17577f35abe6d53c5489"
+      "Sha256": "f14697da38351eda18ed2f227da2ad396f7696825d5b7669aff02de02fa99154"
     },
     {
       "Path": "artifacts/text-quality-tests.log",
@@ -978,8 +1053,8 @@
     },
     {
       "Path": "artifacts/threading/browser-results.json",
-      "Bytes": 21909,
-      "Sha256": "f6c615996162a7ba3d3bb8a635c06e04d47a019b45df8ed8477659fbd40ba57d"
+      "Bytes": 21927,
+      "Sha256": "ade19f46fc6c279a40c2978477ec637f89c24c14169af4024a1c2a4804049e85"
     },
     {
       "Path": "artifacts/threading/build-final.log",
@@ -993,8 +1068,8 @@
     },
     {
       "Path": "artifacts/threading/catalog-results.json",
-      "Bytes": 30971,
-      "Sha256": "40577dff2b0c044356955181109d0e524f8637526818befcd001a6ad7d51811c"
+      "Bytes": 30981,
+      "Sha256": "782735dbbcdd2ae3e7e1811f2338a0bb7489b1e400a6902e311bbb0bc3d33b8a"
     },
     {
       "Path": "artifacts/threading/final-suite-status.log",
@@ -1013,8 +1088,8 @@
     },
     {
       "Path": "artifacts/threading/http-startup-results.json",
-      "Bytes": 2427,
-      "Sha256": "44cbe070df81667e63368ac2d2bfb147cccf198b49b20de116b9e33458b90019"
+      "Bytes": 2425,
+      "Sha256": "849fb493f6d1692f91e3678d4fd2156cf74135b751ae075f4cb266bc0910300e"
     },
     {
       "Path": "artifacts/threading/integration-final.log",
@@ -1024,12 +1099,12 @@
     {
       "Path": "artifacts/threading/integration-http-server.log",
       "Bytes": 37,
-      "Sha256": "260cdfceb7c98df58759daed7a6f49d015c272391695f12de0f885f093dff09c"
+      "Sha256": "774a4faff0227c13836ef2fe8ebc540af6572992348c488364b2cdede4500c6a"
     },
     {
       "Path": "artifacts/threading/integration-results.json",
-      "Bytes": 20729,
-      "Sha256": "835493a34f662d6c041f36618e65ceb88d40c2bbdf9219fde1e38368b705bcb1"
+      "Bytes": 20758,
+      "Sha256": "2cf0e0da4416ae2901c9b7a0803fad5e34e16c41f2642a0c2c9d300d844c68d9"
     },
     {
       "Path": "artifacts/threading/inventory-final.log",
@@ -1143,8 +1218,8 @@
     },
     {
       "Path": "artifacts/threading/performance-results.json",
-      "Bytes": 186962,
-      "Sha256": "f7d3c9de8efb9b8454d0c0af47c6fe7d1323e1aa3111287acd27de4b34529b56"
+      "Bytes": 187717,
+      "Sha256": "b501adb0f7fdd8099839a02e52c3001a6129645599b8d71d856a1eee3d6becc5"
     },
     {
       "Path": "artifacts/threading/quality-final.log",
@@ -1154,7 +1229,7 @@
     {
       "Path": "artifacts/threading/quality-results.json",
       "Bytes": 4574,
-      "Sha256": "7b29c171bbb59fa33e24a72723c8896ee68c57cfc7b5a6eff54f3080a6b18d80"
+      "Sha256": "abe579f54d8876ed18e24991c4c4626fa7acc4901bf98e910666d541395b257e"
     },
     {
       "Path": "artifacts/threading/release-final.log",
@@ -1168,8 +1243,8 @@
     },
     {
       "Path": "artifacts/threading/startup-results.json",
-      "Bytes": 17866,
-      "Sha256": "00999f3c6550f25ceb05542a6b1328ca2024524bfcc76c49d535bb78df6bf05e"
+      "Bytes": 17907,
+      "Sha256": "1f42a47bff8738135472547006111059254a41f10ed6bfd717eeb815c45728c4"
     },
     {
       "Path": "artifacts/threading/vendor-final.log",
@@ -1183,8 +1258,8 @@
     },
     {
       "Path": "artifacts/threading/worker-performance-results.json",
-      "Bytes": 57562,
-      "Sha256": "cae6897f74bcebc25dc41491eaa208d9df7c00cde65cd70ba69919e7f1b2b01d"
+      "Bytes": 57491,
+      "Sha256": "b6fe788d33672fdd1783537ce50d9cf616dfe767c4c34485baec3a59b6347c7c"
     },
     {
       "Path": "artifacts/threading/worker-table.png",
@@ -1723,8 +1798,8 @@
     },
     {
       "Path": "artifacts/validation-optimized/automation-final.json",
-      "Bytes": 2726,
-      "Sha256": "1ce1bba141471ed62eae4556630aab1cd7e04e2290c323d76870dfabfbc8833c"
+      "Bytes": 2725,
+      "Sha256": "724b54d568bc78f28c49d96963b2f037f0cec9c15d8b5e4103866cbced6e97a4"
     },
     {
       "Path": "artifacts/validation-optimized/automation-final.log",
@@ -1804,12 +1879,12 @@
     {
       "Path": "artifacts/validation-optimized/node-final.json",
       "Bytes": 439,
-      "Sha256": "82287f35b5d75a3eff9c3504a5359128a286259bb2355e2f1c94fb0792e6e781"
+      "Sha256": "f08eedd30812982f77ddd36376b4fdcdc7dc5a176a9db43d5226d107911e4bcf"
     },
     {
       "Path": "artifacts/validation-optimized/node-final.log",
-      "Bytes": 130496,
-      "Sha256": "324541f629b4650a3438361844dc1b6351c128fae598404f594f1f2c6f77e07e"
+      "Bytes": 141396,
+      "Sha256": "3ad008ff08683e9cde9a53b33479f3a113c3d32bf55aa529c117992db96cd476"
     },
     {
       "Path": "artifacts/validation-optimized/node-record-final.log",
@@ -1883,8 +1958,8 @@
     },
     {
       "Path": "artifacts/verification-summary.json",
-      "Bytes": 438614,
-      "Sha256": "69cc85d3aa4a709f45e0e0b73f05547bb58ce034188090e5c30fff08cc57bc9a"
+      "Bytes": 441585,
+      "Sha256": "18518e82bf58e408fcd61432ff2575bd895b1379388c49434f042f2c21ef88b9"
     },
     {
       "Path": "artifacts/worker-startup/auto-startup.log",
@@ -2178,8 +2253,8 @@
     },
     {
       "Path": "dist/Pages/Composition.axaml",
-      "Bytes": 814,
-      "Sha256": "bda5b87237d54914a12f29ed3c9a223d4e089b834a14e06a7bf53353a8110277"
+      "Bytes": 1077,
+      "Sha256": "72e9b1cb036b09b4745059858fcaa461457a76bb8b5ec6aa87c1929779aecaf3"
     },
     {
       "Path": "dist/Pages/ContainerQueries.axaml",
@@ -2573,8 +2648,8 @@
     },
     {
       "Path": "dist/compiled/Composition.g.js",
-      "Bytes": 82309,
-      "Sha256": "330b8996ec66964a35f55eea174d2cb14f0e2e0109460e84586b81adf81ec717"
+      "Bytes": 111439,
+      "Sha256": "b6c5f6f6e26922944af8d797795432919536c21bc18d89781c95358a8ab4d2fb"
     },
     {
       "Path": "dist/compiled/ContainerQueries.g.js",
@@ -2858,13 +2933,13 @@
     },
     {
       "Path": "dist/compiled/index.js",
-      "Bytes": 59558,
-      "Sha256": "94bbb7435e076312c5b40548340c43bbb52bbd7e23ee62ead72eb4b6a84af000"
+      "Bytes": 59834,
+      "Sha256": "4e280f09c867f0bbb77e975bec526ff86f4e3b26f27b30bb9bdc9b35610e2a3f"
     },
     {
       "Path": "dist/compiled/lazy.js",
-      "Bytes": 56666,
-      "Sha256": "f9d294d4dfc3cdd209cd4eb459967e15c32c1504395edab0850e1b204bcc754f"
+      "Bytes": 56942,
+      "Sha256": "8e6a302efddb517311c9440d632cc150af6f041800aa8a6cae8f15d1a2920115"
     },
     {
       "Path": "dist/docs/API-INVENTORY.md",
@@ -2905,6 +2980,16 @@
       "Path": "dist/docs/HTTP-WINDOW-QUALIFICATION.md",
       "Bytes": 1776,
       "Sha256": "61f6305adb594174c11ed6b07ffda56e87fb4eb4e62921161ce53b79548aa26e"
+    },
+    {
+      "Path": "dist/docs/IMPLICIT-ANIMATIONS-REFERENCE.json",
+      "Bytes": 1164,
+      "Sha256": "b7a85d751ec92c2d6f33dd33b59e4b9adf75a81c6a6b68eaaa6f3b2893c7f98b"
+    },
+    {
+      "Path": "dist/docs/IMPLICIT-ANIMATIONS.md",
+      "Bytes": 9144,
+      "Sha256": "ab07b0eec9646e398362071120aa6d63e56aa5701022f729b6d7c98980f298d0"
     },
     {
       "Path": "dist/docs/INVALIDATION-FIXES.md",
@@ -3008,8 +3093,8 @@
     },
     {
       "Path": "dist/docs/VERIFICATION.json",
-      "Bytes": 358231,
-      "Sha256": "7e77fff883e2ffce1f2c6594f1d8a74926bedf048e5e440e39734aa22fac4b7b"
+      "Bytes": 438614,
+      "Sha256": "69cc85d3aa4a709f45e0e0b73f05547bb58ce034188090e5c30fff08cc57bc9a"
     },
     {
       "Path": "dist/docs/WORKER-OPENGL.md",
@@ -3148,8 +3233,8 @@
     },
     {
       "Path": "dist/extensions.js",
-      "Bytes": 10695,
-      "Sha256": "c12d704d9674cd6736c03b8cd5366bf72bb5332723e980ef6be9d22c76e855a5"
+      "Bytes": 12694,
+      "Sha256": "793a8f12eaf48ae7260eeea5fa15ca2f7da8e3908f4bfbc03138e5b2eaccc28f"
     },
     {
       "Path": "dist/index.html",
@@ -3198,8 +3283,8 @@
     },
     {
       "Path": "dist/packages/animation/src/index.js",
-      "Bytes": 13849,
-      "Sha256": "d1eb0d5ca98b7dd1a19ba3abacb9daacacf7cb5ffc69344ad3c5cf1c50a71469"
+      "Bytes": 13976,
+      "Sha256": "190ac1c3d8ac84f68f53ce2c16a682bb558ae4d6a8b98d7ac43694db41fab11c"
     },
     {
       "Path": "dist/packages/avalonia/LICENSE",
@@ -3328,13 +3413,13 @@
     },
     {
       "Path": "dist/packages/browser/src/render-thread.js",
-      "Bytes": 22645,
-      "Sha256": "c19c3e77999ae971996c7539dc328a48105dcd5dbc5b258fa9f914cdaeb4012e"
+      "Bytes": 23732,
+      "Sha256": "efcd7b9cdcbbe88253e2a1a2d98c8eb945857b39d305dcc1aae3cdfe0a2549c6"
     },
     {
       "Path": "dist/packages/browser/src/render-worker.js",
-      "Bytes": 9086,
-      "Sha256": "b13902e4a10030ab6f47c35fe2851b928ee2696a921840cd9bb46cb8a6fb3a25"
+      "Bytes": 9174,
+      "Sha256": "08087d852e4d7d89ae6e61e5222e6e96eed0bba21ce47ef57a555406c0648bac"
     },
     {
       "Path": "dist/packages/browser/src/thread-channel.js",
@@ -3369,12 +3454,12 @@
     {
       "Path": "dist/packages/browser/worker-assets/manifest.json",
       "Bytes": 30336,
-      "Sha256": "ede80bc5ae76a3ecd782f63756a23a541ea53104a5347c1bc9e9664d0d4c8c18"
+      "Sha256": "83e6896189a3a0702f318d0e2c200696eb4c79cdf9e0538b5284d2892df35338"
     },
     {
       "Path": "dist/packages/browser/worker-assets/packages/animation/src/index.js",
-      "Bytes": 13834,
-      "Sha256": "5adda04a02dffc8d57e66562afbaa2d61062443b341eb4ad42c2a37ccd8482b5"
+      "Bytes": 13961,
+      "Sha256": "fe8cbc0316be9f7f3a6324ce17167bbcadd29e47e98eb716bd00e93e6f43c664"
     },
     {
       "Path": "dist/packages/browser/worker-assets/packages/avalonia/src/index.js",
@@ -3443,13 +3528,13 @@
     },
     {
       "Path": "dist/packages/browser/worker-assets/packages/browser/src/render-thread.js",
-      "Bytes": 22650,
-      "Sha256": "f3ab9e1f20962c92b872d8db7ec8252f7064e055aa04fd990b932372d19bd653"
+      "Bytes": 23737,
+      "Sha256": "251d92c3343c6bc107c2fb6ec2295554dd8a5cee7445eb2dde0884b6a924d304"
     },
     {
       "Path": "dist/packages/browser/worker-assets/packages/browser/src/render-worker.js",
-      "Bytes": 9076,
-      "Sha256": "357df8873364f07c81f12637cb319cb67e71bef430649fe2646dd96efb750168"
+      "Bytes": 9164,
+      "Sha256": "4a732960d6fcefb6b2b1db297aecfc8ab520ffacfa8663de5ee8b8f2178f12b9"
     },
     {
       "Path": "dist/packages/browser/worker-assets/packages/browser/src/thread-channel.js",
@@ -3483,8 +3568,8 @@
     },
     {
       "Path": "dist/packages/browser/worker-assets/packages/composition/src/index.js",
-      "Bytes": 32377,
-      "Sha256": "c23db4f2b85d25a60f2bebfa06288c8f8d440e8021f0a322b121d074ba4f1b29"
+      "Bytes": 43645,
+      "Sha256": "4ba94dae4b8fd43ffbade7266f616471d157b01d94ef442f68a6a71133730148"
     },
     {
       "Path": "dist/packages/browser/worker-assets/packages/composition/src/values.js",
@@ -3508,8 +3593,8 @@
     },
     {
       "Path": "dist/packages/browser/worker-assets/packages/controls/src/core.js",
-      "Bytes": 46908,
-      "Sha256": "70ede85b1c4fff4c18e0d36ce80573d1e07adcee8d9a773f3a1ade6a22c13def"
+      "Bytes": 46967,
+      "Sha256": "5766718264cd4dd569375ab58e2a68a5bfa026ae54fbb98fc41fc59de361a137"
     },
     {
       "Path": "dist/packages/browser/worker-assets/packages/controls/src/documents.js",
@@ -3673,8 +3758,8 @@
     },
     {
       "Path": "dist/packages/browser/worker-assets/packages/rendering/src/recording.js",
-      "Bytes": 18447,
-      "Sha256": "7370982a343f7d864adc00cc91cfb333c1900bc2df446069db20d4440a9f3645"
+      "Bytes": 18876,
+      "Sha256": "d0ca9bd2505569a3fc67c994838fdaa180b61b7b7c895afcaf0e427dd0d762c2"
     },
     {
       "Path": "dist/packages/browser/worker-assets/packages/rendering/src/references.js",
@@ -3693,8 +3778,8 @@
     },
     {
       "Path": "dist/packages/browser/worker-assets/packages/rendering/src/server.js",
-      "Bytes": 34077,
-      "Sha256": "f0a150780387c389b3f77537fe248f43ef760bc06082975465a6a8b1f4a112d9"
+      "Bytes": 38999,
+      "Sha256": "2db995f7f5b37ef4e7a3596b3de906c9cd62db8a24699e692f830f082014e0dd"
     },
     {
       "Path": "dist/packages/browser/worker-assets/packages/skia/src/index.js",
@@ -4298,8 +4383,8 @@
     },
     {
       "Path": "dist/packages/composition/src/index.js",
-      "Bytes": 32397,
-      "Sha256": "15abce5346c013d8665828c5dee53f7eb74dbaa15274e0de50d0899c69650c83"
+      "Bytes": 43665,
+      "Sha256": "9ede294395efe95765543def544c1df33efe903146e934d8f5265decd8b7a533"
     },
     {
       "Path": "dist/packages/composition/src/values.js",
@@ -4343,8 +4428,8 @@
     },
     {
       "Path": "dist/packages/controls/src/core.js",
-      "Bytes": 46923,
-      "Sha256": "ce6c9190a583d2150535c21d07f4e59ddcb7a7e9f9a74d0f8962e6251f82bb0b"
+      "Bytes": 46982,
+      "Sha256": "8483384ed355004b4baa065576e6d4c63461600ea99cd3397bffd1edfeaab0f1"
     },
     {
       "Path": "dist/packages/controls/src/documents.js",
@@ -4668,8 +4753,8 @@
     },
     {
       "Path": "dist/packages/rendering/src/recording.js",
-      "Bytes": 18462,
-      "Sha256": "335935485f9acbdee5c6685708fd141c0b80fc91e4f1948bce417c9a5f8fc4f7"
+      "Bytes": 18891,
+      "Sha256": "f683419160a0b1033f323a6eecafd6f33ef1cead74906b396c3a31491aed50d0"
     },
     {
       "Path": "dist/packages/rendering/src/references.js",
@@ -4688,8 +4773,8 @@
     },
     {
       "Path": "dist/packages/rendering/src/server.js",
-      "Bytes": 34102,
-      "Sha256": "26370172c7a04975fc7f5b902541df9f4099b505f9360fcc6b8538a1200dd239"
+      "Bytes": 39024,
+      "Sha256": "215704fe95c7fc6d7a3d5cea42166ec7408a9e4f8afaccbad2b8a0f1accf0520"
     },
     {
       "Path": "dist/packages/skia/LICENSE",
@@ -5573,8 +5658,8 @@
     },
     {
       "Path": "dist/worker/compiled/Composition.g.js",
-      "Bytes": 82309,
-      "Sha256": "330b8996ec66964a35f55eea174d2cb14f0e2e0109460e84586b81adf81ec717"
+      "Bytes": 111439,
+      "Sha256": "b6c5f6f6e26922944af8d797795432919536c21bc18d89781c95358a8ab4d2fb"
     },
     {
       "Path": "dist/worker/compiled/ContainerQueries.g.js",
@@ -5858,18 +5943,18 @@
     },
     {
       "Path": "dist/worker/compiled/index.js",
-      "Bytes": 59558,
-      "Sha256": "94bbb7435e076312c5b40548340c43bbb52bbd7e23ee62ead72eb4b6a84af000"
+      "Bytes": 59834,
+      "Sha256": "4e280f09c867f0bbb77e975bec526ff86f4e3b26f27b30bb9bdc9b35610e2a3f"
     },
     {
       "Path": "dist/worker/compiled/lazy.js",
-      "Bytes": 56666,
-      "Sha256": "f9d294d4dfc3cdd209cd4eb459967e15c32c1504395edab0850e1b204bcc754f"
+      "Bytes": 56942,
+      "Sha256": "8e6a302efddb517311c9440d632cc150af6f041800aa8a6cae8f15d1a2920115"
     },
     {
       "Path": "dist/worker/extensions.js",
-      "Bytes": 10736,
-      "Sha256": "c929aa8fd9003bd870fa2c5a43ac91002239684ec9b2160693a7df2f7913596e"
+      "Bytes": 12735,
+      "Sha256": "a8bf83e7f726ccb5c708b281bb2940bb3298671e68fa03e337110f4ee12c6f0e"
     },
     {
       "Path": "dist/worker/manifest.js",
@@ -5935,6 +6020,16 @@
       "Path": "docs/HTTP-WINDOW-QUALIFICATION.md",
       "Bytes": 1776,
       "Sha256": "61f6305adb594174c11ed6b07ffda56e87fb4eb4e62921161ce53b79548aa26e"
+    },
+    {
+      "Path": "docs/IMPLICIT-ANIMATIONS-REFERENCE.json",
+      "Bytes": 1164,
+      "Sha256": "b7a85d751ec92c2d6f33dd33b59e4b9adf75a81c6a6b68eaaa6f3b2893c7f98b"
+    },
+    {
+      "Path": "docs/IMPLICIT-ANIMATIONS.md",
+      "Bytes": 9144,
+      "Sha256": "ab07b0eec9646e398362071120aa6d63e56aa5701022f729b6d7c98980f298d0"
     },
     {
       "Path": "docs/INVALIDATION-FIXES.md",
@@ -6038,8 +6133,8 @@
     },
     {
       "Path": "docs/VERIFICATION.json",
-      "Bytes": 438614,
-      "Sha256": "69cc85d3aa4a709f45e0e0b73f05547bb58ce034188090e5c30fff08cc57bc9a"
+      "Bytes": 441585,
+      "Sha256": "18518e82bf58e408fcd61432ff2575bd895b1379388c49434f042f2c21ef88b9"
     },
     {
       "Path": "docs/WORKER-OPENGL.md",
@@ -6213,8 +6308,8 @@
     },
     {
       "Path": "packages/animation/src/index.js",
-      "Bytes": 13849,
-      "Sha256": "d1eb0d5ca98b7dd1a19ba3abacb9daacacf7cb5ffc69344ad3c5cf1c50a71469"
+      "Bytes": 13976,
+      "Sha256": "190ac1c3d8ac84f68f53ce2c16a682bb558ae4d6a8b98d7ac43694db41fab11c"
     },
     {
       "Path": "packages/avalonia/LICENSE",
@@ -6343,13 +6438,13 @@
     },
     {
       "Path": "packages/browser/src/render-thread.js",
-      "Bytes": 22645,
-      "Sha256": "c19c3e77999ae971996c7539dc328a48105dcd5dbc5b258fa9f914cdaeb4012e"
+      "Bytes": 23732,
+      "Sha256": "efcd7b9cdcbbe88253e2a1a2d98c8eb945857b39d305dcc1aae3cdfe0a2549c6"
     },
     {
       "Path": "packages/browser/src/render-worker.js",
-      "Bytes": 9086,
-      "Sha256": "b13902e4a10030ab6f47c35fe2851b928ee2696a921840cd9bb46cb8a6fb3a25"
+      "Bytes": 9174,
+      "Sha256": "08087d852e4d7d89ae6e61e5222e6e96eed0bba21ce47ef57a555406c0648bac"
     },
     {
       "Path": "packages/browser/src/thread-channel.js",
@@ -6384,12 +6479,12 @@
     {
       "Path": "packages/browser/worker-assets/manifest.json",
       "Bytes": 30330,
-      "Sha256": "735265bd5c40f015dea283ed1ec6a555249abb4bd6da033a3689738a2445bff7"
+      "Sha256": "cfe5ba83bdfe453489dda1c92caa3dcd5da10502a9fb2f137fe65b1b46646b78"
     },
     {
       "Path": "packages/browser/worker-assets/packages/animation/src/index.js",
-      "Bytes": 13834,
-      "Sha256": "5adda04a02dffc8d57e66562afbaa2d61062443b341eb4ad42c2a37ccd8482b5"
+      "Bytes": 13961,
+      "Sha256": "fe8cbc0316be9f7f3a6324ce17167bbcadd29e47e98eb716bd00e93e6f43c664"
     },
     {
       "Path": "packages/browser/worker-assets/packages/avalonia/src/index.js",
@@ -6458,13 +6553,13 @@
     },
     {
       "Path": "packages/browser/worker-assets/packages/browser/src/render-thread.js",
-      "Bytes": 22650,
-      "Sha256": "f3ab9e1f20962c92b872d8db7ec8252f7064e055aa04fd990b932372d19bd653"
+      "Bytes": 23737,
+      "Sha256": "251d92c3343c6bc107c2fb6ec2295554dd8a5cee7445eb2dde0884b6a924d304"
     },
     {
       "Path": "packages/browser/worker-assets/packages/browser/src/render-worker.js",
-      "Bytes": 9076,
-      "Sha256": "357df8873364f07c81f12637cb319cb67e71bef430649fe2646dd96efb750168"
+      "Bytes": 9164,
+      "Sha256": "4a732960d6fcefb6b2b1db297aecfc8ab520ffacfa8663de5ee8b8f2178f12b9"
     },
     {
       "Path": "packages/browser/worker-assets/packages/browser/src/thread-channel.js",
@@ -6498,8 +6593,8 @@
     },
     {
       "Path": "packages/browser/worker-assets/packages/composition/src/index.js",
-      "Bytes": 32377,
-      "Sha256": "c23db4f2b85d25a60f2bebfa06288c8f8d440e8021f0a322b121d074ba4f1b29"
+      "Bytes": 43645,
+      "Sha256": "4ba94dae4b8fd43ffbade7266f616471d157b01d94ef442f68a6a71133730148"
     },
     {
       "Path": "packages/browser/worker-assets/packages/composition/src/values.js",
@@ -6523,8 +6618,8 @@
     },
     {
       "Path": "packages/browser/worker-assets/packages/controls/src/core.js",
-      "Bytes": 46908,
-      "Sha256": "70ede85b1c4fff4c18e0d36ce80573d1e07adcee8d9a773f3a1ade6a22c13def"
+      "Bytes": 46967,
+      "Sha256": "5766718264cd4dd569375ab58e2a68a5bfa026ae54fbb98fc41fc59de361a137"
     },
     {
       "Path": "packages/browser/worker-assets/packages/controls/src/documents.js",
@@ -6688,8 +6783,8 @@
     },
     {
       "Path": "packages/browser/worker-assets/packages/rendering/src/recording.js",
-      "Bytes": 18447,
-      "Sha256": "7370982a343f7d864adc00cc91cfb333c1900bc2df446069db20d4440a9f3645"
+      "Bytes": 18876,
+      "Sha256": "d0ca9bd2505569a3fc67c994838fdaa180b61b7b7c895afcaf0e427dd0d762c2"
     },
     {
       "Path": "packages/browser/worker-assets/packages/rendering/src/references.js",
@@ -6708,8 +6803,8 @@
     },
     {
       "Path": "packages/browser/worker-assets/packages/rendering/src/server.js",
-      "Bytes": 34077,
-      "Sha256": "f0a150780387c389b3f77537fe248f43ef760bc06082975465a6a8b1f4a112d9"
+      "Bytes": 38999,
+      "Sha256": "2db995f7f5b37ef4e7a3596b3de906c9cd62db8a24699e692f830f082014e0dd"
     },
     {
       "Path": "packages/browser/worker-assets/packages/skia/src/index.js",
@@ -7313,8 +7408,8 @@
     },
     {
       "Path": "packages/composition/src/index.js",
-      "Bytes": 32397,
-      "Sha256": "15abce5346c013d8665828c5dee53f7eb74dbaa15274e0de50d0899c69650c83"
+      "Bytes": 43665,
+      "Sha256": "9ede294395efe95765543def544c1df33efe903146e934d8f5265decd8b7a533"
     },
     {
       "Path": "packages/composition/src/values.js",
@@ -7358,8 +7453,8 @@
     },
     {
       "Path": "packages/controls/src/core.js",
-      "Bytes": 46923,
-      "Sha256": "ce6c9190a583d2150535c21d07f4e59ddcb7a7e9f9a74d0f8962e6251f82bb0b"
+      "Bytes": 46982,
+      "Sha256": "8483384ed355004b4baa065576e6d4c63461600ea99cd3397bffd1edfeaab0f1"
     },
     {
       "Path": "packages/controls/src/documents.js",
@@ -7683,8 +7778,8 @@
     },
     {
       "Path": "packages/rendering/src/recording.js",
-      "Bytes": 18462,
-      "Sha256": "335935485f9acbdee5c6685708fd141c0b80fc91e4f1948bce417c9a5f8fc4f7"
+      "Bytes": 18891,
+      "Sha256": "f683419160a0b1033f323a6eecafd6f33ef1cead74906b396c3a31491aed50d0"
     },
     {
       "Path": "packages/rendering/src/references.js",
@@ -7703,8 +7798,8 @@
     },
     {
       "Path": "packages/rendering/src/server.js",
-      "Bytes": 34102,
-      "Sha256": "26370172c7a04975fc7f5b902541df9f4099b505f9360fcc6b8538a1200dd239"
+      "Bytes": 39024,
+      "Sha256": "215704fe95c7fc6d7a3d5cea42166ec7408a9e4f8afaccbad2b8a0f1accf0520"
     },
     {
       "Path": "packages/skia/LICENSE",
@@ -7958,8 +8053,8 @@
     },
     {
       "Path": "samples/ControlCatalog/Pages/Composition.axaml",
-      "Bytes": 814,
-      "Sha256": "bda5b87237d54914a12f29ed3c9a223d4e089b834a14e06a7bf53353a8110277"
+      "Bytes": 1077,
+      "Sha256": "72e9b1cb036b09b4745059858fcaa461457a76bb8b5ec6aa87c1929779aecaf3"
     },
     {
       "Path": "samples/ControlCatalog/Pages/ContainerQueries.axaml",
@@ -8348,8 +8443,8 @@
     },
     {
       "Path": "samples/ControlCatalog/compiled/Composition.g.js",
-      "Bytes": 82309,
-      "Sha256": "330b8996ec66964a35f55eea174d2cb14f0e2e0109460e84586b81adf81ec717"
+      "Bytes": 111439,
+      "Sha256": "b6c5f6f6e26922944af8d797795432919536c21bc18d89781c95358a8ab4d2fb"
     },
     {
       "Path": "samples/ControlCatalog/compiled/ContainerQueries.g.js",
@@ -8633,18 +8728,18 @@
     },
     {
       "Path": "samples/ControlCatalog/compiled/index.js",
-      "Bytes": 59558,
-      "Sha256": "94bbb7435e076312c5b40548340c43bbb52bbd7e23ee62ead72eb4b6a84af000"
+      "Bytes": 59834,
+      "Sha256": "4e280f09c867f0bbb77e975bec526ff86f4e3b26f27b30bb9bdc9b35610e2a3f"
     },
     {
       "Path": "samples/ControlCatalog/compiled/lazy.js",
-      "Bytes": 56666,
-      "Sha256": "f9d294d4dfc3cdd209cd4eb459967e15c32c1504395edab0850e1b204bcc754f"
+      "Bytes": 56942,
+      "Sha256": "8e6a302efddb517311c9440d632cc150af6f041800aa8a6cae8f15d1a2920115"
     },
     {
       "Path": "samples/ControlCatalog/extensions.js",
-      "Bytes": 10695,
-      "Sha256": "c12d704d9674cd6736c03b8cd5366bf72bb5332723e980ef6be9d22c76e855a5"
+      "Bytes": 12694,
+      "Sha256": "793a8f12eaf48ae7260eeea5fa15ca2f7da8e3908f4bfbc03138e5b2eaccc28f"
     },
     {
       "Path": "samples/ControlCatalog/index.html",
@@ -8778,8 +8873,8 @@
     },
     {
       "Path": "samples/ControlCatalog/worker/compiled/Composition.g.js",
-      "Bytes": 82309,
-      "Sha256": "330b8996ec66964a35f55eea174d2cb14f0e2e0109460e84586b81adf81ec717"
+      "Bytes": 111439,
+      "Sha256": "b6c5f6f6e26922944af8d797795432919536c21bc18d89781c95358a8ab4d2fb"
     },
     {
       "Path": "samples/ControlCatalog/worker/compiled/ContainerQueries.g.js",
@@ -9063,18 +9158,18 @@
     },
     {
       "Path": "samples/ControlCatalog/worker/compiled/index.js",
-      "Bytes": 59558,
-      "Sha256": "94bbb7435e076312c5b40548340c43bbb52bbd7e23ee62ead72eb4b6a84af000"
+      "Bytes": 59834,
+      "Sha256": "4e280f09c867f0bbb77e975bec526ff86f4e3b26f27b30bb9bdc9b35610e2a3f"
     },
     {
       "Path": "samples/ControlCatalog/worker/compiled/lazy.js",
-      "Bytes": 56666,
-      "Sha256": "f9d294d4dfc3cdd209cd4eb459967e15c32c1504395edab0850e1b204bcc754f"
+      "Bytes": 56942,
+      "Sha256": "8e6a302efddb517311c9440d632cc150af6f041800aa8a6cae8f15d1a2920115"
     },
     {
       "Path": "samples/ControlCatalog/worker/extensions.js",
-      "Bytes": 10742,
-      "Sha256": "cbc66a1a01f1530127e4ef3b922ebf487d27e2b44dd1251f15874b5638eb1b58"
+      "Bytes": 12741,
+      "Sha256": "4f1e6fd37683b6b43fe5efe2e049ae81801a3dc302a577ccb1ab53956f8d7111"
     },
     {
       "Path": "samples/ControlCatalog/worker/manifest.js",
@@ -9105,6 +9200,11 @@
       "Path": "scripts/apply-core-edits.py",
       "Bytes": 1600,
       "Sha256": "259f89e9b5739a794f8488ac1877998a2d707d02a0ea0ec982b9ea677575885e"
+    },
+    {
+      "Path": "scripts/apply-implicit-edits.py",
+      "Bytes": 2375,
+      "Sha256": "69a79101f23f65290a4b8041949f31aa4b0b033e358f54701c38d5b64c6b6a38"
     },
     {
       "Path": "scripts/archive.py",
@@ -9153,8 +9253,8 @@
     },
     {
       "Path": "scripts/qualify-core-port.sh",
-      "Bytes": 1357,
-      "Sha256": "7090aa33f24b3e02f1b53fce2dacf467c72d42c3d4839ffed075a9165a2f3c05"
+      "Bytes": 1401,
+      "Sha256": "5480a9bc320fda0bf1a8b1c1aeff0ee192b1ca8d2264641098dd315ecf54ce4a"
     },
     {
       "Path": "scripts/register-loader.mjs",
@@ -9183,8 +9283,8 @@
     },
     {
       "Path": "scripts/test-packages.mjs",
-      "Bytes": 7546,
-      "Sha256": "5b79241c12f7588d557d813f5d1017f0b3ab4cedee61fcf9815c5cdb01fb474e"
+      "Bytes": 8482,
+      "Sha256": "3196a8d1ac9deac0754ce49c0cadd22a2f22db645822f8d2233bce152056715b"
     },
     {
       "Path": "scripts/validate-node.mjs",
@@ -9193,8 +9293,8 @@
     },
     {
       "Path": "scripts/verify-release.mjs",
-      "Bytes": 14512,
-      "Sha256": "320697bca608a7e14e432b25edc2966547beaddb9e86349c56f49204737e2826"
+      "Bytes": 15378,
+      "Sha256": "d2046378f67a7709e8e725771c9d47b869d37862353d2884a89d0f9963e998ce"
     },
     {
       "Path": "scripts/verify-vendor.mjs",
@@ -9290,6 +9390,31 @@
       "Path": "tests/http-smoke.py",
       "Bytes": 2773,
       "Sha256": "d8d796a88f387b3cf7e5e9f1b694197a3be704cf16f6412dd82527bd98f5e9d5"
+    },
+    {
+      "Path": "tests/implicit-animation-scene.js",
+      "Bytes": 2906,
+      "Sha256": "e13913681a95f94d48b971d799bd6c65b943c6b21148218b82575f291ff5e98f"
+    },
+    {
+      "Path": "tests/implicit-animation-worker.js",
+      "Bytes": 739,
+      "Sha256": "7d6b5aa64b69e4b763632cbe9a17227fcf129d9307181350b7edcae80c459097"
+    },
+    {
+      "Path": "tests/implicit-animations-browser.py",
+      "Bytes": 7684,
+      "Sha256": "6ed714348f40d89eea4537cbff2f20ddc8279abf0effaebfb66f8414045107a1"
+    },
+    {
+      "Path": "tests/implicit-animations.test.mjs",
+      "Bytes": 13973,
+      "Sha256": "14639c7c8fd4052bfb16967d16e156e76e8819498a821a93aaa44dfbabd0e281"
+    },
+    {
+      "Path": "tests/implicit-server.test.mjs",
+      "Bytes": 14070,
+      "Sha256": "3ed52517d6c1a4a2a0d9bda4c91d058427fb68cca06203e168a7ebe434c93ad8"
     },
     {
       "Path": "tests/integration_host.py",

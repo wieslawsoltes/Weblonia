@@ -1,6 +1,6 @@
 import { Point, Size, Rect, Matrix, Disposable } from "../../base/src/index.js";
 import { DrawingContext, DrawingImage, GetTextServiceVersion } from "../../media/src/index.js";
-import { CompositionObject, CompositionAnimationGroup, CompositionCustomVisual, CompositionDrawListVisual } from "../../composition/src/index.js";
+import { CompositionObject, CompositionAnimationGroup, ImplicitAnimationCollection, CompositionPropertySet, CompositionCustomVisual, CompositionDrawListVisual } from "../../composition/src/index.js";
 import { CompositionResourceRegistry, MatrixValues, RectValues } from './resources.js';
 import { CaptureScrollPolicy } from './scrolling.js';
 import { CompositionProtocolError } from './protocol.js';
@@ -133,7 +133,7 @@ export class CompositionSceneRecorder {
         const next = new Map();
         if (!compositor || compositor.IsDisposed) return next;
         for (const object of compositor._objects) {
-            if (object.IsDisposed || object instanceof CompositionAnimationGroup) continue;
+            if (object.IsDisposed || object instanceof CompositionAnimationGroup || object instanceof ImplicitAnimationCollection) continue;
             const old = this._composition.get(object.Id), version = object._transportVersion ?? compositor.Revision;
             if (old && old.Version === version && old.FontVersion === this._fontVersion) { next.set(object.Id, old); continue; }
             // Defaults must be materialized before cross-realm serialization.
@@ -145,9 +145,9 @@ export class CompositionSceneRecorder {
             for (const state of object._animations.values()) {
                 const a = state.Animation;
                 const animation = { Type: a.constructor.name, Duration: a.Duration, DelayTime: a.DelayTime, IterationCount: a.IterationCount, IterationBehavior: a.IterationBehavior,
-                    Direction: a.Direction, StopBehavior: a.StopBehavior, Parameters: [...a.Parameters].map(([k, v]) => [k, this._compositionValue(v)]),
+                    Direction: a.Direction, DelayBehavior:a.DelayBehavior, StopBehavior: a.StopBehavior, Parameters: [...a.Parameters].map(([k, v]) => [k, this._compositionValue(v)]),
                     Expression: a.Expression, KeyFrames: a.KeyFrames?.map(frame => ({ Progress: frame.Progress, Value: this.Resources.Encode(frame.Value), Expression: frame.Expression?.Text ?? frame.Expression?.Source, Easing: describeEasing(frame.Easing) })) };
-                animations.push({ Name: state.Name, Property: state.Property, Component: state.Component, Base: this.Resources.Encode(state.Base), Start: this.Resources.Encode(state.Start),
+                animations.push({ Id:state.Id, ValueType:state.ValueType, HasFinalValue:state.HasFinalValue, UseServerStartingValue:state.UseServerStartingValue, FinalValue:this.Resources.Encode(state.FinalValue), Name: state.Name, Property: state.Property, Component: state.Component, Base: this.Resources.Encode(state.Base), Start: this.Resources.Encode(state.Start),
                     StartedAt: (compositor.Clock.TimeOrigin ?? performance.timeOrigin ?? 0) + state.StartedAt, Animation: animation });
             }
             let custom = null, customCommands = null;
@@ -160,6 +160,7 @@ export class CompositionSceneRecorder {
                 }
             }
             const item = { Id: object.Id, Version: version, FontVersion: this._fontVersion, Type: object.constructor.name, Values: values,
+                PropertyTypes:object instanceof CompositionPropertySet?Object.fromEntries(object._types):undefined,
                 Children: object.Children?._committed?.map(x => x.Id) ?? [], Animations: animations, Animated: [...object._animated].map(([k, v]) => [k, this.Resources.Encode(v)]),
                 Surface: object._committedBitmap ? this.Resources.Encode(object._committedBitmap) : null, Custom: custom, Commands: customCommands };
             item.Resources = this._references.Get(item).Resources; next.set(object.Id, Object.freeze(item));

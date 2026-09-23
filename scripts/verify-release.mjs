@@ -45,11 +45,17 @@ current(automation, 'Incremental automation');
 require(automation.Completed && automation.Failed === 0 && automation.Passed > 0 && !automation.PageErrors.length && !automation.MissingAssets.length, 'Incremental automation failed');
 const consumer = await read('artifacts/package-consumer-result.json');
 current(consumer, 'Packed consumer');
-require(consumer.Passed && consumer.Packages === 18 && consumer.StartupSubpaths && consumer.CorePortApis && !consumer.PublicRegistryInstalled, 'Packed offline consumer failed');
+require(consumer.Passed && consumer.Packages === 18 && consumer.StartupSubpaths && consumer.CorePortApis && consumer.ImplicitAnimationApis && !consumer.PublicRegistryInstalled, 'Packed offline consumer failed');
 const corePort = await read('artifacts/core-port/browser-results.json');
 current(corePort, 'Core port browser');
 require(corePort.Completed && corePort.Passed === 3 && corePort.Failed === 0 && !corePort.Interception && !corePort.WorkerBootstrapOverrides
     && !corePort.Errors.length && !corePort.MissingAssets.length && corePort.Tests.every(t => t.Passed && t.AutonomousRedraw && t.ComparedChannels === 4 && t.MaximumChannelError <= 2), 'Core/XAML/drawing/composition HTTP qualification failed');
+const implicitAnimations=await read('artifacts/implicit-animations/browser-results.json');
+current(implicitAnimations,'Implicit animations');
+require(implicitAnimations.Completed && implicitAnimations.Passed===3 && implicitAnimations.Failed===0 && !implicitAnimations.Interception
+    && !implicitAnimations.WorkerBootstrapOverrides && !implicitAnimations.SnapshotForcesRender && !implicitAnimations.Errors.length && !implicitAnimations.MissingAssets.length
+    && implicitAnimations.Tests.every(t=>t.Passed&&t.AutonomousRedraw&&t.BindingDrivenLayout&&t.GroupedTrigger&&t.Retargeted&&t.CompletedRunNotReplayed&&t.ClearedDefinitions
+        && t.IntermediatePositions.some(x=>x>24&&x<200)&&t.ComparedChannels===4&&t.MaximumChannelError<=2),'Implicit animation HTTP qualification failed');
 const build = await read('artifacts/build-result.json');
 current(build, 'Build', false, false);
 require(build.XamlModules === 75 && build.NoEval && build.FontFiles === 0, 'AOT build contract changed');
@@ -105,6 +111,7 @@ await scan(path.join(root, 'packages'));
 const lines = (await Promise.all(files.map(f => readFile(f, 'utf8')))).reduce((n, s) => n + s.split('\n').length, 0);
 const report = {
     Version: pkg.version, SourceFingerprint: fingerprint, GeneratedAt: new Date().toISOString(),
+    ImplicitAnimations: implicitAnimations,
     FullAvaloniaParity: false, FullXamlXParity: false, FullUpstreamClonesIncluded: false, OriginalCatalogSubexamplesFullyPorted: false,
     Recovery: await read('docs/recovery/recovery-invalidation.json'),
     UpstreamSkia: await read('docs/SKIASHARPWEB-UPSTREAM.json'),

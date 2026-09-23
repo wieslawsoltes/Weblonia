@@ -5,7 +5,23 @@ import { Clock, ParseDuration, Interpolate, LinearEasing } from "../../animation
 import { CompositionExpression } from './expression.js';
 export { CompositionExpression } from './expression.js';
 
-let objectId=0;
+let objectId=0, animationId=0;
+const propertyTypes=new WeakMap();
+function propertyType(object,name) {
+    if(object instanceof CompositionPropertySet)return object._types.get(name);
+    for(let p=Object.getPrototypeOf(object);p;p=Object.getPrototypeOf(p)) {
+        const properties=propertyTypes.get(p);if(properties?.has(name))return properties.get(name);
+    }
+}
+function equalValue(a,b,type) {
+    if(Object.is(a,b))return true;
+    return !!type && a!=null && b!=null && typeof a==='object' && typeof b==='object'
+        && Object.keys(a).length===Object.keys(b).length && Object.keys(a).every(k=>Object.is(a[k],b[k]));
+}
+function presentationValue(target,state,time,current) {
+    const value=state.Component?current?.[state.Component]:current;
+    return state.Animation.Sample(Math.max(0,time-state.StartedAt),state.Start,target,state.FinalValue,value);
+}
 const clone=value=>{
     if(value==null||typeof value!=='object'||value instanceof CompositionObject||value instanceof Bitmap||value instanceof Brush)return value;
     if(value instanceof Color)return new Color(value.A,value.R,value.G,value.B);
@@ -16,26 +32,52 @@ const clone=value=>{
     return Object.fromEntries(Object.entries(value).map(([key,val])=>[key,clone(val)]));
 };
 function define(type,properties) {
-    for(const [name,initial] of Object.entries(properties))Object.defineProperty(type.prototype,name,{configurable:true,enumerable:true,
-        get(){return Object.hasOwn(this._values,name)?this._values[name]:typeof initial==='function'?this._values[name]=initial():initial;},
-        set(value){this._Set(name,value);}
-    });
+    const types=new Map();propertyTypes.set(type.prototype,types);
+    for(const [name,initial] of Object.entries(properties)) {
+        const sample=typeof initial==='function'?initial():initial;
+        const valueType=typeof sample==='number'?'Scalar':typeof sample==='boolean'?'Boolean':sample instanceof Color?'Color'
+            :sample instanceof Matrix?'Matrix3x2':sample instanceof Point?'Vector2':sample&&'Z' in Object(sample)?'Vector3':null;
+        types.set(name,valueType);
+        Object.defineProperty(type.prototype,name,{configurable:true,enumerable:true,
+            get(){const value=Object.hasOwn(this._values,name)?this._values[name]:typeof initial==='function'?this._values[name]=initial():initial;
+                // Public struct reads are snapshots; internal committed reads stay allocation-free.
+                return valueType&&value!=null&&typeof value==='object'?clone(value):value;},
+            set(value){this._Set(name,value,valueType);}
+        });
+    }
 }
 function interpolate(a,b,t) {
+    if(t===0)return clone(a);if(t===1)return clone(b);
     if(a&&b&&typeof a==='object'&&typeof b==='object'&&Object.hasOwn(a,'X')&&Object.hasOwn(a,'Z'))return {X:a.X+(b.X-a.X)*t,Y:a.Y+(b.Y-a.Y)*t,Z:a.Z+(b.Z-a.Z)*t};
     return Interpolate(a,b,t);
 }
 export class CompositionObject extends Disposable {
     constructor(compositor) {
         super();if(!(compositor instanceof Compositor)||compositor.IsDisposed)throw new TypeError('A live Compositor is required.');
-        this.Id=++objectId;this.Compositor=compositor;this.Comment='';this._values={};this._committed={};this._animated=new Map();this._animations=new Map();
+        this.Id=++objectId;this.Compositor=compositor;this.Comment='';this._values={};this._committed={};this._animated=new Map();this._animations=new Map();this._instances=new Map();
         compositor._objects.add(this);compositor._Dirty(this);
     }
-    _Set(name,value) {
+    get ImplicitAnimations(){return this._implicitAnimations??null;}
+    set ImplicitAnimations(value) {
         if(this.IsDisposed)throw new Error('Composition object is disposed.');
-        if(value instanceof CompositionObject&&value.Compositor!==this.Compositor)throw new Error('Composition resources must belong to the same Compositor.');
-        if(Object.is(this._values[name],value))return;
-        this._values[name]=clone(value);this.Compositor._Dirty(this);
+        if(value!=null&&(!(value instanceof ImplicitAnimationCollection)||value.IsDisposed||value.Compositor!==this.Compositor))
+            throw new TypeError('Implicit animations require a live collection from this compositor.');
+        if(this._implicitAnimations===value)return;
+        this._implicitAnimations?._owners.delete(this);this._implicitAnimations=value??null;value?._owners.add(this);
+    }
+    _Set(name,value,type=propertyType(this,name)) {
+        if(this.IsDisposed)throw new Error('Composition object is disposed.');
+        if(value instanceof CompositionObject&&(value.IsDisposed||value.Compositor!==this.Compositor))throw new Error('Composition resources must belong to the same live Compositor.');
+        const desired=type?CopyCompositionValue(type,value):clone(value);
+        const before=Object.hasOwn(this._values,name)?this._values[name]:this[name];
+        if(equalValue(before,desired,type))return;
+        const trigger=this._implicitAnimations?._items.get(name);
+        // A malformed trigger must not publish either a new base value or a partially started group.
+        const states=trigger?this._PrepareGroup(trigger,this.Compositor.Clock.Now(),name,desired):[];
+        for(const state of [...this._instances.values()])if(state.Property===name)this.StopAnimation(state.Name);
+        this._animated.delete(name);this._serverValues?.delete(name);this._values[name]=desired;
+        for(const state of states)this._InstallAnimation(state);
+        this.Compositor._Dirty(this);if(states.length)this.Compositor._EnsureClock();
     }
     _Commit() {
         // Materialize default properties as part of the immutable value snapshot.
@@ -43,38 +85,60 @@ export class CompositionObject extends Disposable {
             for(const name of Object.getOwnPropertyNames(proto))if(Object.getOwnPropertyDescriptor(proto,name)?.get&&name!=='Parent')void this[name];
         this._committed=Object.fromEntries(Object.entries(this._values).map(([key,value])=>[key,clone(value)]));
     }
-    _Read(name){return this._serverValues?.has(name)?this._serverValues.get(name):this._animated.has(name)?this._animated.get(name):Object.hasOwn(this._committed,name)?this._committed[name]:this[name];}
+    _Read(name){return this._serverValues?.has(name)?this._serverValues.get(name):this._animated.has(name)?this._animated.get(name):Object.hasOwn(this._committed,name)?this._committed[name]:Object.hasOwn(this._values,name)?this._values[name]:this[name];}
     GetExpressionValue(name) {
         if(name.startsWith('_')||['constructor','prototype','__proto__'].includes(name)||!(name in this))throw new ReferenceError(`Composition member '${name}' is not available.`);
         return this._Read(name);
     }
-    _PrepareAnimation(propertyName, animation, startedAt) {
-        if (this.IsDisposed) throw new Error('Composition object is disposed.');
-        if (!(animation instanceof CompositionAnimation) || animation.IsDisposed || animation.Compositor !== this.Compositor)
+    _PresentationAt(property,time) {
+        let value=clone(this._Read(property));
+        // Sample without advancing the live instances: failed group preparation is side-effect free.
+        if(!this.Compositor.ServerTransport)for(const state of this._animations.values())if(state.Property===property) {
+            const sample=presentationValue(this,state,time,value);
+            if(sample.HasValue)value=state.Component?{...value,[state.Component]:sample.Value}:clone(sample.Value);
+        }
+        return value;
+    }
+    _PrepareAnimation(propertyName, animation, startedAt, finalValue, hasFinalValue=false, implicit=false) {
+        if(this.IsDisposed)throw new Error('Composition object is disposed.');
+        if(!(animation instanceof CompositionAnimation)||animation.IsDisposed||animation.Compositor!==this.Compositor)
             throw new TypeError('A live animation from the same compositor is required.');
-        const [property,component,...rest]=String(propertyName).split('.');
-        if(rest.length||property.startsWith('_')||['constructor','prototype','__proto__'].includes(property)||!(property in this)||component&&!['X','Y','Z','W'].includes(component))
-            throw new RangeError(`Invalid animation property '${propertyName}'.`);
+        const [property,component,...rest]=String(propertyName).split('.'),type=propertyType(this,property);
+        if(rest.length||!type||component&&!['X','Y','Z','W'].includes(component))throw new RangeError(`Invalid animation property '${propertyName}'.`);
         animation.Validate();
-        const base=clone(this._Read(property));
-        if(component && !Number.isFinite(base?.[component])) throw new RangeError(`Invalid animation component '${propertyName}'.`);
-        return {Name:propertyName,Property:property,Component:component,Base:base,Start:clone(component?base[component]:base),Animation:animation.Clone(),StartedAt:startedAt};
+        const base=this._PresentationAt(property,startedAt);
+        if(component&&!Number.isFinite(base?.[component]))throw new RangeError(`Invalid animation component '${propertyName}'.`);
+        const valueType=component?'Scalar':type;
+        if(animation.ValueType&&animation.ValueType!==valueType)throw new TypeError(`Animation ${animation.ValueType} cannot target ${valueType} '${propertyName}'.`);
+        const start=clone(component?base[component]:base),final=hasFinalValue?CopyCompositionValue(valueType,finalValue):clone(start);
+        if(!Number.isSafeInteger(animationId+1))throw new RangeError('Animation identity space exhausted.');
+        return {Id:++animationId,Name:String(propertyName),Property:property,Component:component,Base:base,Start:start,FinalValue:final,
+            HasFinalValue:hasFinalValue,UseServerStartingValue:implicit,ValueType:valueType,Animation:Object.assign(animation.Clone(),{_targetValueType:valueType}),StartedAt:startedAt};
     }
     _InstallAnimation(state) {
-        this.StopAnimation(state.Name); this._animations.set(state.Name,state);
-        this.Compositor._animatedObjects.add(this); this.Compositor._Dirty(this);
+        for(const old of [...this._instances.values()])if(old.Property===state.Property&&(!old.Component||!state.Component))this.StopAnimation(old.Name);
+        this.StopAnimation(state.Name);this._animations.set(state.Name,state);this._instances.set(state.Name,state);
+        // Hold the captured presentation across the base-value commit and before the first tick.
+        if(state.Component)this._animated.set(state.Property,{...this._Read(state.Property),[state.Component]:state.Start});
+        else this._animated.set(state.Property,clone(state.Start));
+        this.Compositor._animatedObjects.add(this);this.Compositor._Dirty(this);
     }
     StartAnimation(propertyName,animation) {
         const state=this._PrepareAnimation(propertyName,animation,this.Compositor.Clock.Now());
-        this._InstallAnimation(state); this.Compositor._EnsureClock();
+        this._InstallAnimation(state);this.Compositor._EnsureClock();
+    }
+    _PrepareGroup(group,startedAt,trigger,finalValue) {
+        const states=[];
+        try {
+            for(const animation of this._GroupAnimations(group)) {
+                if(!animation.Target)throw new Error('Grouped animations require a Target.');
+                states.push(this._PrepareAnimation(animation.Target,animation,startedAt,finalValue,animation.Target===trigger,trigger!==undefined));
+            }
+        }catch(error){for(const state of states)state.Animation.Dispose();throw error;}
+        return states;
     }
     StartAnimationGroup(group) {
-        const animations = this._GroupAnimations(group), startedAt=this.Compositor.Clock.Now();
-        // Prepare every clone before replacing any running state. A bad target,
-        // foreign resource or throwing clone cannot leave a half-started group.
-        const states=[];
-        try { for(const a of animations){if(!a.Target)throw new Error('Grouped animations require a Target.');states.push(this._PrepareAnimation(a.Target,a,startedAt));} }
-        catch(error){for(const state of states)state.Animation.Dispose();throw error;}
+        const states=this._PrepareGroup(group,this.Compositor.Clock.Now());
         for(const state of states)this._InstallAnimation(state);
         if(states.length)this.Compositor._EnsureClock();
     }
@@ -88,30 +152,38 @@ export class CompositionObject extends Disposable {
         return group instanceof CompositionAnimationGroup ? group.Animations.slice() : [group];
     }
     StopAnimation(name) {
-        const state=this._animations.get(name);this._animations.delete(name);
+        const state=this._instances.get(name);this._instances.delete(name);this._animations.delete(name);state?.Animation.Dispose();
         const [property,component]=String(name).split('.');
         if(component && this._animated.has(property)) {
-            const value=clone(this._animated.get(property)),base=this._committed[property]??this[property];
+            const value=clone(this._Read(property)),base=this._committed[property]??this._values[property]??this[property];
             value[component]=base?.[component];this._animated.set(property,value);
-            if(![...this._animations.values()].some(s=>s.Property===property))this._animated.delete(property);
+            if(![...this._instances.values()].some(s=>s.Property===property))this._animated.delete(property);
         } else this._animated.delete(state?.Property??property);
         if(!this._animations.size)this.Compositor._animatedObjects.delete(this);
         this.Compositor._Dirty(this);this.Compositor._ReleaseIdleClock();
     }
-    StopAllAnimations() {for(const name of [...this._animations.keys()])this.StopAnimation(name);this._animated.clear();}
+    StopAllAnimations() {for(const name of [...this._instances.keys()])this.StopAnimation(name);this._animated.clear();}
     _Tick(time) {
         for(const [key,state] of this._animations) {
-            const result=state.Animation.Sample(time-state.StartedAt,state.Start,this);
+            const result=presentationValue(this,state,time,this._Read(state.Property));
             if(!result.HasValue)continue;
             if(state.Component){const vector={...this._Read(state.Property)};vector[state.Component]=result.Value;this._animated.set(state.Property,vector);}
             else this._animated.set(state.Property,result.Value);
-            if(result.Done){this._animations.delete(key);if(state.Animation.StopBehavior==='SetToInitialValue')this._animated.delete(state.Property);}
+            if(result.Done){
+                this._animations.delete(key);
+                if(state.Animation.StopBehavior==='SetToInitialValue') {
+                    if(state.Component)this._animated.set(state.Property,{...this._Read(state.Property),[state.Component]:state.Start});
+                    else this._animated.set(state.Property,clone(state.Start));
+                }
+                state.Animation.Dispose();
+            }
         }
         if(!this._animations.size)this.Compositor._animatedObjects.delete(this);
     }
     Dispose() {
         if(this.IsDisposed)return;
-        this.StopAllAnimations();this.Compositor._objects.delete(this);this.Compositor._dirty.delete(this);super.Dispose();
+        this._implicitAnimations?._owners.delete(this);this._implicitAnimations=null;
+        this.StopAllAnimations();this.Compositor._objects.delete(this);this.Compositor._dirty.delete(this);this._serverValues=null;super.Dispose();
     }
 }
 export class CompositionBatch {
@@ -172,6 +244,7 @@ export class Compositor extends Disposable {
     CreateColorKeyFrameAnimation(){return new ColorKeyFrameAnimation(this);}
     CreateExpressionAnimation(expression=''){const animation=new ExpressionAnimation(this);animation.Expression=expression;return animation;}
     CreateAnimationGroup(){return new CompositionAnimationGroup(this);}
+    CreateImplicitAnimationCollection(){return new ImplicitAnimationCollection(this);}
     async CreateCompositionVisualSnapshot(visual,scaling=1) {
         if(visual.Compositor!==this)throw new Error('Visual belongs to another Compositor.');
         const platform=this.Platform;if(!platform)throw new Error('A Skia platform must be attached before taking composition snapshots.');
@@ -303,7 +376,7 @@ export class CompositionPropertySet extends CompositionObject {
     _InsertTyped(name,type,value) {
         ValidateCompositionKey(name);
         if(name in this && !Object.hasOwn(this._values,name))throw new RangeError('Invalid property-set key.');
-        value=CopyCompositionValue(type,value);this._Set(name,value);this._types.set(name,type);
+        value=CopyCompositionValue(type,value);this._Set(name,value,type);this._types.set(name,type);
     }
     _TryGet(name,type) {
         ValidateCompositionKey(name);
@@ -322,7 +395,7 @@ for(const type of CompositionValueTypes) {
     Object.defineProperty(CompositionPropertySet.prototype,`TryGet${type}`,{value:function(name){return this._TryGet(name,type);}});
 }
 export class CompositionAnimation extends Disposable {
-    constructor(compositor){super();this.Compositor=compositor;this.Target='';this.Duration=1000;this.DelayTime=0;this.IterationCount=1;this.IterationBehavior='Count';this.Direction='Normal';this.StopBehavior='SetToFinalValue';this.Parameters=new Map();}
+    constructor(compositor){super();this.Compositor=compositor;this.Target='';this.Duration=1000;this.DelayTime=0;this.DelayBehavior='SetInitialValueAfterDelay';this.IterationCount=1;this.IterationBehavior='Count';this.Direction='Normal';this.StopBehavior='SetToFinalValue';this.Parameters=new Map();}
     _SetParameter(name,type,value) {
         if(this.IsDisposed)throw new Error('Composition animation is disposed.');
         this.Parameters.set(ValidateCompositionKey(name),CopyCompositionValue(type,value));
@@ -334,19 +407,39 @@ export class CompositionAnimation extends Disposable {
     }
     ClearParameter(name){this.Parameters.delete(ValidateCompositionKey(name));}
     ClearAllParameters(){this.Parameters.clear();}
-    Dispose(){if(!this.IsDisposed){this.Parameters.clear();super.Dispose();}}
-    Clone(){const result=Object.assign(Object.create(Object.getPrototypeOf(this)),this);result.Parameters=new Map([...this.Parameters].map(([k,v])=>[k,clone(v)]));if(this.KeyFrames)result.KeyFrames=this.KeyFrames.map(frame=>({...frame,Value:clone(frame.Value)}));return result;}
-    Validate(){if(ParseDuration(this.Duration)<0||ParseDuration(this.DelayTime)<0||!Number.isFinite(ParseDuration(this.Duration))||!(this.IterationCount>0))throw new RangeError('Invalid composition animation timing.');}
-    _Environment(start,target){return {...Object.fromEntries(this.Parameters),this:{StartingValue:start,CurrentValue:start,Target:target}};}
+    Dispose(){if(!this.IsDisposed){this.Parameters.clear();if(this.KeyFrames)this.KeyFrames.length=0;super.Dispose();}}
+    Clone(){const result=Object.assign(Object.create(Object.getPrototypeOf(this)),this);result.Parameters=new Map([...this.Parameters].map(([k,v])=>[k,clone(v)]));if(this.KeyFrames)result.KeyFrames=this.KeyFrames.map(frame=>({...frame,Value:clone(frame.Value),Easing:frame.Easing?Object.assign(Object.create(Object.getPrototypeOf(frame.Easing)),frame.Easing):null}));return result;}
+    Validate(){
+        if(this.IsDisposed)throw new Error('Composition animation is disposed.');
+        const duration=ParseDuration(this.Duration),delay=ParseDuration(this.DelayTime);
+        if(!Number.isFinite(duration)||duration<0||!Number.isFinite(delay)||delay<0||!Number.isSafeInteger(this.IterationCount)||this.IterationCount<1
+            ||!['Count','Forever'].includes(this.IterationBehavior)||!['Normal','Reverse','Alternate','AlternateReverse'].includes(this.Direction)
+            ||!['SetToFinalValue','SetToInitialValue','LeaveCurrentValue'].includes(this.StopBehavior)
+            ||!['SetInitialValueAfterDelay','SetInitialValueBeforeDelay'].includes(this.DelayBehavior))throw new RangeError('Invalid composition animation timing.');
+    }
+    _ValidateResult(value){return this._targetValueType||this.ValueType?CopyCompositionValue(this._targetValueType??this.ValueType,value):value;}
+    _Environment(start,target,finalValue=start,currentValue=start){return {...Object.fromEntries(this.Parameters),this:{StartingValue:start,CurrentValue:currentValue,FinalValue:finalValue,Target:target}};}
 }
 export class KeyFrameAnimation extends CompositionAnimation {
     constructor(compositor){super(compositor);this.KeyFrames=[];}
     InsertKeyFrame(progress,value,easing=null){this._Insert(progress,{Value:clone(value),Easing:easing});}
     InsertExpressionKeyFrame(progress,expression,easing=null){this._Insert(progress,{Expression:new CompositionExpression(expression),Easing:easing});}
-    _Insert(progress,frame){if(!Number.isFinite(progress)||progress<0||progress>1)throw new RangeError('Keyframe progress must be in [0,1].');const old=this.KeyFrames.findIndex(f=>f.Progress===progress);if(old>=0)this.KeyFrames.splice(old,1);this.KeyFrames.push({Progress:progress,...frame});this.KeyFrames.sort((a,b)=>a.Progress-b.Progress);}
-    Validate(){super.Validate();if(!this.KeyFrames.length)throw new Error('A keyframe animation must contain a frame.');}
-    Sample(elapsed,start,target){
-        const time=elapsed-ParseDuration(this.DelayTime);if(time<0)return {HasValue:false};
+    _Insert(progress,frame){if(this.IsDisposed)throw new Error('Composition animation is disposed.');if(this.ValueType&&Object.hasOwn(frame,'Value'))frame.Value=CopyCompositionValue(this.ValueType,frame.Value);if(!Number.isFinite(progress)||progress<0||progress>1)throw new RangeError('Keyframe progress must be in [0,1].');const old=this.KeyFrames.findIndex(f=>f.Progress===progress);if(old>=0)this.KeyFrames.splice(old,1);this.KeyFrames.push({Progress:progress,...frame});this.KeyFrames.sort((a,b)=>a.Progress-b.Progress);}
+    Validate(){
+        super.Validate();if(!this.KeyFrames.length)throw new Error('A keyframe animation must contain a frame.');
+        if(this.KeyFrames.length>100000)throw new RangeError('Keyframe budget exceeded.');
+        let previous=-1;
+        for(const frame of this.KeyFrames){
+            if(!Number.isFinite(frame.Progress)||frame.Progress<0||frame.Progress>1||frame.Progress<=previous)throw new RangeError('Keyframes must be strictly ordered in [0,1].');
+            if(frame.Expression&&!(frame.Expression instanceof CompositionExpression)||frame.Easing&&typeof frame.Easing.Ease!=='function')throw new TypeError('Invalid keyframe expression or easing.');
+            if(!frame.Expression&&this.ValueType)CopyCompositionValue(this.ValueType,frame.Value);
+            previous=frame.Progress;
+        }
+    }
+    Sample(elapsed,start,target,finalValue=start,currentValue=start){
+        const env=this._Environment(start,target,finalValue,currentValue),value=frame=>frame.Expression?frame.Expression.Evaluate(env):frame.Value;
+        const time=elapsed-ParseDuration(this.DelayTime);
+        if(time<0)return this.DelayBehavior==='SetInitialValueBeforeDelay'?{HasValue:true,Value:this._ValidateResult(value(this.KeyFrames[0])),Done:false}:{HasValue:false};
         const duration=ParseDuration(this.Duration),infinite=this.IterationBehavior==='Forever';
         const total=infinite?Infinity:duration*this.IterationCount,done=time>=total;
         let iteration=duration>0?Math.floor(time/duration):0,progress=duration>0?(time%duration)/duration:1;
@@ -354,21 +447,20 @@ export class KeyFrameAnimation extends CompositionAnimation {
         if(this.Direction==='Reverse'||this.Direction==='Alternate'&&iteration%2===1||this.Direction==='AlternateReverse'&&iteration%2===0)progress=1-progress;
         const frames=this.KeyFrames[0].Progress>0?[{Progress:0,Value:start},...this.KeyFrames]:this.KeyFrames;
         let a=frames[0],b=frames.at(-1);for(let i=1;i<frames.length;i++)if(progress<=frames[i].Progress){a=frames[i-1];b=frames[i];break;}
-        const env=this._Environment(start,target),value=frame=>frame.Expression?frame.Expression.Evaluate(env):frame.Value;
         const fraction=b.Progress===a.Progress?1:Math.max(0,Math.min(1,(progress-a.Progress)/(b.Progress-a.Progress)));
-        return {HasValue:true,Value:interpolate(value(a),value(b),b.Easing?.Ease(fraction)??fraction),Done:done};
+        return {HasValue:true,Value:this._ValidateResult(interpolate(value(a),value(b),b.Easing?.Ease(fraction)??fraction)),Done:done};
     }
 }
-export class ScalarKeyFrameAnimation extends KeyFrameAnimation {}
-export class Vector2KeyFrameAnimation extends KeyFrameAnimation {}
-export class Vector3KeyFrameAnimation extends KeyFrameAnimation {}
-export class ColorKeyFrameAnimation extends KeyFrameAnimation {}
+export class ScalarKeyFrameAnimation extends KeyFrameAnimation {get ValueType(){return 'Scalar';}}
+export class Vector2KeyFrameAnimation extends KeyFrameAnimation {get ValueType(){return 'Vector2';}}
+export class Vector3KeyFrameAnimation extends KeyFrameAnimation {get ValueType(){return 'Vector3';}}
+export class ColorKeyFrameAnimation extends KeyFrameAnimation {get ValueType(){return 'Color';}}
 export class ExpressionAnimation extends CompositionAnimation {
     constructor(compositor){super(compositor);this._expression='';this._ast=null;}
     get Expression(){return this._expression;}
     set Expression(value){this._expression=String(value);this._ast=value?new CompositionExpression(value):null;}
     Validate(){if(!this._ast)throw new Error('An expression animation must contain an expression.');}
-    Sample(time,start,target){return {HasValue:true,Value:this._ast.Evaluate(this._Environment(start,target)),Done:false};}
+    Sample(time,start,target,finalValue=start,currentValue=start){return {HasValue:true,Value:this._ValidateResult(this._ast.Evaluate(this._Environment(start,target,finalValue,currentValue))),Done:false};}
 }
 for(const type of CompositionValueTypes) Object.defineProperty(CompositionAnimation.prototype,`Set${type}Parameter`,{value:function(name,value){this._SetParameter(name,type,value);}});
 /** Client-only grouping resource: running animations are cloned and flattened
@@ -386,8 +478,64 @@ export class CompositionAnimationGroup extends CompositionObject {
     Dispose(){if(!this.IsDisposed){this.RemoveAll();super.Dispose();}}
 }
 
+/** Client-only keyed trigger definitions. Collections borrow animations and can
+ * be shared by many targets; every trigger creates independently owned instances. */
+export class ImplicitAnimationCollection extends CompositionObject {
+    constructor(compositor){super(compositor);this._items=new Map();this._owners=new Set();}
+    get Count(){return this._items.size;}
+    get Size(){return this.Count;}
+    get Keys(){return [...this._items.keys()];}
+    get Values(){return [...this._items.values()];}
+    _Check(key,animation) {
+        if(this.IsDisposed)throw new Error('Implicit animation collection is disposed.');
+        ValidateCompositionKey(key);
+        if(!(animation instanceof CompositionAnimation||animation instanceof CompositionAnimationGroup)||animation.IsDisposed||animation.Compositor!==this.Compositor)
+            throw new TypeError('A live animation or group from this compositor is required.');
+    }
+    Add(key,animation){this._Check(key,animation);if(this._items.has(key))throw new Error(`Duplicate implicit animation key '${key}'.`);this._items.set(key,animation);}
+    Insert(key,animation){this.Add(key,animation);}
+    Set(key,animation){this._Check(key,animation);this._items.set(key,animation);}
+    Get(key){ValidateCompositionKey(key);if(!this._items.has(key))throw new RangeError(`Implicit animation '${key}' was not found.`);return this._items.get(key);}
+    Lookup(key){ValidateCompositionKey(key);return this._items.get(key)??null;}
+    ContainsKey(key){ValidateCompositionKey(key);return this._items.has(key);}
+    HasKey(key){return this.ContainsKey(key);}
+    TryGetValue(key){return {Found:this.ContainsKey(key),Value:this.Lookup(key)};}
+    Remove(key){if(this.IsDisposed)throw new Error('Implicit animation collection is disposed.');ValidateCompositionKey(key);return this._items.delete(key);}
+    Clear(){if(this.IsDisposed)throw new Error('Implicit animation collection is disposed.');this._items.clear();}
+    GetView(){return new ImplicitAnimationView(this._items);}
+    [Symbol.iterator](){return this._items[Symbol.iterator]();}
+    get(key){return this.Lookup(key);}
+    set(key,animation){this.Set(key,animation);return this;}
+    has(key){return this.ContainsKey(key);}
+    delete(key){return this.Remove(key);}
+    clear(){this.Clear();}
+    Dispose(){if(this.IsDisposed)return;for(const owner of this._owners)owner._implicitAnimations=null;this._owners.clear();this._items.clear();super.Dispose();}
+}
+class ImplicitAnimationView {
+    #items;
+    constructor(items){this.#items=new Map(items);Object.freeze(this);}
+    get Count(){return this.#items.size;}
+    get Size(){return this.Count;}
+    get Keys(){return [...this.#items.keys()];}
+    get Values(){return [...this.#items.values()];}
+    Get(key){if(!this.#items.has(key))throw new RangeError('Implicit animation key was not found.');return this.#items.get(key);}
+    Lookup(key){return this.#items.get(key)??null;}
+    HasKey(key){return this.#items.has(key);}
+    ContainsKey(key){return this.HasKey(key);}
+    TryGetValue(key){return {Found:this.HasKey(key),Value:this.Lookup(key)};}
+    get(key){return this.Lookup(key);}
+    has(key){return this.HasKey(key);}
+    [Symbol.iterator](){return this.#items[Symbol.iterator]();}
+}
+
 export class CompositionDrawListVisual extends CompositionVisual {
-    constructor(compositor,control){super(compositor);this.Control=control;this.Size=new Vector(control.Bounds.Width,control.Bounds.Height);}
+    constructor(compositor,control){super(compositor);this.Control=control;this.Size=new Vector(control.Bounds.Width,control.Bounds.Height);this.Offset={X:control.Bounds.X,Y:control.Bounds.Y,Z:0};}
+    GetRenderTransform(bounds){return this.GetLocalTransform().Multiply(Matrix.CreateTranslation(-bounds.X,-bounds.Y));}
+    Dispose(){
+        if(this.IsDisposed)return;const control=this.Control;this._attachmentLifetime?.Dispose();this._attachmentLifetime=null;
+        if(control?._compositionSelf===this){control._compositionSelf=null;control._compositionChild=null;this.Compositor._attachments.delete(control);control.InvalidateVisual();}
+        this.Control=null;super.Dispose();
+    }
 }
 export class ElementComposition {
     static GetElementVisual(control) {
@@ -396,8 +544,9 @@ export class ElementComposition {
         const compositor=root.Compositor??=new Compositor({ServerTransport:root.Renderer?.CompositionTransport});compositor.Platform=root.Platform;
         const visual=new CompositionDrawListVisual(compositor,control);control._compositionSelf=visual;
         const lifetime=new CompositeDisposable();
-        lifetime.Add(control.SizeChanged.Add(()=>{visual.Size=new Vector(control.Bounds.Width,control.Bounds.Height);}));
-        lifetime.Add(control.Disposed.Add(()=>{control._compositionSelf=null;control._compositionChild=null;compositor._attachments.delete(control);lifetime.Dispose();visual.Dispose();}));
+        visual._attachmentLifetime=lifetime;
+        lifetime.Add(control.SizeChanged.Add(()=>{visual.Offset={X:control.Bounds.X,Y:control.Bounds.Y,Z:0};visual.Size=new Vector(control.Bounds.Width,control.Bounds.Height);}));
+        lifetime.Add(control.Disposed.Add(()=>visual.Dispose()));
         compositor._attachments.set(control,lifetime);compositor._Dirty(visual);return visual;
     }
     static SetElementChildVisual(control,visual) {

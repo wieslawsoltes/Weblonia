@@ -74,10 +74,26 @@ export async function ConfigureExtendedPage(catalog, id, page, model) {
         const animation = compositor.CreateScalarKeyFrameAnimation(); animation.Duration = 1800; animation.IterationBehavior = 'Forever'; animation.Direction = 'Alternate';
         animation.InsertKeyFrame(0, 24); animation.InsertKeyFrame(1, 340);
         const expression = compositor.CreateExpressionAnimation('Vector3(440 - leader.Offset.X, 100 + Sin(leader.Offset.X / 40) * 50, 0)'); expression.SetReferenceParameter('leader', tile);
-        catalog.CompositionDemo = { Compositor: compositor, Group: group, Tile: tile, Follower: follower, Animation: animation };
-        life.Add(find('AnimateComposition').Click.Add(() => { tile.StartAnimation('Offset.X', animation); follower.StartAnimation('Offset', expression); find('CompositionStatus').Text = 'Running · keyframes + expression animation'; }));
-        life.Add(find('StopComposition').Click.Add(() => { tile.StopAnimation('Offset.X'); follower.StopAnimation('Offset'); find('CompositionStatus').Text = 'Stopped · base values restored'; }));
-        life.Add(A.Disposable.Create(() => { tile.StopAnimation('Offset.X'); follower.StopAnimation('Offset'); group.Dispose(); tile.Dispose(); follower.Dispose(); animation.Dispose(); expression.Dispose(); }));
+        const implicitOffset=compositor.CreateVector3KeyFrameAnimation();implicitOffset.Duration=650;implicitOffset.Target='Offset';implicitOffset.InsertExpressionKeyFrame(1,'this.FinalValue');
+        const implicitScale=compositor.CreateVector3KeyFrameAnimation();implicitScale.Duration=650;implicitScale.Target='Scale';implicitScale.InsertKeyFrame(.5,{X:1.12,Y:1.12,Z:1});implicitScale.InsertKeyFrame(1,{X:1,Y:1,Z:1});
+        const implicitGroup=compositor.CreateAnimationGroup();implicitGroup.Add(implicitOffset);implicitGroup.Add(implicitScale);
+        const implicitAnimations=compositor.CreateImplicitAnimationCollection();implicitAnimations.Add('Offset',implicitGroup);
+        catalog.CompositionDemo = { Compositor: compositor, Group: group, Tile: tile, Follower: follower, Animation: animation, ImplicitAnimations:implicitAnimations };
+        life.Add(find('MoveImplicitComposition').Click.Add(()=>{
+            // Stop the forever demo only on entry. Repeated destination changes
+            // interrupt the implicit run from its current rendered presentation.
+            if(tile.ImplicitAnimations!==implicitAnimations){tile.StopAllAnimations();follower.StopAllAnimations();tile.ImplicitAnimations=implicitAnimations;follower.ImplicitAnimations=implicitAnimations;}
+            const destination=tile.Offset.X<100?Math.max(100,Math.min(340,host.Bounds.Width-112)):24;
+            tile.Offset={X:destination,Y:72,Z:0};follower.Offset={X:destination<100?180:24,Y:99,Z:0};
+            find('CompositionStatus').Text='Implicit group · Offset + Scale · click again to retarget';
+        }));
+        life.Add(find('ClearImplicitComposition').Click.Add(()=>{
+            tile.ImplicitAnimations=null;follower.ImplicitAnimations=null;tile.StopAllAnimations();follower.StopAllAnimations();
+            find('CompositionStatus').Text='Implicit definitions detached · base destinations retained';
+        }));
+        life.Add(find('AnimateComposition').Click.Add(() => { tile.ImplicitAnimations=null;follower.ImplicitAnimations=null;tile.StopAllAnimations();follower.StopAllAnimations();tile.StartAnimation('Offset.X', animation); follower.StartAnimation('Offset', expression); find('CompositionStatus').Text = 'Running · keyframes + expression animation'; }));
+        life.Add(find('StopComposition').Click.Add(() => { tile.StopAllAnimations(); follower.StopAllAnimations(); find('CompositionStatus').Text = 'Stopped · base values restored'; }));
+        life.Add(A.Disposable.Create(() => { tile.StopAnimation('Offset.X'); follower.StopAnimation('Offset'); implicitAnimations.Dispose();implicitGroup.Dispose();implicitOffset.Dispose();implicitScale.Dispose();group.Dispose(); tile.Dispose(); follower.Dispose(); animation.Dispose(); expression.Dispose(); }));
         find('CompositionStatus').Text = 'Ready · committed child visuals attached to the control';
     }
     if (['OpenGL', 'OpenGLLease', 'OpenGLInterop'].includes(id)) {

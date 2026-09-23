@@ -1,0 +1,77 @@
+{
+  "Version": "0.6.2-alpha.1",
+  "SourceFingerprint": "87449554cb1c393cfd60fa9b2e84b434c7f478842cbfe90508c52d4bfac00fc6",
+  "Completed": true,
+  "Tests": [
+    {
+      "Mode": "single",
+      "Passed": true,
+      "AutonomousRedraw": true,
+      "BindingDrivenLayout": true,
+      "GroupedTrigger": true,
+      "Retargeted": true,
+      "CompletedRunNotReplayed": true,
+      "ClearedDefinitions": true,
+      "IntermediatePositions": [
+        24,
+        42
+      ],
+      "ComparedChannels": 4,
+      "MaximumChannelError": 1,
+      "WorkerCount": 0,
+      "Errors": [],
+      "MissingAssets": [],
+      "Milliseconds": 2564.81
+    },
+    {
+      "Mode": "render-worker",
+      "Passed": true,
+      "AutonomousRedraw": true,
+      "BindingDrivenLayout": true,
+      "GroupedTrigger": true,
+      "Retargeted": true,
+      "CompletedRunNotReplayed": true,
+      "ClearedDefinitions": true,
+      "IntermediatePositions": [
+        24,
+        39
+      ],
+      "ComparedChannels": 4,
+      "MaximumChannelError": 1,
+      "WorkerCount": 1,
+      "Errors": [],
+      "MissingAssets": [],
+      "Milliseconds": 3023.02
+    },
+    {
+      "Mode": "full-isolation",
+      "Passed": true,
+      "AutonomousRedraw": true,
+      "BindingDrivenLayout": true,
+      "GroupedTrigger": true,
+      "Retargeted": true,
+      "CompletedRunNotReplayed": true,
+      "ClearedDefinitions": true,
+      "IntermediatePositions": [
+        25
+      ],
+      "ComparedChannels": 4,
+      "MaximumChannelError": 1,
+      "WorkerCount": 2,
+      "Errors": [],
+      "MissingAssets": [],
+      "Milliseconds": 2846.99
+    }
+  ],
+  "Errors": [],
+  "MissingAssets": [],
+  "Interception": false,
+  "WorkerBootstrapOverrides": false,
+  "SnapshotForcesRender": false,
+  "PhysicalGpuQualified": false,
+  "PixelChannelTolerance": 2,
+  "Browser": "152.0.7977.0",
+  "Passed": 3,
+  "Failed": 0,
+  "FinalSourceFingerprint": "87449554cb1c393cfd60fa9b2e84b434c7f478842cbfe90508c52d4bfac00fc6"
+}
