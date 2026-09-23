@@ -27,8 +27,9 @@ jobs:
       - run: node --import ./scripts/register-loader.mjs scripts/compile-effects-fixture.mjs
       - run: node --import ./scripts/register-loader.mjs scripts/compile-resource-fixture.mjs
       - run: npm run verify:vendor
-      - run: npm run test:record
+      # Catalog unit tests consume emitted builders; rebuild before exercising them.
       - run: npm run build
+      - run: npm run test:record
       - run: npm run verify:workers
       - run: npm run pack:all
       - run: node scripts/test-packages.mjs

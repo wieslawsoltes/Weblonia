@@ -9,8 +9,8 @@ node --import ./scripts/register-loader.mjs scripts/compile-effects-fixture.mjs
 node --import ./scripts/register-loader.mjs scripts/compile-namespace-fixture.mjs
 node --import ./scripts/register-loader.mjs scripts/compile-resource-fixture.mjs
 npm run verify:vendor
-npm run test:record
 npm run build
+npm run test:record
 npm run verify:workers
 npm run pack:all
 npm run test:packages
