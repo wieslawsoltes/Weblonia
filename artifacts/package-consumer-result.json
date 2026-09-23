@@ -1,11 +1,12 @@
 {
   "Passed": true,
+  "ImplicitAnimationApis": true,
   "Packages": 18,
-  "FacadeExports": 521,
+  "FacadeExports": 522,
   "PublicRegistryInstalled": false,
   "StartupSubpaths": true,
   "CorePortApis": true,
   "Version": "0.6.2-alpha.1",
-  "SourceFingerprint": "99eadad54483792c5fdf81d848fe59e4d5b862ddbd78c8270f035cc394303717",
-  "FinalSourceFingerprint": "99eadad54483792c5fdf81d848fe59e4d5b862ddbd78c8270f035cc394303717"
+  "SourceFingerprint": "87449554cb1c393cfd60fa9b2e84b434c7f478842cbfe90508c52d4bfac00fc6",
+  "FinalSourceFingerprint": "87449554cb1c393cfd60fa9b2e84b434c7f478842cbfe90508c52d4bfac00fc6"
 }

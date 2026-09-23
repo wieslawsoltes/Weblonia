@@ -73,6 +73,8 @@ export class SplineEasing extends Easing {
         Object.assign(this, { X1: x1, Y1: y1, X2: x2, Y2: y2 });
     }
     Ease(x) {
+        // Cubic Bezier endpoints are exact, not the final bisection approximation.
+        if(x<=0)return 0;if(x>=1)return 1;
         const bezier = (t, a, b) => 3 * (1 - t) ** 2 * t * a + 3 * (1 - t) * t ** 2 * b + t ** 3;
         let lo = 0, hi = 1;
         for (let i = 0; i < 24; i++) {

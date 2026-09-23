@@ -1,0 +1,22 @@
+{
+  "Repository": "AvaloniaUI/Avalonia",
+  "Commit": "dff6a87665aa456c37b8cf89647e007f4c3066d7",
+  "FullParityClaimed": false,
+  "Files": [
+    {
+      "Path": "src/Avalonia.Base/Rendering/Composition/CompositionObject.cs",
+      "GitBlob": "708cb49128d2c72fb33f594bff9ea0684b733c78",
+      "Url": "https://github.com/AvaloniaUI/Avalonia/blob/dff6a87665aa456c37b8cf89647e007f4c3066d7/src/Avalonia.Base/Rendering/Composition/CompositionObject.cs"
+    },
+    {
+      "Path": "src/Avalonia.Base/Rendering/Composition/Animations/ImplicitAnimationCollection.cs",
+      "GitBlob": "868970191584d4377419d6e56a0cd4a292d37d3e",
+      "Url": "https://github.com/AvaloniaUI/Avalonia/blob/dff6a87665aa456c37b8cf89647e007f4c3066d7/src/Avalonia.Base/Rendering/Composition/Animations/ImplicitAnimationCollection.cs"
+    },
+    {
+      "Path": "src/Avalonia.Base/Rendering/Composition/Animations/KeyFrameAnimationInstance.cs",
+      "GitBlob": "aacb0579e719f495cee67bec806ac45ee5032e1a",
+      "Url": "https://github.com/AvaloniaUI/Avalonia/blob/dff6a87665aa456c37b8cf89647e007f4c3066d7/src/Avalonia.Base/Rendering/Composition/Animations/KeyFrameAnimationInstance.cs"
+    }
+  ]
+}
