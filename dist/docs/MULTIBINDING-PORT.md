@@ -81,8 +81,9 @@ not CultureInfo; unspecified culture follows the JS host. F/N/P use Intl number
 formatting; E/G/R use JavaScript digit/exponent conventions. CLR currency/custom
 numeric/date formats and negative hexadecimal values without a declared CLR bit
 width are rejected. BigInt decimal/positive hexadecimal formatting remains exact.
-A user object can implement ToString(specifier, culture). The older single Binding
-StringFormat path is not replaced in this increment.
+A user object can implement ToString(specifier, culture). The single Binding
+StringFormat path is now integrated with this bounded formatter; see
+`SINGLE-BINDING-PIPELINE.md` for the additional publication/lifetime contracts.
 
 Intentional differences from the pinned source: raw result arrays are immutable
 snapshots instead of a read-only view backed by mutable storage; plain converter
