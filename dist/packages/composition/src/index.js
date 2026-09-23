@@ -1,6 +1,6 @@
 import { CopyCompositionValue, DefaultCompositionValue, ValidateCompositionKey, CompositionValueTypes } from './values.js';
 import { Disposable, Event, CompositeDisposable, Point, Vector, Size, Rect, Matrix } from '@wieslawsoltes/avalonia-base';
-import { Brush, SolidColorBrush, Color, Colors, Bitmap } from '@wieslawsoltes/avalonia-media';
+import { Brush, SolidColorBrush, Color, Colors, Bitmap, IEffect, EffectExtensions } from '@wieslawsoltes/avalonia-media';
 import { Clock, ParseDuration, Interpolate, LinearEasing } from '@wieslawsoltes/avalonia-animation';
 import { CompositionExpression } from './expression.js';
 export { CompositionExpression } from './expression.js';
@@ -15,6 +15,7 @@ function propertyType(object,name) {
 }
 function equalValue(a,b,type) {
     if(Object.is(a,b))return true;
+    if(a instanceof IEffect&&b instanceof IEffect)return EffectExtensions.EffectEquals(a,b);
     return !!type && a!=null && b!=null && typeof a==='object' && typeof b==='object'
         && Object.keys(a).length===Object.keys(b).length && Object.keys(a).every(k=>Object.is(a[k],b[k]));
 }
@@ -24,6 +25,7 @@ function presentationValue(target,state,time,current) {
 }
 const clone=value=>{
     if(value==null||typeof value!=='object'||value instanceof CompositionObject||value instanceof Bitmap||value instanceof Brush)return value;
+    if(value instanceof IEffect)return EffectExtensions.ToImmutable(value);
     if(value instanceof Color)return new Color(value.A,value.R,value.G,value.B);
     if(value instanceof Matrix)return new Matrix(value.M11,value.M12,value.M21,value.M22,value.M31,value.M32);
     if(value instanceof Size)return new Size(value.Width,value.Height);
@@ -68,6 +70,7 @@ export class CompositionObject extends Disposable {
     _Set(name,value,type=propertyType(this,name)) {
         if(this.IsDisposed)throw new Error('Composition object is disposed.');
         if(value instanceof CompositionObject&&(value.IsDisposed||value.Compositor!==this.Compositor))throw new Error('Composition resources must belong to the same live Compositor.');
+        if(name==='Effect'&&value!=null&&!(value instanceof IEffect))throw new TypeError('Composition effects must implement IEffect.');
         const desired=type?CopyCompositionValue(type,value):clone(value);
         const before=Object.hasOwn(this._values,name)?this._values[name]:this[name];
         if(equalValue(before,desired,type))return;

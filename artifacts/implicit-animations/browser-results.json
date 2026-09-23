@@ -1,6 +1,6 @@
 {
   "Version": "0.6.2-alpha.1",
-  "SourceFingerprint": "7b4bc184532ed25dc1fc929b9a40a03576b0e54f0142fd3aa6fed1cc5cf6e2ab",
+  "SourceFingerprint": "da0bc93ba76cc77ee6406107721abf30d4390c255a616f85d86a2cdf8f636c63",
   "Completed": true,
   "Tests": [
     {
@@ -13,15 +13,15 @@
       "CompletedRunNotReplayed": true,
       "ClearedDefinitions": true,
       "IntermediatePositions": [
-        24,
-        38
+        20,
+        35
       ],
       "ComparedChannels": 4,
       "MaximumChannelError": 1,
       "WorkerCount": 0,
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 2196.37
+      "Milliseconds": 2397.25
     },
     {
       "Mode": "render-worker",
@@ -33,15 +33,15 @@
       "CompletedRunNotReplayed": true,
       "ClearedDefinitions": true,
       "IntermediatePositions": [
-        24,
-        39
+        20,
+        35
       ],
       "ComparedChannels": 4,
       "MaximumChannelError": 1,
       "WorkerCount": 1,
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 2490.46
+      "Milliseconds": 2755.47
     },
     {
       "Mode": "full-isolation",
@@ -53,15 +53,14 @@
       "CompletedRunNotReplayed": true,
       "ClearedDefinitions": true,
       "IntermediatePositions": [
-        22,
-        37
+        25
       ],
       "ComparedChannels": 4,
       "MaximumChannelError": 1,
       "WorkerCount": 2,
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 2451.97
+      "Milliseconds": 2613.04
     }
   ],
   "Errors": [],
@@ -74,5 +73,5 @@
   "Browser": "153.0.8010.0",
   "Passed": 3,
   "Failed": 0,
-  "FinalSourceFingerprint": "7b4bc184532ed25dc1fc929b9a40a03576b0e54f0142fd3aa6fed1cc5cf6e2ab"
+  "FinalSourceFingerprint": "da0bc93ba76cc77ee6406107721abf30d4390c255a616f85d86a2cdf8f636c63"
 }

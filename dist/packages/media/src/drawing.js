@@ -1,3 +1,4 @@
+import { Effect, IEffect } from './effects.js';
 import { GlyphRun, ImmutableGlyphRunReference } from './glyph-run.js';
 import { Disposable, Point, Size, Rect, Matrix, AvaloniaList, Event, AvaloniaObject, AvaloniaProperty, DefineProperties, CompositeDisposable } from '@wieslawsoltes/avalonia-base';
 import { Brush, Typeface } from './brushes.js';
@@ -254,7 +255,7 @@ export class DrawingGroup extends Drawing {
 DrawingGroup.ChildrenProperty = AvaloniaProperty.RegisterDirect(DrawingGroup, 'Children', o => o.Children, (o,v) => { o.Children = v; });
 DefineProperties(DrawingGroup, {
     Transform: [null, { Convert: v => v == null ? null : Transform.Parse(v) }], Opacity: [1, { Convert: Number, Validate: v => Number.isFinite(v) && v >= 0 && v <= 1 }],
-    ClipGeometry: [null, { Convert: v => v == null ? null : Geometry.Parse(v) }], OpacityMask: [null, { Convert: v => v == null ? null : Brush.Parse(v) }], Effect: [null],
+    ClipGeometry: [null, { Convert: v => v == null ? null : Geometry.Parse(v) }], OpacityMask: [null, { Convert: v => v == null ? null : Brush.Parse(v) }], Effect: [null, { Convert: v => v == null || v instanceof IEffect ? v : Effect.Parse(v), Validate: v => v == null || v instanceof IEffect }],
 });
 export class DrawingImage extends DrawingResource {
     constructor(drawing = null) { super(); this.Drawing = drawing; }

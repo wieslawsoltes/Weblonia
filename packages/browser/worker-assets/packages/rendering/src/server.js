@@ -53,7 +53,11 @@ const idsChanged = (changes, old) => changes.Remove.length > 0 || changes.Upsert
 const updatedIds = changes => new Set([...changes.Upsert.map(x => x.Id), ...(changes.Patch ?? []).map(x => x.Id)]);
 const metadataMap = (old, changes, full) => { const result = new Map(full ? [] : old); for (const id of changes.Remove) result.delete(id); return result; };
 const makeMatrix = values => new Matrix(...values);
-const popAll = states => { for (let i = states.length - 1; i >= 0; --i) states[i].Dispose(); };
+const popAll = states => {
+    const errors = [];
+    while (states.length) try { states.pop().Dispose(); } catch (error) { errors.push(error); }
+    if (errors.length) throw new AggregateError(errors, 'Server drawing scope cleanup failed.');
+};
 const sameState = (a,b) => !!a && a.Name===b.Name && (b.Id!==undefined ? a.Id===b.Id : a.Id===undefined&&a.StartedAt===b.StartedAt);
 const componentValue=(state,value)=>state.Component?value?.[state.Component]:value;
 const writeAnimated=(map,values,state,value)=>map.set(state.Property,state.Component?{...(map.get(state.Property)??values[state.Property]),[state.Component]:value}:value);
@@ -71,11 +75,17 @@ class ServerCompositionObject {
             .Multiply(this.Read('TransformMatrix')).Multiply(Matrix.CreateTranslation(c.X + o.X, c.Y + o.Y));
     }
     Push(context, withTransform = true) {
-        const states = withTransform ? [context.PushTransform(this.Transform())] : [];
-        if (this.Read('Opacity') < 1) states.push(context.PushOpacity(this.Read('Opacity')));
-        const size = this.Read('Size'); if (this.Read('ClipToBounds')) states.push(context.PushClip(new Rect(0, 0, size.X, size.Y)));
-        if (this.Read('Clip')) states.push(context.PushGeometryClip(this.Read('Clip')));
-        if (this.Read('Effect')) states.push(context.PushEffect(this.Read('Effect')));
+        const states = [];
+        try {
+            if (withTransform) states.push(context.PushTransform(this.Transform()));
+            if (this.Read('Opacity') < 1) states.push(context.PushOpacity(this.Read('Opacity')));
+            const size = this.Read('Size'); if (this.Read('ClipToBounds')) states.push(context.PushClip(new Rect(0, 0, size.X, size.Y)));
+            if (this.Read('Clip')) states.push(context.PushGeometryClip(this.Read('Clip')));
+            if (this.Read('Effect')) states.push(context.PushEffect(this.Read('Effect')));
+        } catch (error) {
+            try { popAll(states); } catch (cleanup) { throw new AggregateError([error, cleanup], 'Server composition push failed.'); }
+            throw error;
+        }
         return Disposable.Create(() => popAll(states));
     }
     Render(context) {
@@ -165,15 +175,15 @@ class ServerVisual {
         if (!n.IsVisible || n.Opacity <= 0 || this.IsDisposed || comp && (!comp.Read('IsVisible') || comp.Read('Opacity') <= 0)) return;
         ++scene.Statistics.VisualsVisited;
         const localTransform = this.GetLocalTransform(), states = [];
-        // Exact identity only: no rounding, quantization, or pixel-grid changes.
-        if (!localTransform.IsIdentity) states.push(context.PushTransform(localTransform));
-        else ++scene.Statistics.IdentityTransformsSkipped;
-        if (comp) states.push(comp.Push(context, false));
-        if (n.Opacity < 1) states.push(context.PushOpacity(n.Opacity));
-        if (n.ClipToBounds) states.push(context.PushClip(this._localBounds));
-        if (this.Clip) states.push(context.PushGeometryClip(this.Clip));
-        if (this.Effect) states.push(context.PushEffect(this.Effect));
         try {
+            // Exact identity only: no rounding, quantization, or pixel-grid changes.
+            if (!localTransform.IsIdentity) states.push(context.PushTransform(localTransform));
+            else ++scene.Statistics.IdentityTransformsSkipped;
+            if (comp) states.push(comp.Push(context, false));
+            if (n.Opacity < 1) states.push(context.PushOpacity(n.Opacity));
+            if (n.ClipToBounds) states.push(context.PushClip(this._localBounds));
+            if (this.Clip) states.push(context.PushGeometryClip(this.Clip));
+            if (this.Effect) states.push(context.PushEffect(this.Effect));
             const clip = context.GetDeviceClipBounds?.() ?? context.Canvas?.DeviceClipBounds;
             if (clip && (clip.Width <= 0 || clip.Height <= 0)) { ++scene.Statistics.ClippedBranches; return; }
             if (!n.CacheScale || scene.HasAnimations || scene.ScrollController.Adjustments.size || !context.DrawVisualCache?.(this)) this._RenderContents(context);

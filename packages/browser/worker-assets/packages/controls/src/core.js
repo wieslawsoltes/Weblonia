@@ -1,5 +1,5 @@
-import { AvaloniaObject, AvaloniaProperty, DefineProperties, BindingPriority, Event, Disposable, CompositeDisposable, Classes, AvaloniaList, Size, Rect, Point, Matrix, Thickness, CornerRadius, RelativePoint, MathUtilities } from "../../base/src/index.js";
-import { Brush, Brushes, Pen, Typeface, TextLayout, TextLayoutCache, TransformOperations } from "../../media/src/index.js";
+import { AvaloniaObject, Animatable, AvaloniaProperty, DefineProperties, BindingPriority, Event, Disposable, CompositeDisposable, Classes, AvaloniaList, Size, Rect, Point, Matrix, Thickness, CornerRadius, RelativePoint, MathUtilities } from "../../base/src/index.js";
+import { Brush, Brushes, Pen, Typeface, TextLayout, TextLayoutCache, Effect, IEffect, TransformOperations } from "../../media/src/index.js";
 import { ResourceDictionary, Styles, Styler, ThemeVariant, ResourceEnvironment, FindResource, TryFindResource } from "../../styling/src/index.js";
 let visualId = 0;
 let automationPeerFactory = null;
@@ -54,7 +54,7 @@ export class NameScope {
         return element._nameScope ?? null;
     }
 }
-export class StyledElement extends AvaloniaObject {
+export class StyledElement extends Animatable {
     constructor() {
         super();
         this.VisualId = ++visualId;
@@ -185,6 +185,7 @@ DefineProperties(StyledElement, {
 export class Visual extends StyledElement {
     constructor() {
         super();
+        this.DisableTransitions();
         this.VisualParent = null;
         this.VisualChildren = [];
         this.LogicalChildren = [];
@@ -274,11 +275,13 @@ export class Visual extends StyledElement {
     _Attach(root) {
         this._visualRoot = root;
         this.EndInit();
+        this.EnableTransitions();
         this.AttachedToVisualTree.Raise(this, { Root: root });
         for (const c of this.VisualChildren)
             c._Attach(root);
     }
     _Detach() {
+        this.DisableTransitions();
         const root = this._visualRoot;
         for (const c of this.VisualChildren)
             c._Detach();
@@ -364,21 +367,23 @@ export class Visual extends StyledElement {
         if (!this.IsVisible || this.Opacity <= 0 || this.IsDisposed || this._compositionSelf && (!this._compositionSelf._Read('IsVisible') || this._compositionSelf._Read('Opacity') <= 0))
             return;
         this.ApplyStyling();
-        const states = [context.PushTransform(this.GetLocalTransform())];
-        if (this._compositionSelf) states.push(this._compositionSelf._PushState(context, false));
-        if (this.Opacity < 1)
-            states.push(context.PushOpacity(this.Opacity));
-        if (this.ClipToBounds)
-            states.push(context.PushClip(new Rect(this.Bounds.Size)));
-        if (this.Clip)
-            states.push(context.PushGeometryClip(this.Clip));
-        if (this.Effect) states.push(context.PushEffect(this.Effect));
+        const states = []; let failure;
         try {
+            states.push(context.PushTransform(this.GetLocalTransform()));
+            if (this._compositionSelf) states.push(this._compositionSelf._PushState(context, false));
+            if (this.Opacity < 1)
+                states.push(context.PushOpacity(this.Opacity));
+            if (this.ClipToBounds)
+                states.push(context.PushClip(new Rect(this.Bounds.Size)));
+            if (this.Clip)
+                states.push(context.PushGeometryClip(this.Clip));
+            if (this.Effect) states.push(context.PushEffect(this.Effect));
             if (!this.CacheMode || !context.DrawVisualCache?.(this)) this._RenderContents(context);
-        }
+        } catch (error) { failure = error; throw error; }
         finally {
-            for (const state of states.reverse())
-                state.Dispose();
+            const errors = [];
+            while (states.length) try { states.pop().Dispose(); } catch (error) { errors.push(error); }
+            if (errors.length) throw new AggregateError(failure ? [failure, ...errors] : errors, 'Visual drawing scope cleanup failed.');
         }
     }
     _RenderContents(context) {
@@ -459,7 +464,7 @@ export class Visual extends StyledElement {
     }
 }
 DefineProperties(Visual, {
-    Effect: [null], CacheMode: [null],
+    Effect: [null, { Convert: v => v == null || v instanceof IEffect ? v : Effect.Parse(v), Validate: v => v == null || v instanceof IEffect }], CacheMode: [null],
     IsVisible: [true, { Convert: BooleanValue, AffectsMeasure: true }], IsHitTestVisible: [true, { Convert: BooleanValue }],
     Opacity: [1, { Convert: Number, Coerce: (_, v) => MathUtilities.Clamp(v, 0, 1) }], ZIndex: [0, { Convert: Number }],
     ClipToBounds: [false, { Convert: BooleanValue }], Clip: [null], RenderTransform: [null, { Convert: v => typeof v === 'string' ? TransformOperations.Parse(v) : v }],

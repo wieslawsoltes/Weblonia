@@ -419,9 +419,14 @@ export class AvaloniaObject {
         property.Changed.next(args);
         if (inherits)
             for (const child of [...this._inheritedChildren]) {
-                if (!child._effectiveEntry(property) && property.GetMetadata(child).Inherits) {
+                const effective = child._effectiveEntry(property);
+                if ((!effective || effective.Priority === BindingPriority.Animation && !child._effectiveEntry(property, true)) && property.GetMetadata(child).Inherits) {
+                    // An inherited base can change underneath a child's local
+                    // animation. Let Animatable see it without inventing an
+                    // effective-value jump or disturbing a true local shadow.
+                    const prior = effective?.Priority === BindingPriority.Animation ? child.GetValue(property) : oldValue;
                     child._effectiveValues.delete(property);
-                    child._RaiseChange(property, oldValue, child.GetValue(property), BindingPriority.Inherited);
+                    child._RaiseChange(property, prior, child.GetValue(property), BindingPriority.Inherited);
                 }
             }
     }

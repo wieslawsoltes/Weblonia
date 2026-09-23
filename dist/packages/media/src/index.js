@@ -7,3 +7,4 @@ export * from './unicode.js';
 export * from './text-formatting.js';
 export * from './text-cache.js';
 export * from './glyph-run.js';
+export * from './effects.js';
