@@ -1,0 +1,104 @@
+"""Nested MultiBinding and compiled child paths in ordinary HTTP runtime and direct AOT.
+Observe actual presented pixels after binding changes and renderer restart; no
+resource interception, input event, or render/snapshot RPC repairs invalidation.
+"""
+from pathlib import Path
+from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+from threading import Thread
+from urllib.parse import urlsplit, parse_qs
+import io, json, time, subprocess
+from PIL import Image
+from playwright.sync_api import sync_playwright
+from threading_support import browser_executable
+from verification_support import source_fingerprint
+
+ROOT = Path(__file__).resolve().parent.parent
+OUT = ROOT/'artifacts/multibinding'; OUT.mkdir(parents=True, exist_ok=True)
+subprocess.run(['node', '--import', './scripts/register-loader.mjs', 'scripts/compile-multibinding-fixture.mjs'], cwd=ROOT, check=True)
+report = {'Version': json.loads((ROOT/'package.json').read_text())['version'], 'SourceFingerprint': source_fingerprint(ROOT),
+    'Completed': False, 'Tests': [], 'Errors': [], 'MissingAssets': [], 'Interception': False,
+    'WorkerBootstrapOverrides': False, 'SnapshotForcesRender': False, 'PhysicalGpuQualified': False,
+    'NestedCompiledBindings': True, 'PixelChannelTolerance': 2}
+
+class Handler(SimpleHTTPRequestHandler):
+    def __init__(self, *args, **kw): super().__init__(*args, directory=str(ROOT), **kw)
+    def log_message(self, *args): pass
+    def do_GET(self):
+        parsed = urlsplit(self.path)
+        if parsed.path == '/tests/multibinding-entry.html':
+            mode = parse_qs(parsed.query)['mode'][0]
+            if mode not in ['single', 'render-worker', 'full-isolation']: self.send_error(400); return
+            boot = {'ThreadingMode': mode, 'Backend': 'canvas',
+                'ApplicationModule': f'http://127.0.0.1:{self.server.server_port}/tests/multibinding-worker.js'}
+            body = (ROOT/'samples/ControlCatalog/index.html').read_text().replace('<head>',
+                '<head><base href="/samples/ControlCatalog/"><script>globalThis.AVALONIA_BOOT_OPTIONS='+json.dumps(boot)+';</script>').encode()
+            self.send_response(200); self.send_header('Content-Type', 'text/html; charset=utf-8')
+            self.send_header('Content-Length', str(len(body))); self.end_headers(); self.wfile.write(body)
+        else: super().do_GET()
+
+WHITE, RED, GREEN = (255,255,255,255), (255,0,0,255), (0,255,0,255)
+before = [((24,24),RED),((88,24),WHITE),((64,24),WHITE)]
+after = [((24,24),WHITE),((88,24),GREEN),((64,24),WHITE)]
+def presented(page, expected):
+    deadline = time.monotonic()+10
+    while True:
+        image = Image.open(io.BytesIO(page.locator('#app canvas').first.screenshot(timeout=10000))).convert('RGBA')
+        maximum = max(abs(a-b) for point, rgba in expected for a,b in zip(image.getpixel(point), rgba))
+        if maximum <= 2: return image, maximum
+        if time.monotonic() >= deadline:
+            raise AssertionError({'PresentedMultiBindingPixels': [(p, image.getpixel(p), c) for p,c in expected]})
+        page.wait_for_timeout(25)
+def evaluate(page, expression, arg=None):
+    return page.evaluate('''async arg=>{let timer;try{return await Promise.race([
+        Promise.resolve().then(()=>('''+expression+''')(arg)),new Promise((_,reject)=>{timer=setTimeout(()=>reject(new Error('MultiBinding fixture operation timeout')),45000);})
+    ]);}finally{clearTimeout(timer);}}''', arg)
+def save(): (OUT/'browser-results.json').write_text(json.dumps(report, indent=2)+'\n')
+server = ThreadingHTTPServer(('127.0.0.1',0), Handler); thread = Thread(target=server.serve_forever, daemon=True); thread.start()
+try:
+    with sync_playwright() as p:
+        browser = p.chromium.launch(executable_path=browser_executable(), headless=True, args=['--no-sandbox','--disable-dev-shm-usage'])
+        report['Browser'] = browser.version
+        for mode in ['single', 'render-worker', 'full-isolation']:
+            for aot in [False, True]:
+                context = browser.new_context(viewport={'width':320,'height':200}, device_scale_factor=1)
+                page = context.new_page(); errors=[]; missing=[]; started=time.monotonic(); entry={'Mode':mode,'Aot':aot,'Passed':False}
+                page.on('pageerror', lambda e: errors.append(str(e)))
+                page.on('response', lambda response: missing.append(response.url) if response.status>=400 else None)
+                try:
+                    page.goto(f'http://127.0.0.1:{server.server_port}/tests/multibinding-entry.html?mode={mode}')
+                    page.wait_for_function('globalThis.catalogReady||globalThis.catalogError', timeout=60000)
+                    assert not page.evaluate('globalThis.catalogError')
+                    state = evaluate(page, """async([mode,aot])=>{if(mode==='full-isolation')return await catalogHost.InvokeAsync('MountMultiBinding',aot);
+                        const A=await import('@wieslawsoltes/avalonia'),{CreateMultiBindingScene}=await import('/tests/multibinding-scene.js');
+                        globalThis.multiScene=await CreateMultiBindingScene(A,catalog.Root,aot);return multiScene.State();}""", [mode,aot])
+                    assert state['Aot']==aot and state['HasDocument']==(mode!='full-isolation') and not state['RenderError'], state
+                    assert state['Left']==16 and state['Subscriptions']>0, state
+                    assert state['Text']=='ready:42.5 / LABEL', state
+                    initial, maximum = presented(page, before)
+                    change = evaluate(page, "async mode=>mode==='full-isolation'?await catalogHost.InvokeAsync('ChangeMultiBinding'):await multiScene.Change()", mode)
+                    assert change['Left']==80 and change['Text']=='updated:99.0 / LABEL', change
+                    updated, error = presented(page, after); maximum=max(maximum,error)
+                    current = evaluate(page, "async mode=>mode==='full-isolation'?await catalogHost.InvokeAsync('MultiBindingState'):multiScene.State()", mode)
+                    assert current['Frames']>change['FramesBefore'] and not current['RenderError'],current
+                    if mode!='single':
+                        evaluate(page, "async mode=>{if(mode==='full-isolation')await catalogHost.RestartRendererAsync();else await catalog.Root.Renderer.RestartAsync();}",mode)
+                        _,error=presented(page,after);maximum=max(maximum,error)
+                    assert not errors and not missing, {'Errors':errors,'MissingAssets':missing}
+                    label=mode+('-aot' if aot else '-runtime')
+                    initial.save(OUT/(label+'-before.png'));updated.save(OUT/(label+'-after.png'))
+                    released=evaluate(page,"async mode=>mode==='full-isolation'?await catalogHost.InvokeAsync('ReleaseMultiBinding'):multiScene.Release()",mode)
+                    assert released['RemainingSubscriptions']==0,released
+                    if mode=='full-isolation': evaluate(page,'async()=>await catalogHost.DisposeAsync()')
+                    else: evaluate(page,'()=>{multiScene.Dispose();catalog.Root.Dispose();}')
+                    entry.update(Passed=True, MaximumChannelError=maximum, ComparedChannels=4, AutonomousRedraw=True,
+                        NestedCompiledBindings=True, ConverterFormatting=True, DisposedSubscriptions=True,
+                        RestartPassed=mode!='single', State=current)
+                except Exception as error: entry['Error']=str(error)
+                finally:
+                    entry.update(Errors=errors,MissingAssets=missing,Milliseconds=round((time.monotonic()-started)*1000,2))
+                    report['Errors'].extend(errors);report['MissingAssets'].extend(missing);report['Tests'].append(entry);save()
+                    context.close();print(('PASS' if entry['Passed'] else 'FAIL'),mode,aot,entry.get('Error',''),flush=True)
+        browser.close()
+finally: server.shutdown();server.server_close();thread.join(timeout=5)
+report.update(Completed=True,Passed=sum(t['Passed'] for t in report['Tests']),Failed=sum(not t['Passed'] for t in report['Tests']),FinalSourceFingerprint=source_fingerprint(ROOT))
+save();raise SystemExit(0 if report['Failed']==0 and not report['Errors'] and not report['MissingAssets'] else 1)

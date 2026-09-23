@@ -1,1036 +1,1036 @@
 {
   "Version": "0.6.2-alpha.1",
-  "SourceFingerprint": "0e6ad3cce5334a9edc3b6cd0822e0285bfb63459fcc00075f9ee676730dc638a",
+  "SourceFingerprint": "9608886d60f15a5b9fbe15cdcd4ccef1d08ab046caad57ea9c14bb72bb6487bc",
   "Completed": true,
   "Tests": [
     {
       "Mode": "render-worker",
       "Route": "Buttons",
       "Passed": true,
-      "Milliseconds": 191.7
+      "Milliseconds": 136.2
     },
     {
       "Mode": "render-worker",
       "Route": "ButtonSpinner",
       "Passed": true,
-      "Milliseconds": 113.3
+      "Milliseconds": 93.0
     },
     {
       "Mode": "render-worker",
       "Route": "CheckBox",
       "Passed": true,
-      "Milliseconds": 114.4
+      "Milliseconds": 84.6
     },
     {
       "Mode": "render-worker",
       "Route": "ColorPicker",
       "Passed": true,
-      "Milliseconds": 193.9
+      "Milliseconds": 139.7
     },
     {
       "Mode": "render-worker",
       "Route": "ComboBox",
       "Passed": true,
-      "Milliseconds": 88.8
+      "Milliseconds": 74.8
     },
     {
       "Mode": "render-worker",
       "Route": "NumericUpDown",
       "Passed": true,
-      "Milliseconds": 132.3
+      "Milliseconds": 82.2
     },
     {
       "Mode": "render-worker",
       "Route": "RadioButton",
       "Passed": true,
-      "Milliseconds": 99.3
+      "Milliseconds": 66.5
     },
     {
       "Mode": "render-worker",
       "Route": "Slider",
       "Passed": true,
-      "Milliseconds": 99.8
+      "Milliseconds": 84.1
     },
     {
       "Mode": "render-worker",
       "Route": "ToggleSwitch",
       "Passed": true,
-      "Milliseconds": 99.4
+      "Milliseconds": 64.4
     },
     {
       "Mode": "render-worker",
       "Route": "AutoCompleteBox",
       "Passed": true,
-      "Milliseconds": 104.3
+      "Milliseconds": 83.7
     },
     {
       "Mode": "render-worker",
       "Route": "Label",
       "Passed": true,
-      "Milliseconds": 66.6
+      "Milliseconds": 55.1
     },
     {
       "Mode": "render-worker",
       "Route": "TextBox",
       "Passed": true,
-      "Milliseconds": 251.2
+      "Milliseconds": 180.9
     },
     {
       "Mode": "render-worker",
       "Route": "TextBlock",
       "Passed": true,
-      "Milliseconds": 118.6
+      "Milliseconds": 89.5
     },
     {
       "Mode": "render-worker",
       "Route": "Carousel",
       "Passed": true,
-      "Milliseconds": 90.4
+      "Milliseconds": 56.6
     },
     {
       "Mode": "render-worker",
       "Route": "ListBox",
       "Passed": true,
-      "Milliseconds": 122.8
+      "Milliseconds": 85.6
     },
     {
       "Mode": "render-worker",
       "Route": "PipsPager",
       "Passed": true,
-      "Milliseconds": 96.6
+      "Milliseconds": 66.1
     },
     {
       "Mode": "render-worker",
       "Route": "RefreshContainer",
       "Passed": true,
-      "Milliseconds": 96.8
+      "Milliseconds": 63.5
     },
     {
       "Mode": "render-worker",
       "Route": "TableView",
-      "Passed": true,
-      "Milliseconds": 157.6
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "TreeView",
-      "Passed": true,
-      "Milliseconds": 93.5
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "Calendar",
-      "Passed": true,
-      "Milliseconds": 135.4
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "CalendarDatePicker",
-      "Passed": true,
-      "Milliseconds": 83.3
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "DateTimePicker",
-      "Passed": true,
-      "Milliseconds": 78.5
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "CommandBar",
-      "Passed": true,
-      "Milliseconds": 100.0
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "ContextFlyout",
-      "Passed": true,
-      "Milliseconds": 99.1
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "ContextMenu",
-      "Passed": true,
-      "Milliseconds": 71.6
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "Flyouts",
-      "Passed": true,
-      "Milliseconds": 56.8
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "Menu",
-      "Passed": true,
-      "Milliseconds": 86.8
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "CarouselPage",
-      "Passed": true,
-      "Milliseconds": 100.4
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "ContentPage",
-      "Passed": true,
-      "Milliseconds": 83.4
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "DrawerPage",
-      "Passed": true,
-      "Milliseconds": 101.8
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "NavigationPage",
-      "Passed": true,
-      "Milliseconds": 73.1
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "SplitView",
-      "Passed": true,
-      "Milliseconds": 64.3
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "TabbedPage",
-      "Passed": true,
-      "Milliseconds": 75.7
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "TabControl",
-      "Passed": true,
-      "Milliseconds": 73.4
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "TabStrip",
-      "Passed": true,
-      "Milliseconds": 80.4
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "Border",
-      "Passed": true,
-      "Milliseconds": 94.3
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "Canvas",
-      "Passed": true,
-      "Milliseconds": 100.1
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "ContainerQueries",
-      "Passed": true,
-      "Milliseconds": 105.8
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "Expander",
-      "Passed": true,
-      "Milliseconds": 111.3
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "FlexPanel",
-      "Passed": true,
-      "Milliseconds": 100.7
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "HeaderedContentControl",
-      "Passed": true,
-      "Milliseconds": 98.3
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "LayoutTransformControl",
-      "Passed": true,
-      "Milliseconds": 87.8
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "RelativePanel",
-      "Passed": true,
-      "Milliseconds": 95.1
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "ScrollViewer",
-      "Passed": true,
-      "Milliseconds": 159.5
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "Viewbox",
-      "Passed": true,
-      "Milliseconds": 109.3
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "WrapPanel",
-      "Passed": true,
-      "Milliseconds": 97.5
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "Acrylic",
-      "Passed": true,
-      "Milliseconds": 213.7
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "BitmapCache",
-      "Passed": true,
-      "Milliseconds": 189.8
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "Composition",
-      "Passed": true,
-      "Milliseconds": 462.5
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "CustomDrawing",
-      "Passed": true,
-      "Milliseconds": 252.3
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "Image",
-      "Passed": true,
-      "Milliseconds": 257.5
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "OpenGL",
-      "Passed": true,
-      "Milliseconds": 522.0,
-      "OpenGl": {
-        "Before": {
-          "Available": true,
-          "Ready": true,
-          "Error": null,
-          "Frames": 1,
-          "Width": 824,
-          "Height": 310,
-          "PixelHash": 1700764880,
-          "Samples": [
-            {
-              "X": 729,
-              "Y": 473,
-              "Rgba": [
-                155,
-                169,
-                203,
-                255
-              ]
-            },
-            {
-              "X": 729,
-              "Y": 364,
-              "Rgba": [
-                169,
-                133,
-                248,
-                255
-              ]
-            },
-            {
-              "X": 523,
-              "Y": 535,
-              "Rgba": [
-                73,
-                198,
-                212,
-                255
-              ]
-            }
-          ],
-          "NativeHandleInUi": false,
-          "WorkerCanvas": false
-        },
-        "CapabilitySkipped": false,
-        "BeforeMaximumChannelError": 0,
-        "AfterMaximumChannelError": 0,
-        "After": {
-          "Available": true,
-          "Ready": true,
-          "Error": null,
-          "Frames": 2,
-          "Width": 824,
-          "Height": 310,
-          "PixelHash": 1322482470,
-          "Samples": [
-            {
-              "X": 729,
-              "Y": 473,
-              "Rgba": [
-                155,
-                169,
-                203,
-                255
-              ]
-            },
-            {
-              "X": 729,
-              "Y": 364,
-              "Rgba": [
-                17,
-                19,
-                33,
-                255
-              ]
-            },
-            {
-              "X": 523,
-              "Y": 535,
-              "Rgba": [
-                17,
-                19,
-                33,
-                255
-              ]
-            }
-          ],
-          "NativeHandleInUi": false,
-          "WorkerCanvas": false
-        }
-      }
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "OpenGLLease",
-      "Passed": true,
-      "Milliseconds": 471.5,
-      "OpenGl": {
-        "Before": {
-          "Available": true,
-          "Ready": true,
-          "Error": null,
-          "Frames": 1,
-          "Width": 824,
-          "Height": 310,
-          "PixelHash": 1700764880,
-          "Samples": [
-            {
-              "X": 729,
-              "Y": 493,
-              "Rgba": [
-                155,
-                169,
-                203,
-                255
-              ]
-            },
-            {
-              "X": 729,
-              "Y": 384,
-              "Rgba": [
-                169,
-                133,
-                248,
-                255
-              ]
-            },
-            {
-              "X": 523,
-              "Y": 555,
-              "Rgba": [
-                73,
-                198,
-                212,
-                255
-              ]
-            }
-          ],
-          "NativeHandleInUi": false,
-          "WorkerCanvas": false
-        },
-        "CapabilitySkipped": false,
-        "BeforeMaximumChannelError": 0,
-        "AfterMaximumChannelError": 0,
-        "After": {
-          "Available": true,
-          "Ready": true,
-          "Error": null,
-          "Frames": 2,
-          "Width": 824,
-          "Height": 310,
-          "PixelHash": 1322482470,
-          "Samples": [
-            {
-              "X": 729,
-              "Y": 493,
-              "Rgba": [
-                155,
-                169,
-                203,
-                255
-              ]
-            },
-            {
-              "X": 729,
-              "Y": 384,
-              "Rgba": [
-                17,
-                19,
-                33,
-                255
-              ]
-            },
-            {
-              "X": 523,
-              "Y": 555,
-              "Rgba": [
-                17,
-                19,
-                33,
-                255
-              ]
-            }
-          ],
-          "NativeHandleInUi": false,
-          "WorkerCanvas": false
-        }
-      }
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "OpenGLInterop",
-      "Passed": true,
-      "Milliseconds": 533.1,
-      "OpenGl": {
-        "Before": {
-          "Available": true,
-          "Ready": true,
-          "Error": null,
-          "Frames": 1,
-          "Width": 776,
-          "Height": 262,
-          "PixelHash": 652020212,
-          "Samples": [
-            {
-              "X": 729,
-              "Y": 493,
-              "Rgba": [
-                155,
-                169,
-                203,
-                255
-              ]
-            },
-            {
-              "X": 734,
-              "Y": 401,
-              "Rgba": [
-                169,
-                133,
-                248,
-                255
-              ]
-            },
-            {
-              "X": 533,
-              "Y": 535,
-              "Rgba": [
-                74,
-                198,
-                213,
-                255
-              ]
-            }
-          ],
-          "NativeHandleInUi": false,
-          "WorkerCanvas": false
-        },
-        "CapabilitySkipped": false,
-        "BeforeMaximumChannelError": null,
-        "AfterMaximumChannelError": null,
-        "After": {
-          "Available": true,
-          "Ready": true,
-          "Error": null,
-          "Frames": 2,
-          "Width": 776,
-          "Height": 262,
-          "PixelHash": 3361297254,
-          "Samples": [
-            {
-              "X": 729,
-              "Y": 493,
-              "Rgba": [
-                155,
-                169,
-                203,
-                255
-              ]
-            },
-            {
-              "X": 734,
-              "Y": 401,
-              "Rgba": [
-                17,
-                19,
-                33,
-                255
-              ]
-            },
-            {
-              "X": 533,
-              "Y": 535,
-              "Rgba": [
-                17,
-                19,
-                33,
-                255
-              ]
-            }
-          ],
-          "NativeHandleInUi": false,
-          "WorkerCanvas": false
-        }
-      }
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "TransitioningContentControl",
-      "Passed": true,
-      "Milliseconds": 190.5
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "AdornerLayer",
-      "Passed": true,
-      "Milliseconds": 153.6
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "DataValidation",
-      "Passed": true,
-      "Milliseconds": 98.1
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "Dialogs",
-      "Passed": true,
-      "Milliseconds": 98.9
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "Notifications",
-      "Passed": true,
-      "Milliseconds": 83.9
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "ProgressBar",
-      "Passed": true,
-      "Milliseconds": 82.2
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "ToolTip",
-      "Passed": true,
-      "Milliseconds": 82.0
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "Accelerator",
-      "Passed": true,
-      "Milliseconds": 83.0
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "Clipboard",
-      "Passed": true,
-      "Milliseconds": 84.3
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "Cursor",
-      "Passed": true,
-      "Milliseconds": 71.5
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "DragDrop",
-      "Passed": true,
-      "Milliseconds": 76.6
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "Focus",
-      "Passed": true,
-      "Milliseconds": 116.0
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "Gestures",
-      "Passed": true,
-      "Milliseconds": 120.7
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "Pointers",
-      "Passed": true,
-      "Milliseconds": 94.7
-    },
-    {
-      "Mode": "render-worker",
-      "Route": "NativeEmbed",
       "Passed": true,
       "Milliseconds": 102.8
     },
     {
       "Mode": "render-worker",
-      "Route": "PlatformInformation",
+      "Route": "TreeView",
       "Passed": true,
-      "Milliseconds": 107.4
+      "Milliseconds": 80.5
     },
     {
       "Mode": "render-worker",
-      "Route": "PlatformSettings",
+      "Route": "Calendar",
       "Passed": true,
-      "Milliseconds": 61.4
+      "Milliseconds": 101.2
     },
     {
       "Mode": "render-worker",
-      "Route": "Screens",
+      "Route": "CalendarDatePicker",
       "Passed": true,
       "Milliseconds": 66.9
     },
     {
       "Mode": "render-worker",
+      "Route": "DateTimePicker",
+      "Passed": true,
+      "Milliseconds": 63.8
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "CommandBar",
+      "Passed": true,
+      "Milliseconds": 83.8
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "ContextFlyout",
+      "Passed": true,
+      "Milliseconds": 82.3
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "ContextMenu",
+      "Passed": true,
+      "Milliseconds": 43.1
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "Flyouts",
+      "Passed": true,
+      "Milliseconds": 51.7
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "Menu",
+      "Passed": true,
+      "Milliseconds": 53.7
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "CarouselPage",
+      "Passed": true,
+      "Milliseconds": 66.6
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "ContentPage",
+      "Passed": true,
+      "Milliseconds": 66.7
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "DrawerPage",
+      "Passed": true,
+      "Milliseconds": 67.0
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "NavigationPage",
+      "Passed": true,
+      "Milliseconds": 51.9
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "SplitView",
+      "Passed": true,
+      "Milliseconds": 53.6
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "TabbedPage",
+      "Passed": true,
+      "Milliseconds": 62.2
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "TabControl",
+      "Passed": true,
+      "Milliseconds": 50.2
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "TabStrip",
+      "Passed": true,
+      "Milliseconds": 79.9
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "Border",
+      "Passed": true,
+      "Milliseconds": 49.5
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "Canvas",
+      "Passed": true,
+      "Milliseconds": 84.1
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "ContainerQueries",
+      "Passed": true,
+      "Milliseconds": 84.3
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "Expander",
+      "Passed": true,
+      "Milliseconds": 81.1
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "FlexPanel",
+      "Passed": true,
+      "Milliseconds": 68.1
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "HeaderedContentControl",
+      "Passed": true,
+      "Milliseconds": 63.9
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "LayoutTransformControl",
+      "Passed": true,
+      "Milliseconds": 69.0
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "RelativePanel",
+      "Passed": true,
+      "Milliseconds": 80.4
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "ScrollViewer",
+      "Passed": true,
+      "Milliseconds": 122.7
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "Viewbox",
+      "Passed": true,
+      "Milliseconds": 94.1
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "WrapPanel",
+      "Passed": true,
+      "Milliseconds": 67.4
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "Acrylic",
+      "Passed": true,
+      "Milliseconds": 125.6
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "BitmapCache",
+      "Passed": true,
+      "Milliseconds": 84.7
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "Composition",
+      "Passed": true,
+      "Milliseconds": 358.9
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "CustomDrawing",
+      "Passed": true,
+      "Milliseconds": 154.5
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "Image",
+      "Passed": true,
+      "Milliseconds": 162.9
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "OpenGL",
+      "Passed": true,
+      "Milliseconds": 392.5,
+      "OpenGl": {
+        "Before": {
+          "Available": true,
+          "Ready": true,
+          "Error": null,
+          "Frames": 1,
+          "Width": 824,
+          "Height": 310,
+          "PixelHash": 1700764880,
+          "Samples": [
+            {
+              "X": 729,
+              "Y": 473,
+              "Rgba": [
+                155,
+                169,
+                203,
+                255
+              ]
+            },
+            {
+              "X": 729,
+              "Y": 364,
+              "Rgba": [
+                169,
+                133,
+                248,
+                255
+              ]
+            },
+            {
+              "X": 523,
+              "Y": 535,
+              "Rgba": [
+                73,
+                198,
+                212,
+                255
+              ]
+            }
+          ],
+          "NativeHandleInUi": false,
+          "WorkerCanvas": false
+        },
+        "CapabilitySkipped": false,
+        "BeforeMaximumChannelError": 0,
+        "AfterMaximumChannelError": 0,
+        "After": {
+          "Available": true,
+          "Ready": true,
+          "Error": null,
+          "Frames": 2,
+          "Width": 824,
+          "Height": 310,
+          "PixelHash": 1322482470,
+          "Samples": [
+            {
+              "X": 729,
+              "Y": 473,
+              "Rgba": [
+                155,
+                169,
+                203,
+                255
+              ]
+            },
+            {
+              "X": 729,
+              "Y": 364,
+              "Rgba": [
+                17,
+                19,
+                33,
+                255
+              ]
+            },
+            {
+              "X": 523,
+              "Y": 535,
+              "Rgba": [
+                17,
+                19,
+                33,
+                255
+              ]
+            }
+          ],
+          "NativeHandleInUi": false,
+          "WorkerCanvas": false
+        }
+      }
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "OpenGLLease",
+      "Passed": true,
+      "Milliseconds": 299.5,
+      "OpenGl": {
+        "Before": {
+          "Available": true,
+          "Ready": true,
+          "Error": null,
+          "Frames": 1,
+          "Width": 824,
+          "Height": 310,
+          "PixelHash": 1700764880,
+          "Samples": [
+            {
+              "X": 729,
+              "Y": 493,
+              "Rgba": [
+                155,
+                169,
+                203,
+                255
+              ]
+            },
+            {
+              "X": 729,
+              "Y": 384,
+              "Rgba": [
+                169,
+                133,
+                248,
+                255
+              ]
+            },
+            {
+              "X": 523,
+              "Y": 555,
+              "Rgba": [
+                73,
+                198,
+                212,
+                255
+              ]
+            }
+          ],
+          "NativeHandleInUi": false,
+          "WorkerCanvas": false
+        },
+        "CapabilitySkipped": false,
+        "BeforeMaximumChannelError": 0,
+        "AfterMaximumChannelError": 0,
+        "After": {
+          "Available": true,
+          "Ready": true,
+          "Error": null,
+          "Frames": 2,
+          "Width": 824,
+          "Height": 310,
+          "PixelHash": 1322482470,
+          "Samples": [
+            {
+              "X": 729,
+              "Y": 493,
+              "Rgba": [
+                155,
+                169,
+                203,
+                255
+              ]
+            },
+            {
+              "X": 729,
+              "Y": 384,
+              "Rgba": [
+                17,
+                19,
+                33,
+                255
+              ]
+            },
+            {
+              "X": 523,
+              "Y": 555,
+              "Rgba": [
+                17,
+                19,
+                33,
+                255
+              ]
+            }
+          ],
+          "NativeHandleInUi": false,
+          "WorkerCanvas": false
+        }
+      }
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "OpenGLInterop",
+      "Passed": true,
+      "Milliseconds": 341.1,
+      "OpenGl": {
+        "Before": {
+          "Available": true,
+          "Ready": true,
+          "Error": null,
+          "Frames": 1,
+          "Width": 776,
+          "Height": 262,
+          "PixelHash": 652020212,
+          "Samples": [
+            {
+              "X": 729,
+              "Y": 493,
+              "Rgba": [
+                155,
+                169,
+                203,
+                255
+              ]
+            },
+            {
+              "X": 734,
+              "Y": 401,
+              "Rgba": [
+                169,
+                133,
+                248,
+                255
+              ]
+            },
+            {
+              "X": 533,
+              "Y": 535,
+              "Rgba": [
+                74,
+                198,
+                213,
+                255
+              ]
+            }
+          ],
+          "NativeHandleInUi": false,
+          "WorkerCanvas": false
+        },
+        "CapabilitySkipped": false,
+        "BeforeMaximumChannelError": null,
+        "AfterMaximumChannelError": null,
+        "After": {
+          "Available": true,
+          "Ready": true,
+          "Error": null,
+          "Frames": 2,
+          "Width": 776,
+          "Height": 262,
+          "PixelHash": 3361297254,
+          "Samples": [
+            {
+              "X": 729,
+              "Y": 493,
+              "Rgba": [
+                155,
+                169,
+                203,
+                255
+              ]
+            },
+            {
+              "X": 734,
+              "Y": 401,
+              "Rgba": [
+                17,
+                19,
+                33,
+                255
+              ]
+            },
+            {
+              "X": 533,
+              "Y": 535,
+              "Rgba": [
+                17,
+                19,
+                33,
+                255
+              ]
+            }
+          ],
+          "NativeHandleInUi": false,
+          "WorkerCanvas": false
+        }
+      }
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "TransitioningContentControl",
+      "Passed": true,
+      "Milliseconds": 111.0
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "AdornerLayer",
+      "Passed": true,
+      "Milliseconds": 81.9
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "DataValidation",
+      "Passed": true,
+      "Milliseconds": 83.1
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "Dialogs",
+      "Passed": true,
+      "Milliseconds": 49.1
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "Notifications",
+      "Passed": true,
+      "Milliseconds": 64.9
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "ProgressBar",
+      "Passed": true,
+      "Milliseconds": 67.0
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "ToolTip",
+      "Passed": true,
+      "Milliseconds": 65.2
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "Accelerator",
+      "Passed": true,
+      "Milliseconds": 68.0
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "Clipboard",
+      "Passed": true,
+      "Milliseconds": 65.5
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "Cursor",
+      "Passed": true,
+      "Milliseconds": 52.0
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "DragDrop",
+      "Passed": true,
+      "Milliseconds": 63.9
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "Focus",
+      "Passed": true,
+      "Milliseconds": 99.1
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "Gestures",
+      "Passed": true,
+      "Milliseconds": 85.8
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "Pointers",
+      "Passed": true,
+      "Milliseconds": 80.4
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "NativeEmbed",
+      "Passed": true,
+      "Milliseconds": 67.8
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "PlatformInformation",
+      "Passed": true,
+      "Milliseconds": 83.2
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "PlatformSettings",
+      "Passed": true,
+      "Milliseconds": 55.3
+    },
+    {
+      "Mode": "render-worker",
+      "Route": "Screens",
+      "Passed": true,
+      "Milliseconds": 52.7
+    },
+    {
+      "Mode": "render-worker",
       "Route": "ThemeVariants",
       "Passed": true,
-      "Milliseconds": 77.2
+      "Milliseconds": 72.6
     },
     {
       "Mode": "render-worker",
       "Route": "WindowCustomizations",
       "Passed": true,
-      "Milliseconds": 100.9
+      "Milliseconds": 83.5
     },
     {
       "Mode": "full-isolation",
       "Route": "Buttons",
       "Passed": true,
-      "Milliseconds": 134.5
+      "Milliseconds": 123.0
     },
     {
       "Mode": "full-isolation",
       "Route": "ButtonSpinner",
       "Passed": true,
-      "Milliseconds": 97.0
+      "Milliseconds": 66.3
     },
     {
       "Mode": "full-isolation",
       "Route": "CheckBox",
       "Passed": true,
-      "Milliseconds": 116.0
+      "Milliseconds": 84.2
     },
     {
       "Mode": "full-isolation",
       "Route": "ColorPicker",
       "Passed": true,
-      "Milliseconds": 177.0
+      "Milliseconds": 127.1
     },
     {
       "Mode": "full-isolation",
       "Route": "ComboBox",
       "Passed": true,
-      "Milliseconds": 88.0
+      "Milliseconds": 70.2
     },
     {
       "Mode": "full-isolation",
       "Route": "NumericUpDown",
       "Passed": true,
-      "Milliseconds": 98.9
+      "Milliseconds": 83.1
     },
     {
       "Mode": "full-isolation",
       "Route": "RadioButton",
       "Passed": true,
-      "Milliseconds": 99.5
+      "Milliseconds": 65.6
     },
     {
       "Mode": "full-isolation",
       "Route": "Slider",
       "Passed": true,
-      "Milliseconds": 98.9
+      "Milliseconds": 85.1
     },
     {
       "Mode": "full-isolation",
       "Route": "ToggleSwitch",
       "Passed": true,
-      "Milliseconds": 103.6
+      "Milliseconds": 64.2
     },
     {
       "Mode": "full-isolation",
       "Route": "AutoCompleteBox",
       "Passed": true,
-      "Milliseconds": 79.5
+      "Milliseconds": 67.0
     },
     {
       "Mode": "full-isolation",
       "Route": "Label",
       "Passed": true,
-      "Milliseconds": 72.2
+      "Milliseconds": 44.1
     },
     {
       "Mode": "full-isolation",
       "Route": "TextBox",
       "Passed": true,
-      "Milliseconds": 248.8
+      "Milliseconds": 174.5
     },
     {
       "Mode": "full-isolation",
       "Route": "TextBlock",
       "Passed": true,
-      "Milliseconds": 95.8
+      "Milliseconds": 63.5
     },
     {
       "Mode": "full-isolation",
       "Route": "Carousel",
       "Passed": true,
-      "Milliseconds": 97.7
+      "Milliseconds": 64.3
     },
     {
       "Mode": "full-isolation",
       "Route": "ListBox",
       "Passed": true,
-      "Milliseconds": 120.3
+      "Milliseconds": 70.3
     },
     {
       "Mode": "full-isolation",
       "Route": "PipsPager",
       "Passed": true,
-      "Milliseconds": 94.2
+      "Milliseconds": 96.0
     },
     {
       "Mode": "full-isolation",
       "Route": "RefreshContainer",
       "Passed": true,
-      "Milliseconds": 100.8
+      "Milliseconds": 82.7
     },
     {
       "Mode": "full-isolation",
       "Route": "TableView",
       "Passed": true,
-      "Milliseconds": 135.5
+      "Milliseconds": 103.0
     },
     {
       "Mode": "full-isolation",
       "Route": "TreeView",
       "Passed": true,
-      "Milliseconds": 97.3
+      "Milliseconds": 80.7
     },
     {
       "Mode": "full-isolation",
       "Route": "Calendar",
       "Passed": true,
-      "Milliseconds": 135.5
+      "Milliseconds": 83.5
     },
     {
       "Mode": "full-isolation",
       "Route": "CalendarDatePicker",
       "Passed": true,
-      "Milliseconds": 78.5
+      "Milliseconds": 66.1
     },
     {
       "Mode": "full-isolation",
       "Route": "DateTimePicker",
       "Passed": true,
-      "Milliseconds": 82.8
+      "Milliseconds": 65.4
     },
     {
       "Mode": "full-isolation",
       "Route": "CommandBar",
       "Passed": true,
-      "Milliseconds": 99.2
+      "Milliseconds": 82.2
     },
     {
       "Mode": "full-isolation",
       "Route": "ContextFlyout",
       "Passed": true,
-      "Milliseconds": 83.3
+      "Milliseconds": 66.2
     },
     {
       "Mode": "full-isolation",
       "Route": "ContextMenu",
       "Passed": true,
-      "Milliseconds": 86.3
+      "Milliseconds": 49.0
     },
     {
       "Mode": "full-isolation",
       "Route": "Flyouts",
       "Passed": true,
-      "Milliseconds": 54.4
+      "Milliseconds": 41.8
     },
     {
       "Mode": "full-isolation",
       "Route": "Menu",
       "Passed": true,
-      "Milliseconds": 74.6
+      "Milliseconds": 56.9
     },
     {
       "Mode": "full-isolation",
       "Route": "CarouselPage",
       "Passed": true,
-      "Milliseconds": 83.1
+      "Milliseconds": 68.2
     },
     {
       "Mode": "full-isolation",
       "Route": "ContentPage",
       "Passed": true,
-      "Milliseconds": 100.4
+      "Milliseconds": 65.4
     },
     {
       "Mode": "full-isolation",
       "Route": "DrawerPage",
       "Passed": true,
-      "Milliseconds": 82.5
+      "Milliseconds": 66.8
     },
     {
       "Mode": "full-isolation",
       "Route": "NavigationPage",
       "Passed": true,
-      "Milliseconds": 69.0
+      "Milliseconds": 44.8
     },
     {
       "Mode": "full-isolation",
       "Route": "SplitView",
       "Passed": true,
-      "Milliseconds": 63.8
+      "Milliseconds": 60.1
     },
     {
       "Mode": "full-isolation",
       "Route": "TabbedPage",
       "Passed": true,
-      "Milliseconds": 82.2
+      "Milliseconds": 59.4
     },
     {
       "Mode": "full-isolation",
       "Route": "TabControl",
       "Passed": true,
-      "Milliseconds": 66.0
+      "Milliseconds": 61.0
     },
     {
       "Mode": "full-isolation",
       "Route": "TabStrip",
       "Passed": true,
-      "Milliseconds": 81.0
+      "Milliseconds": 71.1
     },
     {
       "Mode": "full-isolation",
       "Route": "Border",
       "Passed": true,
-      "Milliseconds": 82.9
+      "Milliseconds": 65.8
     },
     {
       "Mode": "full-isolation",
       "Route": "Canvas",
       "Passed": true,
-      "Milliseconds": 83.4
+      "Milliseconds": 73.9
     },
     {
       "Mode": "full-isolation",
       "Route": "ContainerQueries",
       "Passed": true,
-      "Milliseconds": 101.5
+      "Milliseconds": 93.2
     },
     {
       "Mode": "full-isolation",
       "Route": "Expander",
       "Passed": true,
-      "Milliseconds": 81.0
+      "Milliseconds": 64.8
     },
     {
       "Mode": "full-isolation",
       "Route": "FlexPanel",
       "Passed": true,
-      "Milliseconds": 100.8
+      "Milliseconds": 67.1
     },
     {
       "Mode": "full-isolation",
       "Route": "HeaderedContentControl",
       "Passed": true,
-      "Milliseconds": 86.8
+      "Milliseconds": 50.1
     },
     {
       "Mode": "full-isolation",
       "Route": "LayoutTransformControl",
       "Passed": true,
-      "Milliseconds": 82.8
+      "Milliseconds": 67.0
     },
     {
       "Mode": "full-isolation",
       "Route": "RelativePanel",
       "Passed": true,
-      "Milliseconds": 105.8
+      "Milliseconds": 69.3
     },
     {
       "Mode": "full-isolation",
       "Route": "ScrollViewer",
       "Passed": true,
-      "Milliseconds": 152.6
+      "Milliseconds": 116.1
     },
     {
       "Mode": "full-isolation",
       "Route": "Viewbox",
       "Passed": true,
-      "Milliseconds": 101.6
+      "Milliseconds": 77.9
     },
     {
       "Mode": "full-isolation",
       "Route": "WrapPanel",
       "Passed": true,
-      "Milliseconds": 100.6
+      "Milliseconds": 67.3
     },
     {
       "Mode": "full-isolation",
       "Route": "Acrylic",
       "Passed": true,
-      "Milliseconds": 194.1
+      "Milliseconds": 123.4
     },
     {
       "Mode": "full-isolation",
       "Route": "BitmapCache",
       "Passed": true,
-      "Milliseconds": 157.6
+      "Milliseconds": 102.8
     },
     {
       "Mode": "full-isolation",
       "Route": "Composition",
       "Passed": true,
-      "Milliseconds": 410.4
+      "Milliseconds": 309.2
     },
     {
       "Mode": "full-isolation",
       "Route": "CustomDrawing",
       "Passed": true,
-      "Milliseconds": 203.3
+      "Milliseconds": 139.6
     },
     {
       "Mode": "full-isolation",
       "Route": "Image",
       "Passed": true,
-      "Milliseconds": 159.3
+      "Milliseconds": 96.6
     },
     {
       "Mode": "full-isolation",
       "Route": "OpenGL",
       "Passed": true,
-      "Milliseconds": 509.7,
+      "Milliseconds": 348.2,
       "OpenGl": {
         "Before": {
           "Available": true,
@@ -1127,7 +1127,7 @@
       "Mode": "full-isolation",
       "Route": "OpenGLLease",
       "Passed": true,
-      "Milliseconds": 441.9,
+      "Milliseconds": 291.8,
       "OpenGl": {
         "Before": {
           "Available": true,
@@ -1224,7 +1224,7 @@
       "Mode": "full-isolation",
       "Route": "OpenGLInterop",
       "Passed": true,
-      "Milliseconds": 513.8,
+      "Milliseconds": 346.6,
       "OpenGl": {
         "Before": {
           "Available": true,
@@ -1321,121 +1321,121 @@
       "Mode": "full-isolation",
       "Route": "TransitioningContentControl",
       "Passed": true,
-      "Milliseconds": 167.1
+      "Milliseconds": 87.4
     },
     {
       "Mode": "full-isolation",
       "Route": "AdornerLayer",
       "Passed": true,
-      "Milliseconds": 152.6
+      "Milliseconds": 81.2
     },
     {
       "Mode": "full-isolation",
       "Route": "DataValidation",
       "Passed": true,
-      "Milliseconds": 83.5
+      "Milliseconds": 66.2
     },
     {
       "Mode": "full-isolation",
       "Route": "Dialogs",
       "Passed": true,
-      "Milliseconds": 81.0
+      "Milliseconds": 47.7
     },
     {
       "Mode": "full-isolation",
       "Route": "Notifications",
       "Passed": true,
-      "Milliseconds": 82.3
+      "Milliseconds": 50.4
     },
     {
       "Mode": "full-isolation",
       "Route": "ProgressBar",
       "Passed": true,
-      "Milliseconds": 83.9
+      "Milliseconds": 66.4
     },
     {
       "Mode": "full-isolation",
       "Route": "ToolTip",
       "Passed": true,
-      "Milliseconds": 105.4
+      "Milliseconds": 65.6
     },
     {
       "Mode": "full-isolation",
       "Route": "Accelerator",
       "Passed": true,
-      "Milliseconds": 76.4
+      "Milliseconds": 66.0
     },
     {
       "Mode": "full-isolation",
       "Route": "Clipboard",
       "Passed": true,
-      "Milliseconds": 83.2
+      "Milliseconds": 49.6
     },
     {
       "Mode": "full-isolation",
       "Route": "Cursor",
       "Passed": true,
-      "Milliseconds": 67.5
+      "Milliseconds": 46.8
     },
     {
       "Mode": "full-isolation",
       "Route": "DragDrop",
       "Passed": true,
-      "Milliseconds": 79.9
+      "Milliseconds": 51.9
     },
     {
       "Mode": "full-isolation",
       "Route": "Focus",
       "Passed": true,
-      "Milliseconds": 82.6
+      "Milliseconds": 66.3
     },
     {
       "Mode": "full-isolation",
       "Route": "Gestures",
       "Passed": true,
-      "Milliseconds": 122.4
+      "Milliseconds": 68.9
     },
     {
       "Mode": "full-isolation",
       "Route": "Pointers",
       "Passed": true,
-      "Milliseconds": 76.0
+      "Milliseconds": 62.9
     },
     {
       "Mode": "full-isolation",
       "Route": "NativeEmbed",
       "Passed": true,
-      "Milliseconds": 103.9
+      "Milliseconds": 68.1
     },
     {
       "Mode": "full-isolation",
       "Route": "PlatformInformation",
       "Passed": true,
-      "Milliseconds": 99.6
+      "Milliseconds": 83.4
     },
     {
       "Mode": "full-isolation",
       "Route": "PlatformSettings",
       "Passed": true,
-      "Milliseconds": 70.4
+      "Milliseconds": 54.4
     },
     {
       "Mode": "full-isolation",
       "Route": "Screens",
       "Passed": true,
-      "Milliseconds": 73.9
+      "Milliseconds": 46.8
     },
     {
       "Mode": "full-isolation",
       "Route": "ThemeVariants",
       "Passed": true,
-      "Milliseconds": 83.7
+      "Milliseconds": 97.4
     },
     {
       "Mode": "full-isolation",
       "Route": "WindowCustomizations",
       "Passed": true,
-      "Milliseconds": 100.6
+      "Milliseconds": 64.8
     }
   ],
   "Errors": [],
@@ -1469,5 +1469,5 @@
   "Browser": "152.0.7977.0",
   "Passed": 148,
   "Failed": 0,
-  "FinalSourceFingerprint": "0e6ad3cce5334a9edc3b6cd0822e0285bfb63459fcc00075f9ee676730dc638a"
+  "FinalSourceFingerprint": "9608886d60f15a5b9fbe15cdcd4ccef1d08ab046caad57ea9c14bb72bb6487bc"
 }

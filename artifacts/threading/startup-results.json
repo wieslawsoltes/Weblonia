@@ -1,14 +1,14 @@
 {
   "Version": "0.6.2-alpha.1",
-  "SourceFingerprint": "0e6ad3cce5334a9edc3b6cd0822e0285bfb63459fcc00075f9ee676730dc638a",
+  "SourceFingerprint": "9608886d60f15a5b9fbe15cdcd4ccef1d08ab046caad57ea9c14bb72bb6487bc",
   "Completed": true,
   "Tests": [
     {
       "Name": "source module startup, nonblank TableView and restart render-worker",
       "Passed": true,
-      "Milliseconds": 4595.85,
+      "Milliseconds": 3151.49,
       "Evidence": {
-        "StartupMilliseconds": 2849.51,
+        "StartupMilliseconds": 2010.16,
         "WorkerCount": 1,
         "RequestedBackend": "canvas",
         "SelectedBackend": "canvas",
@@ -20,7 +20,7 @@
           "Type": "startup-progress",
           "Role": "render",
           "Stage": "ready",
-          "ElapsedMilliseconds": 1052.2999999999884
+          "ElapsedMilliseconds": 760.3999999999942
         },
         "EntryRequests": [
           "packages/browser/worker-assets/render.js",
@@ -32,9 +32,9 @@
     {
       "Name": "source module startup, nonblank TableView and restart full-isolation",
       "Passed": true,
-      "Milliseconds": 4867.14,
+      "Milliseconds": 3041.78,
       "Evidence": {
-        "StartupMilliseconds": 3145.53,
+        "StartupMilliseconds": 1938.34,
         "WorkerCount": 2,
         "RequestedBackend": "canvas",
         "SelectedBackend": "canvas",
@@ -47,13 +47,13 @@
             "Type": "startup-progress",
             "Role": "ui",
             "Stage": "ready",
-            "ElapsedMilliseconds": 2460.7000000000116
+            "ElapsedMilliseconds": 1506.2000000000116
           },
           "render": {
             "Type": "startup-progress",
             "Role": "render",
             "Stage": "ready",
-            "ElapsedMilliseconds": 1835.3999999999942
+            "ElapsedMilliseconds": 1093.9000000000233
           }
         },
         "EntryRequests": [
@@ -67,9 +67,9 @@
     {
       "Name": "dist module startup, nonblank TableView and restart render-worker",
       "Passed": true,
-      "Milliseconds": 4487.23,
+      "Milliseconds": 2797.2,
       "Evidence": {
-        "StartupMilliseconds": 2710.13,
+        "StartupMilliseconds": 1697.14,
         "WorkerCount": 1,
         "RequestedBackend": "canvas",
         "SelectedBackend": "canvas",
@@ -81,7 +81,7 @@
           "Type": "startup-progress",
           "Role": "render",
           "Stage": "ready",
-          "ElapsedMilliseconds": 1038.2000000000116
+          "ElapsedMilliseconds": 650.3999999999942
         },
         "EntryRequests": [
           "packages/browser/worker-assets/render.js",
@@ -93,9 +93,9 @@
     {
       "Name": "dist module startup, nonblank TableView and restart full-isolation",
       "Passed": true,
-      "Milliseconds": 4856.65,
+      "Milliseconds": 3096.84,
       "Evidence": {
-        "StartupMilliseconds": 3155.74,
+        "StartupMilliseconds": 2016.53,
         "WorkerCount": 2,
         "RequestedBackend": "canvas",
         "SelectedBackend": "canvas",
@@ -108,18 +108,18 @@
             "Type": "startup-progress",
             "Role": "render",
             "Stage": "ready",
-            "ElapsedMilliseconds": 1850.5
+            "ElapsedMilliseconds": 1287
           },
           "ui": {
             "Type": "startup-progress",
             "Role": "ui",
             "Stage": "ready",
-            "ElapsedMilliseconds": 2454.399999999994
+            "ElapsedMilliseconds": 1589.6000000000058
           }
         },
         "EntryRequests": [
-          "packages/browser/worker-assets/render.js",
           "packages/browser/worker-assets/ui.js",
+          "packages/browser/worker-assets/render.js",
           "packages/browser/worker-assets/render.js"
         ],
         "DelayedDependencyMilliseconds": 0
@@ -128,9 +128,9 @@
     {
       "Name": "nested module startup, nonblank TableView and restart render-worker",
       "Passed": true,
-      "Milliseconds": 4380.62,
+      "Milliseconds": 2749.12,
       "Evidence": {
-        "StartupMilliseconds": 2673.92,
+        "StartupMilliseconds": 1668.09,
         "WorkerCount": 1,
         "RequestedBackend": "canvas",
         "SelectedBackend": "canvas",
@@ -142,7 +142,7 @@
           "Type": "startup-progress",
           "Role": "render",
           "Stage": "ready",
-          "ElapsedMilliseconds": 1036.3999999999942
+          "ElapsedMilliseconds": 620.2999999999884
         },
         "EntryRequests": [
           "packages/browser/worker-assets/render.js",
@@ -154,9 +154,9 @@
     {
       "Name": "nested module startup, nonblank TableView and restart full-isolation",
       "Passed": true,
-      "Milliseconds": 4533.38,
+      "Milliseconds": 2937.95,
       "Evidence": {
-        "StartupMilliseconds": 2916.64,
+        "StartupMilliseconds": 1861.05,
         "WorkerCount": 2,
         "RequestedBackend": "canvas",
         "SelectedBackend": "canvas",
@@ -165,22 +165,22 @@
         "PngSha256": "0acfb592ac171cccba2626443661c1a64874e1948e1c8f5d78378d20b0a9691f",
         "RestartPassed": true,
         "Startup": {
-          "ui": {
-            "Type": "startup-progress",
-            "Role": "ui",
-            "Stage": "ready",
-            "ElapsedMilliseconds": 2251.600000000006
-          },
           "render": {
             "Type": "startup-progress",
             "Role": "render",
             "Stage": "ready",
-            "ElapsedMilliseconds": 1805.3999999999942
+            "ElapsedMilliseconds": 1141.3000000000175
+          },
+          "ui": {
+            "Type": "startup-progress",
+            "Role": "ui",
+            "Stage": "ready",
+            "ElapsedMilliseconds": 1421.6000000000058
           }
         },
         "EntryRequests": [
-          "packages/browser/worker-assets/ui.js",
           "packages/browser/worker-assets/render.js",
+          "packages/browser/worker-assets/ui.js",
           "packages/browser/worker-assets/render.js"
         ],
         "DelayedDependencyMilliseconds": 0
@@ -189,9 +189,9 @@
     {
       "Name": "delayed top-level-await dependency render-worker",
       "Passed": true,
-      "Milliseconds": 4946.58,
+      "Milliseconds": 3316.82,
       "Evidence": {
-        "StartupMilliseconds": 2949.33,
+        "StartupMilliseconds": 1994.69,
         "WorkerCount": 1,
         "RequestedBackend": "canvas",
         "SelectedBackend": "canvas",
@@ -203,7 +203,7 @@
           "Type": "startup-progress",
           "Role": "render",
           "Stage": "ready",
-          "ElapsedMilliseconds": 1280
+          "ElapsedMilliseconds": 881.1999999999825
         },
         "EntryRequests": [
           "packages/browser/worker-assets/render.js",
@@ -215,9 +215,9 @@
     {
       "Name": "automatic backend selection render-worker",
       "Passed": true,
-      "Milliseconds": 5224.21,
+      "Milliseconds": 3450.58,
       "Evidence": {
-        "StartupMilliseconds": 3043.2,
+        "StartupMilliseconds": 2035.24,
         "WorkerCount": 1,
         "RequestedBackend": "auto",
         "SelectedBackend": "webgl",
@@ -229,7 +229,7 @@
           "Type": "startup-progress",
           "Role": "render",
           "Stage": "ready",
-          "ElapsedMilliseconds": 1212.1000000000058
+          "ElapsedMilliseconds": 842.1999999999825
         },
         "EntryRequests": [
           "packages/browser/worker-assets/render.js",
@@ -241,7 +241,7 @@
     {
       "Name": "fail fast and release workers: render-worker/loader",
       "Passed": true,
-      "Milliseconds": 2605.68,
+      "Milliseconds": 1836.18,
       "Evidence": {
         "ReportedImmediately": true,
         "DetailedTimeoutStage": false,
@@ -252,7 +252,7 @@
     {
       "Name": "fail fast and release workers: render-worker/graph",
       "Passed": true,
-      "Milliseconds": 1701.32,
+      "Milliseconds": 1247.73,
       "Evidence": {
         "ReportedImmediately": true,
         "DetailedTimeoutStage": false,
@@ -263,7 +263,7 @@
     {
       "Name": "fail fast and release workers: render-worker/pending",
       "Passed": true,
-      "Milliseconds": 11599.09,
+      "Milliseconds": 11149.73,
       "Evidence": {
         "ReportedImmediately": false,
         "DetailedTimeoutStage": true,
@@ -274,9 +274,9 @@
     {
       "Name": "delayed top-level-await dependency full-isolation",
       "Passed": true,
-      "Milliseconds": 5152.92,
+      "Milliseconds": 3495.09,
       "Evidence": {
-        "StartupMilliseconds": 3251.9,
+        "StartupMilliseconds": 2187.78,
         "WorkerCount": 2,
         "RequestedBackend": "canvas",
         "SelectedBackend": "canvas",
@@ -289,13 +289,13 @@
             "Type": "startup-progress",
             "Role": "render",
             "Stage": "ready",
-            "ElapsedMilliseconds": 2111.5999999999767
+            "ElapsedMilliseconds": 1466.1000000000058
           },
           "ui": {
             "Type": "startup-progress",
             "Role": "ui",
             "Stage": "ready",
-            "ElapsedMilliseconds": 2544
+            "ElapsedMilliseconds": 1752.4000000000233
           }
         },
         "EntryRequests": [
@@ -309,9 +309,9 @@
     {
       "Name": "automatic backend selection full-isolation",
       "Passed": true,
-      "Milliseconds": 5208.55,
+      "Milliseconds": 3604.99,
       "Evidence": {
-        "StartupMilliseconds": 3121.49,
+        "StartupMilliseconds": 2078.83,
         "WorkerCount": 2,
         "RequestedBackend": "auto",
         "SelectedBackend": "webgl",
@@ -320,17 +320,17 @@
         "PngSha256": "8550bb31e2eeb2f4fbe2f266855558302f4c6f674e5db131e2e7dbb3884f5a95",
         "RestartPassed": true,
         "Startup": {
-          "render": {
-            "Type": "startup-progress",
-            "Role": "render",
-            "Stage": "ready",
-            "ElapsedMilliseconds": 1917.2000000000116
-          },
           "ui": {
             "Type": "startup-progress",
             "Role": "ui",
             "Stage": "ready",
-            "ElapsedMilliseconds": 2493.5
+            "ElapsedMilliseconds": 1650
+          },
+          "render": {
+            "Type": "startup-progress",
+            "Role": "render",
+            "Stage": "ready",
+            "ElapsedMilliseconds": 1153.5
           }
         },
         "EntryRequests": [
@@ -344,18 +344,18 @@
     {
       "Name": "fail fast and release workers: full-isolation/loader",
       "Passed": true,
-      "Milliseconds": 2505.93,
+      "Milliseconds": 1771.84,
       "Evidence": {
         "ReportedImmediately": true,
         "DetailedTimeoutStage": false,
         "LiveWorkersAfterFailure": 0,
-        "Error": "Error: ui worker startup failed: Failed to fetch dynamically imported module: http://localhost:4173/__missing_loader__.mjs\n    at BrowserWorkerApplication._WorkerMessage (http://localhost:4173/packages/browser/src/isolated-host.js:41:62)\n    at StartAsync.worker.onmessage (http://localhost:4173/packages/browser/src/isolated-host.js:22:38)"
+        "Error": "Error: render worker startup failed: Failed to fetch dynamically imported module: http://localhost:4173/__missing_loader__.mjs\n    at BrowserWorkerApplication._WorkerMessage (http://localhost:4173/packages/browser/src/isolated-host.js:41:62)\n    at StartAsync.worker.onmessage (http://localhost:4173/packages/browser/src/isolated-host.js:22:38)"
       }
     },
     {
       "Name": "fail fast and release workers: full-isolation/graph",
       "Passed": true,
-      "Milliseconds": 943.21,
+      "Milliseconds": 707.61,
       "Evidence": {
         "ReportedImmediately": true,
         "DetailedTimeoutStage": false,
@@ -366,7 +366,7 @@
     {
       "Name": "fail fast and release workers: full-isolation/pending",
       "Passed": true,
-      "Milliseconds": 10435.95,
+      "Milliseconds": 10384.89,
       "Evidence": {
         "ReportedImmediately": false,
         "DetailedTimeoutStage": true,
@@ -377,7 +377,7 @@
     {
       "Name": "invalid isolated application import releases both workers",
       "Passed": true,
-      "Milliseconds": 2695.5,
+      "Milliseconds": 1851.5,
       "Evidence": {
         "ReportedImmediately": true,
         "DetailedTimeoutStage": false,
@@ -414,7 +414,7 @@
     {
       "Mode": "full-isolation",
       "Failure": "loader",
-      "Error": "Error: ui worker startup failed: Failed to fetch dynamically imported module: http://localhost:4173/__missing_loader__.mjs\n    at BrowserWorkerApplication._WorkerMessage (http://localhost:4173/packages/browser/src/isolated-host.js:41:62)\n    at StartAsync.worker.onmessage (http://localhost:4173/packages/browser/src/isolated-host.js:22:38)",
+      "Error": "Error: render worker startup failed: Failed to fetch dynamically imported module: http://localhost:4173/__missing_loader__.mjs\n    at BrowserWorkerApplication._WorkerMessage (http://localhost:4173/packages/browser/src/isolated-host.js:41:62)\n    at StartAsync.worker.onmessage (http://localhost:4173/packages/browser/src/isolated-host.js:22:38)",
       "Expected404": [
         "__missing_loader__.mjs",
         "__missing_loader__.mjs"
@@ -451,6 +451,6 @@
   "Browser": "152.0.7977.0",
   "Passed": 17,
   "Failed": 0,
-  "FinalSourceFingerprint": "0e6ad3cce5334a9edc3b6cd0822e0285bfb63459fcc00075f9ee676730dc638a",
+  "FinalSourceFingerprint": "9608886d60f15a5b9fbe15cdcd4ccef1d08ab046caad57ea9c14bb72bb6487bc",
   "BlockedByBrowserPolicy": false
 }

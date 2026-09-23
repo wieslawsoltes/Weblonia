@@ -156,7 +156,9 @@ export class XamlRuntimeContext {
         const typeArguments = directive('TypeArguments');
         const descriptor = typeArguments
             ? this.Registry.MakeGenericType(typeName, xmlNamespace, SplitTypeArguments(typeArguments).map(x => this.Registry.ResolveType(x, node.Namespaces)))
-            : this.Registry.FindType(typeName, xmlNamespace);
+            : this.Registry.FindType(typeName, xmlNamespace)
+                ?? (avaloniaNamespaces.includes(xmlNamespace) && ['CompiledBinding', 'ReflectionBinding'].includes(typeName)
+                    ? this.Registry.FindType(typeName + 'Extension', xmlNamespace) : null);
         if (!descriptor)
             throw new XamlParseException(`Type '${typeName}' in namespace '${xmlNamespace}' is not registered.`, node?.Line, node?.Position, this.Options.SourceFile);
         const scalarTypes = [Base.Thickness, Base.CornerRadius, Base.Point, Base.Size, Base.Rect, Base.Matrix, Base.RelativePoint, Media.Color, Controls.GridLength];
@@ -191,6 +193,7 @@ export class XamlRuntimeContext {
             catch { throw new XamlParseException('xml:base requires a valid URI and an absolute base URI.', xmlBase.Line, xmlBase.Position); }
         }
         meta.BaseUri = baseUri;
+        meta.CompiledBindingDefault = this._UseCompiledBindings(object);
         meta.DataTypeContext = meta.DataType ? { Name: meta.DataType, Namespaces: node.Namespaces }
             : metadata.get(this._parents.at(-1))?.DataTypeContext ?? this.Options.DataTypeContext ?? null;
         this._parents.push(object); this._baseUris.push(baseUri);
@@ -391,11 +394,10 @@ export class XamlRuntimeContext {
             if (!member.Property)
                 throw new XamlParseException(`Binding target '${name}' is not an Avalonia property.`, node?.Line, node?.Position);
             this._pendingBindings.push(() => {
-                for (const key of ['Source', 'Converter', 'ConverterParameter', 'FallbackValue', 'TargetNullValue'])
-                    if (key in value)
-                        value[key] = this._ResolveReference(value[key], target);
-                this._ValidateCompiledBinding(target, value, namespaces);
-                Data.BindingOperations.Apply(target, member.Property, value);
+                // Prepare a per-target graph. A binding resource may be reused;
+                // resolving child extensions must not mutate its declaration.
+                const prepared = this._PrepareBinding(target, value, namespaces);
+                Data.BindingOperations.Apply(target, member.Property, prepared);
             });
             return;
         }
@@ -431,23 +433,43 @@ export class XamlRuntimeContext {
         else
             target[member.Name] = value;
     }
-    _ValidateCompiledBinding(target, binding, namespaces) {
-        if (!binding.IsCompiled)
-            return;
-        const typeContext = metadata.get(target)?.DataTypeContext ?? this.Options.DataTypeContext;
+    _PrepareBinding(target, binding, namespaces, ancestors = new Set(), budget = { Count: 0 }) {
+        if (!(binding instanceof Data.BindingBase)) throw new XamlParseException('MultiBinding children must be bindings.');
+        if (++budget.Count > 4096 || ancestors.size >= 64) throw new XamlParseException('XAML binding graph exceeds its size/depth budget.');
+        if (ancestors.has(binding)) throw new XamlParseException('A XAML MultiBinding graph cannot contain cycles.');
+        const info = metadata.get(binding);
+        const compiled = binding.constructor === Data.Binding && info?.CompiledBindingDefault;
+        const result = Object.assign(compiled ? new Data.CompiledBindingExtension() : Object.create(Object.getPrototypeOf(binding)), binding);
+        if (compiled) result.IsCompiled = true;
+        for (const key of ['Source', 'Converter', 'ConverterParameter', 'FallbackValue', 'TargetNullValue'])
+            if (key in result) result[key] = this._ResolveReference(result[key], target);
+        if (binding instanceof Data.MultiBinding) {
+            if (!binding.Bindings?.[Symbol.iterator]) throw new XamlParseException('MultiBinding.Bindings must be iterable.');
+            ancestors.add(binding);
+            try { result.Bindings = Array.from(binding.Bindings, child => this._PrepareBinding(target, child, namespaces, ancestors, budget)); }
+            finally { ancestors.delete(binding); }
+        } else this._ValidateCompiledBinding(target, result, info?.Namespaces ?? namespaces, info?.DataTypeContext);
+        return result;
+    }
+    _ValidateCompiledBinding(target, binding, namespaces, declarationContext = null) {
+        if (!binding.IsCompiled) return;
+        binding.CompiledPath = binding.Path instanceof Data.CompiledBindingPath ? binding.Path
+            : binding.CompiledPath instanceof Data.CompiledBindingPath ? binding.CompiledPath : Data.CompiledBindingPath.Parse(binding.Path);
+        // x:DataType describes DataContext, not an explicit Source, named element,
+        // ancestor or templated parent. Still parse those executable paths safely.
+        const explicitRoot = binding.CompiledPath.Root || binding.Source !== Base.UnsetValue || binding.ElementName
+            || binding.RelativeSource && binding.RelativeSource.Mode !== 'DataContext'
+            || /^!*\s*(?:#|\$self(?:\.|$)|\$parent)/.test(String(binding.Path));
+        if (explicitRoot) return;
+        const typeContext = declarationContext ?? metadata.get(target)?.DataTypeContext ?? this.Options.DataTypeContext;
         const typeName = typeContext?.Name;
         namespaces = typeContext?.Namespaces ?? namespaces;
-        binding.CompiledPath = Data.CompiledBindingPath.Parse(binding.Path);
-        const path = binding.CompiledPath.Elements;
-        if (!typeName)
-            return;
+        if (!typeName) return;
         const resolved = this.Registry.ResolveName(typeName, namespaces), model = this.Registry.Models.get(`${resolved.Namespace}|${resolved.Name}`);
-        if (!model)
-            throw new XamlParseException(`Compiled binding model schema '${typeName}' is not registered.`);
+        if (!model) throw new XamlParseException(`Compiled binding model schema '${typeName}' is not registered.`);
         let properties = model.Properties;
-        for (const segment of path) {
-            if (segment.Kind !== 'Property')
-                continue;
+        for (const segment of binding.CompiledPath.Elements) {
+            if (segment.Kind !== 'Property') continue;
             if (!properties || !Object.hasOwn(properties, segment.Name))
                 throw new XamlParseException(`Compiled binding member '${segment.Name}' does not exist on model '${typeName}'.`);
             const next = properties[segment.Name];
