@@ -105,15 +105,39 @@ class RemoteStorageProvider {
     DownloadAsync(name,bytes,mimeType='application/octet-stream'){return this.Connection.RequestAsync('download',{Name:name,Bytes:bytes,MimeType:mimeType});}
 }
 
-export function InstallWorkerWindowFactory(platform){
-    Window.WorkerWindowFactory=(root,owner,options={})=>{
-        root._ownsBrowserWindow=true;
-        root.WhenOpened=owner.HostConnection.RequestAsync('open-window',{Title:root.Title,Width:Number.isFinite(root.Width)?root.Width:800,Height:Number.isFinite(root.Height)?root.Height:600,Backend:options.Backend??owner.Renderer.Backend}).then(async service=>{
-            const connection=new ThreadChannel(service.Port,{OnError:e=>root._ReportRenderError(e)});InstallWorkerTopLevel(root);
-            await root.AttachWorker(connection,service.RenderPort,platform,service.Snapshot);
-            connection.OnEvent=m=>{if(m.Type==='events'){try{for(const e of m.Events)root.ProcessHostMessage(e);}finally{connection.Send({Type:'events-ack'});}}};
-            Window.Windows.add(root);connection.Send({Type:'ready'});return root;
-        }).catch(e=>{root._dialogReject?.(e);root._dialogResolve=null;root._dialogReject=null;if(owner&&root._ownerEnabled!==undefined)owner.IsEnabled=root._ownerEnabled;throw e;});
+export function InstallWorkerWindowFactory(platform) {
+    Window.WorkerWindowFactory = (root, owner, options = {}) => {
+        root._ownsBrowserWindow = true;
+        let connection, renderPort;
+        root.WhenOpened = owner.HostConnection.RequestAsync('open-window', {
+            Title:root.Title, Width:Number.isFinite(root.Width) ? root.Width : 800,
+            Height:Number.isFinite(root.Height) ? root.Height : 600, Backend:options.Backend ?? owner.Renderer.Backend
+        }).then(async service => {
+            connection = new ThreadChannel(service.Port, {OnError:e=>root._ReportRenderError(e)});
+            renderPort = service.RenderPort;
+            if (root.IsDisposed || owner.IsDisposed) throw new Error('Window closed while its browser host was opening.');
+            InstallWorkerTopLevel(root);
+            await root.AttachWorker(connection, renderPort, platform, service.Snapshot);
+            connection.OnEvent = message => {
+                if (message.Type === 'render-worker-failed') { root.Renderer._Recover(new Error(message.Message)); return; }
+                if (message.Type === 'events') {
+                    try { for (const event of message.Events) root.ProcessHostMessage(event); }
+                    finally { connection.Send({Type:'events-ack'}); }
+                }
+            };
+            Window.Windows.add(root);
+            connection.Send({Type:'ready'});
+            return root;
+        }).catch(error => {
+            connection?.Send({Type:'close-window'});
+            connection?.Dispose();
+            renderPort?.close();
+            root._dialogReject?.(error);
+            root._dialogResolve = root._dialogReject = null;
+            if (owner && !owner.IsDisposed && root._ownerEnabled !== undefined) owner.IsEnabled = root._ownerEnabled;
+            root._FinishClose();
+            throw error;
+        });
         return root;
     };
 }
