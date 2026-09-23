@@ -45,7 +45,7 @@ current(automation, 'Incremental automation');
 require(automation.Completed && automation.Failed === 0 && automation.Passed > 0 && !automation.PageErrors.length && !automation.MissingAssets.length, 'Incremental automation failed');
 const consumer = await read('artifacts/package-consumer-result.json');
 current(consumer, 'Packed consumer');
-require(consumer.Passed && consumer.Packages === 18 && consumer.StartupSubpaths && consumer.CorePortApis && consumer.ImplicitAnimationApis && !consumer.PublicRegistryInstalled, 'Packed offline consumer failed');
+require(consumer.Passed && consumer.Packages === 18 && consumer.StartupSubpaths && consumer.CorePortApis && consumer.ImplicitAnimationApis && consumer.GlyphPathApis && !consumer.PublicRegistryInstalled, 'Packed offline consumer failed');
 const corePort = await read('artifacts/core-port/browser-results.json');
 current(corePort, 'Core port browser');
 require(corePort.Completed && corePort.Passed === 3 && corePort.Failed === 0 && !corePort.Interception && !corePort.WorkerBootstrapOverrides
@@ -56,6 +56,15 @@ require(implicitAnimations.Completed && implicitAnimations.Passed===3 && implici
     && !implicitAnimations.WorkerBootstrapOverrides && !implicitAnimations.SnapshotForcesRender && !implicitAnimations.Errors.length && !implicitAnimations.MissingAssets.length
     && implicitAnimations.Tests.every(t=>t.Passed&&t.AutonomousRedraw&&t.BindingDrivenLayout&&t.GroupedTrigger&&t.Retargeted&&t.CompletedRunNotReplayed&&t.ClearedDefinitions
         && t.IntermediatePositions.some(x=>x>24&&x<200)&&t.ComparedChannels===4&&t.MaximumChannelError<=2),'Implicit animation HTTP qualification failed');
+const glyphGeometry=await read('artifacts/glyph-geometry/browser-results.json');
+current(glyphGeometry,'Glyph/path geometry');
+require(glyphGeometry.Completed && glyphGeometry.Passed===6 && glyphGeometry.Failed===0 && !glyphGeometry.Interception
+    && !glyphGeometry.WorkerBootstrapOverrides && !glyphGeometry.SnapshotForcesRender && !glyphGeometry.FontFilesDistributed
+    && !glyphGeometry.Errors.length && !glyphGeometry.MissingAssets.length && glyphGeometry.PixelChannelTolerance===2
+    && glyphGeometry.Tests.every(t=>t.Passed&&t.AutonomousRedraw&&t.ComparedChannels===4&&t.MaximumChannelError<=2&&t.FontRequests===1
+        && (t.Mode==='single'||t.RestartPassed)), 'Positioned glyph/path HTTP qualification failed');
+for(const mode of ['single','render-worker','full-isolation'])for(const aot of [false,true])
+    require(glyphGeometry.Tests.some(t=>t.Mode===mode&&t.Aot===aot), 'Missing glyph/path runtime or AOT topology');
 const build = await read('artifacts/build-result.json');
 current(build, 'Build', false, false);
 require(build.XamlModules === 75 && build.NoEval && build.FontFiles === 0, 'AOT build contract changed');
@@ -111,7 +120,7 @@ await scan(path.join(root, 'packages'));
 const lines = (await Promise.all(files.map(f => readFile(f, 'utf8')))).reduce((n, s) => n + s.split('\n').length, 0);
 const report = {
     Version: pkg.version, SourceFingerprint: fingerprint, GeneratedAt: new Date().toISOString(),
-    ImplicitAnimations: implicitAnimations,
+    ImplicitAnimations: implicitAnimations, GlyphGeometry: glyphGeometry,
     FullAvaloniaParity: false, FullXamlXParity: false, FullUpstreamClonesIncluded: false, OriginalCatalogSubexamplesFullyPorted: false,
     Recovery: await read('docs/recovery/recovery-invalidation.json'),
     UpstreamSkia: await read('docs/SKIASHARPWEB-UPSTREAM.json'),

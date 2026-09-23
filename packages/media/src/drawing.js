@@ -1,3 +1,4 @@
+import { GlyphRun, ImmutableGlyphRunReference } from './glyph-run.js';
 import { Disposable, Point, Size, Rect, Matrix, AvaloniaList, Event, AvaloniaObject, AvaloniaProperty, DefineProperties, CompositeDisposable } from '@wieslawsoltes/avalonia-base';
 import { Brush, Typeface } from './brushes.js';
 import { Geometry, RectangleGeometry, EllipseGeometry, LineGeometry } from './geometry.js';
@@ -59,6 +60,7 @@ export class DrawingContext {
     DrawText(formattedText, origin = new Point()) {
         this.DrawTextLayout(formattedText.TextLayout ?? formattedText, origin);
     }
+    DrawGlyphRun() { throw new Error('DrawingContext.DrawGlyphRun is abstract.'); }
     DrawTextLayout() {
         throw new Error('DrawingContext.DrawTextLayout is abstract.');
     }
@@ -115,6 +117,7 @@ export class RecordingDrawingContext extends DrawingContext {
         if (source instanceof DrawingImage) { source.Draw(this, sourceRect, destRect); return; }
         this.Commands.push({ Op: 'Image', Source: source, SourceRect: sourceRect, DestRect: destRect ?? sourceRect });
     }
+    DrawGlyphRun(foreground, glyphRun) { this.Commands.push({Op:'GlyphRun',Foreground:foreground,GlyphRun:glyphRun}); }
     DrawTextLayout(layout, origin) {
         this.Commands.push({ Op: 'Text', Text: layout.Text, Layout: layout, Origin: origin });
     }
@@ -134,7 +137,7 @@ function assertAcyclic(owner, candidate) {
     };
     visit(candidate);
 }
-const resourceMembers = ['Brush', 'Pen', 'Geometry', 'ImageSource', 'Drawing', 'Transform', 'ClipGeometry', 'OpacityMask', 'Effect', 'Source', 'DashStyle', 'Foreground', 'Layout'];
+const resourceMembers = ['Brush', 'Pen', 'Geometry', 'ImageSource', 'Drawing', 'Transform', 'ClipGeometry', 'OpacityMask', 'Effect', 'Source', 'DashStyle', 'Foreground', 'Layout', 'GlyphRun'];
 /** Observable rendering-resource owner. Dependents are borrowed; Dispose only
  * removes subscriptions, never disposes brushes/geometries supplied by callers. */
 class DrawingResource extends AvaloniaObject {
@@ -181,6 +184,15 @@ export class GeometryDrawing extends Drawing {
     GetBounds() { return this.Geometry?.GetRenderBounds(this.Pen) ?? Rect.Empty; }
 }
 DefineProperties(GeometryDrawing, { Brush: [null, { Convert: v => v == null ? null : Brush.Parse(v) }], Pen: [null], Geometry: [null, { Convert: v => v == null ? null : Geometry.Parse(v) }] });
+export class GlyphRunDrawing extends Drawing {
+    constructor(foreground = null, glyphRun = null) { super(); this.Foreground = foreground; this.GlyphRun = glyphRun; }
+    DrawCore(context) { if (this.GlyphRun) context.DrawGlyphRun(this.Foreground, this.GlyphRun); }
+    GetBounds() { return this.GlyphRun?.Bounds ?? Rect.Empty; }
+}
+DefineProperties(GlyphRunDrawing, {
+    Foreground: [null, { Convert: v => v == null ? null : Brush.Parse(v) }],
+    GlyphRun: [null, { Validate: v => v == null || (v instanceof GlyphRun || v instanceof ImmutableGlyphRunReference) && !v.IsDisposed }]
+});
 export class ImageDrawing extends Drawing {
     constructor(image = null, rect = Rect.Empty) { super(); this.ImageSource = image; this.Rect = rect; }
     DrawCore(context) { if (this.ImageSource) { if (this._sourceRect) context.DrawImage(this.ImageSource, this._sourceRect, this.Rect); else context.DrawImage(this.ImageSource, this.Rect); } }
@@ -303,6 +315,13 @@ export class DrawingGroupDrawingContext extends DrawingContext {
             const drawing = new ImageDrawing(image, destRect); drawing._sourceRect = sourceRect;
             this._Add(drawing);
         } else this._Add(new ImageDrawing(image, sourceRect));
+    }
+    DrawGlyphRun(foreground, glyphRun) {
+        if (!glyphRun || !foreground) return;
+        const retained = glyphRun.TryCreateImmutableGlyphRunReference();
+        const drawing = new GlyphRunDrawing(foreground, retained);
+        drawing._lifetime.Add(retained);
+        try { this._Add(drawing); } catch (error) { drawing.Dispose(); throw error; }
     }
     DrawTextLayout(layout, origin = new Point()) {
         if (layout.IsDisposed) throw new Error('Cannot record a disposed TextLayout.');

@@ -4,6 +4,7 @@
 # committed reports count as a completed run for this source fingerprint.
 set -euo pipefail
 cd "$(dirname "$0")/.."
+node --import ./scripts/register-loader.mjs scripts/compile-glyph-fixture.mjs
 npm run verify:vendor
 npm run test:record
 npm run build
@@ -37,5 +38,6 @@ python tests/invalidation-browser.py
 python tests/worker-performance-browser.py
 python tests/core-port-browser.py
 python tests/implicit-animations-browser.py
+python tests/glyph-geometry-browser.py
 npm run verify:release
 npm run benchmark
