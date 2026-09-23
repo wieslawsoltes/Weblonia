@@ -70,7 +70,7 @@ try:
                     print('STAGE',mode,aot,'navigation',flush=True)
                     page.goto(origin+'/tests/glyph-geometry-entry.html?mode='+mode);page.wait_for_function('globalThis.catalogReady||globalThis.catalogError',timeout=60000);assert not page.evaluate('globalThis.catalogError')
                     state=evaluate(page,'''async([mode,url,aot])=>{
-                        if(mode==='full-isolation')return await catalogHost.InvokeAsync('MountGlyphGeometry',url,aot);
+                        if(mode==='full-isolation')return await catalogHost.InvokeAsync('MountGlyphGeometry',{FontUrl:url,Aot:aot});
                         const A=await import('@wieslawsoltes/avalonia'),{CreateGlyphGeometryScene}=await import('/tests/glyph-geometry-scene.js');
                         globalThis.glyphGeometry=await CreateGlyphGeometryScene(A,catalog.Root,url,aot);return glyphGeometry.State();
                     }''',[mode,origin+'/tests/system-font.ttf',aot],label='mount')
