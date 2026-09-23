@@ -45,7 +45,7 @@ current(automation, 'Incremental automation');
 require(automation.Completed && automation.Failed === 0 && automation.Passed > 0 && !automation.PageErrors.length && !automation.MissingAssets.length, 'Incremental automation failed');
 const consumer = await read('artifacts/package-consumer-result.json');
 current(consumer, 'Packed consumer');
-require(consumer.Passed && consumer.Packages === 18 && consumer.StartupSubpaths && consumer.CorePortApis && consumer.ImplicitAnimationApis && consumer.GlyphPathApis && !consumer.PublicRegistryInstalled, 'Packed offline consumer failed');
+require(consumer.Passed && consumer.Packages === 18 && consumer.StartupSubpaths && consumer.CorePortApis && consumer.ImplicitAnimationApis && consumer.GlyphPathApis && consumer.EffectTransitionApis && !consumer.PublicRegistryInstalled, 'Packed offline consumer failed');
 const corePort = await read('artifacts/core-port/browser-results.json');
 current(corePort, 'Core port browser');
 require(corePort.Completed && corePort.Passed === 3 && corePort.Failed === 0 && !corePort.Interception && !corePort.WorkerBootstrapOverrides
@@ -65,6 +65,16 @@ require(glyphGeometry.Completed && glyphGeometry.Passed===6 && glyphGeometry.Fai
         && (t.Mode==='single'||t.RestartPassed)), 'Positioned glyph/path HTTP qualification failed');
 for(const mode of ['single','render-worker','full-isolation'])for(const aot of [false,true])
     require(glyphGeometry.Tests.some(t=>t.Mode===mode&&t.Aot===aot), 'Missing glyph/path runtime or AOT topology');
+const effectTransitions = await read('artifacts/effects-transitions/browser-results.json');
+current(effectTransitions,'Effects and transitions');
+require(effectTransitions.Completed && effectTransitions.Passed===6 && effectTransitions.Failed===0 && effectTransitions.Tests.length===6
+    && !effectTransitions.Interception && !effectTransitions.WorkerBootstrapOverrides && !effectTransitions.SnapshotForcesRender
+    && effectTransitions.DeterministicTransitionClock && effectTransitions.PixelChannelTolerance===2
+    && !effectTransitions.Errors.length && !effectTransitions.MissingAssets.length
+    && effectTransitions.Tests.every(t=>t.Passed&&t.AutonomousRedraw&&t.BindingRetargeted&&t.MutableBaseRestored&&t.ScalarResourceTransition
+        && t.NullCompleted&&t.ComparedChannels===4&&t.MaximumChannelError<=2&&(t.Mode==='single'||t.RestartPassed)), 'Effect transition HTTP qualification failed');
+for(const mode of ['single','render-worker','full-isolation'])for(const aot of [false,true])
+    require(effectTransitions.Tests.some(t=>t.Mode===mode&&t.Aot===aot),'Missing effect transition runtime or AOT topology');
 const build = await read('artifacts/build-result.json');
 current(build, 'Build', false, false);
 require(build.XamlModules === 75 && build.NoEval && build.FontFiles === 0, 'AOT build contract changed');
@@ -120,7 +130,7 @@ await scan(path.join(root, 'packages'));
 const lines = (await Promise.all(files.map(f => readFile(f, 'utf8')))).reduce((n, s) => n + s.split('\n').length, 0);
 const report = {
     Version: pkg.version, SourceFingerprint: fingerprint, GeneratedAt: new Date().toISOString(),
-    ImplicitAnimations: implicitAnimations, GlyphGeometry: glyphGeometry,
+    ImplicitAnimations: implicitAnimations, GlyphGeometry: glyphGeometry, EffectTransitions: effectTransitions,
     FullAvaloniaParity: false, FullXamlXParity: false, FullUpstreamClonesIncluded: false, OriginalCatalogSubexamplesFullyPorted: false,
     Recovery: await read('docs/recovery/recovery-invalidation.json'),
     UpstreamSkia: await read('docs/SKIASHARPWEB-UPSTREAM.json'),

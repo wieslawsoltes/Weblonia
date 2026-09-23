@@ -1,3 +1,4 @@
+import { SkiaEffectCache } from './effect-cache.js';
 import { CreateSkiaGlyphTypeface } from './glyph-backend.js';
 import { RegisterGlyphTypefaceBackend } from '@wieslawsoltes/avalonia-media';
 import { GetGeometryPath, InstallGeometryBackend } from './geometry-backend.js';
@@ -6,7 +7,7 @@ export { ConfigureCanvasText, CreateTextRasterPlan, GetDeviceTextGeometry } from
 import { SkiaTextService } from './text-service.js';
 import { Initialize } from '@wieslawsoltes/skiasharpweb/browser';
 import { Rect, Size, Point, Matrix, Disposable, Event, CompositeDisposable } from '@wieslawsoltes/avalonia-base';
-import { DrawingContext, DrawingImage, Color, Colors, BrushColor, LinearGradientBrush, RadialGradientBrush, ConicGradientBrush, ImageBrush, VisualBrush, BlurEffect, DropShadowEffect, Bitmap, WriteableBitmap, RenderTargetBitmap, RegisterGeometryBackend, RegisterTextMetricsProvider, RegisterTextLayoutProvider, InvalidateTextServices } from '@wieslawsoltes/avalonia-media';
+import { DrawingContext, DrawingImage, Color, Colors, BrushColor, LinearGradientBrush, RadialGradientBrush, ConicGradientBrush, ImageBrush, VisualBrush, Bitmap, WriteableBitmap, RenderTargetBitmap, RegisterGeometryBackend, RegisterTextMetricsProvider, RegisterTextLayoutProvider, InvalidateTextServices } from '@wieslawsoltes/avalonia-media';
 import { Image } from '@wieslawsoltes/avalonia-controls';
 export class LruCache {
     constructor(maxEntries = 512, maxBytes = 64 * 1024 * 1024) {
@@ -85,6 +86,7 @@ export class SkiaPlatform extends Disposable {
         this.TextImages = new LruCache(options.TextCacheEntries ?? 768, options.TextCacheBytes ?? 48 * 1024 * 1024);
         this.TextMetrics = new LruCache(options.TextMetricsCacheEntries ?? 2048, options.TextMetricsCacheBytes ?? 4 * 1024 * 1024);
         this.SolidPaints = new LruCache(options.SolidPaintCacheEntries ?? 128);
+        this.EffectFilters = new SkiaEffectCache(api, options.EffectCacheEntries ?? 128);
         this._textLifetime = new CompositeDisposable();
         this.DeviceClipQueries = 0; this.TextLinesVisited = 0; this.TextTilesVisited = 0; this.TextRasterizations = 0; this.TextUploads = 0; this.TextMeasurements = 0;
         this._fontRegistrations = new Map();
@@ -329,13 +331,13 @@ export class SkiaPlatform extends Disposable {
         return this._GetTextTiles(text, layout, geometry).next().value;
     }
     GetDiagnostics() {
-        return { Renderer: 'SkiaSharpWeb', NativeRuntime: true, DeviceClipQueries: this.DeviceClipQueries, Frames: this.FrameCount, PathCache: { Count: this.Paths.Count, Hits: this.Paths.Hits, Misses: this.Paths.Misses }, TextCache: { Count: this.TextImages.Count, Bytes: this.TextImages.Bytes, Hits: this.TextImages.Hits, Misses: this.TextImages.Misses }, ParagraphCache: { Count: this.TextService.Cache.Count, EstimatedBytes: this.TextService.Cache.Bytes, KeySerializations: this.TextService.KeySerializations, Builds: this.TextService.ParagraphBuilds }, TextMetricsCache: { Count: this.TextMetrics.Count, Hits: this.TextMetrics.Hits, Misses: this.TextMetrics.Misses }, TextLinesVisited: this.TextLinesVisited, TextTilesVisited: this.TextTilesVisited, TextRasterizations: this.TextRasterizations, TextUploads: this.TextUploads, TextMeasurements: this.TextMeasurements, SolidPaintCache: { Count: this.SolidPaints.Count, Hits: this.SolidPaints.Hits, Misses: this.SolidPaints.Misses }, TextService: this._measureContext ? 'Native SkParagraph for registered fonts; browser system-font fallback' : 'Native SkParagraph with explicit registered fonts' };
+        return { EffectCache: this.EffectFilters.GetDiagnostics(), Renderer: 'SkiaSharpWeb', NativeRuntime: true, DeviceClipQueries: this.DeviceClipQueries, Frames: this.FrameCount, PathCache: { Count: this.Paths.Count, Hits: this.Paths.Hits, Misses: this.Paths.Misses }, TextCache: { Count: this.TextImages.Count, Bytes: this.TextImages.Bytes, Hits: this.TextImages.Hits, Misses: this.TextImages.Misses }, ParagraphCache: { Count: this.TextService.Cache.Count, EstimatedBytes: this.TextService.Cache.Bytes, KeySerializations: this.TextService.KeySerializations, Builds: this.TextService.ParagraphBuilds }, TextMetricsCache: { Count: this.TextMetrics.Count, Hits: this.TextMetrics.Hits, Misses: this.TextMetrics.Misses }, TextLinesVisited: this.TextLinesVisited, TextTilesVisited: this.TextTilesVisited, TextRasterizations: this.TextRasterizations, TextUploads: this.TextUploads, TextMeasurements: this.TextMeasurements, SolidPaintCache: { Count: this.SolidPaints.Count, Hits: this.SolidPaints.Hits, Misses: this.SolidPaints.Misses }, TextService: this._measureContext ? 'Native SkParagraph for registered fonts; browser system-font fallback' : 'Native SkParagraph with explicit registered fonts' };
     }
     Dispose() {
         if (this.IsDisposed)
             return;
         this._textLifetime.Dispose();
-        this.TextMetrics.Dispose(); this.SolidPaints.Dispose();
+        this.TextMetrics.Dispose(); this.SolidPaints.Dispose(); this.EffectFilters.Dispose();
         this.Paths.Dispose();
         this.TextImages.Dispose();
         this.TextService.Dispose();
@@ -460,13 +462,14 @@ export class SkiaDrawingContext extends DrawingContext {
             } };
     }
     OnPush(kind, value) {
-        const C = this.Canvas, state = { PreviousClip: this._deviceClip }; let count = null;
+        const C = this.Canvas, state = { PreviousClip: this._deviceClip }; let count = null, effectCount = null;
         try {
             if (kind === 'Effect') {
-                if (value instanceof BlurEffect) state.Filter = this.Api.SKImageFilter.CreateBlur(value.Radius / 2, value.Radius / 2);
-                else if (value instanceof DropShadowEffect) state.Filter = this.Api.SKImageFilter.CreateDropShadow(value.OffsetX, value.OffsetY, value.BlurRadius / 2, value.BlurRadius / 2, this.Color(value.Color, value.Opacity));
-                else throw new TypeError(`Unsupported effect ${value?.constructor?.name}.`);
-                state.Paint = new this.Api.SKPaint(); state.Paint.ImageFilter = state.Filter; count = C.SaveLayer(state.Paint);
+                state.FilterLease = this.Platform.EffectFilters.Acquire(value);
+                if (state.FilterLease.Filter) {
+                    state.Paint = new this.Api.SKPaint(); state.Paint.ImageFilter = state.FilterLease.Filter;
+                    effectCount = C.SaveCount; count = C.SaveLayer(state.Paint);
+                } else count = C.Save();
             } else if (kind === 'Opacity') {
                 state.Paint = new this.Api.SKPaint({ Color: this.Color(Colors.White, value) }); count = C.SaveLayer(state.Paint);
             } else if (kind === 'OpacityMask') { count = C.SaveLayer(); state.Mask = value; }
@@ -480,8 +483,8 @@ export class SkiaDrawingContext extends DrawingContext {
             this._nativeStates.push(state);
             if (kind !== 'Transform') this._deviceClip = null;
         } catch (error) {
-            try { if (count != null) C.RestoreToCount(count); }
-            finally { state.Paint?.Dispose(); state.Filter?.Dispose(); }
+            try { if (effectCount != null || count != null) C.RestoreToCount(effectCount ?? count); }
+            finally { try { state.Paint?.Dispose(); } finally { state.FilterLease?.Dispose(); } }
             throw error;
         }
     }
@@ -495,7 +498,7 @@ export class SkiaDrawingContext extends DrawingContext {
             }
         } finally {
             try { this.Canvas.Restore(); }
-            finally { this._deviceClip = state.PreviousClip ?? null; state.Paint?.Dispose(); state.Filter?.Dispose(); }
+            finally { this._deviceClip = state.PreviousClip ?? null; try { state.Paint?.Dispose(); } finally { state.FilterLease?.Dispose(); } }
         }
     }
     _FillStroke(brush, pen, bounds, draw) {

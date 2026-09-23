@@ -29,13 +29,17 @@ test('native failed geometry-clip and unsupported effect push restore save count
         assert.equal(c.Canvas.SaveCount,before);assert.equal(c._stack.length,0);assert.equal(c._nativeStates.length,0);
         assert.throws(()=>c.PushEffect({}),/Unsupported/);assert.equal(c.Canvas.SaveCount,before);c.DrawRectangle('#00ff00',null,new A.Rect(0,0,20,20));});
 });
-test('DrawingGroup restores earlier states when a later PushEffect fails',()=>{
-    const group=new A.DrawingGroup([drawing()]);group.Effect={};
-    try{raster(c=>{assert.throws(()=>group.Draw(c),/Unsupported/);assert.equal(c.Canvas.SaveCount,1);assert.equal(c._stack.length,0);assert.equal(c._nativeStates.length,0);});}finally{group.Dispose();}
+test('DrawingGroup restores earlier states when a valid effect fails native allocation',()=>{
+    const group=new A.DrawingGroup([drawing()]),effect=new A.BlurEffect(3);group.Effect=effect;
+    const acquire=platform.EffectFilters.Acquire;platform.EffectFilters.Acquire=()=>{throw new Error('effect allocation');};
+    try{raster(c=>{assert.throws(()=>group.Draw(c),/effect allocation/);assert.equal(c.Canvas.SaveCount,1);assert.equal(c._stack.length,0);assert.equal(c._nativeStates.length,0);});}
+    finally{platform.EffectFilters.Acquire=acquire;group.Dispose();effect.Dispose();}
 });
-test('composition visual restores earlier drawing states on later push failure',()=>{
-    const compositor=new A.Compositor({AutoCommit:false}),visual=compositor.CreateSolidColorVisual();visual.Effect={};compositor.Commit();
-    try{raster(c=>{assert.throws(()=>visual.Render(c),/Unsupported/);assert.equal(c.Canvas.SaveCount,1);assert.equal(c._stack.length,0);});}finally{compositor.Dispose();}
+test('composition visual restores earlier drawing states when a valid effect fails native allocation',()=>{
+    const compositor=new A.Compositor({AutoCommit:false}),visual=compositor.CreateSolidColorVisual(),effect=new A.BlurEffect(3);visual.Effect=effect;compositor.Commit();
+    const acquire=platform.EffectFilters.Acquire;platform.EffectFilters.Acquire=()=>{throw new Error('effect allocation');};
+    try{raster(c=>{assert.throws(()=>visual.Render(c),/effect allocation/);assert.equal(c.Canvas.SaveCount,1);assert.equal(c._stack.length,0);});}
+    finally{platform.EffectFilters.Acquire=acquire;compositor.Dispose();effect.Dispose();}
 });
 test('native opacity-mask draw failure still restores scope and releases paint state',()=>{
     raster(c=>{const state=c.PushOpacityMask(new A.SolidColorBrush('#ff0000'),new A.Rect(0,0,20,20));const paint=c._Paint;c._Paint=()=>{throw new Error('mask allocation');};
