@@ -63,7 +63,7 @@ export async function StartRenderWorker(message, startup = {}) {
                         diagnostics.ReceivedBytes += message.ByteLength;
                         await scene.Apply(batch); await target.Resize(scene.Width, scene.Height, scene.Scale);
                         dirty = true;
-                        send({ Type: 'processed', Sequence: sequence, Generation: generation, Buffer: message.Buffer, Statistics: scene.Statistics }, [message.Buffer]); ++diagnostics.ReturnedBuffers;
+                        send({ Type: 'processed', Sequence: sequence, Generation: generation, AnimationState:scene.GetAnimationReadback(batch.Value.Composition.Upsert.map(x=>x.Id)), Buffer: message.Buffer, Statistics: scene.Statistics }, [message.Buffer]); ++diagnostics.ReturnedBuffers;
                         schedule();
                     } catch (error) { send({ Type: 'batch-error', Sequence: sequence, Generation: generation, Buffer: message.Buffer, Error: { Name: error.name, Message: error.message, Stack: error.stack } }, message.Buffer?.byteLength ? [message.Buffer] : []); }
                 } else if (message?.Type === 'redraw') { dirty = true; schedule(); }

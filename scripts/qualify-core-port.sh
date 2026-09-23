@@ -36,5 +36,6 @@ python tests/threading-performance.py
 python tests/invalidation-browser.py
 python tests/worker-performance-browser.py
 python tests/core-port-browser.py
+python tests/implicit-animations-browser.py
 npm run verify:release
 npm run benchmark

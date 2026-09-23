@@ -87,7 +87,13 @@ assert.equal(group.Children.Count,1);assert.equal(group.GetBounds().Width,10);gr
 const compositor=new A.Compositor({AutoCommit:false}),properties=compositor.CreatePropertySet();properties.InsertQuaternion('Rotation',{X:0,Y:0,Z:0,W:1});
 assert.equal(properties.TryGetQuaternion('Rotation').Status,A.CompositionGetValueStatus.Succeeded);
 assert.equal(properties.TryGetVector4('Rotation').Status,A.CompositionGetValueStatus.TypeMismatch);compositor.Dispose();
-console.log(JSON.stringify({Passed:true,Packages:names.length,FacadeExports:Object.keys(A).length,PublicRegistryInstalled:false,StartupSubpaths:true,CorePortApis:true}));
+const animationClock=new A.ManualClock(),implicitCompositor=new A.Compositor({AutoCommit:false,Clock:animationClock});
+const implicitVisual=implicitCompositor.CreateSolidColorVisual();implicitCompositor.Commit();
+const implicitAnimation=implicitCompositor.CreateScalarKeyFrameAnimation();implicitAnimation.Duration=100;implicitAnimation.Target='Opacity';implicitAnimation.InsertExpressionKeyFrame(1,'this.FinalValue');
+const definitions=implicitCompositor.CreateImplicitAnimationCollection();definitions.Add('Opacity',implicitAnimation);implicitVisual.ImplicitAnimations=definitions;
+implicitVisual.Opacity=.2;implicitCompositor.Commit();animationClock.Advance(50);assert.ok(Math.abs(implicitVisual._Read('Opacity')-.6)<1e-12);
+animationClock.Advance(50);assert.equal(implicitVisual._Read('Opacity'),.2);assert.equal(animationClock._listeners.size,0);implicitCompositor.Dispose();implicitAnimation.Dispose();
+console.log(JSON.stringify({Passed:true,ImplicitAnimationApis:true,Packages:names.length,FacadeExports:Object.keys(A).length,PublicRegistryInstalled:false,StartupSubpaths:true,CorePortApis:true}));
 `);
 const run = spawnSync(process.execPath, ['--import', './register.mjs', 'consumer.mjs'], { cwd: fixture, encoding: 'utf8', timeout: 30000 });
 if (run.error || run.status !== 0) throw new Error(`${run.error ?? ''}\n${run.stdout}\n${run.stderr}`);

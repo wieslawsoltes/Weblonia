@@ -302,7 +302,7 @@ export class Visual extends StyledElement {
         }
         const origin = this.RenderTransformOrigin.ToPixels(this.Bounds.Size), m = this.RenderTransform?.Value ?? this.RenderTransform ?? Matrix.Identity;
         const transform = Matrix.CreateTranslation(-origin.X, -origin.Y).Multiply(m).Multiply(Matrix.CreateTranslation(origin.X + this.Bounds.X, origin.Y + this.Bounds.Y));
-        return this._compositionSelf ? this._compositionSelf.GetLocalTransform().Multiply(transform) : transform;
+        return this._compositionSelf ? (this._compositionSelf.GetRenderTransform?.(this.Bounds)??this._compositionSelf.GetLocalTransform()).Multiply(transform) : transform;
     }
     GetTransformToRoot() {
         let m = Matrix.Identity;
