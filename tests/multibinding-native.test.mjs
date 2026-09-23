@@ -25,6 +25,7 @@ for(const aot of [false,true])for(const scale of [1,1.25,1.5,2,3])test(`MultiBin
         for(const changed of [false,true]){
             if(changed)ChangeMultiBinding(model);root.Layout();assert.equal(A.Canvas.GetLeft(view.FindControl('Box')),changed?80:16);
             assert.equal(view.FindControl('Summary').Text,changed?'updated:99.0 / LABEL':'ready:42.5 / LABEL');
+            assert.deepEqual(['SingleFormat','ReflectedFormat','NullFormat'].map(name=>view.FindControl(name).Text),changed?['{    99.0}','99,00','[13]']:['{    42.5}','42,50','NULL']);
             const expected=pixels(c=>c.DrawRectangle(changed?A.Brushes.Lime:A.Brushes.Red,null,new A.Rect(changed?80:16,16,32,32)),scale);
             compare(pixels(c=>root.RenderTree(c),scale),expected);
             acc.Update(recorder.Capture());const batch=acc.Prepare();assert.ok(batch);

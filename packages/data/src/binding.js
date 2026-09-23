@@ -272,20 +272,17 @@ function sourceRoot(anchor, binding, path) {
         root = anchor.DataContext;
     return { Root: root, Path: remaining, Negate: negate };
 }
-function formatValue(format, value, culture) {
-    return String(format).replace(/\{0(?::([^}]+))?\}/g, (_, spec) => {
-        if (spec && typeof value === 'number') {
-            const m = /^([nNfFpPcC])(\d+)?$/.exec(spec);
-            if (m) {
-                const digits = Number(m[2] ?? 2), kind = m[1].toLowerCase();
-                return new Intl.NumberFormat(culture, { minimumFractionDigits: digits, maximumFractionDigits: digits, useGrouping: kind === 'n', ...(kind === 'p' ? { style: 'percent' } : {}) }).format(value);
-            }
-        }
-        return String(value ?? '');
-    }).replace(/\{\{/g, '{').replace(/\}\}/g, '}');
-}
 export class BindingExpression {
     constructor(target, property, binding, priority = binding.Priority) {
+        if (!(target instanceof AvaloniaObject) || target.IsDisposed) throw new TypeError('A live binding target is required.');
+        if (binding.Converter != null && typeof binding.Converter !== 'function' && typeof binding.Converter.Convert !== 'function')
+            throw new TypeError('Invalid binding converter.');
+        if (binding.StringFormat != null && typeof binding.StringFormat !== 'string') throw new TypeError('Binding.StringFormat must be a string.');
+        if (!Object.values(BindingMode).includes(binding.Mode)) throw new TypeError('Unsupported binding mode.');
+        if (!Object.values(UpdateSourceTrigger).includes(binding.UpdateSourceTrigger)) throw new TypeError('Unsupported source update trigger.');
+        // Parse before Attach clears/replaces a target binding. Missing source
+        // values remain recoverable; unsafe or malformed path syntax does not.
+        if (!(binding instanceof CompiledBindingExtension)) PropertyPath.Parse(sourceRoot({ DataContext: null }, binding, binding.Path).Path);
         this.Target = target;
         this.TargetProperty = property;
         this.ParentBinding = binding;
@@ -348,7 +345,9 @@ export class BindingExpression {
         }
         this._rewiring = true;
         try {
+            let passes = 0;
             do {
+                if (++passes > 128) throw new Error('Binding did not stabilize after 128 updates.');
                 this._pendingRewire = false;
                 this._sourceLifetime.Clear();
                 const binding = this.ParentBinding, resolved = sourceRoot(this._anchor, binding, binding.Path);
@@ -364,61 +363,93 @@ export class BindingExpression {
                     this._sourceMember = segment;
                     current = ReadMember(current, segment);
                 }
-                if (this.Mode !== 'OneWayToSource')
-                    this._publish(current);
-                if (this.Mode === 'OneTime' && current !== UnsetValue) {
+                const success = this.Mode !== 'OneWayToSource' && this._publish(current);
+                if (this.Mode === 'OneTime' && success && !this.IsDisposed) {
                     this._oneTimeDone = true;
-                    this._sourceLifetime.Clear();
+                    this._lifetime.Clear();
                 }
             } while (this._pendingRewire && !this.IsDisposed && !this._oneTimeDone);
         }
         catch (error) {
-            this._error(error);
-            this._setTarget(this.ParentBinding.FallbackValue);
+            this._pendingRewire = false;
+            this._Failure(error);
         }
         finally {
             this._rewiring = false;
         }
     }
-    _publish(value) {
+    /** Converter -> null substitution -> display formatting -> target conversion ->
+     * fallback, in that order. Literal fallback/null replacements never re-enter
+     * the user converter or StringFormat. Reflected and compiled paths share this
+     * publication boundary; DoNothing preserves both target and validation state. */
+    _publish(value, error = null) {
+        if (this.IsDisposed || this.Target.IsDisposed) return false;
         const b = this.ParentBinding;
         try {
-            if (value === UnsetValue)
-                value = b.FallbackValue;
-            if (value === UnsetValue || value === DoNothing) {
-                this._setTarget(value);
-                return;
-            }
-            if (this._negate)
-                value = !value;
-            if (b.Converter)
-                value = typeof b.Converter === 'function' ? b.Converter(value, b.ConverterParameter) : b.Converter.Convert(value, this.TargetProperty.PropertyType, b.ConverterParameter, b.ConverterCulture);
             if (value instanceof BindingNotification) {
-                if (value.HasError)
-                    this._error(value.Error);
+                if (value.HasError) error = value.Error;
                 value = value.Value;
             }
-            else
-                this._error(null);
-            if (value == null && b.TargetNullValue !== UnsetValue)
-                value = b.TargetNullValue;
-            if (b.StringFormat && value !== UnsetValue && value !== DoNothing)
-                value = formatValue(b.StringFormat, value, b.ConverterCulture);
-            this._setTarget(value);
-        }
-        catch (error) {
+            if (value !== UnsetValue && value !== DoNothing) {
+                if (this._negate) value = !value;
+                // Preserve the established JS function(value, parameter) adapter;
+                // IValueConverter objects receive the full Avalonia signature.
+                if (b.Converter) value = typeof b.Converter === 'function'
+                    ? b.Converter(value, b.ConverterParameter)
+                    : b.Converter.Convert(value, this.TargetProperty.PropertyType, b.ConverterParameter, b.ConverterCulture);
+                if (value instanceof BindingNotification) {
+                    if (value.HasError) error = value.Error;
+                    value = value.Value;
+                }
+            }
+            if (this.IsDisposed || this.Target.IsDisposed || value === DoNothing) return false;
+            const nullReplacement = value == null && b.TargetNullValue !== UnsetValue;
+            if (nullReplacement) value = b.TargetNullValue;
+            const type = this.TargetProperty.PropertyType;
+            if (value !== UnsetValue && value !== DoNothing && !nullReplacement &&
+                b.StringFormat?.trim() && (type == null || type === String || type === Object)) {
+                const format = b.StringFormat.includes('{') ? b.StringFormat : `{0:${b.StringFormat}}`;
+                value = FormatComposite(format, [value], b.ConverterCulture);
+            }
+            if (this.IsDisposed || this.Target.IsDisposed || value === DoNothing) return false;
+            value = this._ConvertTargetValue(value);
+            const success = value !== UnsetValue && value !== DoNothing && !error;
+            if (value === UnsetValue) value = this._ConvertTargetValue(b.FallbackValue);
+            if (this.IsDisposed || this.Target.IsDisposed || value === DoNothing) return false;
+            this._setTarget(value, true);
             this._error(error);
-            this._setTarget(b.FallbackValue);
+            return success && !this.IsDisposed;
+        } catch (failure) {
+            this._Failure(error ? new AggregateError([error, failure], 'Binding source and conversion failed.') : failure);
+            return false;
         }
     }
-    _setTarget(value) {
+    _ConvertTargetValue(value) {
+        if (value === UnsetValue || value === DoNothing || this.IsDisposed || this.Target.IsDisposed) return value;
+        const metadata = this.TargetProperty.GetMetadata(this.Target);
+        return metadata.Convert ? metadata.Convert(value) : value;
+    }
+    _Failure(error) {
+        if (this.IsDisposed || this.Target.IsDisposed) return;
+        try { this._setTarget(this.ParentBinding.FallbackValue); }
+        catch (fallbackError) {
+            error = new AggregateError([error, fallbackError], 'Binding conversion and fallback failed.');
+            this._setTarget(UnsetValue, true);
+        }
+        this._error(error);
+    }
+    _setTarget(value, converted = false) {
+        if (this.IsDisposed || this.Target.IsDisposed) return;
         this._updatingTarget = true;
         try {
             if (value === DoNothing)
                 return;
-            const metadata = this.TargetProperty.GetMetadata(this.Target);
-            if (value !== UnsetValue && metadata.Convert)
-                value = metadata.Convert(value);
+            if (!converted && value !== UnsetValue) {
+                const metadata = this.TargetProperty.GetMetadata(this.Target);
+                if (metadata.Convert) value = metadata.Convert(value);
+            }
+            // Metadata converters are application code and can replace this binding.
+            if (this.IsDisposed || this.Target.IsDisposed || value === DoNothing) return;
             if (this.TargetProperty.IsDirect) {
                 if (value !== UnsetValue)
                     this.Target.SetValue(this.TargetProperty, value);
@@ -431,6 +462,7 @@ export class BindingExpression {
         }
     }
     SetCurrentValue(value) {
+        if (this.IsDisposed || this.Target.IsDisposed) return;
         if (this.TargetProperty.IsDirect)
             this.Target.SetValue(this.TargetProperty, value);
         else
@@ -461,17 +493,22 @@ export class BindingExpression {
         }
     }
     _error(error) {
-        BindingOperations.SetValidationError(this.Target, this.TargetProperty, error);
+        if (!this.IsDisposed && !this.Target.IsDisposed)
+            BindingOperations.SetValidationError(this.Target, this.TargetProperty, error);
     }
     Dispose() {
-        if (this.IsDisposed)
-            return;
+        if (this.IsDisposed) return;
         this.IsDisposed = true;
-        this._lifetime.Dispose();
-        if (this.Target._bindings.get(this.TargetProperty) === this)
-            this.Target._bindings.delete(this.TargetProperty);
-        this.Target._RemovePriorityValue(this.TargetProperty, this._key);
-        this._error(null);
+        try { this._lifetime.Dispose(); }
+        finally {
+            try {
+                if (this.Target._bindings.get(this.TargetProperty) === this)
+                    this.Target._bindings.delete(this.TargetProperty);
+                this.Target._RemovePriorityValue(this.TargetProperty, this._key);
+                if (!this.Target._bindings.has(this.TargetProperty))
+                    BindingOperations.SetValidationError(this.Target, this.TargetProperty, null);
+            } finally { this.Target._lifetime.Remove(this); }
+        }
     }
     unsubscribe() {
         this.Dispose();
@@ -679,12 +716,11 @@ export class CompiledBindingExpression extends BindingExpression {
                     else if (node.Element.Get) { ++this.Diagnostics.Reads; node.Output = node.Element.Get(node.Input); }
                 }
                 const value = elements.length ? (this._nodes.length ? this._nodes.at(-1).Output : UnsetValue) : this._root;
-                if (this.Mode !== 'OneWayToSource') this._publish(value);
-                const error = this._nodes.find(node => node.Error)?.Error;
-                if (error) this._error(error);
-                if (this.Mode === 'OneTime' && value !== UnsetValue && !error) { this._oneTimeDone = true; this._DropNodes(0); }
+                const error = this._nodes.find(node => node.Error)?.Error ?? null;
+                const success = this.Mode !== 'OneWayToSource' && this._publish(value, error);
+                if (this.Mode === 'OneTime' && success && !this.IsDisposed) { this._oneTimeDone = true; this._lifetime.Clear(); }
             }
-        } catch (error) { this._pendingIndex = Infinity; this._error(error); this._setTarget(this.ParentBinding.FallbackValue); }
+        } catch (error) { this._pendingIndex = Infinity; this._Failure(error); }
         finally { this._processing = false; }
     }
     UpdateSource(value = this.Target.GetValue(this.TargetProperty)) {

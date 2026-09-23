@@ -45,7 +45,7 @@ current(automation, 'Incremental automation');
 require(automation.Completed && automation.Failed === 0 && automation.Passed > 0 && !automation.PageErrors.length && !automation.MissingAssets.length, 'Incremental automation failed');
 const consumer = await read('artifacts/package-consumer-result.json');
 current(consumer, 'Packed consumer');
-require(consumer.Passed && consumer.Packages === 18 && consumer.StartupSubpaths && consumer.CorePortApis && consumer.ImplicitAnimationApis && consumer.GlyphPathApis && consumer.EffectTransitionApis && consumer.XamlNamespaceApis && consumer.MultiBindingApis && !consumer.PublicRegistryInstalled, 'Packed offline consumer failed');
+require(consumer.Passed && consumer.Packages === 18 && consumer.StartupSubpaths && consumer.CorePortApis && consumer.ImplicitAnimationApis && consumer.GlyphPathApis && consumer.EffectTransitionApis && consumer.XamlNamespaceApis && consumer.MultiBindingApis && consumer.SingleBindingPipeline && !consumer.PublicRegistryInstalled, 'Packed offline consumer failed');
 const corePort = await read('artifacts/core-port/browser-results.json');
 current(corePort, 'Core port browser');
 require(corePort.Completed && corePort.Passed === 3 && corePort.Failed === 0 && !corePort.Interception && !corePort.WorkerBootstrapOverrides
@@ -90,7 +90,7 @@ current(multiBinding, 'MultiBinding');
 require(multiBinding.Completed && multiBinding.Passed===6 && multiBinding.Failed===0 && multiBinding.Tests.length===6
     && !multiBinding.Interception && !multiBinding.WorkerBootstrapOverrides && !multiBinding.SnapshotForcesRender
     && multiBinding.PixelChannelTolerance===2 && !multiBinding.Errors.length && !multiBinding.MissingAssets.length
-    && multiBinding.Tests.every(t=>t.Passed && t.AutonomousRedraw && t.NestedCompiledBindings && t.ConverterFormatting && t.DisposedSubscriptions
+    && multiBinding.Tests.every(t=>t.Passed && t.AutonomousRedraw && t.SingleBindingPipeline && t.NestedCompiledBindings && t.ConverterFormatting && t.DisposedSubscriptions
         && t.ComparedChannels===4 && t.MaximumChannelError<=2 && (t.Mode==='single'||t.RestartPassed)), 'MultiBinding HTTP qualification failed');
 for(const mode of ['single','render-worker','full-isolation'])for(const aot of [false,true])
     require(multiBinding.Tests.some(t=>t.Mode===mode&&t.Aot===aot), 'Missing MultiBinding runtime or AOT topology');

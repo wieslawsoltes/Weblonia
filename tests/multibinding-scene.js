@@ -9,6 +9,7 @@ export async function CreateMultiBindingScene(A, root, aot = false) {
     const rendered = root.Renderer.FrameRendered.Add(() => frames++);
     root.Content = view; await root.RenderNow();
     const state = () => ({ Aot: aot, HasDocument: typeof document !== 'undefined', Frames: frames,
+        SingleFormatting: [view.FindControl('SingleFormat').Text, view.FindControl('ReflectedFormat').Text, view.FindControl('NullFormat').Text],
         Left: A.Canvas.GetLeft(box), Text: label.Text, Subscriptions: model.PropertyChanged.Count + model._propertyChanges.observers.length,
         RenderError: root.LastRenderError?.message ?? null });
     return {

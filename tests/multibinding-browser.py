@@ -74,9 +74,11 @@ try:
                     assert state['Aot']==aot and state['HasDocument']==(mode!='full-isolation') and not state['RenderError'], state
                     assert state['Left']==16 and state['Subscriptions']>0, state
                     assert state['Text']=='ready:42.5 / LABEL', state
+                    assert state['SingleFormatting']==['{    42.5}', '42,50', 'NULL'], state
                     initial, maximum = presented(page, before)
                     change = evaluate(page, "async mode=>mode==='full-isolation'?await catalogHost.InvokeAsync('ChangeMultiBinding'):await multiScene.Change()", mode)
                     assert change['Left']==80 and change['Text']=='updated:99.0 / LABEL', change
+                    assert change['SingleFormatting']==['{    99.0}', '99,00', '[13]'], change
                     updated, error = presented(page, after); maximum=max(maximum,error)
                     current = evaluate(page, "async mode=>mode==='full-isolation'?await catalogHost.InvokeAsync('MultiBindingState'):multiScene.State()", mode)
                     assert current['Frames']>change['FramesBefore'] and not current['RenderError'],current
@@ -91,7 +93,7 @@ try:
                     if mode=='full-isolation': evaluate(page,'async()=>await catalogHost.DisposeAsync()')
                     else: evaluate(page,'()=>{multiScene.Dispose();catalog.Root.Dispose();}')
                     entry.update(Passed=True, MaximumChannelError=maximum, ComparedChannels=4, AutonomousRedraw=True,
-                        NestedCompiledBindings=True, ConverterFormatting=True, DisposedSubscriptions=True,
+                        NestedCompiledBindings=True, ConverterFormatting=True, SingleBindingPipeline=True, DisposedSubscriptions=True,
                         RestartPassed=mode!='single', State=current)
                 except Exception as error: entry['Error']=str(error)
                 finally:

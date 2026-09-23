@@ -124,7 +124,10 @@ A.BindingOperations.Apply(aggregateTarget,A.TextBlock.TextProperty,aggregate);as
 aggregateTarget.DataContext.Second=5;assert.equal(aggregateTarget.Text,'Total: 8.0');aggregateTarget.Dispose();
 assert.equal(new A.StringFormatMultiValueConverter('{0}/{1}').Convert(['a','b']), 'a/b');
 assert.equal(new A.StringFormatValueConverter('F1').Convert(3.5,String,null,'de-DE'), '3,5');
-console.log(JSON.stringify({Passed:true,MultiBindingApis:true,XamlNamespaceApis:true,EffectTransitionApis:true,GlyphPathApis:true,ImplicitAnimationApis:true,Packages:names.length,FacadeExports:Object.keys(A).length,PublicRegistryInstalled:false,StartupSubpaths:true,CorePortApis:true}));
+const formatted = new A.TextBlock();formatted.DataContext={Value:12};
+const simple=new A.Binding('Value');simple.StringFormat='D4';formatted.Bind(A.TextBlock.TextProperty,simple);
+assert.equal(formatted.Text,'0012');formatted.Dispose();
+console.log(JSON.stringify({Passed:true,SingleBindingPipeline:true,MultiBindingApis:true,XamlNamespaceApis:true,EffectTransitionApis:true,GlyphPathApis:true,ImplicitAnimationApis:true,Packages:names.length,FacadeExports:Object.keys(A).length,PublicRegistryInstalled:false,StartupSubpaths:true,CorePortApis:true}));
 `);
 const run = spawnSync(process.execPath, ['--import', './register.mjs', 'consumer.mjs'], { cwd: fixture, encoding: 'utf8', timeout: 30000 });
 if (run.error || run.status !== 0) throw new Error(`${run.error ?? ''}\n${run.stdout}\n${run.stderr}`);
