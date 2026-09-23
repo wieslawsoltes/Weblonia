@@ -1,3 +1,6 @@
+import { CreateSkiaGlyphTypeface } from './glyph-backend.js';
+import { RegisterGlyphTypefaceBackend } from '@wieslawsoltes/avalonia-media';
+import { GetGeometryPath, InstallGeometryBackend } from './geometry-backend.js';
 import { ConfigureCanvasText, TextRasterSignature, CreateTextRasterPlan, GetDeviceTextGeometry } from './text-raster.js';
 export { ConfigureCanvasText, CreateTextRasterPlan, GetDeviceTextGeometry } from './text-raster.js';
 import { SkiaTextService } from './text-service.js';
@@ -78,7 +81,7 @@ export class SkiaPlatform extends Disposable {
         super();
         this.Api = api;
         this.Options = options;
-        this.Paths = new LruCache(options.PathCacheEntries ?? 512);
+        this.Paths = new LruCache(options.PathCacheEntries ?? 512, options.PathCacheBytes ?? 32 * 1024 * 1024);
         this.TextImages = new LruCache(options.TextCacheEntries ?? 768, options.TextCacheBytes ?? 48 * 1024 * 1024);
         this.TextMetrics = new LruCache(options.TextMetricsCacheEntries ?? 2048, options.TextMetricsCacheBytes ?? 4 * 1024 * 1024);
         this.SolidPaints = new LruCache(options.SolidPaintCacheEntries ?? 128);
@@ -110,30 +113,8 @@ export class SkiaPlatform extends Disposable {
     }
     _Install() {
         const platform = this;
-        RegisterGeometryBackend({ GetBounds(g) {
-                const b = platform.GetPath(g).TightBounds;
-                return new Rect(b.Left, b.Top, b.Width, b.Height);
-            }, FillContains(g, p) {
-                return platform.GetPath(g).Contains(p.X, p.Y);
-            }, StrokeContains(g, pen, point) {
-                const path = platform.GetPath(g).Stroke({ Width: pen.Thickness, Cap: pen.LineCap === 'Flat' ? 'Butt' : pen.LineCap, Join: pen.LineJoin, MiterLimit: pen.MiterLimit });
-                try {
-                    return path?.Contains(point.X, point.Y) ?? false;
-                }
-                finally {
-                    path?.Dispose();
-                }
-            }, Combine(a, b, mode) {
-                const result = platform.GetPath(a).Op(platform.GetPath(b), mode === 'Exclude' ? 'Difference' : mode);
-                if (!result)
-                    throw new Error('Skia path operation failed.');
-                try {
-                    return result.ToSvgPathData();
-                }
-                finally {
-                    result.Dispose();
-                }
-            } });
+        this._textLifetime.Add(InstallGeometryBackend(platform));
+        this._textLifetime.Add(RegisterGlyphTypefaceBackend((data,options)=>this.CreateGlyphTypeface(data,options)));
         this._textLifetime.Add(RegisterTextLayoutProvider(this.TextService));
         if (this._measureContext) this._textLifetime.Add(RegisterTextMetricsProvider({ SupportsSpacing: true,
             Measure: (text, typeface, size, options) => this.MeasureText(text, typeface, size, options) }));
@@ -161,21 +142,7 @@ export class SkiaPlatform extends Disposable {
             }
         };
     }
-    GetPath(geometry) {
-        if (!geometry)
-            return new this.Api.SKPath();
-        const data = geometry.Data, transform = geometry.Transform?.Value ?? geometry.Transform, key = `${geometry.FillRule}|${transform ?? ''}|${data}`;
-        let path = this.Paths.Get(key);
-        if (path)
-            return path;
-        path = data ? this.Api.SKPath.ParseSvgPathData(data) : new this.Api.SKPath();
-        if (!path)
-            throw new SyntaxError('Invalid SVG geometry.');
-        path.FillType = geometry.FillRule === 'NonZero' ? this.Api.SKPathFillType.Winding : this.Api.SKPathFillType.EvenOdd;
-        if (transform && !transform.IsIdentity)
-            path.Transform(matrixArray(transform));
-        return this.Paths.Set(key, path);
-    }
+    GetPath(geometry, kind = 'fill') { return GetGeometryPath(this, geometry, kind); }
     async LoadBitmap(bitmap) {
         if (!bitmap || bitmap.IsDisposed || bitmap instanceof DrawingImage || bitmap instanceof WriteableBitmap || bitmap._native)
             return bitmap;
@@ -281,6 +248,10 @@ export class SkiaPlatform extends Disposable {
     InvalidateFonts() {
         if (this.IsDisposed) return;
         this.TextImages.Clear(); this.TextMetrics.Clear(); InvalidateTextServices();
+    }
+    CreateGlyphTypeface(data, options = {}) {
+        if (this.IsDisposed) throw new Error('SkiaPlatform is disposed.');
+        return CreateSkiaGlyphTypeface(this.Api, data, options);
     }
     RegisterTypeface(family, bytes) {
         if (this.IsDisposed) throw new Error('The Skia platform has been disposed.');
@@ -616,8 +587,13 @@ export class SkiaDrawingContext extends DrawingContext {
         }
     }
     DrawGeometry(brush, pen, geometry) {
-        const path = this.Platform.GetPath(geometry), b = path.Bounds, bounds = new Rect(b.Left, b.Top, b.Width, b.Height);
-        this._FillStroke(brush, pen, bounds, paint => this.Canvas.DrawPath(path, paint));
+        if (!geometry) return;
+        const draw = (role, fill, stroke) => {
+            const path = this.Platform.GetPath(geometry, role), b = path.Bounds;
+            this._FillStroke(fill, stroke, new Rect(b.Left,b.Top,b.Width,b.Height), paint => this.Canvas.DrawPath(path, paint));
+        };
+        if (brush) draw('fill', brush, null);
+        if (pen) draw('stroke', null, pen);
     }
     DrawImage(source, sourceRect, destRect) {
         if (source instanceof DrawingImage) { source.Draw(this, sourceRect, destRect); return; }
@@ -639,6 +615,12 @@ export class SkiaDrawingContext extends DrawingContext {
             const bottom = (Math.round(rect.Bottom * m[4] + m[5]) - m[5]) / m[4];
             this.DrawRectangle(brush, null, new Rect(x, y, Math.max(1, Math.round(rect.Width * m[0])) / m[0], Math.max(1 / m[4], bottom - y)));
         } else this.DrawRectangle(brush, null, rect);
+    }
+    DrawGlyphRun(foreground, glyphRun) {
+        if (!foreground || !glyphRun) return;
+        if (this.IsDisposed || this.Platform.IsDisposed) throw new Error('Drawing context or platform is disposed.');
+        const native = glyphRun._GetNative(this.Platform);
+        this._FillStroke(foreground, null, native.Bounds, paint => native.Draw(this.Canvas, paint));
     }
     DrawTextLayout(layout, origin = new Point()) {
         if (layout._nativeLayout) { layout._nativeLayout.Draw(this, origin); return; }

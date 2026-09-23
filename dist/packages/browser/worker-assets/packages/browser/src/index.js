@@ -679,7 +679,7 @@ export class Window extends TopLevel {
         this._dialogResult = result;
         const win = this._window;
         this._FinishClose();
-        if (this._ownsBrowserWindow && !win.closed)
+        if (this._ownsBrowserWindow && win && !win.closed)
             win.close();
     }
     _FinishClose() {

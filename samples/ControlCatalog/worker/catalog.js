@@ -1,3 +1,4 @@
+import { GlyphPathDemo } from './glyph-path-demo.js';
 import * as A from "../../../packages/browser/worker-assets/packages/avalonia/src/index.js";
 import { ReactiveObject, ReactiveCommand } from "../../../packages/browser/worker-assets/vendor/reactiveweb.browser.js";
 import { Subject, debounceTime, distinctUntilChanged } from "../../../packages/browser/worker-assets/vendor/rxjs.js";
@@ -310,8 +311,22 @@ export class CatalogController {
         if (id === 'TextBox') {
             find('LongDocumentEditor').Text = Array.from({ length: 1000 }, (_, i) => `${String(i+1).padStart(4, '0')}    office affinity · source text · ${'horizontal and vertical scrolling  '.repeat(4)}`).join('\n');
         }
-        if (id === 'CustomDrawing')
+        if (id === 'CustomDrawing') {
             find('DrawingHost').Content = new DrawingDemo();
+            const demo = new GlyphPathDemo(); find('GlyphPathHost').Content = demo;
+            this._pageLifetime.Add(find('PathFill').Click.Add(()=>demo.ToggleFill()));
+            this._pageLifetime.Add(find('PathStroke').Click.Add(()=>demo.ToggleStroke()));
+            this._pageLifetime.Add(find('PathRetarget').Click.Add(()=>demo.Retarget()));
+            const status=find('GlyphFontStatus');
+            this._pageLifetime.Add(find('GlyphFont').Click.Add(async()=>{
+                try{
+                    const files=await this.Root.StorageProvider.OpenFilePickerAsync({Title:'Choose a font for positioned glyph rendering',AllowMultiple:false});
+                    if(demo.IsDisposed||!files.length)return;
+                    const bytes=await files[0].OpenReadAsync();if(demo.IsDisposed)return;
+                    status.Text='Native glyphs · '+demo.LoadFont(bytes);
+                }catch(error){if(!demo.IsDisposed)status.Text=error.message;}
+            }));
+        }
         if (id === 'Image') {
             const canvas = typeof document === 'undefined' ? new OffscreenCanvas(720,300) : document.createElement('canvas');
             canvas.width = 720;

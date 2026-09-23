@@ -93,7 +93,12 @@ const implicitAnimation=implicitCompositor.CreateScalarKeyFrameAnimation();impli
 const definitions=implicitCompositor.CreateImplicitAnimationCollection();definitions.Add('Opacity',implicitAnimation);implicitVisual.ImplicitAnimations=definitions;
 implicitVisual.Opacity=.2;implicitCompositor.Commit();animationClock.Advance(50);assert.ok(Math.abs(implicitVisual._Read('Opacity')-.6)<1e-12);
 animationClock.Advance(50);assert.equal(implicitVisual._Read('Opacity'),.2);assert.equal(animationClock._listeners.size,0);implicitCompositor.Dispose();implicitAnimation.Dispose();
-console.log(JSON.stringify({Passed:true,ImplicitAnimationApis:true,Packages:names.length,FacadeExports:Object.keys(A).length,PublicRegistryInstalled:false,StartupSubpaths:true,CorePortApis:true}));
+const figure=new A.PathFigure(new A.Point(0,0),[new A.LineSegment(new A.Point(12,0),false),new A.LineSegment(new A.Point(12,12))]);
+const pathGeometry=new A.PathGeometry([figure]);assert.ok(pathGeometry instanceof A.StreamGeometry);assert.equal(pathGeometry.FillData,'M0 0 L12 0 L12 12 Z');assert.equal(pathGeometry.StrokeData,'M0 0 M12 0 L12 12 L0 0');
+const glyphInfo=new A.GlyphInfo(1,0,12,new A.Vector(.5,1));assert.equal(glyphInfo.GlyphAdvance,12);assert.ok(Object.isFrozen(glyphInfo.GlyphOffset));
+assert.equal(typeof A.GlyphRun,'function');assert.equal(typeof A.GlyphTypeface.FromData,'function');assert.equal(typeof A.GlyphRunDrawing,'function');
+pathGeometry.Dispose();for(const segment of figure.Segments)segment.Dispose();figure.Dispose();
+console.log(JSON.stringify({Passed:true,GlyphPathApis:true,ImplicitAnimationApis:true,Packages:names.length,FacadeExports:Object.keys(A).length,PublicRegistryInstalled:false,StartupSubpaths:true,CorePortApis:true}));
 `);
 const run = spawnSync(process.execPath, ['--import', './register.mjs', 'consumer.mjs'], { cwd: fixture, encoding: 'utf8', timeout: 30000 });
 if (run.error || run.status !== 0) throw new Error(`${run.error ?? ''}\n${run.stdout}\n${run.stderr}`);

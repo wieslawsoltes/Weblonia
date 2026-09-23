@@ -569,7 +569,7 @@ export class XamlRuntimeContext {
             target.Value = value;
             return;
         }
-        for (const member of ['Children', 'Figures', 'Segments', 'Items', 'GradientStops'])
+        for (const member of ['Children', 'Figures', 'Segments', 'Points', 'Items', 'GradientStops'])
             if (target[member]?.Add) {
                 target[member].Add(value);
                 return;

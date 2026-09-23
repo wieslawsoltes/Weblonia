@@ -1,3 +1,9 @@
 <StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
 <Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Drawing primitives" FontSize="17" FontWeight="SemiBold"/><ContentControl x:Name="DrawingHost" Height="350"/></StackPanel></Border>
+<Border Classes="card"><StackPanel Spacing="12">
+<TextBlock Text="Retained paths and positioned glyphs" FontSize="17" FontWeight="SemiBold"/>
+<WrapPanel><Button x:Name="PathFill" Content="Toggle fill" Margin="0,0,8,8"/><Button x:Name="PathStroke" Content="Toggle curved stroke" Margin="0,0,8,8"/><Button x:Name="PathRetarget" Content="Change geometry / glyph offsets" Margin="0,0,8,8"/><Button x:Name="GlyphFont" Content="Choose font…" Margin="0,0,8,8"/></WrapPanel>
+<TextBlock x:Name="GlyphFontStatus" Text="SVG/Avalonia paths, stroke gaps, native glyph IDs and worker rendering." TextWrapping="Wrap"/>
+<ContentControl x:Name="GlyphPathHost" Height="245"/>
+</StackPanel></Border>
 </StackPanel>

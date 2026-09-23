@@ -1,0 +1,78 @@
+name: Qualify glyph and path geometry port
+on:
+  push:
+    branches: [feature/glyphrun-pathgeometry-parity]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: glyph-port-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  qualify:
+    if: github.repository == 'wieslawsoltes/Weblonia' && github.ref == 'refs/heads/feature/glyphrun-pathgeometry-parity'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          package-manager-cache: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+      - name: Materialize exact reviewed source
+        run: |
+          python scripts/apply-glyph-edits.py
+          python scripts/apply-secondary-edits.py
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -u
+          git add -A packages scripts tests docs samples
+          if ! git diff --cached --quiet; then
+            git commit -m 'feat: materialize native glyph and mutable path geometry implementation'
+            git push origin HEAD:feature/glyphrun-pathgeometry-parity
+          fi
+      - run: python -m pip install -r tests/requirements.txt
+      - run: python -m playwright install --with-deps chromium
+      - name: Qualify the new actual HTTP integration first
+        run: |
+          node --import ./scripts/register-loader.mjs scripts/compile-glyph-fixture.mjs
+          npm run build
+          python tests/glyph-geometry-browser.py
+      - name: Execute all existing and new release gates
+        run: |
+          mkdir -p artifacts/glyph-geometry
+          if ! bash scripts/qualify-core-port.sh > artifacts/glyph-geometry/qualification.log 2>&1; then
+            tail -160 artifacts/glyph-geometry/qualification.log
+            exit 1
+          fi
+          tail -40 artifacts/glyph-geometry/qualification.log
+      - name: Rebuild current verification metadata, source manifest and archives
+        run: |
+          cp docs/VERIFICATION.json dist/docs/VERIFICATION.json
+          python scripts/archive.py --output /tmp/glyph-port-release
+      - name: Commit qualified generated assets and evidence
+        run: |
+          git add -u
+          git add -A packages samples scripts tests docs dist SOURCE-MANIFEST.json
+          git add -f artifacts
+          if ! git diff --cached --quiet; then
+            git commit -m 'build: regenerate qualified glyph path workers packages and evidence'
+            git push origin HEAD:feature/glyphrun-pathgeometry-parity
+          fi
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: glyph-port-qualification
+          path: artifacts/
+      - uses: actions/upload-artifact@v7
+        if: success()
+        with:
+          name: glyph-port-release
+          path: /tmp/glyph-port-release/

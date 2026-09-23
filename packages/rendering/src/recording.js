@@ -6,7 +6,7 @@ import { CaptureScrollPolicy } from './scrolling.js';
 import { CompositionProtocolError } from './protocol.js';
 import { CompositionReferenceIndex } from './references.js';
 
-export const DrawingOpcode = Object.freeze({ Push: 1, Pop: 2, Rectangle: 3, Ellipse: 4, Line: 5, Geometry: 6, Image: 7, Text: 8, Caret: 9, Acrylic: 10 });
+export const DrawingOpcode = Object.freeze({ Push: 1, Pop: 2, Rectangle: 3, Ellipse: 4, Line: 5, Geometry: 6, Image: 7, Text: 8, Caret: 9, Acrylic: 10, GlyphRun: 11 });
 /** A UI-side portable display-list recorder. Render is called only on invalidated
  * content. No native graphics handle is retained in its command stream. */
 export class PortableDrawingContext extends DrawingContext {
@@ -22,6 +22,7 @@ export class PortableDrawingContext extends DrawingContext {
         if (source instanceof DrawingImage) source.Draw(this, sourceRect, destRect);
         else this._command(DrawingOpcode.Image, [source, sourceRect, destRect]);
     }
+    DrawGlyphRun(...args) { this._command(DrawingOpcode.GlyphRun, args); }
     DrawTextLayout(...args) { this._command(DrawingOpcode.Text, args); }
     DrawCaret(...args) { this._command(DrawingOpcode.Caret, args); }
     DrawAcrylic(...args) { this._command(DrawingOpcode.Acrylic, args); }
@@ -43,6 +44,7 @@ export function ReplayDrawingCommands(commands, context, decode = identity) {
                 case DrawingOpcode.Line:context.DrawLine(d(c[1]),d(c[2]),d(c[3]));break;
                 case DrawingOpcode.Geometry:context.DrawGeometry(d(c[1]),d(c[2]),d(c[3]));break;
                 case DrawingOpcode.Image:context.DrawImage(d(c[1]),d(c[2]),d(c[3]),d(c[4]));break;
+                case DrawingOpcode.GlyphRun:context.DrawGlyphRun(d(c[1]),d(c[2]));break;
                 case DrawingOpcode.Text:context.DrawTextLayout(d(c[1]),d(c[2]));break;
                 case DrawingOpcode.Caret:if(context.DrawCaret)context.DrawCaret(d(c[1]),d(c[2]));else context.DrawRectangle(d(c[1]),null,d(c[2]));break;
                 case DrawingOpcode.Acrylic:context.DrawAcrylic(d(c[1]),d(c[2]),d(c[3]));break;

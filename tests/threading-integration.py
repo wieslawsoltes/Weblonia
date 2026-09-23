@@ -109,6 +109,46 @@ with ExitStack() as cleanup, sync_playwright()as p:
   invoke(page,'NewModal');state=wait_window_open(page,invoke)
   require(state['Opened'] and not state['OwnerEnabled'],str(state));invoke(page,'CloseModal',{'Accepted':True,'Value':42});page.wait_for_timeout(100);result=invoke(page,'GetModalState');require(result['Completed'] and result['OwnerEnabled'] and result['Result']=={'Accepted':True,'Value':42},str(result));return result
  check('real isolated modal window blocks owner and returns its exact result',modal)
+ def secondary_lifetime():
+  rounds=[]
+  for index in range(6):
+   modal=index%2==1;invoke(page,'NewModal' if modal else 'NewWindow');state=wait_window_open(page,invoke)
+   require(state['Opened'] and not state['Error'],str(state))
+   require(page.evaluate('catalogHost.Children.size')==1,'Closed child hosts remained registered')
+   if modal:
+    result={'Accepted':True,'Iteration':index};invoke(page,'CloseModal',result)
+    page.wait_for_function('async()=>{const s=await catalogHost.InvokeAsync("GetModalState");return s.Completed&&s.OwnerEnabled;}')
+    require(invoke(page,'GetModalState')['Result']==result,'Repeated modal lost its result')
+   else:invoke(page,'CloseWindow')
+   page.wait_for_function('catalogHost.Children.size===0&&catalogHost._wasmSource.PendingDeliveries===0',timeout=10000)
+   rounds.append({'Modal':modal,'ReleasedHosts':True,'PendingNativeDeliveries':0})
+  return {'Rounds':rounds,'RetryCount':0,'CanonicalWorkers':args.http}
+ check('repeated native-ready windows release child hosts and independent WASM deliveries',secondary_lifetime)
+ def secondary_failure():
+  # This fixture reports an explicit bootstrap failure over the real worker
+  # protocol. It does not replace the window implementation or retry a worker.
+  original=page.evaluate('catalogHost.Options.RenderWorkerUrl??null')
+  page.evaluate('catalogHost.Options.RenderWorkerUrl=new URL("/tests/secondary-failed-worker.js",location.href).href')
+  started=time.monotonic()
+  try:
+   invoke(page,'NewModal')
+   deadline=time.monotonic()+10
+   while True:
+    permit=page.locator('dialog[open] button',has_text='Continue')
+    if permit.count():permit.first.click()
+    state=invoke(page,'GetWindowState')
+    if state['OwnerEnabled'] and 'deliberate secondary bootstrap failure' in state['Status']:break
+    if time.monotonic()>=deadline:raise AssertionError({'SecondaryFailureNotPropagated':state})
+    page.wait_for_timeout(20)
+   page.wait_for_function('catalogHost.Children.size===0&&catalogHost._wasmSource.PendingDeliveries===0',timeout=10000)
+   require(not state['Opened'] and not state['Renderer'],str(state))
+  finally:
+   page.evaluate('url=>{if(url===null)delete catalogHost.Options.RenderWorkerUrl;else catalogHost.Options.RenderWorkerUrl=url;}',original)
+  # A failed sibling must neither dispose shared compilation nor poison its owner.
+  invoke(page,'NewWindow');healthy=wait_window_open(page,invoke);require(healthy['Opened'],str(healthy));invoke(page,'CloseWindow')
+  page.wait_for_function('catalogHost.Children.size===0&&catalogHost._wasmSource.PendingDeliveries===0',timeout=10000)
+  return {'OwnerRestored':True,'PendingNativeDeliveries':0,'FollowingWindowPassed':True,'RetryCount':0,'Milliseconds':round((time.monotonic()-started)*1000,2)}
+ if args.http:check('failed secondary bootstrap restores modal owner and leaves the next real window usable',secondary_failure)
  report['FinalDiagnostics']=page.evaluate('async()=>await catalogHost.GetDiagnosticsAsync()')
  page.evaluate('async()=>await catalogHost.DisposeAsync()');require(page.locator('canvas').count()==0,'host disposal leaked canvas');page.close();browser.close()
 report['Completed']=True;report['Passed']=sum(t['Passed']for t in report['Tests']);report['Failed']=len(report['Tests'])-report['Passed'];report['FinalSourceFingerprint']=source_fingerprint(ROOT);save();print(json.dumps({'Passed':report['Passed'],'Failed':report['Failed'],'Errors':report['Errors'],'MissingAssets':report['MissingAssets']},indent=2));raise SystemExit(1 if report['Failed']or report['Errors']or report['MissingAssets']else 0)

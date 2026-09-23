@@ -1,0 +1,50 @@
+{
+  "Repository": "AvaloniaUI/Avalonia",
+  "Commit": "dff6a87665aa456c37b8cf89647e007f4c3066d7",
+  "Files": [
+    {
+      "Path": "src/Avalonia.Base/Media/GlyphRun.cs",
+      "Sha256": "aab6f5d34da59325dd4a99dc878c42d950ad59cef792090f857e97d45783463d"
+    },
+    {
+      "Path": "src/Avalonia.Base/Media/GlyphTypeface.cs",
+      "Sha256": "bf2c186694734d8c5f320a0c67bab031bd2f1eb87b5fbe84b6c04ea8589455f4"
+    },
+    {
+      "Path": "src/Avalonia.Base/Media/GlyphMetrics.cs",
+      "Sha256": "daa7608132cfcd473dd79e35290c56c7ca453fa1c03f2008744cc980b74a32b1"
+    },
+    {
+      "Path": "src/Avalonia.Base/Media/GlyphRunMetrics.cs",
+      "Sha256": "5db9042f73a6d39cb9364c75a0ae3ebf2719e553ed223575ee339aea22fdfbeb"
+    },
+    {
+      "Path": "src/Avalonia.Base/Media/GlyphRunDrawing.cs",
+      "Sha256": "849b4c297314709ef262256b60f34cd69d6188484db86ce5f6e9e7e817cdb2d6"
+    },
+    {
+      "Path": "src/Avalonia.Base/Media/IImmutableGlyphRunReference.cs",
+      "Sha256": "2bdc2c1b26a7bf0a976c6becd57a0bcd8fbff3a7f4d64d70f68f650facb4531a"
+    },
+    {
+      "Path": "src/Avalonia.Base/Media/PathGeometry.cs",
+      "Sha256": "497993a351e01722d4c79e8a9c986086e3854efe4303e316684ee3683e19da60"
+    },
+    {
+      "Path": "src/Avalonia.Base/Media/PathFigure.cs",
+      "Sha256": "2293bfb93fce06098836764175427e63bd7da7231d049df1252870491f5fe741"
+    },
+    {
+      "Path": "src/Avalonia.Base/Media/PathSegment.cs",
+      "Sha256": "9eaac92510c8558fcf96927fd9621ac18a33105a6ef368b19dfe8e6f07573d39"
+    },
+    {
+      "Path": "src/Avalonia.Base/Media/ArcSegment.cs",
+      "Sha256": "d73c7385aadda6150553cb2e8b4359bbbe8aea3ecc9375f59f5563a36bad498f"
+    },
+    {
+      "Path": "src/Skia/Avalonia.Skia/StreamGeometryImpl.cs",
+      "Sha256": "cfa4589bbf2c6940b3bf4be1927e6e89508942420217ef27cbff47db4438460a"
+    }
+  ]
+}
