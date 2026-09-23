@@ -427,7 +427,10 @@ export class BindingExpression {
     _ConvertTargetValue(value) {
         if (value === UnsetValue || value === DoNothing || this.IsDisposed || this.Target.IsDisposed) return value;
         const metadata = this.TargetProperty.GetMetadata(this.Target);
-        return metadata.Convert ? metadata.Convert(value) : value;
+        const updatingTarget = this._updatingTarget;
+        this._updatingTarget = true;
+        try { return metadata.Convert ? metadata.Convert(value) : value; }
+        finally { this._updatingTarget = updatingTarget; }
     }
     _Failure(error) {
         if (this.IsDisposed || this.Target.IsDisposed) return;
