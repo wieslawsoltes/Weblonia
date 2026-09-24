@@ -351,6 +351,8 @@ export class CatalogController {
         if (id === 'TransitioningContentControl')
             find('TransitionHost').Content = this.MakePage(1);
         if (id === 'DataValidation') {
+            this._pageLifetime.Add(find('CommitDelayed').Click.Add(() =>
+                A.BindingOperations.GetBindingExpressionBase(find('DelayedEditor'), A.TextBox.TextProperty)?.UpdateSource()));
             const validator = { Convert: value => value, ConvertBack: value => {
                     if (String(value).trim().length < 3)
                         throw new Error('Use at least three characters.');
