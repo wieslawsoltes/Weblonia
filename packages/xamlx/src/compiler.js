@@ -157,7 +157,7 @@ export class JavaScriptXamlEmitter {
     Emit(document, options = {}) {
         let id = 0;
         const lines = [], literal = safeJson;
-        const emit = (node, root = false) => {
+        const emit = (node, root = false, existing = null) => {
             if ('Text' in node && !node.Type)
                 return literal(node.PreserveWhitespace ? node.Text : node.Text.replace(/\s+/g, ' ').trim());
             const variable = `v${id++}`, name = node.Type.Name;
@@ -182,22 +182,34 @@ export class JavaScriptXamlEmitter {
                 lines.push(`  const ${variable} = ctx.CreateArray(${literal(node)}, [${values.join(', ')}]);`);
                 return variable;
             }
-            lines.push(`  const ${variable} = ${root ? 'instance ?? ' : ''}ctx.Create(${literal(node.Type.Name)}, ${literal(node.Type.XmlNamespace)}, ${literal(node)}, [${arguments_.join(', ')}]);`);
+            lines.push(`  const ${variable} = ${root ? 'instance ?? ' : existing ? existing + ' ?? ' : ''}ctx.Create(${literal(node.Type.Name)}, ${literal(node.Type.XmlNamespace)}, ${literal(node)}, [${arguments_.join(', ')}]);`);
             lines.push(`  ctx.Begin(${variable}, ${literal(node)});`);
             for (const attr of node.Attributes)
                 lines.push(`  ctx.Attribute(${variable}, ${literal(attr)}, ${literal(node.Namespaces)});`);
             for (const child of node.Children) {
                 if (directives.includes(child)) continue;
                 if (child.Type?.Name.includes('.')) {
-                    const values = child.Children.map(c => emit(c));
-                    lines.push(`  ctx.Property(${variable}, ${literal(child.Type.Name)}, [${values.join(', ')}], ${literal(child)});`);
+                    const propertyName = child.Prefix ? `${child.Prefix}:${child.Type.Name}` : child.Type.Name;
+                    const values = child.Children.map(c => emitChild(c, variable, propertyName));
+                    lines.push(`  ctx.Property(${variable}, ${literal(propertyName)}, [${values.join(', ')}], ${literal(child)});`);
                 }
                 else {
-                    const value = emit(child);
+                    const value = emitChild(child, variable, null);
                     lines.push(`  ctx.Content(${variable}, ${value}, ${literal(child)});`);
                 }
             }
             lines.push(`  ctx.End(${variable});`);
+            return variable;
+        };
+        const emitChild = (node, parent, property) => {
+            const existing = property && node.Type?.Name === 'ResourceDictionary' ? `ctx.ResourceInstance(${parent}, ${literal(property)}, ${literal(node)})` : null;
+            if (!node.Attributes?.some(a => [XamlNamespaces.Xaml2006, XamlNamespaces.Xaml2009].includes(a.Namespace) && a.Name === 'Key'))
+                return emit(node, false, existing);
+            const variable = `r${id++}`;
+            lines.push(`  const ${variable} = ctx.ResourceChild(${parent}, ${literal(property)}, ${literal(node)}, ctx => {`);
+            const result = emit(node);
+            lines.push(`    return ${result};`);
+            lines.push('  });');
             return variable;
         };
         const root = emit(document.Root, true);

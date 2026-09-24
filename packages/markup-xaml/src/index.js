@@ -210,7 +210,7 @@ export class XamlRuntimeContext {
                 Controls.NameScope.SetNameScope(object, this.Scope);
                 if (Object.hasOwn(this.Options, 'DataContext'))
                     object.DataContext = this.Options.DataContext;
-                if (this.Options.ResourceParent)
+                if (this.Options.ResourceParent instanceof Base.AvaloniaObject)
                     object.SetInheritanceParent(this.Options.ResourceParent);
             }
         }
@@ -259,8 +259,9 @@ export class XamlRuntimeContext {
         const raw = attribute.CompiledValue ?? MarkupExtensionParser.Parse(attribute.Value);
         if (isXamlNamespace(ns)) {
             if (['TypeArguments', 'FactoryMethod'].includes(name)) return;
+            if (name === 'Shared') { this._SharedValue({ Attributes: [attribute] }); return; }
             if (name === 'Key') {
-                metadata.get(object).Key = this.Value(raw, object, namespaces);
+                metadata.get(object).Key = this._EntryKey(metadata.get(object).Node, object);
                 return;
             }
             if (name === 'Name') {
@@ -367,11 +368,108 @@ export class XamlRuntimeContext {
         if (typeof extension.ProvideValue !== 'function') throw new XamlParseException(`${name} does not implement ProvideValue.`);
         return this._ProvideValue(extension, target, property, namespaces);
     }
-    _ResolveReference(value, target) {
-        if (value instanceof ReferenceExtension)
-            return this.Scope.Get(value.Name);
+    _EntryKey(node, target = this.RootObject) {
+        const entry = this.Options.ResourceEntry;
+        // Both execution paths preserve parser source locations. The deferred
+        // entry key was evaluated at declaration, before running this builder.
+        if (entry && node.Line === entry.Line && node.Position === entry.Position &&
+            node.Type.Name === entry.Name && node.Type.XmlNamespace === entry.Namespace) return entry.Key;
+        const attribute = node.Attributes?.find(a => isXamlNamespace(a.Namespace) && a.Name === 'Key');
+        return attribute ? this.Value(attribute.CompiledValue ?? MarkupExtensionParser.Parse(attribute.Value), target, node.Namespaces) : Base.UnsetValue;
+    }
+    _ResourceAnchor(target = null) {
+        if (target instanceof Controls.StyledElement) return target;
+        for (let i = this._parents.length - 1; i >= 0; --i)
+            if (this._parents[i] instanceof Controls.StyledElement) return this._parents[i];
+        return this.Options.ResourceParent ?? this.RootObject;
+    }
+    _CaptureResourceScopes(target = null) {
+        const result = [], seen = new Set();
+        const add = value => {
+            if (value && typeof value.TryGetResource === 'function' && !seen.has(value)) { seen.add(value); result.push(value); }
+        };
+        const owner = value => { if (value instanceof Styling.ResourceDictionary) add(value); else { add(value?.Resources); add(value?.Styles); } };
+        owner(target);
+        for (let i = this._parents.length - 1; i >= 0; --i) owner(this._parents[i]);
+        for (const scope of this.Options.ResourceScopes ?? []) add(scope);
+        const visited = new Set();
+        for (let value = this.Options.ResourceParent; value && !visited.has(value); value = value.Parent ?? value.VisualParent ?? value.TemplatedParent ?? value.InheritanceParent) {
+            visited.add(value); owner(value); add(value);
+        }
+        return result;
+    }
+    _SharedValue(node) {
+        const attribute = node.Attributes?.find(a => isXamlNamespace(a.Namespace) && a.Name === 'Shared');
+        if (!attribute) return true;
+        if (!/^(true|false)$/i.test(attribute.Value.trim()))
+            throw new XamlParseException('x:Shared must be True or False.', attribute.Line, attribute.Position);
+        return attribute.Value.trim().toLowerCase() === 'true';
+    }
+    _CanDeferResource(node) {
+        if (!node.Type) return false;
+        const name = node.Type.Name, ns = node.Type.XmlNamespace;
+        if (isXamlNamespace(ns) && ['String', 'Double', 'Single', 'Int32', 'Int64', 'Boolean', 'Null'].includes(name)) return false;
+        const type = this.Registry.FindType(name, ns)?.Type;
+        if ([Base.Thickness, Base.CornerRadius, Base.Point, Base.Size, Base.Rect, Base.Matrix, Base.RelativePoint, Media.Color, Controls.GridLength].includes(type)) return false;
+        // Named content must be eagerly registered in its declaring scope. Names
+        // inside templates have their own scope and do not force the resource.
+        const pending = [node];
+        while (pending.length) {
+            const current = pending.pop();
+            if (current.Attributes?.some(a => (isXamlNamespace(a.Namespace) || !a.Namespace) && a.Name === 'Name')) return false;
+            if (current.Type && avaloniaNamespaces.includes(current.Type.XmlNamespace) && ['ControlTemplate','DataTemplate','TreeDataTemplate','ItemsPanelTemplate'].includes(current.Type.Name)) continue;
+            pending.push(...current.Children ?? []);
+        }
+        return true;
+    }
+    ResourceInstance(target, propertyName, node) {
+        // Populate an explicit <...Resources><ResourceDictionary> into the actual
+        // owner dictionary. Copying deferred factories out of a temporary one
+        // would leave lexical references connected to the wrong mutable table.
+        if (!propertyName || !avaloniaNamespaces.includes(node.Type?.XmlNamespace) || node.Type.Name !== 'ResourceDictionary' ||
+            node.Attributes?.some(a => isXamlNamespace(a.Namespace) && a.Name === 'Key')) return null;
+        const member = getProperty(target, propertyName, this.Registry, node.Namespaces);
+        return target[member.Name] instanceof Styling.ResourceDictionary ? target[member.Name] : null;
+    }
+    ResourceChild(target, propertyName, node, build) {
+        const keyAttribute = node.Attributes?.find(a => isXamlNamespace(a.Namespace) && a.Name === 'Key');
+        const shared = this._SharedValue(node);
+        const member = propertyName ? getProperty(target, propertyName, this.Registry, node.Namespaces) : null;
+        const dictionary = member ? target[member.Name] : target;
+        if (!(dictionary instanceof Styling.ResourceDictionary) || !keyAttribute || !this._CanDeferResource(node)) return build(this);
+        const scopes = this._CaptureResourceScopes(target);
+        if (scopes[0] !== dictionary) { const i = scopes.indexOf(dictionary); if (i >= 0) scopes.splice(i, 1); scopes.unshift(dictionary); }
+        const key = this._ResolveReference(this.Value(keyAttribute.CompiledValue ?? MarkupExtensionParser.Parse(keyAttribute.Value), target, node.Namespaces), target, scopes);
+        const options = { ...this.Options,
+            RootObject: this.Options.RootObject ?? this.RootObject,
+            NameScope: this.Scope, CompleteNameScope: false,
+            CodeBehind: this.Options.CodeBehind ?? this.Options.RootObject ?? this.RootObject,
+            ResourceParent: this._ResourceAnchor(target),
+            ResourceScopes: Object.freeze(scopes),
+            ResourceEntry: Object.freeze({Key:key,Name:node.Type.Name,Namespace:node.Type.XmlNamespace,Line:node.Line,Position:node.Position}),
+            ParentProvider: this.CreateServiceProvider(this._parents.at(-1), null, node.Namespaces),
+            BaseUri: this._baseUris.at(-1) ?? this.Options.BaseUri ?? this.Options.SourceFile ?? null,
+            CompileBindings: this._UseCompiledBindings(this._parents.at(-1)),
+            DataTypeContext: metadata.get(this._parents.at(-1))?.DataTypeContext ?? this.Options.DataTypeContext,
+        };
+        delete options.ExistingRoot;
+        // Resource controls inherit live declaration data, not a copied local value.
+        if (options.ResourceParent instanceof Controls.StyledElement) delete options.DataContext;
+        // Only immutable context snapshots and the generated builder are retained;
+        // never the declaring context's mutable construction/cleanup arrays.
+        const factory = () => {
+            const context = new XamlRuntimeContext(options);
+            try { return context.Complete(build(context)); }
+            catch (error) { context.Abort(); throw error; }
+        };
+        if (shared) dictionary.AddDeferred(key, factory); else dictionary.AddNotSharedDeferred(key, factory);
+        return null; // The resource entry has already been registered.
+    }
+    _ResolveReference(value, target, resources = null) {
+        if (value instanceof ReferenceExtension) return this.Scope.Get(value.Name);
         if (value instanceof Styling.StaticResourceExtension && !(value instanceof Styling.DynamicResourceExtension))
-            return Styling.FindResource(target instanceof Controls.Control ? target : this.RootObject, value.ResourceKey, undefined, this.Options.ResourceParent);
+            return Styling.FindResource(this._ResourceAnchor(target),
+                value.ResourceKey, undefined, resources ?? this._CaptureResourceScopes(target));
         return value;
     }
     Set(target, name, value, namespaces = metadata.get(target)?.Namespaces ?? {}, node = null) {
@@ -391,20 +489,24 @@ export class XamlRuntimeContext {
         if (value instanceof Styling.DynamicResourceExtension) {
             if (!member.Property)
                 throw new XamlParseException(`DynamicResource requires an Avalonia property: ${name}.`);
-            this._pendingBindings.push(() => target._lifetime.Add(target.Bind(member.Property, Styling.GetResourceObservable(target, value.ResourceKey, this.Options.ResourceParent))));
+            const resources = target instanceof Controls.StyledElement ? null : this._CaptureResourceScopes(target);
+            const anchor = this._ResourceAnchor(target);
+            this._pendingBindings.push(() => target._lifetime.Add(target.Bind(member.Property, Styling.GetResourceObservable(anchor, value.ResourceKey, resources))));
             return;
         }
         if (value instanceof Styling.StaticResourceExtension || value instanceof ReferenceExtension) {
-            this._pendingValues.push(() => this.Set(target, name, this._ResolveReference(value, target), namespaces, node));
+            const resources = this._CaptureResourceScopes(target);
+            this._pendingValues.push(() => this.Set(target, name, this._ResolveReference(value, target, resources), namespaces, node));
             return;
         }
         if (value instanceof Data.BindingBase && !(target instanceof Data.BindingBase) && !member.Property?.GetMetadata(target).AssignBinding) {
             if (!member.Property)
                 throw new XamlParseException(`Binding target '${name}' is not an Avalonia property.`, node?.Line, node?.Position);
+            const resources = this._CaptureResourceScopes(target);
             this._pendingBindings.push(() => {
                 // Prepare a per-target graph. A binding resource may be reused;
                 // resolving child extensions must not mutate its declaration.
-                const prepared = this._PrepareBinding(target, value, namespaces);
+                const prepared = this._PrepareBinding(target, value, namespaces, resources);
                 Data.BindingOperations.Apply(target, member.Property, prepared);
             });
             return;
@@ -443,7 +545,7 @@ export class XamlRuntimeContext {
         else
             target[member.Name] = value;
     }
-    _PrepareBinding(target, binding, namespaces, ancestors = new Set(), budget = { Count: 0 }) {
+    _PrepareBinding(target, binding, namespaces, resources = null, ancestors = new Set(), budget = { Count: 0 }) {
         if (!(binding instanceof Data.BindingBase)) throw new XamlParseException('MultiBinding children must be bindings.');
         if (++budget.Count > 4096 || ancestors.size >= 64) throw new XamlParseException('XAML binding graph exceeds its size/depth budget.');
         if (ancestors.has(binding)) throw new XamlParseException('A XAML MultiBinding graph cannot contain cycles.');
@@ -452,12 +554,12 @@ export class XamlRuntimeContext {
         const result = Object.assign(compiled ? new Data.CompiledBindingExtension() : Object.create(Object.getPrototypeOf(binding)), binding);
         if (compiled) result.IsCompiled = true;
         for (const key of ['Source', 'Converter', 'ConverterParameter', 'FallbackValue', 'TargetNullValue', 'Delay'])
-            if (key in result) result[key] = this._ResolveReference(result[key], target);
+            if (key in result) result[key] = this._ResolveReference(result[key], target, resources);
         if (result instanceof Data.Binding) result.Delay = bindingDelay(result.Delay);
         if (binding instanceof Data.MultiBinding) {
             if (!binding.Bindings?.[Symbol.iterator]) throw new XamlParseException('MultiBinding.Bindings must be iterable.');
             ancestors.add(binding);
-            try { result.Bindings = Array.from(binding.Bindings, child => this._PrepareBinding(target, child, namespaces, ancestors, budget)); }
+            try { result.Bindings = Array.from(binding.Bindings, child => this._PrepareBinding(target, child, namespaces, resources, ancestors, budget)); }
             finally { ancestors.delete(binding); }
         } else this._ValidateCompiledBinding(target, result, info?.Namespaces ?? namespaces, info?.DataTypeContext);
         return result;
@@ -523,6 +625,7 @@ export class XamlRuntimeContext {
         }
         if (current instanceof Styling.ResourceDictionary && values.length === 1 && values[0] instanceof Styling.ResourceDictionary) {
             const other = values[0];
+            if (other === current) return;
             for (const [key, value] of other)
                 current.set(key, value);
             current.MergedDictionaries.AddRange(other.MergedDictionaries);
@@ -629,7 +732,7 @@ export class XamlRuntimeContext {
         const result = values.map(v => this._ScalarValue(v));
         for (const value of result) if (!reference.Accepts(value)) throw new XamlParseException(`Array item is not assignable to '${reference.Name}'.`, node.Line, node.Position);
         const key = node.Attributes.find(a => isXamlNamespace(a.Namespace) && a.Name === 'Key');
-        metadata.set(result, { Namespaces: node.Namespaces, Node: node, Key: key ? this.Value(key.CompiledValue ?? MarkupExtensionParser.Parse(key.Value), this.RootObject, node.Namespaces) : Base.UnsetValue });
+        metadata.set(result, { Namespaces: node.Namespaces, Node: node, Key: this._EntryKey(node) });
         return result;
     }
     Scalar(node) {
@@ -649,7 +752,7 @@ export class XamlRuntimeContext {
                 throw new XamlParseException(`Invalid ${name} literal.`);
         }
         const result = new XamlPrimitive(value), key = node.Attributes.find(a => isXamlNamespace(a.Namespace) && a.Name === 'Key');
-        metadata.set(result, { Namespaces: node.Namespaces, Node: node, Key: key ? this.Value(key.CompiledValue ?? MarkupExtensionParser.Parse(key.Value), this.RootObject, node.Namespaces) : Base.UnsetValue });
+        metadata.set(result, { Namespaces: node.Namespaces, Node: node, Key: this._EntryKey(node) });
         return result;
     }
     CreateTemplate(node) {
@@ -670,15 +773,15 @@ export class XamlRuntimeContext {
             CompileBindings: compilation ? Controls.BooleanValue(compilation.Value) : this._UseCompiledBindings(this._parents.at(-1)),
             DataTypeContext: dataType ? {Name:dataType,Namespaces:node.Namespaces} : metadata.get(this._parents.at(-1))?.DataTypeContext ?? this.Options.DataTypeContext,
             BaseUri: baseUri, ParentProvider: this.CreateServiceProvider(this._parents.at(-1), null, node.Namespaces),
-        }, resourceParent = this.RootObject;
+        }, resourceParent = this.Options.ResourceParent ?? this.RootObject;
         const build = (data, scope) => {
-            const context = new XamlRuntimeContext({ ...parentOptions, NameScope: scope ?? new Controls.NameScope(), DataContext: data, ResourceParent: resourceParent });
+            const context = new XamlRuntimeContext({ ...parentOptions, NameScope: scope ?? new Controls.NameScope(), CompleteNameScope: true, DataContext: data, ResourceParent: resourceParent });
             return context.Build(children[0]);
         };
         let template;
         if (templateType === 'ControlTemplate')
             template = new Controls.ControlTemplate((owner, scope) => {
-                const context = new XamlRuntimeContext({ ...parentOptions, NameScope: scope, DataContext: owner.DataContext, ResourceParent: owner });
+                const context = new XamlRuntimeContext({ ...parentOptions, NameScope: scope, CompleteNameScope: true, DataContext: owner.DataContext, ResourceParent: owner });
                 try {
                     const result = context._BuildNode(children[0]);
                     for (const v of [result, ...result.GetVisualDescendants()]) v.TemplatedParent = owner;
@@ -701,7 +804,7 @@ export class XamlRuntimeContext {
         }
         const key = node.Attributes.find(a => isXamlNamespace(a.Namespace) && a.Name === 'Key');
         if (key)
-            metadata.get(template).Key = this.Value(key.CompiledValue ?? MarkupExtensionParser.Parse(key.Value), this.RootObject, node.Namespaces);
+            metadata.get(template).Key = this._EntryKey(node);
         return template;
     }
     _BuildNode(node, instance = null) {
@@ -730,11 +833,12 @@ export class XamlRuntimeContext {
             if (child.Type?.Name.includes('.')) {
                 if (avaloniaNamespaces.includes(child.Type.XmlNamespace) && child.Type.Name.startsWith('Design.'))
                     continue;
-                const values = child.Children.map(c => this._BuildNode(c));
-                this.Property(object, child.Type.Name, values, child);
+                const propertyName = child.Prefix ? `${child.Prefix}:${child.Type.Name}` : child.Type.Name;
+                const values = child.Children.map(c => this.ResourceChild(object, propertyName, c, ctx => ctx._BuildNode(c, ctx.ResourceInstance(object, propertyName, c))));
+                this.Property(object, propertyName, values, child);
             }
             else
-                this.Content(object, this._BuildNode(child), child);
+                this.Content(object, this.ResourceChild(object, null, child, ctx => ctx._BuildNode(child)), child);
         }
         this.End(object);
         return object;
@@ -764,7 +868,7 @@ export class XamlRuntimeContext {
             this._CleanupFailedBuild();
             throw new AggregateError(errors, 'One or more XAML references could not be resolved.');
         }
-        this.Scope.Complete();
+        if (this.Options.CompleteNameScope !== false) this.Scope.Complete();
         try {
             for (const action of this._pendingBindings)
                 action();

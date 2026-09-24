@@ -1,0 +1,84 @@
+name: Qualify integrated XAML resources and bindings
+on:
+  push:
+    branches: [feature/deferred-resource-parity]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: resource-port-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  qualify:
+    if: github.repository == 'wieslawsoltes/Weblonia' && github.ref == 'refs/heads/feature/deferred-resource-parity'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          package-manager-cache: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+      - name: Commit exact integrated source before qualification
+        run: |
+          python scripts/apply-resource-edits.py
+          for fixture in scripts/compile-*-fixture.mjs; do
+            node --import ./scripts/register-loader.mjs "$fixture"
+          done
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -u
+          git add -A packages scripts tests docs samples
+          git fetch origin feature/deferred-resource-parity
+          test "$(git rev-parse FETCH_HEAD)" = "$(git rev-parse HEAD)"
+          if ! git diff --cached --quiet; then
+            git commit -m 'fix: integrate deferred resource scopes with nested compiled bindings and delayed source writes'
+            git push origin HEAD:feature/deferred-resource-parity
+          fi
+      - run: python -m pip install -r tests/requirements.txt
+      - run: python -m playwright install --with-deps chromium
+      - name: Qualify new runtime and AOT HTTP resource paths first
+        run: |
+          node --import ./scripts/register-loader.mjs scripts/compile-resource-fixture.mjs
+          npm run build
+          python tests/resources-browser.py
+      - name: Run every existing and new release gate
+        run: |
+          mkdir -p artifacts/resources
+          if ! bash scripts/qualify-core-port.sh > artifacts/resources/qualification.log 2>&1; then
+            tail -160 artifacts/resources/qualification.log
+            exit 1
+          fi
+          tail -40 artifacts/resources/qualification.log
+      - name: Rebuild current source manifest and archives
+        run: |
+          cp docs/VERIFICATION.json dist/docs/VERIFICATION.json
+          python scripts/archive.py --output /tmp/resource-port-release
+      - name: Commit qualified generated assets and evidence
+        run: |
+          git add -u
+          git add -A packages samples scripts tests docs dist SOURCE-MANIFEST.json
+          git add -f artifacts
+          git fetch origin feature/deferred-resource-parity
+          test "$(git rev-parse FETCH_HEAD)" = "$(git rev-parse HEAD)"
+          if ! git diff --cached --quiet; then
+            git commit -m 'build: regenerate integrated resource-binding workers packages and qualification evidence'
+            git push origin HEAD:feature/deferred-resource-parity
+          fi
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: resource-port-qualification
+          path: artifacts/
+      - uses: actions/upload-artifact@v7
+        if: success()
+        with:
+          name: resource-port-release
+          path: /tmp/resource-port-release/

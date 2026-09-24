@@ -20,6 +20,7 @@ jobs:
       - run: python scripts/apply-delay-edits.py
       - run: python scripts/apply-multibinding-edits.py
       - run: python scripts/apply-single-binding-edits.py
+      - run: python scripts/apply-resource-edits.py
       - run: python scripts/apply-glyph-edits.py
       - run: python scripts/apply-secondary-edits.py
       - run: node --import ./scripts/register-loader.mjs scripts/compile-glyph-fixture.mjs
@@ -29,9 +30,11 @@ jobs:
       - run: node --import ./scripts/register-loader.mjs scripts/compile-effects-fixture.mjs
       - run: node --import ./scripts/register-loader.mjs scripts/compile-multibinding-fixture.mjs
       - run: node --import ./scripts/register-loader.mjs scripts/compile-delay-fixture.mjs
+      - run: node --import ./scripts/register-loader.mjs scripts/compile-resource-fixture.mjs
       - run: npm run verify:vendor
-      - run: npm run test:record
+      # Catalog unit tests consume emitted builders; rebuild before exercising them.
       - run: npm run build
+      - run: npm run test:record
       - run: npm run verify:workers
       - run: npm run pack:all
       - run: node scripts/test-packages.mjs
@@ -70,6 +73,7 @@ jobs:
       - run: python tests/xaml-namespaces-browser.py
       - run: python tests/multibinding-browser.py
       - run: python tests/binding-delay-browser.py
+      - run: python tests/resources-browser.py
       - run: npm run verify:release
       - run: npm run benchmark
       - uses: actions/upload-artifact@v7

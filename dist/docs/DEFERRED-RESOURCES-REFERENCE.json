@@ -1,0 +1,19 @@
+{
+  "BaseCommit": "f60cb93e02bbcac2f905834ab2f0a4709b8ca73c",
+  "AvaloniaCommit": "dff6a87665aa456c37b8cf89647e007f4c3066d7",
+  "Sources": [
+    {"Path": "src/Avalonia.Base/Controls/ResourceDictionary.cs", "GitBlob": "f8f6267e7b1b6c0666ff8959607fd4ea5f12f676"},
+    {"Path": "src/Avalonia.Base/Controls/ResourceProvider.cs", "GitBlob": "f73f11e7137361b1affc6a46b556851194fccd78"},
+    {"Path": "src/Markup/Avalonia.Markup.Xaml.Loader/CompilerExtensions/Transformers/AvaloniaXamlIlResourceTransformer.cs", "GitBlob": "014c10f625ea77f3237e5a5b792be5182c4f1353"}
+  ],
+  "SemanticsReference": "https://docs.avaloniaui.net/docs/xaml/directives",
+  "IntentionalDifferences": [
+    "Honor parsed x:Shared True, instead of reproducing the pinned transformer omitted out-value assignment.",
+    "Guard all active deferred keys with a bounded depth, not only the last key.",
+    "SetItems validates the complete enumerable before mutation.",
+    "EnsureCapacity validates but cannot reserve JavaScript Map capacity.",
+    "Retain existing Map and Owner ABI; full ResourceProvider and template-result interfaces are not claimed."
+  ],
+  "NativeSkiaChanges": false,
+  "FullPortParity": false
+}

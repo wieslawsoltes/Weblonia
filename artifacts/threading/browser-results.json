@@ -1,6 +1,6 @@
 {
   "Version": "0.6.2-alpha.1",
-  "SourceFingerprint": "75e6f652a5c22cf4e0694aea4e15f4260b762489c7abe2da69e26c558e5e9b6d",
+  "SourceFingerprint": "e58914136734c7e25010f30f18901e93afef52a1608546d6c434a4deb764a494",
   "Completed": true,
   "Tests": [
     {
@@ -9,8 +9,8 @@
       "Evidence": {
         "Mode": "render-worker",
         "UI": {
-          "EncodeMilliseconds": 9,
-          "LastEncodeMilliseconds": 2.7999999999883585,
+          "EncodeMilliseconds": 11.500000000058208,
+          "LastEncodeMilliseconds": 3.300000000046566,
           "EncodeCalls": 2,
           "StringWrites": 24362,
           "Utf8Bytes": 4520,
@@ -32,7 +32,7 @@
             "CleanBranches": 9,
             "ContentRecords": 430,
             "Commands": 455,
-            "CaptureMilliseconds": 10.700000000011642,
+            "CaptureMilliseconds": 15.099999999976717,
             "ReferenceObjectsWalked": 7279,
             "ReferenceCacheHits": 892
           },
@@ -51,19 +51,19 @@
           }
         },
         "Worker": {
-          "DecodeMilliseconds": 6.099999999976717,
+          "DecodeMilliseconds": 7.2000000000116415,
           "LastDecodeMilliseconds": 3.2000000000116415,
           "DecodedStringDefinitions": 325,
           "DecodedStringReferences": 24037,
           "Thread": "composition-render-worker",
-          "InstanceId": "41512a8e-38a1aebe-5d28b0a4-45e668b9",
+          "InstanceId": "bced15b1-55156303-655b905f-6ed79d94",
           "HasDocument": false,
           "CrossOriginIsolated": false,
           "WorkerFrames": 2,
           "ReceivedBytes": 295870,
           "ReturnedBuffers": 2,
           "Clock": "worker-requestAnimationFrame",
-          "StartedAt": 1790230847746.5,
+          "StartedAt": 1790236850015.2,
           "Scheduler": {
             "dirty": false,
             "frameId": null,
@@ -72,7 +72,7 @@
           },
           "Target": {
             "Frames": 2,
-            "RenderMilliseconds": 77,
+            "RenderMilliseconds": 99.70000000001164,
             "ResizeCount": 1,
             "SelectedBackend": "canvas",
             "BackendFailures": [],
@@ -93,16 +93,16 @@
             "ValidatedDescriptors": 573,
             "ReferenceChecks": 229,
             "GraphChecks": 5,
-            "ValidationMilliseconds": 8,
-            "TotalValidationMilliseconds": 12.400000000023283,
-            "TotalApplyMilliseconds": 29.099999999976717,
+            "ValidationMilliseconds": 12.700000000011642,
+            "TotalValidationMilliseconds": 18.5,
+            "TotalApplyMilliseconds": 51.79999999998836,
             "IdentityTransformsSkipped": 46,
             "Transactions": 2,
             "ContentInstalls": 436,
             "VisualsVisited": 462,
             "ClippedBranches": 0,
             "AnimationTicks": 0,
-            "ApplyMilliseconds": 16.29999999998836,
+            "ApplyMilliseconds": 32.29999999998836,
             "ReferenceObjectsWalked": 7871,
             "ReferenceCacheHits": 92
           },
@@ -179,7 +179,7 @@
           "AutomationWrites": 2576,
           "MainHasSkiaRuntime": false,
           "NativePreparation": {
-            "PreparationMilliseconds": 435.5,
+            "PreparationMilliseconds": 476.5999999999767,
             "Deliveries": 0,
             "CloneFallbacks": 2,
             "PendingDeliveries": 0
@@ -187,113 +187,113 @@
           "StartupEvents": [
             {
               "Type": "startup-progress",
-              "Role": "render",
-              "Stage": "waiting-for-initialize",
-              "ElapsedMilliseconds": 0,
-              "ObservedAt": 579
-            },
-            {
-              "Type": "startup-progress",
               "Role": "ui",
               "Stage": "waiting-for-initialize",
               "ElapsedMilliseconds": 0.09999999997671694,
-              "ObservedAt": 579
+              "ObservedAt": 669.9000000000233
+            },
+            {
+              "Type": "startup-progress",
+              "Role": "render",
+              "Stage": "waiting-for-initialize",
+              "ElapsedMilliseconds": 0.1000000000349246,
+              "ObservedAt": 670
+            },
+            {
+              "Type": "startup-progress",
+              "Role": "ui",
+              "Stage": "module-import",
+              "ElapsedMilliseconds": 37.90000000002328,
+              "ObservedAt": 670.5
             },
             {
               "Type": "startup-progress",
               "Role": "render",
               "Stage": "module-import",
-              "ElapsedMilliseconds": 28.300000000046566,
-              "ObservedAt": 579.4000000000233
-            },
-            {
-              "Type": "startup-progress",
-              "Role": "ui",
-              "Stage": "module-import",
-              "ElapsedMilliseconds": 28.20000000001164,
-              "ObservedAt": 579.4000000000233
-            },
-            {
-              "Type": "startup-progress",
-              "Role": "ui",
-              "Stage": "runtime-loader",
-              "ElapsedMilliseconds": 700.0999999999767,
-              "Url": "http://localhost:4173/packages/browser/worker-assets/canvaskit-loader.mjs",
-              "ObservedAt": 1251.4000000000233
+              "ElapsedMilliseconds": 37.40000000002328,
+              "ObservedAt": 670.5999999999767
             },
             {
               "Type": "startup-progress",
               "Role": "render",
               "Stage": "runtime-loader",
-              "ElapsedMilliseconds": 732.8000000000466,
+              "ElapsedMilliseconds": 978.2000000000116,
               "Url": "http://localhost:4173/packages/browser/worker-assets/canvaskit-loader.mjs",
-              "ObservedAt": 1284.0999999999767
+              "ObservedAt": 1611.5
             },
             {
               "Type": "startup-progress",
               "Role": "ui",
-              "Stage": "wasm-initialization",
-              "ElapsedMilliseconds": 1372.2000000000116,
-              "Url": "http://localhost:4173/vendor/skiasharpweb/dist/vendor/canvaskit.wasm",
-              "ObservedAt": 1926.7999999999884
-            },
-            {
-              "Type": "startup-progress",
-              "Role": "ui",
-              "Stage": "skia-platform",
-              "ElapsedMilliseconds": 1394.7999999999884,
-              "ObservedAt": 1946.0999999999767
-            },
-            {
-              "Type": "startup-progress",
-              "Role": "ui",
-              "Stage": "application-module",
-              "ElapsedMilliseconds": 1407.399999999965,
-              "Url": "http://localhost:4173/samples/ControlCatalog/worker/catalog.js",
-              "ObservedAt": 1959
+              "Stage": "runtime-loader",
+              "ElapsedMilliseconds": 991.5999999999767,
+              "Url": "http://localhost:4173/packages/browser/worker-assets/canvaskit-loader.mjs",
+              "ObservedAt": 1624.2000000000116
             },
             {
               "Type": "startup-progress",
               "Role": "render",
               "Stage": "wasm-initialization",
-              "ElapsedMilliseconds": 1450.600000000035,
+              "ElapsedMilliseconds": 1778.8000000000466,
               "Url": "http://localhost:4173/vendor/skiasharpweb/dist/vendor/canvaskit.wasm",
-              "ObservedAt": 2003.5999999999767
+              "ObservedAt": 2412
             },
             {
               "Type": "startup-progress",
               "Role": "render",
               "Stage": "skia-platform",
-              "ElapsedMilliseconds": 1474.600000000035,
-              "ObservedAt": 2026.2000000000116
+              "ElapsedMilliseconds": 1809.5,
+              "ObservedAt": 2442.7000000000116
             },
             {
               "Type": "startup-progress",
               "Role": "render",
               "Stage": "backend-probe",
-              "ElapsedMilliseconds": 1486.7000000000116,
-              "ObservedAt": 2037.9000000000233
+              "ElapsedMilliseconds": 1827.5,
+              "ObservedAt": 2460.7000000000116
             },
             {
               "Type": "startup-progress",
               "Role": "render",
               "Stage": "ready",
-              "ElapsedMilliseconds": 1490.600000000035,
-              "ObservedAt": 2041.7000000000116
+              "ElapsedMilliseconds": 1832.4000000000233,
+              "ObservedAt": 2465.5999999999767
+            },
+            {
+              "Type": "startup-progress",
+              "Role": "ui",
+              "Stage": "wasm-initialization",
+              "ElapsedMilliseconds": 1875.0999999999767,
+              "Url": "http://localhost:4173/vendor/skiasharpweb/dist/vendor/canvaskit.wasm",
+              "ObservedAt": 2507.7000000000116
+            },
+            {
+              "Type": "startup-progress",
+              "Role": "ui",
+              "Stage": "skia-platform",
+              "ElapsedMilliseconds": 1902.7999999999884,
+              "ObservedAt": 2535.5
+            },
+            {
+              "Type": "startup-progress",
+              "Role": "ui",
+              "Stage": "application-module",
+              "ElapsedMilliseconds": 1919.9000000000233,
+              "Url": "http://localhost:4173/samples/ControlCatalog/worker/catalog.js",
+              "ObservedAt": 2552.5
             },
             {
               "Type": "startup-progress",
               "Role": "ui",
               "Stage": "renderer-channel",
-              "ElapsedMilliseconds": 1530.7000000000116,
-              "ObservedAt": 2081.9000000000233
+              "ElapsedMilliseconds": 2056.2999999999884,
+              "ObservedAt": 2688.9000000000233
             },
             {
               "Type": "startup-progress",
               "Role": "ui",
               "Stage": "ready",
-              "ElapsedMilliseconds": 1816.7999999999884,
-              "ObservedAt": 2368.4000000000233
+              "ElapsedMilliseconds": 2444.2000000000116,
+              "ObservedAt": 3077.2000000000116
             }
           ],
           "QueuedEvents": 0,
@@ -302,12 +302,12 @@
         "UI": {
           "Thread": "avalonia-ui-worker",
           "HasDocument": false,
-          "StartedAt": 1790230849610.6,
+          "StartedAt": 1790236852410.4001,
           "Inputs": 1,
           "LastUiFrame": {
-            "Milliseconds": 0.9000000000232831,
-            "LayoutMilliseconds": 0.20000000001164153,
-            "RenderOrRecordMilliseconds": 0.7000000000116415,
+            "Milliseconds": 1,
+            "LayoutMilliseconds": 0.30000000004656613,
+            "RenderOrRecordMilliseconds": 0.5999999999767169,
             "AutomationMilliseconds": 0
           },
           "WasmHeapBytes": 134217728,
@@ -330,8 +330,8 @@
         "Renderer": {
           "Mode": "full-isolation",
           "UI": {
-            "EncodeMilliseconds": 11.299999999988358,
-            "LastEncodeMilliseconds": 0.1000000000349246,
+            "EncodeMilliseconds": 11.799999999988358,
+            "LastEncodeMilliseconds": 0.09999999997671694,
             "EncodeCalls": 4,
             "StringWrites": 29905,
             "Utf8Bytes": 4951,
@@ -372,19 +372,19 @@
             }
           },
           "Worker": {
-            "DecodeMilliseconds": 7.2999999999883585,
-            "LastDecodeMilliseconds": 0.1000000000349246,
+            "DecodeMilliseconds": 11.500000000058208,
+            "LastDecodeMilliseconds": 0,
             "DecodedStringDefinitions": 382,
             "DecodedStringReferences": 29523,
             "Thread": "composition-render-worker",
-            "InstanceId": "609f1b7c-db278ae7-31860d24-1fe897e4",
+            "InstanceId": "e389f5da-e5768413-95af4df5-9061405d",
             "HasDocument": false,
             "CrossOriginIsolated": false,
             "WorkerFrames": 4,
             "ReceivedBytes": 371940,
             "ReturnedBuffers": 4,
             "Clock": "worker-requestAnimationFrame",
-            "StartedAt": 1790230849644,
+            "StartedAt": 1790236852398.4,
             "Scheduler": {
               "dirty": false,
               "frameId": null,
@@ -393,7 +393,7 @@
             },
             "Target": {
               "Frames": 4,
-              "RenderMilliseconds": 27.800000000046566,
+              "RenderMilliseconds": 36.399999999965075,
               "ResizeCount": 1,
               "SelectedBackend": "canvas",
               "BackendFailures": [],
@@ -414,16 +414,16 @@
               "ValidatedDescriptors": 739,
               "ReferenceChecks": 314,
               "GraphChecks": 6,
-              "ValidationMilliseconds": 0.09999999997671694,
-              "TotalValidationMilliseconds": 25.79999999998836,
-              "TotalApplyMilliseconds": 49.399999999965075,
+              "ValidationMilliseconds": 0.20000000001164153,
+              "TotalValidationMilliseconds": 30.199999999953434,
+              "TotalApplyMilliseconds": 60.79999999998836,
               "IdentityTransformsSkipped": 92,
               "Transactions": 4,
               "ContentInstalls": 596,
               "VisualsVisited": 924,
               "ClippedBranches": 0,
               "AnimationTicks": 0,
-              "ApplyMilliseconds": 0.29999999998835847,
+              "ApplyMilliseconds": 0.7000000000116415,
               "ReferenceObjectsWalked": 10083,
               "ReferenceCacheHits": 133
             },
@@ -723,12 +723,12 @@
       "Name": "three threads: animation continues through UI stall",
       "Passed": true,
       "Evidence": {
-        "FramesDuringAndAroundStall": 10,
-        "AnimationTicks": 10,
-        "HostRoundtripMilliseconds": 1.3399630000208163,
+        "FramesDuringAndAroundStall": 8,
+        "AnimationTicks": 8,
+        "HostRoundtripMilliseconds": 2.8601449999996476,
         "UIStallMilliseconds": 650,
-        "TransactionsBefore": 32,
-        "TransactionsAfter": 32
+        "TransactionsBefore": 33,
+        "TransactionsAfter": 33
       }
     },
     {
@@ -764,5 +764,5 @@
   "Qualification": "Chromium native raster; real dedicated workers; real module workers importing unchanged production entries through intercepted local assets; ordinary HTTP navigation is separately tested.",
   "Passed": 39,
   "Failed": 0,
-  "FinalSourceFingerprint": "75e6f652a5c22cf4e0694aea4e15f4260b762489c7abe2da69e26c558e5e9b6d"
+  "FinalSourceFingerprint": "e58914136734c7e25010f30f18901e93afef52a1608546d6c434a4deb764a494"
 }
