@@ -1,6 +1,6 @@
 {
   "Version": "0.6.2-alpha.1",
-  "SourceFingerprint": "823483213634908bb0256e90b19b79810cd220ea40e2be9da81c99ee333b3b89",
+  "SourceFingerprint": "75e6f652a5c22cf4e0694aea4e15f4260b762489c7abe2da69e26c558e5e9b6d",
   "Completed": true,
   "Tests": [
     {
@@ -13,15 +13,15 @@
       "CompletedRunNotReplayed": true,
       "ClearedDefinitions": true,
       "IntermediatePositions": [
-        24,
-        39
+        23,
+        38
       ],
       "ComparedChannels": 4,
       "MaximumChannelError": 1,
       "WorkerCount": 0,
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 2265.69
+      "Milliseconds": 2350.49
     },
     {
       "Mode": "render-worker",
@@ -33,15 +33,15 @@
       "CompletedRunNotReplayed": true,
       "ClearedDefinitions": true,
       "IntermediatePositions": [
-        24,
-        39
+        20,
+        35
       ],
       "ComparedChannels": 4,
-      "MaximumChannelError": 2,
+      "MaximumChannelError": 1,
       "WorkerCount": 1,
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 2580.18
+      "Milliseconds": 2762.55
     },
     {
       "Mode": "full-isolation",
@@ -60,7 +60,7 @@
       "WorkerCount": 2,
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 2480.48
+      "Milliseconds": 2600.52
     }
   ],
   "Errors": [],
@@ -73,5 +73,5 @@
   "Browser": "153.0.8010.0",
   "Passed": 3,
   "Failed": 0,
-  "FinalSourceFingerprint": "823483213634908bb0256e90b19b79810cd220ea40e2be9da81c99ee333b3b89"
+  "FinalSourceFingerprint": "75e6f652a5c22cf4e0694aea4e15f4260b762489c7abe2da69e26c558e5e9b6d"
 }

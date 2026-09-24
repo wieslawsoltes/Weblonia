@@ -78,8 +78,8 @@
       "Name": "@wieslawsoltes/avalonia-browser",
       "Version": "0.6.2-alpha.1",
       "File": "wieslawsoltes-avalonia-browser-0.6.2-alpha.1.tgz",
-      "Bytes": 1467594,
-      "Sha256": "a7c536eb3f0c497768df1df3117c369554ddcfc2a329012c8dace11b4f1e7735",
+      "Bytes": 1468931,
+      "Sha256": "145d8bc50eb938cc320688bbc3794a67d23beeeec2b8cbeb135b13ce3b570d39",
       "Files": [
         "LICENSE",
         "NOTICE",
@@ -370,8 +370,8 @@
       "Name": "@wieslawsoltes/avalonia-data",
       "Version": "0.6.2-alpha.1",
       "File": "wieslawsoltes-avalonia-data-0.6.2-alpha.1.tgz",
-      "Bytes": 17143,
-      "Sha256": "7ead71ff0ff3943c1f45c3b75aebf20b8894f0b7897a162676b900a424dc2c73",
+      "Bytes": 18135,
+      "Sha256": "cc8646ea9d7039a7dcd7c8510f92de66ba5ae06d377eccb723834f72eb35df8e",
       "Files": [
         "LICENSE",
         "NOTICE",
@@ -427,8 +427,8 @@
       "Name": "@wieslawsoltes/avalonia-markup-xaml",
       "Version": "0.6.2-alpha.1",
       "File": "wieslawsoltes-avalonia-markup-xaml-0.6.2-alpha.1.tgz",
-      "Bytes": 13819,
-      "Sha256": "6b75ac6ccd471bbeacb3dcc7e190f972e4f4e8e6e6bf938c46baa983c11aabd7",
+      "Bytes": 14030,
+      "Sha256": "3e8b240e2db6887cd35d97807deb4c6582882a0198ed010f812f98446bd7c951",
       "Files": [
         "LICENSE",
         "NOTICE",

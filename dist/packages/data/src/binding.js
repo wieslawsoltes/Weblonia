@@ -1,6 +1,6 @@
 import { FormatComposite } from './formatting.js';
 export { StringFormatValueConverter, StringFormatMultiValueConverter } from './formatting.js';
-import { AvaloniaObject, AvaloniaProperty, DefineProperties, BindingPriority, BindingMode, UnsetValue, DoNothing, CompositeDisposable, Disposable, Event, RegisterBindingHandler, AreValuesEqual, } from '@wieslawsoltes/avalonia-base';
+import { AvaloniaObject, AvaloniaProperty, DefineProperties, BindingPriority, BindingMode, UnsetValue, DoNothing, CompositeDisposable, Disposable, Event, RegisterBindingHandler, AreValuesEqual, Dispatcher, DispatcherTimer, DispatcherPriority, } from '@wieslawsoltes/avalonia-base';
 import { Observable } from 'rxjs';
 export { BindingMode, BindingPriority };
 export const UpdateSourceTrigger = Object.freeze({ Default: 'Default', PropertyChanged: 'PropertyChanged', LostFocus: 'LostFocus', Explicit: 'Explicit' });
@@ -44,6 +44,7 @@ export class Binding extends BindingBase {
     constructor(path = '', mode = BindingMode.Default) {
         super();
         this.Path = '';
+        this.Delay = 0;
         this.Source = UnsetValue;
         this.ElementName = null;
         this.RelativeSource = null;
@@ -272,6 +273,13 @@ function sourceRoot(anchor, binding, path) {
         root = anchor.DataContext;
     return { Root: root, Path: remaining, Negate: negate };
 }
+/** Avalonia's public Delay is a signed Int32 number of milliseconds. Negative
+ * values have no positive wait, matching the upstream Ticks > 0 test. */
+function validateBindingDelay(value) {
+    if (typeof value !== 'number' || !Number.isInteger(value) || value < -2147483648 || value > 2147483647)
+        throw new TypeError('Binding.Delay must be a signed 32-bit integer number of milliseconds.');
+    return value;
+}
 export class BindingExpression {
     constructor(target, property, binding, priority = binding.Priority) {
         if (!(target instanceof AvaloniaObject) || target.IsDisposed) throw new TypeError('A live binding target is required.');
@@ -283,6 +291,11 @@ export class BindingExpression {
         // Parse before Attach clears/replaces a target binding. Missing source
         // values remain recoverable; unsafe or malformed path syntax does not.
         if (!(binding instanceof CompiledBindingExtension)) PropertyPath.Parse(sourceRoot({ DataContext: null }, binding, binding.Path).Path);
+        this._delay = validateBindingDelay(binding.Delay);
+        this._updateSourceTrigger = binding.UpdateSourceTrigger;
+        this._delayTimer = null;
+        this._sourceRevision = 0;
+        this._lastSourceOwner = null;
         this.Target = target;
         this.TargetProperty = property;
         this.ParentBinding = binding;
@@ -318,28 +331,56 @@ export class BindingExpression {
         if (anchor?.GetNameScope?.()?.Changed?.Add)
             this._lifetime.Add(anchor.GetNameScope().Changed.Add(() => this.UpdateTarget()));
         if (this.Mode === 'TwoWay' || this.Mode === 'OneWayToSource') {
-            this._lifetime.Add(this.Target.GetPropertyChangedObservable(this.TargetProperty).subscribe(e => {
-                if (this._updatingTarget || this.IsDisposed || this.Target._effectiveEntry(this.TargetProperty) !== this.Target._values.get(this.TargetProperty)?.get(this._key))
-                    return;
-                const trigger = this.ParentBinding.UpdateSourceTrigger;
-                if (trigger === 'Explicit' || trigger === 'LostFocus')
-                    this._pendingSource = e.NewValue;
-                else
-                    this.UpdateSource(e.NewValue);
+            this._lifetime.Add(this.Target.GetPropertyChangedObservable(this.TargetProperty).subscribe(() => {
+                if (!this._CanWriteTargetValue()) return;
+                if (this._updateSourceTrigger === 'Explicit' || this._updateSourceTrigger === 'LostFocus') return;
+                this._ScheduleSourceUpdate();
             }));
-            if (this.ParentBinding.UpdateSourceTrigger === 'LostFocus' && this.Target.LostFocus?.Add)
-                this._lifetime.Add(this.Target.LostFocus.Add(() => this.UpdateSource(this.Target.GetValue(this.TargetProperty))));
+            if (this._updateSourceTrigger === 'LostFocus' && this.Target.LostFocus?.Add)
+                this._lifetime.Add(this.Target.LostFocus.Add(() => this._WriteTargetValueToSource()));
         }
         if (this.Mode === 'OneWayToSource' && !this.TargetProperty.IsDirect) this._setTarget(initialTargetValue);
         this.UpdateTarget();
-        if (this.Mode === 'OneWayToSource')
-            this.UpdateSource(this.Target.GetValue(this.TargetProperty));
         return this;
     }
+    _CanWriteTargetValue() {
+        if (this.IsDisposed || this.Target.IsDisposed || this._updatingTarget || this._updatingSource) return false;
+        if (this.TargetProperty.IsDirect) return this.Target._bindings.get(this.TargetProperty) === this;
+        const entry = this.Target._values.get(this.TargetProperty)?.get(this._key);
+        return entry != null && this.Target._effectiveEntry(this.TargetProperty) === entry;
+    }
+    _StopDelayTimer() { this._delayTimer?.Stop(); }
+    _WriteTargetValueToSource() {
+        // Stop before running getters/converters/setters: those can reenter,
+        // replace this binding, or queue a different edit. Never retain a draft.
+        this._StopDelayTimer();
+        if (this._CanWriteTargetValue()) this.UpdateSource();
+    }
+    _ScheduleSourceUpdate() {
+        if (this._delay <= 0) { this._WriteTargetValueToSource(); return; }
+        this._StopDelayTimer();
+        if (!this._delayTimer) {
+            this._delayTimer = new DispatcherTimer(this._delay, DispatcherPriority.Normal,
+                () => this._WriteTargetValueToSource(), Dispatcher.UIThread);
+            this._lifetime.Add(this._delayTimer);
+        }
+        // Shutdown cancels both native timeout and dispatcher work. Editing a
+        // stopped application must not resurrect its dispatcher or timer.
+        if (!this._delayTimer.Dispatcher.HasShutdownStarted) this._delayTimer.Start();
+    }
+    _SourceOwnerChanged(owner) {
+        if (Object.is(owner, this._lastSourceOwner)) return;
+        this._lastSourceOwner = owner;
+        this._StopDelayTimer();
+        // Initial and replacement OneWayToSource owners receive the CURRENT
+        // target synchronously, regardless of trigger or Delay.
+        if (this.Mode === 'OneWayToSource' && owner != null && owner !== UnsetValue)
+            this._WriteTargetValueToSource();
+    }
     UpdateTarget() {
-        if (this.IsDisposed || this._oneTimeDone || this._updatingSource)
-            return;
-        if (this._rewiring) {
+        if (this.IsDisposed || this._oneTimeDone) return;
+        ++this._sourceRevision;
+        if (this._rewiring || this._updatingSource) {
             this._pendingRewire = true;
             return;
         }
@@ -363,6 +404,8 @@ export class BindingExpression {
                     this._sourceMember = segment;
                     current = ReadMember(current, segment);
                 }
+                this._sourceValue = current;
+                this._SourceOwnerChanged(this._sourceMember ? this._sourceParent : null);
                 const success = this.Mode !== 'OneWayToSource' && this._publish(current);
                 if (this.Mode === 'OneTime' && success && !this.IsDisposed) {
                     this._oneTimeDone = true;
@@ -471,28 +514,39 @@ export class BindingExpression {
         else
             this.Target._SetPriorityValue(this.TargetProperty, value, this.Priority, this._key);
     }
-    UpdateSource(value = this.Target.GetValue(this.TargetProperty)) {
-        if (this.IsDisposed || this._updatingTarget || this._updatingSource || !this._sourceMember)
-            return;
+    _ConvertBack(value) {
+        const b = this.ParentBinding;
+        if (value !== UnsetValue && value !== DoNothing && b.Converter) {
+            if (typeof b.Converter.ConvertBack !== 'function') throw new Error('TwoWay binding requires Converter.ConvertBack.');
+            value = b.Converter.ConvertBack(value, null, b.ConverterParameter, b.ConverterCulture);
+        }
+        if (value instanceof BindingNotification) {
+            if (value.HasError) throw value.Error;
+            value = value.Value;
+        }
+        return value === UnsetValue || value === DoNothing ? value : this._negate ? !value : value;
+    }
+    UpdateSource(value) {
+        this._StopDelayTimer();
+        if (this.IsDisposed || this.Target.IsDisposed || this._updatingTarget || this._updatingSource || !this._sourceMember) return;
         this._updatingSource = true;
+        const revision = this._sourceRevision;
         try {
-            const b = this.ParentBinding;
-            if (b.Converter) {
-                if (typeof b.Converter.ConvertBack !== 'function')
-                    throw new Error('TwoWay binding requires Converter.ConvertBack.');
-                value = b.Converter.ConvertBack(value, null, b.ConverterParameter, b.ConverterCulture);
-            }
-            if (this._negate)
-                value = !value;
-            if (value !== UnsetValue && value !== DoNothing)
+            if (!arguments.length) value = this.Target.GetValue(this.TargetProperty);
+            value = this._ConvertBack(value);
+            // A converter/getter may switch the source or replace the expression.
+            // Do not use a stale terminal from the old graph after that callback.
+            if (this.IsDisposed || this.Target.IsDisposed || revision !== this._sourceRevision) return;
+            if (value === UnsetValue || value === DoNothing) return;
+            if (!Object.is(value, this._sourceValue) || this.Target._bindingErrors?.has(this.TargetProperty)) {
                 WriteMember(this._sourceParent, this._sourceMember, value);
+                this._pendingRewire = true;
+            }
             this._error(null);
-        }
-        catch (error) {
-            this._error(error);
-        }
+        } catch (error) { this._error(error); }
         finally {
             this._updatingSource = false;
+            if (this._pendingRewire && !this._rewiring && !this.IsDisposed) this.UpdateTarget();
         }
     }
     _error(error) {
@@ -502,6 +556,7 @@ export class BindingExpression {
     Dispose() {
         if (this.IsDisposed) return;
         this.IsDisposed = true;
+        this._StopDelayTimer();
         try { this._lifetime.Dispose(); }
         finally {
             try {
@@ -668,6 +723,7 @@ export class CompiledBindingExpression extends BindingExpression {
     }
     _QueueRefresh(index) {
         if (this.IsDisposed || this._oneTimeDone) return;
+        ++this._sourceRevision;
         this._pendingIndex = Math.min(this._pendingIndex, index);
         if (!this._processing && !this._updatingSource) this._Drain();
     }
@@ -720,33 +776,36 @@ export class CompiledBindingExpression extends BindingExpression {
                 }
                 const value = elements.length ? (this._nodes.length ? this._nodes.at(-1).Output : UnsetValue) : this._root;
                 const error = this._nodes.find(node => node.Error)?.Error ?? null;
+                this._SourceOwnerChanged(this._nodes.at(-1)?.Input ?? null);
                 const success = this.Mode !== 'OneWayToSource' && this._publish(value, error);
                 if (this.Mode === 'OneTime' && success && !this.IsDisposed) { this._oneTimeDone = true; this._lifetime.Clear(); }
             }
         } catch (error) { this._pendingIndex = Infinity; this._Failure(error); }
         finally { this._processing = false; }
     }
-    UpdateSource(value = this.Target.GetValue(this.TargetProperty)) {
-        if (this.IsDisposed || this._updatingTarget || this._updatingSource) return;
+    UpdateSource(value) {
+        this._StopDelayTimer();
+        if (this.IsDisposed || this.Target.IsDisposed || this._updatingTarget || this._updatingSource) return;
         this._updatingSource = true;
+        const revision = this._sourceRevision;
         try {
-            const b = this.ParentBinding, node = this._nodes.at(-1);
+            const node = this._nodes.at(-1);
             if (!node || node.Input == null || node.Input === UnsetValue) throw new Error('The compiled binding source is null.');
-            if (b.Converter) {
-                if (typeof b.Converter.ConvertBack !== 'function') throw new Error('TwoWay binding requires Converter.ConvertBack.');
-                value = b.Converter.ConvertBack(value, null, b.ConverterParameter, b.ConverterCulture);
-            }
-            if (this._negate) value = !value;
-            if (value !== UnsetValue && value !== DoNothing) {
+            if (!arguments.length) value = this.Target.GetValue(this.TargetProperty);
+            value = this._ConvertBack(value);
+            if (this.IsDisposed || this.Target.IsDisposed || node.Dead || revision !== this._sourceRevision) return;
+            if (value === UnsetValue || value === DoNothing) return;
+            if (!node.Accessor?.SetValue && !node.Element.Set) throw new TypeError('The compiled binding terminal is read-only.');
+            if (!Object.is(value, node.Output) || this.Target._bindingErrors?.has(this.TargetProperty)) {
                 if (node.Accessor?.SetValue) { if (node.Accessor.SetValue(value, this.Priority) === false) throw new TypeError('Compiled accessor rejected the assignment.'); }
-                else if (node.Element.Set) node.Element.Set(node.Input, value);
-                else throw new TypeError('The compiled binding terminal is read-only.');
+                else node.Element.Set(node.Input, value);
                 this._pendingIndex = Math.min(this._pendingIndex, this._nodes.length - 1);
             }
             this._error(null);
         } catch (error) { this._error(error); }
         finally { this._updatingSource = false; if (this._pendingIndex !== Infinity) this._Drain(); }
     }
+
 }
 
 class BindingProxy extends AvaloniaObject {
@@ -771,6 +830,7 @@ function snapshotMultiBinding(binding, ancestors = new Set(), budget = { Count: 
             for (const child of binding.Bindings) result.Bindings.push(snapshotMultiBinding(child, ancestors, budget));
         } finally { ancestors.delete(binding); }
     } else {
+        validateBindingDelay(binding.Delay);
         // A child can only feed the aggregate, never write back through a proxy.
         result.Mode = binding.Mode === BindingMode.OneTime ? BindingMode.OneTime : BindingMode.OneWay;
         if (result instanceof CompiledBindingExtension) {
