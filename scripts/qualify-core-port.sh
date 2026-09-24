@@ -8,6 +8,7 @@ node --import ./scripts/register-loader.mjs scripts/compile-glyph-fixture.mjs
 node --import ./scripts/register-loader.mjs scripts/compile-effects-fixture.mjs
 node --import ./scripts/register-loader.mjs scripts/compile-namespace-fixture.mjs
 node --import ./scripts/register-loader.mjs scripts/compile-multibinding-fixture.mjs
+node --import ./scripts/register-loader.mjs scripts/compile-delay-fixture.mjs
 npm run verify:vendor
 npm run test:record
 npm run build
@@ -45,5 +46,6 @@ python tests/glyph-geometry-browser.py
 python tests/effects-transitions-browser.py
 python tests/xaml-namespaces-browser.py
 python tests/multibinding-browser.py
+python tests/binding-delay-browser.py
 npm run verify:release
 npm run benchmark

@@ -1,6 +1,6 @@
 {
   "Version": "0.6.2-alpha.1",
-  "SourceFingerprint": "823483213634908bb0256e90b19b79810cd220ea40e2be9da81c99ee333b3b89",
+  "SourceFingerprint": "75e6f652a5c22cf4e0694aea4e15f4260b762489c7abe2da69e26c558e5e9b6d",
   "Completed": true,
   "Tests": [
     {
@@ -110,7 +110,7 @@
       ],
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 1440.14
+      "Milliseconds": 1285.58
     },
     {
       "Mode": "single",
@@ -219,7 +219,7 @@
       ],
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 1170.8
+      "Milliseconds": 1233.88
     },
     {
       "Mode": "render-worker",
@@ -328,7 +328,7 @@
       ],
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 1943.97
+      "Milliseconds": 2010.92
     },
     {
       "Mode": "render-worker",
@@ -437,7 +437,7 @@
       ],
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 1878.19
+      "Milliseconds": 2305.92
     },
     {
       "Mode": "full-isolation",
@@ -456,7 +456,7 @@
           "Command": "middle",
           "Aot": false,
           "HasDocument": false,
-          "Frames": 2,
+          "Frames": 1,
           "Listeners": 1,
           "Active": true,
           "MutableBaseRestored": false,
@@ -469,7 +469,7 @@
           "Command": "retarget",
           "Aot": false,
           "HasDocument": false,
-          "Frames": 3,
+          "Frames": 2,
           "Listeners": 1,
           "Active": true,
           "MutableBaseRestored": false,
@@ -482,7 +482,7 @@
           "Command": "complete",
           "Aot": false,
           "HasDocument": false,
-          "Frames": 4,
+          "Frames": 3,
           "Listeners": 0,
           "Active": false,
           "MutableBaseRestored": true,
@@ -495,7 +495,7 @@
           "Command": "mutate",
           "Aot": false,
           "HasDocument": false,
-          "Frames": 5,
+          "Frames": 4,
           "Listeners": 0,
           "Active": false,
           "MutableBaseRestored": true,
@@ -508,7 +508,7 @@
           "Command": "scalar-middle",
           "Aot": false,
           "HasDocument": false,
-          "Frames": 7,
+          "Frames": 6,
           "Listeners": 1,
           "Active": false,
           "MutableBaseRestored": true,
@@ -521,7 +521,7 @@
           "Command": "scalar-complete",
           "Aot": false,
           "HasDocument": false,
-          "Frames": 8,
+          "Frames": 7,
           "Listeners": 0,
           "Active": false,
           "MutableBaseRestored": true,
@@ -534,7 +534,7 @@
           "Command": "clear",
           "Aot": false,
           "HasDocument": false,
-          "Frames": 9,
+          "Frames": 8,
           "Listeners": 0,
           "Active": false,
           "MutableBaseRestored": false,
@@ -546,7 +546,7 @@
       ],
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 1803.54
+      "Milliseconds": 1929.62
     },
     {
       "Mode": "full-isolation",
@@ -655,7 +655,7 @@
       ],
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 1810.77
+      "Milliseconds": 2048.35
     }
   ],
   "Errors": [],
@@ -669,5 +669,5 @@
   "Browser": "153.0.8010.0",
   "Passed": 6,
   "Failed": 0,
-  "FinalSourceFingerprint": "823483213634908bb0256e90b19b79810cd220ea40e2be9da81c99ee333b3b89"
+  "FinalSourceFingerprint": "75e6f652a5c22cf4e0694aea4e15f4260b762489c7abe2da69e26c558e5e9b6d"
 }

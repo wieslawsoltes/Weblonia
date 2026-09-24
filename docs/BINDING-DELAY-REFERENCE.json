@@ -1,0 +1,28 @@
+{
+  "Repository": "AvaloniaUI/Avalonia",
+  "Commit": "dff6a87665aa456c37b8cf89647e007f4c3066d7",
+  "PortBase": "ccaa49188645247119d7980af0bb862f56a7dc7d",
+  "Sources": [
+    {
+      "Path": "src/Avalonia.Base/Data/ReflectionBinding.cs",
+      "Blob": "299f6317b4136ef1cd7ca9984614bb16cb8370e6",
+      "Contract": "Int32 milliseconds; LostFocus/UpdateSource/new OneWayToSource owners bypass Delay."
+    },
+    {
+      "Path": "src/Avalonia.Base/Data/Core/BindingExpression.cs",
+      "Blob": "2fba66742fc2832c7ec8a5cd004bd8281ac46760",
+      "Contract": "Positive-delay test, reusable DispatcherTimer at Normal, stop before write, read current target, immediate OneWayToSource replacement, StopCore cancellation."
+    }
+  ],
+  "IntentionalDifferences": [
+    "JavaScript public Delay rejects non-Int32 values rather than accepting implicit numeric conversions.",
+    "Source owner changes cancel obsolete waits instead of retaining a redundant timer.",
+    "Existing JavaScript class/API organization remains; this does not rename BindingBase to upstream internal v12 types."
+  ],
+  "Unchanged": [
+    "Native SkiaSharpWeb 0.5.1 and WASM",
+    "Text shaping/rasterization",
+    "Binary rendering protocol",
+    "Browser windowing and full-isolation default"
+  ]
+}

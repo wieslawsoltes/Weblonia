@@ -6,6 +6,13 @@ import * as Controls from "../../controls/src/index.js";
 import * as Data from "../../data/src/index.js";
 import * as Styling from "../../styling/src/index.js";
 import { XamlCompiler, XamlTypeSystem, TransformerConfiguration, XamlParseException, XamlNamespaces, MarkupExtensionParser, XamlOverloadResolver, XamlTypeReference, SplitTypeArguments } from "../../xamlx/src/index.js";
+function bindingDelay(value) {
+    if (value instanceof ReferenceExtension || value instanceof Styling.StaticResourceExtension && !(value instanceof Styling.DynamicResourceExtension)) return value;
+    if (typeof value === 'string' && /^[+-]?\d+$/.test(value.trim())) value = Number(value.trim());
+    if (typeof value !== 'number' || !Number.isInteger(value) || value < -2147483648 || value > 2147483647)
+        throw new XamlParseException('Binding.Delay requires signed 32-bit integer milliseconds.');
+    return value;
+}
 const avaloniaNamespaces = ['', 'https://github.com/avaloniaui', 'http://schemas.avaloniaui.net'];
 const prohibited = new Set(['__proto__', 'prototype', 'constructor']);
 const isXamlNamespace = ns => ns === XamlNamespaces.Xaml2006 || ns === XamlNamespaces.Xaml2009;
@@ -331,7 +338,8 @@ export class XamlRuntimeContext {
                 const binding = new Ctor(positional[0] ?? argument('Path') ?? '');
                 for (const [key, val] of Object.entries(named)) {
                     if (prohibited.has(key) || !(key in binding)) throw new XamlParseException(`Unknown ${name} argument '${key}'.`);
-                    binding[key] = this.Value(val, binding, namespaces, this._TargetProperty(binding, key, namespaces));
+                    const resolvedValue = this.Value(val, binding, namespaces, this._TargetProperty(binding, key, namespaces));
+                    binding[key] = key === 'Delay' ? bindingDelay(resolvedValue) : resolvedValue;
                 }
                 if (binding.IsCompiled) Data.CompiledBindingPath.Parse(binding.Path); else Data.PropertyPath.Parse(binding.Path);
                 return binding;
@@ -424,7 +432,9 @@ export class XamlRuntimeContext {
         if (!(member.Name in target))
             throw new XamlParseException(`Property '${member.Name}' does not exist on ${target.constructor.name}.`, node?.Line, node?.Position, this.Options.SourceFile);
         const current = target[member.Name];
-        if (Array.isArray(current) && Array.isArray(value))
+        if (member.Name === 'Delay' && target instanceof Data.Binding)
+            target[member.Name] = bindingDelay(value);
+        else if (Array.isArray(current) && Array.isArray(value))
             current.push(...value);
         else if (typeof current === 'number' && typeof value === 'string')
             target[member.Name] = Number(value);
@@ -441,8 +451,9 @@ export class XamlRuntimeContext {
         const compiled = binding.constructor === Data.Binding && info?.CompiledBindingDefault;
         const result = Object.assign(compiled ? new Data.CompiledBindingExtension() : Object.create(Object.getPrototypeOf(binding)), binding);
         if (compiled) result.IsCompiled = true;
-        for (const key of ['Source', 'Converter', 'ConverterParameter', 'FallbackValue', 'TargetNullValue'])
+        for (const key of ['Source', 'Converter', 'ConverterParameter', 'FallbackValue', 'TargetNullValue', 'Delay'])
             if (key in result) result[key] = this._ResolveReference(result[key], target);
+        if (result instanceof Data.Binding) result.Delay = bindingDelay(result.Delay);
         if (binding instanceof Data.MultiBinding) {
             if (!binding.Bindings?.[Symbol.iterator]) throw new XamlParseException('MultiBinding.Bindings must be iterable.');
             ancestors.add(binding);

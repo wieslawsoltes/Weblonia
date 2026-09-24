@@ -1,0 +1,242 @@
+{
+  "Version": "0.6.2-alpha.1",
+  "SourceFingerprint": "75e6f652a5c22cf4e0694aea4e15f4260b762489c7abe2da69e26c558e5e9b6d",
+  "Completed": true,
+  "Tests": [
+    {
+      "Mode": "single",
+      "Aot": false,
+      "Passed": true,
+      "ComparedChannels": 4,
+      "MaximumChannelError": 0,
+      "AutonomousRedraw": true,
+      "ImmediatePublicationSuppressed": true,
+      "CoalescedWrites": true,
+      "ExplicitFlush": true,
+      "PendingDisposal": true,
+      "RemainingSubscriptions": 0,
+      "RestartPassed": false,
+      "State": {
+        "Aot": false,
+        "HasDocument": true,
+        "Frames": 3,
+        "Values": [
+          "final",
+          "final"
+        ],
+        "Writes": [
+          1,
+          1
+        ],
+        "Positions": [
+          80,
+          144
+        ],
+        "Pending": 0,
+        "Subscriptions": 4,
+        "RenderError": null
+      },
+      "Errors": [],
+      "MissingAssets": [],
+      "Milliseconds": 1496.9
+    },
+    {
+      "Mode": "single",
+      "Aot": true,
+      "Passed": true,
+      "ComparedChannels": 4,
+      "MaximumChannelError": 0,
+      "AutonomousRedraw": true,
+      "ImmediatePublicationSuppressed": true,
+      "CoalescedWrites": true,
+      "ExplicitFlush": true,
+      "PendingDisposal": true,
+      "RemainingSubscriptions": 0,
+      "RestartPassed": false,
+      "State": {
+        "Aot": true,
+        "HasDocument": true,
+        "Frames": 3,
+        "Values": [
+          "final",
+          "final"
+        ],
+        "Writes": [
+          1,
+          1
+        ],
+        "Positions": [
+          80,
+          144
+        ],
+        "Pending": 0,
+        "Subscriptions": 4,
+        "RenderError": null
+      },
+      "Errors": [],
+      "MissingAssets": [],
+      "Milliseconds": 1465.6
+    },
+    {
+      "Mode": "render-worker",
+      "Aot": false,
+      "Passed": true,
+      "ComparedChannels": 4,
+      "MaximumChannelError": 0,
+      "AutonomousRedraw": true,
+      "ImmediatePublicationSuppressed": true,
+      "CoalescedWrites": true,
+      "ExplicitFlush": true,
+      "PendingDisposal": true,
+      "RemainingSubscriptions": 0,
+      "RestartPassed": true,
+      "State": {
+        "Aot": false,
+        "HasDocument": true,
+        "Frames": 4,
+        "Values": [
+          "final",
+          "final"
+        ],
+        "Writes": [
+          1,
+          1
+        ],
+        "Positions": [
+          80,
+          144
+        ],
+        "Pending": 0,
+        "Subscriptions": 4,
+        "RenderError": null
+      },
+      "Errors": [],
+      "MissingAssets": [],
+      "Milliseconds": 2308.83
+    },
+    {
+      "Mode": "render-worker",
+      "Aot": true,
+      "Passed": true,
+      "ComparedChannels": 4,
+      "MaximumChannelError": 0,
+      "AutonomousRedraw": true,
+      "ImmediatePublicationSuppressed": true,
+      "CoalescedWrites": true,
+      "ExplicitFlush": true,
+      "PendingDisposal": true,
+      "RemainingSubscriptions": 0,
+      "RestartPassed": true,
+      "State": {
+        "Aot": true,
+        "HasDocument": true,
+        "Frames": 4,
+        "Values": [
+          "final",
+          "final"
+        ],
+        "Writes": [
+          1,
+          1
+        ],
+        "Positions": [
+          80,
+          144
+        ],
+        "Pending": 0,
+        "Subscriptions": 4,
+        "RenderError": null
+      },
+      "Errors": [],
+      "MissingAssets": [],
+      "Milliseconds": 2308.08
+    },
+    {
+      "Mode": "full-isolation",
+      "Aot": false,
+      "Passed": true,
+      "ComparedChannels": 4,
+      "MaximumChannelError": 0,
+      "AutonomousRedraw": true,
+      "ImmediatePublicationSuppressed": true,
+      "CoalescedWrites": true,
+      "ExplicitFlush": true,
+      "PendingDisposal": true,
+      "RemainingSubscriptions": 0,
+      "RestartPassed": true,
+      "State": {
+        "Aot": false,
+        "HasDocument": false,
+        "Frames": 4,
+        "Values": [
+          "final",
+          "final"
+        ],
+        "Writes": [
+          1,
+          1
+        ],
+        "Positions": [
+          80,
+          144
+        ],
+        "Pending": 0,
+        "Subscriptions": 4,
+        "RenderError": null
+      },
+      "Errors": [],
+      "MissingAssets": [],
+      "Milliseconds": 2133.44
+    },
+    {
+      "Mode": "full-isolation",
+      "Aot": true,
+      "Passed": true,
+      "ComparedChannels": 4,
+      "MaximumChannelError": 0,
+      "AutonomousRedraw": true,
+      "ImmediatePublicationSuppressed": true,
+      "CoalescedWrites": true,
+      "ExplicitFlush": true,
+      "PendingDisposal": true,
+      "RemainingSubscriptions": 0,
+      "RestartPassed": true,
+      "State": {
+        "Aot": true,
+        "HasDocument": false,
+        "Frames": 4,
+        "Values": [
+          "final",
+          "final"
+        ],
+        "Writes": [
+          1,
+          1
+        ],
+        "Positions": [
+          80,
+          144
+        ],
+        "Pending": 0,
+        "Subscriptions": 4,
+        "RenderError": null
+      },
+      "Errors": [],
+      "MissingAssets": [],
+      "Milliseconds": 2137.02
+    }
+  ],
+  "Errors": [],
+  "MissingAssets": [],
+  "Interception": false,
+  "WorkerBootstrapOverrides": false,
+  "SnapshotForcesRender": false,
+  "ClockOverrides": false,
+  "BindingDelay": true,
+  "PixelChannelTolerance": 2,
+  "PhysicalGpuQualified": false,
+  "Browser": "153.0.8010.0",
+  "Passed": 6,
+  "Failed": 0,
+  "FinalSourceFingerprint": "75e6f652a5c22cf4e0694aea4e15f4260b762489c7abe2da69e26c558e5e9b6d"
+}
