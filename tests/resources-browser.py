@@ -33,11 +33,14 @@ class Handler(SimpleHTTPRequestHandler):
 white,red,blue,green,yellow,magenta=(255,255,255,255),(255,0,0,255),(0,0,255,255),(0,255,0,255),(255,255,0,255),(255,0,255,255)
 expectations={'initial':[red,white,blue,blue],'theme':[blue,white,blue,blue],'move':[white,green,blue,blue],
     'mutate':[white,yellow,magenta,blue],'realize':[white,yellow,magenta,blue]}
-def presented(page,expected):
+black=(0,0,0,255)
+def presented(page,expected,binding=None):
+    if binding is None:binding=[black,white,white,white]
+    expected=[*expected,*binding]
     deadline=time.monotonic()+10
     while True:
         image=Image.open(io.BytesIO(page.locator('#app canvas').first.screenshot(timeout=10000))).convert('RGBA')
-        values=[image.getpixel((32+i*96,32)) for i in range(4)]
+        values=[image.getpixel((32+i*96,y)) for y in [32,128] for i in range(4)]
         maximum=max(abs(a-b) for value,rgba in zip(values,expected) for a,b in zip(value,rgba))
         if maximum<=2:return image,maximum
         if time.monotonic()>=deadline:raise AssertionError({'ResourcePixels':values,'Expected':expected})
@@ -65,7 +68,7 @@ try:
                         const A=await import('@wieslawsoltes/avalonia'),{CreateResourceScene}=await import('/tests/resource-scene.js');
                         globalThis.resourceScene=await CreateResourceScene(A,catalog.Root,aot);return resourceScene.State();}""",[mode,aot])
                     assert state['Aot']==aot and state['HasDocument']==(mode!='full-isolation') and not state['RenderError'],state
-                    assert state['Created']==2 and state['Deferred'] and state['Distinct'],state
+                    assert state['Created']==2 and state['Deferred'] and state['Distinct'] and state['Editors']==0 and state['NestedCompiled'],state
                     initial,maximum=presented(page,expectations['initial']);stages=[]
                     for step in ['theme','move','mutate','realize']:
                         print('STAGE',mode,aot,step,flush=True)
@@ -77,6 +80,29 @@ try:
                         assert current['Created']==(3 if step=='realize' else 2),current
                         stages.append({'Step':step,'State':current,'MaximumChannelError':error})
                     assert not current['Deferred'] and current['Distinct'] and current['ParentIsRight'],current
+                    binding_stages=[]
+                    for step,row,position,writes in [
+                        ('binding',[white,white,black,white],208,[[208]]),
+                        ('flush',[white,black,white,white],112,[[208,112]]),
+                        ('dispose-pending',[white,black,white,white],112,[[208,112]]),
+                        ('replace-source',[black,white,white,white],16,[[208,112],[]])]:
+                        print('STAGE',mode,aot,step,flush=True)
+                        change=evaluate(page,"async([mode,step])=>mode==='full-isolation'?await catalogHost.InvokeAsync('ChangeResources',step):await resourceScene.Change(step)",[mode,step])
+                        assert change['Editors']==2 and change['NestedCompiled'],change
+                        if step=='binding':assert change['Position']==16 and change['SourceWrites']==[[]] and change['PendingTimers']==1,change
+                        if step=='flush':assert change['Position']==112 and change['SourceWrites']==[[208,112]] and change['PendingTimers']==0,change
+                        if step in ['dispose-pending','replace-source']:
+                            assert change['PendingTimers']==0,change
+                            # Observe beyond the real 200ms debounce boundary.
+                            # This is not a fake clock or a forced rendering RPC.
+                            page.wait_for_timeout(300)
+                        updated,error=presented(page,expectations['realize'],row);maximum=max(maximum,error)
+                        current=evaluate(page,"async mode=>mode==='full-isolation'?await catalogHost.InvokeAsync('ResourceState'):resourceScene.State()",mode)
+                        assert current['Position']==position and current['SourceWrites']==writes and current['PendingTimers']==0,current
+                        assert not current['RenderError'],current
+                        if step!='dispose-pending':assert current['Frames']>change['FramesBefore'],current
+                        if step in ['dispose-pending','replace-source']:assert current['EditorDisposed'],current
+                        binding_stages.append({'Step':step,'Immediate':change,'State':current,'MaximumChannelError':error})
                     if mode!='single':
                         print('STAGE',mode,aot,'restart',flush=True)
                         evaluate(page,"async mode=>{if(mode==='full-isolation')await catalogHost.RestartRendererAsync();else await catalog.Root.Renderer.RestartAsync();}",mode)
@@ -87,7 +113,9 @@ try:
                     else:evaluate(page,'()=>{resourceScene.Dispose();catalog.Root.Dispose();}')
                     entry.update(Passed=True,MaximumChannelError=maximum,ComparedChannels=4,AutonomousRedraw=True,
                         LazyCreation=True,UnsharedDistinct=True,ThemeSwitch=True,AncestorReparenting=True,OldScopeDetached=True,
-                        RestartPassed=mode!='single',Stages=stages)
+                        RestartPassed=mode!='single',Stages=stages,BindingStages=binding_stages,
+                        DeferredBindingIntegration=True,NestedCompiledAggregate=True,CoalescedDelayedWrite=True,
+                        ImmediateSourceFlush=True,PendingEditorDisposed=True,SourceOwnerReplacement=True)
                 except Exception as error:entry.update(Passed=False,Error=str(error))
                 finally:
                     entry.update(Errors=errors,MissingAssets=missing,Milliseconds=round((time.monotonic()-started)*1000,2));report['Errors'].extend(errors);report['MissingAssets'].extend(missing);report['Tests'].append(entry);save();context.close();print('PASS'if entry['Passed']else'FAIL',mode,aot,entry.get('Error',''),flush=True)

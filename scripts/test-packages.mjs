@@ -139,7 +139,18 @@ for (const Type of [A.Binding,A.CompiledBindingExtension]) {
     target.SetCurrentValue(A.TextBox.TextProperty,'manual');delayed.UpdateSource();assert.equal(model.Value,'manual');
     target.Dispose();
 }
-console.log(JSON.stringify({Passed:true,BindingDelay:true,SingleBindingPipeline:true,MultiBindingApis:true,XamlNamespaceApis:true,EffectTransitionApis:true,GlyphPathApis:true,ImplicitAnimationApis:true,Packages:names.length,FacadeExports:Object.keys(A).length,PublicRegistryInstalled:false,StartupSubpaths:true,CorePortApis:true}));
+const deferred = new A.ResourceDictionary();let resourceBuilds=0;
+deferred.AddDeferred('shared',()=>({Id:++resourceBuilds}));
+deferred.AddNotSharedDeferred('unshared',{Build:()=>({Id:++resourceBuilds})});
+assert.equal(resourceBuilds,0);assert.equal(deferred.get('shared'),deferred.get('shared'));
+assert.notEqual(deferred.get('unshared'),deferred.get('unshared'));assert.equal(resourceBuilds,3);deferred.Dispose();
+const resourceSource='<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"><StackPanel.Resources><SolidColorBrush x:Key="ink" x:Shared="False" Color="Blue"/></StackPanel.Resources><Border Background="{StaticResource ink}"/><Border Background="{StaticResource ink}"/></StackPanel>';
+const resourceCompilation = new AvaloniaXamlCompiler().Compile(resourceSource);
+const resourceModule = await import('data:text/javascript;base64,'+Buffer.from(resourceCompilation.JavaScript).toString('base64'));
+const resourceView = resourceModule.Build(new A.AvaloniaXamlServices());
+const resourceBrushes=resourceView.Children.ToArray().map(c=>c.Background);
+assert.notEqual(resourceBrushes[0],resourceBrushes[1]);resourceView.Dispose();for(const b of resourceBrushes)b.Dispose();
+console.log(JSON.stringify({Passed:true,DeferredResourceApis:true,BindingDelay:true,SingleBindingPipeline:true,MultiBindingApis:true,XamlNamespaceApis:true,EffectTransitionApis:true,GlyphPathApis:true,ImplicitAnimationApis:true,Packages:names.length,FacadeExports:Object.keys(A).length,PublicRegistryInstalled:false,StartupSubpaths:true,CorePortApis:true}));
 `);
 const run = spawnSync(process.execPath, ['--import', './register.mjs', 'consumer.mjs'], { cwd: fixture, encoding: 'utf8', timeout: 30000 });
 if (run.error || run.status !== 0) throw new Error(`${run.error ?? ''}\n${run.stdout}\n${run.stderr}`);

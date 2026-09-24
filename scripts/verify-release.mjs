@@ -45,7 +45,7 @@ current(automation, 'Incremental automation');
 require(automation.Completed && automation.Failed === 0 && automation.Passed > 0 && !automation.PageErrors.length && !automation.MissingAssets.length, 'Incremental automation failed');
 const consumer = await read('artifacts/package-consumer-result.json');
 current(consumer, 'Packed consumer');
-require(consumer.Passed && consumer.Packages === 18 && consumer.StartupSubpaths && consumer.CorePortApis && consumer.ImplicitAnimationApis && consumer.GlyphPathApis && consumer.EffectTransitionApis && consumer.XamlNamespaceApis && consumer.MultiBindingApis && consumer.SingleBindingPipeline && consumer.BindingDelay && !consumer.PublicRegistryInstalled, 'Packed offline consumer failed');
+require(consumer.Passed && consumer.Packages === 18 && consumer.StartupSubpaths && consumer.CorePortApis && consumer.ImplicitAnimationApis && consumer.GlyphPathApis && consumer.EffectTransitionApis && consumer.XamlNamespaceApis && consumer.MultiBindingApis && consumer.SingleBindingPipeline && consumer.DeferredResourceApis && consumer.BindingDelay && !consumer.PublicRegistryInstalled, 'Packed offline consumer failed');
 const corePort = await read('artifacts/core-port/browser-results.json');
 current(corePort, 'Core port browser');
 require(corePort.Completed && corePort.Passed === 3 && corePort.Failed === 0 && !corePort.Interception && !corePort.WorkerBootstrapOverrides
@@ -94,6 +94,19 @@ require(multiBinding.Completed && multiBinding.Passed===6 && multiBinding.Failed
         && t.ComparedChannels===4 && t.MaximumChannelError<=2 && (t.Mode==='single'||t.RestartPassed)), 'MultiBinding HTTP qualification failed');
 for(const mode of ['single','render-worker','full-isolation'])for(const aot of [false,true])
     require(multiBinding.Tests.some(t=>t.Mode===mode&&t.Aot===aot), 'Missing MultiBinding runtime or AOT topology');
+const resources = await read('artifacts/resources/browser-results.json');
+current(resources,'Deferred XAML resources');
+require(resources.Completed && resources.Passed===6 && resources.Failed===0 && resources.Tests.length===6
+    && !resources.Interception && !resources.WorkerBootstrapOverrides && !resources.SnapshotForcesRender
+    && resources.PixelChannelTolerance===2 && !resources.Errors.length && !resources.MissingAssets.length
+    && resources.Tests.every(t=>t.Passed&&t.AutonomousRedraw&&t.LazyCreation&&t.UnsharedDistinct&&t.ThemeSwitch
+        && t.AncestorReparenting&&t.OldScopeDetached&&t.ComparedChannels===4&&t.MaximumChannelError<=2
+        && t.DeferredBindingIntegration&&t.NestedCompiledAggregate&&t.CoalescedDelayedWrite
+        && t.ImmediateSourceFlush&&t.PendingEditorDisposed&&t.SourceOwnerReplacement
+        && t.BindingStages?.length===4&&t.BindingStages.every(s=>s.MaximumChannelError<=2&&!s.State.RenderError)
+        && (t.Mode==='single'||t.RestartPassed)), 'Deferred resource HTTP qualification failed');
+for(const mode of ['single','render-worker','full-isolation'])for(const aot of [false,true])
+    require(resources.Tests.some(t=>t.Mode===mode&&t.Aot===aot),'Missing resource runtime or AOT topology');
 const build = await read('artifacts/build-result.json');
 current(build, 'Build', false, false);
 require(build.XamlModules === 75 && build.NoEval && build.FontFiles === 0, 'AOT build contract changed');
@@ -159,7 +172,7 @@ await scan(path.join(root, 'packages'));
 const lines = (await Promise.all(files.map(f => readFile(f, 'utf8')))).reduce((n, s) => n + s.split('\n').length, 0);
 const report = {
     FullReleaseQualified: true, Version: pkg.version, SourceFingerprint: fingerprint, GeneratedAt: new Date().toISOString(),
-    ImplicitAnimations: implicitAnimations, GlyphGeometry: glyphGeometry, EffectTransitions: effectTransitions, XamlNamespaces: xamlNamespaces, MultiBinding: multiBinding, BindingDelay: bindingDelay,
+    ImplicitAnimations: implicitAnimations, GlyphGeometry: glyphGeometry, EffectTransitions: effectTransitions, XamlNamespaces: xamlNamespaces, MultiBinding: multiBinding, BindingDelay: bindingDelay, DeferredResources: resources,
     FullAvaloniaParity: false, FullXamlXParity: false, FullUpstreamClonesIncluded: false, OriginalCatalogSubexamplesFullyPorted: false,
     Recovery: await read('docs/recovery/recovery-invalidation.json'),
     UpstreamSkia: await read('docs/SKIASHARPWEB-UPSTREAM.json'),

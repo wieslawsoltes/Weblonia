@@ -116,3 +116,48 @@ complete CI/release validation. A locally intercepted diagnostic is not a substi
 for ordinary HTTP qualification; local administrator-blocked HTTP attempts are
 reported as failures, never passes. Physical-GPU/multibrowser/mobile and full
 Avalonia/XamlX parity are not asserted.
+
+## Integration with Binding.Delay and nested MultiBinding (2026-09-24)
+
+The deferred-resource branch is integrated with main
+`8a1f28c5b69ce89a4991abbbdb2caab84afd7697`, preserving the single-binding value
+pipeline, MultiBinding graph preparation, signed Int32 `Delay`, and all existing
+release gates. This is a merge of both histories, not a replacement of main.
+
+Binding preparation captures lexical resource scopes when the property is
+assigned, before the construction stack is unwound. The immutable scope list is
+passed through the complete nested MultiBinding graph; Source, Converter,
+ConverterParameter, FallbackValue, TargetNullValue and Delay resolve on a
+per-target copy. The original binding graph is never rewritten. Without this
+capture, named/eager targets in a standalone ResourceDictionary cannot resolve
+nested resource references during Complete. Runtime and direct-AOT regression
+cases demonstrate that failure and pass with the capture restored.
+
+Fourteen additional integration tests cover the captured standalone scope,
+per-realization timing of unshared editors, inherited compiled schemas, live
+DataContext replacement, cancellation of obsolete delayed writes, explicit
+UpdateSource, disposal, failed deferred Delay conversion followed by repaired
+retry, nested compiled MultiBinding leaves, independent reuse of binding graphs,
+and 1,000 unshared edit/dispose cycles per execution path with no retained source
+observers or native timers. The combined local Node suite passes 1,196 tests,
+with zero failures, skips or cancellations (test concurrency 4).
+
+The existing analytic resource scene retains every theme/reparenting/shared
+brush pixel assertion and adds a second row driven by a nested compiled
+MultiBinding. Its two unshared resource editors remain dormant until requested.
+Three edits coalesce into one naturally delivered delayed source write; explicit
+UpdateSource flushes immediately; a pending disposed editor cannot write; and
+replacing the inherited source cancels an obsolete write. The same scene passes
+ten actual native RGBA cases (runtime/AOT at five device scales) with natural
+DispatcherTimer delivery and channel tolerance 2. HTTP qualification uses the
+actual presented canvas and additionally requires autonomous frames and renderer
+restart; there is no input-driven repair, asset interception, fake browser clock,
+or render/snapshot RPC after mutation.
+
+All six local ordinary-HTTP attempts were blocked by Chromium's administrator
+policy. They are not passes. The branch Actions workflow must qualify this
+expanded scene, all prior suites, source fingerprints, packages, and generated
+assets before merge. The old 970-test branch reports are historical evidence,
+not qualification of this integrated source. Resource-provider ownership,
+ITemplateResult unwrapping, CLR/XamlX IL semantics, full Avalonia parity and
+physical-GPU/multibrowser qualification remain outside this change.
