@@ -1,6 +1,6 @@
 {
   "Version": "0.6.2-alpha.1",
-  "SourceFingerprint": "6bbc379ecb3ff0e14339de517f36b843bf93682c5cac400b0ac205f740edd56b",
+  "SourceFingerprint": "75e6f652a5c22cf4e0694aea4e15f4260b762489c7abe2da69e26c558e5e9b6d",
   "Completed": true,
   "Tests": [
     {
@@ -26,7 +26,7 @@
       },
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 1086.27
+      "Milliseconds": 952.68
     },
     {
       "Mode": "single",
@@ -51,7 +51,7 @@
       },
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 1061.04
+      "Milliseconds": 954.86
     },
     {
       "Mode": "render-worker",
@@ -76,7 +76,7 @@
       },
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 1962.14
+      "Milliseconds": 1702.72
     },
     {
       "Mode": "render-worker",
@@ -101,7 +101,7 @@
       },
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 1937.69
+      "Milliseconds": 1686.55
     },
     {
       "Mode": "full-isolation",
@@ -126,7 +126,7 @@
       },
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 1783.23
+      "Milliseconds": 1574.27
     },
     {
       "Mode": "full-isolation",
@@ -151,7 +151,7 @@
       },
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 1778.36
+      "Milliseconds": 1606.96
     }
   ],
   "Errors": [],
@@ -162,8 +162,8 @@
   "PhysicalGpuQualified": false,
   "NamespaceMappings": true,
   "PixelChannelTolerance": 2,
-  "Browser": "152.0.7977.0",
+  "Browser": "153.0.8010.0",
   "Passed": 6,
   "Failed": 0,
-  "FinalSourceFingerprint": "6bbc379ecb3ff0e14339de517f36b843bf93682c5cac400b0ac205f740edd56b"
+  "FinalSourceFingerprint": "75e6f652a5c22cf4e0694aea4e15f4260b762489c7abe2da69e26c558e5e9b6d"
 }

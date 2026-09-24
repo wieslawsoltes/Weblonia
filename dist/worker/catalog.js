@@ -224,10 +224,6 @@ export class CatalogController {
         const find = name => page.FindControl(name);
         this.PageFind = find;
         await ConfigureExtendedPage(this, id, page, vm);
-        if (id === 'ThemeVariants') {
-            this._pageLifetime.Add(find('ResourceFirst').Background);
-            this._pageLifetime.Add(find('ResourceSecond').Background);
-        }
         if (id === 'ButtonSpinner')
             find('Spinner').Spin.Add((_, e) => vm.Counter += e.Direction === 'Increase' ? 1 : -1);
         if (id === 'ComboBox')
@@ -355,6 +351,8 @@ export class CatalogController {
         if (id === 'TransitioningContentControl')
             find('TransitionHost').Content = this.MakePage(1);
         if (id === 'DataValidation') {
+            this._pageLifetime.Add(find('CommitDelayed').Click.Add(() =>
+                A.BindingOperations.GetBindingExpressionBase(find('DelayedEditor'), A.TextBox.TextProperty)?.UpdateSource()));
             const validator = { Convert: value => value, ConvertBack: value => {
                     if (String(value).trim().length < 3)
                         throw new Error('Use at least three characters.');
@@ -452,16 +450,6 @@ export class CatalogController {
             this.Model.Status = `XAML error: ${error.message}`;
             this._notifications.Show(new A.Notification('XAML compilation error', error.message, 'Error', 8000));
         }
-    }
-    MutateResourceBrush() {
-        const first = this.Page.FindControl('ResourceFirst');
-        first.Background.Color = A.Color.Parse(first.Background.Color.Equals(A.Color.Parse('#0F9B8E')) ? '#7255D8' : '#0F9B8E');
-        this.Model.Status = 'x:Shared=False · only the first brush instance changed';
-    }
-    MaterializeResource() {
-        const wasDeferred = this.Page.Resources.ContainsDeferredKey('DeferredMessage');
-        this.Page.FindControl('DeferredSlot').Child = this.Page.Resources.get('DeferredMessage');
-        this.Model.Status = wasDeferred ? 'Deferred control created on demand' : 'The existing shared control was reused';
     }
     ToggleTheme() {
         this.SetTheme(A.Application.Current.ActualThemeVariant.Key === 'Dark' ? 'Light' : 'Dark');

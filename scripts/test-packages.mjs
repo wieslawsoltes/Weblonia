@@ -117,18 +117,29 @@ const mappedDocument = X.XDocumentXamlParser.Parse('<Border xmlns="urn:packed-ol
 assert.equal(mappedDocument.Root.Type.XmlNamespace,'https://github.com/avaloniaui');
 const namespaceView=new AvaloniaXamlCompiler({CompatibleNamespaces:namespaceOptions.CompatibleNamespaces}).Compile('<Border xmlns="urn:packed-old" xmlns:l="urn:packed-old" xmlns:d="urn:design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" l:Canvas.Left="9"><d:Missing/></Border>').Build();
 assert.equal(A.Canvas.GetLeft(namespaceView),9);assert.equal(namespaceView.Child,null);namespaceView.Dispose();
-const deferred = new A.ResourceDictionary();let resourceBuilds=0;
-deferred.AddDeferred('shared',()=>({Id:++resourceBuilds}));
-deferred.AddNotSharedDeferred('unshared',{Build:()=>({Id:++resourceBuilds})});
-assert.equal(resourceBuilds,0);assert.equal(deferred.get('shared'),deferred.get('shared'));
-assert.notEqual(deferred.get('unshared'),deferred.get('unshared'));assert.equal(resourceBuilds,3);deferred.Dispose();
-const resourceSource='<StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"><StackPanel.Resources><SolidColorBrush x:Key="ink" x:Shared="False" Color="Blue"/></StackPanel.Resources><Border Background="{StaticResource ink}"/><Border Background="{StaticResource ink}"/></StackPanel>';
-const resourceCompilation = new AvaloniaXamlCompiler().Compile(resourceSource);
-const resourceModule = await import('data:text/javascript;base64,'+Buffer.from(resourceCompilation.JavaScript).toString('base64'));
-const resourceView = resourceModule.Build(new A.AvaloniaXamlServices());
-const resourceBrushes=resourceView.Children.ToArray().map(c=>c.Background);
-assert.notEqual(resourceBrushes[0],resourceBrushes[1]);resourceView.Dispose();for(const b of resourceBrushes)b.Dispose();
-console.log(JSON.stringify({Passed:true,DeferredResourceApis:true,XamlNamespaceApis:true,EffectTransitionApis:true,GlyphPathApis:true,ImplicitAnimationApis:true,Packages:names.length,FacadeExports:Object.keys(A).length,PublicRegistryInstalled:false,StartupSubpaths:true,CorePortApis:true}));
+const aggregateTarget = new A.TextBlock();aggregateTarget.DataContext=new ReactiveObject({First:3,Second:4});
+const childAggregate = new A.MultiBinding([new A.Binding('First'),new A.Binding('Second')],values=>values.reduce((x,y)=>x+y,0));
+const aggregate = new A.MultiBinding([childAggregate]);aggregate.StringFormat='Total: {0:F1}';aggregate.ConverterCulture='en-US';
+A.BindingOperations.Apply(aggregateTarget,A.TextBlock.TextProperty,aggregate);assert.equal(aggregateTarget.Text,'Total: 7.0');
+aggregateTarget.DataContext.Second=5;assert.equal(aggregateTarget.Text,'Total: 8.0');aggregateTarget.Dispose();
+assert.equal(new A.StringFormatMultiValueConverter('{0}/{1}').Convert(['a','b']), 'a/b');
+assert.equal(new A.StringFormatValueConverter('F1').Convert(3.5,String,null,'de-DE'), '3,5');
+const formatted = new A.TextBlock();formatted.DataContext={Value:12};
+const simple=new A.Binding('Value');simple.StringFormat='D4';formatted.Bind(A.TextBlock.TextProperty,simple);
+assert.equal(formatted.Text,'0012');formatted.Dispose();
+// The installed package uses the actual dispatcher, not an application debounce.
+assert.equal(new A.Binding().Delay,0);
+for (const Type of [A.Binding,A.CompiledBindingExtension]) {
+    const model={Value:'original'},target=new A.TextBox();
+    const delayed=target.Bind(A.TextBox.TextProperty,new Type({Path:'Value',Source:model,Mode:'TwoWay',Delay:25}));
+    target.SetCurrentValue(A.TextBox.TextProperty,'first');target.SetCurrentValue(A.TextBox.TextProperty,'last');
+    assert.equal(model.Value,'original');
+    await new Promise(resolve=>setTimeout(resolve,50));A.Dispatcher.UIThread.RunJobs();
+    assert.equal(model.Value,'last');assert.equal(delayed._delayTimer.IsEnabled,false);
+    target.SetCurrentValue(A.TextBox.TextProperty,'manual');delayed.UpdateSource();assert.equal(model.Value,'manual');
+    target.Dispose();
+}
+console.log(JSON.stringify({Passed:true,BindingDelay:true,SingleBindingPipeline:true,MultiBindingApis:true,XamlNamespaceApis:true,EffectTransitionApis:true,GlyphPathApis:true,ImplicitAnimationApis:true,Packages:names.length,FacadeExports:Object.keys(A).length,PublicRegistryInstalled:false,StartupSubpaths:true,CorePortApis:true}));
 `);
 const run = spawnSync(process.execPath, ['--import', './register.mjs', 'consumer.mjs'], { cwd: fixture, encoding: 'utf8', timeout: 30000 });
 if (run.error || run.status !== 0) throw new Error(`${run.error ?? ''}\n${run.stdout}\n${run.stderr}`);

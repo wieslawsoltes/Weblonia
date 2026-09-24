@@ -1,14 +1,14 @@
 {
   "Version": "0.6.2-alpha.1",
-  "SourceFingerprint": "6bbc379ecb3ff0e14339de517f36b843bf93682c5cac400b0ac205f740edd56b",
+  "SourceFingerprint": "75e6f652a5c22cf4e0694aea4e15f4260b762489c7abe2da69e26c558e5e9b6d",
   "Completed": true,
   "Tests": [
     {
       "Name": "source module startup, nonblank TableView and restart render-worker",
       "Passed": true,
-      "Milliseconds": 4517.28,
+      "Milliseconds": 3734.99,
       "Evidence": {
-        "StartupMilliseconds": 2850.14,
+        "StartupMilliseconds": 2317.06,
         "WorkerCount": 1,
         "RequestedBackend": "canvas",
         "SelectedBackend": "canvas",
@@ -20,7 +20,7 @@
           "Type": "startup-progress",
           "Role": "render",
           "Stage": "ready",
-          "ElapsedMilliseconds": 1058.2000000000116
+          "ElapsedMilliseconds": 826
         },
         "EntryRequests": [
           "packages/browser/worker-assets/render.js",
@@ -32,9 +32,9 @@
     {
       "Name": "source module startup, nonblank TableView and restart full-isolation",
       "Passed": true,
-      "Milliseconds": 4773.02,
+      "Milliseconds": 3871.06,
       "Evidence": {
-        "StartupMilliseconds": 3072.49,
+        "StartupMilliseconds": 2510.51,
         "WorkerCount": 2,
         "RequestedBackend": "canvas",
         "SelectedBackend": "canvas",
@@ -43,17 +43,17 @@
         "PngSha256": "0acfb592ac171cccba2626443661c1a64874e1948e1c8f5d78378d20b0a9691f",
         "RestartPassed": true,
         "Startup": {
-          "ui": {
-            "Type": "startup-progress",
-            "Role": "ui",
-            "Stage": "ready",
-            "ElapsedMilliseconds": 2406.2999999999884
-          },
           "render": {
             "Type": "startup-progress",
             "Role": "render",
             "Stage": "ready",
-            "ElapsedMilliseconds": 1820.7000000000116
+            "ElapsedMilliseconds": 1400.6999999999534
+          },
+          "ui": {
+            "Type": "startup-progress",
+            "Role": "ui",
+            "Stage": "ready",
+            "ElapsedMilliseconds": 1863.399999999965
           }
         },
         "EntryRequests": [
@@ -67,9 +67,9 @@
     {
       "Name": "dist module startup, nonblank TableView and restart render-worker",
       "Passed": true,
-      "Milliseconds": 4217.81,
+      "Milliseconds": 3515.7,
       "Evidence": {
-        "StartupMilliseconds": 2585.99,
+        "StartupMilliseconds": 2156.51,
         "WorkerCount": 1,
         "RequestedBackend": "canvas",
         "SelectedBackend": "canvas",
@@ -81,7 +81,7 @@
           "Type": "startup-progress",
           "Role": "render",
           "Stage": "ready",
-          "ElapsedMilliseconds": 1022.7000000000116
+          "ElapsedMilliseconds": 795.4000000000233
         },
         "EntryRequests": [
           "packages/browser/worker-assets/render.js",
@@ -93,9 +93,9 @@
     {
       "Name": "dist module startup, nonblank TableView and restart full-isolation",
       "Passed": true,
-      "Milliseconds": 4706.36,
+      "Milliseconds": 3747.5,
       "Evidence": {
-        "StartupMilliseconds": 3113.03,
+        "StartupMilliseconds": 2506.11,
         "WorkerCount": 2,
         "RequestedBackend": "canvas",
         "SelectedBackend": "canvas",
@@ -108,18 +108,18 @@
             "Type": "startup-progress",
             "Role": "ui",
             "Stage": "ready",
-            "ElapsedMilliseconds": 2400.0999999999767
+            "ElapsedMilliseconds": 1924.0999999999767
           },
           "render": {
             "Type": "startup-progress",
             "Role": "render",
             "Stage": "ready",
-            "ElapsedMilliseconds": 1844.5
+            "ElapsedMilliseconds": 1437.7000000000116
           }
         },
         "EntryRequests": [
-          "packages/browser/worker-assets/ui.js",
           "packages/browser/worker-assets/render.js",
+          "packages/browser/worker-assets/ui.js",
           "packages/browser/worker-assets/render.js"
         ],
         "DelayedDependencyMilliseconds": 0
@@ -128,9 +128,9 @@
     {
       "Name": "nested module startup, nonblank TableView and restart render-worker",
       "Passed": true,
-      "Milliseconds": 4236.88,
+      "Milliseconds": 3506.45,
       "Evidence": {
-        "StartupMilliseconds": 2577.98,
+        "StartupMilliseconds": 2184.11,
         "WorkerCount": 1,
         "RequestedBackend": "canvas",
         "SelectedBackend": "canvas",
@@ -142,7 +142,7 @@
           "Type": "startup-progress",
           "Role": "render",
           "Stage": "ready",
-          "ElapsedMilliseconds": 1018.2000000000116
+          "ElapsedMilliseconds": 836.2000000000116
         },
         "EntryRequests": [
           "packages/browser/worker-assets/render.js",
@@ -154,9 +154,9 @@
     {
       "Name": "nested module startup, nonblank TableView and restart full-isolation",
       "Passed": true,
-      "Milliseconds": 4537.37,
+      "Milliseconds": 3753.9,
       "Evidence": {
-        "StartupMilliseconds": 2954.7,
+        "StartupMilliseconds": 2436.32,
         "WorkerCount": 2,
         "RequestedBackend": "canvas",
         "SelectedBackend": "canvas",
@@ -165,17 +165,17 @@
         "PngSha256": "0acfb592ac171cccba2626443661c1a64874e1948e1c8f5d78378d20b0a9691f",
         "RestartPassed": true,
         "Startup": {
-          "ui": {
-            "Type": "startup-progress",
-            "Role": "ui",
-            "Stage": "ready",
-            "ElapsedMilliseconds": 2265.7999999999884
-          },
           "render": {
             "Type": "startup-progress",
             "Role": "render",
             "Stage": "ready",
-            "ElapsedMilliseconds": 1854.4000000000233
+            "ElapsedMilliseconds": 1366.2999999999884
+          },
+          "ui": {
+            "Type": "startup-progress",
+            "Role": "ui",
+            "Stage": "ready",
+            "ElapsedMilliseconds": 1822.7000000000116
           }
         },
         "EntryRequests": [
@@ -189,9 +189,9 @@
     {
       "Name": "delayed top-level-await dependency render-worker",
       "Passed": true,
-      "Milliseconds": 4718.63,
+      "Milliseconds": 4015.06,
       "Evidence": {
-        "StartupMilliseconds": 2815.52,
+        "StartupMilliseconds": 2415.85,
         "WorkerCount": 1,
         "RequestedBackend": "canvas",
         "SelectedBackend": "canvas",
@@ -203,7 +203,7 @@
           "Type": "startup-progress",
           "Role": "render",
           "Stage": "ready",
-          "ElapsedMilliseconds": 1248.5999999999767
+          "ElapsedMilliseconds": 1036.5
         },
         "EntryRequests": [
           "packages/browser/worker-assets/render.js",
@@ -215,9 +215,9 @@
     {
       "Name": "automatic backend selection render-worker",
       "Passed": true,
-      "Milliseconds": 4945.2,
+      "Milliseconds": 4001.94,
       "Evidence": {
-        "StartupMilliseconds": 2828.62,
+        "StartupMilliseconds": 2387.28,
         "WorkerCount": 1,
         "RequestedBackend": "auto",
         "SelectedBackend": "webgl",
@@ -229,7 +229,7 @@
           "Type": "startup-progress",
           "Role": "render",
           "Stage": "ready",
-          "ElapsedMilliseconds": 1123.3000000000466
+          "ElapsedMilliseconds": 886
         },
         "EntryRequests": [
           "packages/browser/worker-assets/render.js",
@@ -241,7 +241,7 @@
     {
       "Name": "fail fast and release workers: render-worker/loader",
       "Passed": true,
-      "Milliseconds": 2511.89,
+      "Milliseconds": 2189.29,
       "Evidence": {
         "ReportedImmediately": true,
         "DetailedTimeoutStage": false,
@@ -252,7 +252,7 @@
     {
       "Name": "fail fast and release workers: render-worker/graph",
       "Passed": true,
-      "Milliseconds": 1628.44,
+      "Milliseconds": 1402.05,
       "Evidence": {
         "ReportedImmediately": true,
         "DetailedTimeoutStage": false,
@@ -263,7 +263,7 @@
     {
       "Name": "fail fast and release workers: render-worker/pending",
       "Passed": true,
-      "Milliseconds": 11520.44,
+      "Milliseconds": 11367.08,
       "Evidence": {
         "ReportedImmediately": false,
         "DetailedTimeoutStage": true,
@@ -274,9 +274,9 @@
     {
       "Name": "delayed top-level-await dependency full-isolation",
       "Passed": true,
-      "Milliseconds": 5083.06,
+      "Milliseconds": 4120.26,
       "Evidence": {
-        "StartupMilliseconds": 3269.49,
+        "StartupMilliseconds": 2564.91,
         "WorkerCount": 2,
         "RequestedBackend": "canvas",
         "SelectedBackend": "canvas",
@@ -289,18 +289,18 @@
             "Type": "startup-progress",
             "Role": "ui",
             "Stage": "ready",
-            "ElapsedMilliseconds": 2577.7999999999884
+            "ElapsedMilliseconds": 1950.0999999999767
           },
           "render": {
             "Type": "startup-progress",
             "Role": "render",
             "Stage": "ready",
-            "ElapsedMilliseconds": 2152
+            "ElapsedMilliseconds": 1625.2999999999884
           }
         },
         "EntryRequests": [
-          "packages/browser/worker-assets/ui.js",
           "packages/browser/worker-assets/render.js",
+          "packages/browser/worker-assets/ui.js",
           "packages/browser/worker-assets/render.js"
         ],
         "DelayedDependencyMilliseconds": 250
@@ -309,9 +309,9 @@
     {
       "Name": "automatic backend selection full-isolation",
       "Passed": true,
-      "Milliseconds": 5289.09,
+      "Milliseconds": 4254.26,
       "Evidence": {
-        "StartupMilliseconds": 3236.26,
+        "StartupMilliseconds": 2533.89,
         "WorkerCount": 2,
         "RequestedBackend": "auto",
         "SelectedBackend": "webgl",
@@ -324,18 +324,18 @@
             "Type": "startup-progress",
             "Role": "ui",
             "Stage": "ready",
-            "ElapsedMilliseconds": 2554.899999999965
+            "ElapsedMilliseconds": 1960.7000000000116
           },
           "render": {
             "Type": "startup-progress",
             "Role": "render",
             "Stage": "ready",
-            "ElapsedMilliseconds": 1977.899999999965
+            "ElapsedMilliseconds": 1507.2000000000116
           }
         },
         "EntryRequests": [
-          "packages/browser/worker-assets/render.js",
           "packages/browser/worker-assets/ui.js",
+          "packages/browser/worker-assets/render.js",
           "packages/browser/worker-assets/render.js"
         ],
         "DelayedDependencyMilliseconds": 0
@@ -344,7 +344,7 @@
     {
       "Name": "fail fast and release workers: full-isolation/loader",
       "Passed": true,
-      "Milliseconds": 2739.43,
+      "Milliseconds": 1978.01,
       "Evidence": {
         "ReportedImmediately": true,
         "DetailedTimeoutStage": false,
@@ -355,7 +355,7 @@
     {
       "Name": "fail fast and release workers: full-isolation/graph",
       "Passed": true,
-      "Milliseconds": 1031.03,
+      "Milliseconds": 893.46,
       "Evidence": {
         "ReportedImmediately": true,
         "DetailedTimeoutStage": false,
@@ -366,7 +366,7 @@
     {
       "Name": "fail fast and release workers: full-isolation/pending",
       "Passed": true,
-      "Milliseconds": 10401.79,
+      "Milliseconds": 10447.25,
       "Evidence": {
         "ReportedImmediately": false,
         "DetailedTimeoutStage": true,
@@ -377,7 +377,7 @@
     {
       "Name": "invalid isolated application import releases both workers",
       "Passed": true,
-      "Milliseconds": 2739.81,
+      "Milliseconds": 2317.24,
       "Evidence": {
         "ReportedImmediately": true,
         "DetailedTimeoutStage": false,
@@ -416,7 +416,6 @@
       "Failure": "loader",
       "Error": "Error: render worker startup failed: Failed to fetch dynamically imported module: http://localhost:4173/__missing_loader__.mjs\n    at BrowserWorkerApplication._WorkerMessage (http://localhost:4173/packages/browser/src/isolated-host.js:41:62)\n    at StartAsync.worker.onmessage (http://localhost:4173/packages/browser/src/isolated-host.js:22:38)",
       "Expected404": [
-        "__missing_loader__.mjs",
         "__missing_loader__.mjs"
       ]
     },
@@ -448,9 +447,9 @@
   "InitializationReplay": false,
   "PoliciesChanged": false,
   "Transport": "intercepted-local-assets; data module imports unchanged production entry",
-  "Browser": "152.0.7977.0",
+  "Browser": "153.0.8010.0",
   "Passed": 17,
   "Failed": 0,
-  "FinalSourceFingerprint": "6bbc379ecb3ff0e14339de517f36b843bf93682c5cac400b0ac205f740edd56b",
+  "FinalSourceFingerprint": "75e6f652a5c22cf4e0694aea4e15f4260b762489c7abe2da69e26c558e5e9b6d",
   "BlockedByBrowserPolicy": false
 }

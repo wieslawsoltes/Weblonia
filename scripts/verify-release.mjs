@@ -45,7 +45,7 @@ current(automation, 'Incremental automation');
 require(automation.Completed && automation.Failed === 0 && automation.Passed > 0 && !automation.PageErrors.length && !automation.MissingAssets.length, 'Incremental automation failed');
 const consumer = await read('artifacts/package-consumer-result.json');
 current(consumer, 'Packed consumer');
-require(consumer.Passed && consumer.Packages === 18 && consumer.StartupSubpaths && consumer.CorePortApis && consumer.ImplicitAnimationApis && consumer.GlyphPathApis && consumer.EffectTransitionApis && consumer.XamlNamespaceApis && consumer.DeferredResourceApis && !consumer.PublicRegistryInstalled, 'Packed offline consumer failed');
+require(consumer.Passed && consumer.Packages === 18 && consumer.StartupSubpaths && consumer.CorePortApis && consumer.ImplicitAnimationApis && consumer.GlyphPathApis && consumer.EffectTransitionApis && consumer.XamlNamespaceApis && consumer.MultiBindingApis && consumer.SingleBindingPipeline && consumer.BindingDelay && !consumer.PublicRegistryInstalled, 'Packed offline consumer failed');
 const corePort = await read('artifacts/core-port/browser-results.json');
 current(corePort, 'Core port browser');
 require(corePort.Completed && corePort.Passed === 3 && corePort.Failed === 0 && !corePort.Interception && !corePort.WorkerBootstrapOverrides
@@ -85,16 +85,15 @@ require(xamlNamespaces.Completed && xamlNamespaces.Passed===6 && xamlNamespaces.
         && t.ComparedChannels===4&&t.MaximumChannelError<=2&&(t.Mode==='single'||t.RestartPassed)), 'XAML namespace HTTP qualification failed');
 for(const mode of ['single','render-worker','full-isolation'])for(const aot of [false,true])
     require(xamlNamespaces.Tests.some(t=>t.Mode===mode&&t.Aot===aot),'Missing namespace runtime or AOT topology');
-const resources = await read('artifacts/resources/browser-results.json');
-current(resources,'Deferred XAML resources');
-require(resources.Completed && resources.Passed===6 && resources.Failed===0 && resources.Tests.length===6
-    && !resources.Interception && !resources.WorkerBootstrapOverrides && !resources.SnapshotForcesRender
-    && resources.PixelChannelTolerance===2 && !resources.Errors.length && !resources.MissingAssets.length
-    && resources.Tests.every(t=>t.Passed&&t.AutonomousRedraw&&t.LazyCreation&&t.UnsharedDistinct&&t.ThemeSwitch
-        && t.AncestorReparenting&&t.OldScopeDetached&&t.ComparedChannels===4&&t.MaximumChannelError<=2
-        && (t.Mode==='single'||t.RestartPassed)), 'Deferred resource HTTP qualification failed');
+const multiBinding = await read('artifacts/multibinding/browser-results.json');
+current(multiBinding, 'MultiBinding');
+require(multiBinding.Completed && multiBinding.Passed===6 && multiBinding.Failed===0 && multiBinding.Tests.length===6
+    && !multiBinding.Interception && !multiBinding.WorkerBootstrapOverrides && !multiBinding.SnapshotForcesRender
+    && multiBinding.PixelChannelTolerance===2 && !multiBinding.Errors.length && !multiBinding.MissingAssets.length
+    && multiBinding.Tests.every(t=>t.Passed && t.AutonomousRedraw && t.SingleBindingPipeline && t.NestedCompiledBindings && t.ConverterFormatting && t.DisposedSubscriptions
+        && t.ComparedChannels===4 && t.MaximumChannelError<=2 && (t.Mode==='single'||t.RestartPassed)), 'MultiBinding HTTP qualification failed');
 for(const mode of ['single','render-worker','full-isolation'])for(const aot of [false,true])
-    require(resources.Tests.some(t=>t.Mode===mode&&t.Aot===aot),'Missing resource runtime or AOT topology');
+    require(multiBinding.Tests.some(t=>t.Mode===mode&&t.Aot===aot), 'Missing MultiBinding runtime or AOT topology');
 const build = await read('artifacts/build-result.json');
 current(build, 'Build', false, false);
 require(build.XamlModules === 75 && build.NoEval && build.FontFiles === 0, 'AOT build contract changed');
@@ -108,6 +107,16 @@ for(const [name,minimum]of [['browser',39],['integration',19],['quality',12],['c
  for(const t of result.Tests)if(t.Evidence?.MaximumChannelError!=null)require(t.Evidence.Channels===4||name==='integration',`Threaded ${name} did not compare all RGBA channels`);
  threaded[name]=result;
 }
+const bindingDelay = await read('artifacts/binding-delay/browser-results.json');
+current(bindingDelay, 'Binding Delay');
+require(bindingDelay.Completed && bindingDelay.Passed === 6 && bindingDelay.Failed === 0 && bindingDelay.Tests.length === 6
+    && bindingDelay.BindingDelay && !bindingDelay.Interception && !bindingDelay.WorkerBootstrapOverrides && !bindingDelay.SnapshotForcesRender
+    && !bindingDelay.ClockOverrides && bindingDelay.PixelChannelTolerance === 2 && !bindingDelay.Errors.length && !bindingDelay.MissingAssets.length
+    && bindingDelay.Tests.every(t => t.Passed && t.AutonomousRedraw && t.ImmediatePublicationSuppressed && t.CoalescedWrites
+        && t.ExplicitFlush && t.PendingDisposal && t.RemainingSubscriptions === 0 && t.ComparedChannels === 4
+        && t.MaximumChannelError <= 2 && (t.Mode === 'single' || t.RestartPassed)), 'Binding Delay HTTP qualification failed');
+for (const mode of ['single','render-worker','full-isolation']) for (const aot of [false,true])
+    require(bindingDelay.Tests.some(t => t.Mode === mode && t.Aot === aot), 'Missing Binding Delay runtime/AOT topology');
 const startup=await read('artifacts/threading/startup-results.json');current(startup,'Module worker startup');
 require(startup.Completed&&startup.Failed===0&&startup.Passed>=17&&!startup.Errors.length&&!startup.MissingAssets.length&&startup.WorkerType==='module'&&!startup.TestMessageQueue&&!startup.InitializationReplay,'Production module entry regression did not pass');
 let httpStartup=null;try{httpStartup=await read('artifacts/threading/http-startup-results.json');current(httpStartup,'HTTP worker startup');}catch(error){if(error.code!=='ENOENT')throw error;}
@@ -149,8 +158,8 @@ async function scan(dir) {
 await scan(path.join(root, 'packages'));
 const lines = (await Promise.all(files.map(f => readFile(f, 'utf8')))).reduce((n, s) => n + s.split('\n').length, 0);
 const report = {
-    Version: pkg.version, SourceFingerprint: fingerprint, GeneratedAt: new Date().toISOString(),
-    ImplicitAnimations: implicitAnimations, GlyphGeometry: glyphGeometry, EffectTransitions: effectTransitions, XamlNamespaces: xamlNamespaces, DeferredResources: resources,
+    FullReleaseQualified: true, Version: pkg.version, SourceFingerprint: fingerprint, GeneratedAt: new Date().toISOString(),
+    ImplicitAnimations: implicitAnimations, GlyphGeometry: glyphGeometry, EffectTransitions: effectTransitions, XamlNamespaces: xamlNamespaces, MultiBinding: multiBinding, BindingDelay: bindingDelay,
     FullAvaloniaParity: false, FullXamlXParity: false, FullUpstreamClonesIncluded: false, OriginalCatalogSubexamplesFullyPorted: false,
     Recovery: await read('docs/recovery/recovery-invalidation.json'),
     UpstreamSkia: await read('docs/SKIASHARPWEB-UPSTREAM.json'),

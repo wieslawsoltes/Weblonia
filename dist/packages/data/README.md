@@ -1,6 +1,6 @@
 # @wieslawsoltes/avalonia-data
 
-Version 0.2.0-alpha.1. ESM package in the independent AvaloniaWeb JavaScript
+Version 0.6.2-alpha.1. ESM package in the independent AvaloniaWeb JavaScript
 compatibility implementation. Not an official or complete upstream port.
 
 Import from `@wieslawsoltes/avalonia-data`. This package ships JavaScript source with PascalCase APIs.
@@ -14,3 +14,11 @@ use the workspace's offline loader/import maps. Native Skia/browser services
 have the platform and dependency boundaries described in the root documentation.
 
 New code is MIT licensed. Preserve LICENSE, NOTICE and all dependency notices.
+
+## Aggregate bindings
+
+MultiBinding supports nested reflection/compiled bindings and OneWay/OneTime
+with per-target snapshots and deterministic subscription disposal.
+StringFormatMultiValueConverter and StringFormatValueConverter provide bounded
+composite formatting. See docs/MULTIBINDING-PORT.md in the full source tree for
+JavaScript/Intl boundaries and the exact validation/ownership contract.

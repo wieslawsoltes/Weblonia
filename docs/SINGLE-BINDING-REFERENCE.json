@@ -1,0 +1,9 @@
+{
+  "Repository": "AvaloniaUI/Avalonia",
+  "Commit": "dff6a87665aa456c37b8cf89647e007f4c3066d7",
+  "Path": "src/Avalonia.Base/Data/Core/BindingExpression.cs",
+  "Blob": "2fba66742fc2832c7ec8a5cd004bd8281ac46760",
+  "ReviewedRanges": [[36,132],[430,590]],
+  "Contracts": ["StringFormat normalization and target-type guard", "Converter then null replacement then formatting then target conversion then fallback", "TargetNullValue and FallbackValue bypass StringFormat", "DoNothing does not publish", "ConvertBack is separate from display formatting"],
+  "JavaScriptBoundaries": ["Existing function(value, parameter) converter adapter retained", "Existing property metadata replaces CLR target conversion", "BCP-47 locale/Intl and previously documented bounded numeric formatting", "Finite reentrant refresh budget", "No new source Delay or DataContext-reset semantics"]
+}

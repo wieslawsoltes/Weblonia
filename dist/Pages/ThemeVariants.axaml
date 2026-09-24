@@ -1,26 +1,3 @@
 <StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
-  <StackPanel.Resources>
-    <SolidColorBrush x:Key="IndependentBrush" x:Shared="False" Color="#7255D8"/>
-    <TextBlock x:Key="DeferredMessage" Text="This control was created on first resource lookup." TextWrapping="Wrap"/>
-  </StackPanel.Resources>
-  <Border Classes="card">
-    <StackPanel Spacing="16">
-      <TextBlock Text="Light and dark resources" FontSize="17" FontWeight="SemiBold"/>
-      <StackPanel Orientation="Horizontal" Spacing="12"><Button Content="Light theme" Click="LightTheme"/><Button Content="Dark theme" Click="DarkTheme"/></StackPanel>
-      <Border Background="{DynamicResource SystemSelectionBrush}" Padding="24" CornerRadius="8"><TextBlock Text="This brush is a DynamicResource." FontSize="21"/></Border>
-    </StackPanel>
-  </Border>
-  <Border Classes="card">
-    <StackPanel Spacing="16">
-      <TextBlock Text="Deferred and unshared resources" FontSize="17" FontWeight="SemiBold"/>
-      <TextBlock Text="Both swatches use the same x:Key with x:Shared=False. Changing one brush leaves the other untouched." TextWrapping="Wrap"/>
-      <StackPanel Orientation="Horizontal" Spacing="12">
-        <Border x:Name="ResourceFirst" Width="100" Height="48" CornerRadius="6" Background="{StaticResource IndependentBrush}"/>
-        <Border x:Name="ResourceSecond" Width="100" Height="48" CornerRadius="6" Background="{StaticResource IndependentBrush}"/>
-      </StackPanel>
-      <Button Content="Change only the first brush" Click="MutateResourceBrush" HorizontalAlignment="Left"/>
-      <Button Content="Create the deferred control" Click="MaterializeResource" HorizontalAlignment="Left"/>
-      <Border x:Name="DeferredSlot"/>
-    </StackPanel>
-  </Border>
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Light and dark resources" FontSize="17" FontWeight="SemiBold"/><StackPanel Orientation="Horizontal" Spacing="12"><Button Content="Light theme" Click="LightTheme"/><Button Content="Dark theme" Click="DarkTheme"/></StackPanel><Border Background="{DynamicResource SystemSelectionBrush}" Padding="24" CornerRadius="8"><TextBlock Text="This brush is a DynamicResource." FontSize="21"/></Border></StackPanel></Border>
 </StackPanel>

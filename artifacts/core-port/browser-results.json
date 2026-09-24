@@ -1,6 +1,6 @@
 {
   "Version": "0.6.2-alpha.1",
-  "SourceFingerprint": "6bbc379ecb3ff0e14339de517f36b843bf93682c5cac400b0ac205f740edd56b",
+  "SourceFingerprint": "75e6f652a5c22cf4e0694aea4e15f4260b762489c7abe2da69e26c558e5e9b6d",
   "Completed": true,
   "Tests": [
     {
@@ -33,7 +33,7 @@
       },
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 1173.45
+      "Milliseconds": 1042.73
     },
     {
       "Mode": "render-worker",
@@ -65,7 +65,7 @@
       },
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 1581.26
+      "Milliseconds": 1493.47
     },
     {
       "Mode": "full-isolation",
@@ -97,7 +97,7 @@
       },
       "Errors": [],
       "MissingAssets": [],
-      "Milliseconds": 1435.17
+      "Milliseconds": 1289.4
     }
   ],
   "Errors": [],
@@ -107,8 +107,8 @@
   "SnapshotForcesRender": false,
   "PhysicalGpuQualified": false,
   "PixelChannelTolerance": 2,
-  "Browser": "152.0.7977.0",
+  "Browser": "153.0.8010.0",
   "Passed": 3,
   "Failed": 0,
-  "FinalSourceFingerprint": "6bbc379ecb3ff0e14339de517f36b843bf93682c5cac400b0ac205f740edd56b"
+  "FinalSourceFingerprint": "75e6f652a5c22cf4e0694aea4e15f4260b762489c7abe2da69e26c558e5e9b6d"
 }

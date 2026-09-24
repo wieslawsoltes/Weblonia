@@ -1,0 +1,79 @@
+name: Qualify single-binding publication and formatting
+on:
+  push:
+    branches: [feature/binding-publication-parity]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: binding-publication-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  qualify:
+    if: github.repository == 'wieslawsoltes/Weblonia' && github.ref == 'refs/heads/feature/binding-publication-parity'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          package-manager-cache: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+      - name: Commit reviewable source before qualification
+        run: |
+          python scripts/apply-single-binding-edits.py
+          node --import ./scripts/register-loader.mjs scripts/compile-multibinding-fixture.mjs
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -u
+          git add -A packages scripts tests docs
+          if ! git diff --cached --quiet; then
+            git commit -m 'fix: unify binding publication ordering formatting and subscription ownership'
+            git push origin HEAD:feature/binding-publication-parity
+          fi
+      - run: python -m pip install -r tests/requirements.txt
+      - run: python -m playwright install --with-deps chromium
+      - name: Qualify extended runtime and AOT HTTP integration first
+        run: |
+          npm run build
+          python tests/multibinding-browser.py
+      - name: Execute complete release qualification
+        run: |
+          mkdir -p artifacts/single-binding
+          if ! bash scripts/qualify-core-port.sh > artifacts/single-binding/qualification.log 2>&1; then
+            tail -160 artifacts/single-binding/qualification.log
+            exit 1
+          fi
+          tail -40 artifacts/single-binding/qualification.log
+      - name: Rebuild source manifest and archives
+        run: |
+          cp docs/VERIFICATION.json dist/docs/VERIFICATION.json
+          python scripts/archive.py --output /tmp/single-binding-release
+      - name: Commit qualified generated assets and evidence
+        run: |
+          git add -u
+          git add -A packages samples scripts tests docs dist SOURCE-MANIFEST.json
+          git add -f artifacts
+          git fetch origin feature/binding-publication-parity
+          test "$(git rev-parse FETCH_HEAD)" = "$(git rev-parse HEAD)"
+          if ! git diff --cached --quiet; then
+            git commit -m 'build: regenerate qualified single-binding workers packages and evidence'
+            git push origin HEAD:feature/binding-publication-parity
+          fi
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: single-binding-qualification
+          path: artifacts/
+      - uses: actions/upload-artifact@v7
+        if: success()
+        with:
+          name: single-binding-release
+          path: /tmp/single-binding-release/

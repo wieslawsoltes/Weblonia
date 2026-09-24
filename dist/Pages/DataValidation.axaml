@@ -1,3 +1,18 @@
 <StackPanel xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Spacing="18">
-<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Binding validation" FontSize="17" FontWeight="SemiBold"/><TextBox x:Name="Validated" Text="{Binding Name,Mode=TwoWay}"/><TextBlock x:Name="ValidationText" Foreground="#C24858"/><TextBlock Text="The binding keeps the model unchanged when validation rejects an edit." Classes="muted" TextWrapping="Wrap"/></StackPanel></Border>
+<Border Classes="card"><StackPanel Spacing="16"><TextBlock Text="Binding validation" FontSize="17" FontWeight="SemiBold"/><TextBox x:Name="Validated" Text="{Binding Name,Mode=TwoWay}"/><TextBlock x:Name="AggregatePreview" TextWrapping="Wrap">
+      <TextBlock.Text>
+        <MultiBinding StringFormat="{}{0} · {1}">
+          <MultiBinding StringFormat="{}Live preview: {0}"><Binding ElementName="Validated" Path="Text"/></MultiBinding>
+          <Binding Source="two independent binding levels"/>
+        </MultiBinding>
+      </TextBlock.Text>
+    </TextBlock>
+    <TextBlock x:Name="ValidationText" Foreground="#C24858"/><TextBlock Text="The binding keeps the model unchanged when validation rejects an edit." Classes="muted" TextWrapping="Wrap"/></StackPanel></Border>
+<Border Classes="card"><StackPanel Spacing="12">
+  <TextBlock Text="Delayed source update" FontSize="17" FontWeight="SemiBold"/>
+  <TextBlock Text="Type freely: the model updates 300 milliseconds after typing stops. Commit now flushes the same binding immediately." Classes="muted" TextWrapping="Wrap"/>
+  <TextBox x:Name="DelayedEditor" Text="{Binding Name, Mode=TwoWay, Delay=300}"/>
+  <TextBlock x:Name="DelayedModelPreview" Text="{Binding Name, StringFormat='Model: {0}'}" TextWrapping="Wrap"/>
+  <Button x:Name="CommitDelayed" Content="Commit now" HorizontalAlignment="Left"/>
+</StackPanel></Border>
 </StackPanel>
