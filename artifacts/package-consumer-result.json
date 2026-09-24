@@ -1,5 +1,6 @@
 {
   "Passed": true,
+  "DeferredResourceApis": true,
   "BindingDelay": true,
   "SingleBindingPipeline": true,
   "MultiBindingApis": true,
@@ -13,6 +14,6 @@
   "StartupSubpaths": true,
   "CorePortApis": true,
   "Version": "0.6.2-alpha.1",
-  "SourceFingerprint": "75e6f652a5c22cf4e0694aea4e15f4260b762489c7abe2da69e26c558e5e9b6d",
-  "FinalSourceFingerprint": "75e6f652a5c22cf4e0694aea4e15f4260b762489c7abe2da69e26c558e5e9b6d"
+  "SourceFingerprint": "e58914136734c7e25010f30f18901e93afef52a1608546d6c434a4deb764a494",
+  "FinalSourceFingerprint": "e58914136734c7e25010f30f18901e93afef52a1608546d6c434a4deb764a494"
 }

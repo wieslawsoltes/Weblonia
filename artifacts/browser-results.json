@@ -5,562 +5,562 @@
     {
       "name": "native Skia catalog startup",
       "passed": true,
-      "milliseconds": 328.63
+      "milliseconds": 417.31
     },
     {
       "name": "catalog route Buttons",
       "passed": true,
-      "milliseconds": 203.03
+      "milliseconds": 266.58
     },
     {
       "name": "catalog route ButtonSpinner",
       "passed": true,
-      "milliseconds": 150.05
+      "milliseconds": 158.25
     },
     {
       "name": "catalog route CheckBox",
       "passed": true,
-      "milliseconds": 136.36
+      "milliseconds": 162.96
     },
     {
       "name": "catalog route ColorPicker",
       "passed": true,
-      "milliseconds": 158.02
+      "milliseconds": 198.94
     },
     {
       "name": "catalog route ComboBox",
       "passed": true,
-      "milliseconds": 143.32
+      "milliseconds": 186.14
     },
     {
       "name": "catalog route NumericUpDown",
       "passed": true,
-      "milliseconds": 131.18
+      "milliseconds": 148.5
     },
     {
       "name": "catalog route RadioButton",
       "passed": true,
-      "milliseconds": 123.51
+      "milliseconds": 123.76
     },
     {
       "name": "catalog route Slider",
       "passed": true,
-      "milliseconds": 291.63
+      "milliseconds": 384.49
     },
     {
       "name": "catalog route ToggleSwitch",
       "passed": true,
-      "milliseconds": 141.57
+      "milliseconds": 128.73
     },
     {
       "name": "catalog route AutoCompleteBox",
       "passed": true,
-      "milliseconds": 130.06
+      "milliseconds": 155.65
     },
     {
       "name": "catalog route Label",
       "passed": true,
-      "milliseconds": 130.14
+      "milliseconds": 154.5
     },
     {
       "name": "catalog route TextBox",
       "passed": true,
-      "milliseconds": 222.11
+      "milliseconds": 284.01
     },
     {
       "name": "catalog route TextBlock",
       "passed": true,
-      "milliseconds": 164.42
+      "milliseconds": 188.44
     },
     {
       "name": "catalog route Carousel",
       "passed": true,
-      "milliseconds": 128.49
+      "milliseconds": 149.19
     },
     {
       "name": "catalog route ListBox",
       "passed": true,
-      "milliseconds": 146.69
+      "milliseconds": 138.73
     },
     {
       "name": "catalog route PipsPager",
       "passed": true,
-      "milliseconds": 133.24
+      "milliseconds": 157.82
     },
     {
       "name": "catalog route RefreshContainer",
       "passed": true,
-      "milliseconds": 122.15
+      "milliseconds": 140.3
     },
     {
       "name": "catalog route TableView",
       "passed": true,
-      "milliseconds": 154.94
+      "milliseconds": 190.93
     },
     {
       "name": "catalog route TreeView",
       "passed": true,
-      "milliseconds": 145.26
+      "milliseconds": 149.54
     },
     {
       "name": "catalog route Calendar",
       "passed": true,
-      "milliseconds": 130.3
+      "milliseconds": 149.88
     },
     {
       "name": "catalog route CalendarDatePicker",
       "passed": true,
-      "milliseconds": 103.52
+      "milliseconds": 125.77
     },
     {
       "name": "catalog route DateTimePicker",
       "passed": true,
-      "milliseconds": 121.07
+      "milliseconds": 127.47
     },
     {
       "name": "catalog route CommandBar",
       "passed": true,
-      "milliseconds": 124.19
+      "milliseconds": 153.82
     },
     {
       "name": "catalog route ContextFlyout",
       "passed": true,
-      "milliseconds": 121.6
+      "milliseconds": 123.11
     },
     {
       "name": "catalog route ContextMenu",
       "passed": true,
-      "milliseconds": 123.59
+      "milliseconds": 153.16
     },
     {
       "name": "catalog route Flyouts",
       "passed": true,
-      "milliseconds": 118.86
+      "milliseconds": 139.15
     },
     {
       "name": "catalog route Menu",
       "passed": true,
-      "milliseconds": 126.13
+      "milliseconds": 147.62
     },
     {
       "name": "catalog route CarouselPage",
       "passed": true,
-      "milliseconds": 129.01
+      "milliseconds": 144.34
     },
     {
       "name": "catalog route ContentPage",
       "passed": true,
-      "milliseconds": 124.9
+      "milliseconds": 131.77
     },
     {
       "name": "catalog route DrawerPage",
       "passed": true,
-      "milliseconds": 126.53
+      "milliseconds": 146.33
     },
     {
       "name": "catalog route NavigationPage",
       "passed": true,
-      "milliseconds": 124.22
+      "milliseconds": 150.57
     },
     {
       "name": "catalog route SplitView",
       "passed": true,
-      "milliseconds": 122.44
+      "milliseconds": 147.83
     },
     {
       "name": "catalog route TabbedPage",
       "passed": true,
-      "milliseconds": 124.39
+      "milliseconds": 151.07
     },
     {
       "name": "catalog route TabControl",
       "passed": true,
-      "milliseconds": 120.25
+      "milliseconds": 140.54
     },
     {
       "name": "catalog route TabStrip",
       "passed": true,
-      "milliseconds": 124.23
+      "milliseconds": 144.04
     },
     {
       "name": "catalog route Border",
       "passed": true,
-      "milliseconds": 128.45
+      "milliseconds": 124.73
     },
     {
       "name": "catalog route Canvas",
       "passed": true,
-      "milliseconds": 131.46
+      "milliseconds": 157.26
     },
     {
       "name": "catalog route ContainerQueries",
       "passed": true,
-      "milliseconds": 135.6
+      "milliseconds": 157.46
     },
     {
       "name": "catalog route Expander",
       "passed": true,
-      "milliseconds": 131.74
+      "milliseconds": 162.94
     },
     {
       "name": "catalog route FlexPanel",
       "passed": true,
-      "milliseconds": 143.74
+      "milliseconds": 128.26
     },
     {
       "name": "catalog route HeaderedContentControl",
       "passed": true,
-      "milliseconds": 124.58
+      "milliseconds": 125.88
     },
     {
       "name": "catalog route LayoutTransformControl",
       "passed": true,
-      "milliseconds": 131.72
+      "milliseconds": 138.83
     },
     {
       "name": "catalog route RelativePanel",
       "passed": true,
-      "milliseconds": 128.64
+      "milliseconds": 158.58
     },
     {
       "name": "catalog route ScrollViewer",
       "passed": true,
-      "milliseconds": 152.19
+      "milliseconds": 158.53
     },
     {
       "name": "catalog route Viewbox",
       "passed": true,
-      "milliseconds": 148.44
+      "milliseconds": 174.19
     },
     {
       "name": "catalog route WrapPanel",
       "passed": true,
-      "milliseconds": 127.51
+      "milliseconds": 127.14
     },
     {
       "name": "catalog route Acrylic",
       "passed": true,
-      "milliseconds": 240.07
+      "milliseconds": 284.0
     },
     {
       "name": "catalog route BitmapCache",
       "passed": true,
-      "milliseconds": 175.36
+      "milliseconds": 205.29
     },
     {
       "name": "catalog route Composition",
       "passed": true,
-      "milliseconds": 580.94
+      "milliseconds": 725.67
     },
     {
       "name": "catalog route CustomDrawing",
       "passed": true,
-      "milliseconds": 121.66
+      "milliseconds": 167.77
     },
     {
       "name": "catalog route Image",
       "passed": true,
-      "milliseconds": 162.08
+      "milliseconds": 206.34
     },
     {
       "name": "catalog route OpenGL",
       "passed": true,
-      "milliseconds": 156.99
+      "milliseconds": 195.02
     },
     {
       "name": "catalog route OpenGLLease",
       "passed": true,
-      "milliseconds": 164.31
+      "milliseconds": 189.01
     },
     {
       "name": "catalog route OpenGLInterop",
       "passed": true,
-      "milliseconds": 159.82
+      "milliseconds": 193.43
     },
     {
       "name": "catalog route TransitioningContentControl",
       "passed": true,
-      "milliseconds": 166.39
+      "milliseconds": 211.28
     },
     {
       "name": "catalog route AdornerLayer",
       "passed": true,
-      "milliseconds": 210.04
+      "milliseconds": 224.89
     },
     {
       "name": "catalog route DataValidation",
       "passed": true,
-      "milliseconds": 131.12
+      "milliseconds": 158.56
     },
     {
       "name": "catalog route Dialogs",
       "passed": true,
-      "milliseconds": 130.52
+      "milliseconds": 121.24
     },
     {
       "name": "catalog route Notifications",
       "passed": true,
-      "milliseconds": 119.25
+      "milliseconds": 146.07
     },
     {
       "name": "catalog route ProgressBar",
       "passed": true,
-      "milliseconds": 143.65
+      "milliseconds": 169.84
     },
     {
       "name": "catalog route ToolTip",
       "passed": true,
-      "milliseconds": 159.47
+      "milliseconds": 191.65
     },
     {
       "name": "catalog route Accelerator",
       "passed": true,
-      "milliseconds": 122.62
+      "milliseconds": 134.66
     },
     {
       "name": "catalog route Clipboard",
       "passed": true,
-      "milliseconds": 126.63
+      "milliseconds": 145.44
     },
     {
       "name": "catalog route Cursor",
       "passed": true,
-      "milliseconds": 121.02
+      "milliseconds": 143.35
     },
     {
       "name": "catalog route DragDrop",
       "passed": true,
-      "milliseconds": 118.7
+      "milliseconds": 139.94
     },
     {
       "name": "catalog route Focus",
       "passed": true,
-      "milliseconds": 122.01
+      "milliseconds": 141.1
     },
     {
       "name": "catalog route Gestures",
       "passed": true,
-      "milliseconds": 139.0
+      "milliseconds": 135.84
     },
     {
       "name": "catalog route Pointers",
       "passed": true,
-      "milliseconds": 106.66
+      "milliseconds": 159.26
     },
     {
       "name": "catalog route NativeEmbed",
       "passed": true,
-      "milliseconds": 136.82
+      "milliseconds": 128.28
     },
     {
       "name": "catalog route PlatformInformation",
       "passed": true,
-      "milliseconds": 132.4
+      "milliseconds": 139.43
     },
     {
       "name": "catalog route PlatformSettings",
       "passed": true,
-      "milliseconds": 129.17
+      "milliseconds": 120.1
     },
     {
       "name": "catalog route Screens",
       "passed": true,
-      "milliseconds": 127.29
+      "milliseconds": 159.29
     },
     {
       "name": "catalog route ThemeVariants",
       "passed": true,
-      "milliseconds": 132.57
+      "milliseconds": 169.37
     },
     {
       "name": "catalog route WindowCustomizations",
       "passed": true,
-      "milliseconds": 122.66
+      "milliseconds": 124.45
     },
     {
       "name": "pointer clicks execute genuine ReactiveWeb commands and update binding",
       "passed": true,
-      "milliseconds": 371.84
+      "milliseconds": 399.03
     },
     {
       "name": "browser textarea input, selection and two-way ReactiveWeb binding",
       "passed": true,
-      "milliseconds": 576.91
+      "milliseconds": 797.83
     },
     {
       "name": "pointer slider updates progress and numeric binding",
       "passed": true,
-      "milliseconds": 216.22
+      "milliseconds": 231.61
     },
     {
       "name": "10,000-item ListBox keyboard selection and bounded realization",
       "passed": true,
-      "milliseconds": 411.22
+      "milliseconds": 443.61
     },
     {
       "name": "retained ComboBox popup selection and dismissal",
       "passed": true,
-      "milliseconds": 322.42
+      "milliseconds": 337.93
     },
     {
       "name": "calendar native painting and keyboard date navigation",
       "passed": true,
-      "milliseconds": 245.21
+      "milliseconds": 261.29
     },
     {
       "name": "TableView header sorting and pointer row selection",
       "passed": true,
-      "milliseconds": 544.5
+      "milliseconds": 562.23
     },
     {
       "name": "flyout light dismissal releases retained popup",
       "passed": true,
-      "milliseconds": 324.83
+      "milliseconds": 340.27
     },
     {
       "name": "theme change propagates dynamic resources",
       "passed": true,
-      "milliseconds": 364.01
+      "milliseconds": 399.81
     },
     {
       "name": "live XAML compiler produces and instantiates a changed view",
       "passed": true,
-      "milliseconds": 453.07
+      "milliseconds": 482.51
     },
     {
       "name": "NavigationPage push and pop retain correct stack",
       "passed": true,
-      "milliseconds": 310.31
+      "milliseconds": 324.61
     },
     {
       "name": "trusted click opens a real browser window with its own Skia surface",
       "passed": true,
-      "milliseconds": 251.43
+      "milliseconds": 319.04
     },
     {
       "name": "browser modal owner disabling and result delivery",
       "passed": true,
-      "milliseconds": 458.25
+      "milliseconds": 548.52
     },
     {
       "name": "RxJS-debounced catalog navigation filter",
       "passed": true,
-      "milliseconds": 680.59
+      "milliseconds": 701.25
     },
     {
       "name": "container query style activation and removal through real slider input",
       "passed": true,
-      "milliseconds": 598.67
+      "milliseconds": 592.33
     },
     {
       "name": "native visual bitmap cache reuse and geometry invalidation",
       "passed": true,
-      "milliseconds": 615.59
+      "milliseconds": 600.54
     },
     {
       "name": "acrylic native rendering and live material property invalidation",
       "passed": true,
-      "milliseconds": 407.59
+      "milliseconds": 459.76
     },
     {
       "name": "composition clocks, expression animation, cancellation and route disposal",
       "passed": true,
-      "milliseconds": 3369.75
+      "milliseconds": 4034.96
     },
     {
       "name": "native HTML input binding, focus traversal, clipping and deterministic removal",
       "passed": true,
-      "milliseconds": 520.5
+      "milliseconds": 569.68
     },
     {
       "name": "browser editing preserves emoji ZWJ and combining grapheme boundaries",
       "passed": true,
-      "milliseconds": 665.15
+      "milliseconds": 667.47
     },
     {
       "name": "browser composition-event bridge groups preedit into one undo transaction (synthetic IME)",
       "passed": true,
-      "milliseconds": 248.68
+      "milliseconds": 327.89
     },
     {
       "name": "read-only TableView realizes bounded real row and cell controls",
       "passed": true,
-      "milliseconds": 202.27
+      "milliseconds": 248.92
     },
     {
       "name": "CDP two-contact touch input drives pinch scale and releases capture",
       "passed": true,
-      "milliseconds": 421.52
+      "milliseconds": 474.88
     },
     {
       "name": "CDP touch drag scrolls real ScrollViewer without clicking child buttons",
       "passed": true,
-      "milliseconds": 832.9
+      "milliseconds": 998.46
     },
     {
       "name": "CDP simultaneous contacts preserve independent button press and release",
       "passed": true,
-      "milliseconds": 369.58
+      "milliseconds": 448.6
     },
     {
       "name": "CDP touch cancellation clears capture and pressed state without activation",
       "passed": true,
-      "milliseconds": 313.34
+      "milliseconds": 249.21
     },
     {
       "name": "real WebGL2 shader pixels transfer into native Skia",
       "passed": true,
-      "milliseconds": 150.86
+      "milliseconds": 170.04
     },
     {
       "name": "WebGL leases restore state and reject simultaneous ownership",
       "passed": true,
-      "milliseconds": 114.0
+      "milliseconds": 112.0
     },
     {
       "name": "WebGL context loss, restoration and disposal lifecycle",
       "passed": true,
-      "milliseconds": 311.06
+      "milliseconds": 342.19
     },
     {
       "name": "Chromium accessibility tree exposes table hierarchy and actual grid cells",
       "passed": true,
-      "milliseconds": 143.4
+      "milliseconds": 167.71
     },
     {
       "name": "accessibility activation respects enabled state and disposes old page nodes",
       "passed": true,
-      "milliseconds": 331.17
+      "milliseconds": 386.74
     },
     {
       "name": "automation password mirrors withhold values and preserve explicit accessible names",
       "passed": true,
-      "milliseconds": 5887.0
+      "milliseconds": 6758.58
     },
     {
       "name": "focused password editing uses a protected native input and clears inactive buffers",
       "passed": true,
-      "milliseconds": 6240.93
+      "milliseconds": 7144.49
     },
     {
       "name": "navigation disposes prior page tree and leaves no popups",
       "passed": true,
-      "milliseconds": 314.81
+      "milliseconds": 402.6
     },
     {
       "name": "no JavaScript page errors",
       "passed": true,
-      "milliseconds": 0.38
+      "milliseconds": 0.4
     },
     {
       "name": "no missing local assets",
       "passed": true,
-      "milliseconds": 0.34
+      "milliseconds": 0.41
     },
     {
       "name": "no rendering errors during catalog sweep",
       "passed": true,
-      "milliseconds": 2.3
+      "milliseconds": 3.05
     }
   ],
   "pageErrors": [],
@@ -570,10 +570,10 @@
   "missingAssets": [],
   "hardwareGPUQualified": false,
   "version": "0.6.2-alpha.1",
-  "startedAt": "2026-09-24T06:18:07.175682+00:00",
+  "startedAt": "2026-09-24T07:57:38.287959+00:00",
   "completed": true,
-  "sourceFingerprint": "75e6f652a5c22cf4e0694aea4e15f4260b762489c7abe2da69e26c558e5e9b6d",
-  "elapsedSeconds": 41.1,
+  "sourceFingerprint": "e58914136734c7e25010f30f18901e93afef52a1608546d6c434a4deb764a494",
+  "elapsedSeconds": 47.24,
   "passed": 112,
   "skipped": 0,
   "failed": 0,
@@ -585,5 +585,5 @@
   "facadeExports": 561,
   "webGL2Available": true,
   "finalizationStage": "complete",
-  "finalSourceFingerprint": "75e6f652a5c22cf4e0694aea4e15f4260b762489c7abe2da69e26c558e5e9b6d"
+  "finalSourceFingerprint": "e58914136734c7e25010f30f18901e93afef52a1608546d6c434a4deb764a494"
 }

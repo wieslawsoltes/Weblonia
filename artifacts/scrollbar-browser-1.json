@@ -4,112 +4,112 @@
   "mode": "local-asset-interception",
   "hardwareQualified": false,
   "completed": true,
-  "startedAt": "2026-09-24T06:18:51.714105+00:00",
+  "startedAt": "2026-09-24T07:58:30.017916+00:00",
   "tests": [
     {
       "name": "ScrollViewer thumb receives actual mouse drag without selecting or clicking content",
       "passed": true,
-      "milliseconds": 363.9
+      "milliseconds": 422.1
     },
     {
       "name": "ListBox thumb receives actual mouse drag without selecting or clicking content",
       "passed": true,
-      "milliseconds": 374.9
+      "milliseconds": 505.8
     },
     {
       "name": "TreeView thumb receives actual mouse drag without selecting or clicking content",
       "passed": true,
-      "milliseconds": 361.0
+      "milliseconds": 467.2
     },
     {
       "name": "TableView thumb receives actual mouse drag without selecting or clicking content",
       "passed": true,
-      "milliseconds": 503.8
+      "milliseconds": 536.2
     },
     {
       "name": "TextBox thumb receives actual mouse drag without selecting or clicking content",
       "passed": true,
-      "milliseconds": 542.5
+      "milliseconds": 697.2
     },
     {
       "name": "ScrollViewer horizontal thumb pans content and retains header/editor state",
       "passed": true,
-      "milliseconds": 345.1
+      "milliseconds": 354.2
     },
     {
       "name": "ListBox horizontal thumb pans content and retains header/editor state",
       "passed": true,
-      "milliseconds": 333.3
+      "milliseconds": 367.6
     },
     {
       "name": "TableView horizontal thumb pans content and retains header/editor state",
       "passed": true,
-      "milliseconds": 367.2
+      "milliseconds": 383.2
     },
     {
       "name": "TextBox horizontal thumb pans content and retains header/editor state",
       "passed": true,
-      "milliseconds": 507.5
+      "milliseconds": 674.5
     },
     {
       "name": "capture continues outside viewport and releases at the maximum",
       "passed": true,
-      "milliseconds": 349.6
+      "milliseconds": 348.0
     },
     {
       "name": "track click advances one viewport instead of teleporting the thumb",
       "passed": true,
-      "milliseconds": 172.8
+      "milliseconds": 177.8
     },
     {
       "name": "deferred drag previews only the thumb and commits on release",
       "passed": true,
-      "milliseconds": 432.6
+      "milliseconds": 429.1
     },
     {
       "name": "DOM wheel pixels and Shift-wheel horizontal scrolling retain exact deltas",
       "passed": true,
-      "milliseconds": 342.1
+      "milliseconds": 341.2
     },
     {
       "name": "wheel over either scrollbar uses the same pixel units as its content",
       "passed": true,
-      "milliseconds": 364.6
+      "milliseconds": 363.6
     },
     {
       "name": "mouse scrollbar focus and accessibility range keyboard commands scroll the host",
       "passed": true,
-      "milliseconds": 370.3
+      "milliseconds": 387.8
     },
     {
       "name": "Hidden still scrolls while Disabled rejects wheel input and clears offset",
       "passed": true,
-      "milliseconds": 442.2
+      "milliseconds": 441.1
     },
     {
       "name": "editor content shrink clamps offsets and removes obsolete tracks",
       "passed": true,
-      "milliseconds": 610.4
+      "milliseconds": 751.3
     },
     {
       "name": "disabling the scroll host during drag releases capture safely",
       "passed": true,
-      "milliseconds": 470.6
+      "milliseconds": 486.6
     },
     {
       "name": "compact overlay thumb stays interactive above a full-size Button",
       "passed": true,
-      "milliseconds": 365.5
+      "milliseconds": 381.5
     },
     {
       "name": "browser accessibility projection exposes a live scrollbar range",
       "passed": true,
-      "milliseconds": 186.8
+      "milliseconds": 194.4
     }
   ],
   "pageErrors": [],
   "missingAssets": [],
-  "sourceFingerprint": "75e6f652a5c22cf4e0694aea4e15f4260b762489c7abe2da69e26c558e5e9b6d",
+  "sourceFingerprint": "e58914136734c7e25010f30f18901e93afef52a1608546d6c434a4deb764a494",
   "browser": "153.0.8010.0",
   "backend": "webgl",
   "passed": 20,
@@ -171,5 +171,5 @@
       }
     }
   ],
-  "finalSourceFingerprint": "75e6f652a5c22cf4e0694aea4e15f4260b762489c7abe2da69e26c558e5e9b6d"
+  "finalSourceFingerprint": "e58914136734c7e25010f30f18901e93afef52a1608546d6c434a4deb764a494"
 }

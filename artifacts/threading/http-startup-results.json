@@ -1,63 +1,63 @@
 {
   "Version": "0.6.2-alpha.1",
-  "SourceFingerprint": "75e6f652a5c22cf4e0694aea4e15f4260b762489c7abe2da69e26c558e5e9b6d",
+  "SourceFingerprint": "e58914136734c7e25010f30f18901e93afef52a1608546d6c434a4deb764a494",
   "Completed": true,
   "Tests": [
     {
       "Name": "source HTTP render-worker",
       "Passed": true,
-      "Milliseconds": 1347.46,
+      "Milliseconds": 1821.96,
       "Evidence": {
-        "Url": "http://127.0.0.1:47405/?threading=render-worker&backend=canvas",
+        "Url": "http://127.0.0.1:41211/?threading=render-worker&backend=canvas",
         "HttpStatus": 200,
         "NavigationStatus": 200,
         "Interception": false,
         "CanonicalWorkerUrls": [
-          "http://127.0.0.1:47405/packages/browser/worker-assets/render.js"
+          "http://127.0.0.1:41211/packages/browser/worker-assets/render.js"
         ]
       }
     },
     {
       "Name": "source HTTP full-isolation",
       "Passed": true,
-      "Milliseconds": 1291.66,
+      "Milliseconds": 1744.98,
       "Evidence": {
-        "Url": "http://127.0.0.1:49715/?threading=full-isolation&backend=canvas",
+        "Url": "http://127.0.0.1:41331/?threading=full-isolation&backend=canvas",
         "HttpStatus": 200,
         "NavigationStatus": 200,
         "Interception": false,
         "CanonicalWorkerUrls": [
-          "http://127.0.0.1:49715/packages/browser/worker-assets/ui.js",
-          "http://127.0.0.1:49715/packages/browser/worker-assets/render.js"
+          "http://127.0.0.1:41331/packages/browser/worker-assets/ui.js",
+          "http://127.0.0.1:41331/packages/browser/worker-assets/render.js"
         ]
       }
     },
     {
       "Name": "dist HTTP render-worker",
       "Passed": true,
-      "Milliseconds": 1327.81,
+      "Milliseconds": 1734.15,
       "Evidence": {
-        "Url": "http://127.0.0.1:49201/?threading=render-worker&backend=canvas",
+        "Url": "http://127.0.0.1:35419/?threading=render-worker&backend=canvas",
         "HttpStatus": 200,
         "NavigationStatus": 200,
         "Interception": false,
         "CanonicalWorkerUrls": [
-          "http://127.0.0.1:49201/packages/browser/worker-assets/render.js"
+          "http://127.0.0.1:35419/packages/browser/worker-assets/render.js"
         ]
       }
     },
     {
       "Name": "dist HTTP full-isolation",
       "Passed": true,
-      "Milliseconds": 1311.48,
+      "Milliseconds": 1700.79,
       "Evidence": {
-        "Url": "http://127.0.0.1:40889/?threading=full-isolation&backend=canvas",
+        "Url": "http://127.0.0.1:40631/?threading=full-isolation&backend=canvas",
         "HttpStatus": 200,
         "NavigationStatus": 200,
         "Interception": false,
         "CanonicalWorkerUrls": [
-          "http://127.0.0.1:40889/packages/browser/worker-assets/ui.js",
-          "http://127.0.0.1:40889/packages/browser/worker-assets/render.js"
+          "http://127.0.0.1:40631/packages/browser/worker-assets/ui.js",
+          "http://127.0.0.1:40631/packages/browser/worker-assets/render.js"
         ]
       }
     }
@@ -73,6 +73,6 @@
   "Browser": "153.0.8010.0",
   "Passed": 4,
   "Failed": 0,
-  "FinalSourceFingerprint": "75e6f652a5c22cf4e0694aea4e15f4260b762489c7abe2da69e26c558e5e9b6d",
+  "FinalSourceFingerprint": "e58914136734c7e25010f30f18901e93afef52a1608546d6c434a4deb764a494",
   "BlockedByBrowserPolicy": false
 }

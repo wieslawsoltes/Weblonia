@@ -1,6 +1,6 @@
 {
   "Version": "0.6.2-alpha.1",
-  "SourceFingerprint": "75e6f652a5c22cf4e0694aea4e15f4260b762489c7abe2da69e26c558e5e9b6d",
+  "SourceFingerprint": "e58914136734c7e25010f30f18901e93afef52a1608546d6c434a4deb764a494",
   "Completed": true,
   "Tests": [
     {
@@ -12,61 +12,61 @@
         "Projections": 0,
         "DomMutations": 0
       },
-      "Milliseconds": 27.51
+      "Milliseconds": 63.77
     },
     {
       "Name": "detached LabeledBy updates its consumer and releases replaced dependencies",
       "Passed": true,
       "Details": null,
-      "Milliseconds": 33.66
+      "Milliseconds": 47.0
     },
     {
       "Name": "transitive and cyclic label relationships converge without stale names",
       "Passed": true,
       "Details": null,
-      "Milliseconds": 4.41
+      "Milliseconds": 13.52
     },
     {
       "Name": "Control-valued content label remains live without replacing the button node",
       "Passed": true,
       "Details": null,
-      "Milliseconds": 16.41
+      "Milliseconds": 4.9
     },
     {
       "Name": "visibility removes and restores complete automation subtrees",
       "Passed": true,
       "Details": null,
-      "Milliseconds": 8.16
+      "Milliseconds": 14.24
     },
     {
       "Name": "raw nodes flatten descendants and preserve reorder identity",
       "Passed": true,
       "Details": null,
-      "Milliseconds": 4.55
+      "Milliseconds": 11.53
     },
     {
       "Name": "command availability and parameter changes update aria-disabled",
       "Passed": true,
       "Details": null,
-      "Milliseconds": 4.04
+      "Milliseconds": 5.46
     },
     {
       "Name": "inherited disabling refreshes descendant semantics",
       "Passed": true,
       "Details": null,
-      "Milliseconds": 13.91
+      "Milliseconds": 15.48
     },
     {
       "Name": "focus projects editor semantics and transfers ownership between parents",
       "Passed": true,
       "Details": null,
-      "Milliseconds": 17.84
+      "Milliseconds": 21.86
     },
     {
       "Name": "password conversion clears mirrored values and native plain-text buffers",
       "Passed": true,
       "Details": null,
-      "Milliseconds": 20.48
+      "Milliseconds": 26.0
     },
     {
       "Name": "recycled table rows retain accessibility nodes with updated content",
@@ -76,23 +76,23 @@
         "After": 12,
         "RetainedNodes": 10
       },
-      "Milliseconds": 33.34
+      "Milliseconds": 36.05
     },
     {
       "Name": "explicit rendering consumes scheduled callbacks and settled UI stays idle",
       "Passed": true,
       "Details": null,
-      "Milliseconds": 302.77
+      "Milliseconds": 310.94
     }
   ],
   "PageErrors": [],
   "MissingAssets": [],
   "Mode": "local-asset-interception",
   "ScreenReaderQualified": false,
-  "StartedAt": "2026-09-24T06:19:12.803910+00:00",
+  "StartedAt": "2026-09-24T07:58:54.158209+00:00",
   "Passed": 12,
   "Failed": 0,
   "Browser": "153.0.8010.0",
   "Backend": "webgl",
-  "FinalSourceFingerprint": "75e6f652a5c22cf4e0694aea4e15f4260b762489c7abe2da69e26c558e5e9b6d"
+  "FinalSourceFingerprint": "e58914136734c7e25010f30f18901e93afef52a1608546d6c434a4deb764a494"
 }

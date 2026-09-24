@@ -412,7 +412,7 @@
       "Name": "1000 warm TextBlock redraws do not build layouts, rasterize, upload or measure",
       "Passed": true,
       "Redraws": 1000,
-      "Milliseconds": 450.30000000001746,
+      "Milliseconds": 580.6999999999825,
       "WorkDelta": {
         "TextRasterizations": 0,
         "TextUploads": 0,
@@ -478,6 +478,6 @@
   "MissingAssets": [],
   "Completed": true,
   "Version": "0.6.2-alpha.1",
-  "SourceFingerprint": "75e6f652a5c22cf4e0694aea4e15f4260b762489c7abe2da69e26c558e5e9b6d",
-  "FinalSourceFingerprint": "75e6f652a5c22cf4e0694aea4e15f4260b762489c7abe2da69e26c558e5e9b6d"
+  "SourceFingerprint": "e58914136734c7e25010f30f18901e93afef52a1608546d6c434a4deb764a494",
+  "FinalSourceFingerprint": "e58914136734c7e25010f30f18901e93afef52a1608546d6c434a4deb764a494"
 }

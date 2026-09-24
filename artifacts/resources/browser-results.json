@@ -1,0 +1,2040 @@
+{
+  "Version": "0.6.2-alpha.1",
+  "SourceFingerprint": "e58914136734c7e25010f30f18901e93afef52a1608546d6c434a4deb764a494",
+  "Completed": true,
+  "Tests": [
+    {
+      "Mode": "single",
+      "Aot": false,
+      "Passed": true,
+      "MaximumChannelError": 0,
+      "ComparedChannels": 4,
+      "AutonomousRedraw": true,
+      "LazyCreation": true,
+      "UnsharedDistinct": true,
+      "ThemeSwitch": true,
+      "AncestorReparenting": true,
+      "OldScopeDetached": true,
+      "RestartPassed": false,
+      "Stages": [
+        {
+          "Step": "theme",
+          "State": {
+            "Created": 2,
+            "Deferred": true,
+            "Distinct": true,
+            "ParentIsRight": false,
+            "Paint": "#FF0000FF",
+            "First": "#FF0000FF",
+            "Second": "#FF0000FF",
+            "Editors": 0,
+            "EditorDisposed": false,
+            "Position": 16,
+            "SourceWrites": [
+              []
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": false,
+            "HasDocument": true,
+            "Frames": 2,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        },
+        {
+          "Step": "move",
+          "State": {
+            "Created": 2,
+            "Deferred": true,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FF00FF00",
+            "First": "#FF0000FF",
+            "Second": "#FF0000FF",
+            "Editors": 0,
+            "EditorDisposed": false,
+            "Position": 16,
+            "SourceWrites": [
+              []
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": false,
+            "HasDocument": true,
+            "Frames": 3,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        },
+        {
+          "Step": "mutate",
+          "State": {
+            "Created": 2,
+            "Deferred": true,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 0,
+            "EditorDisposed": false,
+            "Position": 16,
+            "SourceWrites": [
+              []
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": false,
+            "HasDocument": true,
+            "Frames": 4,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        },
+        {
+          "Step": "realize",
+          "State": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 0,
+            "EditorDisposed": false,
+            "Position": 16,
+            "SourceWrites": [
+              []
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": false,
+            "HasDocument": true,
+            "Frames": 4,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        }
+      ],
+      "BindingStages": [
+        {
+          "Step": "binding",
+          "Immediate": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": false,
+            "Position": 16,
+            "SourceWrites": [
+              []
+            ],
+            "PendingTimers": 1,
+            "NestedCompiled": true,
+            "Aot": false,
+            "HasDocument": true,
+            "Frames": 4,
+            "RenderError": null,
+            "FramesBefore": 4
+          },
+          "State": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": false,
+            "Position": 208,
+            "SourceWrites": [
+              [
+                208
+              ]
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": false,
+            "HasDocument": true,
+            "Frames": 5,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        },
+        {
+          "Step": "flush",
+          "Immediate": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": false,
+            "Position": 112,
+            "SourceWrites": [
+              [
+                208,
+                112
+              ]
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": false,
+            "HasDocument": true,
+            "Frames": 5,
+            "RenderError": null,
+            "FramesBefore": 5
+          },
+          "State": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": false,
+            "Position": 112,
+            "SourceWrites": [
+              [
+                208,
+                112
+              ]
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": false,
+            "HasDocument": true,
+            "Frames": 6,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        },
+        {
+          "Step": "dispose-pending",
+          "Immediate": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": true,
+            "Position": 112,
+            "SourceWrites": [
+              [
+                208,
+                112
+              ]
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": false,
+            "HasDocument": true,
+            "Frames": 6,
+            "RenderError": null,
+            "FramesBefore": 6
+          },
+          "State": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": true,
+            "Position": 112,
+            "SourceWrites": [
+              [
+                208,
+                112
+              ]
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": false,
+            "HasDocument": true,
+            "Frames": 6,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        },
+        {
+          "Step": "replace-source",
+          "Immediate": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": true,
+            "Position": 16,
+            "SourceWrites": [
+              [
+                208,
+                112
+              ],
+              []
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": false,
+            "HasDocument": true,
+            "Frames": 6,
+            "RenderError": null,
+            "FramesBefore": 6
+          },
+          "State": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": true,
+            "Position": 16,
+            "SourceWrites": [
+              [
+                208,
+                112
+              ],
+              []
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": false,
+            "HasDocument": true,
+            "Frames": 7,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        }
+      ],
+      "DeferredBindingIntegration": true,
+      "NestedCompiledAggregate": true,
+      "CoalescedDelayedWrite": true,
+      "ImmediateSourceFlush": true,
+      "PendingEditorDisposed": true,
+      "SourceOwnerReplacement": true,
+      "Errors": [],
+      "MissingAssets": [],
+      "Milliseconds": 2610.68
+    },
+    {
+      "Mode": "single",
+      "Aot": true,
+      "Passed": true,
+      "MaximumChannelError": 0,
+      "ComparedChannels": 4,
+      "AutonomousRedraw": true,
+      "LazyCreation": true,
+      "UnsharedDistinct": true,
+      "ThemeSwitch": true,
+      "AncestorReparenting": true,
+      "OldScopeDetached": true,
+      "RestartPassed": false,
+      "Stages": [
+        {
+          "Step": "theme",
+          "State": {
+            "Created": 2,
+            "Deferred": true,
+            "Distinct": true,
+            "ParentIsRight": false,
+            "Paint": "#FF0000FF",
+            "First": "#FF0000FF",
+            "Second": "#FF0000FF",
+            "Editors": 0,
+            "EditorDisposed": false,
+            "Position": 16,
+            "SourceWrites": [
+              []
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": true,
+            "HasDocument": true,
+            "Frames": 2,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        },
+        {
+          "Step": "move",
+          "State": {
+            "Created": 2,
+            "Deferred": true,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FF00FF00",
+            "First": "#FF0000FF",
+            "Second": "#FF0000FF",
+            "Editors": 0,
+            "EditorDisposed": false,
+            "Position": 16,
+            "SourceWrites": [
+              []
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": true,
+            "HasDocument": true,
+            "Frames": 3,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        },
+        {
+          "Step": "mutate",
+          "State": {
+            "Created": 2,
+            "Deferred": true,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 0,
+            "EditorDisposed": false,
+            "Position": 16,
+            "SourceWrites": [
+              []
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": true,
+            "HasDocument": true,
+            "Frames": 4,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        },
+        {
+          "Step": "realize",
+          "State": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 0,
+            "EditorDisposed": false,
+            "Position": 16,
+            "SourceWrites": [
+              []
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": true,
+            "HasDocument": true,
+            "Frames": 4,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        }
+      ],
+      "BindingStages": [
+        {
+          "Step": "binding",
+          "Immediate": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": false,
+            "Position": 16,
+            "SourceWrites": [
+              []
+            ],
+            "PendingTimers": 1,
+            "NestedCompiled": true,
+            "Aot": true,
+            "HasDocument": true,
+            "Frames": 4,
+            "RenderError": null,
+            "FramesBefore": 4
+          },
+          "State": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": false,
+            "Position": 208,
+            "SourceWrites": [
+              [
+                208
+              ]
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": true,
+            "HasDocument": true,
+            "Frames": 5,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        },
+        {
+          "Step": "flush",
+          "Immediate": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": false,
+            "Position": 112,
+            "SourceWrites": [
+              [
+                208,
+                112
+              ]
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": true,
+            "HasDocument": true,
+            "Frames": 5,
+            "RenderError": null,
+            "FramesBefore": 5
+          },
+          "State": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": false,
+            "Position": 112,
+            "SourceWrites": [
+              [
+                208,
+                112
+              ]
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": true,
+            "HasDocument": true,
+            "Frames": 6,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        },
+        {
+          "Step": "dispose-pending",
+          "Immediate": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": true,
+            "Position": 112,
+            "SourceWrites": [
+              [
+                208,
+                112
+              ]
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": true,
+            "HasDocument": true,
+            "Frames": 6,
+            "RenderError": null,
+            "FramesBefore": 6
+          },
+          "State": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": true,
+            "Position": 112,
+            "SourceWrites": [
+              [
+                208,
+                112
+              ]
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": true,
+            "HasDocument": true,
+            "Frames": 6,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        },
+        {
+          "Step": "replace-source",
+          "Immediate": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": true,
+            "Position": 16,
+            "SourceWrites": [
+              [
+                208,
+                112
+              ],
+              []
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": true,
+            "HasDocument": true,
+            "Frames": 6,
+            "RenderError": null,
+            "FramesBefore": 6
+          },
+          "State": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": true,
+            "Position": 16,
+            "SourceWrites": [
+              [
+                208,
+                112
+              ],
+              []
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": true,
+            "HasDocument": true,
+            "Frames": 7,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        }
+      ],
+      "DeferredBindingIntegration": true,
+      "NestedCompiledAggregate": true,
+      "CoalescedDelayedWrite": true,
+      "ImmediateSourceFlush": true,
+      "PendingEditorDisposed": true,
+      "SourceOwnerReplacement": true,
+      "Errors": [],
+      "MissingAssets": [],
+      "Milliseconds": 2524.97
+    },
+    {
+      "Mode": "render-worker",
+      "Aot": false,
+      "Passed": true,
+      "MaximumChannelError": 0,
+      "ComparedChannels": 4,
+      "AutonomousRedraw": true,
+      "LazyCreation": true,
+      "UnsharedDistinct": true,
+      "ThemeSwitch": true,
+      "AncestorReparenting": true,
+      "OldScopeDetached": true,
+      "RestartPassed": true,
+      "Stages": [
+        {
+          "Step": "theme",
+          "State": {
+            "Created": 2,
+            "Deferred": true,
+            "Distinct": true,
+            "ParentIsRight": false,
+            "Paint": "#FF0000FF",
+            "First": "#FF0000FF",
+            "Second": "#FF0000FF",
+            "Editors": 0,
+            "EditorDisposed": false,
+            "Position": 16,
+            "SourceWrites": [
+              []
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": false,
+            "HasDocument": true,
+            "Frames": 3,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        },
+        {
+          "Step": "move",
+          "State": {
+            "Created": 2,
+            "Deferred": true,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FF00FF00",
+            "First": "#FF0000FF",
+            "Second": "#FF0000FF",
+            "Editors": 0,
+            "EditorDisposed": false,
+            "Position": 16,
+            "SourceWrites": [
+              []
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": false,
+            "HasDocument": true,
+            "Frames": 4,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        },
+        {
+          "Step": "mutate",
+          "State": {
+            "Created": 2,
+            "Deferred": true,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 0,
+            "EditorDisposed": false,
+            "Position": 16,
+            "SourceWrites": [
+              []
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": false,
+            "HasDocument": true,
+            "Frames": 5,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        },
+        {
+          "Step": "realize",
+          "State": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 0,
+            "EditorDisposed": false,
+            "Position": 16,
+            "SourceWrites": [
+              []
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": false,
+            "HasDocument": true,
+            "Frames": 5,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        }
+      ],
+      "BindingStages": [
+        {
+          "Step": "binding",
+          "Immediate": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": false,
+            "Position": 16,
+            "SourceWrites": [
+              []
+            ],
+            "PendingTimers": 1,
+            "NestedCompiled": true,
+            "Aot": false,
+            "HasDocument": true,
+            "Frames": 5,
+            "RenderError": null,
+            "FramesBefore": 5
+          },
+          "State": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": false,
+            "Position": 208,
+            "SourceWrites": [
+              [
+                208
+              ]
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": false,
+            "HasDocument": true,
+            "Frames": 6,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        },
+        {
+          "Step": "flush",
+          "Immediate": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": false,
+            "Position": 112,
+            "SourceWrites": [
+              [
+                208,
+                112
+              ]
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": false,
+            "HasDocument": true,
+            "Frames": 6,
+            "RenderError": null,
+            "FramesBefore": 6
+          },
+          "State": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": false,
+            "Position": 112,
+            "SourceWrites": [
+              [
+                208,
+                112
+              ]
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": false,
+            "HasDocument": true,
+            "Frames": 7,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        },
+        {
+          "Step": "dispose-pending",
+          "Immediate": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": true,
+            "Position": 112,
+            "SourceWrites": [
+              [
+                208,
+                112
+              ]
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": false,
+            "HasDocument": true,
+            "Frames": 7,
+            "RenderError": null,
+            "FramesBefore": 7
+          },
+          "State": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": true,
+            "Position": 112,
+            "SourceWrites": [
+              [
+                208,
+                112
+              ]
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": false,
+            "HasDocument": true,
+            "Frames": 7,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        },
+        {
+          "Step": "replace-source",
+          "Immediate": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": true,
+            "Position": 16,
+            "SourceWrites": [
+              [
+                208,
+                112
+              ],
+              []
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": false,
+            "HasDocument": true,
+            "Frames": 7,
+            "RenderError": null,
+            "FramesBefore": 7
+          },
+          "State": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": true,
+            "Position": 16,
+            "SourceWrites": [
+              [
+                208,
+                112
+              ],
+              []
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": false,
+            "HasDocument": true,
+            "Frames": 8,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        }
+      ],
+      "DeferredBindingIntegration": true,
+      "NestedCompiledAggregate": true,
+      "CoalescedDelayedWrite": true,
+      "ImmediateSourceFlush": true,
+      "PendingEditorDisposed": true,
+      "SourceOwnerReplacement": true,
+      "Errors": [],
+      "MissingAssets": [],
+      "Milliseconds": 3564.41
+    },
+    {
+      "Mode": "render-worker",
+      "Aot": true,
+      "Passed": true,
+      "MaximumChannelError": 0,
+      "ComparedChannels": 4,
+      "AutonomousRedraw": true,
+      "LazyCreation": true,
+      "UnsharedDistinct": true,
+      "ThemeSwitch": true,
+      "AncestorReparenting": true,
+      "OldScopeDetached": true,
+      "RestartPassed": true,
+      "Stages": [
+        {
+          "Step": "theme",
+          "State": {
+            "Created": 2,
+            "Deferred": true,
+            "Distinct": true,
+            "ParentIsRight": false,
+            "Paint": "#FF0000FF",
+            "First": "#FF0000FF",
+            "Second": "#FF0000FF",
+            "Editors": 0,
+            "EditorDisposed": false,
+            "Position": 16,
+            "SourceWrites": [
+              []
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": true,
+            "HasDocument": true,
+            "Frames": 3,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        },
+        {
+          "Step": "move",
+          "State": {
+            "Created": 2,
+            "Deferred": true,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FF00FF00",
+            "First": "#FF0000FF",
+            "Second": "#FF0000FF",
+            "Editors": 0,
+            "EditorDisposed": false,
+            "Position": 16,
+            "SourceWrites": [
+              []
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": true,
+            "HasDocument": true,
+            "Frames": 4,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        },
+        {
+          "Step": "mutate",
+          "State": {
+            "Created": 2,
+            "Deferred": true,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 0,
+            "EditorDisposed": false,
+            "Position": 16,
+            "SourceWrites": [
+              []
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": true,
+            "HasDocument": true,
+            "Frames": 5,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        },
+        {
+          "Step": "realize",
+          "State": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 0,
+            "EditorDisposed": false,
+            "Position": 16,
+            "SourceWrites": [
+              []
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": true,
+            "HasDocument": true,
+            "Frames": 5,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        }
+      ],
+      "BindingStages": [
+        {
+          "Step": "binding",
+          "Immediate": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": false,
+            "Position": 16,
+            "SourceWrites": [
+              []
+            ],
+            "PendingTimers": 1,
+            "NestedCompiled": true,
+            "Aot": true,
+            "HasDocument": true,
+            "Frames": 5,
+            "RenderError": null,
+            "FramesBefore": 5
+          },
+          "State": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": false,
+            "Position": 208,
+            "SourceWrites": [
+              [
+                208
+              ]
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": true,
+            "HasDocument": true,
+            "Frames": 6,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        },
+        {
+          "Step": "flush",
+          "Immediate": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": false,
+            "Position": 112,
+            "SourceWrites": [
+              [
+                208,
+                112
+              ]
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": true,
+            "HasDocument": true,
+            "Frames": 6,
+            "RenderError": null,
+            "FramesBefore": 6
+          },
+          "State": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": false,
+            "Position": 112,
+            "SourceWrites": [
+              [
+                208,
+                112
+              ]
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": true,
+            "HasDocument": true,
+            "Frames": 7,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        },
+        {
+          "Step": "dispose-pending",
+          "Immediate": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": true,
+            "Position": 112,
+            "SourceWrites": [
+              [
+                208,
+                112
+              ]
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": true,
+            "HasDocument": true,
+            "Frames": 7,
+            "RenderError": null,
+            "FramesBefore": 7
+          },
+          "State": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": true,
+            "Position": 112,
+            "SourceWrites": [
+              [
+                208,
+                112
+              ]
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": true,
+            "HasDocument": true,
+            "Frames": 7,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        },
+        {
+          "Step": "replace-source",
+          "Immediate": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": true,
+            "Position": 16,
+            "SourceWrites": [
+              [
+                208,
+                112
+              ],
+              []
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": true,
+            "HasDocument": true,
+            "Frames": 7,
+            "RenderError": null,
+            "FramesBefore": 7
+          },
+          "State": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": true,
+            "Position": 16,
+            "SourceWrites": [
+              [
+                208,
+                112
+              ],
+              []
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": true,
+            "HasDocument": true,
+            "Frames": 8,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        }
+      ],
+      "DeferredBindingIntegration": true,
+      "NestedCompiledAggregate": true,
+      "CoalescedDelayedWrite": true,
+      "ImmediateSourceFlush": true,
+      "PendingEditorDisposed": true,
+      "SourceOwnerReplacement": true,
+      "Errors": [],
+      "MissingAssets": [],
+      "Milliseconds": 3589.39
+    },
+    {
+      "Mode": "full-isolation",
+      "Aot": false,
+      "Passed": true,
+      "MaximumChannelError": 0,
+      "ComparedChannels": 4,
+      "AutonomousRedraw": true,
+      "LazyCreation": true,
+      "UnsharedDistinct": true,
+      "ThemeSwitch": true,
+      "AncestorReparenting": true,
+      "OldScopeDetached": true,
+      "RestartPassed": true,
+      "Stages": [
+        {
+          "Step": "theme",
+          "State": {
+            "Created": 2,
+            "Deferred": true,
+            "Distinct": true,
+            "ParentIsRight": false,
+            "Paint": "#FF0000FF",
+            "First": "#FF0000FF",
+            "Second": "#FF0000FF",
+            "Editors": 0,
+            "EditorDisposed": false,
+            "Position": 16,
+            "SourceWrites": [
+              []
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": false,
+            "HasDocument": false,
+            "Frames": 3,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        },
+        {
+          "Step": "move",
+          "State": {
+            "Created": 2,
+            "Deferred": true,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FF00FF00",
+            "First": "#FF0000FF",
+            "Second": "#FF0000FF",
+            "Editors": 0,
+            "EditorDisposed": false,
+            "Position": 16,
+            "SourceWrites": [
+              []
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": false,
+            "HasDocument": false,
+            "Frames": 4,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        },
+        {
+          "Step": "mutate",
+          "State": {
+            "Created": 2,
+            "Deferred": true,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 0,
+            "EditorDisposed": false,
+            "Position": 16,
+            "SourceWrites": [
+              []
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": false,
+            "HasDocument": false,
+            "Frames": 5,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        },
+        {
+          "Step": "realize",
+          "State": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 0,
+            "EditorDisposed": false,
+            "Position": 16,
+            "SourceWrites": [
+              []
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": false,
+            "HasDocument": false,
+            "Frames": 5,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        }
+      ],
+      "BindingStages": [
+        {
+          "Step": "binding",
+          "Immediate": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": false,
+            "Position": 16,
+            "SourceWrites": [
+              []
+            ],
+            "PendingTimers": 1,
+            "NestedCompiled": true,
+            "Aot": false,
+            "HasDocument": false,
+            "Frames": 5,
+            "RenderError": null,
+            "FramesBefore": 5
+          },
+          "State": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": false,
+            "Position": 208,
+            "SourceWrites": [
+              [
+                208
+              ]
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": false,
+            "HasDocument": false,
+            "Frames": 6,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        },
+        {
+          "Step": "flush",
+          "Immediate": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": false,
+            "Position": 112,
+            "SourceWrites": [
+              [
+                208,
+                112
+              ]
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": false,
+            "HasDocument": false,
+            "Frames": 6,
+            "RenderError": null,
+            "FramesBefore": 6
+          },
+          "State": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": false,
+            "Position": 112,
+            "SourceWrites": [
+              [
+                208,
+                112
+              ]
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": false,
+            "HasDocument": false,
+            "Frames": 7,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        },
+        {
+          "Step": "dispose-pending",
+          "Immediate": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": true,
+            "Position": 112,
+            "SourceWrites": [
+              [
+                208,
+                112
+              ]
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": false,
+            "HasDocument": false,
+            "Frames": 7,
+            "RenderError": null,
+            "FramesBefore": 7
+          },
+          "State": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": true,
+            "Position": 112,
+            "SourceWrites": [
+              [
+                208,
+                112
+              ]
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": false,
+            "HasDocument": false,
+            "Frames": 7,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        },
+        {
+          "Step": "replace-source",
+          "Immediate": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": true,
+            "Position": 16,
+            "SourceWrites": [
+              [
+                208,
+                112
+              ],
+              []
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": false,
+            "HasDocument": false,
+            "Frames": 7,
+            "RenderError": null,
+            "FramesBefore": 7
+          },
+          "State": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": true,
+            "Position": 16,
+            "SourceWrites": [
+              [
+                208,
+                112
+              ],
+              []
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": false,
+            "HasDocument": false,
+            "Frames": 8,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        }
+      ],
+      "DeferredBindingIntegration": true,
+      "NestedCompiledAggregate": true,
+      "CoalescedDelayedWrite": true,
+      "ImmediateSourceFlush": true,
+      "PendingEditorDisposed": true,
+      "SourceOwnerReplacement": true,
+      "Errors": [],
+      "MissingAssets": [],
+      "Milliseconds": 3466.48
+    },
+    {
+      "Mode": "full-isolation",
+      "Aot": true,
+      "Passed": true,
+      "MaximumChannelError": 0,
+      "ComparedChannels": 4,
+      "AutonomousRedraw": true,
+      "LazyCreation": true,
+      "UnsharedDistinct": true,
+      "ThemeSwitch": true,
+      "AncestorReparenting": true,
+      "OldScopeDetached": true,
+      "RestartPassed": true,
+      "Stages": [
+        {
+          "Step": "theme",
+          "State": {
+            "Created": 2,
+            "Deferred": true,
+            "Distinct": true,
+            "ParentIsRight": false,
+            "Paint": "#FF0000FF",
+            "First": "#FF0000FF",
+            "Second": "#FF0000FF",
+            "Editors": 0,
+            "EditorDisposed": false,
+            "Position": 16,
+            "SourceWrites": [
+              []
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": true,
+            "HasDocument": false,
+            "Frames": 3,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        },
+        {
+          "Step": "move",
+          "State": {
+            "Created": 2,
+            "Deferred": true,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FF00FF00",
+            "First": "#FF0000FF",
+            "Second": "#FF0000FF",
+            "Editors": 0,
+            "EditorDisposed": false,
+            "Position": 16,
+            "SourceWrites": [
+              []
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": true,
+            "HasDocument": false,
+            "Frames": 4,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        },
+        {
+          "Step": "mutate",
+          "State": {
+            "Created": 2,
+            "Deferred": true,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 0,
+            "EditorDisposed": false,
+            "Position": 16,
+            "SourceWrites": [
+              []
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": true,
+            "HasDocument": false,
+            "Frames": 5,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        },
+        {
+          "Step": "realize",
+          "State": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 0,
+            "EditorDisposed": false,
+            "Position": 16,
+            "SourceWrites": [
+              []
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": true,
+            "HasDocument": false,
+            "Frames": 5,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        }
+      ],
+      "BindingStages": [
+        {
+          "Step": "binding",
+          "Immediate": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": false,
+            "Position": 16,
+            "SourceWrites": [
+              []
+            ],
+            "PendingTimers": 1,
+            "NestedCompiled": true,
+            "Aot": true,
+            "HasDocument": false,
+            "Frames": 5,
+            "RenderError": null,
+            "FramesBefore": 5
+          },
+          "State": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": false,
+            "Position": 208,
+            "SourceWrites": [
+              [
+                208
+              ]
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": true,
+            "HasDocument": false,
+            "Frames": 6,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        },
+        {
+          "Step": "flush",
+          "Immediate": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": false,
+            "Position": 112,
+            "SourceWrites": [
+              [
+                208,
+                112
+              ]
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": true,
+            "HasDocument": false,
+            "Frames": 6,
+            "RenderError": null,
+            "FramesBefore": 6
+          },
+          "State": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": false,
+            "Position": 112,
+            "SourceWrites": [
+              [
+                208,
+                112
+              ]
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": true,
+            "HasDocument": false,
+            "Frames": 7,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        },
+        {
+          "Step": "dispose-pending",
+          "Immediate": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": true,
+            "Position": 112,
+            "SourceWrites": [
+              [
+                208,
+                112
+              ]
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": true,
+            "HasDocument": false,
+            "Frames": 7,
+            "RenderError": null,
+            "FramesBefore": 7
+          },
+          "State": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": true,
+            "Position": 112,
+            "SourceWrites": [
+              [
+                208,
+                112
+              ]
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": true,
+            "HasDocument": false,
+            "Frames": 7,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        },
+        {
+          "Step": "replace-source",
+          "Immediate": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": true,
+            "Position": 16,
+            "SourceWrites": [
+              [
+                208,
+                112
+              ],
+              []
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": true,
+            "HasDocument": false,
+            "Frames": 7,
+            "RenderError": null,
+            "FramesBefore": 7
+          },
+          "State": {
+            "Created": 3,
+            "Deferred": false,
+            "Distinct": true,
+            "ParentIsRight": true,
+            "Paint": "#FFFFFF00",
+            "First": "#FFFF00FF",
+            "Second": "#FF0000FF",
+            "Editors": 2,
+            "EditorDisposed": true,
+            "Position": 16,
+            "SourceWrites": [
+              [
+                208,
+                112
+              ],
+              []
+            ],
+            "PendingTimers": 0,
+            "NestedCompiled": true,
+            "Aot": true,
+            "HasDocument": false,
+            "Frames": 8,
+            "RenderError": null
+          },
+          "MaximumChannelError": 0
+        }
+      ],
+      "DeferredBindingIntegration": true,
+      "NestedCompiledAggregate": true,
+      "CoalescedDelayedWrite": true,
+      "ImmediateSourceFlush": true,
+      "PendingEditorDisposed": true,
+      "SourceOwnerReplacement": true,
+      "Errors": [],
+      "MissingAssets": [],
+      "Milliseconds": 3436.27
+    }
+  ],
+  "Errors": [],
+  "MissingAssets": [],
+  "Interception": false,
+  "WorkerBootstrapOverrides": false,
+  "SnapshotForcesRender": false,
+  "PhysicalGpuQualified": false,
+  "PixelChannelTolerance": 2,
+  "Browser": "153.0.8010.0",
+  "Passed": 6,
+  "Failed": 0,
+  "FinalSourceFingerprint": "e58914136734c7e25010f30f18901e93afef52a1608546d6c434a4deb764a494"
+}
